@@ -1,6 +1,6 @@
 import random
 
-from lexicon.tests import EnglishFromSound4
+from lexicon.tests import EnglishFromSound4, EnglishFromSound6
 
 
 def pick_sentence(al, chosen_word, learning=False):
@@ -20,6 +20,7 @@ def pick_sentence(al, chosen_word, learning=False):
         test = None
     return test
 
+
 def pick_a_test_for_word(al, chosen_word):
     test = None
     can_be_tested_on_sentence = True
@@ -35,8 +36,9 @@ def pick_a_test_for_word(al, chosen_word):
         elif r == 3:
             test = EnglishFromSound6(al, correct_word=chosen_word)
         else:
-            if can_be_tested_on_sentence:
-                test = pick_sentence(al, chosen_word)
-                if not test:
-                    can_be_tested_on_sentence = False
+            test = EnglishFromSound6(al, correct_word=chosen_word)
+            # if can_be_tested_on_sentence:
+            #     test = pick_sentence(al, chosen_word)
+            #     if not test:
+            #         can_be_tested_on_sentence = False
     al.active_test = test

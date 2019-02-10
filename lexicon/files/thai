@@ -58,6 +58,7 @@ W | ตอน-เย็น | in the evening
 
 # Adjectives
 M | ดี | good | MID
+M | ใหญ่ | big | LOW
 M | หิว | hungry, thirsty | RISING
 M | เร็ว | fast | MID
 M | ง่วง | sleepy | FALLING
@@ -131,6 +132,7 @@ M | เพื่อน | friend | FALLING
 W | ภา-ษา-ไทย | Thai language
 W | ชื่อ-เล่น | nickname
 W | ความ-สุข | happiness
+W | หิ-มะ | snow
 W | ใจ-ดี | kind
 W | เมือง-ไทย | Thailand
 W | โรง-เรียน | school
@@ -138,13 +140,14 @@ M | ตัว | body | MID
 
 # Verbs
 M | กิน | to eat | MID
+M | เห็น | to see | RISING
 M | ดื่ม | to drink | LOW
 M | คุย | to talk | MID
 M | คิด | to think | HIGH
-M | คิด-ถึง | to miss, think about
-M | คิด-มาก | to think too much, worry
-M | ทำ-งาน | to work
-M | เลิก-งาน | to finish work
+W | คิด-ถึง | to miss, think about
+W | คิด-มาก | to think too much, worry
+W | ทำ-งาน | to work
+W | เลิก-งาน | to finish work
 M | เรียน | to study | MID
 M | ต้อง | to have to, must | FALLING
 M | อา-ศัย | to reside | MID
@@ -192,8 +195,10 @@ M | เอง | oneself | MID
 W | นิด-หน่อย | a little bit
 M | ใช่ | yes | FALLING
 W | ไม่-ใช่ | no
+W | เคย | ever | MID
 
-# W | อ-เล็ก-ซี่ | Alexis (Mid-High-Falling)
+# Proper nouns
+W | กรุง-เทพ | Bangkok
 W | อ-เล็ก-ซี่ | Alexis
 W | ย่อ-มาน | Yoman
 W | ลอน-ดอน | London

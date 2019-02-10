@@ -61,7 +61,7 @@ class Profile(object):
             else:
                 split = line.split(" | ")
                 value = split[0]
-                xp = int(split[1])
+                xp = max(int(split[1]), 0)
                 word = al.words.get_word(value)
                 if not word:
                     print(f'ERROR: could not get word for {value}', split)

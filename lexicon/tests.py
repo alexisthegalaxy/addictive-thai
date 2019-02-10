@@ -604,6 +604,81 @@ class EnglishFromSound4(EnglishFromSound):
         )
 
         # Draw all the options
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(0.35),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[0].thai,
+            selected=self.selected_option_index == 0,
+        )
+
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(0.35),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[1].thai,
+            selected=self.selected_option_index == 1,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(0.625),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[2].thai,
+            selected=self.selected_option_index == 2,
+        )
+
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(0.625),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[3].thai,
+            selected=self.selected_option_index == 3,
+        )
+
+
+class EnglishFromSound6(EnglishFromSound):
+    def __init__(self, al: 'All', correct_word: Word, learning=None):
+        super().__init__(al, learning, correct_word)
+        self.number_of_distr: int = 5
+
+        self.distractors: List[Word] = self.select_distractors()
+        self.choices: List[Word] = [self.correct_word] + self.distractors
+        random.shuffle(self.choices)
+
+    def draw(self):
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        self.draw_background()
+
+        # Draw "What's the Thai word for"
+        explanatory_string = "What's the English word for:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.18)
+        screen.blit(
+            fonts.garuda32.render(self.correct_word.english, True, (0, 0, 0)), (x, y)
+        )
+
+        # Draw all the options
         y = 0.30
         y_space = 0.025
         y_length = 0.175
@@ -669,3 +744,4 @@ class EnglishFromSound4(EnglishFromSound):
             string=self.choices[5].thai,
             selected=self.selected_option_index == 5,
         )
+
