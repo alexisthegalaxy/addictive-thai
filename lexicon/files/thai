@@ -116,6 +116,21 @@ W | พิซ-ซ่า | pizza
 W | ฝรั่ง | guava/westerner
 W | มะม่วง | mango
 
+# Countries
+W | เมือง-ไทย | Thailand
+W | ญี่-ปุ่น | Japan
+W | อัง-กฤษ | England, Britain
+W | ฝ-รั่งเ-ศส | France
+M | จีน | China | MID
+W | เยอ-ร-ม-นี | Germany
+W | อเ-ม-ริ-กัน | American
+W | แค-นา-ดา | Canada
+W | สเ-ปน | Spain
+W | ลาว | Laos | MID
+W | พ-ม่า | Myanmar
+W | มา-เล-เซีย | Malaysia
+W | กัม-พู-ชา | Cambodia
+
 # Nouns
 M | บ้าน | home, house | FALLING | road1 5 10
 M | ใจ | heart, mind, spirit | MID
@@ -134,7 +149,6 @@ W | ชื่อ-เล่น | nickname
 W | ความ-สุข | happiness
 W | หิ-มะ | snow
 W | ใจ-ดี | kind
-W | เมือง-ไทย | Thailand
 W | โรง-เรียน | school
 M | ตัว | body | MID
 
@@ -260,3 +274,7 @@ S | ผม_กิน_น้ำ | I (male) drink (colloquial) water.
 S | ฉัน_ไม่_เคย_เห็น_หิ-มะ | I (female) have never seen snow.
 S | เขา_ไม่_เคย_ไป_กรุง-เทพ | He has never been to Bangkok.
 S | หมา_ตัว_ใหญ่ | The dog is big.
+S | คุณ_พูด_ภา-ษา_ญี่-ปุ่น_ได้_ไหม | Can you speak Japanese?
+S | พรุ่ง-นี้_ฉัน_จะ_ไป_กรุง-เทพ | I will go to Bangkok tomorrow.
+S | ฉัน_เคย_ไป_กรุง-เทพ | I have been to Bangkok.
+S | เรา_มา_จาก_อัง-กฤษ | We come from England.

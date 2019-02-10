@@ -1,9 +1,8 @@
 TODO Sunday:
-For sounds, use the thai rather than the english to identify the word
-    - Make a task to rename sounds in thai!
 Battle
 
 TODO:
+Put npcs file in a sublayer
 Tests types:
     - TONE_FROM_SOUND
     - TONE_FROM_THAI

@@ -6,8 +6,6 @@ from typing import List
 from lexicon.items import Word
 from sounds.play_sound import play_thai_word, play_transformed_thai_word
 
-from sounds.thai.sound_processing import transform_english_into_track_name
-
 
 class Option(object):
     def __init__(self, item, correct, index=0):

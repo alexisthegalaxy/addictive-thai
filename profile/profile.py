@@ -85,7 +85,6 @@ class Profiles(object):
         self.current_profile = None
         dir_path = os.path.dirname(os.path.realpath(__file__))
         os.chdir(dir_path)
-        print('dir_path', dir_path)
         if len(glob.glob("*.pro")) == 0:
             f = open(f"{dir_path}/Alexis.pro", "w")
             f.write("Alexis\n")
@@ -97,7 +96,6 @@ class Profiles(object):
 
         for file_name in glob.glob("*.pro"):
             file_path = dir_path + '/' + file_name
-            print('file_path', file_path)
             learner_name = file_name[:-4]
             profile = Profile(name=learner_name, file_path=file_path)
             self.profiles[learner_name] = profile

@@ -34,14 +34,7 @@ Fruit tree:
     a berry heals you 1 hp
 
 Trainer Battle:
-They have a preset number of words (>3) about which they ask questions.
-The learner loses 1 HP per mistake.
-For each question, words that take part in the question all learn 1 HP.
-If a question is answered mistakenly, the trainer asks the question again.
-The test types are chosen amongst the hardest (7 distractors, etc.)
-Winning results in getting some money.
-They walk up to you when they see you the first time.
-Trainers can be fought once a day - A rematch is triggered by talking to them.
+See battle.py
 
 Wild battle:
 Randomly on tall grass, words can trigger a test about them.
