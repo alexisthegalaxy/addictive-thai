@@ -1,9 +1,6 @@
 TODO Sunday:
 For sounds, use the thai rather than the english to identify the word
     - Make a task to rename sounds in thai!
-Bugs:
-    When talking to a NPC that already taught the word,
-    the text should be 'do you wanna review'
 Battle
 
 TODO:
@@ -29,7 +26,6 @@ Show the progression bar going up in a learning 1/6 or a brain getting full or s
 Each time you make a mistake on a test, it becomes easier
 Signs show their writing on the ow
 Make a nice map editor
-Put on a git project
 Have a script list all the words that do not appear in sentences.
 -------DEMOABLE---------
 Make npc sprites

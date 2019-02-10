@@ -80,11 +80,12 @@ class Npc(object):
 
     def interact(self, al):
         # Then this is the beginning of the interaction with that NPC
-        al.active_npc = self
         if not al.active_npc:
             if self.taught_word:  # If this NPC teaches
                 if self.taught_word.total_xp >= 5:  # If the word is known
                     self.active_dialog = self.review_dialog
+        else:
+            al.active_npc = self
 
         self.special_interaction(al)
         self.active_line_index += 1
