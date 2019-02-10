@@ -35,7 +35,7 @@ class Learning(object):
         if not self.test_5:
             self.test_5 = ThaiFromEnglish6(al, correct_word=word, learning=self)
         self.npc = npc
-        play_transformed_thai_word(self.word.english)
+        play_transformed_thai_word(self.word.thai)
 
     def draw_presentation_screen(self):
         ui = self.al.ui

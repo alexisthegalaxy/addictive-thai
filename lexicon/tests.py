@@ -55,9 +55,8 @@ class Test(object):
             word.increase_xp(self.al, 1)
 
         # 2 - Play sound
-        track_name = transform_english_into_track_name(self.correct_word.english)
         try:
-            play_thai_word(track_name)
+            play_transformed_thai_word(self.correct_word.thai)
         except pygame.error:
             play_thai_word("right")
 
@@ -688,7 +687,7 @@ class FromSound(Test):
         self.correct_word: Word = correct_word
         self.number_of_distr: int = 3
         self.selector_on_sound = False
-        play_transformed_thai_word(self.correct_word.english)
+        play_transformed_thai_word(self.correct_word.thai)
 
     def select_distractors(self):
         known_words = self.al.words.get_known_words()
@@ -739,7 +738,7 @@ class FromSound(Test):
         if al.ui.space:
             al.ui.space = False
             if self.selector_on_sound:
-                play_transformed_thai_word(self.correct_word.english)
+                play_transformed_thai_word(self.correct_word.thai)
             else:
                 self.learner_select_option()
 

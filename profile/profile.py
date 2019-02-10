@@ -15,7 +15,7 @@ class Profile(object):
     def save(self, al: 'All'):
         now_string = datetime.now().strftime(TIME_FORMAT)
 
-        play_thai_word("to save")
+        play_thai_word("บันทึก")
         f = open(self.file_path, "w+")
         map = al.learner.ma.filename
         x = al.learner.x
