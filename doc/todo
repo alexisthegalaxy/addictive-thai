@@ -4,11 +4,8 @@ Bugs:
     the text should be 'do you wanna review'
 Tests types:
     - FROM SOUND
-        - THAI FROM SOUND
         - TONE FROM SOUND
-        - ENGLISH FROM SOUND
     - ENGLISHFROMTHAI
-    - TONE_FROM_SOUND
     - TONE_FROM_THAI
 Battle
 Implement the market in lomsak

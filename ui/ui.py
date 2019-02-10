@@ -37,6 +37,8 @@ def random_images():
     return {
         "full_heart": pygame.image.load("../images/full_heart.png"),
         "empty_heart": pygame.image.load("../images/empty_heart.png"),
+        "sound_icon": pygame.image.load("../images/sound_icon.png"),
+        "sound_icon_green": pygame.image.load("../images/sound_icon_green.png"),
     }
 
 

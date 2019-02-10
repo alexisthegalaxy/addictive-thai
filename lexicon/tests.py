@@ -286,7 +286,7 @@ class ThaiFromEnglish(Test):
         known_words = self.al.words.get_known_words()
         distractors = []
         if len(known_words) > self.number_of_distr:
-            while len(distractors) < self.number_of_distr - 1:
+            while len(distractors) < self.number_of_distr:
                 distractor = random.choices(known_words)[0]
                 if (
                     distractor not in distractors
@@ -294,7 +294,7 @@ class ThaiFromEnglish(Test):
                 ):
                     distractors.append(distractor)
         else:  # We don't know enough words!
-            while len(distractors) < self.number_of_distr - 1:
+            while len(distractors) < self.number_of_distr:
                 distractor = random.choices(self.al.words.words)[0]
                 if (
                     distractor not in distractors
@@ -307,12 +307,12 @@ class ThaiFromEnglish(Test):
         if al.ui.up:
             self.selected_option_index -= 2
             if self.selected_option_index < 0:
-                self.selected_option_index += self.number_of_distr
+                self.selected_option_index += (self.number_of_distr + 1)
             al.ui.up = False
         if al.ui.down:
             self.selected_option_index += 2
-            if self.selected_option_index >= self.number_of_distr:
-                self.selected_option_index -= self.number_of_distr
+            if self.selected_option_index >= (self.number_of_distr + 1):
+                self.selected_option_index -= (self.number_of_distr + 1)
             al.ui.down = False
         if al.ui.left or al.ui.right:
             self.selected_option_index += (
@@ -335,7 +335,7 @@ class ThaiFromEnglish(Test):
 class ThaiFromEnglish4(ThaiFromEnglish):
     def __init__(self, al: 'All', correct_word: Word, learning=None):
         super().__init__(al, correct_word, learning)
-        self.number_of_distr: int = 4
+        self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
@@ -410,7 +410,7 @@ class ThaiFromEnglish4(ThaiFromEnglish):
 class ThaiFromEnglish6(ThaiFromEnglish):
     def __init__(self, al: 'All', correct_word: Word, learning=None):
         super().__init__(al, correct_word, learning)
-        self.number_of_distr: int = 6
+        self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
@@ -517,14 +517,14 @@ class FromSound(Test):
         super().__init__(al, learning)
         self.correct_word: Word = correct_word
         self.number_of_distr: int = 3
-        self.selector_on_sound = True
+        self.selector_on_sound = False
         play_transformed_thai_word(self.correct_word.english)
 
     def select_distractors(self):
         known_words = self.al.words.get_known_words()
         distractors = []
         if len(known_words) > self.number_of_distr:
-            while len(distractors) < self.number_of_distr - 1:
+            while len(distractors) < self.number_of_distr:
                 distractor = random.choices(known_words)[0]
                 if (
                     distractor not in distractors
@@ -532,7 +532,7 @@ class FromSound(Test):
                 ):
                     distractors.append(distractor)
         else:  # We don't know enough words!
-            while len(distractors) < self.number_of_distr - 1:
+            while len(distractors) < self.number_of_distr:
                 distractor = random.choices(self.al.words.words)[0]
                 if (
                     distractor not in distractors
@@ -543,15 +543,23 @@ class FromSound(Test):
 
     def interact(self, al):
         if al.ui.up:
-            self.selected_option_index -= 2
-            if self.selected_option_index < 0:
-                self.selected_option_index += self.number_of_distr
             al.ui.up = False
+            if self.selector_on_sound:
+                self.selector_on_sound = False
+                self.selected_option_index = self.number_of_distr - 1
+            else:
+                self.selected_option_index -= 2
+                if self.selected_option_index < 0:
+                    self.selector_on_sound = True
         if al.ui.down:
-            self.selected_option_index += 2
-            if self.selected_option_index >= self.number_of_distr:
-                self.selected_option_index -= self.number_of_distr
             al.ui.down = False
+            if self.selector_on_sound:
+                self.selector_on_sound = False
+                self.selected_option_index = 0
+            else:
+                self.selected_option_index += 2
+                if self.selected_option_index >= (self.number_of_distr + 1):
+                    self.selector_on_sound = True
         if al.ui.left or al.ui.right:
             self.selected_option_index += (
                 1 if self.selected_option_index % 2 == 0 else -1
@@ -581,6 +589,11 @@ class EnglishFromSound(FromSound):
 class EnglishFromSound4(EnglishFromSound):
     def __init__(self, al: 'All', correct_word: Word, learning=None):
         super().__init__(al, learning, correct_word)
+        self.number_of_distr: int = 3
+
+        self.distractors: List[Word] = self.select_distractors()
+        self.choices: List[Word] = [self.correct_word] + self.distractors
+        random.shuffle(self.choices)
 
     def draw(self):
         ui = self.al.ui
@@ -590,18 +603,188 @@ class EnglishFromSound4(EnglishFromSound):
         # Draw the background
         self.draw_background()
 
-        # Draw "What's the Thai word for"
-        explanatory_string = "What's the Thai word for:"
+        # Draw "What's the English word for"
+        explanatory_string = "What's the English word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
         screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
-        x = ui.percent_width(0.15)
-        y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct_word.english, True, (0, 0, 0)), (x, y)
+        x = ui.percent_width(0.60)
+        y = ui.percent_height(0.10)
+        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        ui.screen.blit(ui.images[image_name], [x, y])
+
+        # Draw all the options
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(0.35),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[0].english,
+            selected=self.selected_option_index == 0,
         )
+
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(0.35),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[1].english,
+            selected=self.selected_option_index == 1,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(0.625),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[2].english,
+            selected=self.selected_option_index == 2,
+        )
+
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(0.625),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[3].english,
+            selected=self.selected_option_index == 3,
+        )
+
+
+class EnglishFromSound6(EnglishFromSound):
+    def __init__(self, al: 'All', correct_word: Word, learning=None):
+        super().__init__(al, learning, correct_word)
+        self.number_of_distr: int = 5
+
+        self.distractors: List[Word] = self.select_distractors()
+        self.choices: List[Word] = [self.correct_word] + self.distractors
+        random.shuffle(self.choices)
+
+    def draw(self):
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        self.draw_background()
+
+        # Draw "What's the English word for"
+        explanatory_string = "What's the English word for:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.60)
+        y = ui.percent_height(0.10)
+        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        ui.screen.blit(ui.images[image_name], [x, y])
+
+        # Draw all the options
+        y = 0.30
+        y_space = 0.025
+        y_length = 0.175
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[0].english,
+            selected=self.selected_option_index == 0,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[1].english,
+            selected=self.selected_option_index == 1,
+        )
+        y += y_space + y_length
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[2].english,
+            selected=self.selected_option_index == 2,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[3].english,
+            selected=self.selected_option_index == 3,
+        )
+        y += y_space + y_length
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[4].english,
+            selected=self.selected_option_index == 4,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[5].english,
+            selected=self.selected_option_index == 5,
+        )
+
+
+class ThaiFromSound4(EnglishFromSound):
+    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None):
+        super().__init__(al, learning, correct_word)
+        self.number_of_distr: int = 3
+
+        self.distractors: List[Word] = self.select_distractors()
+        self.choices: List[Word] = [self.correct_word] + self.distractors
+        random.shuffle(self.choices)
+
+    def draw(self):
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        self.draw_background()
+
+        # Draw "What's the English word for"
+        explanatory_string = "What's the English word for:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.60)
+        y = ui.percent_height(0.10)
+        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        ui.screen.blit(ui.images[image_name], [x, y])
 
         # Draw all the options
         draw_box(
@@ -648,8 +831,8 @@ class EnglishFromSound4(EnglishFromSound):
         )
 
 
-class EnglishFromSound6(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
+class ThaiFromSound6(EnglishFromSound):
+    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None):
         super().__init__(al, learning, correct_word)
         self.number_of_distr: int = 5
 
@@ -665,18 +848,17 @@ class EnglishFromSound6(EnglishFromSound):
         # Draw the background
         self.draw_background()
 
-        # Draw "What's the Thai word for"
+        # Draw "What's the English word for"
         explanatory_string = "What's the English word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
         screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
-        x = ui.percent_width(0.15)
-        y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct_word.english, True, (0, 0, 0)), (x, y)
-        )
+        x = ui.percent_width(0.60)
+        y = ui.percent_height(0.10)
+        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        ui.screen.blit(ui.images[image_name], [x, y])
 
         # Draw all the options
         y = 0.30
