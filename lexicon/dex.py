@@ -7,8 +7,8 @@ class Dex(object):
         self.al = al
         self.from_line = 0
         self.words_to_show = []
-        self.word_count = len(self.words_to_show)
         self.determine_words_to_show()
+        self.word_count = len(self.words_to_show)
 
     def determine_words_to_show(self):
         self.words_to_show = []
@@ -18,13 +18,12 @@ class Dex(object):
 
     def w(self):
         self.active = not self.active
+        self.word_count = len(self.words_to_show)
 
     def interact(self):
         if self.al.ui.down:
-            print("down")
-            self.from_line = min(self.word_count, self.from_line + 1)
+            self.from_line = min(self.word_count - 15, self.from_line + 1)
         if self.al.ui.up:
-            print("up")
             self.from_line = max(0, self.from_line - 1)
 
     def draw(self):
@@ -32,7 +31,7 @@ class Dex(object):
         g16 = ui.fonts.garuda16
         x = ui.percent_width(0.1)
         y = ui.percent_height(0.1)
-        height = ui.percent_height(0.8)
+        height = ui.percent_height(0.81)
         width = ui.percent_width(0.8)
 
         screen = ui.screen

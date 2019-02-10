@@ -1,16 +1,16 @@
 TODO Sunday:
+For sounds, use the thai rather than the english to identify the word
+    - Make a task to rename sounds in thai!
 Bugs:
     When talking to a NPC that already taught the word,
     the text should be 'do you wanna review'
+Battle
+
+TODO:
 Tests types:
     - TONE_FROM_SOUND
     - TONE_FROM_THAI
-Battle
 Implement the market in lomsak
-For sounds, use the thai rather than the english to identify the word
-    - Make a task to rename sounds in thai!
-
-TODO:
 Trainers
 Implement more types of test
     Most important:
