@@ -1,0 +1,64 @@
+Nobody
+chumphae_khonkaen_house_1,10,7
+mom
+down
+0Did you know?
+0The word สวัสดี was invented in the 1930s by Phraya Upakit Silapasan,
+0of Chulalongkorn University.
+0It comes from the Sanskrit svasti, meaning well-being.
+0It was popularised by the government in a modernising effort.
+
+Nobody>ส-วัส-ดี
+chumphae_khonkaen_house_1,5,9
+mom
+down
+0Hello!
+0...
+0What, you don't know how to respond?
+
+Nobody>ขอ-โทษ
+chumphae_khonkaen_house_2,5,9
+mom
+down
+0Sorry, what do you want?
+0A word? Sorry, I'm not the best at teaching...
+0Sorry. Oh, Sorry is good enough for you?
+0Well, let's go for 'sorry' then!
+
+Nobody>ขอบ-คุณ
+chumphae_khonkaen_house_3,5,9
+mom
+down
+0The best way to live your life is to always be grateful.
+0Gratitude makes you happy, makes others happy.
+0I'll teach you how to say 'thank you'.
+
+Nobody>ขอบ-คุณ
+chumphae_khonkaen_house_3,5,9
+mom
+down
+0The best way to live your life is to always be grateful.
+0Gratitude makes you happy, makes others happy.
+0I'll teach you how to say 'thank you'.
+
+Nobody>ครับ
+chumphae_khonkaen_house_4,9,11
+monk
+down
+0ครับ is the male polite particle.
+
+Nobody
+chumphae_khonkaen_house_4,7,5
+monk
+down
+0Did you learn ค่ะ and ครับ yet?
+0They are the two most common polite particles.
+0Add ค่ะ if you are a female, and ครับ if you are a male,
+0when you want to express politeness, at the end of a sentence.
+
+Nobody>ค่ะ
+chumphae_khonkaen_house_4,5,11
+monk
+down
+0ค่ะ is the female polite particle.
+

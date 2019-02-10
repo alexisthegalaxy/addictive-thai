@@ -1,0 +1,54 @@
+Tests types:
+
+TAPPINGSENTENCE
+P: Sentence in English
+R: Sentence in Thai, by selecting the right words, choosing amongst distractors
+
+TAPPINGWORD
+P: Word in English
+R: Word in Thai, by selecting the right letters, choosing amongst many distractors
+
+THAIFROMENGLISH4
+P: Word in English
+R: Word in Thai, choosing amongst 3 distractors
+
+THAIFROMENGLISH6
+P: Word in English
+R: Word in Thai, choosing amongst 5 distractors
+
+ENGLISHFROMTHAI
+P: Word in Thai
+R: Word in English, choosing amongst 8 distractors
+
+WHATWORDSINTHATSENTENCE
+P: Sentence in Thai
+R: Tap all the words amongst a large selection, each tapped word goes to its correct place
+    (making a mistake result in all the remaining words (=not placed yet) losing 1 xp)
+
+
+LANGUAGE tests:
+These tests are not related to meaning
+
+TONEFROMTEXT
+P: Syllable in Thai
+R: the right Tone
+
+TONEFROMAUDIO
+P: Syllable in Thai (audio)
+R: the right Tone
+
+LENGTHFROMTEXT
+P: Syllable in Thai
+R: the length (short/long)
+
+
+Test on letters:
+- Get the correct transliteration
+For consonnants:
+    - Get the group it belongs in
+For vowels:
+    - Get the length?
+
+Test on the other font
+
+Test on being able to get the correct transliteration of a quite long string (~4 syllables)

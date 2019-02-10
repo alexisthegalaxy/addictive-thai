@@ -1,0 +1,122 @@
+Mom>ฉัน
+house1,2,11
+mom
+up
+0Hello Alexis! <3"
+
+Dad>ผม
+house1,4,7
+dad
+up
+0What's up [Name]!
+0How are you doing son? :D
+
+Teacher>เมือง-ไทย
+lab,4,7
+old_man
+up
+0Oh, hello [Name]. Are you ready to begin your Thai language adventure?
+0Here's an important word: how to say Thailand in Thai!
+
+มะลิ>ชอบ
+house2,9,12
+mali
+down
+0Hey [Name]! I heard you're about to go on an adventure?
+0Before you go... I wanted to tell you that...
+0I like you.
+0Let me teach you the word 'to like' so you can remember me <3
+
+สมชาย>คุณ
+house3,5,11
+mom
+down
+0[Name]! I have decided to go on an adventure to learn all the Thai words!
+0What??? You too?
+0Ha! I'll be your rival then!
+0I learnt one aleady. Let me teach it to you!
+
+สมชาย>บ้าน
+chaiyaphum,54,47
+old_man
+down
+0That's my house!
+0Pretty nice, eh?
+0Wanna learn how to say house?
+1Thank you for learning house.
+1I said 'Thank you for learning house'.
+
+สมชาย>อยาก
+house5,12,7
+mom
+down
+0What do you want?
+0You came all the way here, you must want something.
+0Want to learn how to say want?
+
+สมชาย>อยู่
+house4,6,11
+mom
+down
+0I'm at home. You're at my place.
+0Do you know how to say where you are?
+
+Kanokwan
+chaiyaphum,20,93
+mom
+up
+0Did you know? You can save the game just by pressing the s key.
+
+Nobody
+chaiyaphum,45,10
+mom
+up
+0This is the inn.
+0You can rest here for free and restore your health.
+
+Sarawut
+chaiyaphum,32,88
+mom
+up
+0Be careful out there, words can attack you when you're in tall grass.
+0I'll let you go if you know at least 5 words!
+0You can see the words you know by pressing 'w'.
+
+Nobody
+chaiyaphum,36,80
+mom
+right
+0If you are hurt, you can rest a bit on your bed,
+0you'll feel better after waking up!
+
+Nobody
+chaiyaphum,35,60
+mom
+right
+0It's quite frustrating to meet words I never learnt,
+0but I guess that's how life works.
+0I heard you can learn these words in the houses along this path though.
+
+sign
+chaiyaphum,31,84
+sign
+right
+0ัยภูมิ ⇡ ⇣ ชัยภูมิ
+
+sign
+chaiyaphum,41,14
+sign
+right
+0ัยภูมิ ⇡ ⇣ ชัยภูมิ
+
+ชัยภูมิ
+chaiyaphum,24,94
+sign
+right
+0ชัยภูมิ
+
+House
+chaiyaphum,26,91
+sign
+right
+0House of [Name]

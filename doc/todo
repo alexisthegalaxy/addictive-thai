@@ -1,0 +1,42 @@
+TODO Sunday:
+Git
+Bugs:
+    When talking to a NPC that already taught the word,
+    the text should be 'do you wanna review'
+Tests types:
+    - FROM SOUND
+        - THAI FROM SOUND
+        - TONE FROM SOUND
+        - ENGLISH FROM SOUND
+    - ENGLISHFROMTHAI
+    - TONE_FROM_SOUND
+    - TONE_FROM_THAI
+Battle
+Implement the market in lomsak
+For sounds, use the thai rather than the english to identify the word
+    - Make a task to rename sounds in thai!
+
+TODO:
+Trainers
+Implement more types of test
+    Most important:
+    - TAPPINGWORD
+Needed sprites:
+    - Mali
+    - Rival
+    - Old woman
+    - Fat man
+    - Rich man
+    - Boy
+    - Girl
+- Map of Thailand in the inns
+-------PLAYABLE---------
+Show the progression bar going up in a learning 1/6 or a brain getting full or something
+Each time you make a mistake on a test, it becomes easier
+Signs show their writing on the ow
+Make a nice map editor
+Put on a git project
+Have a script list all the words that do not appear in sentences.
+-------DEMOABLE---------
+Make npc sprites
+Make water look nice

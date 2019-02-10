@@ -1,0 +1,62 @@
+Computer:
+In the learner's room and in inns.
+Let the learner access his collection, see sentences, etc.
+
+Bed: in the learner's room and in inns.
+Restore the learner's hp.
+
+Inns:
+Contain a map, a PC, a bed
+
+Jobs/tasks:
+You can work jobs in cities to earn money
+For example:
+    Calculation in thai
+    English teaching
+    Clean the plastig bags on the side of the road
+    Do shopping for old ladies (they ask for a random set of object every day)
+
+Shops:
+Lets you buy:
+    medicine: restore the learner's hp by a small number
+    memory: gives 1 xp to a word
+    Remember-pills: during a battle, can be used to show the learning card of the word
+    Random items that you need for quests.
+
+Swimming:
+A swimming teacher in Phitsalunok will teach you how to swim.
+The first teacher teaches you how to swim up to one pixel.
+Then two, and so on.
+It gets increasingly more expensive.
+
+Fruit tree:
+    each day, gives one berry
+    a berry heals you 1 hp
+
+Trainer Battle:
+They have a preset number of words (>3) about which they ask questions.
+The learner loses 1 HP per mistake.
+For each question, words that take part in the question all learn 1 HP.
+If a question is answered mistakenly, the trainer asks the question again.
+The test types are chosen amongst the hardest (7 distractors, etc.)
+Winning results in getting some money.
+They walk up to you when they see you the first time.
+Trainers can be fought once a day - A rematch is triggered by talking to them.
+
+Wild battle:
+Randomly on tall grass, words can trigger a test about them.
+It can be any type of test.
+It can even be a test about an unknown word.
+Losing results in the loss of 1 HP.
+Winning gives 1 XP to each word that took part.
+
+Teacher:
+Each teacher can be fought, and will have three questions about their word.
+They yield no money, but yield double the XP.
+They have a '!' when they have a word to teach you.
+
+Gym:
+In the gym, you battle a couple of trainers, and then the mayor.
+The mayor fight unlocks the passage to the next town.
+Wakaba's mayor is prof, and
+

@@ -1,0 +1,63 @@
+Nobody>ข้าว
+chumphae_lomsak_house1,4,11
+old_man
+down
+0Hello, young one.
+0Want to learn a word?
+0Well, I am a rice farmer, so how about rice?
+
+Nobody
+chumphae_lomsak_house1,6,11
+mom
+left
+0Rice is an important word, it is very common.
+0To say that you are eating, you literally say "I am eating rice".
+0And to say that you are hungry, you literally say "I'm hungry for rice".
+0Well except if you're eating or are hungry for something else,
+0then of course you say "I'm eating something else", hahaha!
+
+Nobody>น้ำ
+chumphae_lomsak_house2,5,10
+mom
+down
+0What, you came all the way from ชัยภูมิ?
+0You must be tired!
+0Do you want something?
+0Water, maybe?
+
+Nobody
+chumphae_lomsak_house2,11,7
+old_man
+up
+0I'm a rice farmer. That's a common job, around here.
+
+Nobody>กิน
+chumphae_lomsak_house3,5,10
+mom
+left
+0Do you know what Thai people love most?
+0Eating
+0I gotta teach you this word!
+
+Nobody
+chumphae_lomsak_house3,3,8
+old_man
+down
+0You can use the verb กิน to mean both eating and drinking actually!
+
+Nobody
+chumphae_lomsak_house3,2,10
+kid
+right
+0ผมกินน้ำ
+
+Nobody
+chumphae_lomsak_house3,3,11
+kid
+up
+0To say 'I am eating',
+0if you don't want to precise what you are eating,
+0you must add 'rice': ฉันกินข้าว.
+
+
+

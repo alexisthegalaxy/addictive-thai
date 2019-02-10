@@ -1,0 +1,257 @@
+# 1 - W (word) - S (Syllable) - M (monosyllabic word) - P (sentence) - L (letter)
+# 2 - thai ('-' to separate syllables, '_' to separate words)
+# 3 - english
+# 4 - tone
+
+# Interjection
+W | ส-วัส-ดี | hello
+W | ขอบ-คุณ | thank you
+W | ขอ-โทษ | sorry
+
+# Particles
+M | ครับ | (male polite particle) | HIGH
+M | ค่ะ | (female polite particle) | FALLING
+M | นะ | (particle to make sentence softer or more persuasive) | FALLING
+
+# Pronouns
+M | ผม | I (male) | RISING
+M | ฉัน | I (female) | RISING
+M | เธอ | she | MID
+M | เขา | he, she, they | RISING
+M | คุณ | you | MID
+M | เรา | we | MID
+M | นี้ | this | HIGH
+M | นั่น | that | FALLING
+M | โน่น | that (far) | FALLING
+
+# Prepositions
+M | จาก | from | LOW
+M | ใน | in | MID
+M | กับ | with | LOW
+
+# Interrogative words
+W | อะ-ไร | what
+W | ที่-ไหน | where
+M | ใคร | who | MID
+W | เมื่อ-ไหร่ | when
+W | ทำ-ไม | why
+W | ยัง-ไง | how
+W | เท่า-ไร | how much
+W | จาก-ไหน | from where
+
+# Time adverbs
+W | วัน-นี้ | today
+W | พรุ่ง-นี้ | tomorrow
+W | เมื่อ-วาน-นี้ | yesterday
+W | ตอน-นี้ | now
+W | คืน-นี้ | tonight
+W | เมื่อ-คืน-นี้ | last night
+W | ทุก-วัน | every day
+W | เส-มอ | always
+W | บ่อย-ๆ | often
+W | บาง-ครั้ง | sometimes
+W | เมื่อ-เช้า | this morning
+W | ตอน-เช้า | in the morning
+W | ตอน-บ่าย | in the afternoon
+W | ตอน-เย็น | in the evening
+
+
+# Adjectives
+M | ดี | good | MID
+M | หิว | hungry, thirsty | RISING
+M | เร็ว | fast | MID
+M | ง่วง | sleepy | FALLING
+M | ดึก | late | LOW
+M | ใกล้ | near | FALLING
+W | ที่-แล้ว | previous
+M | โปรด | favorite | LOW
+M | ไกล | far | MID
+W | มี-ความ-สุข | happy
+W | สี-เหลือง | yellow
+W | สี-ส้ม | orange
+W | สี-แดง | red
+W | สี-ม่วง | purple
+W | สี-ฟ้า | blue
+W | สี-น้ำ-เงิน | dark blue
+W | สี-เขียว | green
+W | สี-ชม-พู | pink
+W | สี-น้ำ-ตาล | brown
+W | สี-ดำ | black
+W | สี-ขาว | white
+W | สี-เทา | grey
+M | อ้วน | fat, overweight | falling
+W | คน-เดียว | alone
+
+M | สี | color | RISING
+M | เหลือง | (yellow) | RISING
+M | ส้ม | (orange) | FALLING
+M | แดง | (red) | MID
+M | สี-เทา | (grey) | MID
+M | ม่วง | (purple) | FALLING
+M | ฟ้า | sky | HIGH
+M | เงิน | money | MID
+M | เขียว | green | RISING
+M | ตาล | sugar palm | MID
+M | ขาว | (white) | RISING
+M | ดำ | dark, black | MID
+
+# Animals
+M | หมา | dog | RISING
+M | แมว | cat | MID
+M | งู | snake | MID
+M | หนู | mouse | RISING
+
+# Professions
+M | ครู | teacher | MID
+W | วิ-ศ-ว-กร | engineer
+
+# Food
+M | ข้าว | rice | FALLING
+M | ข-นม | sweets, cake | HIGH
+W | อา-หาร | food
+M | น้ำ | water | HIGH
+M | เหล้า | alcohol | FALLING
+W | พิซ-ซ่า | pizza
+W | ฝรั่ง | guava/westerner
+W | มะม่วง | mango
+
+# Nouns
+M | บ้าน | home, house | FALLING | road1 5 10
+M | ใจ | heart, mind, spirit | MID
+M | ขวด | bottle | LOW
+M | ไม้ | tree | HIGH
+M | วัน | day | MID
+W | อา-ทิตย์ | week
+M | เดือน | month | MID
+W | อา-ยุ | age
+W | ภา-ษา | language
+M | ปี | year | MID
+M | ค่า | cost | FALLING
+M | เพื่อน | friend | FALLING
+W | ภา-ษา-ไทย | Thai language
+W | ชื่อ-เล่น | nickname
+W | ความ-สุข | happiness
+W | ใจ-ดี | kind
+W | เมือง-ไทย | Thailand
+W | โรง-เรียน | school
+M | ตัว | body | MID
+
+# Verbs
+M | กิน | to eat | MID
+M | ดื่ม | to drink | LOW
+M | คุย | to talk | MID
+M | คิด | to think | HIGH
+M | คิด-ถึง | to miss, think about
+M | คิด-มาก | to think too much, worry
+M | ทำ-งาน | to work
+M | เลิก-งาน | to finish work
+M | เรียน | to study | MID
+M | ต้อง | to have to, must | FALLING
+M | อา-ศัย | to reside | MID
+M | บอก | to tell | LOW
+M | ไป | to go | MID
+M | มา | to come | MID
+W | มา-ถึง | to arrive
+W | ตื่น-นอน | to get up, wake up
+W | กลับ-บ้าน | to go home
+M | พูด | to speak | FALLING
+M | มี | to have | MID
+M | อยู่ | to be at | LOW
+W | ได้-ยิน | to hear
+M | ชื่อ | to be called | FALLING
+M | ชอบ | to like | FALLING
+M | รัก | to love | HIGH
+M | วิ่ง | to run | FALLING
+M | อยาก | to want | LOW
+W | อยาก-ให้ | to want (someone to do something)
+M | ชื่อ | name, to be named | FALLING
+W | บัน-ทึก | to save
+M | เล่น | to play | FALLING
+W | ขับ-รถ | to drive
+M | คือ | to be (equality) | MID
+M | เป็น | to be (details) | MID
+W | ทำ-ให้ | to make (someone do something)
+M | ทำ | to make | MID
+M | ได้ | to get, to be able | FALLING
+M | นอน | to sleep | MID
+
+# Useful words
+M | ไม่ | not | FALLING
+M | ไหม | (question mark) | RISING
+M | ของ | of | RISING
+M | แต่ | but | LOW
+M | จะ | will (future) | LOW
+M | เยอะ | (too) much | HIGH
+W | มาก-เกิน-ไป | excessively
+W | เกี่ยว-กับ | about
+W | ประ-มาณ | approximately
+M | การ | (prefix converting verbs into nouns) | MID
+M | ทุก | each | HIGH
+M | อย่า | don't | LOW
+M | เอง | oneself | MID
+W | นิด-หน่อย | a little bit
+M | ใช่ | yes | FALLING
+W | ไม่-ใช่ | no
+
+# W | อ-เล็ก-ซี่ | Alexis (Mid-High-Falling)
+W | อ-เล็ก-ซี่ | Alexis
+W | ย่อ-มาน | Yoman
+W | ลอน-ดอน | London
+
+# M | ศูนย์ | 0 | RISING
+# M | หนึ่ง | 1 | LOW
+# M | สอง | 2 | RISING
+# M | สาม | 3 | RISING
+# M | สี่ | 4 | LOW
+# M | ห้า | 5 | FALLING
+# M | หก | 6 | LOW
+# M | เจ็ด | 7 | LOW
+# M | แปด | 8 | LOW
+# M | เก้า | 9 | FALLING
+M | สิบ | 10 | LOW
+
+S | ผม_กิน_ข้าว | I (male) eat rice
+S | ไม่_มี_ขวด | There are no bottles
+S | เขา_ใจ-ดี | He is kind
+S | ฉัน_อยู่_บ้าน | I (female) am at home
+S | คุณ_มี_บ้าน_ไหม | Do you have a house?
+S | คุณ_ชอบ_บ้าน_ของ_ผม_ไหม | Do you like my house? (male)
+S | ผม_ชอบ_คุณ | I (male) like you.
+S | ฉัน_ชอบ_คุณ | I (female) like you.
+S | ผม_ชอบ_เมือง-ไทย | I (male) like Thailand.
+S | คุณ_ชอบ_เมือง-ไทย_ไหม | Do you like Thailand?
+S | ฉัน_อยาก_อยู่_เมือง-ไทย | I (female) want to be in Thailand.
+S | ผม_อยาก_อยู่_บ้าน | I (male) want to be home.
+S | ฉัน_ชอบ_อยู่_บ้าน | I (female) like to be at home.
+S | ผม_ชอบ_อยู่_เมือง-ไทย | I (male) like to be in Thailand.
+S | ผม_ชื่อ_อ-เล็ก-ซี่ | My name is Alexis (male)
+S | ผม_อา-ยุ_สิบ_ปี | I (male) am ten years old.
+S | ผม_วิ่ง_เร็ว | I (male) run fast.
+S | ส-วัส-ดี_ค่ะ | Hello (said by female)!
+S | ส-วัส-ดี_ครับ | Hello (said by male)!
+S | ฉัน_รัก_เขา | I (female) love him.
+S | ฉัน_ชอบ_เขา | I (female) like him.
+S | คุณ_ชื่อ_อะ-ไร | What's your name?
+S | ฉัน_ชอบ_ชื่อ_คุณ_นะ | I (female) like your name.
+S | ผม_อา-ศัย_อยู่_ใน_ลอน-ดอน | I (male) live in London.
+S | ชื่อ-เล่น_ของ_ผม_คือ_ย่อ-มาน | My (male) nickname is Yoman.
+S | คุณ_มา_จาก-ไหน | Where are you from?
+S | เธอ_ทำ-ให้_ผม_มี-ความ-สุข | She makes me (male) happy.
+S | ฉัน_ชอบ_ทำ_ข-นม | I (female) like to make cakes.
+S | การ_กิน_พิซ-ซ่า_ทำ-ให้_ฉัน_อ้วน | Eating pizza makes me (female) fat.
+S | เรา_อยาก-ให้_คุณ_พูด_ภา-ษา-ไทย_ทุก_วัน | We want you to speak thai every day.
+S | ฉัน_มี_อะ-ไร_จะ_บอก_คุณ | I (female) have something to tell you.
+S | ฉัน_อยาก_คุย_กับ_คุณ | I (female) want to talk to you.
+S | อย่า_นอน_ดึก | Don't sleep (go to bed) late.
+S | อย่า_กิน_เหล้า_เยอะ | Don't drink too much alcohol.
+S | คุณ_ได้-ยิน_ฉัน_ไหม | Can you hear me (female)?
+S | ผม_ทำ_อา-หาร_เอง | I (male) cook myself.
+S | ผม_ไม่_ชอบ_กิน_คน-เดียว | I (male) don't like to eat alone.
+S | อา-หาร_โปรด_ของ_ฉัน_คือ_พิซ-ซ่า | My (female) favorite food is pizza.
+S | การ_กิน_อา-หาร_มาก-เกิน-ไป_ไม่_ดี | Eating too much food is not good.
+S | ฉัน_กิน_ข้าว | I (female) eat rice.
+S | คุณ_กิน_ข้าว | You eat rice.
+S | ผม_กิน_น้ำ | I (male) drink (colloquial) water.
+S | ฉัน_ไม่_เคย_เห็น_หิ-มะ | I (female) have never seen snow.
+S | เขา_ไม่_เคย_ไป_กรุง-เทพ | He has never been to Bangkok.
+S | หมา_ตัว_ใหญ่ | The dog is big.

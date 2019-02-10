@@ -1,0 +1,111 @@
+TeacherBottomRight>ของ
+chumphae_school,20,15
+old_man
+down
+0ของ means 'of'.
+
+PupilBottomRight
+chumphae_school,21,20
+kid
+up
+0To say my or your or their and so on, you use ของ too.
+0บ้าน ของ ผม = house of me = my house.
+
+PupilBottomRight
+chumphae_school,18,22
+kid
+up
+0ของ is too easy. I am 4 already, I know this, come on!
+
+PupilBottomRight
+chumphae_school,22,22
+kid
+up
+0It's funny how ของ sounds like kong.
+0Does that mean that King Kong means 'king of'?
+
+PupilBottomRight
+chumphae_school,17,20
+kid
+up
+0To say <'s> in English, you have to invert the order!
+0Mari's brother = brother ของ Mari
+0It's easier to think of it as the word 'of'
+
+TeacherBottomLeft>ไหม
+chumphae_school,6,15
+old_man
+down
+0ไหม is used at the end of sentence to make it a question.
+
+PupilBottomRight
+chumphae_school,4,20
+kid
+up
+0So, if I understood correctly, you have to put the ไหม at the end?
+0So, 'Do you like Thailand?' is 'You like Thailand ไหม': คุณ ชอบ เมืองไทย ไหม
+
+PupilBottomRight
+chumphae_school,8,20
+kid
+up
+0In thai, we don't use a question mark.
+0We don't use punctuation at all, actually, only spaces between chunks of words.
+
+TeacherTopRight>ไม่
+chumphae_school,19,4
+old_man
+down
+0ไม่ is used to create negative sentences.
+
+PupilTopRight
+chumphae_school,18,9
+kid
+up
+0ไม่ also means no.
+0Be careful to add the politeness particle afterwards to not sound rude though!
+0For example, I'm a boy, so to say 'no', I say ไม่ครับ.
+
+PupilTopRight
+chumphae_school,17,9
+kid
+up
+0ไม่ is the 12th most used word in Thai!
+0I'd better learn how to say it properly.
+
+TeacherTopLeft
+chumphae_school,7,4
+old_man
+down
+0There are five tones in Thai.
+0Mid, low, high, falling, rising.
+
+PupilTopLeft
+chumphae_school,4,9
+kid
+up
+0My favorite tone is the falling tone.
+0It sounds like somebody just realising something.
+0Like 'aaAAaa! I see now!'
+
+PupilTopLeft
+chumphae_school,9,11
+kid
+up
+0The rising tone goes down and then up.
+0It sounds like in English when you say: Really?
+0Or: Correct? Down and then up.
+
+ชุมแพ
+chumphae,123,69
+sign
+right
+0ชุมแพ
+
+โรงเรียน
+chumphae,124,60
+sign
+right
+0โรงเรียน
+
+

@@ -1,0 +1,120 @@
+Level up types:
+Each time a word is answered correctly, it gains 1 xp.
+Each time a word is answered wrongly, it loses 1 xp
+
+Issue:
+Idea 1:
+    - You could use the hints to guess.
+        - The hint shows the identity of the aggressor, and must be then closed to return to the word.
+        - A word gets no XP if it isn't learnt properly first.
+Could there be a way to trigger a learning battle?
+    - Yes, that could be taught to the player later on.
+    When fighting an unknown word, you could throw a ball if you feel confident that you know the word,
+    And you have to go through the 6 learning screens without a mistake. If you fail, the word goes away.
+    If you succeed, you see the proper presentation screen, and the word is added to the dex.
+
+When the player is in a map, We would show somewhere all the items that can show up in that map
+    Hence, the player will know if he caught all there is to catch!
+
+How does this relate to the spaced repetition?
+    Words show up more often if they haven't been seen lately
+
+Space repetition: each day, all words lose a penalty of 4 XP
+    Each time you get a word correct (after you have caught a word) the penalty is divided by two
+    The penalty cannot be divided more than once a day though
+    If the word is gotten wrong, the penalty min(is multiplied by 16, goes back to 4XP)
+
+What about sentences then?
+    If the player has learned all the words of a sentence, that sentence becomes available
+
+A road usually has words learnt in the last city, plus 2/3 new words that
+can be learnt in the houses on the road.
+
+I feel like it's all learning and not enough review.
+Will it be fun to go back to places to review words? Because it would be
+hard to put the words on the road all the time.
+    - Well, some roads could have like 20 different words
+        - Also, fights would be 80% sentences, so you see other words
+    - Also Yes, it's ok to go back to places and learn the word again
+    - Also, the words must be known in order to go to the next city
+        - You must win the gym to leave the city.
+        - The gym asks about the words in the city, but also on prior words
+    - It's sad to have words die!
+    - There's a big counter on the screen that shows how many words you know (know = xp>5)
+
+As such, most cities should be teaching:
+    - One grammar rule
+    - 4-6 words
+Roads:
+    - 1-2 words
+Special places (that teach specific vocabulary):
+    - 4-8 words
+
+How to deal with special places?
+Let's say you teach the numbers, or the colors?
+They are not needed in the rest of the adventures, although they appear in other sentences
+That way, you can ignore them if you're not interested
+
+Let's try to have some challenging places and paths.
+Like, it's real hard to power through a path or something, and it's relieving to see an inn
+    at the end of the screen.
+Let's try to provide some choice as well.
+
+Fighting trainers:
+    Idea 1: series of tests.
+    Idea 2:
+        - Phase 1: Selection
+            - You select words in your bag. Each word is indexed, from 1 to the number of words you learnt.
+            Then you get a defense state = sum(index of all words chosen).
+            You must choose as many words as the opposite trainer has words.
+        - Phase 2:
+            - For each word that you selected, you must make it come into your team.
+        - Phase 3:
+            You go through the trainer's team. Each words is a hard test.
+            At the same time, he goes through yours.
+            The fastest to finish wins.
+        Issues with that system:
+            You don't really interact with the other player, do you?
+                How could you?
+
+    Idea 3:
+        - ±6 Words are floating around in the middle.
+        - You have to identify more than the trainer.
+
+        To make it more complex:
+            - words can be linked into combo pieces when grouped by tone
+                - Ex: linking HIGH tones can steal trainer's caught words
+                What else:
+                    Make trainer slower
+                    Destroy his words
+                    Add new words to the pool
+                    Delete words from the pool?
+                    Increase difficulty of tests for him.
+        You can see what word he's focusing and try to steal it from him.
+
+
+    This could be the basis. Then, each word would have different battle properties?
+        - I don't need to go super far in that though.
+        - Ways
+
+
+The story:
+    How to explain you leave for an adventure to retrieve all the thai words?
+
+Idea 1:
+    Words are magic, and hold the essence of things, or something like that.
+    People are only able to teach their favorite word.
+    Trainers are like magic apprentices or something.
+
+
+
+
+
+
+
+
+
+
+
+
+
