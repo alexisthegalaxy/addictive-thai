@@ -505,6 +505,176 @@ class ThaiFromEnglish6(ThaiFromEnglish):
         )
 
 
+class EnglishFromThai4(ThaiFromEnglish):
+    def __init__(self, al: 'All', correct_word: Word, learning=None):
+        super().__init__(al, correct_word, learning)
+        self.number_of_distr: int = 3
+
+        self.distractors: List[Word] = self.select_distractors()
+        self.choices: List[Word] = [self.correct_word] + self.distractors
+        random.shuffle(self.choices)
+
+    def draw(self):
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        self.draw_background()
+
+        explanatory_string = "What's the English word for:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.18)
+        screen.blit(
+            fonts.garuda32.render(self.correct_word.thai, True, (0, 0, 0)), (x, y)
+        )
+
+        # Draw all the options
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(0.35),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[0].english,
+            selected=self.selected_option_index == 0,
+        )
+
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(0.35),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[1].english,
+            selected=self.selected_option_index == 1,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(0.625),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[2].english,
+            selected=self.selected_option_index == 2,
+        )
+
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(0.625),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(0.225),
+            string=self.choices[3].english,
+            selected=self.selected_option_index == 3,
+        )
+
+
+class EnglishFromThai6(ThaiFromEnglish):
+    def __init__(self, al: 'All', correct_word: Word, learning=None):
+        super().__init__(al, correct_word, learning)
+        self.number_of_distr: int = 5
+
+        self.distractors: List[Word] = self.select_distractors()
+        self.choices: List[Word] = [self.correct_word] + self.distractors
+        random.shuffle(self.choices)
+
+    def draw(self):
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        self.draw_background()
+
+        explanatory_string = "What's the English word for:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.18)
+        screen.blit(
+            fonts.garuda32.render(self.correct_word.thai, True, (0, 0, 0)), (x, y)
+        )
+
+        # Draw all the options
+        y = 0.30
+        y_space = 0.025
+        y_length = 0.175
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[0].english,
+            selected=self.selected_option_index == 0,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[1].english,
+            selected=self.selected_option_index == 1,
+        )
+        y += y_space + y_length
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[2].english,
+            selected=self.selected_option_index == 2,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[3].english,
+            selected=self.selected_option_index == 3,
+        )
+        y += y_space + y_length
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.15),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[4].english,
+            selected=self.selected_option_index == 4,
+        )
+        draw_box(
+            screen,
+            fonts,
+            x=ui.percent_width(0.53),
+            y=ui.percent_height(y),
+            width=ui.percent_width(0.32),
+            height=ui.percent_height(y_length),
+            string=self.choices[5].english,
+            selected=self.selected_option_index == 5,
+        )
+
+
 def get_correct_option(options: List[Option]):
     for option in options:
         if option.correct:

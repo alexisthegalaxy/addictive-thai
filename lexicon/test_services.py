@@ -1,6 +1,7 @@
 import random
 
-from lexicon.tests import EnglishFromSound4, EnglishFromSound6, ThaiFromSound6, ThaiFromSound4
+from lexicon.tests import EnglishFromSound4, EnglishFromSound6, ThaiFromSound6, ThaiFromSound4, EnglishFromThai6, \
+    EnglishFromThai4
 
 
 def pick_sentence(al, chosen_word, learning=False):
@@ -39,6 +40,10 @@ def pick_a_test_for_word(al, chosen_word):
             test = ThaiFromSound4(al, correct_word=chosen_word)
         elif r == 5:
             test = ThaiFromSound6(al, correct_word=chosen_word)
+        elif r == 6:
+            test = EnglishFromThai4(al, correct_word=chosen_word)
+        elif r == 7:
+            test = EnglishFromThai6(al, correct_word=chosen_word)
         else:
             if can_be_tested_on_sentence:
                 test = pick_sentence(al, chosen_word)
