@@ -236,9 +236,14 @@ class Mas(object):
                 if ">" in name_line:
                     name, taught_word = name_line.split(">")
                     taught_word = al.words.get_word(taught_word)
+                if "{" in name_line:
+                    name, battle_words = name_line.split("{")
+                    battle_words = battle_words.split(",")
+                    battle_words = [al.words.get_word(battle_word) for battle_word in battle_words]
                 else:
                     name = name_line
                     taught_word = None
+                    battle_words = None
                 map_name, x, y = location.split(",")
                 ma = self.get_map_from_name(map_name)
                 line_index += 1
@@ -255,6 +260,7 @@ class Mas(object):
                     direction=direction_from_string(direction),
                     sprite=sprite,
                     taught_word=taught_word,
+                    battle_words=battle_words,
                 )
                 ma.add_npc(npc)
             except IndexError:

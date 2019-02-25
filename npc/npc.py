@@ -29,6 +29,7 @@ class Npc(object):
         direction,
         sprite,
         taught_word: Word = None,
+        battle_words: List[Word] = None,
     ):
         self.name = name
         self.ma = ma
@@ -46,6 +47,7 @@ class Npc(object):
         self.active_line_index = -1
         self.color = (0, 222, 222)
         self.taught_word = taught_word
+        self.battle_words = battle_words
 
         self.process_dialog(al)
 
@@ -77,6 +79,12 @@ class Npc(object):
             ):
                 al.active_learning = Learning(al=al, word=self.taught_word, npc=self)
                 al.active_learning.goes_to_first_step()
+        if self.battle_words:
+            if self.is_saying_last_sentence() and (self.active_dialog == self.dialog_0):
+                from mechanics.battle import Battle
+                # al.active_npc = None
+                al.active_battle = Battle(al=al, words=self.battle_words, trainer=self)
+                # al.active_battle.goes_to_first_step()
 
     def interact(self, al):
         # Then this is the beginning of the interaction with that NPC
@@ -84,8 +92,7 @@ class Npc(object):
             if self.taught_word:  # If this NPC teaches
                 if self.taught_word.total_xp >= 5:  # If the word is known
                     self.active_dialog = self.review_dialog
-        else:
-            al.active_npc = self
+        al.active_npc = self
 
         self.special_interaction(al)
         self.active_line_index += 1

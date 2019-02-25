@@ -48,11 +48,18 @@ def main():
         if al.active_learning:
             ow_frozen = True
             al.active_learning.interact(al)
+        if al.active_battle:
+            ow_frozen = True
+            al.active_battle.interact(al)
         if not ow_frozen:
             if al.ui.space:
                 al.learner.start_interacting(al)
             if al.learner.can_move():
                 al.learner.move(al)
+
+        if al.ui.lapsed_tick():
+            al.ui.tick()
+            al.tick_activity()
 
         al.ui.screen.fill((0, 0, 0))
         al.mas.current_map.draw(al)
@@ -64,6 +71,8 @@ def main():
                 npc.draw_text(al)
         if al.active_test:
             al.active_test.draw()
+        elif al.active_battle:
+            al.active_battle.draw()
         if al.active_learning:
             al.active_learning.draw()
         if al.dex.active:

@@ -50,3 +50,55 @@ def pick_a_test_for_word(al, chosen_word):
                 if not test:
                     can_be_tested_on_sentence = False
     al.active_test = test
+
+
+def pick_a_test_for_thai_word(al, chosen_word):
+    """
+    Here, the learner saw the word in thai already,
+    so we don't want to ask the Thai word from English, for example
+    """
+    test = None
+    can_be_tested_on_sentence = True
+    while test is None:
+        r = random.randint(0, 10)  # can be 0, ..., n-1
+        from lexicon.tests import ThaiFromEnglish6, ThaiFromEnglish4
+        if r == 0:
+            test = EnglishFromSound4(al, correct_word=chosen_word)
+        elif r == 1:
+            test = EnglishFromSound6(al, correct_word=chosen_word)
+        elif r == 2:
+            test = EnglishFromThai4(al, correct_word=chosen_word)
+        elif r == 3:
+            test = EnglishFromThai6(al, correct_word=chosen_word)
+        else:
+            if can_be_tested_on_sentence:
+                test = pick_sentence(al, chosen_word)
+                if not test:
+                    can_be_tested_on_sentence = False
+    al.active_test = test
+
+
+def pick_a_test_for_english_word(al, chosen_word):
+    """
+    Here, the learner saw the word in english already,
+    so we don't want to ask the English word from Thai, for example
+    """
+    test = None
+    can_be_tested_on_sentence = True
+    while test is None:
+        r = random.randint(0, 10)  # can be 0, ..., n-1
+        from lexicon.tests import ThaiFromEnglish6, ThaiFromEnglish4
+        if r == 0:
+            test = ThaiFromEnglish4(al, correct_word=chosen_word)
+        elif r == 1:
+            test = ThaiFromEnglish6(al, correct_word=chosen_word)
+        elif r == 2:
+            test = ThaiFromSound4(al, correct_word=chosen_word)
+        elif r == 3:
+            test = ThaiFromSound6(al, correct_word=chosen_word)
+        else:
+            if can_be_tested_on_sentence:
+                test = pick_sentence(al, chosen_word)
+                if not test:
+                    can_be_tested_on_sentence = False
+    al.active_test = test

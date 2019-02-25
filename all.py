@@ -28,6 +28,7 @@ class All:
         self.active_test: Test = None
         self.active_npc: 'Npc' = None
         self.active_learning = None
+        self.active_battle = None
         self.dex: Dex = None
 
     def add_sentences_to_words(self):
@@ -35,3 +36,6 @@ class All:
             for word in sentence.words:
                 word.sentences.append(sentence)
 
+    def tick_activity(self):
+        if self.active_battle:
+            self.active_battle.tick()

@@ -1,5 +1,4 @@
-# import os
-
+import time
 import pygame
 
 
@@ -67,6 +66,10 @@ class Ui(object):
         self.npc_sprites = npc_sprites()
         self.clock = pygame.time.Clock()
         self.cell_size = 80
+        self.draw_tick = 0.03
+        self.last_draw_tick = 0
+
+        self.click = None  # looks like (x, y)
 
         self.up = False
         self.down = False
@@ -87,11 +90,17 @@ class Ui(object):
     def percent_width(self, ratio):
         return int(ratio * self.width)
 
+    def lapsed_tick(self) -> bool:
+        return time.time() - self.last_draw_tick > self.draw_tick
+
+    def tick(self) -> None:
+        self.last_draw_tick = time.time()
+
     def listen_event(self, al):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-            if event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
                     al.ui.up = True
                 if event.key == pygame.K_DOWN:
@@ -123,6 +132,8 @@ class Ui(object):
                         al.active_npc = None
                     elif al.dex.active:
                         al.dex.active = False
+                    elif al.active_battle:
+                        al.active_battle = None
                     else:
                         self.running = False
                 if event.key == pygame.K_s:
@@ -138,3 +149,6 @@ class Ui(object):
                     al.ui.right = False
                 if event.key == pygame.K_LEFT:
                     al.ui.left = False
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                al.ui.click = pygame.mouse.get_pos()
+
