@@ -236,7 +236,8 @@ class Mas(object):
                 if ">" in name_line:
                     name, taught_word = name_line.split(">")
                     taught_word = al.words.get_word(taught_word)
-                if "{" in name_line:
+                    battle_words = None
+                elif "{" in name_line:
                     name, battle_words = name_line.split("{")
                     battle_words = battle_words.split(",")
                     battle_words = [al.words.get_word(battle_word) for battle_word in battle_words]
