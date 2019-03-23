@@ -74,7 +74,7 @@ class Profile(object):
             xp_loss = al.words.time_to_xp_loss(seconds_since_last_time)
             for word in al.words.words:
                 word.decrease_xp(al, xp_loss)
-            print('it has been 20 hours!')
+            print('it has been more than 20 hours!')
         else:
             print('it has NOT been 20 hours!')
 

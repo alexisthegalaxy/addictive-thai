@@ -48,7 +48,10 @@ def init_vocab():
             if line[0] == 'S':
                 items = line.split(" | ")
                 thai = items[1]
-                english = items[2]
+                try:
+                    english = items[2]
+                except:
+                    print('Error with sentence', items)
                 # print(f'add sentence {thai} {english}')
                 add_sentence(sentences, words, thai=thai, english=english)
 

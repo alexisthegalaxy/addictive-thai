@@ -7,27 +7,48 @@
 W | ส-วัส-ดี | hello
 W | ขอบ-คุณ | thank you
 W | ขอ-โทษ | sorry
+W | พระ_เจ้า | my God!
+W | เอา-เถอะ | okay, alright
 
 # Particles
 M | ครับ | (male polite particle) | HIGH
 M | ค่ะ | (female polite particle) | FALLING
+M | คะ | (female polite particle for questions) | HIGH
 M | นะ | (particle to make sentence softer or more persuasive) | FALLING
+M | ซะ | (particle implying it must be done quickly or completely) | RISING
+M | เถอะ | (particle with a sense of urging, like [let's] in English) | LOW
+M | ล่ะ | (question particle showing a change of state) | FALLING
+M | เหรอ | (question particle to make it softer, or seeking confirmation) | RISING
 
 # Pronouns
 M | ผม | I (male) | RISING
 M | ฉัน | I (female) | RISING
 M | เธอ | she | MID
 M | เขา | he, she, they | RISING
+M | มัน | it | MID
 M | คุณ | you | MID
-M | เรา | we | MID
+M | เรา | we ([sometimes] I) | MID
+M | พวก-เรา | we | MID
 M | นี้ | this | HIGH
 M | นั่น | that | FALLING
 M | โน่น | that (far) | FALLING
+W | ตัว-เอง | self, own
+W | ทุก-คน | everyone
+
+# Places
+W | ที่-นี่ | here
 
 # Prepositions
 M | จาก | from | LOW
 M | ใน | in | MID
+M | ที่ | to, at, that | FALLING
 M | กับ | with | LOW
+M | ใต้ | under, south | FALLING
+M | เหนือ | over, north | RISING
+M | เรื่อง | about | FALLING
+M | เหมือน | like, as | RISING
+M | ให้ | to, for (somebody), so that | FALLING
+M | ด้วย | as well, with | FALLING
 
 # Interrogative words
 W | อะ-ไร | what
@@ -36,8 +57,9 @@ M | ใคร | who | MID
 W | เมื่อ-ไหร่ | when
 W | ทำ-ไม | why
 W | ยัง-ไง | how
-W | เท่า-ไร | how much
+W | เท่า-ไหร่ | how much
 W | จาก-ไหน | from where
+W | หรือ-ไง | or not?
 
 # Time adverbs
 W | วัน-นี้ | today
@@ -55,10 +77,14 @@ W | ตอน-เช้า | in the morning
 W | ตอน-บ่าย | in the afternoon
 W | ตอน-เย็น | in the evening
 
-
 # Adjectives
 M | ดี | good | MID
 M | ใหญ่ | big | LOW
+M | ยาว | long | MID
+M | สั้น | short | FALLING
+M | แคบ | narrow | FALLING
+M | ลึก | deep | RISING
+M | แข็ง | hard | RISING
 M | หิว | hungry, thirsty | RISING
 M | เร็ว | fast | MID
 M | ง่วง | sleepy | FALLING
@@ -67,8 +93,12 @@ M | ใกล้ | near | FALLING
 W | ที่-แล้ว | previous
 M | โปรด | favorite | LOW
 M | ไกล | far | MID
-W | มี-ความ-สุข | happy
+M | หล่อ | handsome | LOW
+W | กำ-ลัง-ดี | just right
+W | มี-ความ-สุข | to be happy
 W | สี-เหลือง | yellow
+M | เหนื่อย | tired | LOW
+W | สี-เงิน | silver
 W | สี-ส้ม | orange
 W | สี-แดง | red
 W | สี-ม่วง | purple
@@ -82,6 +112,8 @@ W | สี-ขาว | white
 W | สี-เทา | grey
 M | อ้วน | fat, overweight | falling
 W | คน-เดียว | alone
+W | วิ-เศษ | magical
+W | สุด-ท้าย | last
 
 M | สี | color | RISING
 M | เหลือง | (yellow) | RISING
@@ -101,6 +133,12 @@ M | หมา | dog | RISING
 M | แมว | cat | MID
 M | งู | snake | MID
 M | หนู | mouse | RISING
+M | ช้าง | elephant | HIGH
+W | ผี-เสื้อ | butterfly
+M | ลิง | monkey | MID
+M | ปลา | fish | MID
+M | นก | bird | HIGH
+M | เสือ | tiger | RISING
 
 # Professions
 M | ครู | teacher | MID
@@ -115,6 +153,7 @@ M | เหล้า | alcohol | FALLING
 W | พิซ-ซ่า | pizza
 W | ฝรั่ง | guava/westerner
 W | มะม่วง | mango
+W | เค้ก | cake
 
 # Countries
 W | เมือง-ไทย | Thailand
@@ -133,7 +172,6 @@ W | กัม-พู-ชา | Cambodia
 
 # Nouns
 M | บ้าน | home, house | FALLING | road1 5 10
-M | ใจ | heart, mind, spirit | MID
 M | ขวด | bottle | LOW
 M | ไม้ | tree | HIGH
 M | วัน | day | MID
@@ -148,13 +186,50 @@ W | ภา-ษา-ไทย | Thai language
 W | ชื่อ-เล่น | nickname
 W | ความ-สุข | happiness
 W | หิ-มะ | snow
+W | รถ-ไฟ-ฟ้า | skytrain
+W | รถ-ไฟ-ใต้-ดิน | subway, underground train
+W | ใต้-ดิน | underground
+M | ดิน | ground | MID
+M | รถ | car | HIGH
+M | ไฟ | fire | MID
+W | รถ-ไฟ | train
+W | ไฟ-ฟ้า | electricity
 W | ใจ-ดี | kind
+M | เด็ก | child | LOW
+W | ด็ก-ผู้-ชาย | boy
+W | หนัง-สือ | book
+W | มะ-ม่วง | mango
+W | รา-คา | price
 W | โรง-เรียน | school
 M | ตัว | body | MID
+M | แฟน | lover | MID
+W | ส-นาม-บิน | airport
+W | ส-นาม | field
+W | ส-นาม-เด็ก-เล่น | playground
+M | พระ | Buddha image, monk | HIGH
+W | กระ-เป๋า | bag
+M | ผี | ghost, spirit | RISING
+W | หุ่น-ยนต์ | robot
+M | ทอง | gold | MID
+
+# Clothing items
+W | กาง-เกง | trousers
+M | เสื้อ | shirt | FALLING
+W | กาง-เกง-ขา-สั้น | shorts
+W | รอง-เท้า | shoes
+W | ถุง-เท้า | socks
+
+# Body parts
+M | ใจ | heart, mind, spirit | MID
+M | หัว | head | RISING
+M | ผม | hair | RISING
+M | ขา | leg | RISING
+M | เท้า | foot | HIGH
 
 # Verbs
 M | กิน | to eat | MID
 M | เห็น | to see | RISING
+W | ต้อง-การ | to want (followed by nouns)
 M | ดื่ม | to drink | LOW
 M | คุย | to talk | MID
 M | คิด | to think | HIGH
@@ -171,7 +246,9 @@ M | มา | to come | MID
 W | มา-ถึง | to arrive
 W | ตื่น-นอน | to get up, wake up
 W | กลับ-บ้าน | to go home
+M | อ่าน | to read | LOW
 M | พูด | to speak | FALLING
+M | นั่ง | to sit | FALLING
 M | มี | to have | MID
 M | อยู่ | to be at | LOW
 W | ได้-ยิน | to hear
@@ -191,6 +268,17 @@ W | ทำ-ให้ | to make (someone do something)
 M | ทำ | to make | MID
 M | ได้ | to get, to be able | FALLING
 M | นอน | to sleep | MID
+M | บิน | to fly | MID
+W | ดูเ-หมือน | to look like
+M | ซื้อ | to buy | HIGH
+M | จำ | to remember | MID
+W | ลง-น-รก | to go to hell
+W | ฝัน | to dream | RISING
+W | เปิด | to open, switch on | LOW
+W | ปิด | to close, switch off | LOW
+W | ออก-มา | to come out
+M | ถาม | to ask | RISING
+W | ได้-ยิน | to hear
 
 # Useful words
 M | ไม่ | not | FALLING
@@ -198,6 +286,7 @@ M | ไหม | (question mark) | RISING
 M | ของ | of | RISING
 M | แต่ | but | LOW
 M | จะ | will (future) | LOW
+M | แล้ว | already | HIGH
 M | เยอะ | (too) much | HIGH
 W | มาก-เกิน-ไป | excessively
 W | เกี่ยว-กับ | about
@@ -210,6 +299,14 @@ W | นิด-หน่อย | a little bit
 M | ใช่ | yes | FALLING
 W | ไม่-ใช่ | no
 W | เคย | ever | MID
+M | เพราะ | because | HIGH
+M | ยัง | still, yet | MID
+W | กำ-ลัง | [present continuous]
+M | กว่า | more | LOW
+W | น่า-จะ | should
+W | ก-รุ-ณา | please, kindly...
+M | บ้าง | some | FALLING
+M | ว่า | (think, say, etc.) that | FALLING
 
 # Proper nouns
 W | กรุง-เทพ | Bangkok
@@ -271,6 +368,7 @@ S | การ_กิน_อา-หาร_มาก-เกิน-ไป_ไม่
 S | ฉัน_กิน_ข้าว | I (female) eat rice.
 S | คุณ_กิน_ข้าว | You eat rice.
 S | ผม_กิน_น้ำ | I (male) drink (colloquial) water.
+S | ผม_ดื่ม_น้ำ | I (male) drink water.
 S | ฉัน_ไม่_เคย_เห็น_หิ-มะ | I (female) have never seen snow.
 S | เขา_ไม่_เคย_ไป_กรุง-เทพ | He has never been to Bangkok.
 S | หมา_ตัว_ใหญ่ | The dog is big.
@@ -278,6 +376,39 @@ S | คุณ_พูด_ภา-ษา_ญี่-ปุ่น_ได้_ไหม
 S | พรุ่ง-นี้_ฉัน_จะ_ไป_กรุง-เทพ | I will go to Bangkok tomorrow.
 S | ฉัน_เคย_ไป_กรุง-เทพ | I have been to Bangkok.
 S | เรา_มา_จาก_อัง-กฤษ | We come from England.
-
-
-
+S | เขา_หล่อ | He's handsome.
+S | พวก-เรา_ยัง_เด็ก | We (long form) are (still) young.
+S | ผม_เป็น_ด็ก-ผู้-ชาย | I am a boy.
+S | ผม_บิน_ไม่_ได้ | I (male) can't fly.
+S | เขา_อยาก_กลับ-บ้าน_เพราะ_เขา_เหนื่อย | He wants to go home because he's tired.
+S | ฉัน_ชอบ_อ่าน_หนัง-สือ | I (female) like to read books.
+S | ผม_ชอบ_อ่าน_หนัง-สือ_เกี่ยว-กับ_การ_ทำ_อา-หาร | I (male) like to read books about cooking.
+S | มะ-ม่วง_รา-คา_เท่า-ไหร่ | How much does a mango cost?
+S | ฉัน_อยาก_เป็น_ครู | I (female) want to become teacher.
+S | ฉัน_นั่ง_รถ-ไฟ-ฟ้า_เพราะ_มัน_เร็ว_กว่า | I (female) take the sky train because it is faster.
+S | ผม_กำ-ลัง_เรียน | I (male) am studying.
+S | คุณ_เป็น_ช้าง | You are an elephant.
+S | คุณ_ดูเ-หมือน_ลิง | You look like a monkey.
+S | ฉัน_จำ_ไม่_ได้ | I (female) don't remember.
+S | มัน_เป็น_รถ-ไฟ_วิ-เศษ | It's a magic train.
+S | รถ_ไฟ_มา_แล้ว | The train has arrived.
+S | วัน-นี้_เป็น_วัน_สุด-ท้าย_เหรอ_คะ | Is today the last day?
+S | คุณ_กำ-ลัง_พูด_อะ-ไร | What are you saying?
+S | คุณ_กำ-ลัง_คุย_เรื่อง_อะ-ไร_อยู่ | What are you talking about?
+S | มัน_ไม่_เหมือน_ใน_หนัง-สือ | It's not like in books.
+S | ทุก-คน_เปิด_หนัง-สือ_ของ_ตัว-เอง_ซะ | Everybody, open your book!
+S | ลง-น-รก_ไป_ซะ | Go to hell!
+S | คุณ_กำ-ลัง_อ่าน_หนัง-สือ_ไหม | Are you reading a book?
+S | เขา_ซื้อ_ให้_คุณ_เหรอ | He bought it for you, right?
+S | เค้ก_ที่_ฉัน_ให้_คุณ_เป็น_ยัง-ไง_บ้าง | How was the cake I sent you?
+S | คุณ_ซื้อ_เอง_เหรอ | You bought it yourself, right?
+S | คุณ_จะ_ซื้อ_มัน_เหรอ | You will buy it, right?
+# S | พ่อ · ซื้อ_ให้_หนู_ด้วย | Daddy, buy me one too.
+S | ก-รุ-ณา_มา_กับ_ผม_เถอะ | Please come with me.
+S | คุณ_ไม่_ได้-ยิน_ที่_ฉัน_พูด_หรือ-ไง | Didn't you hear what I (female) said?
+S | ผม_ต้อง-การ_หุ่น-ยนต์_ที่_ฝัน_ได้ | I (male) want a robot that can dream.
+S | ฉัน_ถาม_ว่า_เขา_อยู่_ที่-ไหน | I (female) ask where he is.
+S | มัน_มา_จาก_ที่-ไหน | Where did it come from?
+S | ทำ-ไม_คุณ_ออก-มา_ไม่_ได้_ล่ะ | Why can't you come out?
+S | คุณ_อยู่_ที่-นี่_ดี_ไหม | Are you here for good?
+S | ทำ-ไม_คุณ_ยัง_อยู่_ที่-นี่ | Why are you still here?
