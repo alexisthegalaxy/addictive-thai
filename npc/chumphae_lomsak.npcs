@@ -59,11 +59,37 @@ up
 0if you don't want to precise what you are eating,
 0you must add 'rice': ฉันกินข้าว.
 
-FirstBattleTrainer{ข้าว,บ้าน,อยาก,ชอบ,เขา,ผม
+FirstBattleTrainer{ผม, ฉัน, ชอบ
 chumphae,110,55
 kid
-right
+up
 0Let's fight!
+1What, you won already?
+1Here, have two Bahts then.
 
+SecondBattleTrainer{บ้าน, โรง-เรียน
+chumphae,102,50
+kid
+right
+0Let's have a short fight!
+1Ah, I'm not as fast as I use to be.
+
+ThirdBattleTrainer{ฉัน, คุณ, ผม, เขา
+chumphae,97,45
+lass
+right
+0I love word fights! My favorite words are pronouns.
+1I only know four pronouns so far,
+1but I know that Thai has many pronouns!
+1The word 'I' alone has more that ten pronouns different pronouns,
+1to use in different situations.
+
+FourthBattleTrainer{อยาก, ชอบ, บ้าน
+chumphae,69,36
+kid
+right
+0You wanna fight?
+0Let me warn you, I'm pretty strong!
+1That was a good fight!
 
 

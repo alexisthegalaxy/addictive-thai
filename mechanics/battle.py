@@ -4,7 +4,11 @@ import pygame
 from typing import List
 from all import All
 from lexicon.items import Word
-from lexicon.test_services import pick_a_test_for_word, pick_a_test_for_english_word, pick_a_test_for_thai_word
+from lexicon.test_services import (
+    pick_a_test_for_word,
+    pick_a_test_for_english_word,
+    pick_a_test_for_thai_word,
+)
 from npc.npc import Npc
 
 
@@ -16,6 +20,8 @@ class Bubble(object):
     def __init__(self, word: Word, al, box):
         self.show_thai = bool(random.getrandbits(1))
         self.word = word
+        print('bubble word')
+        print(self.word)
         self.al = al
         self.is_selected = False
         self.radius = 30
@@ -54,7 +60,7 @@ class Bubble(object):
 
     def interact(self, al):
         if al.ui.click:
-            print('al.ui.click', al.ui.click)
+            print("al.ui.click", al.ui.click)
             print(self.word.thai)
 
     def tick(self):
@@ -81,7 +87,10 @@ class Bubble(object):
             self.y += self.speed_y
 
     def contains_point(self, point):
-        return math.sqrt(square(point[0] - self.x) + square(point[1] - self.y)) <= self.radius
+        return (
+            math.sqrt(square(point[0] - self.x) + square(point[1] - self.y))
+            <= self.radius
+        )
 
 
 # (screen, (150, 150, 150), (x, y, width, height))
@@ -149,10 +158,19 @@ class Battle(object):
         if al.ui.click:
             for bubble in self.bubbles:
                 if bubble.contains_point(al.ui.click):
+                    last_bubble = len(self.bubbles) == 1
                     if bubble.is_shown_in_thai:
-                        pick_a_test_for_thai_word(al, chosen_word=bubble.word)
+                        pick_a_test_for_thai_word(
+                            al,
+                            chosen_word=bubble.word,
+                            test_success_callback=self.end_battle if last_bubble else None,
+                        )
                     else:
-                        pick_a_test_for_english_word(al, chosen_word=bubble.word)
+                        pick_a_test_for_english_word(
+                            al,
+                            chosen_word=bubble.word,
+                            test_success_callback=self.end_battle if last_bubble else None,
+                        )
                     self.kill_bubble(bubble)
                     break
             al.ui.click = None
@@ -173,5 +191,12 @@ class Battle(object):
 
     def kill_bubble(self, bubble):
         self.bubbles.remove(bubble)
-        if len(self.bubbles) == 0:
-            self.al.active_battle = None
+
+    def end_battle(self):
+        self.al.active_battle = None
+        self.al.active_npc = self.trainer
+        self.al.active_npc.active_dialog = self.al.active_npc.dialog_1
+        self.al.active_npc.active_line_index += 1
+
+        battle_money = 2
+        self.al.learner.money += battle_money

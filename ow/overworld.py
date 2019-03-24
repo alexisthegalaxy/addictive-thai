@@ -221,6 +221,8 @@ class Mas(object):
                 dialog_1 = []
                 dialog_2 = []
                 dialog_3 = []
+                taught_word = None
+                battle_words = None
                 while lines[line_index] and lines[line_index][0] == '0':
                     dialog_0.append(lines[line_index][1:])
                     line_index += 1
@@ -236,15 +238,12 @@ class Mas(object):
                 if ">" in name_line:
                     name, taught_word = name_line.split(">")
                     taught_word = al.words.get_word(taught_word)
-                    battle_words = None
                 elif "{" in name_line:
                     name, battle_words = name_line.split("{")
-                    battle_words = battle_words.split(",")
+                    battle_words = battle_words.split(", ")
                     battle_words = [al.words.get_word(battle_word) for battle_word in battle_words]
                 else:
                     name = name_line
-                    taught_word = None
-                    battle_words = None
                 map_name, x, y = location.split(",")
                 ma = self.get_map_from_name(map_name)
                 line_index += 1

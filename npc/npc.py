@@ -22,8 +22,8 @@ class Npc(object):
         ma,
         x,
         y,
-        dialog_0,
-        dialog_1,
+        dialog_0,  # pre-fight, normal talk, pre-learn
+        dialog_1,  # post-fight
         dialog_2,
         dialog_3,
         direction,

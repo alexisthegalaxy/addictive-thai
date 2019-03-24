@@ -25,10 +25,11 @@ class TestType(Enum):
 
 
 class Test(object):
-    def __init__(self, al: 'All', learning=None):
+    def __init__(self, al: 'All', learning=None, test_success_callback=None):
         self.al = al
         self.learning = learning
         self.selected_option_index = 0
+        self.test_success_callback = test_success_callback
 
     def draw(self):
         pass
@@ -65,6 +66,10 @@ class Test(object):
         if self.learning:
             self.learning.test_finished()
 
+        # 5 - test_success_callback
+        if self.test_success_callback:
+            self.test_success_callback()
+
     def fails(self):
         # 1 - Hurts the player.
         self.al.learner.hurt(1)
@@ -78,8 +83,8 @@ class Test(object):
 
 
 class TappingTestSentence(Test):
-    def __init__(self, al: 'All', correct_word: Word, sentence, learning=None):
-        super().__init__(al, learning)
+    def __init__(self, al: 'All', correct_word: Word, sentence, learning=None, test_success_callback=None):
+        super().__init__(al, learning, test_success_callback)
         self.correct_word = correct_word
         self.number_of_distr = 6
         self.constructed_sentence = []  # List of syllables
@@ -274,8 +279,8 @@ def draw_box(screen, fonts, x, y, width, height, string, selected=False):
 
 
 class ThaiFromEnglish(Test):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, learning)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, learning, test_success_callback)
         self.correct_word: Word = correct_word
         self.number_of_distr: int = 3
 
@@ -330,8 +335,8 @@ class ThaiFromEnglish(Test):
 
 
 class ThaiFromEnglish4(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, correct_word, learning)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -405,8 +410,8 @@ class ThaiFromEnglish4(ThaiFromEnglish):
 
 
 class ThaiFromEnglish6(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, correct_word, learning)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -503,8 +508,8 @@ class ThaiFromEnglish6(ThaiFromEnglish):
 
 
 class EnglishFromThai4(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, correct_word, learning)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -577,8 +582,8 @@ class EnglishFromThai4(ThaiFromEnglish):
 
 
 class EnglishFromThai6(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, correct_word, learning)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -680,8 +685,8 @@ def get_correct_option(options: List[Option]):
 
 
 class FromSound(Test):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, learning)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, learning, test_success_callback)
         self.correct_word: Word = correct_word
         self.number_of_distr: int = 3
         self.selector_on_sound = False
@@ -749,13 +754,13 @@ class FromSound(Test):
 
 
 class EnglishFromSound(FromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, learning, correct_word)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, learning, correct_word, test_success_callback)
 
 
 class EnglishFromSound4(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, learning, correct_word)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -828,8 +833,8 @@ class EnglishFromSound4(EnglishFromSound):
 
 
 class EnglishFromSound6(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning=None):
-        super().__init__(al, learning, correct_word)
+    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+        super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -925,8 +930,8 @@ class EnglishFromSound6(EnglishFromSound):
 
 
 class ThaiFromSound4(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None):
-        super().__init__(al, learning, correct_word)
+    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None, test_success_callback=None):
+        super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -999,8 +1004,8 @@ class ThaiFromSound4(EnglishFromSound):
 
 
 class ThaiFromSound6(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None):
-        super().__init__(al, learning, correct_word)
+    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None, test_success_callback=None):
+        super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()

@@ -229,7 +229,6 @@ M | เท้า | foot | HIGH
 # Verbs
 M | กิน | to eat | MID
 M | เห็น | to see | RISING
-W | ต้อง-การ | to want (followed by nouns)
 M | ดื่ม | to drink | LOW
 M | คุย | to talk | MID
 M | คิด | to think | HIGH
@@ -258,6 +257,7 @@ M | รัก | to love | HIGH
 M | วิ่ง | to run | FALLING
 M | อยาก | to want | LOW
 W | อยาก-ให้ | to want (someone to do something)
+W | ต้อง-การ | to want (followed by nouns)
 M | ชื่อ | name, to be named | FALLING
 W | บัน-ทึก | to save
 M | เล่น | to play | FALLING
