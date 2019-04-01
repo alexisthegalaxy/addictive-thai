@@ -5,7 +5,6 @@ from typing import List
 from all import All
 from lexicon.items import Word
 from lexicon.test_services import (
-    pick_a_test_for_word,
     pick_a_test_for_english_word,
     pick_a_test_for_thai_word,
 )
@@ -20,13 +19,14 @@ class Bubble(object):
     def __init__(self, word: Word, al, box):
         self.show_thai = bool(random.getrandbits(1))
         self.word = word
-        print('bubble word')
-        print(self.word)
         self.al = al
         self.is_selected = False
         self.radius = 30
         self.color = (200, 0, 100)
         self.is_shown_in_thai = random.random() > 0.5
+
+        self.hp = 10  # Each bubble has an amount of hp, so that the opponent has to work on it
+
 
         self.box_x = box[0]
         self.box_y = box[1]
@@ -56,6 +56,10 @@ class Bubble(object):
         ui.screen.blit(
             ui.fonts.garuda32.render(shown_value, True, (0, 0, 0)),
             (x_translated_inbox - 15, y_translated_inbox - 20 - 15),
+        )
+        ui.screen.blit(
+            ui.fonts.garuda32.render(str(self.hp), True, (0, 0, 0)),
+            (x_translated_inbox - 15, y_translated_inbox - 20 - 15 + 20),
         )
 
     def interact(self, al):
@@ -92,8 +96,8 @@ class Bubble(object):
             <= self.radius
         )
 
-
-# (screen, (150, 150, 150), (x, y, width, height))
+    def reduce_hp(self, damage):
+        self.hp -= damage
 
 
 class Battle(object):
@@ -127,7 +131,7 @@ class Battle(object):
 
     """
 
-    def __init__(self, al: All, words, trainer) -> None:
+    def __init__(self, al: All, words, trainer: Npc) -> None:
         # UI
         self.x = al.ui.percent_width(0.07)
         self.y = al.ui.percent_height(0.07)
@@ -140,6 +144,9 @@ class Battle(object):
         self.bubbles = []
         self.create_bubbles()
         self.selected_bubble_index = -1
+
+        # properties for the opponent
+        self.bubble_selected_by_opponent = None
 
     def create_bubbles(self) -> None:
         for word in self.words:
@@ -175,6 +182,19 @@ class Battle(object):
                     break
             al.ui.click = None
 
+    def opponent_play(self):
+        if self.bubble_selected_by_opponent is None or self.bubble_selected_by_opponent.hp == 0:
+            self.opponent_select_bubble()
+        else:
+            self.bubble_selected_by_opponent.reduce_hp(1)
+            if self.bubble_selected_by_opponent.hp <= 0:
+                self.kill_bubble(self.bubble_selected_by_opponent)
+                if len(self.bubbles) == 0:
+                    self.end_battle()
+
+    def opponent_select_bubble(self):
+        self.bubble_selected_by_opponent = random.choice(self.bubbles)
+
     def draw(self):
         ui = self.al.ui
         screen = ui.screen
@@ -190,6 +210,7 @@ class Battle(object):
             bubble.draw()
 
     def kill_bubble(self, bubble):
+        bubble.hp = 0
         self.bubbles.remove(bubble)
 
     def end_battle(self):
@@ -198,5 +219,5 @@ class Battle(object):
         self.al.active_npc.active_dialog = self.al.active_npc.dialog_1
         self.al.active_npc.active_line_index += 1
 
-        battle_money = 2
+        battle_money = 1
         self.al.learner.money += battle_money

@@ -3,24 +3,34 @@ Battle
     Have the trainer doing it too!
     Have a way to use mouse in tests!
 Story progression:
-    Teach the word for school in the school
-
+    Finish the city of Chum Phae
+        Market
+        Teach the word school
+        https://www.tripadvisor.co.uk/Attraction_Review-g2237417-d6669488-Reviews-Non_Mueang_Ancient_Town-Chum_Phae_Khon_Kaen_Province.html
+            Lots of bats
+                Teach Baht?
+            Skeletons are quite tall
+            In the past, ChumPhae
+            Just south west of ChumPhae
+    Make the city of Lomsak
+        The school
+        The market
 
 TODO:
-Put npcs file in a sublayer
+Put npcs file in a folder
 Tests types:
     - TONE_FROM_SOUND
     - TONE_FROM_THAI
-Implement the market in lomsak
-Trainers
 Implement more types of test
     Most important:
     - TAPPINGWORD
 Needed sprites:
+    - Main character
     - Mali
     - Rival
     - Old woman
     - Fat man
+    - Rich woman
     - Rich man
     - Boy
     - Girl
@@ -29,8 +39,10 @@ Needed sprites:
 Show the progression bar going up in a learning 1/6 or a brain getting full or something
 Each time you make a mistake on a test, it becomes easier
 Signs show their writing on the ow
-Make a nice map editor
-Have a script list all the words that do not appear in sentences.
 -------DEMOABLE---------
 Make npc sprites
 Make water look nice
+---------COOL-----------
+Trainers walk to you
+Make a nice map editor
+Have a script list all the words that do not appear in sentences.

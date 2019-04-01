@@ -61,6 +61,9 @@ to_convert = [
     "chumphae_lomsak_house2",
     "chumphae_lomsak_house3",
     "lomsak",
+    "lomsak_house_1",
+    "lomsak_house_2",
+    "lomsak_school",
 ]
 
 for item in to_convert:

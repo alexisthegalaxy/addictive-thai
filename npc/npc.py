@@ -2,7 +2,7 @@ import pygame
 from typing import List
 
 from all import All
-from direction import string_from_direction, opposite_direction
+from direction import string_from_direction, opposite_direction, Direction
 from lexicon.items import Word
 from lexicon.learning import Learning
 from sounds.play_sound import play_thai_word
@@ -22,15 +22,20 @@ class Npc(object):
         ma,
         x,
         y,
-        dialog_0,  # pre-fight, normal talk, pre-learn
-        dialog_1,  # post-fight
-        dialog_2,
-        dialog_3,
-        direction,
-        sprite,
+        dialog_0=None,  # pre-fight, normal talk, pre-learn
+        dialog_1=None,  # post-fight
+        dialog_2=None,
+        dialog_3=None,
+        direction=Direction.UP,
+        sprite="kid",
         taught_word: Word = None,
         battle_words: List[Word] = None,
     ):
+        dialog_0 = dialog_0 or ["Hello"]
+        dialog_1 = dialog_1 or []
+        dialog_2 = dialog_2 or []
+        dialog_3 = dialog_3 or []
+
         self.name = name
         self.ma = ma
         self.sprite = sprite
@@ -82,6 +87,7 @@ class Npc(object):
         if self.battle_words:
             if self.is_saying_last_sentence() and (self.active_dialog == self.dialog_0):
                 from mechanics.battle import Battle
+
                 # al.active_npc = None
                 al.active_battle = Battle(al=al, words=self.battle_words, trainer=self)
                 # al.active_battle.goes_to_first_step()

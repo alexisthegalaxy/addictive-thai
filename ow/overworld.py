@@ -192,6 +192,9 @@ class Mas(object):
         self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", words=words, cell_types=cell_types, mas=self)
 
         self.lomsak = Ma(filename="lomsak", words=words, cell_types=cell_types, mas=self)
+        self.lomsak_house_1 = Ma(filename="lomsak_house_1", words=words, cell_types=cell_types, mas=self)
+        self.lomsak_house_2 = Ma(filename="lomsak_house_2", words=words, cell_types=cell_types, mas=self)
+        self.lomsak_school = Ma(filename="lomsak_school", words=words, cell_types=cell_types, mas=self)
 
         self.current_map: Ma = self.chaiyaphum
 
@@ -333,3 +336,9 @@ class Mas(object):
         self.lomsak.get_cell_at(37, 40).goes_to = (self.chumphae, 14, 20)
         self.lomsak.get_cell_at(29, 32).goes_to = (self.inn2, 4, 7)
         self.inn2.get_cell_at(4, 8).goes_to = (self.lomsak, 29, 33)
+        self.lomsak.get_cell_at(19, 36).goes_to = (self.lomsak_house_1, 5, 12)
+        self.lomsak_house_1.get_cell_at(5, 13).goes_to = (self.lomsak, 19, 37)
+        self.lomsak.get_cell_at(7, 24).goes_to = (self.lomsak_house_2, 5, 12)
+        self.lomsak_house_2.get_cell_at(5, 13).goes_to = (self.lomsak, 7, 25)
+        self.lomsak.get_cell_at(28, 24).goes_to = (self.lomsak_school, 13, 24)
+        self.lomsak_school.get_cell_at(13, 25).goes_to = (self.lomsak, 28, 25)

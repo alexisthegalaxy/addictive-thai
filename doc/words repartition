@@ -1,43 +1,60 @@
-chaiyaphum: ✓
-mom: I (female)
-dad: I (male)
-Rival: You
-Lover: to like
-Teacher (Old man): Thailand
+✓ chaiyaphum:
+✓ mom: I (female)
+✓ dad: I (male)
+✓ Rival: You
+✓ Lover: to like
+✓ Teacher (Old man): Thailand
 
-chaiyaphum-chumphae: ✓
-to want
-House
-To be at
+✓ chaiyaphum-chumphae:
+✓ to want
+✓ House
+✓ To be at
 
-chumphae: ✓
+chumphae:
 school (good because it is a noun that you can like, be in, posses, etc.)
-of
-he/she/they
-not
-mai (question)
+    ✓ of
+    ✓ he/she/they
+    ✓ not
+    ✓ mai (question)
 
-chumphae-khonkaen1: ✓
-There's a house in the middle of the road, on an island,
-where an old man teaches basic politeness
-krap, kaa
-The wild words are:
-thank you, sorry, hello
+✓ chumphae-khonkaen1:
+✓ There's a house in the middle of the road, on an island,
+✓ where an old man teaches basic politeness
+✓ krap, kaa
+✓ The wild words are:
+✓ thank you, sorry, hello
 
-chumphae-lomsak: ✓
-to eat
-water
-rice
+✓ chumphae-lomsak:
+✓ to eat
+✓ water
+✓ rice
 
 lomsak:
-School: to be able to (dai)
-thai (language)
-english
+School:
+    to be able to (>dai)
+    yes and no (>maichai)
+    question with 'chai mai' (>chai)
+✓ language
+✓ thai
+✓ english
 to speak
+to study
 
 lomsak-phetchabun:
 to go
 good
+
+phetchabun
+teacher
+cat
+today
+school:
+    - adjectives
+    - bpen
+
+
+
+
 
 khaotakian-park: (เขาตะเคียน)
     - how much

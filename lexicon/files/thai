@@ -9,9 +9,12 @@ W | ขอบ-คุณ | thank you
 W | ขอ-โทษ | sorry
 W | พระ_เจ้า | my God!
 W | เอา-เถอะ | okay, alright
+W | สา-ธุ | sadhu
+W | ไม่-เป็น-ไร | nevermind
 
 # Particles
 M | ครับ | (male polite particle) | HIGH
+M | ไหม | (question particle) | RISING
 M | ค่ะ | (female polite particle) | FALLING
 M | คะ | (female polite particle for questions) | HIGH
 M | นะ | (particle to make sentence softer or more persuasive) | FALLING
@@ -19,6 +22,9 @@ M | ซะ | (particle implying it must be done quickly or completely) | RISING
 M | เถอะ | (particle with a sense of urging, like [let's] in English) | LOW
 M | ล่ะ | (question particle showing a change of state) | FALLING
 M | เหรอ | (question particle to make it softer, or seeking confirmation) | RISING
+
+# Classifiers
+M | แก้ว | FALLING | glass, classifier for glasses
 
 # Pronouns
 M | ผม | I (male) | RISING
@@ -68,6 +74,7 @@ W | เมื่อ-วาน-นี้ | yesterday
 W | ตอน-นี้ | now
 W | คืน-นี้ | tonight
 W | เมื่อ-คืน-นี้ | last night
+W | อา-ทิตย์ห-น้า | next week
 W | ทุก-วัน | every day
 W | เส-มอ | always
 W | บ่อย-ๆ | often
@@ -114,6 +121,8 @@ M | อ้วน | fat, overweight | falling
 W | คน-เดียว | alone
 W | วิ-เศษ | magical
 W | สุด-ท้าย | last
+W | ใจ-เย็น | calm, cool-headed
+W | ใจ-ร้อน | hot-tempered
 
 M | สี | color | RISING
 M | เหลือง | (yellow) | RISING
@@ -144,6 +153,16 @@ M | เสือ | tiger | RISING
 M | ครู | teacher | MID
 W | วิ-ศ-ว-กร | engineer
 
+# Plants
+W | ต้น-ไม้ | tree
+W | ดอก-ไม้ | flower
+
+# Fruits
+W | ผล-ไม้ | fruit
+W | มะ-ม่วง | mango
+M | กล้วย | banana | FALLING
+W | สับปะรด | pineapple
+
 # Food
 M | ข้าว | rice | FALLING
 M | ข-นม | sweets, cake | HIGH
@@ -152,7 +171,6 @@ M | น้ำ | water | HIGH
 M | เหล้า | alcohol | FALLING
 W | พิซ-ซ่า | pizza
 W | ฝรั่ง | guava/westerner
-W | มะม่วง | mango
 W | เค้ก | cake
 
 # Countries
@@ -183,6 +201,7 @@ M | ปี | year | MID
 M | ค่า | cost | FALLING
 M | เพื่อน | friend | FALLING
 W | ภา-ษา-ไทย | Thai language
+W | ภา-ษา-อัง-กฤษ | English language
 W | ชื่อ-เล่น | nickname
 W | ความ-สุข | happiness
 W | หิ-มะ | snow
@@ -201,6 +220,7 @@ W | หนัง-สือ | book
 W | มะ-ม่วง | mango
 W | รา-คา | price
 W | โรง-เรียน | school
+W | ต-ลาด | market
 M | ตัว | body | MID
 M | แฟน | lover | MID
 W | ส-นาม-บิน | airport
@@ -211,6 +231,18 @@ W | กระ-เป๋า | bag
 M | ผี | ghost, spirit | RISING
 W | หุ่น-ยนต์ | robot
 M | ทอง | gold | MID
+W | โท-ร-ทัศน์ | TV
+M | หนัง | RISING | movie
+W | ภาพ-ยน-ตร์ | movie (formal)
+W | สอบ | LOW | exam
+
+# Celestial bodies
+W | พระ-จันทร์ | moon
+W | พระ-อา-ทิตย์ | sun
+
+# Days of the week
+W | วัน-จันทร์ | Monday
+W | วัน-อา-ทิตย์ | Sunday
 
 # Clothing items
 W | กาง-เกง | trousers
@@ -282,7 +314,6 @@ W | ได้-ยิน | to hear
 
 # Useful words
 M | ไม่ | not | FALLING
-M | ไหม | (question mark) | RISING
 M | ของ | of | RISING
 M | แต่ | but | LOW
 M | จะ | will (future) | LOW
@@ -314,6 +345,7 @@ W | อ-เล็ก-ซี่ | Alexis
 W | ย่อ-มาน | Yoman
 W | ลอน-ดอน | London
 
+# Numbers
 # M | ศูนย์ | 0 | RISING
 # M | หนึ่ง | 1 | LOW
 # M | สอง | 2 | RISING
@@ -412,3 +444,4 @@ S | มัน_มา_จาก_ที่-ไหน | Where did it come from?
 S | ทำ-ไม_คุณ_ออก-มา_ไม่_ได้_ล่ะ | Why can't you come out?
 S | คุณ_อยู่_ที่-นี่_ดี_ไหม | Are you here for good?
 S | ทำ-ไม_คุณ_ยัง_อยู่_ที่-นี่ | Why are you still here?
+S | เรา_มี_สอบ_อา-ทิตย์ห-น้า | We have an exam next week.

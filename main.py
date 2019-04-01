@@ -3,6 +3,7 @@ from lexicon.dex import Dex
 from lexicon.init import init_vocab
 import pygame
 
+from npc.import_npcs import import_npcs
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
 from profile.profile import Profiles
@@ -28,7 +29,8 @@ def main():
 
     al.add_sentences_to_words()
     al.learner = Learner(al, 1, 1, (150, 0, 150))
-    mas.import_npcs(al)
+    # mas.import_npcs(al)
+    import_npcs(al)
 
     profiles.current_profile.load(al)
     al.dex = Dex(al)
@@ -73,6 +75,7 @@ def main():
             al.active_test.draw()
         elif al.active_battle:
             al.active_battle.draw()
+            al.active_battle.opponent_play()
         if al.active_learning:
             al.active_learning.draw()
         if al.dex.active:
