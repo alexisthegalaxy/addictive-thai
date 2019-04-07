@@ -35,10 +35,10 @@ class Profile(object):
         self.save_pickle(al)
 
     def save_pickle(self, al: 'All'):
-        pickle.dump(al, open("save.p", "wb"))
+        pickle.dump(al, open("Alexis.pro", "wb"))
 
     def load_pickle(self, al: 'All'):
-        file_name = "save.p"
+        file_name = "Alexis.pro"
         if os.path.getsize(file_name) > 0:
             retrieved_all = pickle.load(open(file_name, "rb"))
             ma = getattr(al.mas, retrieved_all.current_map)
@@ -84,14 +84,14 @@ class Profiles(object):
         self.current_profile = None
         dir_path = os.path.dirname(os.path.realpath(__file__))
         os.chdir(dir_path)
-        if len(glob.glob("*.pro")) == 0:
-            f = open(f"{dir_path}/Alexis.pro", "w")
-            f.write("Alexis\n")
-            f.write(f"position chaiyaphum 28 92\n")
-            f.write(f"hp 5\n")
-            f.write(f"money 5\n")
-            f.write(f"last_heal chaiyaphum 28 92\n")
-            f.write(f"22:00:53 28 Jan 2019\n")
+        # if len(glob.glob("*.pro")) == 0:
+        #     f = open(f"{dir_path}/Alexis.pro", "w")
+        #     f.write("Alexis\n")
+        #     f.write(f"position chaiyaphum 28 92\n")
+        #     f.write(f"hp 5\n")
+        #     f.write(f"money 5\n")
+        #     f.write(f"last_heal chaiyaphum 28 92\n")
+        #     f.write(f"22:00:53 28 Jan 2019\n")
 
         for file_name in glob.glob("*.pro"):
             file_path = dir_path + '/' + file_name
