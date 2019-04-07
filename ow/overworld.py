@@ -187,6 +187,8 @@ class Mas(object):
         self.chumphae_school = Ma(filename="chumphae_school", words=words, cell_types=cell_types, mas=self)
         self.chumphae_house1 = Ma(filename="chumphae_house1", words=words, cell_types=cell_types, mas=self)
         self.chumphae_house2 = Ma(filename="chumphae_house2", words=words, cell_types=cell_types, mas=self)
+        self.chumphae_house3 = Ma(filename="chumphae_house3", words=words, cell_types=cell_types, mas=self)
+        self.non_muang_house_1 = Ma(filename="non_muang_house_1", words=words, cell_types=cell_types, mas=self)
         self.chumphae_lomsak_house1 = Ma(filename="chumphae_lomsak_house1", words=words, cell_types=cell_types, mas=self)
         self.chumphae_lomsak_house2 = Ma(filename="chumphae_lomsak_house2", words=words, cell_types=cell_types, mas=self)
         self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", words=words, cell_types=cell_types, mas=self)
@@ -310,6 +312,11 @@ class Mas(object):
         self.chumphae.get_cell_at(117, 63).goes_to = (self.chumphae_house2, 5, 12)
         self.chumphae_house1.get_cell_at(5, 13).goes_to = (self.chumphae, 127, 62)
         self.chumphae.get_cell_at(127, 61).goes_to = (self.chumphae_house1, 5, 12)
+        self.chumphae_house3.get_cell_at(7, 13).goes_to = (self.chumphae, 118, 74)
+        self.chumphae.get_cell_at(118, 73).goes_to = (self.chumphae_house3, 7, 12)
+
+        self.non_muang_house_1.get_cell_at(7, 13).goes_to = (self.chumphae, 113, 76)
+        self.chumphae.get_cell_at(113, 75).goes_to = (self.non_muang_house_1, 7, 12)
         # chumphae_khonkaen
         self.chumphae_khonkaen.get_cell_at(12, 78).goes_to = (self.chumphae, 137, 66)
         self.chumphae_khonkaen.get_cell_at(12, 79).goes_to = (self.chumphae, 137, 67)
