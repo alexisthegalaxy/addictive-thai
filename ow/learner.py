@@ -21,7 +21,6 @@ class Learner(object):
         self.color = color
         self.last_movement = time.time()
         self.direction = Direction.DOWN
-        self.interact_with = None
         self.al: "All" = al
         self.max_free_steps = 3
         self.free_steps = self.max_free_steps
@@ -45,13 +44,6 @@ class Learner(object):
             self.color,
             pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
         )
-        if self.interact_with:
-            al.ui.screen.blit(
-                al.ui.fonts.garuda32.render(
-                    self.interact_with.thai, True, (255, 255, 255)
-                ),
-                (0, 0),
-            )
 
     def draw_money(self, al):
         color = (0, 0, 0)

@@ -270,6 +270,7 @@ class Mas(object):
                 reading = False
 
     def import_npcs(self, al):
+        # Not used anymore
         all_files = []
         for (dirpath, dirnames, filenames) in walk("./../npc/"):
             all_files.extend(filenames)

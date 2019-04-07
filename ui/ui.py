@@ -7,6 +7,7 @@ class Fonts(object):
         self.garuda64 = pygame.font.Font("../fonts/Garuda.ttf", 64)
         self.garuda32 = pygame.font.Font("../fonts/Garuda.ttf", 32)
         self.garuda16 = pygame.font.Font("../fonts/Garuda.ttf", 16)
+        self.garuda24 = pygame.font.Font("../fonts/Garuda.ttf", 24)
         self.setha64 = pygame.font.Font("../fonts/JS-Setha-Normal.ttf", 64)
         self.setha32 = pygame.font.Font("../fonts/JS-Setha-Normal.ttf", 32)
         self.setha16 = pygame.font.Font("../fonts/JS-Setha-Normal.ttf", 16)
@@ -35,6 +36,7 @@ def npc_sprites():
 def random_images():
     return {
         "full_heart": pygame.image.load("../images/full_heart.png"),
+        "selection_arrow": pygame.image.load("../images/selection_arrow.png"),
         "empty_heart": pygame.image.load("../images/empty_heart.png"),
         "sound_icon": pygame.image.load("../images/sound_icon.png"),
         "sound_icon_green": pygame.image.load("../images/sound_icon_green.png"),
@@ -134,6 +136,8 @@ class Ui(object):
                         al.dex.active = False
                     elif al.active_battle:
                         al.active_battle = None
+                    elif al.active_sale:
+                        al.active_sale = None
                     else:
                         self.running = False
                 if event.key == pygame.K_s:

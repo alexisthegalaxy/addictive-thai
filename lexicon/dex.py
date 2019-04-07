@@ -9,6 +9,7 @@ class Dex(object):
         self.words_to_show = []
         self.determine_words_to_show()
         self.word_count = len(self.words_to_show)
+        self.max_items_to_show = 15
 
     def determine_words_to_show(self):
         self.words_to_show = []
@@ -22,7 +23,7 @@ class Dex(object):
 
     def interact(self):
         if self.al.ui.down:
-            self.from_line = min(self.word_count - 15, self.from_line + 1)
+            self.from_line = min(self.word_count - self.max_items_to_show, self.from_line + 1)
         if self.al.ui.up:
             self.from_line = max(0, self.from_line - 1)
 
@@ -51,7 +52,7 @@ class Dex(object):
 
         y = ui.percent_height(0.15)
         for i, word in enumerate(self.words_to_show):
-            if 0 <= i - self.from_line < 15:
+            if 0 <= i - self.from_line < self.max_items_to_show:
                 x = ui.percent_width(0.12)
                 screen.blit(g16.render(word.thai, True, (0, 0, 0)), (x, y))
                 x = ui.percent_width(0.28)

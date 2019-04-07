@@ -1,5 +1,8 @@
+from bag.bag import Compartment
+from bag.item import Item
 from direction import Direction
 from npc.npc import Npc
+from npc.vendor import Vendor
 
 
 def chumphae_lomsak(al):
@@ -123,11 +126,8 @@ def chumphae_lomsak(al):
             y=55,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
-                "Let's fight!",
-            ],
-            dialog_1=["What, you won already?",
-                      "Here, have two Bahts then."],
+            dialog_0=["Let's fight!"],
+            dialog_1=["What, you won already?", "Here, have two Bahts then."],
         ),
         Npc(
             al=al,
@@ -140,26 +140,22 @@ def chumphae_lomsak(al):
             y=50,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=[
-                "Let's have a short fight!",
-            ],
+            dialog_0=["Let's have a short fight!"],
             dialog_1=["Ah, I'm not as fast as I use to be."],
         ),
         Npc(
             al=al,
             name="ThirdBattleTrainer",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
+                al.words.get_word(battle_word)
+                for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
             x=97,
             y=45,
             sprite="lass",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "I love word fights!",
-                "My favorite words are pronouns.",
-            ],
+            dialog_0=["I love word fights!", "My favorite words are pronouns."],
             dialog_1=[
                 "I only know four pronouns so far,",
                 "but I know that Thai has many pronouns!",
@@ -171,20 +167,16 @@ def chumphae_lomsak(al):
             al=al,
             name="FourthBattleTrainer",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
+                al.words.get_word(battle_word)
+                for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
             x=97,
             y=45,
             sprite="lass",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "You wanna fight?",
-                "Let me warn you, I'm pretty strong!",
-            ],
-            dialog_1=[
-                "That was a good fight!",
-            ],
+            dialog_0=["You wanna fight?", "Let me warn you, I'm pretty strong!"],
+            dialog_1=["That was a good fight!"],
         ),
     ]
     for npc in npcs:
@@ -202,9 +194,7 @@ def chumphae_school(al):
             y=15,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
-                "ของ means 'of'",
-            ],
+            dialog_0=["ของ means 'of'"],
         ),
         Npc(
             al=al,
@@ -227,10 +217,7 @@ def chumphae_school(al):
             y=22,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
-                "ของ is too easy.",
-                "I am 4 already, I know this, come on!",
-            ],
+            dialog_0=["ของ is too easy.", "I am 4 already, I know this, come on!"],
         ),
         Npc(
             al=al,
@@ -397,9 +384,7 @@ def chumphae(al):
             y=69,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "ชุมแพ",
-            ],
+            dialog_0=["ชุมแพ"],
         ),
         Npc(
             al=al,
@@ -409,9 +394,7 @@ def chumphae(al):
             y=60,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "โรงเรียน (school)",
-            ],
+            dialog_0=["โรงเรียน (school)"],
         ),
         Npc(
             al=al,
@@ -434,10 +417,7 @@ def chumphae(al):
             y=80,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "North: ชุมแพ",
-                "South: ชัยภูมิ",
-            ],
+            dialog_0=["North: ชุมแพ", "South: ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -462,10 +442,7 @@ def chumphae(al):
             y=11,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
-                "ผมชอบ โรงเรียนของชุมแพ!",
-                "ผมชอบ โรงเรียนของชุมแพ!!!",
-            ],
+            dialog_0=["ผมชอบ โรงเรียนของชุมแพ!", "ผมชอบ โรงเรียนของชุมแพ!!!"],
         ),
         Npc(
             al=al,
@@ -492,6 +469,34 @@ def chumphae(al):
             dialog_0=[
                 "Many young people on this road like language challenge.",
                 "I don't like it personally, it's too stressful for me.",
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="Vendor of Chumphae",
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=119,
+            y=61,
+            sprite="old_man",
+            direction=Direction.UP,
+            vendor_dialog_beginning=[
+                "I've never seen you here, it's your first time in Chumphae?",
+                "You want to buy something?",
+            ],
+            vendor_dialog_end=["See you again!"],
+            sold_items=[
+                Item(
+                    name="apple",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="delicious apple from chumphae",
+                    price=8,
+                ),
+                Item(
+                    name="water",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="a plastic one-liter bottle of water",
+                    price=12,
+                ),
             ],
         ),
     ]
@@ -538,11 +543,7 @@ def chumphae_khonkaen(al):
             y=9,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
-                "Hello!",
-                "...",
-                "What, you don't know how to respond?",
-            ],
+            dialog_0=["Hello!", "...", "What, you don't know how to respond?"],
         ),
         Npc(
             al=al,
@@ -584,9 +585,7 @@ def chumphae_khonkaen(al):
             y=11,
             sprite="monk",
             direction=Direction.DOWN,
-            dialog_0=[
-                "ครับ is the male polite particle.",
-            ],
+            dialog_0=["ครับ is the male polite particle."],
         ),
         Npc(
             al=al,
@@ -612,9 +611,7 @@ def chumphae_khonkaen(al):
             y=11,
             sprite="monk",
             direction=Direction.DOWN,
-            dialog_0=[
-                "ค่ะ is the female polite particle.",
-            ],
+            dialog_0=["ค่ะ is the female polite particle."],
         ),
     ]
     for npc in npcs:
@@ -823,7 +820,7 @@ def chaiyaphum(al):
             sprite="mom",
             direction=Direction.UP,
             dialog_0=[
-                "Did you know? You can save the game just by pressing the s key.",
+                "Did you know? You can save the game just by pressing the s key."
             ],
         ),
         Npc(
@@ -888,10 +885,7 @@ def chaiyaphum(al):
             y=84,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "North: ชุมแพ",
-                "South: ชัยภูมิ",
-            ],
+            dialog_0=["North: ชุมแพ", "South: ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -901,10 +895,7 @@ def chaiyaphum(al):
             y=14,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "North: ชุมแพ",
-                "South: ชัยภูมิ",
-            ],
+            dialog_0=["North: ชุมแพ", "South: ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -914,9 +905,7 @@ def chaiyaphum(al):
             y=94,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "ชัยภูมิ",
-            ],
+            dialog_0=["ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -926,9 +915,7 @@ def chaiyaphum(al):
             y=91,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=[
-                "House of [Name]",
-            ],
+            dialog_0=["House of [Name]"],
         ),
         Npc(
             al=al,
@@ -938,9 +925,7 @@ def chaiyaphum(al):
             y=22,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=[
-                "Yo, my name is Rob!",
-            ],
+            dialog_0=["Yo, my name is Rob!"],
         ),
     ]
     for npc in npcs:
@@ -1015,6 +1000,8 @@ def empty(al):
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)
+
+
 """
     taught_word=al.words.get_word("โรง"),
 """

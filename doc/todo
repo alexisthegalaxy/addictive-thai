@@ -1,20 +1,19 @@
-TODO Sunday:
-Battle
-    Have the trainer doing it too!
+TODO Saturday:
+Battle:
+    Code in the defeat
     Have a way to use mouse in tests!
-Story progression:
-    Finish the city of Chum Phae
-        Market
-        Teach the word school
+Finish Chumphae:
+    Market
+        Vendor sprite
+    NonMuang
         https://www.tripadvisor.co.uk/Attraction_Review-g2237417-d6669488-Reviews-Non_Mueang_Ancient_Town-Chum_Phae_Khon_Kaen_Province.html
-            Lots of bats
-                Teach Baht?
-            Skeletons are quite tall
-            In the past, ChumPhae
-            Just south west of ChumPhae
-    Make the city of Lomsak
-        The school
-        The market
+        Lots of bats
+            Teach Baht?
+        Skeletons are quite tall
+Finish Lomsak
+    School
+    Market
+    Gym
 
 TODO:
 Put npcs file in a folder

@@ -24,7 +24,9 @@ M | ล่ะ | (question particle showing a change of state) | FALLING
 M | เหรอ | (question particle to make it softer, or seeking confirmation) | RISING
 
 # Classifiers
-M | แก้ว | FALLING | glass, classifier for glasses
+M | แก้ว | glass, classifier for glasses | FALLING
+M | เครื่อง | machine, classifier for machines | FALLING
+M | รูป | classifier for pictures and monks | FALLING
 
 # Pronouns
 M | ผม | I (male) | RISING
@@ -40,6 +42,7 @@ M | นั่น | that | FALLING
 M | โน่น | that (far) | FALLING
 W | ตัว-เอง | self, own
 W | ทุก-คน | everyone
+W | พวก-เขา | they
 
 # Places
 W | ที่-นี่ | here
@@ -83,6 +86,7 @@ W | เมื่อ-เช้า | this morning
 W | ตอน-เช้า | in the morning
 W | ตอน-บ่าย | in the afternoon
 W | ตอน-เย็น | in the evening
+M | ก่อน | first, before | LOW
 
 # Adjectives
 M | ดี | good | MID
@@ -234,7 +238,8 @@ M | ทอง | gold | MID
 W | โท-ร-ทัศน์ | TV
 M | หนัง | RISING | movie
 W | ภาพ-ยน-ตร์ | movie (formal)
-W | สอบ | LOW | exam
+M | สอบ | exam | LOW
+W | ที-วี | TV
 
 # Celestial bodies
 W | พระ-จันทร์ | moon
@@ -310,6 +315,7 @@ W | เปิด | to open, switch on | LOW
 W | ปิด | to close, switch off | LOW
 W | ออก-มา | to come out
 M | ถาม | to ask | RISING
+M | เชื่อ | to believe | FALLING
 W | ได้-ยิน | to hear
 
 # Useful words
@@ -346,16 +352,16 @@ W | ย่อ-มาน | Yoman
 W | ลอน-ดอน | London
 
 # Numbers
-# M | ศูนย์ | 0 | RISING
-# M | หนึ่ง | 1 | LOW
-# M | สอง | 2 | RISING
-# M | สาม | 3 | RISING
-# M | สี่ | 4 | LOW
-# M | ห้า | 5 | FALLING
-# M | หก | 6 | LOW
-# M | เจ็ด | 7 | LOW
-# M | แปด | 8 | LOW
-# M | เก้า | 9 | FALLING
+M | ศูนย์ | 0 | RISING
+M | หนึ่ง | 1 | LOW
+M | สอง | 2 | RISING
+M | สาม | 3 | RISING
+M | สี่ | 4 | LOW
+M | ห้า | 5 | FALLING
+M | หก | 6 | LOW
+M | เจ็ด | 7 | LOW
+M | แปด | 8 | LOW
+M | เก้า | 9 | FALLING
 M | สิบ | 10 | LOW
 
 S | ผม_กิน_ข้าว | I (male) eat rice
@@ -445,3 +451,7 @@ S | ทำ-ไม_คุณ_ออก-มา_ไม่_ได้_ล่ะ | Why
 S | คุณ_อยู่_ที่-นี่_ดี_ไหม | Are you here for good?
 S | ทำ-ไม_คุณ_ยัง_อยู่_ที่-นี่ | Why are you still here?
 S | เรา_มี_สอบ_อา-ทิตย์ห-น้า | We have an exam next week.
+S | ฉัน_มี_ที-วี_สอง_เครื่อง | I (female) have two TVs.
+S | ฉัน_เห็น_พระ_สอง_รูป | I (female) see two monks.
+S | ฉัน_เชื่อ_ว่า_ฉัน_บิน_ได้ | I (female) believe I can fly.
+S | พวก-เขา_จะ_ทำ_อะ-ไร_ก่อน | What will they do first?

@@ -193,6 +193,7 @@ class Battle(object):
                     self.end_battle()
 
     def opponent_select_bubble(self):
+        # TODO Alexis: may fail if there is no more bubble here
         self.bubble_selected_by_opponent = random.choice(self.bubbles)
 
     def draw(self):

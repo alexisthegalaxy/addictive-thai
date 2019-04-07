@@ -1,4 +1,5 @@
 import glob, os
+import pickle
 from datetime import datetime
 from time import strptime
 from time import mktime
@@ -31,43 +32,41 @@ class Profile(object):
             f.write(f"{word.separated_form} | {word.total_xp}\n")
         print('save!')
         f.close()
+        self.save_pickle(al)
+
+    def save_pickle(self, al: 'All'):
+        pickle.dump(al, open("save.p", "wb"))
+
+    def load_pickle(self, al: 'All'):
+        file_name = "save.p"
+        if os.path.getsize(file_name) > 0:
+            retrieved_all = pickle.load(open(file_name, "rb"))
+            ma = getattr(al.mas, retrieved_all.current_map)
+            al.mas.current_map = ma
+            al.learner.ma = ma
+            al.learner.x = retrieved_all.learner["x"]
+            al.learner.y = retrieved_all.learner["y"]
+            al.learner.hp = retrieved_all.learner["hp"]
+            al.learner.money = retrieved_all.learner["money"]
+            last_healing_place_map = getattr(al.mas, retrieved_all.learner["last_healing_place"]["map_name"])
+            last_healing_place_x = retrieved_all.learner["last_healing_place"]["x"]
+            last_healing_place_y = retrieved_all.learner["last_healing_place"]["y"]
+            al.learner.last_healing_place = (last_healing_place_x, last_healing_place_y, last_healing_place_map)
+            al.learner.last_saved = retrieved_all.learner["last_saved"]
+            al.learner.direction = retrieved_all.learner["direction"]
+            al.learner.max_hp = retrieved_all.learner["max_hp"]
+
+            al.bag = retrieved_all.bag
+
+            for word in retrieved_all.words:
+                xp = max(word["total_xp"], 0)
+                word = al.words.get_word(word["separated_form"])
+                if not word:
+                    print(f'ERROR: could not get word for {word["separated_form"]}')
+                word.increase_xp(al, xp)
 
     def load(self, al: 'All'):
-        f = open(self.file_path, "r")
-
-        for i, line in enumerate(f):
-            line = line[:-1]
-            if i == 0:  # name
-                pass
-            elif i == 1:  # position
-                _, m, x, y = tuple(line.split(" "))
-                ma = getattr(al.mas, m)
-                al.mas.current_map = ma
-                al.learner.ma = ma
-                al.learner.x = int(x)
-                al.learner.y = int(y)
-            elif i == 2:  # hp
-                _, hp = tuple(line.split(" "))
-                al.learner.hp = int(hp)
-            elif i == 3:  # money
-                _, money = tuple(line.split(" "))
-                al.learner.money = int(money)
-            elif i == 4:  # last_heal
-                _, m, x, y = tuple(line.split(" "))
-                ma = getattr(al.mas, m)
-                al.learner.last_healing_place = (int(x), int(y), ma)
-            elif i == 5:  # last_saved
-                al.learner.last_saved = mktime(strptime(line, TIME_FORMAT))
-            else:
-                split = line.split(" | ")
-                value = split[0]
-                xp = max(int(split[1]), 0)
-                word = al.words.get_word(value)
-                if not word:
-                    print(f'ERROR: could not get word for {value}', split)
-                word.increase_xp(al, xp)
-        f.close()
-
+        self.load_pickle(al)
         # proceed to remove 1 xp for each word if necessary
         seconds_since_last_time = mktime(datetime.now().timetuple()) - al.learner.last_saved
         if seconds_since_last_time > 72000:
