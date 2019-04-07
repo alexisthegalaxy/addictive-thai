@@ -477,7 +477,7 @@ def chumphae(al):
             ma=al.mas.get_map_from_name("chumphae"),
             x=119,
             y=61,
-            sprite="old_man",
+            sprite="vendor",
             direction=Direction.UP,
             vendor_dialog_beginning=[
                 "I've never seen you here, it's your first time in Chumphae?",
