@@ -197,6 +197,7 @@ class Mas(object):
         self.lomsak_house_1 = Ma(filename="lomsak_house_1", words=words, cell_types=cell_types, mas=self)
         self.lomsak_house_2 = Ma(filename="lomsak_house_2", words=words, cell_types=cell_types, mas=self)
         self.lomsak_school = Ma(filename="lomsak_school", words=words, cell_types=cell_types, mas=self)
+        self.lomsak_gym = Ma(filename="lomsak_gym", words=words, cell_types=cell_types, mas=self)
 
         self.current_map: Ma = self.chaiyaphum
 
@@ -204,72 +205,73 @@ class Mas(object):
         return getattr(self, name)
 
     def import_npcs_from_file(self, filename, al):
-        file = open(f"{os.path.dirname(os.path.realpath(__file__))}/../npc/{filename}", "r")
-        reading = True
-        line_index = 0
-        lines = []
-        for line in file:
-            lines.append(line[:-1])
-
-        while reading:
-            try:
-                name_line = lines[line_index]
-                line_index += 1
-                location = lines[line_index]
-                line_index += 1
-                sprite = lines[line_index]
-                line_index += 1
-                direction = lines[line_index]
-                line_index += 1
-
-                dialog_0 = []
-                dialog_1 = []
-                dialog_2 = []
-                dialog_3 = []
-                taught_word = None
-                battle_words = None
-                while lines[line_index] and lines[line_index][0] == '0':
-                    dialog_0.append(lines[line_index][1:])
-                    line_index += 1
-                while lines[line_index] and lines[line_index][0] == '1':
-                    dialog_1.append(lines[line_index][1:])
-                    line_index += 1
-                while lines[line_index] and lines[line_index][0] == '2':
-                    dialog_2.append(lines[line_index][1:])
-                    line_index += 1
-                while lines[line_index] and lines[line_index][0] == '3':
-                    dialog_3.append(lines[line_index][1:])
-                    line_index += 1
-                if ">" in name_line:
-                    name, taught_word = name_line.split(">")
-                    taught_word = al.words.get_word(taught_word)
-                elif "{" in name_line:
-                    name, battle_words = name_line.split("{")
-                    battle_words = battle_words.split(", ")
-                    battle_words = [al.words.get_word(battle_word) for battle_word in battle_words]
-                else:
-                    name = name_line
-                map_name, x, y = location.split(",")
-                ma = self.get_map_from_name(map_name)
-                line_index += 1
-                npc = Npc(
-                    al=al,
-                    name=name,
-                    ma=ma,
-                    x=int(x),
-                    y=int(y),
-                    dialog_0=dialog_0,
-                    dialog_1=dialog_1,
-                    dialog_2=dialog_2,
-                    dialog_3=dialog_3,
-                    direction=direction_from_string(direction),
-                    sprite=sprite,
-                    taught_word=taught_word,
-                    battle_words=battle_words,
-                )
-                ma.add_npc(npc)
-            except IndexError:
-                reading = False
+        pass
+        # file = open(f"{os.path.dirname(os.path.realpath(__file__))}/../npc/{filename}", "r")
+        # reading = True
+        # line_index = 0
+        # lines = []
+        # for line in file:
+        #     lines.append(line[:-1])
+        #
+        # while reading:
+        #     try:
+        #         name_line = lines[line_index]
+        #         line_index += 1
+        #         location = lines[line_index]
+        #         line_index += 1
+        #         sprite = lines[line_index]
+        #         line_index += 1
+        #         direction = lines[line_index]
+        #         line_index += 1
+        #
+        #         standard_dialog = []
+        #         defeat_dialog = []
+        #         victory_dialog = []
+        #         dialog_3 = []
+        #         taught_word = None
+        #         battle_words = None
+        #         while lines[line_index] and lines[line_index][0] == '0':
+        #             standard_dialog.append(lines[line_index][1:])
+        #             line_index += 1
+        #         while lines[line_index] and lines[line_index][0] == '1':
+        #             defeat_dialog.append(lines[line_index][1:])
+        #             line_index += 1
+        #         while lines[line_index] and lines[line_index][0] == '2':
+        #             victory_dialog.append(lines[line_index][1:])
+        #             line_index += 1
+        #         while lines[line_index] and lines[line_index][0] == '3':
+        #             dialog_3.append(lines[line_index][1:])
+        #             line_index += 1
+        #         if ">" in name_line:
+        #             name, taught_word = name_line.split(">")
+        #             taught_word = al.words.get_word(taught_word)
+        #         elif "{" in name_line:
+        #             name, battle_words = name_line.split("{")
+        #             battle_words = battle_words.split(", ")
+        #             battle_words = [al.words.get_word(battle_word) for battle_word in battle_words]
+        #         else:
+        #             name = name_line
+        #         map_name, x, y = location.split(",")
+        #         ma = self.get_map_from_name(map_name)
+        #         line_index += 1
+        #         npc = Npc(
+        #             al=al,
+        #             name=name,
+        #             ma=ma,
+        #             x=int(x),
+        #             y=int(y),
+        #             standard_dialog=standard_dialog,
+        #             defeat_dialog=defeat_dialog,
+        #             victory_dialog=victory_dialog,
+        #             dialog_3=dialog_3,
+        #             direction=direction_from_string(direction),
+        #             sprite=sprite,
+        #             taught_word=taught_word,
+        #             battle_words=battle_words,
+        #         )
+        #         ma.add_npc(npc)
+        #     except IndexError:
+        #         reading = False
 
     def import_npcs(self, al):
         # Not used anymore
@@ -350,3 +352,7 @@ class Mas(object):
         self.lomsak_house_2.get_cell_at(5, 13).goes_to = (self.lomsak, 7, 25)
         self.lomsak.get_cell_at(28, 24).goes_to = (self.lomsak_school, 13, 24)
         self.lomsak_school.get_cell_at(13, 25).goes_to = (self.lomsak, 28, 25)
+        self.lomsak.get_cell_at(31, 23).goes_to = (self.lomsak_school, 19, 16)
+        self.lomsak_school.get_cell_at(20, 16).goes_to = (self.lomsak, 32, 23)
+        self.lomsak.get_cell_at(16, 24).goes_to = (self.lomsak_gym, 13, 24)
+        self.lomsak_gym.get_cell_at(13, 25).goes_to = (self.lomsak, 16, 25)

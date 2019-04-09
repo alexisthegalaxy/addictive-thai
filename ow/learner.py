@@ -192,6 +192,9 @@ class Learner(object):
         x, y, ma = self.last_healing_place
         self.teleport(x, y, ma)
         self.al.active_test = None
+        self.al.active_battle = None
+        self.al.active_npc = None
+        self.al.active_learning = None
         self.hp = self.max_hp
         self.money = int(self.money / 2)
 

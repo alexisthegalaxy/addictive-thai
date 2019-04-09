@@ -65,6 +65,7 @@ to_convert = [
     "lomsak_house_1",
     "lomsak_house_2",
     "lomsak_school",
+    "lomsak_gym",
     "non_muang_house_1",
 ]
 

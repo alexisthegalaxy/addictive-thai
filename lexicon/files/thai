@@ -334,7 +334,7 @@ M | ทุก | each | HIGH
 M | อย่า | don't | LOW
 M | เอง | oneself | MID
 W | นิด-หน่อย | a little bit
-M | ใช่ | yes | FALLING
+M | ใช่ | yes / right? | FALLING
 W | ไม่-ใช่ | no
 W | เคย | ever | MID
 M | เพราะ | because | HIGH
@@ -412,6 +412,8 @@ S | ฉัน_ไม่_เคย_เห็น_หิ-มะ | I (female) have n
 S | เขา_ไม่_เคย_ไป_กรุง-เทพ | He has never been to Bangkok.
 S | หมา_ตัว_ใหญ่ | The dog is big.
 S | คุณ_พูด_ภา-ษา_ญี่-ปุ่น_ได้_ไหม | Can you speak Japanese?
+S | คุณ_พูด_ภา-ษา-ไทย_ได้_ไหม | Can you speak Thai?
+S | คุณ_พูด_ภา-ษา-อัง-กฤษ_ได้_ไหม | Can you speak English?
 S | พรุ่ง-นี้_ฉัน_จะ_ไป_กรุง-เทพ | I will go to Bangkok tomorrow.
 S | ฉัน_เคย_ไป_กรุง-เทพ | I have been to Bangkok.
 S | เรา_มา_จาก_อัง-กฤษ | We come from England.
@@ -456,3 +458,5 @@ S | ฉัน_มี_ที-วี_สอง_เครื่อง | I (female) 
 S | ฉัน_เห็น_พระ_สอง_รูป | I (female) see two monks.
 S | ฉัน_เชื่อ_ว่า_ฉัน_บิน_ได้ | I (female) believe I can fly.
 S | พวก-เขา_จะ_ทำ_อะ-ไร_ก่อน | What will they do first?
+S | คุณ_อยู่_บ้าน_ได้_ไหม | Can you be at home?
+S | คุณ_ชอบ_ฉัน_ใช่_ไหม | You like me (female), right?

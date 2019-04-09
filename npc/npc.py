@@ -22,18 +22,19 @@ class Npc(object):
         ma,
         x,
         y,
-        dialog_0=None,  # pre-fight, normal talk, pre-learn
-        dialog_1=None,  # post-fight
-        dialog_2=None,
+        standard_dialog=None,  # pre-fight, normal talk, pre-learn
+        defeat_dialog=None,  # post-fight
+        victory_dialog=None,
         dialog_3=None,
         direction=Direction.UP,
         sprite="kid",
         taught_word: Word = None,
         battle_words: List[Word] = None,
+        money: int = 5,  # amount given when lost the fight
     ):
-        dialog_0 = dialog_0 or ["Hello"]
-        dialog_1 = dialog_1 or []
-        dialog_2 = dialog_2 or []
+        standard_dialog = standard_dialog or ["Hello"]
+        defeat_dialog = defeat_dialog or ["Well played!"]
+        victory_dialog = victory_dialog or ["I won! Try again when you're stronger!"]
         dialog_3 = dialog_3 or []
 
         self.name = name
@@ -41,13 +42,14 @@ class Npc(object):
         self.sprite = sprite
         self.x = x
         self.y = y
-        self.dialog_0: List[str] = dialog_0
-        self.dialog_1: List[str] = dialog_1
-        self.dialog_2: List[str] = dialog_2
+        self.money = money
+        self.standard_dialog: List[str] = standard_dialog
+        self.defeat_dialog: List[str] = defeat_dialog
+        self.victory_dialog: List[str] = victory_dialog
         self.dialog_3: List[str] = dialog_3
         self.review_dialog: List[str] = ["Do you want to review the word"]
-        self.dialogs = [self.dialog_0, self.dialog_1, self.dialog_2, self.dialog_3]
-        self.active_dialog: List[str] = self.dialog_0
+        self.dialogs = [self.standard_dialog, self.defeat_dialog, self.victory_dialog, self.dialog_3]
+        self.active_dialog: List[str] = self.standard_dialog
         self.direction = direction
         self.active_line_index = -1
         self.color = (0, 222, 222)
@@ -79,18 +81,18 @@ class Npc(object):
                 play_thai_word(self.name)
         if self.taught_word:
             if self.is_saying_last_sentence() and (
-                self.active_dialog == self.dialog_0
+                self.active_dialog == self.standard_dialog
                 or self.active_dialog == self.review_dialog
             ):
                 al.active_learning = Learning(al=al, word=self.taught_word, npc=self)
                 al.active_learning.goes_to_first_step()
         if self.battle_words:
-            if self.is_saying_last_sentence() and (self.active_dialog == self.dialog_0):
-                from mechanics.battle import Battle
-
-                # al.active_npc = None
-                al.active_battle = Battle(al=al, words=self.battle_words, trainer=self)
-                # al.active_battle.goes_to_first_step()
+            if self.is_saying_last_sentence():
+                if self.active_dialog == self.standard_dialog:
+                    from mechanics.battle import Battle
+                    al.active_battle = Battle(al=al, words=self.battle_words, trainer=self)
+                if self.active_dialog == self.victory_dialog:
+                    al.learner.faints()
 
     def interact(self, al):
         # Then this is the beginning of the interaction with that NPC

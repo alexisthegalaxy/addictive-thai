@@ -25,8 +25,7 @@ class Bubble(object):
         self.color = (200, 0, 100)
         self.is_shown_in_thai = random.random() > 0.5
 
-        self.hp = 10  # Each bubble has an amount of hp, so that the opponent has to work on it
-
+        self.hp = 500  # Each bubble has an amount of hp, so that the opponent has to work on it
 
         self.box_x = box[0]
         self.box_y = box[1]
@@ -109,6 +108,7 @@ class Battle(object):
     Fighting trainers:
         - ±6 Words are floating around in bubbles in the middle.
         - You have to identify more than the trainer.
+        - If you identify less by the end, you are knocked-out, and loses a 5th of you money
 
         To make it more complex:
             - words can be linked into combo pieces when grouped by tone
@@ -144,9 +144,11 @@ class Battle(object):
         self.bubbles = []
         self.create_bubbles()
         self.selected_bubble_index = -1
+        self.bubbles_solved = 0
 
         # properties for the opponent
         self.bubble_selected_by_opponent = None
+        self.bubbles_solved_by_opponent = 0
 
     def create_bubbles(self) -> None:
         for word in self.words:
@@ -165,18 +167,20 @@ class Battle(object):
         if al.ui.click:
             for bubble in self.bubbles:
                 if bubble.contains_point(al.ui.click):
-                    last_bubble = len(self.bubbles) == 1
+                    # last_bubble = len(self.bubbles) == 1
+
                     if bubble.is_shown_in_thai:
                         pick_a_test_for_thai_word(
                             al,
                             chosen_word=bubble.word,
-                            test_success_callback=self.end_battle if last_bubble else None,
+                            test_success_callback=self.solve_bubble,
+                            # test_success_callback=self.end_battle if last_bubble else None,
                         )
                     else:
                         pick_a_test_for_english_word(
                             al,
                             chosen_word=bubble.word,
-                            test_success_callback=self.end_battle if last_bubble else None,
+                            test_success_callback=self.solve_bubble,
                         )
                     self.kill_bubble(bubble)
                     break
@@ -189,12 +193,13 @@ class Battle(object):
             self.bubble_selected_by_opponent.reduce_hp(1)
             if self.bubble_selected_by_opponent.hp <= 0:
                 self.kill_bubble(self.bubble_selected_by_opponent)
+                self.bubbles_solved_by_opponent += 1
                 if len(self.bubbles) == 0:
                     self.end_battle()
 
     def opponent_select_bubble(self):
-        # TODO Alexis: may fail if there is no more bubble here
-        self.bubble_selected_by_opponent = random.choice(self.bubbles)
+        if len(self.bubbles) > 0:
+            self.bubble_selected_by_opponent = random.choice(self.bubbles)
 
     def draw(self):
         ui = self.al.ui
@@ -210,6 +215,12 @@ class Battle(object):
         for bubble in self.bubbles:
             bubble.draw()
 
+    def solve_bubble(self):
+        last_bubble = len(self.bubbles) == 0
+        self.bubbles_solved += 1
+        if last_bubble:
+            self.end_battle()
+
     def kill_bubble(self, bubble):
         bubble.hp = 0
         self.bubbles.remove(bubble)
@@ -217,8 +228,13 @@ class Battle(object):
     def end_battle(self):
         self.al.active_battle = None
         self.al.active_npc = self.trainer
-        self.al.active_npc.active_dialog = self.al.active_npc.dialog_1
-        self.al.active_npc.active_line_index += 1
-
-        battle_money = 1
-        self.al.learner.money += battle_money
+        victory = self.bubbles_solved >= self.bubbles_solved_by_opponent
+        if victory:
+            self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog
+            self.al.active_npc.active_line_index = 0
+            battle_money = self.al.active_npc.money
+            self.al.learner.money += battle_money
+            self.al.active_battle = None
+        else:
+            self.al.active_npc.active_dialog = self.al.active_npc.victory_dialog
+            self.al.active_npc.active_line_index = 0

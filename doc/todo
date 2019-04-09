@@ -1,10 +1,7 @@
 TODO Saturday:
 Battle:
-    Code in the defeat
     Have a way to use mouse in tests!
 Finish Lomsak
-    School
-    Market
     Gym
 
 TODO:
@@ -19,6 +16,8 @@ Needed sprites:
     - Main character
     - Mali
     - Rival
+    - Dad
+    - Innkeeper
     - Old woman
     - Fat man
     - Rich woman
@@ -30,6 +29,7 @@ Needed sprites:
 Show the progression bar going up in a learning 1/6 or a brain getting full or something
 Each time you make a mistake on a test, it becomes easier
 Signs show their writing on the ow
+Have something show when the words level up
 -------DEMOABLE---------
 Make npc sprites
 Make water look nice

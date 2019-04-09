@@ -52,7 +52,7 @@ def pick_a_test_for_word(al, chosen_word):
     al.active_test = test
 
 
-def pick_a_test_for_thai_word(al, chosen_word, test_success_callback=None):
+def pick_a_test_for_thai_word(al, chosen_word, test_success_callback=None) -> None:
     """
     Here, the learner saw the word in thai already,
     so we don't want to ask the Thai word from English, for example

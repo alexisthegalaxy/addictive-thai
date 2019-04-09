@@ -49,7 +49,7 @@ def main_draw(al: All):
             npc.draw_text(al)
     if al.active_test:
         al.active_test.draw()
-    if al.active_sale:
+    elif al.active_sale:
         al.active_sale.draw()
     elif al.active_battle:
         al.active_battle.draw()

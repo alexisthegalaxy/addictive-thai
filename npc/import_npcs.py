@@ -13,7 +13,7 @@ def chumphae_lomsak(al):
             ma=al.mas.get_map_from_name("chumphae_lomsak_house1"),
             x=4,
             y=11,
-            dialog_0=[
+            standard_dialog=[
                 "Hello, young one.",
                 "Want to learn a word?",
                 "Well, I am a rice farmer, so how about rice?",
@@ -30,7 +30,7 @@ def chumphae_lomsak(al):
             y=11,
             sprite="mom",
             direction=Direction.LEFT,
-            dialog_0=[
+            standard_dialog=[
                 "Rice is an important word, it is very common.",
                 'To say that you are eating, you literally say "I am eating rice".',
                 'And to say that you are hungry, you literally say "I\'m hungry for rice".',
@@ -47,7 +47,7 @@ def chumphae_lomsak(al):
             y=10,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "What, you came all the way from ชัยภูมิ?",
                 "You must be tired!",
                 "Do you want something?",
@@ -62,7 +62,7 @@ def chumphae_lomsak(al):
             y=7,
             sprite="old_man",
             direction=Direction.UP,
-            dialog_0=["I'm a rice farmer.", "That's a common job, around here."],
+            standard_dialog=["I'm a rice farmer.", "That's a common job, around here."],
         ),
         Npc(
             al=al,
@@ -73,7 +73,7 @@ def chumphae_lomsak(al):
             y=10,
             sprite="mom",
             direction=Direction.LEFT,
-            dialog_0=[
+            standard_dialog=[
                 "Do you know what Thai people love most?",
                 "Eating",
                 "I gotta teach you this word!",
@@ -87,7 +87,7 @@ def chumphae_lomsak(al):
             y=8,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "You can use the verb กิน to mean both eating and drinking actually!"
             ],
         ),
@@ -99,7 +99,7 @@ def chumphae_lomsak(al):
             y=10,
             sprite="kid",
             direction=Direction.RIGHT,
-            dialog_0=["ผมกินน้ำ"],
+            standard_dialog=["ผมกินน้ำ"],
         ),
         Npc(
             al=al,
@@ -109,7 +109,7 @@ def chumphae_lomsak(al):
             y=11,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "To say 'I am eating',",
                 "if you don't want to precise what you are eating,",
                 "you must add 'rice': ฉันกินข้าว.",
@@ -126,8 +126,9 @@ def chumphae_lomsak(al):
             y=55,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=["Let's fight!"],
-            dialog_1=["What, you won already?", "Here, have two Bahts then."],
+            money=2,
+            standard_dialog=["Let's fight!"],
+            defeat_dialog=["What, you won already?", "Here, have two Bahts then."],
         ),
         Npc(
             al=al,
@@ -140,8 +141,8 @@ def chumphae_lomsak(al):
             y=50,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=["Let's have a short fight!"],
-            dialog_1=["Ah, I'm not as fast as I use to be."],
+            standard_dialog=["Let's have a short fight!"],
+            defeat_dialog=["Ah, I'm not as fast as I use to be."],
         ),
         Npc(
             al=al,
@@ -155,8 +156,8 @@ def chumphae_lomsak(al):
             y=45,
             sprite="lass",
             direction=Direction.RIGHT,
-            dialog_0=["I love word fights!", "My favorite words are pronouns."],
-            dialog_1=[
+            standard_dialog=["I love word fights!", "My favorite words are pronouns."],
+            defeat_dialog=[
                 "I only know four pronouns so far,",
                 "but I know that Thai has many pronouns!",
                 "The word 'I' alone has more that ten different pronouns,",
@@ -175,8 +176,8 @@ def chumphae_lomsak(al):
             y=45,
             sprite="lass",
             direction=Direction.RIGHT,
-            dialog_0=["You wanna fight?", "Let me warn you, I'm pretty strong!"],
-            dialog_1=["That was a good fight!"],
+            standard_dialog=["You wanna fight?", "Let me warn you, I'm pretty strong!"],
+            defeat_dialog=["That was a good fight!"],
         ),
     ]
     for npc in npcs:
@@ -194,7 +195,7 @@ def chumphae_school(al):
             y=15,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=["ของ means 'of'"],
+            standard_dialog=["ของ means 'of'"],
         ),
         Npc(
             al=al,
@@ -204,7 +205,7 @@ def chumphae_school(al):
             y=20,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "To say my or your or their and so on, you use ของ too.",
                 "บ้าน ของ ผม = house of me = my house.",
             ],
@@ -217,7 +218,7 @@ def chumphae_school(al):
             y=22,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=["ของ is too easy.", "I am 4 already, I know this, come on!"],
+            standard_dialog=["ของ is too easy.", "I am 4 already, I know this, come on!"],
         ),
         Npc(
             al=al,
@@ -227,7 +228,7 @@ def chumphae_school(al):
             y=22,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "It's funny how ของ sounds like kong.",
                 "Does that mean that King Kong means 'king of'?",
             ],
@@ -240,7 +241,7 @@ def chumphae_school(al):
             y=20,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "To say <'s> in English, you have to invert the order!",
                 "Mari's brother = brother ของ Mari",
                 "It's easier to think of it as the word 'of'",
@@ -255,7 +256,7 @@ def chumphae_school(al):
             y=15,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "ไหม is used at the end of sentence to make it a question.",
                 "We only use it for yes/no questions.",
             ],
@@ -268,7 +269,7 @@ def chumphae_school(al):
             y=20,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "So, if I understood correctly, you have to put the ไหม at the end?",
                 "So, 'Do you like Thailand?' is 'You like Thailand ไหม': คุณ ชอบ เมืองไทย ไหม",
             ],
@@ -281,7 +282,7 @@ def chumphae_school(al):
             y=20,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "In thai, we don't use a question mark.",
                 "We don't use punctuation at all, actually, only spaces between chunks of words.",
             ],
@@ -295,7 +296,7 @@ def chumphae_school(al):
             y=4,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "ไม่ is used to create negative sentences.",
                 "Careful not to get ไม่ (not) confused with ไหม (question mark),",
                 "both are pronounced mai!",
@@ -309,7 +310,7 @@ def chumphae_school(al):
             y=9,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "ไม่ also means no.",
                 "Be careful to add the politeness particle afterwards to not sound rude though!",
                 "For example, I'm a boy, so to say 'no', I say ไม่ครับ.",
@@ -323,7 +324,7 @@ def chumphae_school(al):
             y=9,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "ไม่ is the 12th most used word in Thai!",
                 "I'd better learn how to say it properly.",
             ],
@@ -336,7 +337,7 @@ def chumphae_school(al):
             y=4,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "There are five tones in Thai.",
                 "Mid, low, high, falling, rising.",
             ],
@@ -349,7 +350,7 @@ def chumphae_school(al):
             y=9,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "My favorite tone is the falling tone.",
                 "It sounds like somebody just realising something.",
                 "Like 'aaAAaa! I see now!'",
@@ -363,7 +364,7 @@ def chumphae_school(al):
             y=11,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "The rising tone goes down and then up.",
                 "It sounds like in English when you say: Really?",
                 "Or: Correct? Down and then up.",
@@ -384,7 +385,7 @@ def chumphae(al):
             y=69,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["ชุมแพ"],
+            standard_dialog=["ชุมแพ"],
         ),
         Npc(
             al=al,
@@ -394,7 +395,7 @@ def chumphae(al):
             y=60,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["โรงเรียน (school)"],
+            standard_dialog=["โรงเรียน (school)"],
         ),
         Npc(
             al=al,
@@ -404,7 +405,7 @@ def chumphae(al):
             y=76,
             sprite="mom",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "This is the inn.",
                 "You can rest here for free and restore your health.",
             ],
@@ -417,7 +418,7 @@ def chumphae(al):
             y=80,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["North: ชุมแพ", "South: ชัยภูมิ"],
+            standard_dialog=["North: ชุมแพ", "South: ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -428,7 +429,7 @@ def chumphae(al):
             y=11,
             sprite="mom",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "My son is to young for going to school yet, but he only thinks about that.",
                 "This is because we live next to the school I guess.",
                 "Do you know how to say school?",
@@ -443,7 +444,7 @@ def chumphae(al):
             y=8,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "I heard that this place is full of bats.",
                 "Not to be confused with bahts, the Thai currency!",
                 "Bahts are spelled บาท!",
@@ -457,7 +458,7 @@ def chumphae(al):
             y=7,
             sprite="mom",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "Non Muang is famous for the skeletons that have been discovered here.",
                 "They are from the iron age!",
             ],
@@ -470,7 +471,7 @@ def chumphae(al):
             y=7,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "These skeletons are so tall!",
             ],
         ),
@@ -482,7 +483,7 @@ def chumphae(al):
             y=71,
             sprite="kid",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "The road to Non Muang is not easy to walk!",
                 "But Non Muang is fun.",
                 "It has bats and skeletons!",
@@ -496,7 +497,7 @@ def chumphae(al):
             y=75,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["นนเมือง"],
+            standard_dialog=["นนเมือง"],
         ),
         Npc(
             al=al,
@@ -506,7 +507,7 @@ def chumphae(al):
             y=11,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=["ผมชอบ โรงเรียนของชุมแพ!", "ผมชอบ โรงเรียนของชุมแพ!!!"],
+            standard_dialog=["ผมชอบ โรงเรียนของชุมแพ!", "ผมชอบ โรงเรียนของชุมแพ!!!"],
         ),
         Npc(
             al=al,
@@ -517,7 +518,7 @@ def chumphae(al):
             y=10,
             sprite="old_man",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "Let me teach you เขา. It's an important word, it means they/she/he.",
                 "It's very common. It also means them/her/him.",
             ],
@@ -530,7 +531,7 @@ def chumphae(al):
             y=64,
             sprite="mom",
             direction=Direction.RIGHT,
-            dialog_0=[
+            standard_dialog=[
                 "Many young people on this road like language challenge.",
                 "I don't like it personally, it's too stressful for me.",
             ],
@@ -578,7 +579,7 @@ def chumphae_khonkaen(al):
             y=7,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "The word สวัสดี was invented in the 1930s by Phraya Upakit Silapasan,",
                 "of Chulalongkorn University.",
                 "It comes from the Sanskrit svasti, meaning well-being.",
@@ -593,7 +594,7 @@ def chumphae_khonkaen(al):
             y=10,
             sprite="kid",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "You don't have to say สวัสดี if you're with your friends,",
                 "You can just say วัสดี!",
             ],
@@ -607,7 +608,7 @@ def chumphae_khonkaen(al):
             y=9,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=["Hello!", "...", "What, you don't know how to respond?"],
+            standard_dialog=["Hello!", "...", "What, you don't know how to respond?"],
         ),
         Npc(
             al=al,
@@ -618,7 +619,7 @@ def chumphae_khonkaen(al):
             y=9,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "Sorry, what do you want?",
                 "A word? Sorry, I'm not the best at teaching...",
                 "Sorry. Oh, Sorry is good enough for you?",
@@ -634,7 +635,7 @@ def chumphae_khonkaen(al):
             y=9,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "The best way to live your life is to always be grateful.",
                 "Gratitude makes you happy, makes others happy.",
                 "I'll teach you how to say 'thank you'.",
@@ -649,7 +650,7 @@ def chumphae_khonkaen(al):
             y=11,
             sprite="monk",
             direction=Direction.DOWN,
-            dialog_0=["ครับ is the male polite particle."],
+            standard_dialog=["ครับ is the male polite particle."],
         ),
         Npc(
             al=al,
@@ -659,7 +660,7 @@ def chumphae_khonkaen(al):
             y=5,
             sprite="monk",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "Did you learn ค่ะ and ครับ yet?",
                 "They are the two most common polite particles.",
                 "Add ค่ะ if you are a female, and ครับ if you are a male,",
@@ -675,7 +676,7 @@ def chumphae_khonkaen(al):
             y=11,
             sprite="monk",
             direction=Direction.DOWN,
-            dialog_0=["ค่ะ is the female polite particle."],
+            standard_dialog=["ค่ะ is the female polite particle."],
         ),
     ]
     for npc in npcs:
@@ -692,7 +693,7 @@ def nurses(al):
             y=1,
             sprite="nurse",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "Welcome to the inn of Chumphae!",
                 "You can rest here for a while, and you'll feel better!",
             ],
@@ -705,7 +706,7 @@ def nurses(al):
             y=1,
             sprite="nurse",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "Welcome to the inn of Lomsak!",
                 "You can rest here for a while, and you'll feel better!",
             ],
@@ -718,7 +719,7 @@ def nurses(al):
             y=1,
             sprite="nurse",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "Welcome to the inn of Chumphae!",
                 "You can rest here for a while, and you'll feel better!",
             ],
@@ -731,7 +732,7 @@ def nurses(al):
             y=1,
             sprite="nurse",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "Welcome to the inn of Chumphae!",
                 "You can rest here for a while, and you'll feel better!",
             ],
@@ -744,7 +745,7 @@ def nurses(al):
             y=1,
             sprite="nurse",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "Welcome to the inn of Chumphae!",
                 "You can rest here for a while, and you'll feel better!",
             ],
@@ -765,7 +766,7 @@ def chaiyaphum(al):
             y=11,
             sprite="mom",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "Mom> [Name]!",
                 "Mom> So, you decided to begin your Thai Adventure?",
                 "Mom> Let me teach you the first word:",
@@ -780,7 +781,7 @@ def chaiyaphum(al):
             y=7,
             sprite="dad",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "Dad> What's up [Name]!",
                 "Dad> I'll teach you a useful word before you go:",
             ],
@@ -794,7 +795,7 @@ def chaiyaphum(al):
             y=7,
             sprite="old_man",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "Oh, hello [Name]. Are you ready to begin your Thai language adventure?",
                 "Here's an important word: how to say Thailand in Thai!",
             ],
@@ -808,7 +809,7 @@ def chaiyaphum(al):
             y=12,
             sprite="mali",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "มะลิ> Hey [Name]! I heard you're about to go on an adventure?",
                 "มะลิ> Before you go... I wanted to tell you that...",
                 "มะลิ> I like you.",
@@ -824,7 +825,7 @@ def chaiyaphum(al):
             y=11,
             sprite="somchai",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "สมชาย> [Name]! I have decided to go on an adventure to learn all the Thai words!",
                 "สมชาย> What??? You too?",
                 "สมชาย> Ha! I'll be your rival then!",
@@ -840,7 +841,7 @@ def chaiyaphum(al):
             y=47,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "That's my house!",
                 "Pretty nice, eh?",
                 "Wanna learn how to say house?",
@@ -855,7 +856,7 @@ def chaiyaphum(al):
             y=7,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "What do you want?",
                 "You came all the way here, you must want something.",
                 "Want to learn how to say want?",
@@ -870,7 +871,7 @@ def chaiyaphum(al):
             y=11,
             sprite="mom",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "I'm at home. You're at my place.",
                 "Do you know how to say where you are?",
             ],
@@ -883,7 +884,7 @@ def chaiyaphum(al):
             y=93,
             sprite="mom",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "Did you know? You can save the game just by pressing the s key."
             ],
         ),
@@ -895,7 +896,7 @@ def chaiyaphum(al):
             y=10,
             sprite="mom",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "This is the inn.",
                 "You can rest here for free and restore your health.",
             ],
@@ -908,7 +909,7 @@ def chaiyaphum(al):
             y=88,
             sprite="mom",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "Be careful out there, words can attack you when you're in tall grass.",
                 "I'll let you go if you know at least 5 words!",
                 "You can see the words you know by pressing 'w'.",
@@ -922,7 +923,7 @@ def chaiyaphum(al):
             y=80,
             sprite="mom",
             direction=Direction.RIGHT,
-            dialog_0=[
+            standard_dialog=[
                 "If you are hurt, you can rest a bit on your bed,",
                 "you'll feel better after waking up!",
             ],
@@ -935,7 +936,7 @@ def chaiyaphum(al):
             y=60,
             sprite="mom",
             direction=Direction.RIGHT,
-            dialog_0=[
+            standard_dialog=[
                 "It's quite frustrating to meet words I never learnt,",
                 "but I guess that's how life works.",
                 "I heard you can learn these words in the houses along this path though.",
@@ -949,7 +950,7 @@ def chaiyaphum(al):
             y=84,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["North: ชุมแพ", "South: ชัยภูมิ"],
+            standard_dialog=["North: ชุมแพ", "South: ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -959,7 +960,7 @@ def chaiyaphum(al):
             y=14,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["North: ชุมแพ", "South: ชัยภูมิ"],
+            standard_dialog=["North: ชุมแพ", "South: ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -969,7 +970,7 @@ def chaiyaphum(al):
             y=94,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["ชัยภูมิ"],
+            standard_dialog=["ชัยภูมิ"],
         ),
         Npc(
             al=al,
@@ -979,7 +980,7 @@ def chaiyaphum(al):
             y=91,
             sprite="sign",
             direction=Direction.RIGHT,
-            dialog_0=["House of [Name]"],
+            standard_dialog=["House of [Name]"],
         ),
         Npc(
             al=al,
@@ -989,7 +990,7 @@ def chaiyaphum(al):
             y=22,
             sprite="old_man",
             direction=Direction.DOWN,
-            dialog_0=["Yo, my name is Rob!"],
+            standard_dialog=["Yo, my name is Rob!"],
         ),
     ]
     for npc in npcs:
@@ -1007,7 +1008,7 @@ def lomsak(al):
             y=11,
             sprite="mom",
             direction=Direction.RIGHT,
-            dialog_0=[
+            standard_dialog=[
                 "Have you visited our school yet?",
                 "I teach languages English and Thai at Lomsak school.",
                 "You wanna learn the word for language?",
@@ -1022,7 +1023,7 @@ def lomsak(al):
             y=6,
             sprite="dad",
             direction=Direction.DOWN,
-            dialog_0=[
+            standard_dialog=[
                 "My wife taught me how to speak Thai.",
                 "To say Thai, you just say language-Thai!",
             ],
@@ -1036,9 +1037,153 @@ def lomsak(al):
             y=10,
             sprite="kid",
             direction=Direction.UP,
-            dialog_0=[
+            standard_dialog=[
                 "I'm learning English at Lomsak's school.",
                 "ฉันเรียนภาษาอังกฤษที่โรงเรียนหล่มสัก",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 1",
+            taught_word=al.words.get_word("ได้"),
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=32,
+            y=17,
+            sprite="mom",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "To say that you can do something, you use ได้ (dai).",
+                "Put ได้ (dai) at the end of the sentence.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 1 - kid 1",
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=32,
+            y=19,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "ได้ is so easy to use!",
+                "I just put it at the end of my sentence if I want to say it's possible!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 1 - kid 2",
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=34,
+            y=19,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "To ask a question with ได้,",
+                "At the end of your sentence, first say ได้, then ไหม.",
+                "For example, guess the meaning of: คุณ อยู่ บ้าน ได้ ไหม",
+                "It means 'Can you be at home?'",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 1 - kid 1",
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=35,
+            y=17,
+            sprite="kid",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "If you want to negate ได้, Just put ไม่ (not) in front of it!",
+                "So, cannot is mai-dai: ไม่ได้",
+                "I can't eat: ฉัน กิน ไม่ ได้",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 2",
+            ma=al.mas.get_map_from_name("lomsak_school"),
+            x=7,
+            y=16,
+            sprite="mom",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "In Thai, we don't really have a word for yes or no.",
+                "To answer yes, you have to repeat the verb of the question.",
+                "To answer no, you repeat the verb and put ไม่ (no) in front.",
+                "For example: 'Do you like me?' 'คุณ ชอบ ฉัน ไหม'",
+                "The verb is ชอบ (like), so the answer is ชอบ (yes) or ไม่ ชอบ (no).",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 2 - kid 1",
+            ma=al.mas.get_map_from_name("lomsak_school"),
+            x=8,
+            y=20,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "It works the same with adjectives:",
+                "You repeat the adjective to say yes,",
+                "And put ไม่ before the adjective to say no!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 3",
+            ma=al.mas.get_map_from_name("lomsak_school"),
+            taught_word=al.words.get_word("ใช่"),
+            x=25,
+            y=21,
+            sprite="old_man",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "When you ask a question that ends with '..., right?',",
+                "Or something like '..., isn't it?',",
+                "in Thai, we use ใช่ ไหม (chai mai) at the end of the sentence.",
+                "For example: 'You like me, right?' 'คุณ ชอบ ผม ใช่ ไหม'",
+                "",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak - Prof 3 - kid 1",
+            ma=al.mas.get_map_from_name("lomsak_school"),
+            x=21,
+            y=20,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "The answer to a question ending in ใช่ ไหม",
+                "would be ใช่ (yes), or ไม่ ใช่ (no).",
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="Vendor of Chumphae",
+            ma=al.mas.get_map_from_name("lomsak_house_2"),
+            x=10,
+            y=8,
+            sprite="fat_vendor",
+            direction=Direction.DOWN,
+            vendor_dialog_beginning=[
+                "Welcome to Lomsak!",
+                "How can I help you?",
+            ],
+            vendor_dialog_end=["Hope to See you again!"],
+            sold_items=[
+                Item(
+                    name="apple",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="delicious apple from chumphae",
+                    price=8,
+                ),
+                Item(
+                    name="water",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="a plastic one-liter bottle of water",
+                    price=12,
+                ),
             ],
         ),
     ]
@@ -1056,7 +1201,7 @@ def empty(al):
         #     y=1,
         #     sprite="nurse",
         #     direction=Direction.DOWN,
-        #     dialog_0=[
+        #     standard_dialog=[
         #         "Welcome to the inn of Chumphae!",
         #         "You can rest here for a while, and you'll feel better!",
         #     ],
