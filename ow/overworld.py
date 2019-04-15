@@ -1,5 +1,4 @@
 import os
-from os import walk
 import random
 from typing import List
 
@@ -8,7 +7,6 @@ import pygame
 from lexicon.items import Words
 from lexicon.test_services import pick_a_test_for_word
 from npc.npc import Npc
-from ow.direction import direction_from_string
 
 
 class CellType(object):
@@ -199,88 +197,12 @@ class Mas(object):
         self.lomsak_school = Ma(filename="lomsak_school", words=words, cell_types=cell_types, mas=self)
         self.lomsak_gym = Ma(filename="lomsak_gym", words=words, cell_types=cell_types, mas=self)
 
+        self.phetchabun = Ma(filename="phetchabun", words=words, cell_types=cell_types, mas=self)
+
         self.current_map: Ma = self.chaiyaphum
 
     def get_map_from_name(self, name):
         return getattr(self, name)
-
-    def import_npcs_from_file(self, filename, al):
-        pass
-        # file = open(f"{os.path.dirname(os.path.realpath(__file__))}/../npc/{filename}", "r")
-        # reading = True
-        # line_index = 0
-        # lines = []
-        # for line in file:
-        #     lines.append(line[:-1])
-        #
-        # while reading:
-        #     try:
-        #         name_line = lines[line_index]
-        #         line_index += 1
-        #         location = lines[line_index]
-        #         line_index += 1
-        #         sprite = lines[line_index]
-        #         line_index += 1
-        #         direction = lines[line_index]
-        #         line_index += 1
-        #
-        #         standard_dialog = []
-        #         defeat_dialog = []
-        #         victory_dialog = []
-        #         dialog_3 = []
-        #         taught_word = None
-        #         battle_words = None
-        #         while lines[line_index] and lines[line_index][0] == '0':
-        #             standard_dialog.append(lines[line_index][1:])
-        #             line_index += 1
-        #         while lines[line_index] and lines[line_index][0] == '1':
-        #             defeat_dialog.append(lines[line_index][1:])
-        #             line_index += 1
-        #         while lines[line_index] and lines[line_index][0] == '2':
-        #             victory_dialog.append(lines[line_index][1:])
-        #             line_index += 1
-        #         while lines[line_index] and lines[line_index][0] == '3':
-        #             dialog_3.append(lines[line_index][1:])
-        #             line_index += 1
-        #         if ">" in name_line:
-        #             name, taught_word = name_line.split(">")
-        #             taught_word = al.words.get_word(taught_word)
-        #         elif "{" in name_line:
-        #             name, battle_words = name_line.split("{")
-        #             battle_words = battle_words.split(", ")
-        #             battle_words = [al.words.get_word(battle_word) for battle_word in battle_words]
-        #         else:
-        #             name = name_line
-        #         map_name, x, y = location.split(",")
-        #         ma = self.get_map_from_name(map_name)
-        #         line_index += 1
-        #         npc = Npc(
-        #             al=al,
-        #             name=name,
-        #             ma=ma,
-        #             x=int(x),
-        #             y=int(y),
-        #             standard_dialog=standard_dialog,
-        #             defeat_dialog=defeat_dialog,
-        #             victory_dialog=victory_dialog,
-        #             dialog_3=dialog_3,
-        #             direction=direction_from_string(direction),
-        #             sprite=sprite,
-        #             taught_word=taught_word,
-        #             battle_words=battle_words,
-        #         )
-        #         ma.add_npc(npc)
-        #     except IndexError:
-        #         reading = False
-
-    def import_npcs(self, al):
-        # Not used anymore
-        all_files = []
-        for (dirpath, dirnames, filenames) in walk("./../npc/"):
-            all_files.extend(filenames)
-        for file_name in all_files:
-            if file_name[-5:] == ".npcs":
-                self.import_npcs_from_file(file_name, al)
 
     def form_links(self):
         """
@@ -295,12 +217,16 @@ class Mas(object):
         # chaiyaphum
         self.chaiyaphum.get_cell_at(28, 91).goes_to = (self.house1, 5, 12)
         self.house1.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 28, 92)
-        self.chaiyaphum.get_cell_at(27, 99).goes_to = (self.house2, 5, 12)
-        self.house2.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 27, 100)
+
+        self.chaiyaphum.get_cell_at(20, 89).goes_to = (self.house2, 5, 12)
+        self.house2.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 20, 90)
+        self.chaiyaphum.get_cell_at(20, 86).goes_to = (self.house2, 5, 6)
+        self.house2.get_cell_at(5, 5).goes_to = (self.chaiyaphum, 20, 85)
+        self.chaiyaphum.get_cell_at(27, 99).goes_to = (self.lab, 5, 12)
+        self.lab.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 27, 100)
+
         self.chaiyaphum.get_cell_at(19, 97).goes_to = (self.house3, 5, 12)
         self.house3.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 19, 98)
-        self.chaiyaphum.get_cell_at(21, 89).goes_to = (self.lab, 5, 12)
-        self.lab.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 21, 90)
         self.chaiyaphum.get_cell_at(30, 39).goes_to = (self.house4, 5, 12)
         self.house4.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 30, 40)
         self.chaiyaphum.get_cell_at(53, 10).goes_to = (self.house5, 5, 12)
@@ -356,3 +282,10 @@ class Mas(object):
         self.lomsak_school.get_cell_at(20, 16).goes_to = (self.lomsak, 32, 23)
         self.lomsak.get_cell_at(16, 24).goes_to = (self.lomsak_gym, 13, 24)
         self.lomsak_gym.get_cell_at(13, 25).goes_to = (self.lomsak, 16, 25)
+
+        self.phetchabun.get_cell_at(49, 8).goes_to = (self.lomsak, 12, 37)
+        self.lomsak.get_cell_at(12, 38).goes_to = (self.phetchabun, 49, 9)
+        self.phetchabun.get_cell_at(50, 8).goes_to = (self.lomsak, 13, 37)
+        self.lomsak.get_cell_at(13, 38).goes_to = (self.phetchabun, 50, 9)
+
+

@@ -67,6 +67,7 @@ to_convert = [
     "lomsak_school",
     "lomsak_gym",
     "non_muang_house_1",
+    "phetchabun",
 ]
 
 for item in to_convert:

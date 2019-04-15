@@ -20,9 +20,13 @@ def npc_sprites():
         "sign": pygame.image.load("../npc/sprites/sign.png"),
         "mom_up": pygame.image.load("../npc/sprites/mom_up.png"),
         "mom_down": pygame.image.load("../npc/sprites/mom_down.png"),
-        "mali_down": pygame.image.load("../npc/sprites/mali_down.png"),
+        "dad_down": pygame.image.load("../npc/sprites/dad_down.png"),
+        "dad_up": pygame.image.load("../npc/sprites/dad_up.png"),
+        "dad_right": pygame.image.load("../npc/sprites/dad_right.png"),
+        "dad_left": pygame.image.load("../npc/sprites/dad_left.png"),
         "mom_right": pygame.image.load("../npc/sprites/mom_right.png"),
         "mom_left": pygame.image.load("../npc/sprites/mom_left.png"),
+        "mali_down": pygame.image.load("../npc/sprites/mali_down.png"),
         "old_man_left": pygame.image.load("../npc/sprites/old_man_left.png"),
         "old_man_right": pygame.image.load("../npc/sprites/old_man_right.png"),
         "old_man_down": pygame.image.load("../npc/sprites/old_man_down.png"),
@@ -65,6 +69,8 @@ class Ui(object):
             "grass": pygame.image.load("../ow/sprites/grass.bmp"),
             "path": pygame.image.load("../ow/sprites/path.bmp"),
             "tree": pygame.image.load("../ow/sprites/tree.bmp"),
+            "flower": pygame.image.load("../ow/sprites/flower.bmp"),
+            "door": pygame.image.load("../ow/sprites/door.bmp"),
             "water": pygame.image.load("../ow/sprites/water.bmp"),
             "ground": pygame.image.load("../ow/sprites/ground.bmp"),
             "tall_grass": pygame.image.load("../ow/sprites/tall_grass.bmp"),
@@ -120,6 +126,9 @@ class Ui(object):
                     al.learner.open()
                 if event.key == pygame.K_r:
                     al.words.reset_words(al)
+                    al.learner.money = 0
+                    al.learner.hp = 5
+                    al.learner.max_hp = 5
                 if event.key == pygame.K_BACKSPACE:
                     al.ui.backspace = True
                 if event.key == pygame.K_SPACE:

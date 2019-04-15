@@ -10,7 +10,7 @@ from sounds.play_sound import play_thai_word
 
 class Learner(object):
     def __init__(self, al, x, y, color):
-        self.name = "Alexis"
+        self.name = "Celine"
         self.money = 5
         self.max_hp = 5
         self.must_wait = 0.1

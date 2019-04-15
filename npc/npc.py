@@ -24,7 +24,7 @@ class Npc(object):
         y,
         standard_dialog=None,  # pre-fight, normal talk, pre-learn
         defeat_dialog=None,  # post-fight
-        victory_dialog=None,
+        victory_dialog=None,  # post-fight
         dialog_3=None,
         direction=Direction.UP,
         sprite="kid",
@@ -71,7 +71,7 @@ class Npc(object):
         return self.active_line_index == len(self.active_dialog) - 1
 
     def special_interaction(self, al):
-        if self.sprite == "nurse":
+        if self.name == "nurse":
             if self.active_line_index == -1:
                 play_thai_word("welcome")
             if self.active_line_index == 0:

@@ -179,6 +179,21 @@ def chumphae_lomsak(al):
             standard_dialog=["You wanna fight?", "Let me warn you, I'm pretty strong!"],
             defeat_dialog=["That was a good fight!"],
         ),
+        Npc(
+            al=al,
+            name="FifthBattleTrainer",
+            battle_words=[
+                al.words.get_word(battle_word)
+                for battle_word in ["น้ำ", "ข้าว", "กิน", "เขา"]
+            ],
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=23,
+            y=24,
+            sprite="lass",
+            direction=Direction.DOWN,
+            standard_dialog=["I hope you like to talk about food!"],
+            defeat_dialog=["Ah, maybe you're better when it comes to talking about food,", "but I'm better when it comes to eating it!"],
+        ),
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)
@@ -542,7 +557,7 @@ def chumphae(al):
             ma=al.mas.get_map_from_name("chumphae_house3"),
             x=10,
             y=8,
-            sprite="vendor",
+            sprite="§",
             direction=Direction.DOWN,
             vendor_dialog_beginning=[
                 "I've never seen you here, it's your first time in Chumphae?",
@@ -687,11 +702,11 @@ def nurses(al):
     npcs = [
         Npc(
             al=al,
-            name="Nurse",
+            name="nurse",
             ma=al.mas.get_map_from_name("inn1"),
             x=4,
             y=1,
-            sprite="nurse",
+            sprite="vendor",
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Chumphae!",
@@ -700,11 +715,11 @@ def nurses(al):
         ),
         Npc(
             al=al,
-            name="Nurse",
+            name="nurse",
             ma=al.mas.get_map_from_name("inn2"),
             x=4,
             y=1,
-            sprite="nurse",
+            sprite="vendor",
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Lomsak!",
@@ -713,11 +728,11 @@ def nurses(al):
         ),
         Npc(
             al=al,
-            name="Nurse",
+            name="nurse",
             ma=al.mas.get_map_from_name("inn3"),
             x=4,
             y=1,
-            sprite="nurse",
+            sprite="vendor",
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Chumphae!",
@@ -726,11 +741,11 @@ def nurses(al):
         ),
         Npc(
             al=al,
-            name="Nurse",
+            name="nurse",
             ma=al.mas.get_map_from_name("inn4"),
             x=4,
             y=1,
-            sprite="nurse",
+            sprite="vendor",
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Chumphae!",
@@ -739,11 +754,11 @@ def nurses(al):
         ),
         Npc(
             al=al,
-            name="Nurse",
+            name="nurse",
             ma=al.mas.get_map_from_name("inn5"),
             x=4,
             y=1,
-            sprite="nurse",
+            sprite="vendor",
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Chumphae!",
@@ -767,9 +782,9 @@ def chaiyaphum(al):
             sprite="mom",
             direction=Direction.UP,
             standard_dialog=[
-                "Mom> [Name]!",
-                "Mom> So, you decided to begin your Thai Adventure?",
-                "Mom> Let me teach you the first word:",
+                "Mom: [Name]!",
+                "Mom: So, you decided to begin your Thai Adventure?",
+                "Mom: Let me teach you the first word:",
             ],
         ),
         Npc(
@@ -778,12 +793,18 @@ def chaiyaphum(al):
             taught_word=al.words.get_word("ผม"),
             ma=al.mas.get_map_from_name("house1"),
             x=4,
-            y=7,
+            y=6,
             sprite="dad",
             direction=Direction.UP,
             standard_dialog=[
-                "Dad> What's up [Name]!",
-                "Dad> I'll teach you a useful word before you go:",
+                "Dad: What's up [Name]!",
+                "Dad: I'll teach you a useful word before you go:",
+            ],
+            defeat_dialog=[
+                "Dad: Well done, [Name]!",
+                "Dad: Now, go on your adventure!",
+                "Dad: Come again when you'll have learned more than 100 words,",
+                "Dad: and I'll give you something!",
             ],
         ),
         Npc(
@@ -804,9 +825,9 @@ def chaiyaphum(al):
             al=al,
             name="มะลิ",
             taught_word=al.words.get_word("ชอบ"),
-            ma=al.mas.get_map_from_name("house2"),
-            x=9,
-            y=12,
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=18,
+            y=82,
             sprite="mali",
             direction=Direction.DOWN,
             standard_dialog=[
@@ -814,6 +835,22 @@ def chaiyaphum(al):
                 "มะลิ> Before you go... I wanted to tell you that...",
                 "มะลิ> I like you.",
                 "มะลิ> Let me teach you the word 'to like' so you can remember me <3",
+            ],
+            defeat_dialog=[
+                "มะลิ> Don't forget the word, [Name]...",
+                "มะลิ> We'll meet again!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Father of Mali",
+            ma=al.mas.get_map_from_name("house2"),
+            x=4,
+            y=9,
+            sprite="old_man",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "มะลิ wanted to talk to you, she's waiting in the garden.",
             ],
         ),
         Npc(

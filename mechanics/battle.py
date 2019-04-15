@@ -21,7 +21,7 @@ class Bubble(object):
         self.word = word
         self.al = al
         self.is_selected = False
-        self.radius = 30
+        self.radius = 40
         self.color = (200, 0, 100)
         self.is_shown_in_thai = random.random() > 0.5
 

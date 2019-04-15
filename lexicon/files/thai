@@ -27,6 +27,8 @@ M | เหรอ | (question particle to make it softer, or seeking confirmation
 M | แก้ว | glass, classifier for glasses | FALLING
 M | เครื่อง | machine, classifier for machines | FALLING
 M | รูป | classifier for pictures and monks | FALLING
+M | หลัง | next / classifier for house | RISING
+M | สาย | to be late / line, classifier for roads, rivers | RISING
 
 # Pronouns
 M | ผม | I (male) | RISING
@@ -46,6 +48,7 @@ W | พวก-เขา | they
 
 # Places
 W | ที่-นี่ | here
+W | ที่-นั่น | there
 
 # Prepositions
 M | จาก | from | LOW
@@ -58,6 +61,7 @@ M | เรื่อง | about | FALLING
 M | เหมือน | like, as | RISING
 M | ให้ | to, for (somebody), so that | FALLING
 M | ด้วย | as well, with | FALLING
+M | หน้า | in front of | FALLING
 
 # Interrogative words
 W | อะ-ไร | what
@@ -87,6 +91,10 @@ W | ตอน-เช้า | in the morning
 W | ตอน-บ่าย | in the afternoon
 W | ตอน-เย็น | in the evening
 M | ก่อน | first, before | LOW
+M | นาน | for a long time | MID
+
+# Time Nouns
+W | อา-ทิตย์ | week
 
 # Adjectives
 M | ดี | good | MID
@@ -175,7 +183,8 @@ M | น้ำ | water | HIGH
 M | เหล้า | alcohol | FALLING
 W | พิซ-ซ่า | pizza
 W | ฝรั่ง | guava/westerner
-W | เค้ก | cake
+M | เค้ก | cake | HIGH
+W | กา-แฟ | coffee
 
 # Countries
 W | เมือง-ไทย | Thailand
@@ -215,6 +224,7 @@ W | ใต้-ดิน | underground
 M | ดิน | ground | MID
 M | รถ | car | HIGH
 M | ไฟ | fire | MID
+M | ลม | wind, air | MID
 W | รถ-ไฟ | train
 W | ไฟ-ฟ้า | electricity
 W | ใจ-ดี | kind
@@ -241,6 +251,7 @@ M | หนัง | RISING | movie
 W | ภาพ-ยน-ตร์ | movie (formal)
 M | สอบ | exam | LOW
 W | ที-วี | TV
+W | ประ-เทศ | country
 
 # Celestial bodies
 W | พระ-จันทร์ | moon
@@ -318,6 +329,15 @@ W | ออก-มา | to come out
 M | ถาม | to ask | RISING
 M | เชื่อ | to believe | FALLING
 W | ได้-ยิน | to hear
+M | เกลียด | to hate | LOW
+W | รู้-จัก | to know (someone)
+M | กลับ | to return | LOW
+M | รับ | to receive | HIGH
+W | ทำ-อา-หาร | to cook
+
+# Useful verbs
+M | ควร | should | MID
+W | คง-จะ | may
 
 # Useful words
 M | ไม่ | not | FALLING
@@ -351,6 +371,7 @@ W | กรุง-เทพ | Bangkok
 W | อ-เล็ก-ซี่ | Alexis
 W | ย่อ-มาน | Yoman
 W | ลอน-ดอน | London
+W | อังก-ฤษ | England
 
 # Numbers
 M | ศูนย์ | 0 | RISING
@@ -366,19 +387,25 @@ M | เก้า | 9 | FALLING
 M | สิบ | 10 | LOW
 
 S | ผม_กิน_ข้าว | I (male) eat rice
+S | ผม_ไม่_กิน_ข้าว | I (male) don't eat rice
 S | ไม่_มี_ขวด | There are no bottles
 S | เขา_ใจ-ดี | He is kind
 S | ฉัน_อยู่_บ้าน | I (female) am at home
 S | คุณ_มี_บ้าน_ไหม | Do you have a house?
 S | คุณ_ชอบ_บ้าน_ของ_ผม_ไหม | Do you like my house? (male)
+S | คุณ_ไม่_ชอบ_บ้าน_ของ_ผม | You don't like my house. (male)
 S | ผม_ชอบ_คุณ | I (male) like you.
 S | ฉัน_ชอบ_คุณ | I (female) like you.
+S | ผม_ไม่_ชอบ_คุณ | I (male) don't like you.
+S | ฉัน_ไม่_ชอบ_คุณ | I (female) don't like you.
 S | ผม_ชอบ_เมือง-ไทย | I (male) like Thailand.
 S | คุณ_ชอบ_เมือง-ไทย_ไหม | Do you like Thailand?
 S | ฉัน_อยาก_อยู่_เมือง-ไทย | I (female) want to be in Thailand.
 S | ผม_อยาก_อยู่_บ้าน | I (male) want to be home.
 S | ฉัน_ชอบ_อยู่_บ้าน | I (female) like to be at home.
+S | ผม_ไม่_ชอบ_อยู่_บ้าน | I (male) don't like to be at home.
 S | ผม_ชอบ_อยู่_เมือง-ไทย | I (male) like to be in Thailand.
+S | ฉัน_ไม่_ชอบ_อยู่_เมือง-ไทย | I (female) don't like to be in Thailand.
 S | ผม_ชื่อ_อ-เล็ก-ซี่ | My name is Alexis (male)
 S | ผม_อา-ยุ_สิบ_ปี | I (male) am ten years old.
 S | ผม_วิ่ง_เร็ว | I (male) run fast.
@@ -386,6 +413,8 @@ S | ส-วัส-ดี_ค่ะ | Hello (said by female)!
 S | ส-วัส-ดี_ครับ | Hello (said by male)!
 S | ฉัน_รัก_เขา | I (female) love him.
 S | ฉัน_ชอบ_เขา | I (female) like him.
+S | ผม_ชอบ_เขา | I (male) like him.
+S | ผม_ไม่_ชอบ_เขา | I (male) don't like him.
 S | คุณ_ชื่อ_อะ-ไร | What's your name?
 S | ฉัน_ชอบ_ชื่อ_คุณ_นะ | I (female) like your name.
 S | ผม_อา-ศัย_อยู่_ใน_ลอน-ดอน | I (male) live in London.
@@ -407,7 +436,7 @@ S | การ_กิน_อา-หาร_มาก-เกิน-ไป_ไม่
 S | ฉัน_กิน_ข้าว | I (female) eat rice.
 S | คุณ_กิน_ข้าว | You eat rice.
 S | ผม_กิน_น้ำ | I (male) drink (colloquial) water.
-S | ผม_ดื่ม_น้ำ | I (male) drink water.
+S | ผม_ไม่_ดื่ม_น้ำ | I (male) don't drink (colloquial) water.
 S | ฉัน_ไม่_เคย_เห็น_หิ-มะ | I (female) have never seen snow.
 S | เขา_ไม่_เคย_ไป_กรุง-เทพ | He has never been to Bangkok.
 S | หมา_ตัว_ใหญ่ | The dog is big.
@@ -460,3 +489,18 @@ S | ฉัน_เชื่อ_ว่า_ฉัน_บิน_ได้ | I (femal
 S | พวก-เขา_จะ_ทำ_อะ-ไร_ก่อน | What will they do first?
 S | คุณ_อยู่_บ้าน_ได้_ไหม | Can you be at home?
 S | คุณ_ชอบ_ฉัน_ใช่_ไหม | You like me (female), right?
+S | ผม_ไม่_ควร_อยู่_ที่-นี่ | I (male) should not be here.
+S | มัน_ควร_อยู่_ใน_รถ | It should be in the car.
+S | เขา_กิน_เยอะ | He eats a lot.
+S | เธอ_ไป_ที่-นั่น | She goes there.
+S | ผม_เกลียด_มัน | I (male) hate it.
+S | ฉัน_เกลียด_นั่น | I (female) hate that.
+S | ฉัน_รู้-จัก_เขา | I (female) know him.
+S | ฉัน_ไม่_รู้-จัก_เขา | I (female) don't know him.
+S | ผม_ต้อง_กลับ_ประ-เทศ_อังก-ฤษ_อา-ทิตย์_หน้า | I have to return to the United Kingdom next week.
+S | เธอ_ต้อง_ไป_รับ_แฟน_ของ_เธอ_ที่_ส-นาม-บิน | She has to pick up her boyfriend at the airport.
+S | คุณ_ไม่_ต้อง_ซื้อ_กา-แฟ_สอง_แก้ว | You don't have to buy two cups of coffee.
+S | วัน-นี้_ผม_ไม่_ต้อง_ทำ-อา-หาร | Today I (male) don't have to cook.
+S | เขา_ไม่_ควร_อยู่_หลัง_บ้าน | He shouldn't be behind the house.
+S | ฉัน_สาย_แล้ว | I'm (female) late.
+S | เขา_คง-จะ_ไป_ตอน-นี้ | He will probably go now.
