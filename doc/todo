@@ -1,16 +1,13 @@
-TODO Saturday:
+TODO:
 Battle:
     Have a way to use mouse in tests!
 Finish Lomsak
     Gym
 
 TODO:
-Put npcs file in a folder
 Tests types:
     - TONE_FROM_SOUND
     - TONE_FROM_THAI
-Implement more types of test
-    Most important:
     - TAPPINGWORD
 Needed sprites:
     - Main character

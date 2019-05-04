@@ -135,6 +135,8 @@ W | วิ-เศษ | magical
 W | สุด-ท้าย | last
 W | ใจ-เย็น | calm, cool-headed
 W | ใจ-ร้อน | hot-tempered
+M | ว่าง | free | FALLING
+M | พอ | enough | MID
 
 M | สี | color | RISING
 M | เหลือง | (yellow) | RISING
@@ -252,6 +254,7 @@ W | ภาพ-ยน-ตร์ | movie (formal)
 M | สอบ | exam | LOW
 W | ที-วี | TV
 W | ประ-เทศ | country
+W | เว-ลา | time
 
 # Celestial bodies
 W | พระ-จันทร์ | moon
@@ -334,6 +337,7 @@ W | รู้-จัก | to know (someone)
 M | กลับ | to return | LOW
 M | รับ | to receive | HIGH
 W | ทำ-อา-หาร | to cook
+M | ใช้ | to use | HIGH
 
 # Useful verbs
 M | ควร | should | MID
@@ -504,3 +508,7 @@ S | วัน-นี้_ผม_ไม่_ต้อง_ทำ-อา-หาร | 
 S | เขา_ไม่_ควร_อยู่_หลัง_บ้าน | He shouldn't be behind the house.
 S | ฉัน_สาย_แล้ว | I'm (female) late.
 S | เขา_คง-จะ_ไป_ตอน-นี้ | He will probably go now.
+S | คุณ_มี_เว-ลา_ว่าง_พอ_ไหม | Do you have enough free time?
+S | ฉัน_มี_เว-ลา_ไม่_พอ | I (female) don't have enough free time.
+S | พอ_แล้ว | enough already!
+S | คุณ_ใช้_เว-ลา_ว่าง_ที่-ไหน | Where do you spend your free time?
