@@ -47,9 +47,9 @@ class Growable(object):
             al.dex.determine_words_to_show()
 
     def decrease_xp(self, al, value):
-        print('')
-        print('before the decreasing:')
-        print('total_xp = ', self.total_xp)
+        # print('')
+        # print('before the decreasing:')
+        # print('total_xp = ', self.total_xp)
 
         final_xp = max(self.total_xp - value, 0)
 
@@ -61,9 +61,9 @@ class Growable(object):
 
         self.increase_xp(al, final_xp)
 
-        print('after the decreasing')
-        print('total_xp = ', self.total_xp)
-        print('')
+        # print('after the decreasing')
+        # print('total_xp = ', self.total_xp)
+        # print('')
 
     def level_up(self):
         self.level += 1

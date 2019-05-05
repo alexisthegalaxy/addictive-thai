@@ -37,6 +37,8 @@ def npc_sprites():
         "vendor_right": pygame.image.load("../npc/sprites/vendor_right.png"),
         "vendor_left": pygame.image.load("../npc/sprites/vendor_left.png"),
         "kid_up": pygame.image.load("../npc/sprites/kid_up.png"),
+        "kid_right": pygame.image.load("../npc/sprites/kid_right.png"),
+        "kid_left": pygame.image.load("../npc/sprites/kid_left.png"),
         "nurse_down": pygame.image.load("../npc/sprites/nurse_down.png"),
         "monk_down": pygame.image.load("../npc/sprites/monk_down.png"),
     }

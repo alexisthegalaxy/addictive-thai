@@ -192,7 +192,10 @@ def chumphae_lomsak(al):
             sprite="lass",
             direction=Direction.DOWN,
             standard_dialog=["I hope you like to talk about food!"],
-            defeat_dialog=["Ah, maybe you're better when it comes to talking about food,", "but I'm better when it comes to eating it!"],
+            defeat_dialog=[
+                "Ah, maybe you're better when it comes to talking about food,",
+                "but I'm better when it comes to eating it!",
+            ],
         ),
     ]
     for npc in npcs:
@@ -233,7 +236,10 @@ def chumphae_school(al):
             y=22,
             sprite="kid",
             direction=Direction.UP,
-            standard_dialog=["ของ is too easy.", "I am 4 already, I know this, come on!"],
+            standard_dialog=[
+                "ของ is too easy.",
+                "I am 4 already, I know this, come on!",
+            ],
         ),
         Npc(
             al=al,
@@ -486,9 +492,7 @@ def chumphae(al):
             y=7,
             sprite="kid",
             direction=Direction.UP,
-            standard_dialog=[
-                "These skeletons are so tall!",
-            ],
+            standard_dialog=["These skeletons are so tall!"],
         ),
         Npc(
             al=al,
@@ -850,7 +854,7 @@ def chaiyaphum(al):
             sprite="old_man",
             direction=Direction.RIGHT,
             standard_dialog=[
-                "มะลิ wanted to talk to you, she's waiting in the garden.",
+                "มะลิ wanted to talk to you, she's waiting in the garden."
             ],
         ),
         Npc(
@@ -1203,10 +1207,7 @@ def lomsak(al):
             y=8,
             sprite="fat_vendor",
             direction=Direction.DOWN,
-            vendor_dialog_beginning=[
-                "Welcome to Lomsak!",
-                "How can I help you?",
-            ],
+            vendor_dialog_beginning=["Welcome to Lomsak!", "How can I help you?"],
             vendor_dialog_end=["Hope to See you again!"],
             sold_items=[
                 Item(
@@ -1222,6 +1223,114 @@ def lomsak(al):
                     price=12,
                 ),
             ],
+        ),
+        Npc(
+            al=al,
+            name="lomsak_gym_battle_1",
+            ma=al.mas.get_map_from_name("lomsak_gym"),
+            x=14,
+            y=22,
+            standard_dialog=[
+                "Welcome to the gym of Lomsak!",
+                "If you beat us all and also the leader, you'll get something.",
+                "I won't let you beat me easily, though!",
+            ],
+            defeat_dialog=["What, you won already?", "The leader won't be so easy!"],
+            direction=Direction.LEFT,
+            sprite="kid",
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["ใช่", "ภา-ษา"]
+            ],
+            money=4,
+        ),
+        Npc(
+            al=al,
+            name="lomsak_gym_battle_2",
+            ma=al.mas.get_map_from_name("lomsak_gym"),
+            x=11,
+            y=20,
+            standard_dialog=[
+                "Do you know your pronouns? I'll test you!",
+            ],
+            defeat_dialog=["You're too good!"],
+            direction=Direction.RIGHT,
+            sprite="kid",
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["คุณ", "ผม", "ฉัน", "เขา"]
+            ],
+            money=4,
+        ),
+        Npc(
+            al=al,
+            name="lomsak_gym_battle_3",
+            ma=al.mas.get_map_from_name("lomsak_gym"),
+            x=15,
+            y=18,
+            standard_dialog=[
+                "I like to be in that gym,", "I train against every body who comes to challenge the leader!",
+            ],
+            defeat_dialog=["I lost! But I learned a lot from you."],
+            direction=Direction.LEFT,
+            sprite="kid",
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["ครับ", "ค่ะ"]
+            ],
+            money=4,
+        ),
+        Npc(
+            al=al,
+            name="lomsak_gym_battle_4",
+            ma=al.mas.get_map_from_name("lomsak_gym"),
+            x=11,
+            y=16,
+            standard_dialog=[
+                "Let's see how well you know the polite words!",
+            ],
+            defeat_dialog=["What, you won already?", "The leader won't be so easy!"],
+            direction=Direction.RIGHT,
+            sprite="kid",
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["ขอบ-คุณ", "ขอ-โทษ", "ส-วัส-ดี"]
+            ],
+            money=4,
+        ),
+        Npc(
+            al=al,
+            name="lomsak_gym_battle_5",
+            ma=al.mas.get_map_from_name("lomsak_gym"),
+            x=12,
+            y=14,
+            standard_dialog=[
+                "I am the last one before the leader!",
+                "I'll do my best to give you a good fight!",
+            ],
+            defeat_dialog=["I knew already that you'd win!", "I saw you fighting the others.", "You're good."],
+            direction=Direction.RIGHT,
+            sprite="kid",
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["น้ำ", "ได้", "ภา-ษา"]
+            ],
+            money=4,
+        ),
+        Npc(
+            al=al,
+            name="lomsak_gym_leader",
+            ma=al.mas.get_map_from_name("lomsak_gym"),
+            x=13,
+            y=5,
+            standard_dialog=[
+                "Welcome, challenger!",
+                "I am the leader of Lomsak's gym.",
+                "Oh, this is your first time battling a gym's leader?",
+                "If you can win this battle, I'll give you a something special!",
+            ],
+            defeat_dialog=["Congratulations!", "You have great knowledge of the Thai language already!", "Here, as promised, have the Lomsak badge."],
+            direction=Direction.DOWN,
+            sprite="dad",
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["ใช่", "ภา-ษา", "ภา-ษา-อัง-กฤษ", "ได้", "เรียน", "พูด", "ของ", "เรียน"]
+            ],
+            money=15,
         ),
     ]
     for npc in npcs:

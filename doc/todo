@@ -1,12 +1,14 @@
 TODO:
+Test:
+    Allow replaying audio in test using the mouse
 Battle:
-    Have a way to use mouse in tests!
-        Only sentences and replay audio left
-Tests:
-    Sentences:
-        Show the correct answer after 3 mistakes
-Finish Lomsak
-    Gym
+    At the end of the battle, have some text:
+        - Learner won the battle
+        - Learner gets that many points
+        - Words such and such got to level such and such
+Trainer:
+    - Walk to the learner
+
 
 TODO:
 Tests types:
