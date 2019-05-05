@@ -24,8 +24,53 @@ class TestType(Enum):
     ENFROMTHAI = 4
 
 
+def get_correct_option(options: List[Option]):
+    for option in options:
+        if option.correct:
+            return option
+    print("ERROR: no correct option in options!")
+
+
+def draw_box(screen, fonts, x, y, width, height, string, selected=False):
+    # 1 - Draw background
+    screen_color = (0, 220, 0) if selected else (0, 0, 0)
+    pygame.draw.rect(screen, screen_color, [x - 5, y - 5, width + 10, height + 10])
+    pygame.draw.rect(screen, (220, 220, 220), (x, y, width, height))
+
+    # 2 - Draw the word inside
+    rendered_text = fonts.garuda32.render(string, True, (0, 0, 0))
+    screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
+
+
+class TestAnswerBox(object):
+    def __init__(self, x, y, width, height, string, index):
+        self.x = x
+        self.y = y
+        self.selected = False
+        self.width = width
+        self.height = height
+        self.string = string
+        self.index = index
+
+    def draw(self, screen, fonts, selected):
+        draw_box(
+            screen,
+            fonts,
+            x=self.x,
+            y=self.y,
+            width=self.width,
+            height=self.height,
+            string=self.string,
+            selected=selected or self.selected,
+        )
+
+    def contains(self, point):
+        (x, y) = point
+        return self.x < x < self.x + self.width and self.y < y < self.y + self.height
+
+
 class Test(object):
-    def __init__(self, al: 'All', learning=None, test_success_callback=None):
+    def __init__(self, al: "All", learning=None, test_success_callback=None):
         self.al = al
         self.learning = learning
         self.selected_option_index = 0
@@ -83,13 +128,24 @@ class Test(object):
 
 
 class TappingTestSentence(Test):
-    def __init__(self, al: 'All', correct_word: Word, sentence, learning=None, test_success_callback=None):
+    def __init__(
+        self,
+        al: "All",
+        correct_word: Word,
+        sentence,
+        learning=None,
+        test_success_callback=None,
+    ):
         super().__init__(al, learning, test_success_callback)
         self.correct_word = correct_word
         self.number_of_distr = 6
+        self.selected_picked_syllable_index = 0
         self.constructed_sentence = []  # List of syllables
         self.is_validating = False
         self.sentence = sentence
+        self.option_boxes = []
+        self.sentence_boxes = []
+        self.validate_box = None
 
         # 1 - Determine the correct options
         self.correct_syllables = []
@@ -106,6 +162,70 @@ class TappingTestSentence(Test):
         # 4 - Mix distractors and correct options
         self.choices = self.correct_syllables + self.distractors
         random.shuffle(self.choices)
+
+        # 5 - Set boxes position - both options and already built sentence
+        self.set_boxes()
+
+    def set_boxes(self):
+        # Reset boxes
+        self.sentence_boxes = []
+        self.option_boxes = []
+        self.validate_box = None
+
+        # options
+        ui = self.al.ui
+        fonts = ui.fonts
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.30)
+        height = ui.percent_height(0.1)
+        for i, syllable in enumerate(self.choices):
+            rendered_text = fonts.garuda32.render(syllable.thai, True, (0, 0, 0))
+            text_length = rendered_text.get_width()
+            width = text_length + 20
+            self.option_boxes.append(
+                TestAnswerBox(
+                    x=x, y=y, width=width, height=height, string=syllable.thai, index=i
+                )
+            )
+            x += width + 20
+            if x > ui.percent_width(0.85):
+                x = ui.percent_width(0.15)
+                y += ui.percent_height(0.30)
+
+        # built sentence
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.60)
+        validated_box_index = 0
+        for i, syllable in enumerate(self.constructed_sentence):
+            rendered_text = fonts.garuda32.render(syllable.thai, True, (0, 0, 0))
+            text_length = rendered_text.get_width()
+            width = text_length + 20
+            self.sentence_boxes.append(
+                TestAnswerBox(
+                    x=x, y=y, width=width, height=height, string=syllable.thai, index=i
+                )
+            )
+            x += width + 20
+            if x > ui.percent_width(0.85):
+                x = ui.percent_width(0.15)
+                y += ui.percent_height(0.15)
+            validated_box_index += 1
+
+        rendered_text = fonts.garuda32.render("Validate", True, (0, 0, 0))
+        text_length = rendered_text.get_width()
+        width = text_length + 20
+
+        if x + width > ui.percent_width(0.85):
+            x = ui.percent_width(0.15)
+            y += ui.percent_height(0.15)
+        self.validate_box = TestAnswerBox(
+            x=x,
+            y=y,
+            width=width,
+            height=height,
+            string="Validate",
+            index=validated_box_index,
+        )
 
     def select_distractors(self, syllable_only):
         # We select amongst sentences.words rather than amongst words to get
@@ -146,86 +266,52 @@ class TappingTestSentence(Test):
         )
 
         # Draw all the options
-        x = ui.percent_width(0.15)
-        y = ui.percent_height(0.30)
-        height = ui.percent_height(0.1)
-        for i, syllable in enumerate(self.choices):
-            rendered_text = fonts.garuda32.render(syllable.thai, True, (0, 0, 0))
-            text_length = rendered_text.get_width()
-            width = text_length + 20
-            draw_box(
-                self.al.ui.screen,
-                self.al.ui.fonts,
-                x=x,
-                y=y,
-                width=width,
-                height=height,
-                string=syllable.thai,
+        for i, option_box in enumerate(self.option_boxes):
+            option_box.draw(
+                screen,
+                fonts,
+                # selected=self.selected_option_index == i and not self.is_validating,
                 selected=self.selected_option_index == i and not self.is_validating,
             )
 
-            x += width + 20
-            if x > ui.percent_width(0.85):
-                x = ui.percent_width(0.15)
-                y += ui.percent_height(0.30)
-
         # Draw the constructed sentence
-        x = ui.percent_width(0.15)
-        y = ui.percent_height(0.60)
-        for i, syllable in enumerate(self.constructed_sentence):
-            rendered_text = fonts.garuda32.render(syllable.thai, True, (0, 0, 0))
-            text_length = rendered_text.get_width()
-            width = text_length + 20
-            # if x + width + 40 > ui.percent_width(0.85):
-            #     x = ui.percent_width(0.15)
-            #     y += ui.percent_height(0.15)
-
-            draw_box(
-                self.al.ui.screen,
-                self.al.ui.fonts,
-                x=x,
-                y=y,
-                width=width,
-                height=height,
-                string=syllable.thai,
+        for i, sentence_box in enumerate(self.sentence_boxes):
+            sentence_box.draw(
+                screen,
+                fonts,
+                # selected=self.selected_option_index == i and not self.is_validating,
+                selected=self.is_validating and self.selected_picked_syllable_index == i,
             )
 
-            x += width + 20
-            if x > ui.percent_width(0.85):
-                x = ui.percent_width(0.15)
-                y += ui.percent_height(0.15)
-
         # Draw Validate Answer box
-        rendered_text = fonts.garuda32.render("Validate", True, (0, 0, 0))
-        text_length = rendered_text.get_width()
-        width = text_length + 20
-
-        if x + width > ui.percent_width(0.85):
-            x = ui.percent_width(0.15)
-            y += ui.percent_height(0.15)
-
-        draw_box(
-            self.al.ui.screen,
-            self.al.ui.fonts,
-            x=x,
-            y=y,
-            width=width,
-            height=height,
-            string="Validate",
-            selected=self.is_validating,
+        self.validate_box.draw(
+            screen,
+            fonts,
+            selected=self.is_validating
+            and self.selected_picked_syllable_index == self.validate_box.index,
         )
 
     def interact(self, al):
         if al.ui.left:
             al.ui.left = False
-            self.selected_option_index -= 1
-            if self.selected_option_index < 0:
-                self.selected_option_index = len(self.choices) - 1
+            if self.is_validating:
+                self.selected_picked_syllable_index -= 1
+                if self.selected_picked_syllable_index < 0:
+                    self.selected_picked_syllable_index = len(self.sentence_boxes)
+            else:
+                self.selected_option_index -= 1
+                if self.selected_option_index < 0:
+                    self.selected_option_index = len(self.choices) - 1
         if al.ui.right:
             al.ui.right = False
-            self.selected_option_index += 1
-            if self.selected_option_index > len(self.choices) - 1:
-                self.selected_option_index = 0
+            if self.is_validating:
+                self.selected_picked_syllable_index += 1
+                if self.selected_picked_syllable_index > len(self.sentence_boxes):
+                    self.selected_picked_syllable_index = 0
+            else:
+                self.selected_option_index += 1
+                if self.selected_option_index > len(self.choices) - 1:
+                    self.selected_option_index = 0
         if al.ui.down:
             al.ui.down = False
             self.is_validating = True
@@ -235,12 +321,64 @@ class TappingTestSentence(Test):
         if al.ui.space:
             al.ui.space = False
             if self.is_validating:
-                self.validate_answer()
+                if self.selected_picked_syllable_index == len(self.constructed_sentence):
+                    self.validate_answer()
+                else:
+                    self.learner_remove_picked_syllable(self.selected_picked_syllable_index)
             else:
                 self.learner_select_option()
         if al.ui.backspace:
             al.ui.backspace = False
             self.remove_last_word()
+
+        if al.ui.hover:
+            self.process_hover()
+        if al.ui.click:
+            self.process_click()
+
+    def set_box_as_selected_and_unselect_others(self, box):
+        for other_box in (
+            self.option_boxes + self.sentence_boxes + [self.validate_box]
+        ):
+            other_box.selected = False
+        box.selected = True
+
+    def process_hover(self):
+        for box in self.option_boxes:
+            if box.contains(self.al.ui.hover):
+                self.al.ui.hover = None
+                self.is_validating = False
+                self.set_box_as_selected_and_unselect_others(box)
+                self.selected_option_index = box.index
+                return
+        for box in self.sentence_boxes:
+            if box.contains(self.al.ui.hover):
+                self.al.ui.hover = None
+                self.is_validating = True
+                self.selected_picked_syllable_index = box.index
+                self.set_box_as_selected_and_unselect_others(box)
+                return
+        if self.validate_box.contains(self.al.ui.hover):
+            self.al.ui.hover = None
+            self.set_box_as_selected_and_unselect_others(self.validate_box)
+            self.selected_picked_syllable_index = self.validate_box.index
+            self.is_validating = True
+
+    def process_click(self):
+        for box in self.option_boxes:
+            if box.contains(self.al.ui.click):
+                self.al.ui.click = None
+                self.selected_option_index = box.index
+                self.learner_select_option()
+                return
+        for box in self.sentence_boxes:
+            if box.contains(self.al.ui.click):
+                self.al.ui.click = None
+                self.learner_remove_picked_syllable(box.index)
+                return
+        if self.validate_box.contains(self.al.ui.click):
+            self.al.ui.click = None
+            self.validate_answer()
 
     def validate_answer(self):
         constructed = "".join([word.thai for word in self.constructed_sentence])
@@ -254,32 +392,23 @@ class TappingTestSentence(Test):
         else:
             self.fails()
 
+    def learner_remove_picked_syllable(self, picked_syllable_index: int):
+        self.constructed_sentence.remove(self.constructed_sentence[picked_syllable_index])
+        self.set_boxes()
+
     def learner_select_option(self):
         self.constructed_sentence.append(self.choices[self.selected_option_index])
-        # option = self.selected_option_index
-        # if self.choices[option] == self.correct_word:
-        #     self.succeeds([self.correct_word])
-        # else:
-        #     self.fails()
+        self.set_boxes()
 
     def remove_last_word(self):
         if len(self.constructed_sentence) > 0:
             self.constructed_sentence.pop()
 
 
-def draw_box(screen, fonts, x, y, width, height, string, selected=False):
-    # 1 - Draw background
-    screen_color = (0, 220, 0) if selected else (0, 0, 0)
-    pygame.draw.rect(screen, screen_color, [x - 5, y - 5, width + 10, height + 10])
-    pygame.draw.rect(screen, (220, 220, 220), (x, y, width, height))
-
-    # 2 - Draw the word inside
-    rendered_text = fonts.garuda32.render(string, True, (0, 0, 0))
-    screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
-
-
 class ThaiFromEnglish(Test):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, learning, test_success_callback)
         self.correct_word: Word = correct_word
         self.number_of_distr: int = 3
@@ -309,12 +438,12 @@ class ThaiFromEnglish(Test):
         if al.ui.up:
             self.selected_option_index -= 2
             if self.selected_option_index < 0:
-                self.selected_option_index += (self.number_of_distr + 1)
+                self.selected_option_index += self.number_of_distr + 1
             al.ui.up = False
         if al.ui.down:
             self.selected_option_index += 2
             if self.selected_option_index >= (self.number_of_distr + 1):
-                self.selected_option_index -= (self.number_of_distr + 1)
+                self.selected_option_index -= self.number_of_distr + 1
             al.ui.down = False
         if al.ui.left or al.ui.right:
             self.selected_option_index += (
@@ -335,13 +464,50 @@ class ThaiFromEnglish(Test):
 
 
 class ThaiFromEnglish4(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
+
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[0].thai,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[1].thai,
+                index=1,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[2].thai,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[3].thai,
+                index=3,
+            ),
+        ]
 
     def draw(self):
         ui = self.al.ui
@@ -365,58 +531,98 @@ class ThaiFromEnglish4(ThaiFromEnglish):
         )
 
         # Draw all the options
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[0].thai,
-            selected=self.selected_option_index == 0,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
 
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[1].thai,
-            selected=self.selected_option_index == 1,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[2].thai,
-            selected=self.selected_option_index == 2,
-        )
-
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[3].thai,
-            selected=self.selected_option_index == 3,
-        )
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
 
 
 class ThaiFromEnglish6(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
+
+        y = 0.30
+        y_space = 0.025
+        y_length = 0.175
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[0].thai,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[1].thai,
+                index=1,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[2].thai,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[3].thai,
+                index=3,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[4].thai,
+                index=4,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[5].thai,
+                index=5,
+            ),
+        ]
 
     def draw(self):
         ui = self.al.ui
@@ -440,81 +646,73 @@ class ThaiFromEnglish6(ThaiFromEnglish):
         )
 
         # Draw all the options
-        y = 0.30
-        y_space = 0.025
-        y_length = 0.175
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[0].thai,
-            selected=self.selected_option_index == 0,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[1].thai,
-            selected=self.selected_option_index == 1,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[2].thai,
-            selected=self.selected_option_index == 2,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[3].thai,
-            selected=self.selected_option_index == 3,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[4].thai,
-            selected=self.selected_option_index == 4,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[5].thai,
-            selected=self.selected_option_index == 5,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
+
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
 
 
 class EnglishFromThai4(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
+
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[0].english,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[1].english,
+                index=1,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[2].english,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[3].english,
+                index=3,
+            ),
+        ]
 
     def draw(self):
         ui = self.al.ui
@@ -537,58 +735,98 @@ class EnglishFromThai4(ThaiFromEnglish):
         )
 
         # Draw all the options
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[0].english,
-            selected=self.selected_option_index == 0,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
 
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[1].english,
-            selected=self.selected_option_index == 1,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[2].english,
-            selected=self.selected_option_index == 2,
-        )
-
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[3].english,
-            selected=self.selected_option_index == 3,
-        )
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
 
 
 class EnglishFromThai6(ThaiFromEnglish):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, correct_word, learning, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
+
+        y = 0.30
+        y_space = 0.025
+        y_length = 0.175
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[0].english,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[1].english,
+                index=1,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[2].english,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[3].english,
+                index=3,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[4].english,
+                index=4,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[5].english,
+                index=5,
+            ),
+        ]
 
     def draw(self):
         ui = self.al.ui
@@ -610,82 +848,32 @@ class EnglishFromThai6(ThaiFromEnglish):
         )
 
         # Draw all the options
-        y = 0.30
-        y_space = 0.025
-        y_length = 0.175
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[0].english,
-            selected=self.selected_option_index == 0,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[1].english,
-            selected=self.selected_option_index == 1,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[2].english,
-            selected=self.selected_option_index == 2,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[3].english,
-            selected=self.selected_option_index == 3,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[4].english,
-            selected=self.selected_option_index == 4,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[5].english,
-            selected=self.selected_option_index == 5,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
 
-
-def get_correct_option(options: List[Option]):
-    for option in options:
-        if option.correct:
-            return option
-    print("ERROR: no correct option in options!")
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
 
 
 class FromSound(Test):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, learning, test_success_callback)
         self.correct_word: Word = correct_word
         self.number_of_distr: int = 3
@@ -754,18 +942,57 @@ class FromSound(Test):
 
 
 class EnglishFromSound(FromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, learning, correct_word, test_success_callback)
 
 
 class EnglishFromSound4(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
+
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[0].english,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[1].english,
+                index=1,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[2].english,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[3].english,
+                index=3,
+            ),
+        ]
 
     def draw(self):
         ui = self.al.ui
@@ -784,62 +1011,102 @@ class EnglishFromSound4(EnglishFromSound):
         # Draw prompt
         x = ui.percent_width(0.60)
         y = ui.percent_height(0.10)
-        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        image_name = "sound_icon_green" if self.selector_on_sound else "sound_icon"
         ui.screen.blit(ui.images[image_name], [x, y])
 
         # Draw all the options
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[0].english,
-            selected=self.selected_option_index == 0,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
 
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[1].english,
-            selected=self.selected_option_index == 1,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[2].english,
-            selected=self.selected_option_index == 2,
-        )
-
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[3].english,
-            selected=self.selected_option_index == 3,
-        )
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
 
 
 class EnglishFromSound6(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning=None, test_success_callback=None):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
         super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
+
+        y = 0.30
+        y_space = 0.025
+        y_length = 0.175
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[0].english,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[1].english,
+                index=1,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[2].english,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[3].english,
+                index=3,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[4].english,
+                index=4,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[5].english,
+                index=5,
+            ),
+        ]
 
     def draw(self):
         ui = self.al.ui
@@ -858,79 +1125,40 @@ class EnglishFromSound6(EnglishFromSound):
         # Draw prompt
         x = ui.percent_width(0.60)
         y = ui.percent_height(0.10)
-        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        image_name = "sound_icon_green" if self.selector_on_sound else "sound_icon"
         ui.screen.blit(ui.images[image_name], [x, y])
 
         # Draw all the options
-        y = 0.30
-        y_space = 0.025
-        y_length = 0.175
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[0].english,
-            selected=self.selected_option_index == 0,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[1].english,
-            selected=self.selected_option_index == 1,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[2].english,
-            selected=self.selected_option_index == 2,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[3].english,
-            selected=self.selected_option_index == 3,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[4].english,
-            selected=self.selected_option_index == 4,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[5].english,
-            selected=self.selected_option_index == 5,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
+
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
 
 
 class ThaiFromSound4(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None, test_success_callback=None):
+    def __init__(
+        self,
+        al: "All",
+        correct_word: Word,
+        learning: "Learning" = None,
+        test_success_callback=None,
+    ):
         super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 3
 
@@ -938,6 +1166,41 @@ class ThaiFromSound4(EnglishFromSound):
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
 
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[0].thai,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[1].thai,
+                index=1,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[2].thai,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[3].thai,
+                index=3,
+            ),
+        ]
+
     def draw(self):
         ui = self.al.ui
 
@@ -955,56 +1218,40 @@ class ThaiFromSound4(EnglishFromSound):
         # Draw prompt
         x = ui.percent_width(0.60)
         y = ui.percent_height(0.10)
-        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        image_name = "sound_icon_green" if self.selector_on_sound else "sound_icon"
         ui.screen.blit(ui.images[image_name], [x, y])
 
         # Draw all the options
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[0].thai,
-            selected=self.selected_option_index == 0,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
 
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.35),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[1].thai,
-            selected=self.selected_option_index == 1,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[2].thai,
-            selected=self.selected_option_index == 2,
-        )
-
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(0.625),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(0.225),
-            string=self.choices[3].thai,
-            selected=self.selected_option_index == 3,
-        )
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
 
 
 class ThaiFromSound6(EnglishFromSound):
-    def __init__(self, al: 'All', correct_word: Word, learning: 'Learning' = None, test_success_callback=None):
+    def __init__(
+        self,
+        al: "All",
+        correct_word: Word,
+        learning: "Learning" = None,
+        test_success_callback=None,
+    ):
         super().__init__(al, learning, correct_word, test_success_callback)
         self.number_of_distr: int = 5
 
@@ -1012,6 +1259,66 @@ class ThaiFromSound6(EnglishFromSound):
         self.choices: List[Word] = [self.correct_word] + self.distractors
         random.shuffle(self.choices)
 
+        y = 0.30
+        y_space = 0.025
+        y_length = 0.175
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[0].thai,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[1].thai,
+                index=1,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[2].thai,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[3].thai,
+                index=3,
+            ),
+        ]
+        y += y_space + y_length
+        self.boxes += [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[4].thai,
+                index=4,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(y),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(y_length),
+                string=self.choices[5].thai,
+                index=5,
+            ),
+        ]
+
     def draw(self):
         ui = self.al.ui
 
@@ -1029,73 +1336,27 @@ class ThaiFromSound6(EnglishFromSound):
         # Draw prompt
         x = ui.percent_width(0.60)
         y = ui.percent_height(0.10)
-        image_name = 'sound_icon_green' if self.selector_on_sound else 'sound_icon'
+        image_name = "sound_icon_green" if self.selector_on_sound else "sound_icon"
         ui.screen.blit(ui.images[image_name], [x, y])
 
         # Draw all the options
-        y = 0.30
-        y_space = 0.025
-        y_length = 0.175
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[0].thai,
-            selected=self.selected_option_index == 0,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[1].thai,
-            selected=self.selected_option_index == 1,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[2].thai,
-            selected=self.selected_option_index == 2,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[3].thai,
-            selected=self.selected_option_index == 3,
-        )
-        y += y_space + y_length
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.15),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[4].thai,
-            selected=self.selected_option_index == 4,
-        )
-        draw_box(
-            screen,
-            fonts,
-            x=ui.percent_width(0.53),
-            y=ui.percent_height(y),
-            width=ui.percent_width(0.32),
-            height=ui.percent_height(y_length),
-            string=self.choices[5].thai,
-            selected=self.selected_option_index == 5,
-        )
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
 
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break

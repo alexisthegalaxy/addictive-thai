@@ -86,6 +86,7 @@ class Ui(object):
         self.last_draw_tick = 0
 
         self.click = None  # looks like (x, y)
+        self.hover = None  # looks like (x, y)
 
         self.up = False
         self.down = False
@@ -132,6 +133,8 @@ class Ui(object):
                     al.learner.money = 0
                     al.learner.hp = 5
                     al.learner.max_hp = 5
+                if event.key == pygame.K_t:
+                    al.words.reset_words(al, xp=100)
                 if event.key == pygame.K_BACKSPACE:
                     al.ui.backspace = True
                 if event.key == pygame.K_SPACE:
@@ -172,4 +175,6 @@ class Ui(object):
                     al.ui.left = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 al.ui.click = pygame.mouse.get_pos()
+            elif event.type == pygame.MOUSEMOTION:
+                al.ui.hover = pygame.mouse.get_pos()
 

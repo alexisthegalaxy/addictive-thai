@@ -15,6 +15,9 @@ def main_interact(al: All):
     if al.active_test:
         ow_frozen = True
         al.active_test.interact(al)
+    elif al.active_battle:
+        ow_frozen = True
+        al.active_battle.interact(al)
     if al.dex.active:
         ow_frozen = True
         al.dex.interact()
@@ -25,9 +28,6 @@ def main_interact(al: All):
     if al.active_learning:
         ow_frozen = True
         al.active_learning.interact(al)
-    if al.active_battle:
-        ow_frozen = True
-        al.active_battle.interact(al)
     if al.active_sale:
         ow_frozen = True
         al.active_sale.interact(al)

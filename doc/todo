@@ -1,6 +1,10 @@
 TODO:
 Battle:
     Have a way to use mouse in tests!
+        Only sentences and replay audio left
+Tests:
+    Sentences:
+        Show the correct answer after 3 mistakes
 Finish Lomsak
     Gym
 

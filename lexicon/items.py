@@ -71,12 +71,15 @@ class Growable(object):
         self.next_threshold += self.level
         # print(f'{self.thai}levelled up to level {self.level}!')
 
-    def reset(self, al):
-        self.total_xp = 0
-        self.level = 1
-        self.next_threshold = 1
-        self.previous_threshold = 0
-        al.dex.determine_words_to_show()
+    def reset(self, al, xp=0):
+        if xp == 0:
+            self.total_xp = 0
+            self.level = 1
+            self.next_threshold = 1
+            self.previous_threshold = 0
+            al.dex.determine_words_to_show()
+        else:
+            self.increase_xp(al, xp)
 
     def show_xp(self):
         print()
@@ -213,9 +216,9 @@ class Words(object):
     def print(self):
         print(self)
 
-    def reset_words(self, al):
+    def reset_words(self, al, xp=0):
         for word in self.words:
-            word.reset(al)
+            word.reset(al, xp=xp)
 
 
 class Sentence(object):

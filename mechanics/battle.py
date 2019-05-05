@@ -167,8 +167,6 @@ class Battle(object):
         if al.ui.click:
             for bubble in self.bubbles:
                 if bubble.contains_point(al.ui.click):
-                    # last_bubble = len(self.bubbles) == 1
-
                     if bubble.is_shown_in_thai:
                         pick_a_test_for_thai_word(
                             al,

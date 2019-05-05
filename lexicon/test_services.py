@@ -26,7 +26,7 @@ def pick_a_test_for_word(al, chosen_word):
     test = None
     can_be_tested_on_sentence = True
     while test is None:
-        r = random.randint(0, 15)  # can be 0, ..., n-1
+        r = random.randint(0, 40)  # can be 0, ..., n-1   (15)
         from lexicon.tests import ThaiFromEnglish6, ThaiFromEnglish4
         if r == 0:
             test = ThaiFromEnglish4(al, correct_word=chosen_word)
