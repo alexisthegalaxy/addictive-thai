@@ -141,11 +141,13 @@ class TappingTestSentence(Test):
         self.number_of_distr = 6
         self.selected_picked_syllable_index = 0
         self.constructed_sentence = []  # List of syllables
-        self.is_validating = False
+        self.is_validating = False  # means that the selector is in the lower part of the screen
         self.sentence = sentence
         self.option_boxes = []
         self.sentence_boxes = []
         self.validate_box = None
+        self.failed_attempts = 0
+        self.failed_attempts_limit = 3  # After three failed attempts, show the answer
 
         # 1 - Determine the correct options
         self.correct_syllables = []
@@ -291,6 +293,13 @@ class TappingTestSentence(Test):
             and self.selected_picked_syllable_index == self.validate_box.index,
         )
 
+        if self.failed_attempts >= self.failed_attempts_limit:
+            x = ui.percent_width(0.15)
+            y = ui.percent_height(0.78)
+            screen.blit(
+                fonts.garuda32.render("Correct answer: " + self.sentence.thai, True, (0, 0, 0)), (x, y)
+            )
+
     def interact(self, al):
         if al.ui.left:
             al.ui.left = False
@@ -391,6 +400,8 @@ class TappingTestSentence(Test):
             self.succeeds(words_to_level_up)
         else:
             self.fails()
+            self.failed_attempts += 1
+
 
     def learner_remove_picked_syllable(self, picked_syllable_index: int):
         self.constructed_sentence.remove(self.constructed_sentence[picked_syllable_index])
