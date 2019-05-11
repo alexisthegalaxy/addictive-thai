@@ -19,25 +19,29 @@ class CellType(object):
 
 
 class CellTypes:
-    grass = CellType('.', 'grass', (100, 200, 100), True, 0.2)
-    tree = CellType('t', 'tree', (85, 107, 47), False, 0)
-    ground = CellType('^', 'ground', (176, 246, 176), True, 0)
-    tall_grass = CellType('-', 'tall_grass', (0, 128, 0), True, 0.4)
-    path = CellType('_', 'path', (200, 200, 200), True, 0)
-    wall = CellType('W', 'wall', (22, 22, 22), False, 0)
-    sign = CellType('s', 'sign', (71, 71, 71), False, 0)
-    water = CellType('w', 'water', (57, 62, 255), False, 0.2)
-    decoration = CellType('d', 'decoration', (123, 9, 9), False, 0)
-    flower = CellType('f', 'flower', (231, 148, 193), True, 0)
-    door = CellType('0', 'door', (255, 0, 204), True, 0)
-    inn_floor = CellType('I', 'inn_floor', (117, 199, 242), True, 0)
-    inn_map = CellType('}', 'inn_map', (99, 122, 80), False, 0)
-    inn_map = CellType('}', 'inn_map', (99, 122, 80), False, 0)
-    rock = CellType('r', 'rock', (94, 37, 37), False, 0)
-    boulder = CellType('B', 'boulder', (172, 92, 113), False, 0)
-    entrance = CellType('E', 'entrance', (227, 25, 77), True, 0)
-    fruit_tree = CellType('F', 'fruit_tree', (192, 255, 81), False, 0)
-    none = CellType('?', 'none', (0, 0, 0), False, 0)
+    grass = CellType('草', 'grass', (100, 200, 100), True, 0.2)
+    tree = CellType('树', 'tree', (85, 107, 47), False, 0)
+    ground = CellType('土', 'ground', (176, 246, 176), True, 0)
+    tall_grass = CellType('稂', 'tall_grass', (0, 128, 0), True, 0.4)
+    path = CellType('道', 'path', (200, 200, 200), True, 0)
+    wall = CellType('壁', 'wall', (22, 22, 22), False, 0)
+    sign = CellType('標', 'sign', (71, 71, 71), False, 0)
+    water = CellType('水', 'water', (57, 62, 255), False, 0.2)
+    cave_water = CellType('湿', 'cave_water', (24, 24, 58), False, 0.2)
+    decoration = CellType('飾', 'decoration', (123, 9, 9), False, 0)
+    flower = CellType('花', 'flower', (231, 148, 193), True, 0)
+    flower_2 = CellType('李', 'flower_2', (231, 148, 194), True, 0)
+    door = CellType('门', 'door', (255, 0, 204), True, 0)
+    inn_floor = CellType('床', 'inn_floor', (117, 199, 242), True, 0)
+    inn_map = CellType('図', 'inn_map', (99, 122, 80), False, 0)
+    temple_floor = CellType('寺', 'temple_floor', (183, 183, 183), True, 0)
+    cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0)
+    boulder_2 = CellType('岩', 'boulder_2', (53, 14, 14), False, 0)
+    rock = CellType('石', 'rock', (94, 37, 37), False, 0)
+    boulder = CellType('砾', 'boulder', (172, 92, 113), False, 0)
+    entrance = CellType('入', 'entrance', (227, 25, 77), True, 0)
+    fruit_tree = CellType('果', 'fruit_tree', (192, 255, 81), False, 0)
+    none = CellType('無', 'none', (0, 0, 0), False, 0)
 
 
 class Cell(object):
@@ -197,10 +201,21 @@ class Mas(object):
         self.lomsak = Ma(filename="lomsak", words=words, cell_types=cell_types, mas=self)
         self.lomsak_house_1 = Ma(filename="lomsak_house_1", words=words, cell_types=cell_types, mas=self)
         self.lomsak_house_2 = Ma(filename="lomsak_house_2", words=words, cell_types=cell_types, mas=self)
+        self.lomsak_house_3 = Ma(filename="lomsak_house_3", words=words, cell_types=cell_types, mas=self)
         self.lomsak_school = Ma(filename="lomsak_school", words=words, cell_types=cell_types, mas=self)
         self.lomsak_gym = Ma(filename="lomsak_gym", words=words, cell_types=cell_types, mas=self)
+        self.lomsak_temple = Ma(filename="lomsak_temple", words=words, cell_types=cell_types, mas=self)
+
+        self.question_cave = Ma(filename="question_cave", words=words, cell_types=cell_types, mas=self)
+        self.cat_cave = Ma(filename="cat_cave", words=words, cell_types=cell_types, mas=self)
+        self.cat_cove = Ma(filename="cat_cove", words=words, cell_types=cell_types, mas=self)
+        self.cat_cove_house = Ma(filename="cat_cove_house", words=words, cell_types=cell_types, mas=self)
 
         self.phetchabun = Ma(filename="phetchabun", words=words, cell_types=cell_types, mas=self)
+        self.banyaeng = Ma(filename="banyaeng", words=words, cell_types=cell_types, mas=self)
+        self.labyrinth = Ma(filename="labyrinth", words=words, cell_types=cell_types, mas=self)
+        self.phitsalunok = Ma(filename="phitsalunok", words=words, cell_types=cell_types, mas=self)
+        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", words=words, cell_types=cell_types, mas=self)
 
         self.current_map: Ma = self.chaiyaphum
 
@@ -277,8 +292,8 @@ class Mas(object):
         self.inn2.get_cell_at(4, 8).goes_to = (self.lomsak, 29, 33)
         self.lomsak.get_cell_at(19, 36).goes_to = (self.lomsak_house_1, 5, 12)
         self.lomsak_house_1.get_cell_at(5, 13).goes_to = (self.lomsak, 19, 37)
-        self.lomsak.get_cell_at(7, 24).goes_to = (self.lomsak_house_2, 5, 12)
-        self.lomsak_house_2.get_cell_at(5, 13).goes_to = (self.lomsak, 7, 25)
+        self.lomsak.get_cell_at(8, 23).goes_to = (self.lomsak_house_2, 5, 12)
+        self.lomsak_house_2.get_cell_at(5, 13).goes_to = (self.lomsak, 8, 24)
         self.lomsak.get_cell_at(28, 24).goes_to = (self.lomsak_school, 13, 24)
         self.lomsak_school.get_cell_at(13, 25).goes_to = (self.lomsak, 28, 25)
         self.lomsak.get_cell_at(31, 23).goes_to = (self.lomsak_school, 19, 16)
@@ -286,9 +301,61 @@ class Mas(object):
         self.lomsak.get_cell_at(16, 24).goes_to = (self.lomsak_gym, 13, 24)
         self.lomsak_gym.get_cell_at(13, 25).goes_to = (self.lomsak, 16, 25)
 
+        self.lomsak.get_cell_at(21, 12).goes_to = (self.lomsak_temple, 13, 24)
+        self.lomsak_temple.get_cell_at(13, 25).goes_to = (self.lomsak, 21, 13)
+
+        self.phetchabun.get_cell_at(17, 17).goes_to = (self.question_cave, 24, 26)
+        self.question_cave.get_cell_at(24, 27).goes_to = (self.phetchabun, 17, 18)
+        self.phetchabun.get_cell_at(11, 27).goes_to = (self.question_cave, 18, 39)
+        self.question_cave.get_cell_at(18, 40).goes_to = (self.phetchabun, 11, 28)
+        self.phetchabun.get_cell_at(24, 35).goes_to = (self.question_cave, 31, 47)
+        self.question_cave.get_cell_at(31, 48).goes_to = (self.phetchabun, 24, 36)
+
+        self.phetchabun.get_cell_at(36, 54).goes_to = (self.cat_cave, 6, 12)
+        self.cat_cave.get_cell_at(6, 13).goes_to = (self.phetchabun, 36, 55)
+        self.cat_cave.get_cell_at(13, 3).goes_to = (self.cat_cove, 19, 29)
+        self.cat_cove.get_cell_at(19, 30).goes_to = (self.cat_cave, 13, 4)
+
+        self.cat_cove.get_cell_at(11, 6).goes_to = (self.cat_cove_house, 5, 12)
+        self.cat_cove_house.get_cell_at(5, 13).goes_to = (self.cat_cove, 11, 7)
+
         self.phetchabun.get_cell_at(49, 8).goes_to = (self.lomsak, 12, 37)
         self.lomsak.get_cell_at(12, 38).goes_to = (self.phetchabun, 49, 9)
         self.phetchabun.get_cell_at(50, 8).goes_to = (self.lomsak, 13, 37)
         self.lomsak.get_cell_at(13, 38).goes_to = (self.phetchabun, 50, 9)
+
+        # To banyaeng forest
+        self.phetchabun.get_cell_at(8, 57).goes_to = (self.banyaeng, 48, 51)
+        self.phetchabun.get_cell_at(8, 58).goes_to = (self.banyaeng, 48, 52)
+        self.banyaeng.get_cell_at(49, 51).goes_to = (self.phetchabun, 9, 57)
+        self.banyaeng.get_cell_at(49, 52).goes_to = (self.phetchabun, 9, 58)
+
+        self.banyaeng.get_cell_at(8, 10).goes_to = (self.labyrinth, 21, 43)
+        self.banyaeng.get_cell_at(9, 10).goes_to = (self.labyrinth, 22, 43)
+        self.labyrinth.get_cell_at(21, 44).goes_to = (self.banyaeng, 8, 11)
+        self.labyrinth.get_cell_at(22, 44).goes_to = (self.banyaeng, 9, 11)
+
+        self.labyrinth.get_cell_at(7, 16).goes_to = (self.phitsalunok, 63, 16)
+        self.labyrinth.get_cell_at(8, 16).goes_to = (self.phitsalunok, 64, 16)
+        self.phitsalunok.get_cell_at(63, 15).goes_to = (self.labyrinth, 7, 15)
+        self.phitsalunok.get_cell_at(64, 15).goes_to = (self.labyrinth, 8, 15)
+
+        self.labyrinth.get_cell_at(42, 9).goes_to = (self.lomsak_labyrinth, 8, 6)
+        self.labyrinth.get_cell_at(42, 10).goes_to = (self.lomsak_labyrinth, 8, 7)
+        self.lomsak_labyrinth.get_cell_at(7, 6).goes_to = (self.labyrinth, 41, 9)
+        self.lomsak_labyrinth.get_cell_at(7, 7).goes_to = (self.labyrinth, 41, 10)
+
+        self.lomsak.get_cell_at(7, 24).goes_to = (self.lomsak_labyrinth, 63, 19)
+        self.lomsak.get_cell_at(7, 25).goes_to = (self.lomsak_labyrinth, 63, 20)
+        self.lomsak_labyrinth.get_cell_at(64, 19).goes_to = (self.lomsak, 8, 24)
+        self.lomsak_labyrinth.get_cell_at(64, 20).goes_to = (self.lomsak, 8, 25)
+
+        self.phetchabun.get_cell_at(21, 8).goes_to = (self.lomsak_labyrinth, 40, 32)
+        self.phetchabun.get_cell_at(22, 8).goes_to = (self.lomsak_labyrinth, 41, 32)
+        self.lomsak_labyrinth.get_cell_at(40, 33).goes_to = (self.phetchabun, 21, 9)
+        self.lomsak_labyrinth.get_cell_at(41, 33).goes_to = (self.phetchabun, 22, 9)
+
+        self.phetchabun.get_cell_at(59, 13).goes_to = (self.lomsak_house_3, 13, 24)
+        self.lomsak_house_3.get_cell_at(13, 25).goes_to = (self.phetchabun, 59, 14)
 
 

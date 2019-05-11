@@ -1,3 +1,6 @@
+from datetime import datetime
+from time import mktime
+
 import pygame
 from typing import List
 
@@ -31,6 +34,7 @@ class Npc(object):
         taught_word: Word = None,
         battle_words: List[Word] = None,
         money: int = 5,  # amount given when lost the fight
+        eyesight: int = 5,  # how far the trainer can see
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well played!"]
@@ -48,13 +52,22 @@ class Npc(object):
         self.victory_dialog: List[str] = victory_dialog
         self.dialog_3: List[str] = dialog_3
         self.review_dialog: List[str] = ["Do you want to review the word"]
-        self.dialogs = [self.standard_dialog, self.defeat_dialog, self.victory_dialog, self.dialog_3]
+        self.dialogs = [
+            self.standard_dialog,
+            self.defeat_dialog,
+            self.victory_dialog,
+            self.dialog_3,
+        ]
         self.active_dialog: List[str] = self.standard_dialog
         self.direction = direction
         self.active_line_index = -1
         self.color = (0, 222, 222)
         self.taught_word = taught_word
         self.battle_words = battle_words
+
+        self.wants_battle = True
+        self.eyesight = eyesight
+        self.have_exclamation_mark_until = None
 
         self.process_dialog(al)
 
@@ -67,6 +80,79 @@ class Npc(object):
                 self.review_dialog[0] + f" {self.taught_word.thai} ?"
             )
 
+    def is_trainer(self):
+        return bool(self.battle_words)
+
+    def sees_learner(self, al):
+        if self.direction == Direction.UP:
+            if (
+                al.learner.x == self.x
+                and al.learner.y < self.y
+                and self.y - al.learner.y <= self.eyesight
+            ):
+                can_walk_to_trainer = True
+                for y in range(al.learner.y, self.y):
+                    can_walk_to_trainer = (
+                        can_walk_to_trainer
+                        and al.mas.current_map.get_cell_at(self.x, y).walkable()
+                    )
+                if can_walk_to_trainer:
+                    print(self.name + ": I can walk to you!")
+                else:
+                    print(self.name + ": I can't walk to you!")
+                return can_walk_to_trainer
+        elif self.direction == Direction.DOWN:
+            if (
+                al.learner.x == self.x
+                and al.learner.y > self.y
+                and al.learner.y - self.y <= self.eyesight
+            ):
+                can_walk_to_trainer = True
+                for y in range(self.y, al.learner.y):
+                    can_walk_to_trainer = (
+                        can_walk_to_trainer
+                        and al.mas.current_map.get_cell_at(self.x, y).walkable()
+                    )
+                if can_walk_to_trainer:
+                    print(self.name + ": I can walk to you!")
+                else:
+                    print(self.name + ": I can't walk to you!")
+                return can_walk_to_trainer
+        elif self.direction == Direction.RIGHT:
+            if (
+                al.learner.y == self.y
+                and al.learner.x > self.x
+                and al.learner.x - self.x <= self.eyesight
+            ):
+                can_walk_to_trainer = True
+                for x in range(self.x, al.learner.x):
+                    can_walk_to_trainer = (
+                        can_walk_to_trainer
+                        and al.mas.current_map.get_cell_at(x, self.y).walkable()
+                    )
+                if can_walk_to_trainer:
+                    print(self.name + ": I can walk to you!")
+                else:
+                    print(self.name + ": I can't walk to you!")
+                return can_walk_to_trainer
+        elif self.direction == Direction.LEFT:
+            if (
+                al.learner.y == self.y
+                and al.learner.x < self.x
+                and self.x - al.learner.x <= self.eyesight
+            ):
+                can_walk_to_trainer = True
+                for x in range(al.learner.x, self.x):
+                    can_walk_to_trainer = (
+                        can_walk_to_trainer
+                        and al.mas.current_map.get_cell_at(x, self.y).walkable()
+                    )
+                if can_walk_to_trainer:
+                    print(self.name + ": I can walk to you!")
+                else:
+                    print(self.name + ": I can't walk to you!")
+                return can_walk_to_trainer
+
     def is_saying_last_sentence(self):
         return self.active_line_index == len(self.active_dialog) - 1
 
@@ -76,9 +162,10 @@ class Npc(object):
                 play_thai_word("welcome")
             if self.active_line_index == 0:
                 al.learner.inn_heal()
-        if self.sprite == "sign":
-            if self.active_line_index == -1:
-                play_thai_word(self.name)
+        # if self.sprite == "sign":
+        if self.active_line_index == -1:
+            #         play_thai_word(self.name)
+            play_thai_word(self.name)
         if self.taught_word:
             if self.is_saying_last_sentence() and (
                 self.active_dialog == self.standard_dialog
@@ -90,7 +177,10 @@ class Npc(object):
             if self.is_saying_last_sentence():
                 if self.active_dialog == self.standard_dialog:
                     from mechanics.battle import Battle
-                    al.active_battle = Battle(al=al, words=self.battle_words, trainer=self)
+
+                    al.active_battle = Battle(
+                        al=al, words=self.battle_words, trainer=self
+                    )
                 if self.active_dialog == self.victory_dialog:
                     al.learner.faints()
 
@@ -140,6 +230,29 @@ class Npc(object):
         x = self.x * al.ui.cell_size + offset_x
         y = self.y * al.ui.cell_size + offset_y
         self.draw_ow(al, x, y)
+
+        if self.have_exclamation_mark_until:
+            now = mktime(datetime.now().timetuple())
+            if self.have_exclamation_mark_until > now:
+                al.ui.screen.blit(
+                    al.ui.images["exclamation_mark"], [x, y - al.ui.cell_size]
+                )
+            else:
+                self.have_exclamation_mark_until = None
+
+    def gets_exclamation_mark(self):
+        now = mktime(datetime.now().timetuple())
+        self.have_exclamation_mark_until = now + 1
+
+    def walks_toward(self, x, y):
+        if self.direction == Direction.UP:
+            y += 1
+        if self.direction == Direction.DOWN:
+            y -= 1
+        if self.direction == Direction.RIGHT:
+            x -= 1
+        if self.direction == Direction.LEFT:
+            x += 1
 
     def switch_to_dialog(self, dialog):
         self.active_dialog = dialog

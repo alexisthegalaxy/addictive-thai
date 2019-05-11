@@ -6,8 +6,14 @@ Battle:
         - Learner won the battle
         - Learner gets that many points
         - Words such and such got to level such and such
+    Show how the other trainer is fighting
+    Have more sentences in trainer fights
 Trainer:
     - Walk to the learner
+        - See the learner
+        - Walk to the learner
+        - Have a '!'
+Have the text write slowly
 
 
 TODO:

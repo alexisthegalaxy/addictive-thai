@@ -1332,10 +1332,240 @@ def lomsak(al):
             ],
             money=15,
         ),
+        Npc(
+            al=al,
+            name="test_person",
+            ma=al.mas.get_map_from_name("lomsak_gym"),
+            x=9,
+            y=7,
+            standard_dialog=[
+                "Welcome, challenger!",
+            ],
+            defeat_dialog=["Congratulations!", "You have great knowledge of the Thai language already!", "Here, as promised, have the Lomsak badge."],
+            direction=Direction.RIGHT,
+            sprite="dad",
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["ใช่", "ภา-ษา", "ภา-ษา-อัง-กฤษ"]
+            ],
+            money=15,
+        ),
+        Npc(
+            al=al,
+            name="lomsak_monk_1",
+            taught_word=al.words.get_word("พูด"),
+            ma=al.mas.get_map_from_name("lomsak_temple"),
+            x=8,
+            y=9,
+            sprite="monk",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "สวัสดีครับ",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="lomsak_monk_2",
+            taught_word=al.words.get_word("เรียน"),
+            ma=al.mas.get_map_from_name("lomsak_temple"),
+            x=18,
+            y=9,
+            sprite="monk",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "สวัสดีครับ",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="lomsak_monk_3",
+            taught_word=al.words.get_word("ไป"),
+            ma=al.mas.get_map_from_name("lomsak_temple"),
+            x=13,
+            y=8,
+            sprite="monk",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "สวัสดีครับ",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="lomsak_house_3_person_1",
+            taught_word=al.words.get_word("ดี"),
+            ma=al.mas.get_map_from_name("lomsak_house_3"),
+            x=14,
+            y=23,
+            sprite="mom",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "I will teach you the most useful adjective ever.",
+                "Good!",
+            ],
+            defeat_dialog=[
+                "ดี is everywhere, even in hello: สวัสดี!",
+            ],
+        ),
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)
 
+
+def cat_cove(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="cat_girl",
+            taught_word=al.words.get_word("แมว"),
+            ma=al.mas.get_map_from_name("cat_cove_house"),
+            x=5,
+            y=10,
+            sprite="lass",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Oh, you found my secret cat paradise?",
+                "Let's have a deal: I teach you the word cat,"
+                "and you tell nobody, ok?",
+            ],
+            defeat_dialog=[
+                "Funny how it sounds like a cat meowing, right?"
+            ]
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove_house"),
+            x=9,
+            y=12,
+            sprite="cat",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=11,
+            y=10,
+            sprite="cat",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=13,
+            y=12,
+            sprite="cat",
+            direction=Direction.UP,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=9,
+            y=15,
+            sprite="cat",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=18,
+            y=22,
+            sprite="cat",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=18,
+            y=7,
+            sprite="cat",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=22,
+            y=26,
+            sprite="cat",
+            direction=Direction.UP,
+            taught_word=al.words.get_word("ปลา"),
+            standard_dialog=[
+                "I want to eat fish",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=9,
+            y=19,
+            sprite="cat",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=10,
+            y=19,
+            sprite="cat",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=16,
+            y=11,
+            sprite="cat",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cove"),
+            x=16,
+            y=12,
+            sprite="cat",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
 
 def empty(al):
     npcs = [
@@ -1370,3 +1600,4 @@ def import_npcs(al):
     chaiyaphum(al)
     nurses(al)
     lomsak(al)
+    cat_cove(al)

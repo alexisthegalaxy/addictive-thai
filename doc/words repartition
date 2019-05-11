@@ -37,12 +37,13 @@ School:
 ✓ language ภา-ษา
 ✓ thai ภา-ษา-ไทย
 ✓ english ภา-ษา-อัง-กฤษ
-to speak พูด
-to study เรียน
+Temple:
+    to speak พูด
+    to study เรียน
+    to go ไป
 
 lomsak-phetchabun:
-to go
-good
+good ดี
 
 phetchabun
 teacher

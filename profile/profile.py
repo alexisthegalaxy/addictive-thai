@@ -1,7 +1,6 @@
 import glob, os
 import pickle
 from datetime import datetime
-from time import strptime
 from time import mktime
 
 from sounds.play_sound import play_thai_word

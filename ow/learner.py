@@ -123,6 +123,12 @@ class Learner(object):
             self.free_steps -= 1
             self.last_movement = time.time()
 
+        # check for trainers seeing the learner
+        for npc in al.mas.current_map.npcs:
+            if npc.is_trainer() and npc.wants_battle and npc.sees_learner(al):
+                npc.gets_exclamation_mark()
+                npc.walks_toward(self.x, self.y)
+
     def open(self):
         x, y = self.next_position()
         cell_in_front = self.al.mas.current_map.get_cell_at(x, y)

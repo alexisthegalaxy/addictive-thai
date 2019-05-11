@@ -64,10 +64,20 @@ to_convert = [
     "lomsak",
     "lomsak_house_1",
     "lomsak_house_2",
+    "lomsak_house_3",
     "lomsak_school",
     "lomsak_gym",
+    "lomsak_temple",
+    "question_cave",
     "non_muang_house_1",
     "phetchabun",
+    "cat_cave",
+    "cat_cove",
+    "cat_cove_house",
+    "banyaeng",
+    "labyrinth",
+    "phitsalunok",
+    "lomsak_labyrinth",
 ]
 
 for item in to_convert:
