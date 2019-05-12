@@ -216,6 +216,7 @@ M | ปี | year | MID
 M | ค่า | cost | FALLING
 M | เพื่อน | friend | FALLING
 W | ภา-ษา-ไทย | Thai language
+W | คน-ไทย | Thai people
 W | ภา-ษา-อัง-กฤษ | English language
 W | ชื่อ-เล่น | nickname
 W | ความ-สุข | happiness
@@ -512,11 +513,13 @@ S | คุณ_มี_เว-ลา_ว่าง_พอ_ไหม | Do you have e
 S | ฉัน_มี_เว-ลา_ไม่_พอ | I (female) don't have enough free time.
 S | พอ_แล้ว | enough already!
 S | คุณ_ใช้_เว-ลา_ว่าง_ที่-ไหน | Where do you spend your free time?
-คนไทยชอบพูดภาษาอังกฤษ
-ฉันชอบเรียนภาษาไทย
-ฉันไม่ชอบเรียนภาษาอังกฤษ
-ฉันมีแมว
-คุณชอบแมวไหม?
-แมวของเธออยู่ในบ้านของเธอ
-แมวของเขาพูดไม่ได้
-ผมคิดว่าแมวชอบสุนัขได้
+S | คน-ไทย_ชอบ_พูด_ภา-ษา_อัง-กฤษ | Thai people like to speak English.
+S | ฉัน_ชอบ_เรียน_ภา-ษา-ไทย | I (female) like to study Thai.
+S | ฉัน_ไม่_ชอบ_เรียน_ภา-ษา-อัง-กฤษ | I (male) don't like to study English.
+S | ฉัน_มี_แมว | I (female) have a cat.
+S | คุณ_ชอบ_แมว_ไหม | Do you like cats?
+S | แมว_ของ_ผม_อยู่_บ้าน_ของ_ผม | My cat is in my house.
+S | แมว_พูด_ไม่_ได้ | Cats can't talk.
+S | ผม_คิด_ว่า_แมว_ชอบ_หมา_ได้ | I (male) think that cats can like dogs.
+S | คน-ไทย_ชอบ_แมว | Thai people like cats.
+S | ฉัน_อยาก_เรียน_ภา-ษา_แมว | I (female) want to learn cat language.

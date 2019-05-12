@@ -3,14 +3,15 @@ import time
 
 from all import All
 from movement import Movement
-from ow.direction import Direction
+from ow.direction import Direction, dir_equal, string_from_direction
 from ow.overworld import CellTypes
 from sounds.play_sound import play_thai_word
 
 
 class Learner(object):
     def __init__(self, al, x, y, color):
-        self.name = "Celine"
+        self.name = "Alexis"
+        self.sprite = self.name.lower()
         self.money = 5
         self.max_hp = 5
         self.must_wait = 0.1
@@ -27,6 +28,7 @@ class Learner(object):
         self.last_healing_place = (28, 92, self.al.mas.chaiyaphum)
         self.movement: Movement = None
 
+
     def draw(self, al):
         cell_size = al.ui.cell_size
         if cell_size == 30:
@@ -38,12 +40,16 @@ class Learner(object):
         else:  # cell_size == 80:
             x = 7 * al.ui.cell_size
             y = 4 * al.ui.cell_size
-
-        pygame.draw.rect(
-            al.ui.screen,
-            self.color,
-            pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
-        )
+        sprite_name = f"{self.sprite}_{string_from_direction(self.direction)}"
+        if sprite_name in al.ui.npc_sprites:
+            sprite = al.ui.npc_sprites[sprite_name]
+            al.ui.screen.blit(sprite, [x, y])
+        else:
+            pygame.draw.rect(
+                al.ui.screen,
+                self.color,
+                pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
+            )
 
     def draw_money(self, al):
         color = (0, 0, 0)
@@ -125,9 +131,14 @@ class Learner(object):
 
         # check for trainers seeing the learner
         for npc in al.mas.current_map.npcs:
-            if npc.is_trainer() and npc.wants_battle and npc.sees_learner(al):
-                npc.gets_exclamation_mark()
-                npc.walks_toward(self.x, self.y)
+            if npc.is_trainer() and npc.wants_battle and not npc.must_walk_to and not al.active_npc:
+                must_walk_to = npc.sees_learner(al)
+                if must_walk_to:
+                    npc.gets_exclamation_mark()
+                    npc.must_walk_to = must_walk_to
+                    if npc.must_walk_to.x == self.x and npc.must_walk_to.y == self.y:
+                        npc.must_walk_to = None
+
 
     def open(self):
         x, y = self.next_position()
@@ -140,14 +151,13 @@ class Learner(object):
     def next_position(self):
         next_x = self.x
         next_y = self.y
-
-        if self.direction == Direction.UP:
+        if dir_equal(self.direction, Direction.UP):
             next_y -= 1
-        if self.direction == Direction.DOWN:
+        if dir_equal(self.direction, Direction.DOWN):
             next_y += 1
-        if self.direction == Direction.LEFT:
+        if dir_equal(self.direction, Direction.LEFT):
             next_x -= 1
-        if self.direction == Direction.RIGHT:
+        if dir_equal(self.direction, Direction.RIGHT):
             next_x += 1
 
         return next_x, next_y
@@ -156,13 +166,13 @@ class Learner(object):
         next_next_x = self.x
         next_next_y = self.y
 
-        if self.direction == Direction.UP:
+        if dir_equal(self.direction, Direction.UP):
             next_next_y -= 2
-        if self.direction == Direction.DOWN:
+        if dir_equal(self.direction, Direction.DOWN):
             next_next_y += 2
-        if self.direction == Direction.LEFT:
+        if dir_equal(self.direction, Direction.LEFT):
             next_next_x -= 2
-        if self.direction == Direction.RIGHT:
+        if dir_equal(self.direction, Direction.RIGHT):
             next_next_x += 2
 
         return next_next_x, next_next_y

@@ -2,18 +2,17 @@ TODO:
 Test:
     Allow replaying audio in test using the mouse
 Battle:
+    Show how the other trainer is fighting
+        - See the gotten bubbles on each side!
+            - See what bubble the opponent is working on
+            - See that even during a test
     At the end of the battle, have some text:
         - Learner won the battle
         - Learner gets that many points
         - Words such and such got to level such and such
-    Show how the other trainer is fighting
     Have more sentences in trainer fights
-Trainer:
-    - Walk to the learner
-        - See the learner
-        - Walk to the learner
-        - Have a '!'
 Have the text write slowly
+Have the beginning of combat be less abrupt
 
 
 TODO:

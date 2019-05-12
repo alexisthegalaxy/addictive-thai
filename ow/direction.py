@@ -39,3 +39,7 @@ def opposite_direction(direction):
         return Direction.LEFT
     if direction.name == Direction.LEFT.name:
         return Direction.RIGHT
+
+
+def dir_equal(direction_1, direction_2):
+    return direction_1.value == direction_2.value

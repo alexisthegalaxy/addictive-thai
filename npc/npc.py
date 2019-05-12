@@ -1,11 +1,12 @@
+from dataclasses import dataclass
 from datetime import datetime
 from time import mktime
 
 import pygame
-from typing import List
+from typing import List, Tuple, Optional
 
 from all import All
-from direction import string_from_direction, opposite_direction, Direction
+from direction import string_from_direction, opposite_direction, Direction, dir_equal
 from lexicon.items import Word
 from lexicon.learning import Learning
 from sounds.play_sound import play_thai_word
@@ -15,6 +16,12 @@ def can_turn(sprite_type):
     if sprite_type == "sign":
         return False
     return True
+
+
+@dataclass
+class Position:
+    x: int
+    y: int
 
 
 class Npc(object):
@@ -37,7 +44,7 @@ class Npc(object):
         eyesight: int = 5,  # how far the trainer can see
     ):
         standard_dialog = standard_dialog or ["Hello"]
-        defeat_dialog = defeat_dialog or ["Well played!"]
+        defeat_dialog = defeat_dialog or ["Well done!"]
         victory_dialog = victory_dialog or ["I won! Try again when you're stronger!"]
         dialog_3 = dialog_3 or []
 
@@ -68,6 +75,8 @@ class Npc(object):
         self.wants_battle = True
         self.eyesight = eyesight
         self.have_exclamation_mark_until = None
+        self.must_walk_to = None
+        self.walked_float = 0
 
         self.process_dialog(al)
 
@@ -83,7 +92,10 @@ class Npc(object):
     def is_trainer(self):
         return bool(self.battle_words)
 
-    def sees_learner(self, al):
+    def sees_learner(self, al) -> Optional[Position]:
+        """
+        :return: the must_walk_to position if there's one, else None
+        """
         if self.direction == Direction.UP:
             if (
                 al.learner.x == self.x
@@ -98,9 +110,7 @@ class Npc(object):
                     )
                 if can_walk_to_trainer:
                     print(self.name + ": I can walk to you!")
-                else:
-                    print(self.name + ": I can't walk to you!")
-                return can_walk_to_trainer
+                    return Position(x=al.learner.x, y=al.learner.y + 1)
         elif self.direction == Direction.DOWN:
             if (
                 al.learner.x == self.x
@@ -115,9 +125,7 @@ class Npc(object):
                     )
                 if can_walk_to_trainer:
                     print(self.name + ": I can walk to you!")
-                else:
-                    print(self.name + ": I can't walk to you!")
-                return can_walk_to_trainer
+                    return Position(x=al.learner.x, y=al.learner.y - 1)
         elif self.direction == Direction.RIGHT:
             if (
                 al.learner.y == self.y
@@ -132,9 +140,7 @@ class Npc(object):
                     )
                 if can_walk_to_trainer:
                     print(self.name + ": I can walk to you!")
-                else:
-                    print(self.name + ": I can't walk to you!")
-                return can_walk_to_trainer
+                    return Position(x=al.learner.x - 1, y=al.learner.y)
         elif self.direction == Direction.LEFT:
             if (
                 al.learner.y == self.y
@@ -149,9 +155,8 @@ class Npc(object):
                     )
                 if can_walk_to_trainer:
                     print(self.name + ": I can walk to you!")
-                else:
-                    print(self.name + ": I can't walk to you!")
-                return can_walk_to_trainer
+                    return Position(x=al.learner.x + 1, y=al.learner.y)
+        return None
 
     def is_saying_last_sentence(self):
         return self.active_line_index == len(self.active_dialog) - 1
@@ -183,6 +188,8 @@ class Npc(object):
                     )
                 if self.active_dialog == self.victory_dialog:
                     al.learner.faints()
+                    self.active_dialog = self.standard_dialog
+                    self.active_line_index = 0
 
     def interact(self, al):
         # Then this is the beginning of the interaction with that NPC
@@ -199,7 +206,18 @@ class Npc(object):
             al.active_npc = None
         self.direction = opposite_direction(al.learner.direction)
 
+    def get_precise_position(self, x, y):
+        if dir_equal(self.direction, Direction.UP):
+            return x, y - self.walked_float
+        if dir_equal(self.direction, Direction.DOWN):
+            return x, y + self.walked_float
+        if dir_equal(self.direction, Direction.RIGHT):
+            return x + self.walked_float, y
+        if dir_equal(self.direction, Direction.LEFT):
+            return x - self.walked_float, y
+
     def draw_ow(self, al, x, y):
+        # get sprite
         sprite = None
         if can_turn(self.sprite):
             sprite_name = f"{self.sprite}_{string_from_direction(self.direction)}"
@@ -208,6 +226,8 @@ class Npc(object):
         else:
             if self.sprite in al.ui.npc_sprites:
                 sprite = al.ui.npc_sprites[self.sprite]
+
+        x, y = self.get_precise_position(x, y)
 
         if sprite:
             al.ui.screen.blit(sprite, [x, y])
@@ -244,15 +264,19 @@ class Npc(object):
         now = mktime(datetime.now().timetuple())
         self.have_exclamation_mark_until = now + 1
 
-    def walks_toward(self, x, y):
-        if self.direction == Direction.UP:
-            y += 1
-        if self.direction == Direction.DOWN:
-            y -= 1
-        if self.direction == Direction.RIGHT:
-            x -= 1
-        if self.direction == Direction.LEFT:
-            x += 1
+    def makes_a_step_towards_goal(self, al):
+        if self.must_walk_to.x > self.x:
+            self.x += 1
+        if self.must_walk_to.x < self.x:
+            self.x -= 1
+        if self.must_walk_to.y > self.y:
+            self.y += 1
+        if self.must_walk_to.y < self.y:
+            self.y -= 1
+        if Position(x=self.x, y=self.y) == self.must_walk_to:
+            self.must_walk_to = None
+            al.learner.direction = opposite_direction(self.direction)
+            self.interact(al)
 
     def switch_to_dialog(self, dialog):
         self.active_dialog = dialog

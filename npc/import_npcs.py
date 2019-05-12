@@ -1334,23 +1334,6 @@ def lomsak(al):
         ),
         Npc(
             al=al,
-            name="test_person",
-            ma=al.mas.get_map_from_name("lomsak_gym"),
-            x=9,
-            y=7,
-            standard_dialog=[
-                "Welcome, challenger!",
-            ],
-            defeat_dialog=["Congratulations!", "You have great knowledge of the Thai language already!", "Here, as promised, have the Lomsak badge."],
-            direction=Direction.RIGHT,
-            sprite="dad",
-            battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ใช่", "ภา-ษา", "ภา-ษา-อัง-กฤษ"]
-            ],
-            money=15,
-        ),
-        Npc(
-            al=al,
             name="lomsak_monk_1",
             taught_word=al.words.get_word("พูด"),
             ma=al.mas.get_map_from_name("lomsak_temple"),

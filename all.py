@@ -44,6 +44,12 @@ class All:
         # How we make the game check on things at every tick
         if self.active_battle:
             self.active_battle.tick()
+        for npc in self.mas.current_map.npcs:
+            if npc.must_walk_to:
+                npc.walked_float += self.ui.cell_size / 6
+                if npc.walked_float >= self.ui.cell_size:
+                    npc.walked_float = 0
+                    npc.makes_a_step_towards_goal(self)
 
     def __getstate__(self):
         """Return state values to be pickled."""

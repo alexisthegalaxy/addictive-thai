@@ -9,6 +9,12 @@ from lexicon.test_services import (
     pick_a_test_for_thai_word,
 )
 from npc.npc import Npc
+from direction import string_from_direction, Direction
+
+
+BUBBLE_STATUS_FREE = 0
+BUBBLE_STATUS_WON = 1
+BUBBLE_STATUS_LOST = 2
 
 
 def square(x):
@@ -17,6 +23,7 @@ def square(x):
 
 class Bubble(object):
     def __init__(self, word: Word, al, box):
+        self.status = BUBBLE_STATUS_FREE
         self.show_thai = bool(random.getrandbits(1))
         self.word = word
         self.al = al
@@ -25,7 +32,7 @@ class Bubble(object):
         self.color = (200, 0, 100)
         self.is_shown_in_thai = random.random() > 0.5
 
-        self.hp = 500  # Each bubble has an amount of hp, so that the opponent has to work on it
+        self.hp = 50  # Each bubble has an amount of hp, so that the opponent has to work on it
 
         self.box_x = box[0]
         self.box_y = box[1]
@@ -43,23 +50,27 @@ class Bubble(object):
         self.speed_x = random.random() * 10
         self.speed_y = random.random() * 10
 
-    def draw(self):
+    def draw_bubble(self, x, y):
         ui = self.al.ui
-        x_translated_inbox = int(self.x)
-        y_translated_inbox = int(self.y)
         # the position we draw the circle at is the center of the circle
         pygame.draw.circle(
-            ui.screen, self.color, (x_translated_inbox, y_translated_inbox), self.radius
+            ui.screen, self.color, (x, y), self.radius
         )
         shown_value = self.word.thai if self.is_shown_in_thai else self.word.english
         ui.screen.blit(
             ui.fonts.garuda32.render(shown_value, True, (0, 0, 0)),
-            (x_translated_inbox - 15, y_translated_inbox - 20 - 15),
+            (x - 15, y - 20 - 15),
         )
-        ui.screen.blit(
-            ui.fonts.garuda32.render(str(self.hp), True, (0, 0, 0)),
-            (x_translated_inbox - 15, y_translated_inbox - 20 - 15 + 20),
-        )
+        if self.hp:
+            ui.screen.blit(
+                ui.fonts.garuda32.render(str(self.hp), True, (0, 0, 0)),
+                (x - 15, y - 20 - 15 + 20),
+            )
+
+    def draw(self):
+        x_translated_inbox = int(self.x)
+        y_translated_inbox = int(self.y)
+        self.draw_bubble(x_translated_inbox, y_translated_inbox)
 
     def interact(self, al):
         if al.ui.click:
@@ -143,7 +154,7 @@ class Battle(object):
         self.words: List[Word] = words
         self.bubbles = []
         self.create_bubbles()
-        self.selected_bubble_index = -1
+        self.selected_bubble = None
         self.bubbles_solved = 0
 
         # properties for the opponent
@@ -167,6 +178,7 @@ class Battle(object):
         if al.ui.click:
             for bubble in self.bubbles:
                 if bubble.contains_point(al.ui.click):
+                    self.selected_bubble = bubble
                     if bubble.is_shown_in_thai:
                         pick_a_test_for_thai_word(
                             al,
@@ -180,7 +192,7 @@ class Battle(object):
                             chosen_word=bubble.word,
                             test_success_callback=self.solve_bubble,
                         )
-                    self.kill_bubble(bubble)
+                    bubble.hp = 0
                     break
             al.ui.click = None
 
@@ -190,9 +202,10 @@ class Battle(object):
         else:
             self.bubble_selected_by_opponent.reduce_hp(1)
             if self.bubble_selected_by_opponent.hp <= 0:
-                self.kill_bubble(self.bubble_selected_by_opponent)
+                self.bubble_selected_by_opponent.hp = 0
+                self.bubble_selected_by_opponent.status = BUBBLE_STATUS_LOST
                 self.bubbles_solved_by_opponent += 1
-                if len(self.bubbles) == 0:
+                if not [bubble for bubble in self.bubbles if bubble.status == BUBBLE_STATUS_FREE]:
                     self.end_battle()
 
     def opponent_select_bubble(self):
@@ -200,6 +213,7 @@ class Battle(object):
             self.bubble_selected_by_opponent = random.choice(self.bubbles)
 
     def draw(self):
+        # draw background
         ui = self.al.ui
         screen = ui.screen
         pygame.draw.rect(
@@ -210,18 +224,63 @@ class Battle(object):
         )
 
         # draw bubbles
+        won_bubbles = 0
+        lost_bubbles = 0
         for bubble in self.bubbles:
-            bubble.draw()
+            if bubble.status == BUBBLE_STATUS_FREE:
+                bubble.draw()
+            elif bubble.status == BUBBLE_STATUS_WON:
+                bubble.draw_bubble(x=50, y=150 + ui.cell_size + won_bubbles * (ui.cell_size + 10))
+                won_bubbles += 1
+            elif bubble.status == BUBBLE_STATUS_LOST:
+                bubble.draw_bubble(x=ui.percent_width(1.0) - ui.cell_size + 30, y=150 + ui.cell_size +lost_bubbles * (ui.cell_size + 10))
+                lost_bubbles += 1
+
+        # draw learner face
+        face_x = 10
+        face_y = 90
+        pygame.draw.rect(
+            screen, (150, 150, 150), (face_x, face_y, ui.cell_size, ui.cell_size)
+        )
+        pygame.draw.rect(
+            screen, (0, 0, 0), (face_x, face_y, ui.cell_size, ui.cell_size), 1
+        )
+        sprite_name = f"{self.al.learner.sprite}_{string_from_direction(Direction.DOWN)}"
+        if sprite_name in ui.npc_sprites:
+            sprite = ui.npc_sprites[sprite_name]
+            ui.screen.blit(sprite, [face_x, face_y])
+        else:
+            pygame.draw.rect(
+                self.al.ui.screen,
+                self.trainer.color,
+                pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
+            )
+
+        # draw learner face
+        face_x = ui.percent_width(1.0) - ui.cell_size - 10
+        pygame.draw.rect(
+            screen, (150, 150, 150), (face_x, face_y, ui.cell_size, ui.cell_size)
+        )
+        pygame.draw.rect(
+            screen, (0, 0, 0), (face_x, face_y, ui.cell_size, ui.cell_size), 1
+        )
+        sprite_name = f"{self.trainer.sprite}_{string_from_direction(Direction.DOWN)}"
+        if sprite_name in ui.npc_sprites:
+            sprite = ui.npc_sprites[sprite_name]
+            ui.screen.blit(sprite, [face_x, face_y])
+        else:
+            pygame.draw.rect(
+                self.al.ui.screen,
+                self.trainer.color,
+                pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
+            )
 
     def solve_bubble(self):
-        last_bubble = len(self.bubbles) == 0
+        self.selected_bubble.status = BUBBLE_STATUS_WON
         self.bubbles_solved += 1
+        last_bubble = not [bubble for bubble in self.bubbles if bubble.status == BUBBLE_STATUS_FREE]
         if last_bubble:
             self.end_battle()
-
-    def kill_bubble(self, bubble):
-        bubble.hp = 0
-        self.bubbles.remove(bubble)
 
     def end_battle(self):
         self.al.active_battle = None
@@ -230,9 +289,12 @@ class Battle(object):
         if victory:
             self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog
             self.al.active_npc.active_line_index = 0
+            self.al.active_npc.wants_battle = False
             battle_money = self.al.active_npc.money
             self.al.learner.money += battle_money
             self.al.active_battle = None
+            print('VICTORY!!!')
         else:
             self.al.active_npc.active_dialog = self.al.active_npc.victory_dialog
             self.al.active_npc.active_line_index = 0
+            print('DEFEAT!!!')

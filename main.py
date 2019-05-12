@@ -31,6 +31,8 @@ def main_interact(al: All):
     if al.active_sale:
         ow_frozen = True
         al.active_sale.interact(al)
+    if any([npc.must_walk_to for npc in al.mas.current_map.npcs]):
+        ow_frozen = True
     if not ow_frozen:
         if al.ui.space:
             al.learner.start_interacting(al)
