@@ -3,7 +3,7 @@ import time
 
 from all import All
 from movement import Movement
-from ow.direction import Direction, dir_equal, string_from_direction
+from ow.direction import Direction, dir_equal, string_from_direction, opposite_direction
 from ow.overworld import CellTypes
 from sounds.play_sound import play_thai_word
 
@@ -136,8 +136,10 @@ class Learner(object):
                 if must_walk_to:
                     npc.gets_exclamation_mark()
                     npc.must_walk_to = must_walk_to
-                    if npc.must_walk_to.x == self.x and npc.must_walk_to.y == self.y:
+                    if npc.must_walk_to.x == npc.x and npc.must_walk_to.y == npc.y:
                         npc.must_walk_to = None
+                        al.learner.direction = opposite_direction(npc.direction)
+                        npc.interact(al)
 
     def open(self):
         x, y = self.next_position()

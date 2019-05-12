@@ -100,7 +100,7 @@ class Npc(object):
         """
         :return: the must_walk_to position if there's one, else None
         """
-        if self.direction == Direction.UP:
+        if dir_equal(self.direction, Direction.UP):
             if (
                 al.learner.x == self.x
                 and al.learner.y < self.y
@@ -113,9 +113,8 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(self.x, y).walkable()
                     )
                 if can_walk_to_trainer:
-                    print(self.name + ": I can walk to you!")
                     return Position(x=al.learner.x, y=al.learner.y + 1)
-        elif self.direction == Direction.DOWN:
+        elif dir_equal(self.direction, Direction.DOWN):
             if (
                 al.learner.x == self.x
                 and al.learner.y > self.y
@@ -128,9 +127,8 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(self.x, y).walkable()
                     )
                 if can_walk_to_trainer:
-                    print(self.name + ": I can walk to you!")
                     return Position(x=al.learner.x, y=al.learner.y - 1)
-        elif self.direction == Direction.RIGHT:
+        elif dir_equal(self.direction, Direction.RIGHT):
             if (
                 al.learner.y == self.y
                 and al.learner.x > self.x
@@ -143,9 +141,8 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(x, self.y).walkable()
                     )
                 if can_walk_to_trainer:
-                    print(self.name + ": I can walk to you!")
                     return Position(x=al.learner.x - 1, y=al.learner.y)
-        elif self.direction == Direction.LEFT:
+        elif dir_equal(self.direction, Direction.LEFT):
             if (
                 al.learner.y == self.y
                 and al.learner.x < self.x
@@ -158,7 +155,6 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(x, self.y).walkable()
                     )
                 if can_walk_to_trainer:
-                    print(self.name + ": I can walk to you!")
                     return Position(x=al.learner.x + 1, y=al.learner.y)
         return None
 
@@ -244,6 +240,15 @@ class Npc(object):
                 pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
             )
 
+        if self.have_exclamation_mark_until:
+            now = time.time()
+            if self.have_exclamation_mark_until > now:
+                al.ui.screen.blit(
+                    al.ui.images["exclamation_mark"], [x, y - al.ui.cell_size]
+                )
+            else:
+                self.have_exclamation_mark_until = None
+
     def draw(self, al):
         offset_x = -al.ui.cell_size * (al.learner.x - 7)
         offset_y = -al.ui.cell_size * (al.learner.y - 4)
@@ -257,18 +262,9 @@ class Npc(object):
         y = self.y * al.ui.cell_size + offset_y
         self.draw_ow(al, x, y)
 
-        if self.have_exclamation_mark_until:
-            now = mktime(datetime.now().timetuple())
-            if self.have_exclamation_mark_until > now:
-                al.ui.screen.blit(
-                    al.ui.images["exclamation_mark"], [x, y - al.ui.cell_size]
-                )
-            else:
-                self.have_exclamation_mark_until = None
-
     def gets_exclamation_mark(self):
-        now = mktime(datetime.now().timetuple())
-        self.have_exclamation_mark_until = now + 1
+        now = time.time()
+        self.have_exclamation_mark_until = now + 0.5
 
     def makes_a_step_towards_goal(self, al):
         if self.must_walk_to.x > self.x:
@@ -279,7 +275,7 @@ class Npc(object):
             self.y += 1
         if self.must_walk_to.y < self.y:
             self.y -= 1
-        if Position(x=self.x, y=self.y) == self.must_walk_to:
+        if self.x == self.must_walk_to.x and self.y == self.must_walk_to.y:
             self.must_walk_to = None
             al.learner.direction = opposite_direction(self.direction)
             self.interact(al)
