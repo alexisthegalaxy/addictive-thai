@@ -42,6 +42,7 @@ class Npc(object):
         battle_words: List[Word] = None,
         money: int = 5,  # amount given when lost the fight
         eyesight: int = 5,  # how far the trainer can see
+        wanna_meet: bool = False,  # if true, non trainers will also walk to the learner and start talking
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
@@ -73,6 +74,7 @@ class Npc(object):
         self.battle_words = battle_words
 
         self.wants_battle = True
+        self.wanna_meet = wanna_meet
         self.eyesight = eyesight
         self.have_exclamation_mark_until = None
         self.must_walk_to = None
@@ -194,6 +196,7 @@ class Npc(object):
 
     def interact(self, al):
         # Then this is the beginning of the interaction with that NPC
+        self.wanna_meet = False
         self.reset_cursor()
         if not al.active_npc:
             if self.taught_word:  # If this NPC teaches

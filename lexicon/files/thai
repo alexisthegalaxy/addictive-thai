@@ -166,6 +166,9 @@ M | เสือ | tiger | RISING
 # Professions
 M | ครู | teacher | MID
 W | วิ-ศ-ว-กร | engineer
+W | คน-ขับ | driver
+W | นัก-ร้อง | singer
+M | หมอ | doctor | RISING
 
 # Plants
 W | ต้น-ไม้ | tree
@@ -256,6 +259,7 @@ M | สอบ | exam | LOW
 W | ที-วี | TV
 W | ประ-เทศ | country
 W | เว-ลา | time
+M | ยิ้ม | smile, to smile | HIGH
 
 # Celestial bodies
 W | พระ-จันทร์ | moon
@@ -523,3 +527,4 @@ S | แมว_พูด_ไม่_ได้ | Cats can't talk.
 S | ผม_คิด_ว่า_แมว_ชอบ_หมา_ได้ | I (male) think that cats can like dogs.
 S | คน-ไทย_ชอบ_แมว | Thai people like cats.
 S | ฉัน_อยาก_เรียน_ภา-ษา_แมว | I (female) want to learn cat language.
+S | ฉัน_ชอบ_เห็น_ยิ้ม_ของ_คุณ | I like to see your smile.

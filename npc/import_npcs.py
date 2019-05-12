@@ -1550,6 +1550,30 @@ def cat_cove(al):
     for npc in npcs:
         npc.ma.add_npc(npc)
 
+
+def phetchabun(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="Lass_who_lost_dog",
+            ma=al.mas.get_map_from_name("phetchabun"),
+            x=43,
+            y=12,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "I lost my dog!",
+                "He went in the mountains behind me, can you help me to find it back?",
+                "Please please!",
+            ],
+            eyesight=10,
+            wanna_meet=True,
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
 def empty(al):
     npcs = [
         # Npc(
@@ -1583,4 +1607,5 @@ def import_npcs(al):
     chaiyaphum(al)
     nurses(al)
     lomsak(al)
+    phetchabun(al)
     cat_cove(al)

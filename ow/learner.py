@@ -131,14 +131,13 @@ class Learner(object):
 
         # check for trainers seeing the learner
         for npc in al.mas.current_map.npcs:
-            if npc.is_trainer() and npc.wants_battle and not npc.must_walk_to and not al.active_npc:
+            if (npc.is_trainer() or npc.wanna_meet) and npc.wants_battle and not npc.must_walk_to and not al.active_npc:
                 must_walk_to = npc.sees_learner(al)
                 if must_walk_to:
                     npc.gets_exclamation_mark()
                     npc.must_walk_to = must_walk_to
                     if npc.must_walk_to.x == self.x and npc.must_walk_to.y == self.y:
                         npc.must_walk_to = None
-
 
     def open(self):
         x, y = self.next_position()
