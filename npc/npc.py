@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime
 from time import mktime
-
+import time
 import pygame
 from typing import List, Tuple, Optional
 
@@ -77,6 +77,7 @@ class Npc(object):
         self.have_exclamation_mark_until = None
         self.must_walk_to = None
         self.walked_float = 0
+        self.draw_text_since = 0
 
         self.process_dialog(al)
 
@@ -193,6 +194,7 @@ class Npc(object):
 
     def interact(self, al):
         # Then this is the beginning of the interaction with that NPC
+        self.reset_cursor()
         if not al.active_npc:
             if self.taught_word:  # If this NPC teaches
                 if self.taught_word.total_xp >= 5:  # If the word is known
@@ -281,6 +283,10 @@ class Npc(object):
     def switch_to_dialog(self, dialog):
         self.active_dialog = dialog
         self.active_line_index = 0
+        self.reset_cursor()
+
+    def reset_cursor(self):
+        self.draw_text_since = time.time()
 
     def draw_text(self, al: All):
         # 1 - Background:
@@ -295,6 +301,8 @@ class Npc(object):
         pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
 
         # 2 - Draw text:
-        text = self.active_dialog[self.active_line_index]
+        now = time.time()
+        number_of_characters_to_show = int((now - self.draw_text_since)*75)
+        text = self.active_dialog[self.active_line_index][:number_of_characters_to_show]
         rendered_text = ui.fonts.garuda32.render(text, True, (0, 0, 0))
         screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))

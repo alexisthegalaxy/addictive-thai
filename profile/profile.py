@@ -13,23 +13,10 @@ class Profile(object):
         self.file_path = file_path
 
     def save(self, al: 'All'):
-        now_string = datetime.now().strftime(TIME_FORMAT)
-
         play_thai_word("บันทึก")
         f = open(self.file_path, "w+")
-        # map = al.learner.ma.filename
-        # x = al.learner.x
-        # y = al.learner.y
         al.learner.last_saved = mktime(datetime.now().timetuple())
 
-        # f.write(self.name + "\n")
-        # f.write(f"position {map} {str(x)} {str(y)}\n")
-        # f.write(f"hp {al.learner.hp}\n")
-        # f.write(f"money {al.learner.money}\n")
-        # f.write(f"last_heal {al.learner.last_healing_place[2].filename} {al.learner.last_healing_place[0]} {al.learner.last_healing_place[1]}\n")
-        # f.write(f"{now_string}\n")
-        # for word in al.words.words:
-        #     f.write(f"{word.separated_form} | {word.total_xp}\n")
         print('save!')
         f.close()
         self.save_pickle(al)
