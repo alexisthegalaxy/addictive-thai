@@ -27,7 +27,7 @@ class Learner(object):
         self.free_steps = self.max_free_steps
         self.last_healing_place = (28, 92, self.al.mas.chaiyaphum)
         self.movement: Movement = None
-
+        self.follower = None
 
     def draw(self, al):
         cell_size = al.ui.cell_size

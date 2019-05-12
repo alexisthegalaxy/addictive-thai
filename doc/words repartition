@@ -38,12 +38,20 @@ School:
 ✓ thai ภา-ษา-ไทย
 ✓ english ภา-ษา-อัง-กฤษ
 Temple:
-    to speak พูด
-    to study เรียน
-    to go ไป
+✓     to speak พูด
+✓     to study เรียน
+✓     to go ไป
 
 lomsak-phetchabun:
-good ดี
+✓ good ดี
+
+question mountain:
+✓ what อะ-ไร
+✓ where ที่-ไหน
+✓ who ใคร
+✓ when เมื่อ-ไหร่
+✓ why ทำ-ไม
+✓ how ยัง-ไง
 
 phetchabun
 teacher

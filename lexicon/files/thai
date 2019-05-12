@@ -157,6 +157,7 @@ M | แมว | cat | MID
 M | งู | snake | MID
 M | หนู | mouse | RISING
 M | ช้าง | elephant | HIGH
+W | ตุ๊ก-แก | gecko
 W | ผี-เสื้อ | butterfly
 M | ลิง | monkey | MID
 M | ปลา | fish | MID
@@ -528,3 +529,4 @@ S | ผม_คิด_ว่า_แมว_ชอบ_หมา_ได้ | I (male
 S | คน-ไทย_ชอบ_แมว | Thai people like cats.
 S | ฉัน_อยาก_เรียน_ภา-ษา_แมว | I (female) want to learn cat language.
 S | ฉัน_ชอบ_เห็น_ยิ้ม_ของ_คุณ | I like to see your smile.
+S | คุณ_คือ_ใคร | Who are you?

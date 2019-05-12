@@ -5,6 +5,7 @@ Battle:
     Show how the other trainer is fighting
         - See the gotten bubbles on each side!
             - See what bubble the opponent is working on
+                - Have it appear slowly on the right of the screen
             - See that even during a test
     At the end of the battle, have some text:
         - Learner won the battle
@@ -12,7 +13,7 @@ Battle:
         - Words such and such got to level such and such
     Have more sentences in trainer fights
 Have the beginning of combat be less abrupt
-NPCs can walk to you to teach you
+Do the people in the mountain
 
 
 TODO:

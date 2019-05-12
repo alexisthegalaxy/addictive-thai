@@ -78,6 +78,8 @@ to_convert = [
     "labyrinth",
     "phitsalunok",
     "lomsak_labyrinth",
+    "phetchabun_mountain_house_1",
+    "phetchabun_mountain_house_2",
 ]
 
 for item in to_convert:

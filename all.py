@@ -44,6 +44,7 @@ class All:
         # How we make the game check on things at every tick
         if self.active_battle:
             self.active_battle.tick()
+            self.active_battle.opponent_play()
         for npc in self.mas.current_map.npcs:
             if npc.must_walk_to:
                 npc.walked_float += self.ui.cell_size / 6

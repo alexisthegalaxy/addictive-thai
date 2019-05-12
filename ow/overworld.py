@@ -31,6 +31,7 @@ class CellTypes:
     decoration = CellType('飾', 'decoration', (123, 9, 9), False, 0)
     flower = CellType('花', 'flower', (231, 148, 193), True, 0)
     flower_2 = CellType('李', 'flower_2', (231, 148, 194), True, 0)
+    nenuphar = CellType('华', 'nenuphar', (189, 176, 246), True, 0)
     door = CellType('门', 'door', (255, 0, 204), True, 0)
     inn_floor = CellType('床', 'inn_floor', (117, 199, 242), True, 0)
     inn_map = CellType('図', 'inn_map', (99, 122, 80), False, 0)
@@ -216,6 +217,8 @@ class Mas(object):
         self.labyrinth = Ma(filename="labyrinth", words=words, cell_types=cell_types, mas=self)
         self.phitsalunok = Ma(filename="phitsalunok", words=words, cell_types=cell_types, mas=self)
         self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", words=words, cell_types=cell_types, mas=self)
+        self.phetchabun_mountain_house_1 = Ma(filename="phetchabun_mountain_house_1", words=words, cell_types=cell_types, mas=self)
+        self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", words=words, cell_types=cell_types, mas=self)
 
         self.current_map: Ma = self.chaiyaphum
 
@@ -357,5 +360,10 @@ class Mas(object):
 
         self.phetchabun.get_cell_at(59, 13).goes_to = (self.lomsak_house_3, 13, 24)
         self.lomsak_house_3.get_cell_at(13, 25).goes_to = (self.phetchabun, 59, 14)
+
+        self.phetchabun.get_cell_at(24, 10).goes_to = (self.phetchabun_mountain_house_1, 7, 12)
+        self.phetchabun_mountain_house_1.get_cell_at(7, 13).goes_to = (self.phetchabun, 24, 11)
+        self.phetchabun.get_cell_at(22, 24).goes_to = (self.phetchabun_mountain_house_2, 7, 12)
+        self.phetchabun_mountain_house_2.get_cell_at(7, 13).goes_to = (self.phetchabun, 22, 25)
 
 

@@ -32,7 +32,8 @@ class Bubble(object):
         self.color = (200, 0, 100)
         self.is_shown_in_thai = random.random() > 0.5
 
-        self.hp = 50  # Each bubble has an amount of hp, so that the opponent has to work on it
+        self.max_hp = 550  # Each bubble has an amount of hp, so that the opponent has to work on it
+        self.hp = self.max_hp
 
         self.box_x = box[0]
         self.box_y = box[1]
@@ -61,7 +62,7 @@ class Bubble(object):
             ui.fonts.garuda32.render(shown_value, True, (0, 0, 0)),
             (x - 15, y - 20 - 15),
         )
-        if self.hp:
+        if self.hp != 0 and self.hp != self.max_hp:
             ui.screen.blit(
                 ui.fonts.garuda32.render(str(self.hp), True, (0, 0, 0)),
                 (x - 15, y - 20 - 15 + 20),
@@ -212,24 +213,14 @@ class Battle(object):
         if len(self.bubbles) > 0:
             self.bubble_selected_by_opponent = random.choice(self.bubbles)
 
-    def draw(self):
-        # draw background
+    def draw_secondary(self):
         ui = self.al.ui
         screen = ui.screen
-        pygame.draw.rect(
-            screen, (200, 200, 200), (self.x, self.y, self.width, self.height)
-        )
-        pygame.draw.rect(
-            screen, (0, 0, 0), [self.x, self.y, self.width, self.height], 1
-        )
-
         # draw bubbles
         won_bubbles = 0
         lost_bubbles = 0
         for bubble in self.bubbles:
-            if bubble.status == BUBBLE_STATUS_FREE:
-                bubble.draw()
-            elif bubble.status == BUBBLE_STATUS_WON:
+            if bubble.status == BUBBLE_STATUS_WON:
                 bubble.draw_bubble(x=50, y=150 + ui.cell_size + won_bubbles * (ui.cell_size + 10))
                 won_bubbles += 1
             elif bubble.status == BUBBLE_STATUS_LOST:
@@ -274,6 +265,21 @@ class Battle(object):
                 self.trainer.color,
                 pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
             )
+
+    def draw(self):
+        # draw background
+        ui = self.al.ui
+        screen = ui.screen
+        pygame.draw.rect(
+            screen, (200, 200, 200), (self.x, self.y, self.width, self.height)
+        )
+        pygame.draw.rect(
+            screen, (0, 0, 0), [self.x, self.y, self.width, self.height], 1
+        )
+        for bubble in self.bubbles:
+            if bubble.status == BUBBLE_STATUS_FREE:
+                bubble.draw()
+        self.draw_secondary()
 
     def solve_bubble(self):
         self.selected_bubble.status = BUBBLE_STATUS_WON
