@@ -2,7 +2,6 @@ Level up types:
 Each time a word is answered correctly, it gains 1 xp.
 Each time a word is answered wrongly, it loses 1 xp
 
-Issue:
 Idea 1:
     - You could use the hints to guess.
         - The hint shows the identity of the aggressor, and must be then closed to return to the word.
@@ -15,6 +14,7 @@ Could there be a way to trigger a learning battle?
 
 When the player is in a map, We would show somewhere all the items that can show up in that map
     Hence, the player will know if he caught all there is to catch!
+    This could be done using a kind of device the player gets from a friend.
 
 How does this relate to the spaced repetition?
     Words show up more often if they haven't been seen lately
@@ -24,41 +24,21 @@ Space repetition: each day, all words lose a penalty of 4 XP
     The penalty cannot be divided more than once a day though
     If the word is gotten wrong, the penalty min(is multiplied by 16, goes back to 4XP)
 
-What about sentences then?
-    If the player has learned all the words of a sentence, that sentence becomes available
-
 A road usually has words learnt in the last city, plus 2/3 new words that
 can be learnt in the houses on the road.
 
-I feel like it's all learning and not enough review.
-Will it be fun to go back to places to review words? Because it would be
-hard to put the words on the road all the time.
-    - Well, some roads could have like 20 different words
-        - Also, fights would be 80% sentences, so you see other words
-    - Also Yes, it's ok to go back to places and learn the word again
-    - Also, the words must be known in order to go to the next city
-        - You must win the gym to leave the city.
-        - The gym asks about the words in the city, but also on prior words
-    - It's sad to have words die!
-    - There's a big counter on the screen that shows how many words you know (know = xp>5)
-
-As such, most cities should be teaching:
+Most cities should be teaching:
     - One grammar rule
     - 4-6 words
 Roads:
     - 1-2 words
-Special places (that teach specific vocabulary):
+Special places (that teaches specific vocabulary):
     - 4-8 words
 
 How to deal with special places?
 Let's say you teach the numbers, or the colors?
 They are not needed in the rest of the adventures, although they appear in other sentences
 That way, you can ignore them if you're not interested
-
-Let's try to have some challenging places and paths.
-Like, it's real hard to power through a path or something, and it's relieving to see an inn
-    at the end of the screen.
-Let's try to provide some choice in the path you take.
 
 The story:
     How to explain you leave for an adventure to retrieve all the thai words?

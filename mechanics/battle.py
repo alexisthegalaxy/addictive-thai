@@ -22,7 +22,7 @@ def square(x):
 
 
 class Bubble(object):
-    def __init__(self, word: Word, al, box):
+    def __init__(self, word: Word, al, box, max_hp):
         self.status = BUBBLE_STATUS_FREE
         self.show_thai = bool(random.getrandbits(1))
         self.word = word
@@ -32,7 +32,7 @@ class Bubble(object):
         self.color = (200, 0, 100)
         self.is_shown_in_thai = random.random() > 0.5
 
-        self.max_hp = 550  # Each bubble has an amount of hp, so that the opponent has to work on it
+        self.max_hp = max_hp  # Each bubble has an amount of hp, so that the opponent has to work on it
         self.hp = self.max_hp
 
         self.box_x = box[0]
@@ -163,9 +163,10 @@ class Battle(object):
         self.bubbles_solved_by_opponent = 0
 
     def create_bubbles(self) -> None:
+        max_hp = self.trainer.bubbles_max_hp
         for word in self.words:
             self.bubbles.append(
-                Bubble(word, self.al, (self.x, self.y, self.width, self.height))
+                Bubble(word, self.al, (self.x, self.y, self.width, self.height), max_hp)
             )
 
     def tick(self) -> None:
@@ -185,7 +186,6 @@ class Battle(object):
                             al,
                             chosen_word=bubble.word,
                             test_success_callback=self.solve_bubble,
-                            # test_success_callback=self.end_battle if last_bubble else None,
                         )
                     else:
                         pick_a_test_for_english_word(

@@ -14,7 +14,10 @@ Battle:
     Have more sentences in trainer fights
 Have the beginning of combat be less abrupt
 Do the people in the mountain
+Life of bubbles is determined by the NPCs
 
+Bugs:
+    Npcs that wanna_meet walk onto the learner when the learner is directly next to them
 
 TODO:
 Tests types:

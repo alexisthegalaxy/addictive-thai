@@ -1331,6 +1331,7 @@ def lomsak(al):
                 al.words.get_word(battle_word) for battle_word in ["ใช่", "ภา-ษา", "ภา-ษา-อัง-กฤษ", "ได้", "เรียน", "พูด", "ของ", "เรียน"]
             ],
             money=15,
+            bubbles_max_hp=200,
         ),
         Npc(
             al=al,

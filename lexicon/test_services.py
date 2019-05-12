@@ -4,7 +4,7 @@ from lexicon.tests import EnglishFromSound4, EnglishFromSound6, ThaiFromSound6, 
     EnglishFromThai4
 
 
-def pick_sentence(al, chosen_word, learning=False):
+def pick_sentence(al, chosen_word, learning=False, test_success_callback=None):
     from lexicon.tests import TappingTestSentence
     can_be_selected_sentences = []
     for sentence in chosen_word.sentences:
@@ -16,7 +16,7 @@ def pick_sentence(al, chosen_word, learning=False):
             can_be_selected_sentences.append(sentence)
     if len(can_be_selected_sentences) > 0:
         sentence = random.choice(can_be_selected_sentences)
-        test = TappingTestSentence(al, correct_word=chosen_word, sentence=sentence, learning=learning)
+        test = TappingTestSentence(al, correct_word=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
     else:
         test = None
     return test
@@ -71,7 +71,7 @@ def pick_a_test_for_thai_word(al, chosen_word, test_success_callback=None) -> No
             test = EnglishFromThai6(al, correct_word=chosen_word, test_success_callback=test_success_callback)
         else:
             if can_be_tested_on_sentence:
-                test = pick_sentence(al, chosen_word)
+                test = pick_sentence(al, chosen_word, test_success_callback=test_success_callback)
                 if not test:
                     can_be_tested_on_sentence = False
     al.active_test = test

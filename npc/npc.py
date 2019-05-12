@@ -43,6 +43,7 @@ class Npc(object):
         money: int = 5,  # amount given when lost the fight
         eyesight: int = 5,  # how far the trainer can see
         wanna_meet: bool = False,  # if true, non trainers will also walk to the learner and start talking
+        bubbles_max_hp: int = 1000,
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
@@ -80,7 +81,7 @@ class Npc(object):
         self.must_walk_to = None
         self.walked_float = 0
         self.draw_text_since = 0
-
+        self.bubbles_max_hp = bubbles_max_hp
         self.process_dialog(al)
 
     def process_dialog(self, al):

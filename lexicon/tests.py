@@ -402,7 +402,6 @@ class TappingTestSentence(Test):
             self.fails()
             self.failed_attempts += 1
 
-
     def learner_remove_picked_syllable(self, picked_syllable_index: int):
         self.constructed_sentence.remove(self.constructed_sentence[picked_syllable_index])
         self.set_boxes()
