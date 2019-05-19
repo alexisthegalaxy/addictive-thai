@@ -1,7 +1,7 @@
 import sqlite3
 
 # open connection and get a cursor
-conn = sqlite3.connect('example.db')
+conn = sqlite3.connect('thai.db')
 c = conn.cursor()
 
 # create schema for a new table
@@ -31,6 +31,9 @@ def insert_word(thai, english, tones):
         c.execute(f"INSERT INTO words (thai, english, tones) VALUES ('{thai}', '{english}', '{tones}')")
         conn.commit()
 
+# c.execute(f"INSERT INTO users (name) VALUES ('Kana')")
+# c.execute(f"INSERT INTO users (name) VALUES ('Rob')")
+# conn.commit()
 
 # insert_word('เอา-เถอะ', 'okay, alright', 'ML')
 # insert_word('แก้ว', 'glass, classifier for glasses', 'F')
@@ -358,7 +361,7 @@ def insert_word(thai, english, tones):
 # insert_word('ภา-ษา-อัง-กฤษ', 'English language', 'MRML')
 # insert_word('เยอ-ร-ม-นี', 'Germany', 'MHHM')
 # insert_word('อเ-ม-ริ-กัน', 'American', 'LMHM')
-# insert_word('None', 'None', 'None')
+
 # # get a single row
 # print('all')
 # c.execute('SELECT * FROM cont')
