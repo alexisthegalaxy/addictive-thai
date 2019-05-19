@@ -1,19 +1,20 @@
 TODO:
 Test:
     Allow replaying audio in test using the mouse
+Learning:
+    Show the progression bar going up in a learning 1/6 or a brain getting full or something
 Battle:
     Show how the other trainer is fighting
         - See the gotten bubbles on each side!
             - See what bubble the opponent is working on
-                - Have it appear slowly on the right of the screen
-            - See that even during a test
+                - Have it appear slowly on the right of the screen?
     At the end of the battle, have some text:
         - Learner won the battle
         - Learner gets that many points
         - Words such and such got to level such and such
     Have more sentences in trainer fights
-Have the beginning of combat be less abrupt
-Do the people in the mountain
+Have the beginning of tests/battles be less abrupt
+Have the full sentence being said when the test is a sentence
 
 TODO:
 Tests types:
@@ -21,17 +22,12 @@ Tests types:
     - TONE_FROM_THAI
     - TAPPINGWORD
 Needed sprites:
-    - Main character
     - Mali
     - Rival
-    - Dad
-    - Innkeeper
     - Old woman
     - Fat man
     - Rich woman
     - Rich man
-    - Boy
-    - Girl
 - Map of Thailand in the inns
 -------PLAYABLE---------
 Show the progression bar going up in a learning 1/6 or a brain getting full or something
@@ -39,9 +35,7 @@ Each time you make a mistake on a test, it becomes easier
 Signs show their writing on the ow
 Have something show when the words level up
 -------DEMOABLE---------
-Make npc sprites
-Make water look nice
+Make water look nicer  |
 ---------COOL-----------
-Trainers walk to you
 Make a nice map editor
 Have a script list all the words that do not appear in sentences.

@@ -24,7 +24,7 @@ def pick_sentence(al, chosen_word, learning=False, test_success_callback=None):
 
 def pick_a_test_for_word(al, chosen_word):
     test = None
-    can_be_tested_on_sentence = True
+    # can_be_tested_on_sentence = True
     while test is None:
         r = random.randint(0, 15)  # can be 0, ..., n-1   (15)
         from lexicon.tests import ThaiFromEnglish6, ThaiFromEnglish4
@@ -42,13 +42,13 @@ def pick_a_test_for_word(al, chosen_word):
             test = ThaiFromSound6(al, correct_word=chosen_word)
         elif r == 6:
             test = EnglishFromThai4(al, correct_word=chosen_word)
-        elif r == 7:
+        else:  # if r == 7:
             test = EnglishFromThai6(al, correct_word=chosen_word)
-        else:
-            if can_be_tested_on_sentence:
-                test = pick_sentence(al, chosen_word)
-                if not test:
-                    can_be_tested_on_sentence = False
+        # else:
+        #     if can_be_tested_on_sentence:
+        #         test = pick_sentence(al, chosen_word)
+        #         if not test:
+        #             can_be_tested_on_sentence = False
     al.active_test = test
 
 
@@ -60,7 +60,7 @@ def pick_a_test_for_thai_word(al, chosen_word, test_success_callback=None) -> No
     test = None
     can_be_tested_on_sentence = True
     while test is None:
-        r = random.randint(0, 10)  # can be 0, ..., n-1
+        r = random.randint(0, 20)  # can be 0, ..., n-1
         if r == 0:
             test = EnglishFromSound4(al, correct_word=chosen_word, test_success_callback=test_success_callback)
         elif r == 1:
@@ -85,7 +85,7 @@ def pick_a_test_for_english_word(al, chosen_word, test_success_callback=None):
     test = None
     can_be_tested_on_sentence = True
     while test is None:
-        r = random.randint(0, 10)  # can be 0, ..., n-1
+        r = random.randint(0, 20)  # can be 0, ..., n-1
         from lexicon.tests import ThaiFromEnglish6, ThaiFromEnglish4
         if r == 0:
             test = ThaiFromEnglish4(al, correct_word=chosen_word, test_success_callback=test_success_callback)
@@ -97,7 +97,7 @@ def pick_a_test_for_english_word(al, chosen_word, test_success_callback=None):
             test = ThaiFromSound6(al, correct_word=chosen_word, test_success_callback=test_success_callback)
         else:
             if can_be_tested_on_sentence:
-                test = pick_sentence(al, chosen_word)
+                test = pick_sentence(al, chosen_word, test_success_callback=test_success_callback)
                 if not test:
                     can_be_tested_on_sentence = False
     al.active_test = test

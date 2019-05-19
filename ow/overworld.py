@@ -36,7 +36,7 @@ class CellTypes:
     inn_floor = CellType('床', 'inn_floor', (117, 199, 242), True, 0)
     inn_map = CellType('図', 'inn_map', (99, 122, 80), False, 0)
     temple_floor = CellType('寺', 'temple_floor', (183, 183, 183), True, 0)
-    cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0)
+    cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0.2)
     boulder_2 = CellType('岩', 'boulder_2', (53, 14, 14), False, 0)
     rock = CellType('石', 'rock', (94, 37, 37), False, 0)
     boulder = CellType('砾', 'boulder', (172, 92, 113), False, 0)

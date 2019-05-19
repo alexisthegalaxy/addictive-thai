@@ -107,7 +107,7 @@ def chumphae_lomsak(al):
             ma=al.mas.get_map_from_name("chumphae_lomsak_house3"),
             x=3,
             y=11,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "To say 'I am eating',",
@@ -221,7 +221,7 @@ def chumphae_school(al):
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=21,
             y=20,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "To say my or your or their and so on, you use ของ too.",
@@ -247,7 +247,7 @@ def chumphae_school(al):
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=22,
             y=22,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "It's funny how ของ sounds like kong.",
@@ -301,7 +301,7 @@ def chumphae_school(al):
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=8,
             y=20,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "In thai, we don't use a question mark.",
@@ -329,7 +329,7 @@ def chumphae_school(al):
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=18,
             y=9,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "ไม่ also means no.",
@@ -369,7 +369,7 @@ def chumphae_school(al):
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=4,
             y=9,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "My favorite tone is the falling tone.",
@@ -490,7 +490,7 @@ def chumphae(al):
             ma=al.mas.get_map_from_name("non_muang_house_1"),
             x=2,
             y=7,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=["These skeletons are so tall!"],
         ),
@@ -524,7 +524,7 @@ def chumphae(al):
             ma=al.mas.get_map_from_name("chumphae_house1"),
             x=4,
             y=11,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=["ผมชอบ โรงเรียนของชุมแพ!", "ผมชอบ โรงเรียนของชุมแพ!!!"],
         ),
@@ -1076,7 +1076,7 @@ def lomsak(al):
             ma=al.mas.get_map_from_name("lomsak_house_1"),
             x=9,
             y=10,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "I'm learning English at Lomsak's school.",
@@ -1116,7 +1116,7 @@ def lomsak(al):
             ma=al.mas.get_map_from_name("lomsak"),
             x=34,
             y=19,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "To ask a question with ได้,",
@@ -1161,7 +1161,7 @@ def lomsak(al):
             ma=al.mas.get_map_from_name("lomsak_school"),
             x=8,
             y=20,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
                 "It works the same with adjectives:",
@@ -1254,7 +1254,7 @@ def lomsak(al):
             ],
             defeat_dialog=["You're too good!"],
             direction=Direction.RIGHT,
-            sprite="kid",
+            sprite="lass",
             battle_words=[
                 al.words.get_word(battle_word) for battle_word in ["คุณ", "ผม", "ฉัน", "เขา"]
             ],
@@ -1288,7 +1288,7 @@ def lomsak(al):
             ],
             defeat_dialog=["What, you won already?", "The leader won't be so easy!"],
             direction=Direction.RIGHT,
-            sprite="kid",
+            sprite="lass",
             battle_words=[
                 al.words.get_word(battle_word) for battle_word in ["ขอบ-คุณ", "ขอ-โทษ", "ส-วัส-ดี"]
             ],
@@ -1560,7 +1560,7 @@ def phetchabun(al):
             ma=al.mas.get_map_from_name("phetchabun"),
             x=43,
             y=12,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.RIGHT,
             standard_dialog=[
                 "I lost my dog!",
@@ -1682,12 +1682,93 @@ def phetchabun(al):
             ma=al.mas.get_map_from_name("phetchabun"),
             x=32,
             y=18,
-            sprite="kid",
+            sprite="lass",
             direction=Direction.RIGHT,
             money=2,
             standard_dialog=["Let's have a word battle!"],
             defeat_dialog=["That was a cool fight!", "Huh? You're looking for a dog?", "Maybe it went to the cave?"],
             eyesight=10,
+        ),
+        Npc(
+            al=al,
+            name="question_teacher_4",
+            taught_word=al.words.get_word("เมื่อ-ไหร่"),
+            ma=al.mas.get_map_from_name("phetchabun_mountain_house_2"),
+            x=6,
+            y=10,
+            sprite="mom",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Here's how to say 'when':",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="question_teacher_4",
+            taught_word=al.words.get_word("ทำ-ไม"),
+            ma=al.mas.get_map_from_name("phetchabun_mountain_house_2"),
+            x=9,
+            y=10,
+            sprite="mom",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Here's how to say 'why':",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="question_teacher_4",
+            taught_word=al.words.get_word("ยัง-ไง"),
+            ma=al.mas.get_map_from_name("phetchabun_mountain_house_2"),
+            x=11,
+            y=10,
+            sprite="mom",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Here's how to say 'how':",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("question_cave"),
+            x=24,
+            y=20,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "This cave is so cool!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("question_cave"),
+            x=14,
+            y=29,
+            sprite="lass",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "I'm a bit tired of exploring.", "How about a word fight?",
+            ],
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["ใคร", "เมื่อ-ไหร่", "ชอบ"]
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("question_cave"),
+            x=15,
+            y=39,
+            sprite="old_man",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Ho, young one!", "Would you be so kind as to have a word battle?",
+            ],
+            battle_words=[
+                al.words.get_word(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ทำ-ไม"]
+            ],
         ),
     ]
     for npc in npcs:
