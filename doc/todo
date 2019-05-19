@@ -1,4 +1,16 @@
 TODO:
+Make grid test
+    On hover: becomes green
+    Fill with random thai words
+    Have a link in between words?
+    Embed the original sentence
+
+Make it isometric
+Tone From sound test
+
+
+TODO mid:
+get rid of pickle entirely
 Test:
     Allow replaying audio in test using the mouse
 Learning:
@@ -16,7 +28,7 @@ Battle:
 Have the beginning of tests/battles be less abrupt
 Have the full sentence being said when the test is a sentence
 
-TODO:
+TODO low:
 Tests types:
     - TONE_FROM_SOUND
     - TONE_FROM_THAI
@@ -29,13 +41,13 @@ Needed sprites:
     - Rich woman
     - Rich man
 - Map of Thailand in the inns
--------PLAYABLE---------
+
 Show the progression bar going up in a learning 1/6 or a brain getting full or something
 Each time you make a mistake on a test, it becomes easier
 Signs show their writing on the ow
 Have something show when the words level up
--------DEMOABLE---------
-Make water look nicer  |
----------COOL-----------
+
+Make water look nicer
+
 Make a nice map editor
 Have a script list all the words that do not appear in sentences.

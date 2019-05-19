@@ -148,16 +148,12 @@ class Word(Growable):
             self.syllables.append(syllable)
 
     def __str__(self):
-        s = f"┌────────────────────────────────────────────\n"
-        s += f"│thai:    {self.thai}\n"
-        s += f"│english: {self.english}\n"
-        # s += f"tone:    {self.tone}\n"
+        s = f"{self.thai} - {self.english}\n"
         if len(self.syllables) > 1:
             for syllable in self.syllables:
                 s += f"│  {syllable.thai}   ({syllable.english})\n"
         if self.map is not None:
             s += f"│map: {self.map} ({self.x}, {self.y})\n"
-        s += f"└────────────────────────────────────────────\n"
         return s
 
     def print(self):

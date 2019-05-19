@@ -3,7 +3,7 @@ from enum import Enum
 
 from all import All
 from lexicon.test_services import pick_sentence
-from lexicon.tests import ThaiFromEnglish4, ThaiFromEnglish6, TappingTestSentence
+from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6
 from sounds.play_sound import play_transformed_thai_word
 
 

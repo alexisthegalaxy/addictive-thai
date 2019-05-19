@@ -15,7 +15,7 @@ class All:
         cell_types: "CellType",
         profiles: "Profile",
     ):
-        from lexicon.tests import Test
+        from lexicon.tests.tests import Test
 
         self.mas = mas
         self.mas.al = self
