@@ -8,6 +8,7 @@ class Fonts(object):
         self.garuda32 = pygame.font.Font("../fonts/Garuda.ttf", 32)
         self.garuda16 = pygame.font.Font("../fonts/Garuda.ttf", 16)
         self.garuda24 = pygame.font.Font("../fonts/Garuda.ttf", 24)
+        self.garuda28 = pygame.font.Font("../fonts/Garuda.ttf", 28)
         self.setha64 = pygame.font.Font("../fonts/JS-Setha-Normal.ttf", 64)
         self.setha32 = pygame.font.Font("../fonts/JS-Setha-Normal.ttf", 32)
         self.setha16 = pygame.font.Font("../fonts/JS-Setha-Normal.ttf", 16)
@@ -118,6 +119,7 @@ class Ui(object):
         self.last_draw_tick = 0
 
         self.click = None  # looks like (x, y)
+        self.click_up = None  # looks like (x, y)
         self.hover = None  # looks like (x, y)
 
         self.up = False
@@ -207,6 +209,8 @@ class Ui(object):
                     al.ui.left = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 al.ui.click = pygame.mouse.get_pos()
+            elif event.type == pygame.MOUSEBUTTONUP:
+                al.ui.click_up = pygame.mouse.get_pos()
             elif event.type == pygame.MOUSEMOTION:
                 al.ui.hover = pygame.mouse.get_pos()
 

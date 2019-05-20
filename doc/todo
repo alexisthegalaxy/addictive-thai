@@ -1,12 +1,13 @@
 TODO:
-Make grid test
-    On hover: becomes green
-    Fill with random thai words
-    Have a link in between words?
-    Embed the original sentence
-
+Grid tests:
+    Make the validation
+    Make find sentence grid test
+        Show the prompt sentence
+    Make grammar grid test
+        Show the timer
 Make it isometric
 Tone From sound test
+Change the bubbles system
 
 
 TODO mid:

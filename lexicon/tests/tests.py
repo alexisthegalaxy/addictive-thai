@@ -31,14 +31,20 @@ def get_correct_option(options: List[Option]):
     print("ERROR: no correct option in options!")
 
 
-def draw_box(screen, fonts, x, y, width, height, string, selected=False):
+def draw_box(screen, fonts, x, y, width, height, string, selected=False, font_size=32, bg=(220, 220, 220)):
     # 1 - Draw background
-    screen_color = (0, 220, 0) if selected else (0, 0, 0)
-    pygame.draw.rect(screen, screen_color, [x - 5, y - 5, width + 10, height + 10])
-    pygame.draw.rect(screen, (220, 220, 220), (x, y, width, height))
+    border_color = (0, 220, 0) if selected else (0, 0, 0)
+    pygame.draw.rect(screen, border_color, [x - 5, y - 5, width + 10, height + 10])
+    pygame.draw.rect(screen, bg, (x, y, width, height))
 
     # 2 - Draw the word inside
-    rendered_text = fonts.garuda32.render(string, True, (0, 0, 0))
+    if font_size == 24:
+        font = fonts.garuda24
+    elif font_size == 28:
+        font = fonts.garuda28
+    else:
+        font = fonts.garuda32
+    rendered_text = font.render(string, True, (0, 0, 0))
     screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
 
 
