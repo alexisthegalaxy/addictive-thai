@@ -1,4 +1,4 @@
-# addictive-thai
+# Once upon a Thai
 
 This is a video game that teaches you Thai in a fun and addictive way.
 
