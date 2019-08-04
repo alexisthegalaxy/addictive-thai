@@ -142,7 +142,7 @@ class ThaiFromEnglish(Test):
         self.number_of_distr: int = 3
 
     def select_distractors(self):
-        known_words = self.al.words.get_known_words()
+        known_words = Word.get_known_words()
         distractors = []
         if len(known_words) > self.number_of_distr:
             while len(distractors) < self.number_of_distr:
@@ -609,7 +609,7 @@ class FromSound(Test):
         play_transformed_thai_word(self.correct_word.thai)
 
     def select_distractors(self):
-        known_words = self.al.words.get_known_words()
+        known_words = Word.get_known_words()
         distractors = []
         if len(known_words) > self.number_of_distr:
             while len(distractors) < self.number_of_distr:

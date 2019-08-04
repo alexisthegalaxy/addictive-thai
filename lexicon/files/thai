@@ -396,6 +396,7 @@ M | แปด | 8 | LOW
 M | เก้า | 9 | FALLING
 M | สิบ | 10 | LOW
 
+S | ผม_รัก_คุณ | I (male) love you
 S | ผม_กิน_ข้าว | I (male) eat rice
 S | ผม_ไม่_กิน_ข้าว | I (male) don't eat rice
 S | ไม่_มี_ขวด | There are no bottles

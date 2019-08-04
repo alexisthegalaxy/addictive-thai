@@ -1,6 +1,7 @@
+import sqlite3
 from bag.bag import Bag
 from lexicon.dex import Dex
-from lexicon.items import Words, Sentences, Syllables
+from models import get_current_map
 from ui.ui import Ui
 
 
@@ -8,9 +9,6 @@ class All:
     def __init__(
         self,
         mas: "Mas",
-        words: "Words",
-        sentences: "Sentences",
-        syllables: "Syllables",
         ui: "Ui",
         cell_types: "CellType",
         profiles: "Profile",
@@ -18,10 +16,8 @@ class All:
         from lexicon.tests.tests import Test
 
         self.mas = mas
+        self.cursor = sqlite3.connect("../thai.db").cursor()
         self.mas.al = self
-        self.words = words
-        self.sentences = sentences
-        self.syllables = syllables
         self.ui: Ui = ui
         self.learner = None
         self.cell_types = cell_types
@@ -34,11 +30,6 @@ class All:
         self.active_sale = None
         self.dex: Dex = None
         self.bag: Bag = Bag()
-
-    def add_sentences_to_words(self):
-        for sentence in self.sentences.sentences:
-            for word in sentence.words:
-                word.sentences.append(sentence)
 
     def tick_activity(self):
         # How we make the game check on things at every tick
@@ -55,9 +46,7 @@ class All:
     def __getstate__(self):
         """Return state values to be pickled."""
         state = self.__dict__.copy()
-        # Don't pickle baz
         del state["mas"]
-        del state["sentences"]
         del state["ui"]
         del state["cell_types"]
         del state["profiles"]
@@ -66,17 +55,10 @@ class All:
         del state["active_battle"]
         del state["active_learning"]
         del state["active_npc"]
-        del state["syllables"]
         del state["dex"]
-        # We make words a list of dictionary {separated_form, total_xp}
-        words = []
-        for word in state["words"].words:
-            words.append(
-                {"separated_form": word.separated_form, "total_xp": word.total_xp}
-            )
-        state["words"] = words
-
-        state["current_map"] = self.learner.ma.filename
+        del state["cursor"]
+        current_map = get_current_map(self)
+        state["current_map"] = current_map
         learner = {
             "color": self.learner.color,
             "direction": self.learner.direction,

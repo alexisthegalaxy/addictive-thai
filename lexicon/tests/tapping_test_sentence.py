@@ -1,4 +1,4 @@
-from lexicon.items import Word
+from lexicon.items import Word, Sentence
 from lexicon.tests.tests import Test, TestAnswerBox
 import random
 import pygame
@@ -30,7 +30,7 @@ class TappingTestSentence(Test):
         self.correct_syllables = []
         syllable_only = []
         for word in self.sentence.words:
-            for syllable in word.syllables:
+            for syllable in word.get_syllables():
                 self.correct_syllables.append(syllable)
                 syllable_only.append(syllable.thai)
 
@@ -109,9 +109,9 @@ class TappingTestSentence(Test):
     def select_distractors(self, syllable_only):
         # We select amongst sentences.words rather than amongst words to get
         # more common words
-        for sentence in random.choices(population=self.al.sentences.sentences):
+        for sentence in Sentence.get_random_known_sentence():
             for word in random.choices(population=sentence.words):
-                for syllable in word.syllables:
+                for syllable in word.get_syllables():
                     if syllable.thai not in syllable_only:
                         self.distractors.append(syllable)
                         syllable_only.append(syllable.thai)

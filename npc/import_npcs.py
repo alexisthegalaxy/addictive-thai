@@ -1,6 +1,7 @@
 from bag.bag import Compartment
 from bag.item import Item
 from direction import Direction
+from lexicon.items import Word
 from npc.npc import Npc
 from npc.vendor import Vendor
 
@@ -20,7 +21,7 @@ def chumphae_lomsak(al):
             ],
             direction=Direction.DOWN,
             sprite="old_man",
-            taught_word=al.words.get_word("ข้าว"),
+            taught_word=Word.get_by_split_form("ข้าว"),
         ),
         Npc(
             al=al,
@@ -41,7 +42,7 @@ def chumphae_lomsak(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("น้ำ"),
+            taught_word=Word.get_by_split_form("น้ำ"),
             ma=al.mas.get_map_from_name("chumphae_lomsak_house2"),
             x=5,
             y=10,
@@ -67,7 +68,7 @@ def chumphae_lomsak(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("กิน"),
+            taught_word=Word.get_by_split_form("กิน"),
             ma=al.mas.get_map_from_name("chumphae_lomsak_house3"),
             x=5,
             y=10,
@@ -119,7 +120,7 @@ def chumphae_lomsak(al):
             al=al,
             name="FirstBattleTrainer",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ผม", "ฉัน", "ชอบ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ผม", "ฉัน", "ชอบ"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
             x=108,
@@ -134,7 +135,7 @@ def chumphae_lomsak(al):
             al=al,
             name="SecondBattleTrainer",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["บ้าน", "โรง-เรียน"]
+                Word.get_by_split_form(battle_word) for battle_word in ["บ้าน", "โรง-เรียน"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
             x=102,
@@ -148,7 +149,7 @@ def chumphae_lomsak(al):
             al=al,
             name="ThirdBattleTrainer",
             battle_words=[
-                al.words.get_word(battle_word)
+                Word.get_by_split_form(battle_word)
                 for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
@@ -168,7 +169,7 @@ def chumphae_lomsak(al):
             al=al,
             name="FourthBattleTrainer",
             battle_words=[
-                al.words.get_word(battle_word)
+                Word.get_by_split_form(battle_word)
                 for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
@@ -183,7 +184,7 @@ def chumphae_lomsak(al):
             al=al,
             name="FifthBattleTrainer",
             battle_words=[
-                al.words.get_word(battle_word)
+                Word.get_by_split_form(battle_word)
                 for battle_word in ["น้ำ", "ข้าว", "กิน", "เขา"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
@@ -207,7 +208,7 @@ def chumphae_school(al):
         Npc(
             al=al,
             name="TeacherBottomRight",
-            taught_word=al.words.get_word("ของ"),
+            taught_word=Word.get_by_split_form("ของ"),
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=20,
             y=15,
@@ -271,7 +272,7 @@ def chumphae_school(al):
         Npc(
             al=al,
             name="TeacherBottomLeft",
-            taught_word=al.words.get_word("ไหม"),
+            taught_word=Word.get_by_split_form("ไหม"),
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=6,
             y=15,
@@ -311,7 +312,7 @@ def chumphae_school(al):
         Npc(
             al=al,
             name="TeacherTopRight",
-            taught_word=al.words.get_word("ไม่"),
+            taught_word=Word.get_by_split_form("ไม่"),
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=19,
             y=4,
@@ -433,6 +434,19 @@ def chumphae(al):
         ),
         Npc(
             al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=121,
+            y=67,
+            sprite="dad",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Our village, Chumphae, is one of the poorest of Thailand.",
+                "Most people here are rice farmers.",
+            ],
+        ),
+        Npc(
+            al=al,
             name="sign",
             ma=al.mas.get_map_from_name("chumphae"),
             x=122,
@@ -444,7 +458,7 @@ def chumphae(al):
         Npc(
             al=al,
             name="MomOfKidWhoWannaGoToSchool",
-            taught_word=al.words.get_word("โรง-เรียน"),
+            taught_word=Word.get_by_split_form("โรง-เรียน"),
             ma=al.mas.get_map_from_name("chumphae_house1"),
             x=3,
             y=11,
@@ -459,7 +473,7 @@ def chumphae(al):
         Npc(
             al=al,
             name="Person that teaches baht",
-            taught_word=al.words.get_word("บาท"),
+            taught_word=Word.get_by_split_form("บาท"),
             ma=al.mas.get_map_from_name("non_muang_house_1"),
             x=8,
             y=8,
@@ -531,7 +545,7 @@ def chumphae(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("เขา"),
+            taught_word=Word.get_by_split_form("เขา"),
             ma=al.mas.get_map_from_name("chumphae_house2"),
             x=3,
             y=10,
@@ -621,7 +635,7 @@ def chumphae_khonkaen(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ส-วัส-ดี"),
+            taught_word=Word.get_by_split_form("ส-วัส-ดี"),
             ma=al.mas.get_map_from_name("chumphae_khonkaen_house_1"),
             x=5,
             y=9,
@@ -632,7 +646,7 @@ def chumphae_khonkaen(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ขอ-โทษ"),
+            taught_word=Word.get_by_split_form("ขอ-โทษ"),
             ma=al.mas.get_map_from_name("chumphae_khonkaen_house_2"),
             x=5,
             y=9,
@@ -648,7 +662,7 @@ def chumphae_khonkaen(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ขอบ-คุณ"),
+            taught_word=Word.get_by_split_form("ขอบ-คุณ"),
             ma=al.mas.get_map_from_name("chumphae_khonkaen_house_3"),
             x=5,
             y=9,
@@ -663,7 +677,7 @@ def chumphae_khonkaen(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ครับ"),
+            taught_word=Word.get_by_split_form("ครับ"),
             ma=al.mas.get_map_from_name("chumphae_khonkaen_house_4"),
             x=9,
             y=11,
@@ -689,7 +703,7 @@ def chumphae_khonkaen(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ค่ะ"),
+            taught_word=Word.get_by_split_form("ค่ะ"),
             ma=al.mas.get_map_from_name("chumphae_khonkaen_house_4"),
             x=5,
             y=11,
@@ -779,7 +793,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="Mom",
-            taught_word=al.words.get_word("ฉัน"),
+            taught_word=Word.get_by_split_form("ฉัน"),
             ma=al.mas.get_map_from_name("house1"),
             x=2,
             y=11,
@@ -794,7 +808,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="Dad",
-            taught_word=al.words.get_word("ผม"),
+            taught_word=Word.get_by_split_form("ผม"),
             ma=al.mas.get_map_from_name("house1"),
             x=4,
             y=6,
@@ -814,7 +828,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="Teacher",
-            taught_word=al.words.get_word("เมือง-ไทย"),
+            taught_word=Word.get_by_split_form("เมือง-ไทย"),
             ma=al.mas.get_map_from_name("lab"),
             x=4,
             y=7,
@@ -828,7 +842,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="มะลิ",
-            taught_word=al.words.get_word("ชอบ"),
+            taught_word=Word.get_by_split_form("ชอบ"),
             ma=al.mas.get_map_from_name("chaiyaphum"),
             x=18,
             y=82,
@@ -860,7 +874,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="สมชาย",
-            taught_word=al.words.get_word("คุณ"),
+            taught_word=Word.get_by_split_form("คุณ"),
             ma=al.mas.get_map_from_name("house3"),
             x=5,
             y=11,
@@ -876,7 +890,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("บ้าน"),
+            taught_word=Word.get_by_split_form("บ้าน"),
             ma=al.mas.get_map_from_name("chaiyaphum"),
             x=54,
             y=47,
@@ -891,7 +905,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("อยาก"),
+            taught_word=Word.get_by_split_form("อยาก"),
             ma=al.mas.get_map_from_name("house5"),
             x=12,
             y=7,
@@ -906,7 +920,7 @@ def chaiyaphum(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("อยู่"),
+            taught_word=Word.get_by_split_form("อยู่"),
             ma=al.mas.get_map_from_name("house4"),
             x=6,
             y=11,
@@ -1043,7 +1057,7 @@ def lomsak(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ภา-ษา"),
+            taught_word=Word.get_by_split_form("ภา-ษา"),
             ma=al.mas.get_map_from_name("lomsak_house_1"),
             x=3,
             y=11,
@@ -1058,7 +1072,59 @@ def lomsak(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ภา-ษา-ไทย"),
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=21,
+            y=24,
+            sprite="lass",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "This is the gym of Lomsak.",
+                "The leader of Lomsak lives there,",
+                "you can fight him if you want, but it will be a hard fight",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=11,
+            y=29,
+            sprite="mali",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "[Name]!",
+                "My sister went down this road, looking for her dog.",
+                "Could you help her maybe?",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=8,
+            y=25,
+            sprite="kid",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "You should'nt go this way if you haven't fought the leader yet.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=21,
+            y=18,
+            sprite="old_man",
+            direction=Direction.UP,
+            standard_dialog=[
+                "คุณพูดภาษาไทยได้ไหมครับ",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            taught_word=Word.get_by_split_form("ภา-ษา-ไทย"),
             ma=al.mas.get_map_from_name("lomsak_house_1"),
             x=4,
             y=6,
@@ -1072,7 +1138,7 @@ def lomsak(al):
         Npc(
             al=al,
             name="Nobody",
-            taught_word=al.words.get_word("ภา-ษา-อัง-กฤษ"),
+            taught_word=Word.get_by_split_form("ภา-ษา-อัง-กฤษ"),
             ma=al.mas.get_map_from_name("lomsak_house_1"),
             x=9,
             y=10,
@@ -1086,7 +1152,7 @@ def lomsak(al):
         Npc(
             al=al,
             name="Lomsak - Prof 1",
-            taught_word=al.words.get_word("ได้"),
+            taught_word=Word.get_by_split_form("ได้"),
             ma=al.mas.get_map_from_name("lomsak"),
             x=32,
             y=17,
@@ -1173,7 +1239,7 @@ def lomsak(al):
             al=al,
             name="Lomsak - Prof 3",
             ma=al.mas.get_map_from_name("lomsak_school"),
-            taught_word=al.words.get_word("ใช่"),
+            taught_word=Word.get_by_split_form("ใช่"),
             x=25,
             y=21,
             sprite="old_man",
@@ -1239,7 +1305,7 @@ def lomsak(al):
             direction=Direction.LEFT,
             sprite="kid",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ใช่", "ภา-ษา"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ใช่", "ภา-ษา"]
             ],
             money=4,
         ),
@@ -1256,7 +1322,7 @@ def lomsak(al):
             direction=Direction.RIGHT,
             sprite="lass",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["คุณ", "ผม", "ฉัน", "เขา"]
+                Word.get_by_split_form(battle_word) for battle_word in ["คุณ", "ผม", "ฉัน", "เขา"]
             ],
             money=4,
         ),
@@ -1273,7 +1339,7 @@ def lomsak(al):
             direction=Direction.LEFT,
             sprite="kid",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ครับ", "ค่ะ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ครับ", "ค่ะ"]
             ],
             money=4,
         ),
@@ -1290,7 +1356,7 @@ def lomsak(al):
             direction=Direction.RIGHT,
             sprite="lass",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ขอบ-คุณ", "ขอ-โทษ", "ส-วัส-ดี"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ขอบ-คุณ", "ขอ-โทษ", "ส-วัส-ดี"]
             ],
             money=4,
         ),
@@ -1308,7 +1374,7 @@ def lomsak(al):
             direction=Direction.RIGHT,
             sprite="kid",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["น้ำ", "ได้", "ภา-ษา"]
+                Word.get_by_split_form(battle_word) for battle_word in ["น้ำ", "ได้", "ภา-ษา"]
             ],
             money=4,
         ),
@@ -1328,15 +1394,16 @@ def lomsak(al):
             direction=Direction.DOWN,
             sprite="dad",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ใช่", "ภา-ษา", "ภา-ษา-อัง-กฤษ", "ได้", "เรียน", "พูด", "ของ", "เรียน"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ใช่", "ภา-ษา", "ภา-ษา-อัง-กฤษ", "ได้", "เรียน", "พูด", "ของ", "เรียน"]
             ],
             money=15,
+            eyesight=2,
             bubbles_max_hp=200,
         ),
         Npc(
             al=al,
             name="lomsak_monk_1",
-            taught_word=al.words.get_word("พูด"),
+            taught_word=Word.get_by_split_form("พูด"),
             ma=al.mas.get_map_from_name("lomsak_temple"),
             x=8,
             y=9,
@@ -1349,7 +1416,7 @@ def lomsak(al):
         Npc(
             al=al,
             name="lomsak_monk_2",
-            taught_word=al.words.get_word("เรียน"),
+            taught_word=Word.get_by_split_form("เรียน"),
             ma=al.mas.get_map_from_name("lomsak_temple"),
             x=18,
             y=9,
@@ -1362,7 +1429,7 @@ def lomsak(al):
         Npc(
             al=al,
             name="lomsak_monk_3",
-            taught_word=al.words.get_word("ไป"),
+            taught_word=Word.get_by_split_form("ไป"),
             ma=al.mas.get_map_from_name("lomsak_temple"),
             x=13,
             y=8,
@@ -1375,7 +1442,7 @@ def lomsak(al):
         Npc(
             al=al,
             name="lomsak_house_3_person_1",
-            taught_word=al.words.get_word("ดี"),
+            taught_word=Word.get_by_split_form("ดี"),
             ma=al.mas.get_map_from_name("lomsak_house_3"),
             x=14,
             y=23,
@@ -1399,7 +1466,7 @@ def cat_cove(al):
         Npc(
             al=al,
             name="cat_girl",
-            taught_word=al.words.get_word("แมว"),
+            taught_word=Word.get_by_split_form("แมว"),
             ma=al.mas.get_map_from_name("cat_cove_house"),
             x=5,
             y=10,
@@ -1494,7 +1561,7 @@ def cat_cove(al):
             y=26,
             sprite="cat",
             direction=Direction.UP,
-            taught_word=al.words.get_word("ปลา"),
+            taught_word=Word.get_by_split_form("ปลา"),
             standard_dialog=[
                 "I want to eat fish",
             ],
@@ -1607,13 +1674,11 @@ def phetchabun(al):
             standard_dialog=[
                 "You're looking for a dog?", "I just saw one running past me down there!",
             ],
-            eyesight=10,
-            wanna_meet=True,
         ),
         Npc(
             al=al,
             name="question_teacher_1",
-            taught_word=al.words.get_word("อะ-ไร"),
+            taught_word=Word.get_by_split_form("อะ-ไร"),
             ma=al.mas.get_map_from_name("phetchabun_mountain_house_1"),
             x=9,
             y=11,
@@ -1630,7 +1695,7 @@ def phetchabun(al):
         Npc(
             al=al,
             name="question_teacher_1",
-            taught_word=al.words.get_word("ที่-ไหน"),
+            taught_word=Word.get_by_split_form("ที่-ไหน"),
             ma=al.mas.get_map_from_name("phetchabun_mountain_house_1"),
             x=4,
             y=5,
@@ -1643,7 +1708,7 @@ def phetchabun(al):
         Npc(
             al=al,
             name="question_teacher_1",
-            taught_word=al.words.get_word("ใคร"),
+            taught_word=Word.get_by_split_form("ใคร"),
             ma=al.mas.get_map_from_name("phetchabun_mountain_house_1"),
             x=12,
             y=7,
@@ -1661,7 +1726,7 @@ def phetchabun(al):
             al=al,
             name="MountainTrainer",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ใคร"]
+                Word.get_by_split_form(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ใคร"]
             ],
             ma=al.mas.get_map_from_name("phetchabun"),
             x=21,
@@ -1677,7 +1742,7 @@ def phetchabun(al):
             al=al,
             name="MountainTrainer",
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ได้", "ข้าว", "อยาก"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ได้", "ข้าว", "อยาก"]
             ],
             ma=al.mas.get_map_from_name("phetchabun"),
             x=32,
@@ -1692,7 +1757,7 @@ def phetchabun(al):
         Npc(
             al=al,
             name="question_teacher_4",
-            taught_word=al.words.get_word("เมื่อ-ไหร่"),
+            taught_word=Word.get_by_split_form("เมื่อ-ไหร่"),
             ma=al.mas.get_map_from_name("phetchabun_mountain_house_2"),
             x=6,
             y=10,
@@ -1705,7 +1770,7 @@ def phetchabun(al):
         Npc(
             al=al,
             name="question_teacher_4",
-            taught_word=al.words.get_word("ทำ-ไม"),
+            taught_word=Word.get_by_split_form("ทำ-ไม"),
             ma=al.mas.get_map_from_name("phetchabun_mountain_house_2"),
             x=9,
             y=10,
@@ -1718,7 +1783,7 @@ def phetchabun(al):
         Npc(
             al=al,
             name="question_teacher_4",
-            taught_word=al.words.get_word("ยัง-ไง"),
+            taught_word=Word.get_by_split_form("ยัง-ไง"),
             ma=al.mas.get_map_from_name("phetchabun_mountain_house_2"),
             x=11,
             y=10,
@@ -1752,7 +1817,7 @@ def phetchabun(al):
                 "I'm a bit tired of exploring.", "How about a word fight?",
             ],
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["ใคร", "เมื่อ-ไหร่", "ชอบ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ใคร", "เมื่อ-ไหร่", "ชอบ"]
             ],
         ),
         Npc(
@@ -1767,7 +1832,7 @@ def phetchabun(al):
                 "Ho, young one!", "Would you be so kind as to have a word battle?",
             ],
             battle_words=[
-                al.words.get_word(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ทำ-ไม"]
+                Word.get_by_split_form(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ทำ-ไม"]
             ],
         ),
     ]
@@ -1796,7 +1861,7 @@ def empty(al):
 
 
 """
-    taught_word=al.words.get_word("โรง"),
+    taught_word=Word.get_by_split_form("โรง"),
 """
 
 

@@ -2,7 +2,7 @@ import pygame
 from enum import Enum
 
 from all import All
-from lexicon.test_services import pick_sentence
+from lexicon.test_services import pick_sentence_test
 from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6
 from sounds.play_sound import play_transformed_thai_word
 
@@ -31,7 +31,7 @@ class Learning(object):
         self.test_4 = ThaiFromEnglish4(al, correct_word=word, learning=self)  # TODO
         # self.test_5 = TappingTestSentence(al, correct_word=word, learning=self)
         # test_5 is a sentence if possible, a Thai from English 6 otherwise
-        self.test_5 = pick_sentence(al, word, learning=self)
+        self.test_5 = pick_sentence_test(al, word, learning=self)
         if not self.test_5:
             self.test_5 = ThaiFromEnglish6(al, correct_word=word, learning=self)
         self.npc = npc

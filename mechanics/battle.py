@@ -22,14 +22,14 @@ def square(x):
 
 
 class Bubble(object):
-    def __init__(self, word: Word, al, box, max_hp):
+    def __init__(self, word: Word, al, box, max_hp, bubble_index, number_of_bubbles):
         self.status = BUBBLE_STATUS_FREE
         self.show_thai = bool(random.getrandbits(1))
         self.word = word
         self.al = al
         self.is_selected = False
-        self.radius = 40
-        self.color = (200, 0, 100)
+        self.radius = 80
+        self.color = (0, 100, 200)
         self.is_shown_in_thai = random.random() > 0.5
 
         self.max_hp = max_hp  # Each bubble has an amount of hp, so that the opponent has to work on it
@@ -40,13 +40,13 @@ class Bubble(object):
         self.box_width = box[2]
         self.box_height = box[3]
 
-        # The center of the circle
-        self.x = random.randint(
-            self.box_x + self.radius, self.box_x + self.box_height - self.radius
-        )  # can be 0, ..., n-1
-        self.y = random.randint(
-            self.box_y + self.radius, self.box_y + self.box_width - self.radius
-        )  # can be 0, ..., n-1
+        # Position
+        angle = math.pi / 2 - (2 * math.pi / number_of_bubbles) * (bubble_index + 1)
+        x = math.cos(angle)
+        y = -math.sin(angle)
+
+        self.x = x * 200 + self.box_x + self.box_width / 2
+        self.y = y * 200 + self.box_y + self.box_height / 2
 
         self.speed_x = random.random() * 10
         self.speed_y = random.random() * 10
@@ -54,18 +54,22 @@ class Bubble(object):
     def draw_bubble(self, x, y):
         ui = self.al.ui
         # the position we draw the circle at is the center of the circle
+        edge_black_color = (0, 0, 0)
+        pygame.draw.circle(
+            ui.screen, edge_black_color, (x, y), self.radius + 3
+        )
         pygame.draw.circle(
             ui.screen, self.color, (x, y), self.radius
         )
         shown_value = self.word.thai if self.is_shown_in_thai else self.word.english
         ui.screen.blit(
             ui.fonts.garuda32.render(shown_value, True, (0, 0, 0)),
-            (x - 15, y - 20 - 15),
+            (x - self.radius/2, y - 20 - 15),
         )
         if self.hp != 0 and self.hp != self.max_hp:
             ui.screen.blit(
                 ui.fonts.garuda32.render(str(self.hp), True, (0, 0, 0)),
-                (x - 15, y - 20 - 15 + 20),
+                (x - 15, y - 5),
             )
 
     def draw(self):
@@ -79,27 +83,28 @@ class Bubble(object):
             print(self.word.thai)
 
     def tick(self):
-        if self.x + self.radius > self.box_width + self.box_x:
-            if self.speed_x > 0:
-                self.speed_x = -self.speed_x
-            self.x = self.box_width + self.box_x - self.radius
-        elif self.x - self.radius < self.box_x:
-            if self.speed_x < 0:
-                self.speed_x = -self.speed_x
-            self.x = self.box_x + self.radius
-        else:
-            self.x += self.speed_x
-
-        if self.y + self.radius > self.box_height + self.box_y:
-            if self.speed_y > 0:
-                self.speed_y = -self.speed_y
-            self.y = self.box_y + self.box_height - self.radius
-        elif self.y - self.radius < self.box_y:
-            if self.speed_y < 0:
-                self.speed_y = -self.speed_y
-            self.y = self.box_y + self.radius
-        else:
-            self.y += self.speed_y
+        pass
+        # if self.x + self.radius > self.box_width + self.box_x:
+        #     if self.speed_x > 0:
+        #         self.speed_x = -self.speed_x
+        #     self.x = self.box_width + self.box_x - self.radius
+        # elif self.x - self.radius < self.box_x:
+        #     if self.speed_x < 0:
+        #         self.speed_x = -self.speed_x
+        #     self.x = self.box_x + self.radius
+        # else:
+        #     self.x += self.speed_x
+        #
+        # if self.y + self.radius > self.box_height + self.box_y:
+        #     if self.speed_y > 0:
+        #         self.speed_y = -self.speed_y
+        #     self.y = self.box_y + self.box_height - self.radius
+        # elif self.y - self.radius < self.box_y:
+        #     if self.speed_y < 0:
+        #         self.speed_y = -self.speed_y
+        #     self.y = self.box_y + self.radius
+        # else:
+        #     self.y += self.speed_y
 
     def contains_point(self, point):
         return (
@@ -164,9 +169,10 @@ class Battle(object):
 
     def create_bubbles(self) -> None:
         max_hp = self.trainer.bubbles_max_hp
-        for word in self.words:
+        number_of_bubbles = len(self.words)
+        for i, word in enumerate(self.words):
             self.bubbles.append(
-                Bubble(word, self.al, (self.x, self.y, self.width, self.height), max_hp)
+                Bubble(word, self.al, (self.x, self.y, self.width, self.height), max_hp, i, number_of_bubbles)
             )
 
     def tick(self) -> None:

@@ -1,6 +1,8 @@
 import time
 import pygame
 
+from lexicon.items import Words
+
 
 class Fonts(object):
     def __init__(self):
@@ -163,12 +165,12 @@ class Ui(object):
                 if event.key == pygame.K_o:
                     al.learner.open()
                 if event.key == pygame.K_r:
-                    al.words.reset_words(al)
-                    al.learner.money = 0
+                    Words.reset_words(xp=0)
+                    al.learner.money = 3
                     al.learner.hp = 5
                     al.learner.max_hp = 5
                 if event.key == pygame.K_t:
-                    al.words.reset_words(al, xp=100)
+                    Words.reset_words(xp=100)
                 if event.key == pygame.K_BACKSPACE:
                     al.ui.backspace = True
                 if event.key == pygame.K_SPACE:
@@ -189,7 +191,7 @@ class Ui(object):
                     elif al.dex.active:
                         al.dex.active = False
                     elif al.active_battle:
-                        al.active_battle = None
+                        al.active_battle.end_battle()
                     elif al.active_sale:
                         al.active_sale = None
                     else:

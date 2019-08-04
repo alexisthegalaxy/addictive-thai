@@ -1,29 +1,7 @@
-# import pygame
 from typing import List
-
-from pygame import gfxdraw
-from lexicon.tone import Tone, Length
-
-
-class Syllable(object):
-    def __init__(
-        self,
-        thai="no_thai",
-        english="no_english",
-        tone=Tone.UNKNOWN,
-        length=Length.UNKNOWN,
-        audio="",
-    ):
-        self.thai = thai
-        self.english = english
-        self.tone = tone
-        self.long = length
-        self.audio = audio
-
-    def print(self, extra):
-        print(f"{extra}thai:    {self.thai}")
-        print(f"{extra}english: {self.english}")
-        print(f"{extra}tone:    {self.tone}")
+import json
+from db import get_db_cursor, get_db_conn
+from models import get_word_by_id
 
 
 class Growable(object):
@@ -90,88 +68,155 @@ class Growable(object):
         print(f"current_xp: {current_xp}/{total_xp_in_level}")
 
 
-class Syllables(object):
-    def __init__(self):
-        self.syllables = []
-
-    def get_syllable(self, thai: str):
-        for syllable in self.syllables:
-            if syllable.thai == thai:
-                return syllable
-
-    def add_syllable(self, syllable: Syllable):
-        self.syllables.append(syllable)
-
-    def print(self):
-        print("╔═════════════════════════════════════════════")
-        for syllable in self.syllables:
-            syllable.print("║")
-            print("╠═════════════════════════════════════════════")
-        print("╚═════════════════════════════════════════════")
-
-
 class Word(Growable):
-    """
-    A word is made of one or more syllables.
-    Example:
-        thai = ใจดี
-        english = kind
-        syllables = [Syllable("ใจ"), Syllable("ดี")]
-    """
-
     def __init__(
-        self, syllables: Syllables, thai="no_thai", english="no_english", location=None
+        self,
+        id,
+        split_form="no_thai",
+        thai="nothai",
+        english="no_english",
+        tones="LHMRF",
+        pos="NOUN???",
     ):
         super().__init__()
-        self.thai = thai.replace("-", "")
-        self.separated_form = thai
+        self.id = id
+        self.thai = thai
+        self.split_form = split_form
         self.english = english
-        self.syllables = []  # list of syllables contained in that word
-        self.sentences = []  # list of sentences containing that word
-        self.map = None
-        if location:
-            self.map = location[0]
-            self.x = location[1]
-            self.y = location[2]
+        self.tones = tones
+        self.pos = pos
 
-        syllables_in_word = thai.split("-")
+    def increase_xp(self, al, value):
+        super().increase_xp(al, value)
+        v = value
+        i = self.id
+        get_db_cursor().execute(
+            "UPDATE user_word"
+            f" SET total_xp = {value}"
+            # f" JOIN users on users.id = user_word.user_id"
+            f" WHERE user_word.word_id = '{self.id}'"
+        )
+        # get_db_cursor().execute(
+        #     f"UPDATE user_word uw"
+        #     f" JOIN users u on u.id = uw.user_id"
+        #     f" WHERE word_id = '{self.id}' AND u.is_playing = 1"
+        #     f" SET total_xp = {value}"
+        # )
+        get_db_conn().commit()
 
-        for syllable_in_word in syllables_in_word:
-            syllable = syllables.get_syllable(syllable_in_word)
-            if not syllable:
-                from lexicon.items_creation import add_syllable
+    def get_syllables(self):
+        return self.split_form.split("-")
 
-                add_syllable(
-                    syllables, thai=syllable_in_word, english="", tone=Tone.UNKNOWN
-                )
-                syllable = syllables.get_syllable(syllable_in_word)
-            self.syllables.append(syllable)
+    def get_sentences(self):
+        # TODO Alexis
+        sentences = []
+        for sentence_db in list(get_db_cursor().execute(
+            f"SELECT * FROM sentences s JOIN word_sentence ws on s.id = ws.sentence_id WHERE ws.word_id = '{self.id}'"
+        )):
+            thai = sentence_db[1]
+            english = sentence_db[2]
+            word_ids = json.loads(sentence_db[3])
+            words = [
+                get_word_by_id(word_id) for word_id in word_ids
+            ]
+            sentence = Sentence(thai=thai, english=english, words=words)
+            sentences.append(sentence)
+        return sentences
+
+
+    @classmethod
+    def get_known_words(self):
+        words = []
+        for word_db in list(get_db_cursor().execute(
+            f"SELECT * FROM words w JOIN user_word uw on w.id = uw.word_id join users u on u.id = uw.user_id WHERE uw.total_xp > 5 AND u.is_playing = 1"
+        )):
+            id = word_db[0]
+            split_form = word_db[1]
+            english = word_db[2]
+            tones = word_db[3]
+            pos = word_db[4]
+            # in_sentence = word_db[5]  # TODO
+            thai = word_db[5]
+            word = Word(
+                id=id,
+                split_form=split_form,
+                thai=thai,
+                english=english,
+                tones=tones,
+                pos=pos,
+            )
+            words.append(word)
+        return words
+
+    @classmethod
+    def get_all(cls):
+        answers = list(get_db_cursor().execute(f"SELECT * FROM words"))
+        words = []
+        for answer in answers:
+            id = answer[0]
+            split_form = answer[1]
+            english = answer[2]
+            tones = answer[3]
+            pos = answer[4]
+            thai = answer[5]
+            words.append(Word(
+                id=id,
+                split_form=split_form,
+                thai=thai,
+                english=english,
+                tones=tones,
+                pos=pos,
+            ))
+        return words
+
+    @classmethod
+    def get_by_split_form(cls, split_form):
+        answers = list(get_db_cursor().execute(f"SELECT * FROM words WHERE split_form = '{split_form}'"))
+        if answers and answers[0]:
+            first_word = answers[0]
+            id = first_word[0]
+            split_form = first_word[1]
+            english = first_word[2]
+            tones = first_word[3]
+            pos = first_word[4]
+            thai = first_word[5]
+            return Word(
+                id=id,
+                split_form=split_form,
+                thai=thai,
+                english=english,
+                tones=tones,
+                pos=pos,
+            )
+        else:
+            print(f'can\'t find split_form for {split_form}')
+            return None
+
+    @classmethod
+    def get_by_thai(cls, thai):
+        answers = list(get_db_cursor().execute(f"SELECT * FROM words WHERE thai = '{thai}'"))
+        if answers and answers[0]:
+            first_word = answers[0]
+            id = first_word[0]
+            split_form = first_word[1]
+            english = first_word[2]
+            tones = first_word[3]
+            pos = first_word[4]
+            thai = first_word[5]
+            return Word(
+                id=id,
+                split_form=split_form,
+                thai=thai,
+                english=english,
+                tones=tones,
+                pos=pos,
+            )
+        else:
+            print(f'can\'t find word for {thai}')
+            return None
 
     def __str__(self):
-        s = f"{self.thai} - {self.english}\n"
-        if len(self.syllables) > 1:
-            for syllable in self.syllables:
-                s += f"│  {syllable.thai}   ({syllable.english})\n"
-        if self.map is not None:
-            s += f"│map: {self.map} ({self.x}, {self.y})\n"
-        return s
-
-    def print(self):
-        print(self)
-
-    def draw(self, al, offset_x, offset_y):
-        x = self.x * al.ui.cell_size + offset_x
-        y = self.y * al.ui.cell_size + offset_y
-        gfxdraw.aacircle(
-            al.ui.screen,
-            x + int(al.ui.cell_size / 2),
-            y + int(al.ui.cell_size / 2),
-            int(al.ui.cell_size / 2),
-            (255, 0, 0),
-        )
-        al.ui.screen.blit(
-            al.ui.fonts.garuda32.render(self.thai, True, (0, 255, 255)), (x, y - 20)
-        )
+        return f"{self.thai} - {self.english}\n"
 
 
 class Words(object):
@@ -187,9 +232,9 @@ class Words(object):
             else:
                 self.words_per_map[word.map] = [word]
 
-    def get_word(self, separated_form: str):
+    def get_word(self, split_form: str):
         for word in self.words:
-            if word.separated_form == separated_form:
+            if word.split_form == split_form:
                 return word
 
     def time_to_xp_loss(self, number_of_seconds: int):
@@ -212,45 +257,82 @@ class Words(object):
     def print(self):
         print(self)
 
-    def reset_words(self, al, xp=0):
-        for word in self.words:
-            word.reset(al, xp=xp)
+    @classmethod
+    def reset_words(cls, xp):
+        get_db_cursor().execute(
+            f"UPDATE user_word "
+            f"SET total_xp = {xp} "
+            f"where EXISTS (SELECT * "
+            f"    FROM user_word "
+            f"    JOIN users ON users.id = user_word.user_id "
+            f"    WHERE users.is_playing = 1)"
+        )
 
 
 class Sentence(object):
-    def __init__(self, words: str, thai: str, english: str):
+    def __init__(self, thai: str, english: str, words: List["Word"]):
         super().__init__()
         self.thai = thai.replace("-", "").replace("_", "")
-        self.words = []
+        self.words = words
         self.english = english
-        words_in_sentence = thai.split("_")
-
-        for word_in_sentence in words_in_sentence:
-            word = words.get_word(word_in_sentence)
-            if not word:
-                print(f"ERROR: word {word} ({word_in_sentence}) is not in words!")
-            self.words.append(word)
-
-    def print(self):
-        print(self)
 
     def __str__(self):
-        s = f"{self.thai}\n"
-        s += f"{self.english}\n"
-        for word in self.words:
-            s += str(word)
-        return s
+        return f"{self.thai} - {self.english}"
+
+    @staticmethod
+    def get_words_in_sentence(sentence_id, al):
+        words_db = list(
+            al.cursor.execute(
+                f"SELECT * FROM words JOIN word_sentence ON words.id = word_sentence.word_id WHERE word_sentence.sentence_id = '{sentence_id}'"
+            )
+        )
+        words = []
+        for word_db in words_db:
+            id = word_db[0]
+            split_form = word_db[1]
+            english = word_db[2]
+            tones = word_db[3]
+            pos = word_db[4]
+            thai = word_db[5]
+            words.append(
+                Word(
+                    id=id,
+                    split_form=split_form,
+                    thai=thai,
+                    english=english,
+                    tones=tones,
+                    pos=pos,
+                )
+            )
+        return words
+
+    @classmethod
+    def get(cls, sentence_id, al):
+        sentence = list(
+            al.cursor.execute(f"SELECT * FROM sentences WHERE id = '{sentence_id}'")
+        )[0]
+        thai = sentence[1]
+        english = sentence[2]
+        words = cls.get_words_in_sentence(sentence_id)
+        return Sentence(thai=thai, english=english, words=words)
+
+    @classmethod
+    def get_random_known_sentence(cls, al):
+        # TODO: for the moment, this only returns a random sentence!
+        sentence = list(
+            al.cursor.execute(f"SELECT * FROM sentences order by random() LIMIT 1")
+        )[0]
+        sentence_id = sentence[0]
+        thai = sentence[1]
+        english = sentence[2]
+        words = cls.get_words_in_sentence(sentence_id)
+        return Sentence(thai=thai, english=english, words=words)
 
 
 class Sentences(object):
     def __init__(self):
         self.sentences = []
 
-    # def get_syllable(self, thai: str):
-    #     for syllable in self.syllables:
-    #         if syllable.thai == thai:
-    #             return syllable
-    #
     def add_sentence(self, sentence: Sentence):
         self.sentences.append(sentence)
 
@@ -282,9 +364,9 @@ class Sentences(object):
 #     def add_word(self, user_word: UserWord):
 #         self.user_words.append(user_word)
 #
-#     # def get_word(self, separated_form: str):
+#     # def get_word(self, split_form: str):
 #     #     for user_word in self.user_words:
-#     #         if word.separated_form == separated_form:
+#     #         if word.split_form == split_form:
 #     #             return word
 #
 #     # def print(self):

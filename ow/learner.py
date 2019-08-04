@@ -9,7 +9,7 @@ from sounds.play_sound import play_thai_word
 
 
 class Learner(object):
-    def __init__(self, al, x, y, color):
+    def __init__(self, al, x=45, y=9, color=(150, 0, 150)):
         self.name = "Alexis"
         self.sprite = self.name.lower()
         self.money = 5
@@ -110,13 +110,6 @@ class Learner(object):
                 if npc.x == next_x and npc.y == next_y:
                     next_position_walkable = False
                     break
-        # Check for words:
-        if next_position_walkable:
-            if al.mas.current_map.filename in al.words.words_per_map:
-                for word in al.words.words_per_map[al.mas.current_map.filename]:
-                    if word.x == next_x and word.y == next_y:
-                        next_position_walkable = False
-                        break
 
         if next_position_walkable:
             has_moved = next_x != self.x or next_y != self.y

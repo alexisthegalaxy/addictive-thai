@@ -4,7 +4,7 @@ from typing import List
 
 import pygame
 
-from lexicon.items import Words
+from lexicon.items import Words, Word
 from lexicon.test_services import pick_a_test_for_word
 from npc.npc import Npc
 
@@ -19,15 +19,15 @@ class CellType(object):
 
 
 class CellTypes:
-    grass = CellType('草', 'grass', (100, 200, 100), True, 0.2)
+    grass = CellType('草', 'grass', (100, 200, 100), True, 0.05)
     tree = CellType('树', 'tree', (85, 107, 47), False, 0)
     ground = CellType('土', 'ground', (176, 246, 176), True, 0)
-    tall_grass = CellType('稂', 'tall_grass', (0, 128, 0), True, 0.4)
+    tall_grass = CellType('稂', 'tall_grass', (0, 128, 0), True, 0.1)
     path = CellType('道', 'path', (200, 200, 200), True, 0)
     wall = CellType('壁', 'wall', (22, 22, 22), False, 0)
     sign = CellType('標', 'sign', (71, 71, 71), False, 0)
-    water = CellType('水', 'water', (57, 62, 255), False, 0.2)
-    cave_water = CellType('湿', 'cave_water', (24, 24, 58), False, 0.2)
+    water = CellType('水', 'water', (57, 62, 255), False, 0.05)
+    cave_water = CellType('湿', 'cave_water', (24, 24, 58), False, 0.05)
     decoration = CellType('飾', 'decoration', (123, 9, 9), False, 0)
     flower = CellType('花', 'flower', (231, 148, 193), True, 0)
     flower_2 = CellType('李', 'flower_2', (231, 148, 194), True, 0)
@@ -36,7 +36,7 @@ class CellTypes:
     inn_floor = CellType('床', 'inn_floor', (117, 199, 242), True, 0)
     inn_map = CellType('図', 'inn_map', (99, 122, 80), False, 0)
     temple_floor = CellType('寺', 'temple_floor', (183, 183, 183), True, 0)
-    cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0.2)
+    cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0.05)
     boulder_2 = CellType('岩', 'boulder_2', (53, 14, 14), False, 0)
     rock = CellType('石', 'rock', (94, 37, 37), False, 0)
     boulder = CellType('砾', 'boulder', (172, 92, 113), False, 0)
@@ -61,7 +61,7 @@ class Occurrence(object):
     Each map (Ma) has an occurrence.
     An occurrence gives for the map the probability for each word to appear
     """
-    def __init__(self, ma, words: Words):
+    def __init__(self, ma):
         self.ma = ma
         self.candidates = []
         self.rates = []
@@ -76,7 +76,8 @@ class Occurrence(object):
             line = line.replace("\n", "")
             elements = line.split(" ")
             weight = int(elements[0])
-            word = words.get_word(elements[1])
+            # TODO Alexis do it so that it fetches word by id rather than by thai to avoid confusions
+            word = Word.get_by_split_form(elements[1])
             total_weight += weight
             self.candidates.append(word)
             self.rates.append(weight)
@@ -84,7 +85,7 @@ class Occurrence(object):
 
 
 class Ma(object):
-    def __init__(self, filename, words, cell_types, mas):
+    def __init__(self, filename, cell_types, mas):
         self.filename = filename
         self.mas: Mas = mas
         self.ma = []
@@ -106,7 +107,7 @@ class Ma(object):
             self.ma.append(new_line)
         self.width = x
         self.height = y
-        self.occ = Occurrence(self, words)
+        self.occ = Occurrence(self)
         self.npcs: List[Npc] = []
 
     def draw(self, al):
@@ -167,58 +168,58 @@ class Ma(object):
 
 
 class Mas(object):
-    def __init__(self, words, cell_types):
+    def __init__(self, cell_types):
         self.al: 'All' = None
-        self.house1 = Ma(filename="house1", words=words, cell_types=cell_types, mas=self)
-        self.house2 = Ma(filename="house2", words=words, cell_types=cell_types, mas=self)
-        self.house3 = Ma(filename="house3", words=words, cell_types=cell_types, mas=self)
-        self.house4 = Ma(filename="house4", words=words, cell_types=cell_types, mas=self)
-        self.house5 = Ma(filename="house5", words=words, cell_types=cell_types, mas=self)
-        self.lab = Ma(filename="lab", words=words, cell_types=cell_types, mas=self)
+        self.house1 = Ma(filename="house1", cell_types=cell_types, mas=self)
+        self.house2 = Ma(filename="house2", cell_types=cell_types, mas=self)
+        self.house3 = Ma(filename="house3", cell_types=cell_types, mas=self)
+        self.house4 = Ma(filename="house4", cell_types=cell_types, mas=self)
+        self.house5 = Ma(filename="house5", cell_types=cell_types, mas=self)
+        self.lab = Ma(filename="lab", cell_types=cell_types, mas=self)
 
-        self.inn1 = Ma(filename="inn1", words=words, cell_types=cell_types, mas=self)
-        self.inn2 = Ma(filename="inn2", words=words, cell_types=cell_types, mas=self)
-        self.inn3 = Ma(filename="inn3", words=words, cell_types=cell_types, mas=self)
-        self.inn4 = Ma(filename="inn4", words=words, cell_types=cell_types, mas=self)
-        self.inn5 = Ma(filename="inn5", words=words, cell_types=cell_types, mas=self)
-        self.chaiyaphum = Ma(filename="chaiyaphum", words=words, cell_types=cell_types, mas=self)
-        self.chumphae = Ma(filename="chumphae", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", words=words, cell_types=cell_types, mas=self)
+        self.inn1 = Ma(filename="inn1", cell_types=cell_types, mas=self)
+        self.inn2 = Ma(filename="inn2", cell_types=cell_types, mas=self)
+        self.inn3 = Ma(filename="inn3", cell_types=cell_types, mas=self)
+        self.inn4 = Ma(filename="inn4", cell_types=cell_types, mas=self)
+        self.inn5 = Ma(filename="inn5", cell_types=cell_types, mas=self)
+        self.chaiyaphum = Ma(filename="chaiyaphum", cell_types=cell_types, mas=self)
+        self.chumphae = Ma(filename="chumphae", cell_types=cell_types, mas=self)
+        self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", cell_types=cell_types, mas=self)
 
-        self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen_house_3 = Ma(filename="chumphae_khonkaen_house_3", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen_house_4 = Ma(filename="chumphae_khonkaen_house_4", words=words, cell_types=cell_types, mas=self)
+        self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", cell_types=cell_types, mas=self)
+        self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", cell_types=cell_types, mas=self)
+        self.chumphae_khonkaen_house_3 = Ma(filename="chumphae_khonkaen_house_3", cell_types=cell_types, mas=self)
+        self.chumphae_khonkaen_house_4 = Ma(filename="chumphae_khonkaen_house_4", cell_types=cell_types, mas=self)
 
-        self.chumphae_school = Ma(filename="chumphae_school", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_house1 = Ma(filename="chumphae_house1", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_house2 = Ma(filename="chumphae_house2", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_house3 = Ma(filename="chumphae_house3", words=words, cell_types=cell_types, mas=self)
-        self.non_muang_house_1 = Ma(filename="non_muang_house_1", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_lomsak_house1 = Ma(filename="chumphae_lomsak_house1", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_lomsak_house2 = Ma(filename="chumphae_lomsak_house2", words=words, cell_types=cell_types, mas=self)
-        self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", words=words, cell_types=cell_types, mas=self)
+        self.chumphae_school = Ma(filename="chumphae_school", cell_types=cell_types, mas=self)
+        self.chumphae_house1 = Ma(filename="chumphae_house1", cell_types=cell_types, mas=self)
+        self.chumphae_house2 = Ma(filename="chumphae_house2", cell_types=cell_types, mas=self)
+        self.chumphae_house3 = Ma(filename="chumphae_house3", cell_types=cell_types, mas=self)
+        self.non_muang_house_1 = Ma(filename="non_muang_house_1", cell_types=cell_types, mas=self)
+        self.chumphae_lomsak_house1 = Ma(filename="chumphae_lomsak_house1", cell_types=cell_types, mas=self)
+        self.chumphae_lomsak_house2 = Ma(filename="chumphae_lomsak_house2", cell_types=cell_types, mas=self)
+        self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", cell_types=cell_types, mas=self)
 
-        self.lomsak = Ma(filename="lomsak", words=words, cell_types=cell_types, mas=self)
-        self.lomsak_house_1 = Ma(filename="lomsak_house_1", words=words, cell_types=cell_types, mas=self)
-        self.lomsak_house_2 = Ma(filename="lomsak_house_2", words=words, cell_types=cell_types, mas=self)
-        self.lomsak_house_3 = Ma(filename="lomsak_house_3", words=words, cell_types=cell_types, mas=self)
-        self.lomsak_school = Ma(filename="lomsak_school", words=words, cell_types=cell_types, mas=self)
-        self.lomsak_gym = Ma(filename="lomsak_gym", words=words, cell_types=cell_types, mas=self)
-        self.lomsak_temple = Ma(filename="lomsak_temple", words=words, cell_types=cell_types, mas=self)
+        self.lomsak = Ma(filename="lomsak", cell_types=cell_types, mas=self)
+        self.lomsak_house_1 = Ma(filename="lomsak_house_1", cell_types=cell_types, mas=self)
+        self.lomsak_house_2 = Ma(filename="lomsak_house_2", cell_types=cell_types, mas=self)
+        self.lomsak_house_3 = Ma(filename="lomsak_house_3", cell_types=cell_types, mas=self)
+        self.lomsak_school = Ma(filename="lomsak_school", cell_types=cell_types, mas=self)
+        self.lomsak_gym = Ma(filename="lomsak_gym", cell_types=cell_types, mas=self)
+        self.lomsak_temple = Ma(filename="lomsak_temple", cell_types=cell_types, mas=self)
 
-        self.question_cave = Ma(filename="question_cave", words=words, cell_types=cell_types, mas=self)
-        self.cat_cave = Ma(filename="cat_cave", words=words, cell_types=cell_types, mas=self)
-        self.cat_cove = Ma(filename="cat_cove", words=words, cell_types=cell_types, mas=self)
-        self.cat_cove_house = Ma(filename="cat_cove_house", words=words, cell_types=cell_types, mas=self)
+        self.question_cave = Ma(filename="question_cave", cell_types=cell_types, mas=self)
+        self.cat_cave = Ma(filename="cat_cave", cell_types=cell_types, mas=self)
+        self.cat_cove = Ma(filename="cat_cove", cell_types=cell_types, mas=self)
+        self.cat_cove_house = Ma(filename="cat_cove_house", cell_types=cell_types, mas=self)
 
-        self.phetchabun = Ma(filename="phetchabun", words=words, cell_types=cell_types, mas=self)
-        self.banyaeng = Ma(filename="banyaeng", words=words, cell_types=cell_types, mas=self)
-        self.labyrinth = Ma(filename="labyrinth", words=words, cell_types=cell_types, mas=self)
-        self.phitsalunok = Ma(filename="phitsalunok", words=words, cell_types=cell_types, mas=self)
-        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", words=words, cell_types=cell_types, mas=self)
-        self.phetchabun_mountain_house_1 = Ma(filename="phetchabun_mountain_house_1", words=words, cell_types=cell_types, mas=self)
-        self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", words=words, cell_types=cell_types, mas=self)
+        self.phetchabun = Ma(filename="phetchabun", cell_types=cell_types, mas=self)
+        self.banyaeng = Ma(filename="banyaeng", cell_types=cell_types, mas=self)
+        self.labyrinth = Ma(filename="labyrinth", cell_types=cell_types, mas=self)
+        self.phitsalunok = Ma(filename="phitsalunok", cell_types=cell_types, mas=self)
+        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", cell_types=cell_types, mas=self)
+        self.phetchabun_mountain_house_1 = Ma(filename="phetchabun_mountain_house_1", cell_types=cell_types, mas=self)
+        self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", cell_types=cell_types, mas=self)
 
         self.current_map: Ma = self.chaiyaphum
 

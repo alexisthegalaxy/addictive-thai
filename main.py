@@ -1,6 +1,5 @@
 from all import All
 from lexicon.dex import Dex
-from lexicon.init import init_vocab
 import pygame
 
 from npc.import_npcs import import_npcs
@@ -66,24 +65,19 @@ def main_draw(al: All):
 
 
 def main():
-    syllables, words, sentences = init_vocab()
     cell_types = CellTypes()
-    mas = Mas(words, cell_types)
+    mas = Mas(cell_types)
     mas.form_links()
     profiles = Profiles()
     profiles.set_as_profile("Alexis")
     al = All(
         mas=mas,
-        words=words,
-        sentences=sentences,
-        syllables=syllables,
         ui=Ui(),
         cell_types=cell_types,
         profiles=profiles,
     )
 
-    al.add_sentences_to_words()
-    al.learner = Learner(al, 1, 1, (150, 0, 150))
+    al.learner = Learner(al)
     import_npcs(al)
 
     profiles.current_profile.load(al)

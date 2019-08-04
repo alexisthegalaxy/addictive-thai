@@ -3,6 +3,7 @@ import pickle
 from datetime import datetime
 from time import mktime
 
+from models import get_current_map, save_user_to_db, get_current_x_y_money_hp
 from sounds.play_sound import play_thai_word
 
 TIME_FORMAT = "%H:%M:%S %d %b %Y"
@@ -26,22 +27,26 @@ class Profile(object):
 
         print("save!")
         f.close()
+        save_user_to_db(al, al.learner.x, al.learner.y, al.learner.money, al.learner.hp, al.mas.current_map.filename)
         self.save_pickle(al)
 
     def save_pickle(self, al: "All"):
         pickle.dump(al, open("Alexis.pro", "wb"))
+        pass
 
-    def load_pickle(self, al: "All"):
+    def load_all(self, al: "All"):
+        # pass
         file_name = "Alexis.pro"
         if os.path.getsize(file_name) > 0:
-            retrieved_all = pickle.load(open(file_name, "rb"))
-            ma = getattr(al.mas, retrieved_all.current_map)
+            retrieved_all = pickle.load(open(file_name, "rb")) # let's get rid of that!
+            ma = get_current_map(al)
+            x, y, money, hp = get_current_x_y_money_hp(al)  # from the DB
             al.mas.current_map = ma
             al.learner.ma = ma
-            al.learner.x = retrieved_all.learner["x"]
-            al.learner.y = retrieved_all.learner["y"]
-            al.learner.hp = retrieved_all.learner["hp"]
-            al.learner.money = retrieved_all.learner["money"]
+            al.learner.x = x
+            al.learner.y = y
+            al.learner.hp = hp
+            al.learner.money = money
             last_healing_place_map = getattr(
                 al.mas, retrieved_all.learner["last_healing_place"]["map_name"]
             )
@@ -58,29 +63,23 @@ class Profile(object):
 
             al.bag = retrieved_all.bag
 
-            for word in retrieved_all.words:
-                xp = max(word["total_xp"], 0)
-                word = al.words.get_word(word["separated_form"])
-                if not word:
-                    print(f'ERROR: could not get word for {word["separated_form"]}')
-                word.increase_xp(al, xp)
-
     def load(self, al: "All"):
         """
         TODO: this should use the DB only
         """
-        self.load_pickle(al)
-        # proceed to remove 1 xp for each word if necessary
-        seconds_since_last_time = (
-            mktime(datetime.now().timetuple()) - al.learner.last_saved
-        )
-        if seconds_since_last_time > 72000:
-            xp_loss = al.words.time_to_xp_loss(seconds_since_last_time)
-            for word in al.words.words:
-                word.decrease_xp(al, xp_loss)
-            print("it has been more than 20 hours!")
-        else:
-            print("it has NOT been 20 hours!")
+        # pass
+        self.load_all(al)
+        # # proceed to remove 1 xp for each word if necessary
+        # seconds_since_last_time = (
+        #     mktime(datetime.now().timetuple()) - al.learner.last_saved
+        # )
+        # if seconds_since_last_time > 72000:
+        #     xp_loss = al.words.time_to_xp_loss(seconds_since_last_time)
+        #     for word in al.words.words:
+        #         word.decrease_xp(al, xp_loss)
+        #     print("it has been more than 20 hours!")
+        # else:
+        #     print("it has NOT been 20 hours!")
 
 
 class Profiles(object):

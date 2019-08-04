@@ -6,6 +6,7 @@ from time import mktime
 from datetime import datetime
 
 from models import get_random_known_word_id, find_word_by_id_get_thai
+from sounds.play_sound import play_thai_word
 
 
 class Cell(object):
@@ -106,8 +107,8 @@ class Grid(object):
             [Cell(), Cell(), Cell(), Cell()],
         ]
         self.al = al
-        self.sentence = sentence
-        print(self.sentence)
+        self.sentence_id = sentence
+        self.sentence_words = sentence.words()
         self.selected_cells = []
         self.set_cells_positions()
         self.fill_with_random_words()
@@ -117,10 +118,10 @@ class Grid(object):
 
     def set_cells_positions(self):
         width = 220
-        height = 140
+        height = 110
         gap = 5
         shift_x = (self.al.ui.percent_width(1) - (width + gap) * 4 + gap) / 2
-        shift_y = (self.al.ui.percent_height(1) - (height + gap) * 4 + gap) / 2
+        shift_y = (self.al.ui.percent_height(1) - (height + gap) * 4 + gap) / 2 + 60
         for i, line in enumerate(self.cells):
             for j, cell in enumerate(line):
                 self.cells[i][j].x = shift_x + i * (width + gap)
@@ -257,18 +258,89 @@ class Grid(object):
                         self.selected_cells.append(cell)
                         cell.becomes_selected(len(self.selected_cells) - 1)
 
-    def process_click_up(self):
+    def process_click_up(self, validate_callback):
         self.click_down = False
         self.al.ui.click_up = None
         if self.selected_cells:
-            s = ""
+            s = "_".join()
             for selected_cell in self.selected_cells:
                 s += selected_cell.thai
-            print(s)  # TODO Alexis
+            validate_callback(s)
             self.unselect_all_cells()
 
 
-class GridTest(Test):
+class GrammarGridTest(Test):
+    """
+    Concept:
+    In limited time, find the maximum of sentences.
+    The longer the sentence, the more points you get.
+    Sentences are checked using grammar.
+    An argument allows specifying the words,
+    and any unspecified word is generated amongst most common words known by the learner.
+    """
+
+    def __init__(
+        self,
+        al: "All",
+        correct_word: Word,
+        sentence,
+        learning=None,
+        test_success_callback=None,
+    ):
+        super().__init__(al, learning, test_success_callback)
+        self.correct_word = correct_word
+        self.grid = Grid(al=al, sentence=sentence)
+        self.timer = Timer(al=al)
+        self.sentence = sentence
+
+    def draw(self):
+        ui = self.al.ui
+        x = ui.percent_width(0.07)
+        y = ui.percent_height(0.07)
+        height = ui.percent_height(0.86)
+        width = ui.percent_width(0.86)
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        pygame.draw.rect(screen, (150, 150, 150), (x, y, width, height))
+        pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
+
+        # Draw "Find as many sentences as you can! The longer, the better"
+        explanatory_string = "Find as many sentences as you can! The longer, the better!"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        self.grid.draw()
+        self.timer.draw()
+
+    def interact(self, al):
+        if al.ui.hover:
+            self.grid.process_hover()
+        if al.ui.click:
+            self.grid.process_click_down()
+        if al.ui.click_up:
+            self.grid.process_click_up(self.validate_answer)
+
+    def fails(self):
+        # Some time is lost (3 seconds)
+        pass
+
+    def validate_answer(self, built_sentence):
+        print(built_sentence)
+        print(built_sentence)
+        # TODO Alexis: have
+        # success = built_sentence == self.sentence.thai
+        # if success:
+        #     self.succeeds([])
+        # else:
+        #     self.al.learner.hurt(1)
+        #     play_thai_word("wrong")
+        #     self.fails()
+
+
+class SentenceGridTest(Test):
     """
     Concept:
     For a given word, choose a sentence that contains,
@@ -291,18 +363,7 @@ class GridTest(Test):
         self.correct_word = correct_word
         self.grid = Grid(al=al, sentence=sentence)
         self.timer = Timer(al=al)
-        self.number_of_distr = 6
-        self.selected_picked_syllable_index = 0
-        self.constructed_sentence = []  # List of syllables
-        self.is_validating = (
-            False
-        )  # means that the selector is in the lower part of the screen
         self.sentence = sentence
-        self.option_boxes = []
-        self.sentence_boxes = []
-        self.validate_box = None
-        self.failed_attempts = 0
-        self.failed_attempts_limit = 3  # After three failed attempts, show the answer
 
     def draw(self):
         ui = self.al.ui
@@ -317,142 +378,39 @@ class GridTest(Test):
         pygame.draw.rect(screen, (150, 150, 150), (x, y, width, height))
         pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
 
-        # # Draw "Write the following sentence in Thai"
-        # explanatory_string = "Write the following sentence in Thai:"
-        # x = ui.percent_width(0.12)
-        # y = ui.percent_height(0.12)
-        # screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        # Draw "Find the following sentence in Thai"
+        explanatory_string = "Find the following sentence in Thai:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.10)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
-        # # Draw prompt
-        # x = ui.percent_width(0.15)
-        # y = ui.percent_height(0.18)
-        # screen.blit(
-        #     fonts.garuda32.render(self.sentence.english, True, (0, 0, 0)), (x, y)
-        # )
+        # Draw prompt
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.15)
+        screen.blit(
+            fonts.garuda32.render(self.sentence.english, True, (0, 0, 0)), (x, y)
+        )
 
-        # Draw grid
         self.grid.draw()
-
-        # Draw timer
         self.timer.draw()
 
     def interact(self, al):
-        pass
-        # if al.ui.left:
-        #     al.ui.left = False
-        #     if self.is_validating:
-        #         self.selected_picked_syllable_index -= 1
-        #         if self.selected_picked_syllable_index < 0:
-        #             self.selected_picked_syllable_index = len(self.sentence_boxes)
-        #     else:
-        #         self.selected_option_index -= 1
-        #         if self.selected_option_index < 0:
-        #             self.selected_option_index = len(self.choices) - 1
-        # if al.ui.right:
-        #     al.ui.right = False
-        #     if self.is_validating:
-        #         self.selected_picked_syllable_index += 1
-        #         if self.selected_picked_syllable_index > len(self.sentence_boxes):
-        #             self.selected_picked_syllable_index = 0
-        #     else:
-        #         self.selected_option_index += 1
-        #         if self.selected_option_index > len(self.choices) - 1:
-        #             self.selected_option_index = 0
-        # if al.ui.down:
-        #     al.ui.down = False
-        #     self.is_validating = True
-        # if al.ui.up:
-        #     al.ui.up = False
-        #     self.is_validating = False
-        # if al.ui.space:
-        #     al.ui.space = False
-        #     if self.is_validating:
-        #         if self.selected_picked_syllable_index == len(
-        #             self.constructed_sentence
-        #         ):
-        #             self.validate_answer()
-        #         else:
-        #             self.learner_remove_picked_syllable(
-        #                 self.selected_picked_syllable_index
-        #             )
-        #     else:
-        #         self.learner_select_option()
-        # if al.ui.backspace:
-        #     al.ui.backspace = False
-        #     self.remove_last_word()
-        #
         if al.ui.hover:
             self.grid.process_hover()
         if al.ui.click:
             self.grid.process_click_down()
         if al.ui.click_up:
-            self.grid.process_click_up()
+            self.grid.process_click_up(self.validate_answer)
 
-    def set_box_as_selected_and_unselect_others(self, box):
-        for other_box in self.option_boxes + self.sentence_boxes + [self.validate_box]:
-            other_box.selected = False
-        box.selected = True
+    def fails(self):
+        # Have the grid shake or something
+        pass
 
-    def process_hover(self):
-        for box in self.option_boxes:
-            if box.contains(self.al.ui.hover):
-                self.al.ui.hover = None
-                self.is_validating = False
-                self.set_box_as_selected_and_unselect_others(box)
-                self.selected_option_index = box.index
-                return
-        for box in self.sentence_boxes:
-            if box.contains(self.al.ui.hover):
-                self.al.ui.hover = None
-                self.is_validating = True
-                self.selected_picked_syllable_index = box.index
-                self.set_box_as_selected_and_unselect_others(box)
-                return
-        if self.validate_box.contains(self.al.ui.hover):
-            self.al.ui.hover = None
-            self.set_box_as_selected_and_unselect_others(self.validate_box)
-            self.selected_picked_syllable_index = self.validate_box.index
-            self.is_validating = True
-
-    def process_click(self):
-        for box in self.option_boxes:
-            if box.contains(self.al.ui.click):
-                self.al.ui.click = None
-                self.selected_option_index = box.index
-                self.learner_select_option()
-                return
-        for box in self.sentence_boxes:
-            if box.contains(self.al.ui.click):
-                self.al.ui.click = None
-                self.learner_remove_picked_syllable(box.index)
-                return
-        if self.validate_box.contains(self.al.ui.click):
-            self.al.ui.click = None
-            self.validate_answer()
-
-    def validate_answer(self):
-        constructed = "".join([word.thai for word in self.constructed_sentence])
-        if constructed == self.sentence.thai:
-            words_to_level_up = []
-            for syllable in self.constructed_sentence:
-                for word in self.al.words.words:
-                    if syllable.thai == word.thai:
-                        words_to_level_up.append(word)
-            self.succeeds(words_to_level_up)
+    def validate_answer(self, built_sentence):
+        success = built_sentence == self.sentence.thai
+        if success:
+            self.succeeds([])
         else:
+            self.al.learner.hurt(1)
+            play_thai_word("wrong")
             self.fails()
-            self.failed_attempts += 1
-
-    def learner_remove_picked_syllable(self, picked_syllable_index: int):
-        self.constructed_sentence.remove(
-            self.constructed_sentence[picked_syllable_index]
-        )
-        self.set_boxes()
-
-    def learner_select_option(self):
-        self.constructed_sentence.append(self.choices[self.selected_option_index])
-        self.set_boxes()
-
-    def remove_last_word(self):
-        if len(self.constructed_sentence) > 0:
-            self.constructed_sentence.pop()

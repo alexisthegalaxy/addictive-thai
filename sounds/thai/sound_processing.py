@@ -1,5 +1,5 @@
 import os
-from lexicon.init import init_vocab
+# from lexicon.init import init_vocab
 from os import walk
 
 
@@ -21,7 +21,8 @@ def get_all_mp3_files():
 def print_thai_words_with_no_audio():
     sound_files = get_all_mp3_files()
     number_of_files_to_convert = 0
-    syllables, words, sentences = init_vocab()
+    # syllables, words, sentences = init_vocab()
+    # TODO Alexis
     for word in words.words:
         if word.thai not in sound_files:
             print(f"{word.thai}           {word.english}")
@@ -31,17 +32,6 @@ def print_thai_words_with_no_audio():
         print("😁 No files to convert! 😁")
     else:
         print(f"{number_of_files_to_convert} files to convert! 😅")
-
-
-def rename_files_in_english_to_thai():
-    sound_files = get_all_mp3_files()
-    syllables, words, sentences = init_vocab()
-    for word in words.words:
-        if word.english in sound_files:
-            old_filename = f"{word.english}.mp3"
-            new_filename = f"{word.thai}.mp3"
-            path = os.path.dirname(os.path.realpath(__file__))
-            os.rename(os.path.join(path, old_filename), os.path.join(path, new_filename))
 
 
 if __name__ == '__main__':
