@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 import json
 from db import get_db_cursor, get_db_conn
 from models import get_word_by_id
@@ -71,12 +71,13 @@ class Growable(object):
 class Word(Growable):
     def __init__(
         self,
-        id,
-        split_form="no_thai",
-        thai="nothai",
+        id: int,
+        split_form: str = "no_split_form",
+        thai: str ="no_thai",
         english="no_english",
         tones="LHMRF",
         pos="NOUN???",
+        xp: Optional[str] = 0,
     ):
         super().__init__()
         self.id = id
@@ -85,6 +86,7 @@ class Word(Growable):
         self.english = english
         self.tones = tones
         self.pos = pos
+        self.total_xp = xp
 
     def increase_xp(self, al, value):
         super().increase_xp(al, value)

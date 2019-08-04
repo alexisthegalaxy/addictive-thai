@@ -1,4 +1,8 @@
 TODO:
+ Should I get rid of words entirely?
+  Maybe I should keep it, because it's faster than reloading from DB constantly?
+  But I never need to show it all at once. I can keep it in the dex to show the dex, and that's enough.
+ Have the w key actually show the known words.
  There should be only one map for the overworld
     + No more updating many little maps: only one big map source of truth
         (when it comes to the overworl - otherwise, little maps for the houses)

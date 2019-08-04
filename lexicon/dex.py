@@ -1,35 +1,59 @@
 import pygame
 
+from db import get_db_cursor
 from lexicon.items import Word
 
 
 class Dex(object):
     def __init__(self, al):
+        self.actualized = False
         self.active = False
         self.al = al
-        self.from_line = 0
+        self.offset = 0
         self.words_to_show = []
-        self.determine_words_to_show()
         self.word_count = len(self.words_to_show)
         self.max_items_to_show = 15
 
-    def determine_words_to_show(self):
-        self.words_to_show = []
-        for word in Word.get_all():
-            if word.total_xp > 0:
-                self.words_to_show.append(word)
+    def select_words_from_db(self):
+        if not self.actualized:
+            words_db = list(get_db_cursor().execute(
+                f"SELECT w.id, w.split_form, w.thai, w.english, w.tones, w.pos, uw.total_xp "
+                f"FROM words w "
+                f"JOIN user_word uw ON uw.word_id = w.id "
+                f"JOIN users u ON u.id = uw.user_id "
+                f"WHERE u.is_playing "
+                f"AND uw.total_xp > 0 "
+                f"ORDER BY uw.total_xp DESC "
+                f"LIMIT {self.max_items_to_show} OFFSET {self.offset};"
+            ))
+            self.words_to_show = [Word(
+                id=id,
+                split_form=split_form,
+                thai=thai,
+                english=english,
+                tones=tones,
+                pos=pos,
+                xp=xp,
+            ) for (id, split_form, thai, english, tones, pos, xp) in words_db]
+            self.actualized = True
 
     def w(self):
         self.active = not self.active
+        if self.active and not self.actualized:
+            self.select_words_from_db()
         self.word_count = len(self.words_to_show)
 
     def interact(self):
         if self.al.ui.down:
-            self.from_line = min(self.word_count - self.max_items_to_show, self.from_line + 1)
+            self.offset = self.offset + 1
+            self.actualized = False
         if self.al.ui.up:
-            self.from_line = max(0, self.from_line - 1)
+            self.offset = max(0, self.offset - 1)
+            self.actualized = False
 
     def draw(self):
+        if not self.actualized:
+            self.select_words_from_db()
         # TODO Alexis
         ui = self.al.ui
         g16 = ui.fonts.garuda16
@@ -55,13 +79,13 @@ class Dex(object):
 
         y = ui.percent_height(0.15)
         for i, word in enumerate(self.words_to_show):
-            if 0 <= i - self.from_line < self.max_items_to_show:
-                x = ui.percent_width(0.12)
-                screen.blit(g16.render(word.thai, True, (0, 0, 0)), (x, y))
-                x = ui.percent_width(0.28)
-                screen.blit(g16.render(word.english, True, (0, 0, 0)), (x, y))
-                x = ui.percent_width(0.65)
-                screen.blit(g16.render(str(word.level), True, (0, 0, 0)), (x, y))
-                x = ui.percent_width(0.78)
-                screen.blit(g16.render(str(word.total_xp), True, (0, 0, 0)), (x, y))
-                y += ui.percent_width(0.03)
+            # if 0 <= i - self.offset < self.max_items_to_show:
+            x = ui.percent_width(0.12)
+            screen.blit(g16.render(word.thai, True, (0, 0, 0)), (x, y))
+            x = ui.percent_width(0.28)
+            screen.blit(g16.render(word.english, True, (0, 0, 0)), (x, y))
+            x = ui.percent_width(0.65)
+            screen.blit(g16.render(str(word.level), True, (0, 0, 0)), (x, y))
+            x = ui.percent_width(0.78)
+            screen.blit(g16.render(str(word.total_xp), True, (0, 0, 0)), (x, y))
+            y += ui.percent_width(0.03)
