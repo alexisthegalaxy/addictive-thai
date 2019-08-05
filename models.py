@@ -2,8 +2,8 @@ import random
 import sqlite3
 
 # from db import get_db_cursor, get_db_conn
-conn = sqlite3.connect('thai.db')
-c = conn.cursor()
+CONN = sqlite3.connect('thai.db')
+CURSOR = CONN.cursor()
 
 
 def find_word_by_id(id):
@@ -20,7 +20,7 @@ def find_word_by_id(id):
 
 def get_word_by_id(word_id):
     from lexicon.items import Word
-    word_db = list(c.execute(f"SELECT * FROM words WHERE id = '{word_id}'"))[0]
+    word_db = list(CURSOR.execute(f"SELECT * FROM words WHERE id = '{word_id}'"))[0]
     id = word_db[0]
     split_form = word_db[1]
     english = word_db[2]
@@ -41,13 +41,13 @@ def get_word_by_id(word_id):
 
 
 def get_current_map(al):
-    answers = list(c.execute("SELECT current_map FROM users WHERE is_playing = 1"))
+    answers = list(CURSOR.execute("SELECT current_map FROM users WHERE is_playing = 1"))
     if answers:
         return al.mas.get_map_from_name(answers[0][0])
 
 
 def get_current_xy(al):
-    answers = list(c.execute("SELECT x, y FROM users WHERE is_playing = 1"))
+    answers = list(CURSOR.execute("SELECT x, y FROM users WHERE is_playing = 1"))
     if answers:
         x = answers[0][0]
         y = answers[0][1]
@@ -55,7 +55,7 @@ def get_current_xy(al):
 
 
 def get_current_x_y_money_hp(al):
-    answers = list(c.execute("SELECT x, y, money, hp FROM users WHERE is_playing = 1"))
+    answers = list(CURSOR.execute("SELECT x, y, money, hp FROM users WHERE is_playing = 1"))
     if answers:
         x = answers[0][0]
         y = answers[0][1]
@@ -65,37 +65,37 @@ def get_current_x_y_money_hp(al):
 
 
 def save_user_to_db(al, x, y, money, hp, current_map):
-    c.execute(f"UPDATE users SET x = {x}, y = {y}, money = {money}, hp = {hp}, current_map='{current_map}' WHERE is_playing = 1")
-    conn.commit()
+    CURSOR.execute(f"UPDATE users SET x = {x}, y = {y}, money = {money}, hp = {hp}, current_map='{current_map}' WHERE is_playing = 1")
+    CONN.commit()
 
 
 def find_word_by_id_get_thai(id):
-    thai = list(c.execute(f"SELECT thai FROM words WHERE id = '{id}'"))[0][0]
+    thai = list(CURSOR.execute(f"SELECT thai FROM words WHERE id = '{id}'"))[0][0]
     return thai
 
 
 def insert_word(thai, english, tones):
     if not find_word_by_thai(thai):
-        c.execute(f"INSERT INTO words (thai, english, tones) VALUES ('{thai}', '{english}', '{tones}')")
-        conn.commit()
+        CURSOR.execute(f"INSERT INTO words (thai, english, tones) VALUES ('{thai}', '{english}', '{tones}')")
+        CONN.commit()
 
 
 def get_active_learner_id():
-    answers = list(c.execute("SELECT id FROM users WHERE is_playing = 1"))
+    answers = list(CURSOR.execute("SELECT id FROM users WHERE is_playing = 1"))
     if answers:
         return answers[0][0]
 
 
 def get_known_words():
     learner_id = get_active_learner_id()
-    answers = list(c.execute(f"SELECT id FROM user_word WHERE user_id = {learner_id} AND total_xp > 5"))
+    answers = list(CURSOR.execute(f"SELECT id FROM user_word WHERE user_id = {learner_id} AND total_xp > 5"))
     if answers:
         return answers[0][0]
 
 
 def get_random_known_word_id():
     user_id = get_active_learner_id()
-    known_words = list(c.execute(f"""
+    known_words = list(CURSOR.execute(f"""
         SELECT word_id
         FROM user_word
         WHERE total_xp > 0
@@ -106,7 +106,7 @@ def get_random_known_word_id():
 
 def find_user_word(user_id, word_id):
     answers = list(
-        c.execute(
+        CURSOR.execute(
             f"SELECT * FROM user_word WHERE user_id = '{user_id}' AND word_id = '{word_id}'"
         )
     )
@@ -120,7 +120,7 @@ def insert_user_word(
     user_id, word_id, total_xp, level, next_threshold, previous_threshold
 ):
     if not find_user_word(user_id, word_id):
-        c.execute(
+        CURSOR.execute(
             f"INSERT INTO user_word (user_id, word_id, total_xp, level, next_threshold, previous_threshold) VALUES ('{user_id}', '{word_id}', '{total_xp}', '{level}', '{next_threshold}', '{previous_threshold}')"
         )
-        conn.commit()
+        CONN.commit()

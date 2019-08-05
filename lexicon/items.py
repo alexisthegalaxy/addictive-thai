@@ -1,7 +1,8 @@
+import sqlite3
 from typing import List, Optional
 import json
 from db import get_db_cursor, get_db_conn
-from models import get_word_by_id
+from models import get_word_by_id, CONN, CURSOR
 
 
 class Growable(object):
@@ -261,14 +262,15 @@ class Words(object):
 
     @classmethod
     def reset_words(cls, xp):
-        get_db_cursor().execute(
+        CURSOR.execute(
             f"UPDATE user_word "
             f"SET total_xp = {xp} "
-            f"where EXISTS (SELECT * "
-            f"    FROM user_word "
-            f"    JOIN users ON users.id = user_word.user_id "
-            f"    WHERE users.is_playing = 1)"
+            f"where EXISTS (SELECT 1 "
+            f"    FROM users "
+            f"    WHERE users.id = user_word.user_id "
+            f"    AND users.is_playing = 1)"
         )
+        CONN.commit()
 
 
 class Sentence(object):
