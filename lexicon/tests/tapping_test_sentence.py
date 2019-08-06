@@ -3,19 +3,21 @@ from lexicon.tests.tests import Test, TestAnswerBox
 import random
 import pygame
 
+from models import increase_xp
+
 
 class TappingTestSentence(Test):
     def __init__(
         self,
         al: "All",
         correct_word: Word,
-        sentence,
+        sentence: Sentence,
         learning=None,
         test_success_callback=None,
     ):
         super().__init__(al, learning, test_success_callback)
         self.correct_word = correct_word
-        self.number_of_distr = 6
+        self.number_of_distr = 1  # 6 is better no?
         self.selected_picked_syllable_index = 0
         self.constructed_sentence = []  # List of syllables
         self.is_validating = False  # means that the selector is in the lower part of the screen
@@ -32,7 +34,7 @@ class TappingTestSentence(Test):
         for word in self.sentence.words:
             for syllable in word.get_syllables():
                 self.correct_syllables.append(syllable)
-                syllable_only.append(syllable.thai)
+                syllable_only.append(syllable)
 
         # 3 - Determine the distractors
         self.distractors = []
@@ -58,30 +60,30 @@ class TappingTestSentence(Test):
         y = ui.percent_height(0.30)
         height = ui.percent_height(0.1)
         for i, syllable in enumerate(self.choices):
-            rendered_text = fonts.garuda32.render(syllable.thai, True, (0, 0, 0))
+            rendered_text = fonts.garuda32.render(syllable, True, (0, 0, 0))
             text_length = rendered_text.get_width()
             width = text_length + 20
             self.option_boxes.append(
                 TestAnswerBox(
-                    x=x, y=y, width=width, height=height, string=syllable.thai, index=i
+                    x=x, y=y, width=width, height=height, string=syllable, index=i
                 )
             )
             x += width + 20
             if x > ui.percent_width(0.85):
                 x = ui.percent_width(0.15)
-                y += ui.percent_height(0.30)
+                y += ui.percent_height(0.15)
 
         # built sentence
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.60)
         validated_box_index = 0
         for i, syllable in enumerate(self.constructed_sentence):
-            rendered_text = fonts.garuda32.render(syllable.thai, True, (0, 0, 0))
+            rendered_text = fonts.garuda32.render(syllable, True, (0, 0, 0))
             text_length = rendered_text.get_width()
             width = text_length + 20
             self.sentence_boxes.append(
                 TestAnswerBox(
-                    x=x, y=y, width=width, height=height, string=syllable.thai, index=i
+                    x=x, y=y, width=width, height=height, string=syllable, index=i
                 )
             )
             x += width + 20
@@ -109,12 +111,13 @@ class TappingTestSentence(Test):
     def select_distractors(self, syllable_only):
         # We select amongst sentences.words rather than amongst words to get
         # more common words
-        for sentence in Sentence.get_random_known_sentence():
+        while len(self.distractors) <= self.number_of_distr:
+            sentence = Sentence.get_random_known_sentence()
             for word in random.choices(population=sentence.words):
                 for syllable in word.get_syllables():
-                    if syllable.thai not in syllable_only:
+                    if syllable not in syllable_only:
                         self.distractors.append(syllable)
-                        syllable_only.append(syllable.thai)
+                        syllable_only.append(syllable)
                     if len(self.distractors) > self.number_of_distr:
                         return
 
@@ -267,14 +270,11 @@ class TappingTestSentence(Test):
             self.validate_answer()
 
     def validate_answer(self):
-        constructed = "".join([word.thai for word in self.constructed_sentence])
+        constructed = "".join(self.constructed_sentence)
         if constructed == self.sentence.thai:
-            words_to_level_up = []
-            for syllable in self.constructed_sentence:
-                for word in self.al.words.words:
-                    if syllable.thai == word.thai:
-                        words_to_level_up.append(word)
-            self.succeeds(words_to_level_up)
+            for word in self.sentence.words:
+                increase_xp(word.thai, 1)
+            self.succeeds()
         else:
             self.fails()
             self.failed_attempts += 1

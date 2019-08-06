@@ -38,9 +38,8 @@ class Dex(object):
             self.actualized = True
 
     def w(self):
+        self.actualized = False
         self.active = not self.active
-        if self.active and not self.actualized:
-            self.select_words_from_db()
         self.word_count = len(self.words_to_show)
 
     def interact(self):

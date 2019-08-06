@@ -39,6 +39,24 @@ def get_word_by_id(word_id):
     return word
 
 
+def find_word_by_thai_get_id(thai):
+    print(thai)
+    id = list(CURSOR.execute(f"SELECT id FROM words WHERE thai = '{thai}'"))[0][0]
+    return id
+
+
+def increase_xp(thai, value):
+    """ increase xp by value """
+    learner_id = get_active_learner_id()
+    word_id = find_word_by_thai_get_id(thai)
+    CURSOR.execute(
+        f"UPDATE user_word "
+        f"SET total_xp = total_xp + {value} "
+        f"WHERE user_word.word_id = {word_id} "
+        f"AND user_word.user_id = {learner_id}"
+    )
+    CONN.commit()
+
 
 def get_current_map(al):
     answers = list(CURSOR.execute("SELECT current_map FROM users WHERE is_playing = 1"))
@@ -102,6 +120,22 @@ def get_random_known_word_id():
           AND user_id = '{user_id}'
     """))
     return random.choice(known_words)[0]
+
+
+def get_random_word_id() -> 'Word':
+    from lexicon.items import Word
+    random_word_db = random.choice(list(CURSOR.execute(f"""
+        SELECT id, split_form, english, tones, pos, thai
+        FROM words
+    """)))
+    return Word(
+        id=random_word_db[0],
+        split_form=random_word_db[1],
+        english=random_word_db[2],
+        tones=random_word_db[3],
+        pos=random_word_db[4],
+        thai=random_word_db[5],
+    )
 
 
 def find_user_word(user_id, word_id):

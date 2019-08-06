@@ -1,8 +1,4 @@
 TODO:
- Should I get rid of words entirely?
-  Maybe I should keep it, because it's faster than reloading from DB constantly?
-  But I never need to show it all at once. I can keep it in the dex to show the dex, and that's enough.
- Have the w key actually show the known words.
  There should be only one map for the overworld
     + No more updating many little maps: only one big map source of truth
         (when it comes to the overworl - otherwise, little maps for the houses)
@@ -12,13 +8,12 @@ TODO:
     In the main function, have a function to do the cropping and get the text files
  Data change:
     remove pickling
-        fix def get_sentences so that it returns actual sentences!
  Grid tests:
     Make grammar grid test
         Show the timer
         Use the word POS
  Make it isometric
-    Device a way to design the maps
+    Devise a way to design the maps
         Using GIMP:
             Save maps as csv files now, and each layer is different
  Tone From sound test

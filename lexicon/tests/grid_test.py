@@ -23,6 +23,9 @@ class Cell(object):
         self.index = -1
         self.bg = (220, 220, 220)
 
+    def __str__(self):
+        return self.thai
+
     def contains(self, point):
         (x, y) = point
         margin = 10
@@ -107,8 +110,8 @@ class Grid(object):
             [Cell(), Cell(), Cell(), Cell()],
         ]
         self.al = al
-        self.sentence_id = sentence
-        self.sentence_words = sentence.words()
+        self.sentence = sentence
+        self.sentence_words = sentence.words
         self.selected_cells = []
         self.set_cells_positions()
         self.fill_with_random_words()
@@ -129,11 +132,12 @@ class Grid(object):
                 self.cells[i][j].width = width
                 self.cells[i][j].height = height
 
-    def set_cell(self, x, y, thai, word_id):
+    def set_cell(self, x, y, thai, word_id, pos):
         assert 0 <= x <= 3
         assert 0 <= y <= 3
         self.cells[x][y].thai = thai
         self.cells[x][y].word_id = word_id
+        self.cells[x][y].pos = pos
 
     def get_cell(self, x, y):
         assert 0 <= x <= 3
@@ -175,8 +179,9 @@ class Grid(object):
         for i, position in enumerate(positions):
             x, y = position
             thai = words[i].thai
-            word_id = -1
-            self.set_cell(x, y, thai=thai, word_id=word_id)
+            word_id = -1  # TODO Alexis
+            pos = 'VERB'  # TODO Alexis
+            self.set_cell(x, y, thai=thai, word_id=word_id, pos=pos)
         return True
 
     def fill_with_random_words(self):
@@ -262,7 +267,7 @@ class Grid(object):
         self.click_down = False
         self.al.ui.click_up = None
         if self.selected_cells:
-            s = "_".join()
+            s = ""
             for selected_cell in self.selected_cells:
                 s += selected_cell.thai
             validate_callback(s)

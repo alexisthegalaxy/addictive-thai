@@ -1,8 +1,7 @@
-import sqlite3
 from typing import List, Optional
 import json
 from db import get_db_cursor, get_db_conn
-from models import get_word_by_id, CONN, CURSOR
+from models import get_word_by_id, CONN, CURSOR, get_active_learner_id
 
 
 class Growable(object):
@@ -22,8 +21,6 @@ class Growable(object):
         self.total_xp += value
         while self.total_xp >= self.next_threshold:
             self.level_up()
-        if al.dex:
-            al.dex.determine_words_to_show()
 
     def decrease_xp(self, al, value):
         # print('')
@@ -91,26 +88,30 @@ class Word(Growable):
 
     def increase_xp(self, al, value):
         super().increase_xp(al, value)
-        v = value
-        i = self.id
-        get_db_cursor().execute(
-            "UPDATE user_word"
-            f" SET total_xp = {value}"
-            # f" JOIN users on users.id = user_word.user_id"
-            f" WHERE user_word.word_id = '{self.id}'"
+        learner_id = get_active_learner_id()
+        CURSOR.execute(
+            f"UPDATE user_word "
+            f"SET total_xp = total_xp + {value} "
+            f"WHERE user_word.word_id = {self.id} "
+            f"AND user_word.user_id = {learner_id}"
         )
-        # get_db_cursor().execute(
-        #     f"UPDATE user_word uw"
-        #     f" JOIN users u on u.id = uw.user_id"
-        #     f" WHERE word_id = '{self.id}' AND u.is_playing = 1"
-        #     f" SET total_xp = {value}"
-        # )
-        get_db_conn().commit()
+        CONN.commit()
+
+    def get_total_xp(self) -> int:
+        # TODO Alexis: add a check in the case that there is no column at all
+        total_xp = list(CURSOR.execute(
+            f"SELECT uw.total_xp FROM user_word uw "
+            f"JOIN words w on w.id = uw.word_id "
+            f"JOIN users u on u.id = uw.user_id "
+            f"WHERE w.id = '{self.id}'"
+            f"AND u.is_playing"
+        ))[0][0]
+        return total_xp
 
     def get_syllables(self):
         return self.split_form.split("-")
 
-    def get_sentences(self):
+    def get_sentences(self) -> List['Sentence']:
         # TODO Alexis
         sentences = []
         for sentence_db in list(get_db_cursor().execute(
@@ -223,9 +224,9 @@ class Word(Growable):
 
 
 class Words(object):
-    def __init__(self):
-        self.words: List[Word] = []
-        self.words_per_map = {}  # a dictionary giving al the words for a given map
+    # def __init__(self):
+    #     self.words: List[Word] = []
+    #     self.words_per_map = {}  # a dictionary giving al the words for a given map
 
     def add_word(self, word: Word):
         self.words.append(word)
@@ -284,9 +285,9 @@ class Sentence(object):
         return f"{self.thai} - {self.english}"
 
     @staticmethod
-    def get_words_in_sentence(sentence_id, al):
+    def get_words_in_sentence(sentence_id):
         words_db = list(
-            al.cursor.execute(
+            CURSOR.execute(
                 f"SELECT * FROM words JOIN word_sentence ON words.id = word_sentence.word_id WHERE word_sentence.sentence_id = '{sentence_id}'"
             )
         )
@@ -321,10 +322,10 @@ class Sentence(object):
         return Sentence(thai=thai, english=english, words=words)
 
     @classmethod
-    def get_random_known_sentence(cls, al):
+    def get_random_known_sentence(cls):
         # TODO: for the moment, this only returns a random sentence!
         sentence = list(
-            al.cursor.execute(f"SELECT * FROM sentences order by random() LIMIT 1")
+            CURSOR.execute(f"SELECT * FROM sentences order by random() LIMIT 1")
         )[0]
         sentence_id = sentence[0]
         thai = sentence[1]

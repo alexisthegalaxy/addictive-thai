@@ -1,27 +1,27 @@
 import random
+from typing import List
 
 from lexicon.tests.grid_test import GrammarGridTest, SentenceGridTest
 from lexicon.tests.tests import EnglishFromSound4, EnglishFromSound6, ThaiFromSound6, ThaiFromSound4, EnglishFromThai6, \
     EnglishFromThai4
 
 
-def pick_sentence_test(al, chosen_word, learning=False, test_success_callback=None):
+def pick_sentence_test(al, chosen_word: 'Word', learning=False, test_success_callback=None):
     """
     Returns TappingTestSentence or SentenceGridTest or None if no sentence
     """
-    can_be_selected_sentences = []
-    a = chosen_word.get_sentences()
+    can_be_selected_sentences: List['Sentence'] = []
     for sentence in chosen_word.get_sentences():
         sentence_can_be_learnt = True
         for word in sentence.words:
-            if word.total_xp < 5:
+            if word.get_total_xp() < 5:
                 sentence_can_be_learnt = False
         if sentence_can_be_learnt:
             can_be_selected_sentences.append(sentence)
     if len(can_be_selected_sentences) > 0:
         sentence = random.choice(can_be_selected_sentences)
 
-        r = random.randint(0, 30)  # can be 0, ..., n-1
+        r = random.randint(0, 2)  # can be 0, ..., n-1
         if r == 0:
             from lexicon.tests.tapping_test_sentence import TappingTestSentence
             test = TappingTestSentence(al, correct_word=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
@@ -38,7 +38,7 @@ def pick_a_test_for_word(al, chosen_word):
     test = None
     can_be_tested_on_sentence = True
     while test is None:
-        r = random.randint(0, 20)  # can be 0, ..., n-1   (15)
+        r = random.randint(0, 200)  # can be 0, ..., n-1   (15)
         from lexicon.tests.tests import ThaiFromEnglish6, ThaiFromEnglish4
         if r == 0:
             test = ThaiFromEnglish4(al, correct_word=chosen_word)

@@ -4,6 +4,7 @@ from enum import Enum
 from typing import List
 
 from lexicon.items import Word
+from models import get_random_word_id
 from sounds.play_sound import play_thai_word, play_transformed_thai_word
 
 
@@ -99,11 +100,7 @@ class Test(object):
         pygame.draw.rect(screen, (150, 150, 150), (x, y, width, height))
         pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
 
-    def succeeds(self, words_to_level_up):
-        # 1 - Puts in the xp
-        for word in words_to_level_up:
-            word.increase_xp(self.al, 1)
-
+    def succeeds(self):
         # 2 - Play sound
         try:
             play_transformed_thai_word(self.correct_word.thai)
@@ -154,7 +151,8 @@ class ThaiFromEnglish(Test):
                     distractors.append(distractor)
         else:  # We don't know enough words!
             while len(distractors) < self.number_of_distr:
-                distractor = random.choices(self.al.words.words)[0]
+                # TODO Alexis there is no more al.words
+                distractor = get_random_word_id()
                 if (
                     distractor not in distractors
                     and distractor.thai != self.correct_word.thai
@@ -621,7 +619,7 @@ class FromSound(Test):
                     distractors.append(distractor)
         else:  # We don't know enough words!
             while len(distractors) < self.number_of_distr:
-                distractor = random.choices(self.al.words.words)[0]
+                distractor = get_random_word_id()
                 if (
                     distractor not in distractors
                     and distractor.thai != self.correct_word.thai
