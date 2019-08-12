@@ -414,7 +414,7 @@ class SentenceGridTest(Test):
     def validate_answer(self, built_sentence):
         success = built_sentence == self.sentence.thai
         if success:
-            self.succeeds([])
+            self.succeeds()
         else:
             self.al.learner.hurt(1)
             play_thai_word("wrong")

@@ -66,6 +66,7 @@ def main_draw(al: All):
 
 
 def main():
+    # derive_from_mothermap()
     cell_types = CellTypes()
     mas = Mas(cell_types)
     mas.form_links()

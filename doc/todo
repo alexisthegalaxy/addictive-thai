@@ -1,11 +1,7 @@
 TODO:
- There should be only one map for the overworld
-    + No more updating many little maps: only one big map source of truth
-        (when it comes to the overworl - otherwise, little maps for the houses)
-    The npcs and such would have their coordinates computed in the OW
-    Each map would still have a name - it would just not have a bmp file
-        Each map would have the x and y to be cropped from the mother map
-    In the main function, have a function to do the cropping and get the text files
+    - Express old NPC in their new coordinates
+      Actually, just keep the coordinates the way they are for now, and in the future when adding
+      a new NPC, we use the mothermap and then substract using the Mothermap.minimaps[map_name].x,y
  Data change:
     remove pickling
  Grid tests:

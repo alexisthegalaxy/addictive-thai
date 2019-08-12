@@ -184,7 +184,7 @@ class ThaiFromEnglish(Test):
     def learner_select_option(self):
         option = self.selected_option_index
         if self.choices[option] == self.correct_word:
-            self.succeeds([self.correct_word])
+            self.succeeds()
         else:
             self.fails()
 
@@ -662,7 +662,7 @@ class FromSound(Test):
     def learner_select_option(self):
         option = self.selected_option_index
         if self.choices[option] == self.correct_word:
-            self.succeeds([self.correct_word])
+            self.succeeds()
         else:
             self.fails()
 

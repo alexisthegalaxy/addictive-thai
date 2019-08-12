@@ -4,6 +4,7 @@ from typing import List
 
 import pygame
 
+from derive_from_mothermap import Mothermap, mothermap
 from lexicon.items import Words, Word
 from lexicon.test_services import pick_a_test_for_word
 from npc.npc import Npc
@@ -39,6 +40,7 @@ class CellTypes:
     cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0.05)
     boulder_2 = CellType('岩', 'boulder_2', (53, 14, 14), False, 0)
     rock = CellType('石', 'rock', (94, 37, 37), False, 0)
+    rocky_ground = CellType('嶝', 'rocky_path', (210, 185, 184), True, 0.05)
     boulder = CellType('砾', 'boulder', (172, 92, 113), False, 0)
     entrance = CellType('入', 'entrance', (227, 25, 77), True, 0)
     fruit_tree = CellType('果', 'fruit_tree', (192, 255, 81), False, 0)
@@ -85,7 +87,7 @@ class Occurrence(object):
 
 
 class Ma(object):
-    def __init__(self, filename, cell_types, mas):
+    def __init__(self, filename, cell_types, mas, x_shift=-1, y_shift=-1):
         self.filename = filename
         self.mas: Mas = mas
         self.ma = []
@@ -109,6 +111,8 @@ class Ma(object):
         self.height = y
         self.occ = Occurrence(self)
         self.npcs: List[Npc] = []
+        self.x_shift = x_shift
+        self.y_shift = y_shift
 
     def draw(self, al):
         offset_x = -al.ui.cell_size * (al.learner.x - 7)
@@ -182,9 +186,9 @@ class Mas(object):
         self.inn3 = Ma(filename="inn3", cell_types=cell_types, mas=self)
         self.inn4 = Ma(filename="inn4", cell_types=cell_types, mas=self)
         self.inn5 = Ma(filename="inn5", cell_types=cell_types, mas=self)
-        self.chaiyaphum = Ma(filename="chaiyaphum", cell_types=cell_types, mas=self)
-        self.chumphae = Ma(filename="chumphae", cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", cell_types=cell_types, mas=self)
+        self.chaiyaphum = Ma(filename="chaiyaphum", cell_types=cell_types, mas=self, x_shift=780, y_shift=629)
+        self.chumphae = Ma(filename="chumphae", cell_types=cell_types, mas=self, x_shift=699, y_shift=563)
+        self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", cell_types=cell_types, mas=self, x_shift=824, y_shift=551)
 
         self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", cell_types=cell_types, mas=self)
         self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", cell_types=cell_types, mas=self)
@@ -200,7 +204,7 @@ class Mas(object):
         self.chumphae_lomsak_house2 = Ma(filename="chumphae_lomsak_house2", cell_types=cell_types, mas=self)
         self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", cell_types=cell_types, mas=self)
 
-        self.lomsak = Ma(filename="lomsak", cell_types=cell_types, mas=self)
+        self.lomsak = Ma(filename="lomsak", cell_types=cell_types, mas=self, x_shift=676, y_shift=543)
         self.lomsak_house_1 = Ma(filename="lomsak_house_1", cell_types=cell_types, mas=self)
         self.lomsak_house_2 = Ma(filename="lomsak_house_2", cell_types=cell_types, mas=self)
         self.lomsak_house_3 = Ma(filename="lomsak_house_3", cell_types=cell_types, mas=self)
@@ -210,14 +214,14 @@ class Mas(object):
 
         self.question_cave = Ma(filename="question_cave", cell_types=cell_types, mas=self)
         self.cat_cave = Ma(filename="cat_cave", cell_types=cell_types, mas=self)
-        self.cat_cove = Ma(filename="cat_cove", cell_types=cell_types, mas=self)
+        self.cat_cove = Ma(filename="cat_cove", cell_types=cell_types, mas=self, x_shift=710, y_shift=616)
         self.cat_cove_house = Ma(filename="cat_cove_house", cell_types=cell_types, mas=self)
 
-        self.phetchabun = Ma(filename="phetchabun", cell_types=cell_types, mas=self)
-        self.banyaeng = Ma(filename="banyaeng", cell_types=cell_types, mas=self)
-        self.labyrinth = Ma(filename="labyrinth", cell_types=cell_types, mas=self)
-        self.phitsalunok = Ma(filename="phitsalunok", cell_types=cell_types, mas=self)
-        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", cell_types=cell_types, mas=self)
+        self.phetchabun = Ma(filename="phetchabun", cell_types=cell_types, mas=self, x_shift=639, y_shift=572)
+        self.banyaeng = Ma(filename="banyaeng", cell_types=cell_types, mas=self, x_shift=599, y_shift=578)
+        self.labyrinth = Ma(filename="labyrinth", cell_types=cell_types, mas=self, x_shift=586, y_shift=545)
+        self.phitsalunok = Ma(filename="phitsalunok", cell_types=cell_types, mas=self, x_shift=530, y_shift=545)
+        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", cell_types=cell_types, mas=self, x_shift=620, y_shift=548)
         self.phetchabun_mountain_house_1 = Ma(filename="phetchabun_mountain_house_1", cell_types=cell_types, mas=self)
         self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", cell_types=cell_types, mas=self)
 
@@ -288,25 +292,24 @@ class Mas(object):
         self.chumphae.get_cell_at(36, 32).goes_to = (self.chumphae_lomsak_house3, 5, 12)
         self.chumphae_lomsak_house3.get_cell_at(5, 13).goes_to = (self.chumphae, 36, 33)
         # lomsak
-        self.chumphae.get_cell_at(13, 19).goes_to = (self.lomsak, 36, 39)
-        self.chumphae.get_cell_at(13, 20).goes_to = (self.lomsak, 36, 40)
-        self.lomsak.get_cell_at(37, 39).goes_to = (self.chumphae, 14, 19)
-        self.lomsak.get_cell_at(37, 40).goes_to = (self.chumphae, 14, 20)
-        self.lomsak.get_cell_at(29, 32).goes_to = (self.inn2, 4, 7)
-        self.inn2.get_cell_at(4, 8).goes_to = (self.lomsak, 29, 33)
-        self.lomsak.get_cell_at(19, 36).goes_to = (self.lomsak_house_1, 5, 12)
-        self.lomsak_house_1.get_cell_at(5, 13).goes_to = (self.lomsak, 19, 37)
-        self.lomsak.get_cell_at(8, 23).goes_to = (self.lomsak_house_2, 5, 12)
-        self.lomsak_house_2.get_cell_at(5, 13).goes_to = (self.lomsak, 8, 24)
-        self.lomsak.get_cell_at(28, 24).goes_to = (self.lomsak_school, 13, 24)
-        self.lomsak_school.get_cell_at(13, 25).goes_to = (self.lomsak, 28, 25)
-        self.lomsak.get_cell_at(31, 23).goes_to = (self.lomsak_school, 19, 16)
-        self.lomsak_school.get_cell_at(20, 16).goes_to = (self.lomsak, 32, 23)
-        self.lomsak.get_cell_at(16, 24).goes_to = (self.lomsak_gym, 13, 24)
-        self.lomsak_gym.get_cell_at(13, 25).goes_to = (self.lomsak, 16, 25)
-
-        self.lomsak.get_cell_at(21, 12).goes_to = (self.lomsak_temple, 13, 24)
-        self.lomsak_temple.get_cell_at(13, 25).goes_to = (self.lomsak, 21, 13)
+        self.chumphae.get_cell_at(13, 19).goes_to = (self.lomsak, 36 + 6, 39)
+        self.chumphae.get_cell_at(13, 20).goes_to = (self.lomsak, 36 + 6, 40)
+        self.lomsak.get_cell_at(37 + 6, 39).goes_to = (self.chumphae, 14, 19)
+        self.lomsak.get_cell_at(37 + 6, 40).goes_to = (self.chumphae, 14, 20)
+        self.lomsak.get_cell_at(29 + 6, 32).goes_to = (self.inn2, 4, 7)
+        self.inn2.get_cell_at(4, 8).goes_to = (self.lomsak, 29 + 6, 33)
+        self.lomsak.get_cell_at(19 + 6, 36).goes_to = (self.lomsak_house_1, 5, 12)
+        self.lomsak_house_1.get_cell_at(5, 13).goes_to = (self.lomsak, 19 + 6, 37)
+        self.lomsak.get_cell_at(13, 24).goes_to = (self.lomsak_house_2, 5, 12)
+        self.lomsak_house_2.get_cell_at(5, 13).goes_to = (self.lomsak, 13, 25)
+        self.lomsak.get_cell_at(28 + 6, 24).goes_to = (self.lomsak_school, 13, 24)
+        self.lomsak_school.get_cell_at(13, 25).goes_to = (self.lomsak, 28 + 6, 25)
+        self.lomsak.get_cell_at(31 + 6, 23).goes_to = (self.lomsak_school, 19, 16)
+        self.lomsak_school.get_cell_at(20, 16).goes_to = (self.lomsak, 32 + 6, 23)
+        self.lomsak.get_cell_at(16 + 6, 24).goes_to = (self.lomsak_gym, 13, 24)
+        self.lomsak_gym.get_cell_at(13, 25).goes_to = (self.lomsak, 16 + 6, 25)
+        self.lomsak.get_cell_at(21 + 6, 12).goes_to = (self.lomsak_temple, 13, 24)
+        self.lomsak_temple.get_cell_at(13, 25).goes_to = (self.lomsak, 21 + 6, 13)
 
         self.phetchabun.get_cell_at(17, 17).goes_to = (self.question_cave, 24, 26)
         self.question_cave.get_cell_at(24, 27).goes_to = (self.phetchabun, 17, 18)
@@ -323,10 +326,10 @@ class Mas(object):
         self.cat_cove.get_cell_at(11, 6).goes_to = (self.cat_cove_house, 5, 12)
         self.cat_cove_house.get_cell_at(5, 13).goes_to = (self.cat_cove, 11, 7)
 
-        self.phetchabun.get_cell_at(49, 8).goes_to = (self.lomsak, 12, 37)
-        self.lomsak.get_cell_at(12, 38).goes_to = (self.phetchabun, 49, 9)
-        self.phetchabun.get_cell_at(50, 8).goes_to = (self.lomsak, 13, 37)
-        self.lomsak.get_cell_at(13, 38).goes_to = (self.phetchabun, 50, 9)
+        self.phetchabun.get_cell_at(49, 8).goes_to = (self.lomsak, 12 + 6, 37)
+        self.lomsak.get_cell_at(12 + 6, 38).goes_to = (self.phetchabun, 49, 9)
+        self.phetchabun.get_cell_at(50, 8).goes_to = (self.lomsak, 13 + 6, 37)
+        self.lomsak.get_cell_at(13 + 6, 38).goes_to = (self.phetchabun, 50, 9)
 
         # To banyaeng forest
         self.phetchabun.get_cell_at(8, 57).goes_to = (self.banyaeng, 48, 51)
@@ -349,10 +352,10 @@ class Mas(object):
         self.lomsak_labyrinth.get_cell_at(7, 6).goes_to = (self.labyrinth, 41, 9)
         self.lomsak_labyrinth.get_cell_at(7, 7).goes_to = (self.labyrinth, 41, 10)
 
-        self.lomsak.get_cell_at(7, 24).goes_to = (self.lomsak_labyrinth, 63, 19)
-        self.lomsak.get_cell_at(7, 25).goes_to = (self.lomsak_labyrinth, 63, 20)
-        self.lomsak_labyrinth.get_cell_at(64, 19).goes_to = (self.lomsak, 8, 24)
-        self.lomsak_labyrinth.get_cell_at(64, 20).goes_to = (self.lomsak, 8, 25)
+        self.lomsak.get_cell_at(677 - mothermap.minimaps['lomsak'].x, 567 - mothermap.minimaps['lomsak'].y).goes_to = (self.lomsak_labyrinth, 677 - mothermap.minimaps['lomsak_labyrinth'].x, 567 - mothermap.minimaps['lomsak_labyrinth'].y)
+        self.lomsak.get_cell_at(677 - mothermap.minimaps['lomsak'].x, 568 - mothermap.minimaps['lomsak'].y).goes_to = (self.lomsak_labyrinth, 677 - mothermap.minimaps['lomsak_labyrinth'].x, 568 - mothermap.minimaps['lomsak_labyrinth'].y)
+        self.lomsak_labyrinth.get_cell_at(677 + 1 - mothermap.minimaps['lomsak_labyrinth'].x, 567 - mothermap.minimaps['lomsak_labyrinth'].y).goes_to = (self.lomsak, 677 + 1 - mothermap.minimaps['lomsak'].x, 567 - mothermap.minimaps['lomsak'].y)
+        self.lomsak_labyrinth.get_cell_at(677 + 1 - mothermap.minimaps['lomsak_labyrinth'].x, 568 - mothermap.minimaps['lomsak_labyrinth'].y).goes_to = (self.lomsak, 677 + 1 - mothermap.minimaps['lomsak'].x, 568 - mothermap.minimaps['lomsak'].y)
 
         self.phetchabun.get_cell_at(21, 8).goes_to = (self.lomsak_labyrinth, 40, 32)
         self.phetchabun.get_cell_at(22, 8).goes_to = (self.lomsak_labyrinth, 41, 32)
