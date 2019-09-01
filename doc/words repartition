@@ -44,6 +44,7 @@ Temple:
 
 lomsak-phetchabun:
 ✓ good ดี
+✓ bad ดี
 
 question mountain:
 ✓ what อะ-ไร
@@ -54,24 +55,23 @@ question mountain:
 ✓ how ยัง-ไง
 
 phetchabun
-teacher
-cat
-today
+DB✓ - teacher
+✓ cat
+DB✓ - today
 school:
     - adjectives
     - bpen
-
-
-
-
-
-khaotakian-park: (เขาตะเคียน)
+phetchabun fruit farm:
+    - mango
+    - banana
+    - ananas
+baenyang forest:
     - how much
     - how long
     - how many
 
 phetchabun:
-fruits
+
 
 
 kikyou:

@@ -21,14 +21,14 @@ def pick_sentence_test(al, chosen_word: 'Word', learning=False, test_success_cal
     if len(can_be_selected_sentences) > 0:
         sentence = random.choice(can_be_selected_sentences)
 
-        r = random.randint(0, 2)  # can be 0, ..., n-1
-        if r == 0:
+        r = random.randint(0, 20)  # can be 0, ..., n-1
+        if r != 0:
             from lexicon.tests.tapping_test_sentence import TappingTestSentence
             test = TappingTestSentence(al, correct_word=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
-        elif r == 1:
-            test = SentenceGridTest(al, correct_word=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
         else:
-            test = GrammarGridTest(al, correct_word=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
+            test = SentenceGridTest(al, correct_word=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
+        # else:
+        #     test = GrammarGridTest(al, correct_word=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
     else:
         test = None
     return test

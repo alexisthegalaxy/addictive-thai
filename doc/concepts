@@ -36,9 +36,6 @@ Fruit tree:
     each day, gives one berry
     a berry heals you 1 hp
 
-Trainer Battle:
-See battle.py
-
 Wild battle:
 Randomly on tall grass, words can trigger a test about them.
 It can be any type of test.

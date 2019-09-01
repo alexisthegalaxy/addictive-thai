@@ -112,6 +112,7 @@ class Ui(object):
             "cave_water": pygame.image.load("../ow/sprites/cave_water.bmp"),
             "ground": pygame.image.load("../ow/sprites/ground.bmp"),
             "tall_grass": pygame.image.load("../ow/sprites/tall_grass.bmp"),
+            "field": pygame.image.load("../ow/sprites/field.bmp"),
         }
         self.images = random_images()
         self.npc_sprites = npc_sprites()

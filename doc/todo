@@ -1,9 +1,4 @@
 TODO:
-    - Express old NPC in their new coordinates
-      Actually, just keep the coordinates the way they are for now, and in the future when adding
-      a new NPC, we use the mothermap and then substract using the Mothermap.minimaps[map_name].x,y
- Data change:
-    remove pickling
  Grid tests:
     Make grammar grid test
         Show the timer
@@ -13,6 +8,7 @@ TODO:
         Using GIMP:
             Save maps as csv files now, and each layer is different
  Tone From sound test
+ When a teacher want to teach you a word, they have a ! on their head!
 
 
 TODO mid:

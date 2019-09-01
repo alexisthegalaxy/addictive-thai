@@ -23,7 +23,7 @@ class Vendor(Npc):
             al=al, name=name, ma=ma, x=x, y=y, direction=direction, sprite=sprite
         )
         self.vendor_dialog_beginning = vendor_dialog_beginning
-        self.vendor_dialog_end = vendor_dialog_end
+        self.vendor_dialog_end = vendor_dialog_end or ["Hope to see you again!"]
         self.sold_items = sold_items
         self.active_dialog: List[str] = self.vendor_dialog_beginning
 

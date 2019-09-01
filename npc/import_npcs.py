@@ -784,6 +784,19 @@ def nurses(al):
                 "You can rest here for a while, and you'll feel better!",
             ],
         ),
+        Npc(
+            al=al,
+            name="nurse",
+            ma=al.mas.get_map_from_name("inn_khonkaen"),
+            x=4,
+            y=1,
+            sprite="vendor",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Welcome to the inn of Khonkaen!",
+                "You can rest here for a while, and you'll feel better!",
+            ],
+        ),
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)
@@ -1048,6 +1061,32 @@ def chaiyaphum(al):
             direction=Direction.DOWN,
             standard_dialog=["Yo, my name is Rob!"],
         ),
+        Npc(
+            al=al,
+            name="old man looking at stones",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=31,
+            y=69,
+            sprite="old_man",
+            direction=Direction.DOWN,
+            standard_dialog=["These stones are quite famous around here.",
+                             "They are called มอหินขาว but tourists call those the Thai Stonehenge,",
+                             "although they are entirely natural.",
+                             ],
+        ),
+        Npc(
+            al=al,
+            name="old man looking at stones",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=27,
+            y=72,
+            sprite="mom",
+            direction=Direction.RIGHT,
+            standard_dialog=["I pray here every day.",
+                             "A different spirit lives in each rock,",
+                             "and the one in that rock brings good health.",
+                             ],
+        ),
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)
@@ -1275,7 +1314,6 @@ def lomsak(al):
             sprite="fat_vendor",
             direction=Direction.DOWN,
             vendor_dialog_beginning=["Welcome to Lomsak!", "How can I help you?"],
-            vendor_dialog_end=["Hope to See you again!"],
             sold_items=[
                 Item(
                     name="apple",
@@ -1444,7 +1482,7 @@ def lomsak(al):
             al=al,
             name="lomsak_house_3_person_1",
             taught_word=Word.get_by_split_form("ดี"),
-            ma=al.mas.get_map_from_name("lomsak_house_3"),
+            ma=al.mas.get_map_from_name("lomsak_house_4"),
             x=14,
             y=23,
             sprite="mom",
@@ -1455,6 +1493,25 @@ def lomsak(al):
             ],
             defeat_dialog=[
                 "ดี is everywhere, even in hello: สวัสดี!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="lomsak_house_4_person_1",
+            taught_word=Word.get_by_split_form("ไม่-ดี"),
+            ma=al.mas.get_map_from_name("lomsak_house_3"),
+            x=13,
+            y=23,
+            sprite="old_man",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Everything is getting worse and worse, year after year.",
+                "I will teach you the most useful adjective ever.",
+                "Bad!",
+            ],
+            defeat_dialog=[
+                "Uh? You're on an adventure?",
+                "Why, it's as bad anywhere else as it is here!",
             ],
         ),
     ]
@@ -1620,6 +1677,98 @@ def cat_cove(al):
         npc.ma.add_npc(npc)
 
 
+def khonkaen(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="look_at_tv_girl",
+            ma=al.mas.get_map_from_name("khonkaen"),
+            x=30,
+            y=20,
+            sprite="lass",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Everyday, they show a free movie on this tower screen."
+                "I'm watching right now.",
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="Market vendor of Khonkaen",
+            ma=al.mas.get_map_from_name("khonkaen"),
+            x=32,
+            y=18,
+            sprite="mom",
+            direction=Direction.RIGHT,
+            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Are you interested in silk?"],
+            sold_items=[
+                Item(
+                    name="silk",
+                    compartment=Compartment.QUEST_ITEMS,
+                    description="good quality silk from Khonkaen",
+                    price=8,
+                ),
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="Market vendor of Khonkaen",
+            ma=al.mas.get_map_from_name("khonkaen"),
+            x=32,
+            y=16,
+            sprite="dad",
+            direction=Direction.RIGHT,
+            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Want some water?"],
+            sold_items=[
+                Item(
+                    name="water",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="a plastic one-liter bottle of water",
+                    price=12,
+                ),
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="Market vendor of Khonkaen",
+            ma=al.mas.get_map_from_name("khonkaen"),
+            x=34,
+            y=17,
+            sprite="old_man",
+            direction=Direction.LEFT,
+            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Want some water?"],
+            sold_items=[
+                Item(
+                    name="water",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="a plastic one-liter bottle of water",
+                    price=12,
+                ),
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="Market vendor of Khonkaen",
+            ma=al.mas.get_map_from_name("khonkaen"),
+            x=34,
+            y=15,
+            sprite="lass",
+            direction=Direction.LEFT,
+            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Are you interested in silk?"],
+            sold_items=[
+                Item(
+                    name="silk",
+                    compartment=Compartment.QUEST_ITEMS,
+                    description="good quality silk from Khonkaen",
+                    price=8,
+                ),
+            ],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
 def phetchabun(al):
     npcs = [
         Npc(
@@ -1627,7 +1776,7 @@ def phetchabun(al):
             name="Lass_who_lost_dog",
             ma=al.mas.get_map_from_name("phetchabun"),
             x=45,
-            y=4,
+            y=15,
             sprite="lass",
             direction=Direction.RIGHT,
             standard_dialog=[
@@ -1892,3 +2041,4 @@ def import_npcs(al):
     lomsak(al)
     phetchabun(al)
     cat_cove(al)
+    khonkaen(al)
