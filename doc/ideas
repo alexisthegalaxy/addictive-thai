@@ -16,6 +16,11 @@ When the player is in a map, We would show somewhere all the items that can show
     Hence, the player will know if he caught all there is to catch!
     This could be done using a kind of device the player gets from a friend.
 
+The map could work as in SC, it is greyed but lights up where one has been.
+
+The words could be shown in a way that makes one want to collect them.
+    The order would be the frequency order.
+
 How does this relate to the spaced repetition?
     Words show up more often if they haven't been seen lately
 

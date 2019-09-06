@@ -797,6 +797,19 @@ def nurses(al):
                 "You can rest here for a while, and you'll feel better!",
             ],
         ),
+        Npc(
+            al=al,
+            name="nurse",
+            ma=al.mas.get_map_from_name("inn_buengsamphan"),
+            x=4,
+            y=1,
+            sprite="vendor",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Welcome to the inn of Buengsamphan!",
+                "You can rest here for a while, and you'll feel better!",
+            ],
+        ),
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)
@@ -949,12 +962,25 @@ def chaiyaphum(al):
             al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=20,
+            x=24,
             y=93,
             sprite="mom",
             direction=Direction.UP,
             standard_dialog=[
                 "Did you know? You can save the game just by pressing the s key."
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=20,
+            y=93,
+            sprite="lass",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "That road east is quite dangerous if you don't know thai.",
+                "I wouldn't go there myself although I have been learning thai for three months already!",
             ],
         ),
         Npc(
@@ -1076,7 +1102,7 @@ def chaiyaphum(al):
         ),
         Npc(
             al=al,
-            name="old man looking at stones",
+            name="woman praying at stones",
             ma=al.mas.get_map_from_name("chaiyaphum"),
             x=27,
             y=72,
@@ -1085,6 +1111,19 @@ def chaiyaphum(al):
             standard_dialog=["I pray here every day.",
                              "A different spirit lives in each rock,",
                              "and the one in that rock brings good health.",
+                             ],
+        ),
+        Npc(
+            al=al,
+            name="kid informing stone path is also dangerous",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=30,
+            y=59,
+            sprite="kid",
+            direction=Direction.DOWN,
+            standard_dialog=["That path leads to มอหินขาว, the Thai Stonehenge.",
+                             "Be careful, you can also get attacked by words,",
+                             "on mountain paths like these!",
                              ],
         ),
     ]

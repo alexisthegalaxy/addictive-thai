@@ -25,6 +25,7 @@ class CellTypes:
     ground = CellType('土', 'ground', (176, 246, 176), True, 0)
     tall_grass = CellType('稂', 'tall_grass', (0, 128, 0), True, 0.1)
     path = CellType('道', 'path', (200, 200, 200), True, 0)
+    road = CellType('路', 'road', (154, 154, 154), True, 0)
     wall = CellType('壁', 'wall', (22, 22, 22), False, 0)
     sign = CellType('標', 'sign', (71, 71, 71), False, 0)
     water = CellType('水', 'water', (57, 62, 255), False, 0.05)
@@ -44,10 +45,11 @@ class CellTypes:
     boulder = CellType('砾', 'boulder', (172, 92, 113), False, 0)
     entrance = CellType('入', 'entrance', (227, 25, 77), True, 0)
     fruit_tree = CellType('果', 'fruit_tree', (192, 255, 81), False, 0)
-    waterfall = CellType('滝', 'waterfall', (57, 150, 255), False, 0)
+    waterfall = CellType('滝', 'waterfall', (57, 150, 255), True, 0.1)
     bridge = CellType('橋', 'bridge', (163, 165, 255), True, 0)
     fence = CellType('垣', 'fence', (102, 102, 102), False, 0)
     arena_sign = CellType('競', 'arena_sign', (255, 192, 0), False, 0)
+    school_sign = CellType('学', 'school_sign', (103, 229, 216), False, 0)
     field = CellType('畑', 'field', (225, 232, 168), True, 0.04)
     sand = CellType('砂', 'sand', (255, 218, 105), True, 0)
     none = CellType('無', 'none', (0, 0, 0), False, 0)
@@ -198,6 +200,8 @@ class Mas(object):
         self.inn4 = Ma(filename="inn4", cell_types=cell_types, mas=self)
         self.inn5 = Ma(filename="inn5", cell_types=cell_types, mas=self)
         self.inn_khonkaen = Ma(filename="inn_khonkaen", cell_types=cell_types, mas=self)
+        self.inn_buengsamphan = Ma(filename="inn_buengsamphan", cell_types=cell_types, mas=self)
+
         self.chaiyaphum = Ma(filename="chaiyaphum", cell_types=cell_types, mas=self, x_shift=780, y_shift=629)
         self.chumphae = Ma(filename="chumphae", cell_types=cell_types, mas=self, x_shift=699, y_shift=563)
         self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", cell_types=cell_types, mas=self, x_shift=824, y_shift=551)
@@ -227,6 +231,7 @@ class Mas(object):
 
         self.question_cave = Ma(filename="question_cave", cell_types=cell_types, mas=self)
         self.cat_cave = Ma(filename="cat_cave", cell_types=cell_types, mas=self)
+        self.bat_cave = Ma(filename="bat_cave", cell_types=cell_types, mas=self)
         self.cat_cove = Ma(filename="cat_cove", cell_types=cell_types, mas=self, x_shift=710, y_shift=616)
         self.cat_cove_house = Ma(filename="cat_cove_house", cell_types=cell_types, mas=self)
 
@@ -247,7 +252,10 @@ class Mas(object):
         self.chumsaeng = Ma(filename="chumsaeng", cell_types=cell_types, mas=self, x_shift=537, y_shift=660)
         self.thapkhlo_phitsalunok = Ma(filename="thapkhlo_phitsalunok", cell_types=cell_types, mas=self, x_shift=572, y_shift=596)
         self.khonkaen = Ma(filename="khonkaen", cell_types=cell_types, mas=self, x_shift=897, y_shift=611)
-
+        self.buengsamphan_chaiyaphum = Ma(filename="buengsamphan_chaiyaphum", cell_types=cell_types, mas=self, x_shift=697, y_shift=689)
+        self.buengsamphan_mountain= Ma(filename="buengsamphan_mountain", cell_types=cell_types, mas=self, x_shift=719, y_shift=689)
+        self.buengsamphan_cave = Ma(filename="buengsamphan_cave", cell_types=cell_types, mas=self)
+        self.inn_banyaeng = Ma(filename="inn_banyaeng", cell_types=cell_types, mas=self)
         self.current_map: Ma = self.chaiyaphum
 
     def get_map_from_name(self, name):
@@ -455,4 +463,29 @@ class Mas(object):
         self.khonkaen.get_cell_at(8, 21).goes_to = (self.chumphae_khonkaen, 905 - mothermap.minimaps['chumphae_khonkaen'].x, 632 - mothermap.minimaps['chumphae_khonkaen'].y)
         self.inn_khonkaen.get_cell_at(4, 8).goes_to = (self.khonkaen, 916 - mothermap.minimaps['khonkaen'].x, 631 - mothermap.minimaps['khonkaen'].y)
         self.khonkaen.get_cell_at(916 - mothermap.minimaps['khonkaen'].x, 630 - mothermap.minimaps['khonkaen'].y).goes_to = (self.inn_khonkaen, 4, 7)
+
+        # Buengsamphan
+        self.chaiyaphum.get_cell_at(11, 92).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.minimaps['buengsamphan_chaiyaphum'].x, 721 - mothermap.minimaps['buengsamphan_chaiyaphum'].y)
+        self.chaiyaphum.get_cell_at(11, 93).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.minimaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.minimaps['buengsamphan_chaiyaphum'].y)
+        self.buengsamphan_chaiyaphum.get_cell_at(73, 32).goes_to = (self.chaiyaphum, 792 - mothermap.minimaps['chaiyaphum'].x, 721 - mothermap.minimaps['chaiyaphum'].y)
+        self.buengsamphan_chaiyaphum.get_cell_at(73, 33).goes_to = (self.chaiyaphum, 792 - mothermap.minimaps['chaiyaphum'].x, 722 - mothermap.minimaps['chaiyaphum'].y)
+        self.buengsamphan_chaiyaphum.get_cell_at(7, 32).goes_to = (self.buengsamphan, 726 - mothermap.minimaps['buengsamphan'].x, 721 - mothermap.minimaps['buengsamphan'].y)
+        self.buengsamphan_chaiyaphum.get_cell_at(7, 33).goes_to = (self.buengsamphan, 726 - mothermap.minimaps['buengsamphan'].x, 722 - mothermap.minimaps['buengsamphan'].y)
+        self.buengsamphan.get_cell_at(20, 22).goes_to = (self.inn_buengsamphan, 4, 7)
+        self.inn_buengsamphan.get_cell_at(4, 8).goes_to = (self.buengsamphan, 670 - mothermap.minimaps['buengsamphan'].x, 725 - mothermap.minimaps['buengsamphan'].y)
+        self.buengsamphan.get_cell_at(61, 6).goes_to = (self.buengsamphan_cave, 10, 21)
+        self.buengsamphan_cave.get_cell_at(10, 22).goes_to = (self.buengsamphan, 61, 7)
+        self.buengsamphan_cave.get_cell_at(17, 17).goes_to = (self.buengsamphan_mountain, 718 - mothermap.minimaps['buengsamphan_mountain'].x, 704 - mothermap.minimaps['buengsamphan_mountain'].y)
+        self.buengsamphan_cave.get_cell_at(3, 10).goes_to = (self.buengsamphan_mountain, 704 - mothermap.minimaps['buengsamphan_mountain'].x, 697 - mothermap.minimaps['buengsamphan_mountain'].y)
+        self.buengsamphan_cave.get_cell_at(35, 10).goes_to = (self.buengsamphan_mountain, 736 - mothermap.minimaps['buengsamphan_mountain'].x, 697 - mothermap.minimaps['buengsamphan_mountain'].y)
+        self.buengsamphan_mountain.get_cell_at(7, 7).goes_to = (self.buengsamphan_cave, 3, 9)
+        self.buengsamphan_mountain.get_cell_at(21, 14).goes_to = (self.buengsamphan_cave, 17, 16)
+        self.buengsamphan_mountain.get_cell_at(39, 7).goes_to = (self.buengsamphan_cave, 35, 9)
+
+        # Banyaeng
+        self.banyaeng.get_cell_at(45, 6).goes_to = (self.bat_cave, 9, 15)
+        self.bat_cave.get_cell_at(9, 16).goes_to = (self.banyaeng, 45, 7)
+        self.banyaeng.get_cell_at(36, 12).goes_to = (self.inn_banyaeng, 4, 7)
+        self.inn_banyaeng.get_cell_at(4, 8).goes_to = (self.banyaeng, 36, 13)
+
 

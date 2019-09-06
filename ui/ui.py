@@ -96,6 +96,7 @@ class Ui(object):
             "grass": pygame.image.load("../ow/sprites/grass.bmp"),
             "path": pygame.image.load("../ow/sprites/path.bmp"),
             "tree": pygame.image.load("../ow/sprites/tree.bmp"),
+            "waterfall": pygame.image.load("../ow/sprites/waterfall1.bmp"),
             "flower": pygame.image.load("../ow/sprites/flower.bmp"),
             "flower_2": pygame.image.load("../ow/sprites/flower_2.bmp"),
             "nenuphar": pygame.image.load("../ow/sprites/nenuphar.bmp"),
