@@ -1,15 +1,13 @@
 TODO:
+ Fix the XP. It doesn't work at the moment.
  Grid tests:
     Make grammar grid test
         Show the timer
         Use the word POS
- Make it isometric
-    Devise a way to design the maps
-        Using GIMP:
-            Save maps as csv files now, and each layer is different
  Tone From sound test
  When a teacher want to teach you a word, they have a ! on their head!
-
+ Make the list of gotten words much funnier!
+  It should look like a grid maybe, all clickable and allowing interaction
 
 TODO mid:
 get rid of pickle entirely
@@ -35,14 +33,15 @@ Tests types:
     - TONE_FROM_SOUND
     - TONE_FROM_THAI
     - TAPPINGWORD
-Needed sprites:
+Needed NPC sprites:
     - Mali
     - Rival
+    - Man
     - Old woman
-    - Fat man
-    - Rich woman
     - Rich man
-- Map of Thailand in the inns
+Needed OW sprites:
+    - Map of Thailand in the inns
+    - Buddha statues
 
 Show the progression bar going up in a learning 1/6 or a brain getting full or something
 Each time you make a mistake on a test, it becomes easier

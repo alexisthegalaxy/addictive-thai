@@ -1,3 +1,4 @@
+All the data for the wild words lie in ow/occurrences/map_name.occurrence
 ✓ chaiyaphum:
 ✓ mom: I (female) ฉัน
 ✓ dad: I (male) ผม
@@ -11,15 +12,14 @@
 ✓ To be at อยู่
 
 chumphae:
-school (good because it is a noun that you can like, be in, posses, etc.)
+✓ school
+School:
     ✓ of ของ
     ✓ he/she/they เขา
     ✓ not ไม่
     ✓ mai (question) ไหม
 
 ✓ chumphae-khonkaen1:
-✓ There's a house in the middle of the road, on an island,
-✓ where an old man teaches basic politeness
 ✓ krap, kaa ครับ ค่ะ
 ✓ The wild words are:
 ✓ thank you, sorry, hello
@@ -54,45 +54,79 @@ question mountain:
 ✓ why ทำ-ไม
 ✓ how ยัง-ไง
 
-phetchabun
-DB✓ - teacher
-✓ cat
-DB✓ - today
+Phetchabun
+✓ teacher ครู
+✓ cat แมว (in cat cove)
+✓ fish ปลา (in cat cove)
+✓ day วัน
+✓ to have มี
+School:
+✓   (adjectives)
+✓   เป็น
+✓   คือ
+Fruit farm:
+✓   mango มะ-ม่วง
+✓   banana กล้วย
+✓   pineapple สับ-ปะ-รด
+
+Baenyang:
+Temple:
+✓   think คิด
+✓   heart ใจ
+Village house:
+✓   to see เห็น
+Village temple:
+
+School:
+✓   at ที่
+
+lomsak-labyrinth
+✓ child เด็ก
+✓ to play เล่น
+✓ people คน
+✓ to do ทำ
+✓ big ใหญ่
+✓ small เล็ก
+
+phitsalunok:
+- temple วัด HIGH
 school:
-    - adjectives
-    - bpen
-phetchabun fruit farm:
-    - mango
-    - banana
-    - ananas
-baenyang forest:
-    - how much
-    - how long
-    - how many
+    most, more than?
 
-phetchabun:
+to teach:
+    List of common words https://en.wiktionary.org/wiki/Appendix:200_basic_Thai_words
+    to give
+    delicious
+    ter (she)
+    it มัน
+    time
+    forest, plant, tree, flower
+    yesterday
+    numbers
+    this, that
+    today, yesterday
+    colors
+    how much, how long, how many
+Grammar to teach
+    to give
+    gam-lang (กำลัง)
+    Future
+    Past (already) Leo
+    Classifiers
 
 
-
-kikyou:
 to come, delicious
-(small and big houses) small, big
-(path) yes no
 (island) cute, beautiful/pretty
 (fisherman house) kind
 (house on the case) rock
 (school1) kore, sore, are, it
 
 madatsubomi:
-Buddha, monk, meditation, temple, let go
+Buddha, monk, meditation, let go
 
-tsunagari:
-None (although the word rock appears almost exclusively)
 
 hiwada: (needs more houses)
 forest, tree, leaf, calm
-(school) can
-
 hiwada.hole
 green, red, blue, black, white, yellow, gray
 

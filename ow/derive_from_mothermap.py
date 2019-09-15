@@ -57,7 +57,7 @@ class Mothermap(object):
             'lomsak': Minimap('lomsak', x=676-6, y=543, x2=721, y2=590),
             'lomsak_labyrinth': Minimap('lomsak_labyrinth', x=620, y=548, x2=691, y2=592),
             'labyrinth': Minimap('labyrinth', x=586, y=545, x2=635, y2=597),
-            'phetchabun': Minimap('phetchabun', x=639, y=572, x2=711, y2=657),
+            'phetchabun': Minimap('phetchabun', x=639, y=572, x2=712, y2=657),
             'phitsalunok': Minimap('phitsalunok', x=530, y=545, x2=601, y2=614),
             'banyaeng': Minimap('banyaeng', x=599, y=578, x2=655, y2=650),
             'phetchabun_buengsamphan': Minimap('phetchabun_buengsamphan', x=647, y=639, x2=713, y2=715),
@@ -70,6 +70,7 @@ class Mothermap(object):
             'thapkhlo_phitsalunok': Minimap('thapkhlo_phitsalunok', x=572, y=596, x2=605, y2=660),
             'chumsaeng': Minimap('chumsaeng', x=537, y=660, x2=598, y2=727),
             'khonkaen': Minimap('khonkaen', x=897, y=611, x2=951, y2=655),
+            'nakhon_sawan': Minimap('nakhon_sawan', x=502, y=703, x2=566, y2=745),
             # Rerun 'derive_from_mothermap' after modifications to that file.'
         }
 

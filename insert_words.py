@@ -1,33 +1,34 @@
-import math
-PI = math.pi
-
-def get_angle(number_of_bubbles, bubble_index):
-    angle = math.pi / 2 - (2 * math.pi / number_of_bubbles) * (bubble_index + 1)
-    print(angle)
-
-
-l = 3
-for i in range(l):
-    get_angle(l, i)
-
-
-print(- 2 * PI + PI / 2)
-
-
-
-
-
-
-# import sqlite3
+# import math
+# PI = math.pi
 #
-# # open connection and get a cursor
-# conn = sqlite3.connect('thai.db')
-# c = conn.cursor()
 #
-# # add row
-# # c.execute('INSERT INTO cont values (?, ?, ?, ?) ', ('1', 'ตุ๊ก-แก', 'gecko', 'HM'))
-# # c.execute("INSERT INTO cont (thai, english, tones) VALUES ('ขอ-โทษ', 'sorry', 'RF');")
-# # conn.commit()
+# def get_angle(number_of_bubbles, bubble_index):
+#     angle = math.pi / 2 - (2 * math.pi / number_of_bubbles) * (bubble_index + 1)
+#     print(angle)
+#
+#
+# l = 3
+# for i in range(l):
+#     get_angle(l, i)
+#
+#
+# print(- 2 * PI + PI / 2)
+#
+#
+#
+#
+
+
+import sqlite3
+
+# open connection and get a cursor
+conn = sqlite3.connect('thai.db')
+c = conn.cursor()
+
+# add row
+# c.execute('INSERT INTO cont values (?, ?, ?, ?) ', ('1', 'ตุ๊ก-แก', 'gecko', 'HM'))
+# c.execute("INSERT INTO cont (thai, english, tones) VALUES ('ขอ-โทษ', 'sorry', 'RF');")
+# conn.commit()
 #
 # # from profile.profile import insert_user_word
 # # insert_user_word(1, 1, 1, 1, 1, 1)
@@ -44,20 +45,25 @@ print(- 2 * PI + PI / 2)
 # #             new_split_form = split_form[:-1]
 # #             c.execute(f"UPDATE words SET thai = '{new_thai}', split_form = '{new_split_form}' WHERE id = '{id}'")
 # #             conn.commit()
-#
-# # def find_word(thai):
-# #     answers = list(c.execute(f"SELECT * FROM words WHERE thai = '{thai}'"))
-# #     if answers:
-# #         return answers[0]
-# #     else:
-# #         return None
-# #
-# #
-# # def insert_word(thai, english, tones):
-# #     if not find_word(thai):
-# #         c.execute(f"INSERT INTO words (thai, english, tones) VALUES ('{thai}', '{english}', '{tones}')")
-# #         conn.commit()
-# #
+
+
+def find_word(thai):
+    answers = list(c.execute(f"SELECT * FROM words WHERE thai = '{thai}'"))
+    if answers:
+        return answers[0]
+    else:
+        return None
+
+
+def insert_word(thai, english, tones, split_form):
+    if not find_word(thai):
+        c.execute(f"INSERT INTO words (thai, english, tones, split_form) VALUES ('{thai}', '{english}', '{tones}', '{split_form}')")
+        conn.commit()
+
+
+insert_word(thai='เล็ก', english='small', tones='H', split_form='เล็ก')
+
+
 # # # c.execute(f"INSERT INTO users (name) VALUES ('Kana')")
 # # # c.execute(f"INSERT INTO users (name) VALUES ('Rob')")
 # # # conn.commit()

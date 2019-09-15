@@ -83,6 +83,18 @@ def chumphae_lomsak(al):
         ),
         Npc(
             al=al,
+            name="โฮ่งโฮ่ง",
+            ma=al.mas.get_map_from_name("chumphae_lomsak_house3"),
+            x=5,
+            y=9,
+            sprite="dog",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "โฮ่ง โฮ่ง",
+            ],
+        ),
+        Npc(
+            al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("chumphae_lomsak_house3"),
             x=3,
@@ -226,7 +238,7 @@ def chumphae_school(al):
             sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
-                "To say my or your or their and so on, you use ของ too.",
+                "To say \"my\" or \"your\" or \"their\" and so on, you use ของ too.",
                 "บ้าน ของ ผม = house of me = my house.",
             ],
         ),
@@ -331,7 +343,7 @@ def chumphae_school(al):
             ma=al.mas.get_map_from_name("chumphae_school"),
             x=18,
             y=9,
-            sprite="lass",
+            sprite="kid",
             direction=Direction.UP,
             standard_dialog=[
                 "ไม่ also means no.",
@@ -412,16 +424,6 @@ def chumphae(al):
         ),
         Npc(
             al=al,
-            name="โรงเรียน",
-            ma=al.mas.get_map_from_name("chumphae"),
-            x=124,
-            y=60,
-            sprite="sign",
-            direction=Direction.RIGHT,
-            standard_dialog=["โรงเรียน (school)"],
-        ),
-        Npc(
-            al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("chumphae"),
             x=126,
@@ -469,6 +471,11 @@ def chumphae(al):
                 "My son is to young for going to school yet, but he only thinks about that.",
                 "This is because we live next to the school I guess.",
                 "Do you know how to say school?",
+            ],
+            defeat_dialog=[
+                "Actually, the word school (โรงเรียน) is a compound of โรง (rong), the building,",
+                "and เรียน (rian), to study.",
+                "A school is a building where you study!",
             ],
         ),
         Npc(
@@ -572,14 +579,14 @@ def chumphae(al):
         ),
         Vendor(
             al=al,
-            name="Vendor of Chumphae",
+            name="Vendor of Lomsak",
             ma=al.mas.get_map_from_name("chumphae_house3"),
             x=10,
             y=8,
-            sprite="§",
+            sprite="vendor",
             direction=Direction.DOWN,
             vendor_dialog_beginning=[
-                "I've never seen you here, it's your first time in Chumphae?",
+                "I've never seen you here, it's your first time in Lomsak?",
                 "You want to buy something?",
             ],
             vendor_dialog_end=["See you again!"],
@@ -587,7 +594,7 @@ def chumphae(al):
                 Item(
                     name="apple",
                     compartment=Compartment.BATTLE_ITEMS,
-                    description="delicious apple from chumphae",
+                    description="delicious apple from Lomsak",
                     price=8,
                 ),
                 Item(
@@ -735,6 +742,19 @@ def nurses(al):
         Npc(
             al=al,
             name="nurse",
+            ma=al.mas.get_map_from_name("inn_phitsalunok"),
+            x=4,
+            y=1,
+            sprite="vendor",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Welcome to the inn of Phitsalunok!",
+                "You can rest here for a while, and you'll feel better!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="nurse",
             ma=al.mas.get_map_from_name("inn2"),
             x=4,
             y=1,
@@ -807,6 +827,45 @@ def nurses(al):
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Buengsamphan!",
+                "You can rest here for a while, and you'll feel better!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="nurse",
+            ma=al.mas.get_map_from_name("inn_nakhon_sawan"),
+            x=4,
+            y=1,
+            sprite="vendor",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Welcome to the inn of Nakhon Sawan!",
+                "You can rest here for a while, and you'll feel better!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="nurse",
+            ma=al.mas.get_map_from_name("inn_banyaeng"),
+            x=4,
+            y=1,
+            sprite="vendor",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Welcome to the inn of Banyaeng!",
+                "You can rest here for a while, and you'll feel better!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="nurse",
+            ma=al.mas.get_map_from_name("inn_phetchabun"),
+            x=4,
+            y=1,
+            sprite="vendor",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Welcome to the inn of Phetchabun!",
                 "You can rest here for a while, and you'll feel better!",
             ],
         ),
@@ -1144,7 +1203,7 @@ def lomsak(al):
             direction=Direction.RIGHT,
             standard_dialog=[
                 "Have you visited our school yet?",
-                "I teach languages English and Thai at Lomsak school.",
+                "I teach English and Thai at Lomsak school.",
                 "You wanna learn the word for language?",
             ],
         ),
@@ -1161,6 +1220,16 @@ def lomsak(al):
                 "The leader of Lomsak lives there,",
                 "you can fight him if you want, but it will be a hard fight",
             ],
+        ),
+        Npc(
+            al=al,
+            name="sign",
+            ma=al.mas.get_map_from_name("lomsak"),
+            x=38,
+            y=37,
+            sprite="sign",
+            direction=Direction.RIGHT,
+            standard_dialog=["Lomsak"],
         ),
         Npc(
             al=al,
@@ -1192,8 +1261,8 @@ def lomsak(al):
             al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("lomsak"),
-            x=21+6,
-            y=18,
+            x=26,
+            y=19,
             sprite="old_man",
             direction=Direction.UP,
             standard_dialog=[
@@ -1328,7 +1397,6 @@ def lomsak(al):
                 "Or something like '..., isn't it?',",
                 "in Thai, we use ใช่ ไหม (chai mai) at the end of the sentence.",
                 "For example: 'You like me, right?' 'คุณ ชอบ ผม ใช่ ไหม'",
-                "",
             ],
         ),
         Npc(
@@ -1357,7 +1425,7 @@ def lomsak(al):
                 Item(
                     name="apple",
                     compartment=Compartment.BATTLE_ITEMS,
-                    description="delicious apple from chumphae",
+                    description="delicious apple from Chumphae",
                     price=8,
                 ),
                 Item(
@@ -1483,12 +1551,18 @@ def lomsak(al):
             name="lomsak_monk_1",
             taught_word=Word.get_by_split_form("พูด"),
             ma=al.mas.get_map_from_name("lomsak_temple"),
-            x=8,
-            y=9,
+            x=13,
+            y=10,
             sprite="monk",
             direction=Direction.DOWN,
             standard_dialog=[
-                "สวัสดีครับ",
+                "You came here to hear me speak?",
+                "Oh, you just want to learn how to say \"to speak\"?",
+            ],
+            defeat_dialog=[
+                "You can remember it easily:",
+                "When you speak, it's as if you put words into the world.",
+                "As if you พูด words into the world!",
             ],
         ),
         Npc(
@@ -1496,12 +1570,16 @@ def lomsak(al):
             name="lomsak_monk_2",
             taught_word=Word.get_by_split_form("เรียน"),
             ma=al.mas.get_map_from_name("lomsak_temple"),
-            x=18,
+            x=8,
             y=9,
             sprite="monk",
             direction=Direction.DOWN,
             standard_dialog=[
-                "สวัสดีครับ",
+                "This life is precious, and the best use you can make of it is to study.",
+            ],
+            defeat_dialog=[
+                "If you already know how to say \"school\", remembering \"study\" is easy!",
+                "\"School\" is โรง-เรียน - \"building\"-\"study\".",
             ],
         ),
         Npc(
@@ -1509,12 +1587,17 @@ def lomsak(al):
             name="lomsak_monk_3",
             taught_word=Word.get_by_split_form("ไป"),
             ma=al.mas.get_map_from_name("lomsak_temple"),
-            x=13,
-            y=8,
+            x=18,
+            y=9,
             sprite="monk",
             direction=Direction.DOWN,
             standard_dialog=[
-                "สวัสดีครับ",
+                "Life is not a matter of where you go, but a matter of where you are.",
+                "What, you still want to learn how to say \"to go\"?",
+            ],
+            defeat_dialog=[
+                "You want a way to remember that?",
+                "Think \"Days go by, days go ไป\"!",
             ],
         ),
         Npc(
@@ -1558,6 +1641,257 @@ def lomsak(al):
         npc.ma.add_npc(npc)
 
 
+def lomsak_labyrinth(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="Nobody",
+            taught_word=Word.get_by_split_form("คน"),
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=61,
+            y=7,
+            sprite="old_man",
+            direction=Direction.UP,
+            standard_dialog=[
+                "I love people.",
+                "People give meaning to life - what's life without people?",
+                "That's also why it's nice to have people teach you words:",
+                "it adds meaning, context and emotion to the word, makes it easier to remember.",
+                "I'll teach you how to say people.",
+            ],
+            defeat_dialog=[
+                "Good, good! Use this word a lot, it'll bring you far!",
+                "Remember that adjectives come after the noun, so \"Thai people\" is คน ไทย.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            taught_word=Word.get_by_split_form("เด็ก"),
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=56,
+            y=8,
+            sprite="old_woman",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "Ah, I love to see my grandchildren play in the sunshine!",
+                "Do you know how to say child in Thai?",
+            ],
+            defeat_dialog=[
+                "It's easy to remember!",
+                "You can imagine children playing with a deck of cards!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=54,
+            y=9,
+            sprite="lass",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "ขอโทษ ฉันพูดภาษาอังกฤษไม่ได้",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=54,
+            y=10,
+            sprite="dog",
+            direction=Direction.UP,
+            standard_dialog=[
+                "โฮ่ง",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            taught_word=Word.get_by_split_form("เล่น"),
+            ma=al.mas.get_map_from_name("lomsak_labyrinth_house_1"),
+            x=3,
+            y=5,
+            sprite="lass",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Everybody else is playing in the garden but I have to learn Thai.",
+                "I wish I had time to play too.",
+                "Do you know how to say play?",
+            ],
+            defeat_dialog=[
+                "What do you mean, playing and learning Thai is the same?",
+                "To remember that play is \"len\",",
+                "You can imagine children playing in a lane!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            taught_word=Word.get_by_split_form("ทำ"),
+            ma=al.mas.get_map_from_name("lomsak_labyrinth_house_1"),
+            x=11,
+            y=11,
+            sprite="woman",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "I'm quite busy, I have a lot to do here!",
+                "You want to know how to say to do?",
+            ],
+            defeat_dialog=[
+                "I guess that to remember it, you can imagine me making tam tam drums.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=55,
+            y=10,
+            sprite="kid",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "คุณพูดภาษาไทยได้ไหม",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=49,
+            y=14,
+            sprite="old_man",
+            direction=Direction.UP,
+            standard_dialog=[
+                "The people in that house are very nice, they taught me lots of new words!",
+                "They taught me \"to do\", \"child\", \"to play\", and \"people\".",
+                "Everybody likes them around here.",
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="TODOAlexis",
+            ma=al.mas.get_map_from_name("lomsak_labyrinth_shop"),
+            x=8,
+            y=12,
+            sprite="old_woman",
+            direction=Direction.LEFT,
+            vendor_dialog_beginning=[
+                "There are no inns around here young one.",
+                "If you don't wanna travel back all the way to Lomsak",
+                "you can buy some apples and get your health back here.",
+            ],
+            sold_items=[
+                Item(
+                    name="apple",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="looks like a normal apple.",
+                    price=8,
+                ),
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak-Labyrinth Trainer",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ทำ", "เด็ก", "กิน", "เขา", "ได้"]
+            ],
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=40,
+            y=16,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=["I learnt lots of new words!", "I'm gonna teach you a good lesson!"],
+            defeat_dialog=[
+                "I'm the one who was taught a good lesson!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Lomsak-Labyrinth Trainer",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ดอก-ไม้", "ทำ", "ใหญ่", "เรียน", "เล็ก"]
+
+
+            ],
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=18,
+            y=19,
+            sprite="woman",
+            direction=Direction.RIGHT,
+            standard_dialog=["Let's see, between you and me, who is better at speaking Thai?"],
+            defeat_dialog=[
+                "I guess it was you.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            taught_word=Word.get_by_split_form("ใหญ่"),
+            ma=al.mas.get_map_from_name("lomsak_labyrinth_house_2"),
+            x=13,
+            y=20,
+            sprite="old_woman",
+            direction=Direction.UP,
+            standard_dialog=[
+                "People thing I live in a small house, but it is actually very big, hehehe.",
+                "Do you know how to say big?",
+            ],
+            defeat_dialog=[
+                "You can remember it like, \"Yay, yay, it's big!\".",
+                "Although I must admit it can get lonely here sometimes.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            taught_word=Word.get_by_split_form("เล็ก"),
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=33,
+            y=16,
+            sprite="rich_woman",
+            direction=Direction.UP,
+            standard_dialog=[
+                "The old lady that lives in that house but be quite poor.",
+                "See how small that house is!",
+            ],
+            defeat_dialog=[
+                "To remember it, you can imagine a small person with very short legs",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("lomsak_labyrinth_house_2"),
+            x=20,
+            y=5,
+            sprite="cat",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "เมี้ยว",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("lomsak_labyrinth"),
+            x=15,
+            y=11,
+            sprite="lass",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "I just noticed how small and child are similar: เล็ก and เด็ก.",
+                "I wonder if there's a link.",
+            ],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
 def cat_cove(al):
     npcs = [
         Npc(
@@ -1571,8 +1905,7 @@ def cat_cove(al):
             direction=Direction.DOWN,
             standard_dialog=[
                 "Oh, you found my secret cat paradise?",
-                "Let's have a deal: I teach you the word cat,"
-                "and you tell nobody, ok?",
+                "Let's have a deal: I teach you the word cat, and you tell nobody, ok?",
             ],
             defeat_dialog=[
                 "Funny how it sounds like a cat meowing, right?"
@@ -1660,7 +1993,10 @@ def cat_cove(al):
             direction=Direction.UP,
             taught_word=Word.get_by_split_form("ปลา"),
             standard_dialog=[
-                "I want to eat fish",
+                "Meow?",
+            ],
+            defeat_dialog=[
+                "Meow ผมอยากกินปลา meow",
             ],
         ),
         Npc(
@@ -1945,22 +2281,6 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="Mayor",
-            battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["ได้", "ข้าว", "อยาก"]
-            ],
-            ma=al.mas.get_map_from_name("phetchabun"),
-            x=666 - mothermap.minimaps["phetchabun"].x,
-            y=627 - mothermap.minimaps["phetchabun"].y,
-            sprite="lass",
-            direction=Direction.RIGHT,
-            money=2,
-            standard_dialog=["Let's have a word battle!"],
-            defeat_dialog=["That was a cool fight!", "Huh? You're looking for a dog?", "Maybe it went to the cave?"],
-            eyesight=10,
-        ),
-        Npc(
-            al=al,
             name="question_teacher_4",
             taught_word=Word.get_by_split_form("เมื่อ-ไหร่"),
             ma=al.mas.get_map_from_name("phetchabun_mountain_house_2"),
@@ -1984,6 +2304,10 @@ def phetchabun(al):
             standard_dialog=[
                 "Here's how to say 'why':",
             ],
+            defeat_dialog=[
+                "ทำ actually means \"to do\". ไม means nothing. ทำไม means why.",
+                "ทำไม?",
+            ],
         ),
         Npc(
             al=al,
@@ -1997,6 +2321,11 @@ def phetchabun(al):
             standard_dialog=[
                 "Here's how to say 'how':",
             ],
+            defeat_dialog=[
+                "To remember that, you can imagine a manual on \"How to become a young guy\"",
+                "\"How to become a ยัง ไง\"",
+            ],
+
         ),
         Npc(
             al=al,
@@ -2028,6 +2357,58 @@ def phetchabun(al):
         Npc(
             al=al,
             name="Nobody",
+            ma=al.mas.get_map_from_name("phetchabun"),
+            x=51,
+            y=37,
+            sprite="old_man",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "I wonder how you reach that garden down there.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="teacher of the word teacher",
+            taught_word=Word.get_by_split_form("ครู"),
+            ma=al.mas.get_map_from_name("phetchabun_house_1"),
+            x=6,
+            y=10,
+            sprite="dad",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "My wife works as a teacher in Phetchabun school.",
+                "Have you met her yet?",
+                "She's great at explaining grammar, right?",
+                "By the way, do you know how to say teacher?",
+            ],
+            defeat_dialog=[
+                "To remember that, you can imagine a crew of teachers!",
+                "A crew of ครู!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="teacher of the word today",
+            taught_word=Word.get_by_split_form("วัน"),
+            ma=al.mas.get_map_from_name("phetchabun_temple"),
+            x=13,
+            y=18,
+            sprite="monk",
+            direction=Direction.UP,
+            standard_dialog=[
+                "You know what's the best day in my life?",
+                "Today, it's always today!",
+                "That's because any other day doesn't exist,",
+                "and is nothing, just an illusion created in your mind.",
+                "What, you just wanted to learn a word?",
+            ],
+            defeat_dialog=[
+                "To remember that, think \"one day\", \"วัน day\"!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
             ma=al.mas.get_map_from_name("question_cave"),
             x=15,
             y=39,
@@ -2038,6 +2419,707 @@ def phetchabun(al):
             ],
             battle_words=[
                 Word.get_by_split_form(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ทำ-ไม"]
+            ],
+        ),
+        Npc(
+            al=al,
+            name="เพชรบูรณ์",
+            ma=al.mas.get_map_from_name("phetchabun"),
+            x=31,
+            y=46,
+            sprite="sign",
+            direction=Direction.RIGHT,
+            standard_dialog=["เพชรบูรณ์", "Welcome to Phetchabun!"],
+        ),
+        # Phetchabun school
+        Npc(
+            al=al,
+            name="Teacher of bpen",
+            taught_word=Word.get_by_split_form("เป็น"),
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=7,
+            y=1,
+            sprite="woman",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "เป็น (bpen) and คือ (keu) both mean \"to be\"",
+                "เป็น (bpen) is used to give additional details about something.",
+                "Namely, about relationships, social status, sex, nationality, occupation,",
+                "physical characteristics, or condition.",
+                "For example: คุณ เป็น ครู: You are a teacher.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Teacher of bpen",
+            taught_word=Word.get_by_split_form("คือ"),
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=6,
+            y=1,
+            sprite="woman",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "เป็น (bpen) and คือ (keu) both mean \"to be\"",
+                "คือ (keu) means \"is equal to\",",
+                "When you use คือ, \"A คือ B\" must be as true as \"B คือ A\".",
+                "For example: คุณ คือ ครู ของ ฉัน: You are my teacher = My teacher is you.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Teacher of adjectives",
+            taught_word=Word.get_by_split_form("สวย"),
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=19,
+            y=12,
+            sprite="dad",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "In Thai, all adjectives are actually verbs.",
+                "For example, beautiful, สวย (suay) actually means \"to be beautiful\".",
+                "To say \"You are beautiful\", you just need to say \"You beautiful\".",
+                "No need for the word \"to be\"!",
+            ],
+            defeat_dialog=["It makes life easier right?",
+                           "It's the same for all adjectives!"],
+        ),
+        Npc(
+            al=al,
+            name="Kid childsplaining the grammar rule",
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=8,
+            y=6,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Apparently, you can not negate คือ (keu), but you can negate เป็น (bpen).",
+                "The negation for เป็น (bpen) is the word for no: ไม่ใช่ (mai chai)!",
+                "For example: คุณ ไม่ ใช่ ครู: you are not a teacher.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Kid childsplaining the grammar rule of adjectives",
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=21,
+            y=17,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "In Thai, the adjective follow the noun, it's not like in English.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Kid in bpen keu class",
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=9,
+            y=8,
+            sprite="lass",
+            direction=Direction.UP,
+            standard_dialog=[
+                "It happens that เป็น and คือ can be used interchangeably.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Kid guarding the garden",
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=26,
+            y=10,
+            sprite="kid",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "This is our training field!",
+                "We train here against the words taught in our school.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="lass in adjectives class",
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=18,
+            y=17,
+            sprite="lass",
+            direction=Direction.UP,
+            standard_dialog=[
+                "I just know the adjective good: ดี.",
+                "Oh, and the teacher taught us the word beautiful!",
+                "Oh and I guess that I know bad also! It's ไม่ดี!",
+                "How many adjectives do you know?",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="lass in adjectives class",
+            ma=al.mas.get_map_from_name("phetchabun_school"),
+            x=22,
+            y=21,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "ครูของฉันไม่สวย ¬_¬",
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="staff of phetchabun farm",
+            ma=al.mas.get_map_from_name("phetchabun_farm"),
+            x=12,
+            y=24,
+            sprite="woman",
+            direction=Direction.LEFT,
+            vendor_dialog_beginning=[
+                "Welcome to Phetchabun fruit farm!",
+                "You can explore here for free, or buy some fruits!",
+            ],
+            sold_items=[
+                Item(
+                    name="กล้วย",
+                    compartment=Compartment.BONUS_ITEMS,
+                    description="Banana from Phetchabun fruit farm.",
+                    price=9999,
+                ),
+                Item(
+                    name="มะม่วง",
+                    compartment=Compartment.BONUS_ITEMS,
+                    description="Mango from Phetchabun fruit farm.",
+                    price=9999,
+                ),
+                Item(
+                    name="สับปะรด",
+                    compartment=Compartment.BONUS_ITEMS,
+                    description="Pineapple from Phetchabun fruit farm.",
+                    price=9999,
+                ),
+            ],
+        ),
+        Npc(
+            al=al,
+            name="worker 1 of phetchabun farm",
+            taught_word=Word.get_by_split_form("มะ-ม่วง"),
+            ma=al.mas.get_map_from_name("phetchabun_farm"),
+            x=9,
+            y=17,
+            sprite="lass",
+            direction=Direction.UP,
+            standard_dialog=[
+                "My work consists of getting rid of the bad-looking mangoes,",
+                "But I'm having a break now.",
+                "You wanna learn how to say mango?",
+            ],
+            defeat_dialog=[
+                "มะ means fruit, and appears in many fruit names.",
+                "And ม่วง is what became mango in English!",
+                "Do you hear the similarity? It makes it easy to remember!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="worker 2 of phetchabun farm",
+            taught_word=Word.get_by_split_form("กล้วย"),
+            ma=al.mas.get_map_from_name("phetchabun_farm"),
+            x=17,
+            y=17,
+            sprite="dad",
+            direction=Direction.UP,
+            standard_dialog=[
+                "My favorite fruit is the banana!",
+                "It is such a divine fruit, delicious, easy to transport, easy to peel, easy to eat.",
+
+            ],
+            defeat_dialog=[
+                "It's also easy to remember, right?",
+                "It sounds like gluey. You can imagine a gluey banana!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="teacher of pineapple of phetchabun farm",
+            taught_word=Word.get_by_split_form("สับ-ปะ-รด"),
+            ma=al.mas.get_map_from_name("phetchabun"),
+            x=53,
+            y=64,
+            sprite="old_man",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "This tree right there is a pineapple tree. Have you ever seen one?",
+                "Here's how we say pineapple in Thai:",
+            ],
+            defeat_dialog=[
+                "It sounds like \"sap parrot\", right?",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="teaches mi (to have)",
+            taught_word=Word.get_by_split_form("มี"),
+            ma=al.mas.get_map_from_name("phetchabun_house_2"),
+            x=12,
+            y=8,
+            sprite="woman",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Oh, you're learning Thai?",
+                "Listen carefully then, because I'm gonna teach you a very important word.",
+                "It's the seventh most used word in Thai.",
+                "I'm gonna teach you how to say:",
+                "To have!",
+            ],
+            defeat_dialog=[
+                "To remember it, you can imagine two lovers speaking passionately.",
+                "\"I lost everything\" the man says.",
+                "\"But at least you have me!\" replies his lover.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="kid of woman who teaches mi (to have)",
+            ma=al.mas.get_map_from_name("phetchabun_house_2"),
+            x=8,
+            y=10,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "My mom is very generous.",
+                "She always give very valuable things to strangers.",
+                "She says that in life, you only have what you give.",
+                "I don't get it.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="kid in phetchabun farm",
+            ma=al.mas.get_map_from_name("phetchabun_farm"),
+            x=19,
+            y=19,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Thai bananas are not the same as western bananas.",
+                "They are much smaller, come in a bunch, and are not as good.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Phetchabun farm trainer",
+            battle_words=[
+                Word.get_by_split_form(battle_word) for battle_word in ["กล้วย", "มะ-ม่วง", "สับ-ปะ-รด"]
+            ],
+            ma=al.mas.get_map_from_name("phetchabun"),
+            x=51,
+            y=58,
+            sprite="woman",
+            direction=Direction.RIGHT,
+            money=2,
+            standard_dialog=["Can you guess which are my three favorite fruits?"],
+            defeat_dialog=["It was easy to guess, I bet."],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("phetchabun"),
+            x=32,
+            y=56,
+            sprite="old_woman",
+            direction=Direction.RIGHT,
+            standard_dialog=["That cave, right there.",
+                             "I heard it leads somewhere strange.",
+                             "With cats."],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("phetchabun"),
+            x=20,
+            y=59,
+            sprite="rich_woman",
+            direction=Direction.RIGHT,
+            standard_dialog=["I often come to Phetchabun to buy fruits, they're better here.",
+                             "And also cheaper..."],
+        ),
+        Npc(
+            al=al,
+            name="Phetchabun gym trainer 1",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ทำ"]
+            ],
+            ma=al.mas.get_map_from_name("phetchabun_gym"),
+            x=12,
+            y=20,
+            eyesight=3,
+            sprite="lass",
+            direction=Direction.DOWN,
+            standard_dialog=["Oh! A new challenger!"],
+            defeat_dialog=[
+                "The first challenger in a while, and I lose...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Phetchabun gym trainer 2",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ทำ"]
+            ],
+            ma=al.mas.get_map_from_name("phetchabun_gym"),
+            x=15,
+            y=20,
+            eyesight=3,
+            sprite="kid",
+            direction=Direction.DOWN,
+            standard_dialog=["Let's see if you've learnt your Thai lesson!"],
+        ),
+        Npc(
+            al=al,
+            name="Phetchabun gym trainer 3",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ทำ"]
+            ],
+            ma=al.mas.get_map_from_name("phetchabun_gym"),
+            x=21,
+            y=17,
+            eyesight=3,
+            sprite="kid",
+            direction=Direction.LEFT,
+            standard_dialog=["Let's see if you've learnt your Thai lesson!"],
+        ),
+        Npc(
+            al=al,
+            name="Phetchabun gym trainer 4",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ทำ"]
+            ],
+            ma=al.mas.get_map_from_name("phetchabun_gym"),
+            x=14,
+            y=18,
+            eyesight=7,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=["Let's see if you've learnt your Thai lesson!"],
+        ),
+        Npc(
+            al=al,
+            name="Phetchabun gym trainer 5",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ทำ"]
+            ],
+            ma=al.mas.get_map_from_name("phetchabun_gym"),
+            x=8,
+            y=14,
+            eyesight=7,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=["Let's see if you've learnt your Thai lesson!"],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
+def banyaeng(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="banyaeng forest monk 1",
+            taught_word=Word.get_by_split_form("คิด"),
+            ma=al.mas.get_map_from_name("banyaeng"),
+            x=16,
+            y=50,
+            sprite="monk",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "The goal of meditation is not to stop thinking,",
+                "it's to be able to control your thoughts.",
+                "Rather than being the puppet of your thoughts, you used thoughts like a tool.",
+                "Wanna learn to think?",
+            ],
+            defeat_dialog=[
+                "To remember it, remember this profound teaching:",
+                "Thinking should be a tool for you - you should not be slave of your thinking.",
+                "It's just one tool in your toolkit.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="banyaeng forest monk 2",
+            taught_word=Word.get_by_split_form("ใจ"),
+            ma=al.mas.get_map_from_name("banyaeng_house_2"),
+            x=5,
+            y=11,
+            sprite="monk",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "In Thai, we use the same word for heart, mind and soul: ใจ.",
+                "The goal of monks training is to get perfect control of your ใจ.",
+                "We use it a lot, in all kinds of meanings.",
+                "For example, to say that someone is kind, we say they have a good heart.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="banyaeng village monk",
+            ma=al.mas.get_map_from_name("banyaeng_temple"),
+            x=13,
+            y=20,
+            sprite="monk",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Time does not exist - it's only a concept in your mind to make sense of the world.",
+                "You're only ever in the present, you can only live in the present.",
+                "And if you realise that you can decide to be at peace in the present,",
+                "there's no worries to be had about a potential future,",
+                "for when the future comes, it is only the present.",
+                "Realise that and you'll never be worried again.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="banyaeng village monk",
+            taught_word=Word.get_by_split_form("เว-ลา"),
+            ma=al.mas.get_map_from_name("banyaeng_temple"),
+            x=13,
+            y=22,
+            sprite="monk",
+            direction=Direction.UP,
+            standard_dialog=[
+                "My master is really wise, and I understand what he says,",
+                "but I have troubles putting it into practice.",
+                "How about I teach you some Thai instead?",
+            ],
+            defeat_dialog=[
+                "เวลา is time. Time is an illusion. Voilà."
+            ],
+        ),
+        Npc(
+            al=al,
+            name="teacher of to see",
+            taught_word=Word.get_by_split_form("เห็น"),
+            ma=al.mas.get_map_from_name("banyaeng_house_3"),
+            x=5,
+            y=10,
+            sprite="mom",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "Did you come here to see the bats too?",
+                "I guess, there's nothing else to see here.",
+                "Wanna learn how to say \"to see\"?",
+            ],
+            defeat_dialog=[
+                "It's quite easy to remember, you can remember that it sounds like a hen.",
+                "Imagine that whatever you do, a hen sees you.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("inn_banyaeng"),
+            x=9,
+            y=6,
+            sprite="old_man",
+            direction=Direction.UP,
+            standard_dialog=[
+                "I have travelled a full day to arrive here, it's good to have some rest!",
+            ],
+        ),
+        Vendor(
+            al=al,
+            name="Vendor of Banyaeng",
+            ma=al.mas.get_map_from_name("inn_banyaeng"),
+            x=2,
+            y=6,
+            sprite="vendor",
+            direction=Direction.RIGHT,
+            vendor_dialog_beginning=[
+                "Welcome! You want to buy something?",
+            ],
+            vendor_dialog_end=["See you again!"],
+            sold_items=[
+                Item(
+                    name="postcard",
+                    compartment=Compartment.QUEST_ITEMS,
+                    description="A postcard showing millions of bats in the sky.",
+                    price=9,
+                ),
+            ],
+        ),
+        Npc(
+            al=al,
+            name="teacher of ที่",
+            taught_word=Word.get_by_split_form("ที่"),
+            ma=al.mas.get_map_from_name("banyaeng_school"),
+            x=16,
+            y=21,
+            sprite="dad",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "Pay attention, for today I will teach the most important word in Thai.",
+                "It's the most used word in Thai, and has many meanings.",
+                "The main ones are \"at\", as in \"at home\", and that, as in \"the person that...\".",
+            ],
+            defeat_dialog=[
+                "It is also has many other uses.",
+                "It is part of grammatical constructs, and it is also a classifier for locations.",
+                "You'll learn that later.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="kid learning ที่",
+            ma=al.mas.get_map_from_name("banyaeng_school"),
+            x=11,
+            y=23,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "So, if I understand correctly, to say \"I'm at school\", I say:",
+                "I - to be at - at - school: ผม อยู่ ที่ โรง-เรียน",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="kid learning ที่",
+            ma=al.mas.get_map_from_name("banyaeng_school"),
+            x=11,
+            y=22,
+            sprite="lass",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "I recognise this word ที่! It's in \"where\": ที่-ไหน!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="kid learning ที่",
+            ma=al.mas.get_map_from_name("banyaeng_school"),
+            x=11,
+            y=20,
+            sprite="lass",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "To say, \"the child that learns Thai eats rice\", you have to say:",
+                "child - ที่ - to learn - Thai - to eat - rice: เด็ก ที่ เรียน ภาษาไทย กิน ข้าว",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="kid learning ที่",
+            ma=al.mas.get_map_from_name("banyaeng_school"),
+            x=11,
+            y=19,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "I find it crazy that the same word has two uses that are super common.",
+                "Don't Thai people get confused?",
+                "For example, to say, the child that is at a place, do you have two ที่?",
+                "The teacher said it's fine. \"The child that is at school eats rice\" simply gives:",
+                "child - ที่ - school - to eat - rice: เด็ก ที่ โรงเรียน กิน ข้าว",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="kid learning ที่",
+            ma=al.mas.get_map_from_name("banyaeng_school"),
+            x=9,
+            y=20,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "ที่ is also the classifier for places, armed forces, bruises and insect bites on the skin,",
+                "ashtrays, breakfasts, beaches and bridges, and altars.",
+                "You know what a classifier is right?",
+                "Don't worry, you'll learn that later.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="old lady in banyaeng forest monastery",
+            ma=al.mas.get_map_from_name("banyaeng"),
+            x=24,
+            y=52,
+            sprite="old_woman",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "In Thailand, it often happens that monks live in small huts in forests and jungle.",
+                "They are striving really hard to attain enlightenment,",
+                "and believe that being far from the cities and distractions will help them progress.",
+                "I come here to give them food everyday.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="man that came to see the bats",
+            ma=al.mas.get_map_from_name("banyaeng"),
+            x=39,
+            y=7,
+            sprite="dad",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "I came all the way to this village to see the bats!",
+                "It's quite famous - every day at around 6pm, millions of bats get out of this cave.",
+                "It's called the Thai northern lights, because they form huge streams in the sky.",
+            ],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
+def labyrinth(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="Labyrinth south trainer",
+            battle_words=[
+                Word.get_by_split_form(battle_word) for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
+            ],
+            ma=al.mas.get_map_from_name("labyrinth"),
+            x=18,
+            y=27,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            money=1,
+            standard_dialog=["I just discovered a shortcut in the woods!",
+                             "Also, let's fight!"],
+            defeat_dialog=["Well fought!", "Here, have one Baht then.", "Sorry, I don't have much more money!"],
+        ),
+        Vendor(
+            al=al,
+            name="Vendor of Banyaeng",
+            ma=al.mas.get_map_from_name("labyrinth_shop"),
+            x=8,
+            y=11,
+            sprite="old_man",
+            direction=Direction.LEFT,
+            vendor_dialog_beginning=[
+                "Welcome young one! You need something?",
+            ],
+            vendor_dialog_end=["Come back if you want something alright?"],
+            sold_items=[
+                Item(
+                    name="apple",
+                    compartment=Compartment.BATTLE_ITEMS,
+                    description="looks like a normal apple.",
+                    price=8,
+                ),
+            ],
+        ),
+        Npc(
+            al=al,
+            name="lass looking at shop",
+            ma=al.mas.get_map_from_name("labyrinth"),
+            x=22,
+            y=23,
+            sprite="lass",
+            direction=Direction.UP,
+            standard_dialog=[
+                "I just want to restore my health, because I had a lot of word fights.",
+                "There are no inns around, so I have no choice but to buy food.",
             ],
         ),
     ]
@@ -2065,6 +3147,147 @@ def empty(al):
         npc.ma.add_npc(npc)
 
 
+def nakhon_sawan(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="Aquarium entrance staff",
+            ma=al.mas.get_map_from_name("nakhon_sawan_aquarium"),
+            x=11,
+            y=23,
+            sprite="vendor",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "Welcome to the the Bueng Boraphet aquarium!",
+                "The entrance fee is 49 Baht.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="fish",
+            ma=al.mas.get_map_from_name("nakhon_sawan_aquarium"),
+            x=16,
+            y=24,
+            sprite="clown_fish",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="ตุ๊กแก",
+            ma=al.mas.get_map_from_name("nakhon_sawan_aquarium"),
+            x=5,
+            y=15,
+            sprite="gecko",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "ตุ๊กแก",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="crocodile",
+            ma=al.mas.get_map_from_name("nakhon_sawan_aquarium"),
+            x=15,
+            y=16,
+            sprite="crocodile",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "...",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="ตุ๊กแก",
+            ma=al.mas.get_map_from_name("nakhon_sawan"),
+            x=52,
+            y=23,
+            sprite="gecko",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "ตุ๊กแก",
+            ],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
+def phitsalunok(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="rich_woman",
+            ma=al.mas.get_map_from_name("phitsalunok"),
+            x=23,
+            y=42,
+            sprite="rich_woman",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Yep, I'm rich.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="rich_woman",
+            ma=al.mas.get_map_from_name("phitsalunok"),
+            x=38,
+            y=39,
+            sprite="woman",
+            direction=Direction.UP,
+            standard_dialog=[
+                "According to my map, the market should be just there...",
+                "Phitsalunok is too big, that's so frustrating!",
+                "I always get lost!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="phitsalunok",
+            ma=al.mas.get_map_from_name("phitsalunok"),
+            x=42,
+            y=16,
+            sprite="sign",
+            direction=Direction.RIGHT,
+            standard_dialog=["Phitsalunok"],
+        ),
+        Npc(
+            al=al,
+            name="Bird Observation Garden",
+            ma=al.mas.get_map_from_name("phitsalunok"),
+            x=38,
+            y=27,
+            sprite="sign",
+            direction=Direction.RIGHT,
+            standard_dialog=["Bird Observation Garden"],
+        ),
+        Npc(
+            al=al,
+            name="Underground",
+            ma=al.mas.get_map_from_name("phitsalunok"),
+            x=27,
+            y=28,
+            sprite="sign",
+            direction=Direction.RIGHT,
+            standard_dialog=["Underground"],
+        ),
+        Npc(
+            al=al,
+            name="Underground",
+            ma=al.mas.get_map_from_name("phitsalunok"),
+            x=25,
+            y=40,
+            sprite="sign",
+            direction=Direction.RIGHT,
+            standard_dialog=["Underground"],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
 """
     taught_word=Word.get_by_split_form("โรง"),
 """
@@ -2078,6 +3301,11 @@ def import_npcs(al):
     chaiyaphum(al)
     nurses(al)
     lomsak(al)
+    lomsak_labyrinth(al)
+    labyrinth(al)
     phetchabun(al)
+    banyaeng(al)
     cat_cove(al)
     khonkaen(al)
+    nakhon_sawan(al)
+    phitsalunok(al)

@@ -36,6 +36,7 @@ class CellTypes:
     nenuphar = CellType('华', 'nenuphar', (189, 176, 246), True, 0)
     door = CellType('门', 'door', (255, 0, 204), True, 0)
     inn_floor = CellType('床', 'inn_floor', (117, 199, 242), True, 0)
+    inn_sign = CellType('館', 'inn_sign', (255, 152, 234), False, 0)
     inn_map = CellType('図', 'inn_map', (99, 122, 80), False, 0)
     temple_floor = CellType('寺', 'temple_floor', (183, 183, 183), True, 0)
     cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0.05)
@@ -50,8 +51,10 @@ class CellTypes:
     fence = CellType('垣', 'fence', (102, 102, 102), False, 0)
     arena_sign = CellType('競', 'arena_sign', (255, 192, 0), False, 0)
     school_sign = CellType('学', 'school_sign', (103, 229, 216), False, 0)
+    shop_sign = CellType('買', 'shop_sign', (65, 71, 193), False, 0)
     field = CellType('畑', 'field', (225, 232, 168), True, 0.04)
     sand = CellType('砂', 'sand', (255, 218, 105), True, 0)
+    buddha_statue = CellType('仏', 'buddha_statue', (255, 215, 54), False, 0)
     none = CellType('無', 'none', (0, 0, 0), False, 0)
 
 
@@ -153,7 +156,7 @@ class Ma(object):
         except:
             print('The map', self.filename)
             print(f' only has dimensions ({len(self.ma)}, {len(self.ma[0])})')
-            print(f' and the player is on ({x}, {y})')
+            print(f' and the cell requested is ({x}, {y})')
 
     def add_npc(self, npc):
         self.npcs.append(npc)
@@ -249,6 +252,7 @@ class Mas(object):
         self.taphan_hin = Ma(filename="taphan_hin", cell_types=cell_types, mas=self, x_shift=537, y_shift=597)
         self.buengsamphan_chumsaeng = Ma(filename="buengsamphan_chumsaeng", cell_types=cell_types, mas=self, x_shift=569, y_shift=664)
         self.thapkhlo = Ma(filename="thapkhlo", cell_types=cell_types, mas=self, x_shift=578, y_shift=648)
+        self.nakhon_sawan = Ma(filename="nakhon_sawan", cell_types=cell_types, mas=self, x_shift=502, y_shift=703)
         self.chumsaeng = Ma(filename="chumsaeng", cell_types=cell_types, mas=self, x_shift=537, y_shift=660)
         self.thapkhlo_phitsalunok = Ma(filename="thapkhlo_phitsalunok", cell_types=cell_types, mas=self, x_shift=572, y_shift=596)
         self.khonkaen = Ma(filename="khonkaen", cell_types=cell_types, mas=self, x_shift=897, y_shift=611)
@@ -256,6 +260,29 @@ class Mas(object):
         self.buengsamphan_mountain= Ma(filename="buengsamphan_mountain", cell_types=cell_types, mas=self, x_shift=719, y_shift=689)
         self.buengsamphan_cave = Ma(filename="buengsamphan_cave", cell_types=cell_types, mas=self)
         self.inn_banyaeng = Ma(filename="inn_banyaeng", cell_types=cell_types, mas=self)
+        self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", cell_types=cell_types, mas=self)
+        self.inn_chumsaeng = Ma(filename="inn_chumsaeng", cell_types=cell_types, mas=self)
+        self.inn_phetchabun = Ma(filename="inn_phetchabun", cell_types=cell_types, mas=self)
+        self.inn_phitsalunok = Ma(filename="inn_phitsalunok", cell_types=cell_types, mas=self)
+        self.inn_phitsalunok_2 = Ma(filename="inn_phitsalunok_2", cell_types=cell_types, mas=self)
+        self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", cell_types=cell_types, mas=self)
+        self.banyaeng_cave = Ma(filename="banyaeng_cave", cell_types=cell_types, mas=self)
+        self.phetchabun_school = Ma(filename="phetchabun_school", cell_types=cell_types, mas=self)
+        self.phetchabun_cave = Ma(filename="phetchabun_cave", cell_types=cell_types, mas=self)
+        self.phetchabun_house_1 = Ma(filename="phetchabun_house_1", cell_types=cell_types, mas=self)
+        self.phetchabun_house_2 = Ma(filename="phetchabun_house_2", cell_types=cell_types, mas=self)
+        self.phitsalunok_underground = Ma(filename="phitsalunok_underground", cell_types=cell_types, mas=self)
+        self.lomsak_labyrinth_house_1 = Ma(filename="lomsak_labyrinth_house_1", cell_types=cell_types, mas=self)
+        self.lomsak_labyrinth_house_2 = Ma(filename="lomsak_labyrinth_house_2", cell_types=cell_types, mas=self)
+        self.phetchabun_temple = Ma(filename="phetchabun_temple", cell_types=cell_types, mas=self)
+        self.phetchabun_gym = Ma(filename="phetchabun_gym", cell_types=cell_types, mas=self)
+        self.banyaeng_house_1 = Ma(filename="banyaeng_house_1", cell_types=cell_types, mas=self)
+        self.banyaeng_house_2 = Ma(filename="banyaeng_house_2", cell_types=cell_types, mas=self)
+        self.banyaeng_school = Ma(filename="banyaeng_school", cell_types=cell_types, mas=self)
+        self.banyaeng_temple = Ma(filename="banyaeng_temple", cell_types=cell_types, mas=self)
+        self.banyaeng_house_3 = Ma(filename="banyaeng_house_3", cell_types=cell_types, mas=self)
+        self.lomsak_labyrinth_shop = Ma(filename="lomsak_labyrinth_shop", cell_types=cell_types, mas=self)
+        self.labyrinth_shop = Ma(filename="labyrinth_shop", cell_types=cell_types, mas=self)
         self.current_map: Ma = self.chaiyaphum
 
     def get_map_from_name(self, name):
@@ -336,21 +363,12 @@ class Mas(object):
         self.lomsak.get_cell_at(28 + 6, 24).goes_to = (self.lomsak_school, 13, 24)
         self.lomsak_school.get_cell_at(13, 25).goes_to = (self.lomsak, 28 + 6, 25)
         self.lomsak.get_cell_at(31 + 6, 23).goes_to = (self.lomsak_school, 19, 16)
-        self.lomsak_school.get_cell_at(20, 16).goes_to = (self.lomsak, 32 + 6, 23)
+        self.lomsak_school.get_cell_at(20, 16).goes_to = (self.lomsak, 37, 22)
         self.lomsak.get_cell_at(16 + 6, 24).goes_to = (self.lomsak_gym, 13, 24)
         self.lomsak_gym.get_cell_at(13, 25).goes_to = (self.lomsak, 16 + 6, 25)
         self.lomsak.get_cell_at(21 + 6, 12).goes_to = (self.lomsak_temple, 13, 24)
         self.lomsak_temple.get_cell_at(13, 25).goes_to = (self.lomsak, 21 + 6, 13)
 
-        self.phetchabun.get_cell_at(17, 17).goes_to = (self.question_cave, 24, 26)
-        self.question_cave.get_cell_at(24, 27).goes_to = (self.phetchabun, 17, 18)
-        self.phetchabun.get_cell_at(11, 27).goes_to = (self.question_cave, 18, 39)
-        self.question_cave.get_cell_at(18, 40).goes_to = (self.phetchabun, 11, 28)
-        self.phetchabun.get_cell_at(24, 35).goes_to = (self.question_cave, 31, 47)
-        self.question_cave.get_cell_at(31, 48).goes_to = (self.phetchabun, 24, 36)
-
-        self.phetchabun.get_cell_at(36, 54).goes_to = (self.cat_cave, 6, 12)
-        self.cat_cave.get_cell_at(6, 13).goes_to = (self.phetchabun, 36, 55)
         self.cat_cave.get_cell_at(13, 3).goes_to = (self.cat_cove, 19, 29)
         self.cat_cove.get_cell_at(19, 30).goes_to = (self.cat_cave, 13, 4)
 
@@ -362,12 +380,7 @@ class Mas(object):
         self.phetchabun.get_cell_at(50, 8).goes_to = (self.lomsak, 13 + 6, 37)
         self.lomsak.get_cell_at(13 + 6, 38).goes_to = (self.phetchabun, 50, 9)
 
-        # To banyaeng forest
-        self.phetchabun.get_cell_at(8, 57).goes_to = (self.banyaeng, 48, 51)
-        self.phetchabun.get_cell_at(8, 58).goes_to = (self.banyaeng, 48, 52)
-        self.banyaeng.get_cell_at(49, 51).goes_to = (self.phetchabun, 9, 57)
-        self.banyaeng.get_cell_at(49, 52).goes_to = (self.phetchabun, 9, 58)
-
+        # Banyaeng forest
         self.banyaeng.get_cell_at(8, 10).goes_to = (self.labyrinth, 21, 43)
         self.banyaeng.get_cell_at(9, 10).goes_to = (self.labyrinth, 22, 43)
         self.labyrinth.get_cell_at(21, 44).goes_to = (self.banyaeng, 8, 11)
@@ -388,35 +401,59 @@ class Mas(object):
         self.lomsak_labyrinth.get_cell_at(677 + 1 - mothermap.minimaps['lomsak_labyrinth'].x, 567 - mothermap.minimaps['lomsak_labyrinth'].y).goes_to = (self.lomsak, 677 + 1 - mothermap.minimaps['lomsak'].x, 567 - mothermap.minimaps['lomsak'].y)
         self.lomsak_labyrinth.get_cell_at(677 + 1 - mothermap.minimaps['lomsak_labyrinth'].x, 568 - mothermap.minimaps['lomsak_labyrinth'].y).goes_to = (self.lomsak, 677 + 1 - mothermap.minimaps['lomsak'].x, 568 - mothermap.minimaps['lomsak'].y)
 
+        # Phetchabun
+        self.phetchabun.get_cell_at(8, 57).goes_to = (self.banyaeng, 48, 51)
+        self.phetchabun.get_cell_at(8, 58).goes_to = (self.banyaeng, 48, 52)
+        self.banyaeng.get_cell_at(49, 51).goes_to = (self.phetchabun, 9, 57)
+        self.banyaeng.get_cell_at(49, 52).goes_to = (self.phetchabun, 9, 58)
+        self.phetchabun.get_cell_at(17, 17).goes_to = (self.question_cave, 24, 26)
+        self.question_cave.get_cell_at(24, 27).goes_to = (self.phetchabun, 17, 18)
+        self.phetchabun.get_cell_at(11, 27).goes_to = (self.question_cave, 18, 39)
+        self.question_cave.get_cell_at(18, 40).goes_to = (self.phetchabun, 11, 28)
+        self.phetchabun.get_cell_at(24, 35).goes_to = (self.question_cave, 31, 47)
+        self.question_cave.get_cell_at(31, 48).goes_to = (self.phetchabun, 24, 36)
+        self.phetchabun.get_cell_at(36, 54).goes_to = (self.cat_cave, 6, 12)
+        self.cat_cave.get_cell_at(6, 13).goes_to = (self.phetchabun, 36, 55)
+        self.phetchabun.get_cell_at(26, 60).goes_to = (self.phetchabun_house_1, 5, 12)
+        self.phetchabun_house_1.get_cell_at(5, 13).goes_to = (self.phetchabun, 26, 61)
         self.phetchabun.get_cell_at(21, 8).goes_to = (self.lomsak_labyrinth, 40, 32)
         self.phetchabun.get_cell_at(22, 8).goes_to = (self.lomsak_labyrinth, 41, 32)
         self.lomsak_labyrinth.get_cell_at(40, 33).goes_to = (self.phetchabun, 21, 9)
         self.lomsak_labyrinth.get_cell_at(41, 33).goes_to = (self.phetchabun, 22, 9)
-
         self.phetchabun.get_cell_at(42, 18).goes_to = (self.lomsak_house_3, 13, 24)
         self.lomsak_house_3.get_cell_at(13, 25).goes_to = (self.phetchabun, 42, 19)
         self.phetchabun.get_cell_at(59, 13).goes_to = (self.lomsak_house_4, 13, 24)
         self.lomsak_house_4.get_cell_at(13, 25).goes_to = (self.phetchabun, 59, 14)
-
         self.phetchabun.get_cell_at(24, 10).goes_to = (self.phetchabun_mountain_house_1, 7, 12)
         self.phetchabun_mountain_house_1.get_cell_at(7, 13).goes_to = (self.phetchabun, 24, 11)
         self.phetchabun.get_cell_at(22, 24).goes_to = (self.phetchabun_mountain_house_2, 7, 12)
         self.phetchabun_mountain_house_2.get_cell_at(7, 13).goes_to = (self.phetchabun, 22, 25)
-
         self.phetchabun.get_cell_at(46, 62).goes_to = (self.phetchabun_farm, 10, 24)
         self.phetchabun_farm.get_cell_at(10, 25).goes_to = (self.phetchabun, 46, 63)
         self.phetchabun_farm.get_cell_at(16, 25).goes_to = (self.phetchabun, 49, 63)
         self.phetchabun.get_cell_at(49, 62).goes_to = (self.phetchabun_farm, 16, 24)
-
         self.phetchabun.get_cell_at(677 - mothermap.minimaps['phetchabun'].x, 645 - mothermap.minimaps['phetchabun'].y).goes_to = (self.phetchabun_buengsamphan, 677 - mothermap.minimaps['phetchabun_buengsamphan'].x, 645 - mothermap.minimaps['phetchabun_buengsamphan'].y)
         self.phetchabun.get_cell_at(678 - mothermap.minimaps['phetchabun'].x, 645 - mothermap.minimaps['phetchabun'].y).goes_to = (self.phetchabun_buengsamphan, 678 - mothermap.minimaps['phetchabun_buengsamphan'].x, 645 - mothermap.minimaps['phetchabun_buengsamphan'].y)
         self.phetchabun_buengsamphan.get_cell_at(677 - mothermap.minimaps['phetchabun_buengsamphan'].x, 643 - mothermap.minimaps['phetchabun_buengsamphan'].y).goes_to = (self.phetchabun, 677 - mothermap.minimaps['phetchabun'].x, 643 - mothermap.minimaps['phetchabun'].y)
         self.phetchabun_buengsamphan.get_cell_at(678 - mothermap.minimaps['phetchabun_buengsamphan'].x, 643 - mothermap.minimaps['phetchabun_buengsamphan'].y).goes_to = (self.phetchabun, 678 - mothermap.minimaps['phetchabun'].x, 643 - mothermap.minimaps['phetchabun'].y)
-
         self.phetchabun_buengsamphan.get_cell_at(21, 67).goes_to = (self.buengsamphan, 668 - mothermap.minimaps['buengsamphan'].x, 706 - mothermap.minimaps['buengsamphan'].y)
         self.phetchabun_buengsamphan.get_cell_at(21, 68).goes_to = (self.buengsamphan, 668 - mothermap.minimaps['buengsamphan'].x, 707 - mothermap.minimaps['buengsamphan'].y)
         self.buengsamphan.get_cell_at(19, 5).goes_to = (self.phetchabun_buengsamphan, 669 - mothermap.minimaps['phetchabun_buengsamphan'].x, 707 - mothermap.minimaps['phetchabun_buengsamphan'].y)
         self.buengsamphan.get_cell_at(19, 4).goes_to = (self.phetchabun_buengsamphan, 669 - mothermap.minimaps['phetchabun_buengsamphan'].x, 706 - mothermap.minimaps['phetchabun_buengsamphan'].y)
+        self.phetchabun.get_cell_at(13, 52).goes_to = (self.phetchabun_school, 13, 24)
+        self.phetchabun_school.get_cell_at(13, 25).goes_to = (self.phetchabun, 13, 53)
+        self.phetchabun.get_cell_at(26, 52).goes_to = (self.inn_phetchabun, 4, 7)
+        self.inn_phetchabun.get_cell_at(4, 8).goes_to = (self.phetchabun, 26, 53)
+        self.phetchabun.get_cell_at(66, 22).goes_to = (self.phetchabun_cave, 4, 1)
+        self.phetchabun_cave.get_cell_at(4, 2).goes_to = (self.phetchabun, 66, 23)
+        self.phetchabun.get_cell_at(66, 34).goes_to = (self.phetchabun_cave, 4, 13)
+        self.phetchabun_cave.get_cell_at(4, 14).goes_to = (self.phetchabun, 66, 35)
+        self.phetchabun.get_cell_at(33, 62).goes_to = (self.phetchabun_temple, 13, 24)
+        self.phetchabun_temple.get_cell_at(13, 25).goes_to = (self.phetchabun, 33, 63)
+        self.phetchabun.get_cell_at(15, 62).goes_to = (self.phetchabun_gym, 12, 24)
+        self.phetchabun_gym.get_cell_at(12, 25).goes_to = (self.phetchabun, 15, 63)
+        self.phetchabun.get_cell_at(21, 50).goes_to = (self.phetchabun_house_2, 5, 12)
+        self.phetchabun_house_2.get_cell_at(5, 13).goes_to = (self.phetchabun, 21, 51)
 
         self.buengsamphan.get_cell_at(7, 11).goes_to = (self.buengsamphan_chumsaeng, 657 - mothermap.minimaps['buengsamphan_chumsaeng'].x, 713 - mothermap.minimaps['buengsamphan_chumsaeng'].y)
         self.buengsamphan.get_cell_at(7, 10).goes_to = (self.buengsamphan_chumsaeng, 657 - mothermap.minimaps['buengsamphan_chumsaeng'].x, 712 - mothermap.minimaps['buengsamphan_chumsaeng'].y)
@@ -487,5 +524,58 @@ class Mas(object):
         self.bat_cave.get_cell_at(9, 16).goes_to = (self.banyaeng, 45, 7)
         self.banyaeng.get_cell_at(36, 12).goes_to = (self.inn_banyaeng, 4, 7)
         self.inn_banyaeng.get_cell_at(4, 8).goes_to = (self.banyaeng, 36, 13)
+
+        self.chumsaeng.get_cell_at(553 - mothermap.minimaps['chumsaeng'].x, 714 - mothermap.minimaps['chumsaeng'].y).goes_to = (self.nakhon_sawan, 553 - mothermap.minimaps['nakhon_sawan'].x, 714 - mothermap.minimaps['nakhon_sawan'].y)
+        self.nakhon_sawan.get_cell_at(553 - mothermap.minimaps['nakhon_sawan'].x, 713 - mothermap.minimaps['nakhon_sawan'].y).goes_to = (self.chumsaeng, 553 - mothermap.minimaps['chumsaeng'].x, 713 - mothermap.minimaps['chumsaeng'].y)
+
+        self.chumsaeng.get_cell_at(30, 27).goes_to = (self.inn_chumsaeng, 4, 7)
+        self.inn_chumsaeng.get_cell_at(4, 8).goes_to = (self.chumsaeng, 30, 28)
+
+        # Phitsalunok
+        self.phitsalunok.get_cell_at(38, 17).goes_to = (self.inn_phitsalunok, 4, 7)
+        self.inn_phitsalunok.get_cell_at(4, 8).goes_to = (self.phitsalunok, 38, 18)
+        self.phitsalunok.get_cell_at(26, 28).goes_to = (self.phitsalunok_underground, 6, 4)
+        self.phitsalunok.get_cell_at(40, 42).goes_to = (self.phitsalunok_underground, 20, 18)
+        self.phitsalunok.get_cell_at(24, 40).goes_to = (self.phitsalunok_underground, 4, 16)
+        self.phitsalunok_underground.get_cell_at(20, 19).goes_to = (self.phitsalunok, 40, 43)
+        self.phitsalunok_underground.get_cell_at(6, 5).goes_to = (self.phitsalunok, 26, 29)
+        self.phitsalunok_underground.get_cell_at(4, 17).goes_to = (self.phitsalunok, 24, 41)
+
+        self.nakhon_sawan.get_cell_at(57, 19).goes_to = (self.nakhon_sawan_aquarium, 13, 24)
+        self.nakhon_sawan_aquarium.get_cell_at(13, 25).goes_to = (self.nakhon_sawan, 57, 20)
+        self.nakhon_sawan.get_cell_at(32, 20).goes_to = (self.inn_nakhon_sawan, 4, 7)
+        self.inn_nakhon_sawan.get_cell_at(4, 8).goes_to = (self.nakhon_sawan, 32, 21)
+        self.banyaeng.get_cell_at(37, 55).goes_to = (self.banyaeng_cave, 16, 10)
+        self.banyaeng.get_cell_at(27, 51).goes_to = (self.banyaeng_cave, 6, 6)
+        self.banyaeng_cave.get_cell_at(6, 7).goes_to = (self.banyaeng, 27, 52)
+        self.banyaeng_cave.get_cell_at(16, 11).goes_to = (self.banyaeng, 37, 56)
+
+        # Lomsak Labyrinth
+        self.lomsak_labyrinth.get_cell_at(48, 12).goes_to = (self.lomsak_labyrinth_house_1, 5, 12)
+        self.lomsak_labyrinth_house_1.get_cell_at(5, 13).goes_to = (self.lomsak_labyrinth, 48, 13)
+        self.lomsak_labyrinth.get_cell_at(49, 11).goes_to = (self.lomsak_labyrinth_house_1, 8, 3)
+        self.lomsak_labyrinth_house_1.get_cell_at(8, 2).goes_to = (self.lomsak_labyrinth, 49, 10)
+        self.lomsak_labyrinth.get_cell_at(33, 12).goes_to = (self.lomsak_labyrinth_house_2, 13, 24)
+        self.lomsak_labyrinth_house_2.get_cell_at(13, 25).goes_to = (self.lomsak_labyrinth, 33, 13)
+        self.lomsak_labyrinth.get_cell_at(25, 16).goes_to = (self.lomsak_labyrinth_shop, 5, 12)
+        self.lomsak_labyrinth_shop.get_cell_at(5, 13).goes_to = (self.lomsak_labyrinth, 25, 17)
+
+        # Labyrinth
+        self.labyrinth.get_cell_at(21, 21).goes_to = (self.labyrinth_shop, 5, 12)
+        self.labyrinth_shop.get_cell_at(5, 13).goes_to = (self.labyrinth, 21, 22)
+
+        # Banyaeng
+        self.banyaeng.get_cell_at(17, 49).goes_to = (self.banyaeng_house_1, 5, 12)
+        self.banyaeng_house_1.get_cell_at(5, 13).goes_to = (self.banyaeng, 17, 50)
+        self.banyaeng.get_cell_at(20, 55).goes_to = (self.banyaeng_house_2, 5, 12)
+        self.banyaeng_house_2.get_cell_at(5, 13).goes_to = (self.banyaeng, 20, 56)
+        self.banyaeng.get_cell_at(41, 12).goes_to = (self.banyaeng_school, 13, 24)
+        self.banyaeng_school.get_cell_at(13, 25).goes_to = (self.banyaeng, 41, 13)
+        self.banyaeng.get_cell_at(37, 6).goes_to = (self.banyaeng_temple, 13, 24)
+        self.banyaeng_temple.get_cell_at(13, 25).goes_to = (self.banyaeng, 37, 7)
+        self.banyaeng.get_cell_at(39, 5).goes_to = (self.banyaeng_temple, 17, 21)
+        self.banyaeng_temple.get_cell_at(18, 21).goes_to = (self.banyaeng, 40, 5)
+        self.banyaeng.get_cell_at(31, 9).goes_to = (self.banyaeng_house_3, 5, 12)
+        self.banyaeng_house_3.get_cell_at(5, 13).goes_to = (self.banyaeng, 31, 10)
 
 

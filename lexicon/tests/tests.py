@@ -4,7 +4,7 @@ from enum import Enum
 from typing import List
 
 from lexicon.items import Word
-from models import get_random_word_id
+from models import get_random_word_id, increase_xp
 from sounds.play_sound import play_thai_word, play_transformed_thai_word
 
 
@@ -114,7 +114,12 @@ class Test(object):
         if self.learning:
             self.learning.test_finished()
 
-        # 5 - test_success_callback
+        # 5 - Increase XP for the word
+        try:
+            increase_xp(self.correct_word.thai, 1)
+        except Exception as e:
+            print('Error - 483912')
+            print(e)
         if self.test_success_callback:
             self.test_success_callback()
 

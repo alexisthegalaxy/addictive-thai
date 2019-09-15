@@ -18,6 +18,7 @@ class Growable(object):
         self.previous_threshold = 0
 
     def increase_xp(self, al, value):
+        # This only sets the xp for the in-memory object, and the DB manipulation is done by the inheriting class Word
         self.total_xp += value
         while self.total_xp >= self.next_threshold:
             self.level_up()
@@ -91,7 +92,7 @@ class Word(Growable):
         learner_id = get_active_learner_id()
         CURSOR.execute(
             f"UPDATE user_word "
-            f"SET total_xp = total_xp + {value} "
+            f"SET total_xp = {self.total_xp}, level = {self.level} "
             f"WHERE user_word.word_id = {self.id} "
             f"AND user_word.user_id = {learner_id}"
         )
