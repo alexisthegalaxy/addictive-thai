@@ -11,19 +11,13 @@ TODO:
   It should look like a grid maybe, all clickable and allowing interaction
 
 TODO mid:
-Cool Dex:
-    - Register all the words taught so far
-    - Have it more interactive
-        - Upon click, show an extra window
-            - Location on map
-                - x, y on the map
-                - Name of place where it is
-            - Tones
-            - Playing the sound
-            - Translation
-            - Words it is a part of
-            - Sentences that contain it
-            XP, LVL, etc.
+Register all the words taught so far in the Dex
+Presentation Screen:
+        - Location on map
+            - x, y on the map
+            - Name of place where it is
+        - Tones
+        - Words it is a part of?
 get rid of pickle entirely
 Allow using an other character than Alexis
 Optimizing the beginning

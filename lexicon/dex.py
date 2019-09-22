@@ -1,5 +1,5 @@
 import pygame
-
+import datetime
 from db import get_db_cursor
 from lexicon.items import Word
 from lexicon.presentation import Presentation
@@ -11,13 +11,14 @@ def draw_square(screen, color, x, y, width, height):
 
 
 class WordBox(object):
-    def __init__(self, x, y, width, height, word):
+    def __init__(self, x, y, width, height, word, blinks):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.word = word
-        self.hovered = False
+        self.hovered = None  # contains (x, y) when hovered
+        self.blinks = blinks
 
     def __contains__(self, item):
         if not self.word or not item:
@@ -33,9 +34,11 @@ class WordBox(object):
         y = self.y
         if self.word.total_xp > 0:
             draw_square(screen, (220, 220, 220), x, y, self.width, self.height)
-
         else:
-            draw_square(screen, (170, 170, 170), x, y, self.width, self.height)
+            if self.blinks and datetime.datetime.now().second % 2 == 0:
+                draw_square(screen, (40, 170, 40), x, y, self.width, self.height)
+            else:
+                draw_square(screen, (170, 170, 170), x, y, self.width, self.height)
 
     def draw_2(self, ui):
         if not self.word or not self.hovered:
@@ -62,6 +65,15 @@ class WordBox(object):
         else:
             screen.blit(ui.fonts.garuda24.render(self.word.thai, True, (100, 100, 100)), (x + 10, y + 20))
 
+    def draw_tooltip(self, ui):
+        if not self.word or not self.blinks or not self.hovered:
+            return
+        (x, y) = self.hovered
+        screen = ui.screen
+        s = " The word is taught in the vicinity! "
+        draw_square(screen, (210, 210, 210), x, y, 368, 50)
+        screen.blit(ui.fonts.garuda24.render(s, True, (0, 0, 0)), (x, y))
+
 
 class Dex(object):
     def __init__(self, al):
@@ -76,11 +88,14 @@ class Dex(object):
         self.max_items_to_show = self.words_per_line * self.number_of_lines
         self.square_width = al.ui.percent_width(0.10)
         self.square_height = al.ui.percent_height(0.15)
+        self.hovered_box = None
+        self.location = self.get_broad_map_name()
+        print(self.location)
 
     def select_words_from_db(self):
         if not self.actualized:
             words_db = list(get_db_cursor().execute(
-                f"SELECT w.id, w.split_form, w.thai, w.english, w.tones, w.pos, uw.total_xp "
+                f"SELECT w.id, w.split_form, w.thai, w.english, w.tones, w.pos, uw.total_xp, w.location "
                 f"FROM words w "
                 f"JOIN user_word uw ON uw.word_id = w.id "
                 f"JOIN users u ON u.id = uw.user_id "
@@ -95,9 +110,11 @@ class Dex(object):
                 english=english,
                 tones=tones,
                 pos=pos,
+                location=location,
                 xp=xp,
-            ) for (id, split_form, thai, english, tones, pos, xp) in words_db]
+            ) for (id, split_form, thai, english, tones, pos, xp, location) in words_db]
 
+            self.word_boxes = []
             for line in range(self.number_of_lines):
                 for column in range(self.words_per_line):
                     try:
@@ -110,11 +127,18 @@ class Dex(object):
                         width=self.square_width,
                         height=self.square_height,
                         word=word,
+                        blinks=word and word.location == self.location
                     ))
             self.actualized = True
 
+    def get_broad_map_name(self):
+        map_name = self.al.mas.current_map.filename
+        mother_map = self.al.mas.get_map_from_name(map_name).parent
+        return mother_map.filename if mother_map else map_name
+
     def w(self):
         self.actualized = False
+        self.location = self.get_broad_map_name()
         self.active = not self.active
 
     def launch_presentation(self, word):
@@ -132,12 +156,14 @@ class Dex(object):
             self.offset = max(0, self.offset - self.words_per_line)
             self.actualized = False
         if ui.hover:
+            self.hovered_box = None
             for box in self.word_boxes:
                 if ui.hover in box:
-                    ui.hover = None
                     for other_box in self.word_boxes:
                         other_box.hovered = False
-                    box.hovered = True
+                    self.hovered_box = box
+                    box.hovered = ui.hover
+                    ui.hover = None
                     break
         if ui.click:
             for box in self.word_boxes:
@@ -152,9 +178,11 @@ class Dex(object):
         draw_square(self.al.ui.screen, (150, 150, 150), self.al.ui.percent_width(0.05), self.al.ui.percent_height(0.05), self.al.ui.percent_width(0.90), self.al.ui.percent_height(0.90))
         for box in self.word_boxes:
             box.draw_1(self.al.ui)
-        for box in self.word_boxes:
-            box.draw_2(self.al.ui)
+        if self.hovered_box:
+            self.hovered_box.draw_2(self.al.ui)
         for box in self.word_boxes:
             box.draw_3(self.al.ui)
+        if self.hovered_box:
+            self.hovered_box.draw_tooltip(self.al.ui)
         if self.al.active_presentation:
             self.al.active_presentation.draw()

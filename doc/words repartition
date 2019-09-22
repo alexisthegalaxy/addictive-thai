@@ -51,76 +51,82 @@ Teach the fighting system.
 20 to go ไป if the learner wins.
 
 ✓ chumphae-lomsak:
-✓ 21 to eat กิน
-✓ 22 water น้ำ
-✓ 23 rice ข้าว
+✓✓21 to eat กิน
+✓✓22 water น้ำ
+✓✓23 rice ข้าว
 
 lomsak:
 School:
-    ✓ to be able to ได้
-    ✓ right? (>maichai)
-    ✓ How to answer a question: rather than yes, you repeat the verb, eventually with no in front
-✓ language ภา-ษา
-✓ thai ภา-ษา-ไทย
-✓ english ภา-ษา-อัง-กฤษ
+    ✓✓24 to be able to ได้
+    ✓✓25 right? (>maichai) ใช่
+    ✓✓How to answer a question: rather than yes, you repeat the verb, eventually with no in front
+✓✓26 language ภา-ษา
+✓✓27 thai ภา-ษา-ไทย
+✓✓28 english ภา-ษา-อัง-กฤษ
 Temple:
-✓     to speak พูด
-✓     to study เรียน
-✓     to go ไป => want
+    ✓✓29 to speak พูด
+    ✓✓30 to study เรียน
+    ✓ 31 to go ไป => will disappear once the rival teaches ไป
 
-I like to go to school.
+---I like to go to school.
+---I don't want to go to school.
+---I don't want to be at home and eat.
+---I don't want to return home and study Thai language.
+---He doesn't like to speak.
+---She doesn't want to speak.
 
 lomsak-phetchabun:
-✓ good ดี
-✓ bad ดี
+✓✓32 good ดี
+✓✓33 bad ไม่-ดี
 
 question mountain:
-✓ what อะ-ไร
-✓ where ที่-ไหน
-✓ who ใคร
-✓ when เมื่อ-ไหร่
-✓ why ทำ-ไม
-✓ how ยัง-ไง
+✓✓34 what อะ-ไร
+✓✓35 where ที่-ไหน
+✓✓36 who ใคร
+
+✓✓37 when เมื่อ-ไหร่
+✓✓38 why ทำ-ไม
+✓✓39 how ยัง-ไง
 
 Phetchabun
-✓ teacher ครู
-✓ cat แมว (in cat cove)
-✓ fish ปลา (in cat cove)
-✓ day วัน
-✓ to have มี
+✓ 40 teacher ครู
+✓ 41 cat แมว (in cat cove)
+✓ 42 fish ปลา (in cat cove)
+✓ 43 day วัน
+✓ 44 to have มี
 School:
-✓   (adjectives)
-✓   เป็น
-✓   คือ
+    ✓ (adjectives)
+    ✓ 45 เป็น
+    ✓ 46 คือ
 Fruit farm:
-✓   mango มะ-ม่วง
-✓   banana กล้วย
-✓   pineapple สับ-ปะ-รด
+    ✓ 47 mango มะ-ม่วง
+    ✓ 48 banana กล้วย
+    ✓ 49 pineapple สับ-ปะ-รด
 
 Baenyang:
 Temple:
-✓   think คิด
-✓   heart ใจ
+    ✓ 50 think คิด
+    ✓ 51 heart ใจ
 Village house:
-✓   to see เห็น
+    ✓ 52 to see เห็น
 Village temple:
-
+    ✓ 53 time
 School:
-✓   at ที่
+    ✓ 54 at ที่
 
 lomsak-labyrinth
-✓ child เด็ก
-✓ to play เล่น
-✓ people คน
-✓ to do ทำ
-✓ big ใหญ่
-✓ small เล็ก
+✓ 55 child เด็ก
+✓ 56 to play เล่น
+✓ 57 people คน
+✓ 58 to do ทำ
+✓ 59 big ใหญ่
+✓ 60 small เล็ก
 
 phitsalunok:
-- temple วัด HIGH
-- money
-- buy
-- expensive
+- 61 temple วัด HIGH
+- 62 money
+- 63 buy
+- 64 expensive
 school:
     most, more than?
 

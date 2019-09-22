@@ -76,6 +76,7 @@ class Word(Growable):
         english="no_english",
         tones="LHMRF",
         pos="NOUN???",
+        location="NOWHERE???",
         xp: Optional[str] = 0,
     ):
         super().__init__()
@@ -85,6 +86,7 @@ class Word(Growable):
         self.english = english
         self.tones = tones
         self.pos = pos
+        self.location = location
         self.total_xp = xp
 
     def increase_xp(self, al, value):

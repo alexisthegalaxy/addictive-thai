@@ -120,9 +120,10 @@ class Occurrence(object):
 
 
 class Ma(object):
-    def __init__(self, filename, cell_types, mas, x_shift=-1, y_shift=-1):
+    def __init__(self, filename, cell_types, mas, x_shift=-1, y_shift=-1, parent=None):
         self.filename = filename
         self.mas: Mas = mas
+        self.parent = parent
         self.ma = []
         x, y = (0, 0)
         file = open(f"{os.path.dirname(os.path.realpath(__file__))}/map_text_files/{filename}", "r")
@@ -216,15 +217,6 @@ class Ma(object):
 class Mas(object):
     def __init__(self, cell_types):
         self.al: 'All' = None
-        self.house_learner_f2 = Ma(filename="house_learner_f2", cell_types=cell_types, mas=self)
-        self.house_learner_f1 = Ma(filename="house_learner_f1", cell_types=cell_types, mas=self)
-        self.house_rival_f1 = Ma(filename="house_rival_f1", cell_types=cell_types, mas=self)
-        self.house_rival_f2 = Ma(filename="house_rival_f2", cell_types=cell_types, mas=self)
-        self.chaiyaphum_house_1 = Ma(filename="chaiyaphum_house_1", cell_types=cell_types, mas=self)
-        self.chaiyaphum_house_2 = Ma(filename="chaiyaphum_house_2", cell_types=cell_types, mas=self)
-        self.lover_house = Ma(filename="lover_house", cell_types=cell_types, mas=self)
-        self.house4 = Ma(filename="house4", cell_types=cell_types, mas=self)
-        self.house5 = Ma(filename="house5", cell_types=cell_types, mas=self)
 
         self.inn1 = Ma(filename="inn1", cell_types=cell_types, mas=self)
         self.inn2 = Ma(filename="inn2", cell_types=cell_types, mas=self)
@@ -238,10 +230,20 @@ class Mas(object):
         self.chumphae = Ma(filename="chumphae", cell_types=cell_types, mas=self, x_shift=699, y_shift=563)
         self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", cell_types=cell_types, mas=self, x_shift=824, y_shift=551)
 
-        self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen_house_3 = Ma(filename="chumphae_khonkaen_house_3", cell_types=cell_types, mas=self)
-        self.chumphae_khonkaen_house_4 = Ma(filename="chumphae_khonkaen_house_4", cell_types=cell_types, mas=self)
+        self.house_learner_f2 = Ma(filename="house_learner_f2", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.house_learner_f1 = Ma(filename="house_learner_f1", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.house_rival_f1 = Ma(filename="house_rival_f1", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.house_rival_f2 = Ma(filename="house_rival_f2", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.chaiyaphum_house_1 = Ma(filename="chaiyaphum_house_1", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.chaiyaphum_house_2 = Ma(filename="chaiyaphum_house_2", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.lover_house = Ma(filename="lover_house", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.house4 = Ma(filename="house4", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.house5 = Ma(filename="house5", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+
+        self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_3 = Ma(filename="chumphae_khonkaen_house_3", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_4 = Ma(filename="chumphae_khonkaen_house_4", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
 
         self.chumphae_school = Ma(filename="chumphae_school", cell_types=cell_types, mas=self)
         self.chumphae_house1 = Ma(filename="chumphae_house1", cell_types=cell_types, mas=self)
