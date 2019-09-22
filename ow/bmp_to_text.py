@@ -37,11 +37,14 @@ def convert_bmp_to_text(file_name: str):
 
 
 to_convert = [
-    "house1",
-    "house2",
-    "house3",
+    "house_learner_f2",
+    "house_learner_f1",
+    "house_rival_f2",
+    "house_rival_f1",
+    "lover_house",
+    "chaiyaphum_house_1",
+    "chaiyaphum_house_2",
     "house4",
-    "lab",
     "inn1",
     "inn2",
     "inn3",
@@ -98,8 +101,10 @@ to_convert = [
     "banyaeng_house_3",
     "banyaeng_school",
     "banyaeng_temple",
+    "phetchabun_shop",
     "labyrinth_shop",
     "lomsak_labyrinth_shop",
+    "chumphae_kasetsombum_cave",
 ]
 
 for item in to_convert:

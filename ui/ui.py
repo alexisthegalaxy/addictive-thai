@@ -21,6 +21,7 @@ def npc_sprites():
     # This should be done automatically
     return {
         "sign": pygame.image.load("../npc/sprites/sign.png"),
+        "bed": pygame.image.load("../npc/sprites/bed.png"),
         "mom_up": pygame.image.load("../npc/sprites/mom_up.png"),
         "mom_down": pygame.image.load("../npc/sprites/mom_down.png"),
         "dad_down": pygame.image.load("../npc/sprites/dad_down.png"),
@@ -94,6 +95,7 @@ def npc_sprites():
 def random_images():
     return {
         "full_heart": pygame.image.load("../images/full_heart.png"),
+        "check_mark": pygame.image.load("../images/check_mark.png"),
         "selection_arrow": pygame.image.load("../images/selection_arrow.png"),
         "empty_heart": pygame.image.load("../images/empty_heart.png"),
         "sound_icon": pygame.image.load("../images/sound_icon.png"),
@@ -120,6 +122,8 @@ class Ui(object):
             "path": pygame.image.load("../ow/sprites/path.bmp"),
             "tree": pygame.image.load("../ow/sprites/tree.bmp"),
             "waterfall": pygame.image.load("../ow/sprites/waterfall1.bmp"),
+            "bridge_hor": pygame.image.load("../ow/sprites/bridge_hor.bmp"),
+            "bridge_ver": pygame.image.load("../ow/sprites/bridge_ver.bmp"),
             "flower": pygame.image.load("../ow/sprites/flower.bmp"),
             "flower_2": pygame.image.load("../ow/sprites/flower_2.bmp"),
             "nenuphar": pygame.image.load("../ow/sprites/nenuphar.bmp"),
@@ -128,6 +132,25 @@ class Ui(object):
             "temple_floor": pygame.image.load("../ow/sprites/temple_floor.bmp"),
             "cave_floor": pygame.image.load("../ow/sprites/cave_floor.bmp"),
             "boulder_2": pygame.image.load("../ow/sprites/boulder_2.bmp"),
+
+            'cave_0010': pygame.image.load("../ow/sprites/cave_0010.bmp"),
+            'cave_0110': pygame.image.load("../ow/sprites/cave_0110.bmp"),
+            'cave_0100': pygame.image.load("../ow/sprites/cave_0100.bmp"),
+            'cave_1100': pygame.image.load("../ow/sprites/cave_1100.bmp"),
+            'cave_1000': pygame.image.load("../ow/sprites/cave_1000.bmp"),
+            'cave_1001': pygame.image.load("../ow/sprites/cave_1001.bmp"),
+            'cave_0001': pygame.image.load("../ow/sprites/cave_0001.bmp"),
+            'cave_0011': pygame.image.load("../ow/sprites/cave_0011.bmp"),
+            'cave_1110': pygame.image.load("../ow/sprites/cave_1110.bmp"),
+            'cave_1101': pygame.image.load("../ow/sprites/cave_1101.bmp"),
+            'cave_entrance_down': pygame.image.load("../ow/sprites/cave_entrance_down.bmp"),
+            'cave_stairs_1100': pygame.image.load("../ow/sprites/cave_stairs_1100.bmp"),
+            'cave_stairs_0110': pygame.image.load("../ow/sprites/cave_stairs_0110.bmp"),
+            'cave_stairs_1001': pygame.image.load("../ow/sprites/cave_stairs_1001.bmp"),
+            'cave_stairs_0011': pygame.image.load("../ow/sprites/cave_stairs_0011.bmp"),
+            'cave_0001_over_edge': pygame.image.load("../ow/sprites/cave_0001_over_edge.bmp"),
+            'cave_0010_over_edge': pygame.image.load("../ow/sprites/cave_0010_over_edge.bmp"),
+
             "rock": pygame.image.load("../ow/sprites/rock.bmp"),
             "entrance": pygame.image.load("../ow/sprites/cave_entrance.bmp"),
             "inn_map": pygame.image.load("../ow/sprites/inn_map.bmp"),

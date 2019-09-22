@@ -1,16 +1,18 @@
 TODO:
  Fix the XP. It doesn't work at the moment.
+ Make the mountains look nice, with 4 different tiles (+ 4 corner tiles)
  Grid tests:
     Make grammar grid test
         Show the timer
         Use the word POS
  Tone From sound test
- When a teacher want to teach you a word, they have a ! on their head!
+ When a teacher wants to teach you a word, they have a ! on their head!
  Make the list of gotten words much funnier!
   It should look like a grid maybe, all clickable and allowing interaction
 
 TODO mid:
 get rid of pickle entirely
+Allow using an other character than Alexis
 Test:
     Allow replaying audio in test using the mouse
 Learning:
@@ -52,3 +54,4 @@ Make water look nicer
 
 Make a nice map editor
 Have a script list all the words that do not appear in sentences.
+Have a script that lists all the words learnt (using the teaching order) that do not have an audio!

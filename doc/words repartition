@@ -1,33 +1,54 @@
 All the data for the wild words lie in ow/occurrences/map_name.occurrence
-✓ chaiyaphum:
-✓ mom: I (female) ฉัน
-✓ dad: I (male) ผม
-✓ Rival: You คุณ
-✓ Lover: to like ชอบ
-✓ Teacher (Old man): Thailand เมือง-ไทย
+Chaiyaphum:
+✓ 1 mom: I (female) ฉัน
+✓ 2 dad: I (male) ผม
+✓ 3 Rival: You คุณ
+✓ 4 Lover: to like ชอบ
+✓ 5 Old man: Thai ไทย
+✓ 6 Old woman: people คน
+
+---You like Thai people
+---Thai people like me
+---I like Thai people
 
 ✓ chaiyaphum-chumphae:
-✓ to want อยาก
-✓ House บ้าน
-✓ To be at อยู่
+✓ 7 to want อยาก
+✓ 8 House บ้าน
+✓ 9 To be at อยู่
+
+---Thai people like to be at home.
+---He doesn't like to be at home.
 
 chumphae:
-✓ school
+✓ 10 school โรง-เรียน
+✓ 11 he/she/they เขา
 School:
     ✓ of ของ
-    ✓ he/she/they เขา
     ✓ not ไม่
     ✓ mai (question) ไหม
+
+---Do you like school?
+---Do you like to be at school?
+---He doesn't like Thai school.
+---He doesn't want to be at school.
+---Do Thai people like school?
+---I'm glad you like it. ฉันดีใจที่คุณชอบมัน
 
 ✓ chumphae-khonkaen1:
 ✓ krap, kaa ครับ ค่ะ
 ✓ The wild words are:
 ✓ thank you, sorry, hello
 
+Rival:
+Teach the fighting system.
+to go ไป if the learner wins.
+
 ✓ chumphae-lomsak:
 ✓ to eat กิน
 ✓ water น้ำ
 ✓ rice ข้าว
+
+
 
 lomsak:
 School:
@@ -40,7 +61,9 @@ School:
 Temple:
 ✓     to speak พูด
 ✓     to study เรียน
-✓     to go ไป
+✓     to go ไป => want
+
+I like to go to school.
 
 lomsak-phetchabun:
 ✓ good ดี
@@ -90,6 +113,9 @@ lomsak-labyrinth
 
 phitsalunok:
 - temple วัด HIGH
+- money
+- buy
+- expensive
 school:
     most, more than?
 

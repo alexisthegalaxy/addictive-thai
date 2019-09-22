@@ -13,7 +13,7 @@ from sounds.play_sound import play_thai_word
 
 
 def can_turn(sprite_type):
-    if sprite_type == "sign":
+    if sprite_type == "sign" or sprite_type == "bed":
         return False
     return True
 
@@ -167,9 +167,10 @@ class Npc(object):
                 play_thai_word("welcome")
             if self.active_line_index == 0:
                 al.learner.inn_heal()
-        # if self.sprite == "sign":
+        if self.name == "bed":
+            if self.active_line_index == 0:
+                al.learner.bed_heal()
         if self.active_line_index == -1:
-            #         play_thai_word(self.name)
             play_thai_word(self.name)
         if self.taught_word:
             if self.is_saying_last_sentence() and (

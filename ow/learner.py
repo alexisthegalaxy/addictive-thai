@@ -102,8 +102,16 @@ class Learner(object):
         next_position_walkable = True
 
         # Check for walls:
-        if not al.mas.current_map.get_cell_at(next_x, next_y).walkable():
+
+        next_cell = al.mas.current_map.get_cell_at(next_x, next_y)
+        if not next_cell.walkable():
             next_position_walkable = False
+        if next_position_walkable and next_cell.typ.name == "cave_0011" and self.direction == Direction.DOWN:
+            next_position_walkable = False
+        if next_position_walkable:
+            current_cell = al.mas.current_map.get_cell_at(self.x, self.y)
+            if current_cell.typ.name == "cave_0011" and self.direction == Direction.UP:
+                next_position_walkable = False
         # Check for npcs:
         if next_position_walkable:
             for npc in al.mas.current_map.npcs:
@@ -217,6 +225,10 @@ class Learner(object):
         self.hp = self.max_hp
         self.last_healing_place = (self.x, self.y, self.al.mas.current_map)
         play_thai_word("heal")
+
+    def bed_heal(self):
+        self.hp = self.max_hp
+        self.last_healing_place = (self.x, self.y, self.al.mas.current_map)
 
     def heal(self, amount):
         self.hp = min(self.hp + amount, self.max_hp)

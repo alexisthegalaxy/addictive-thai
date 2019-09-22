@@ -71,6 +71,7 @@ class Mothermap(object):
             'chumsaeng': Minimap('chumsaeng', x=537, y=660, x2=598, y2=727),
             'khonkaen': Minimap('khonkaen', x=897, y=611, x2=951, y2=655),
             'nakhon_sawan': Minimap('nakhon_sawan', x=502, y=703, x2=566, y2=745),
+            'kasetsombum': Minimap('kasetsombum', x=761, y=635, x2=802, y2=663),
             # Rerun 'derive_from_mothermap' after modifications to that file.'
         }
 
