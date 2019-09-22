@@ -856,8 +856,8 @@ class EnglishFromSound6(EnglishFromSound):
         # Draw prompt
         x = ui.percent_width(0.60)
         y = ui.percent_height(0.10)
-        image_name = "sound_icon_green" if self.selector_on_sound else "sound_icon"
-        ui.screen.blit(ui.images[image_name], [x, y])
+        sound = "sound_icon_green" if self.selector_on_sound else "sound_icon"
+        ui.screen.blit(ui.images[sound], [x, y])
 
         # Draw all the options
         for i, box in enumerate(self.boxes):

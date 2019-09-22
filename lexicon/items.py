@@ -277,7 +277,6 @@ class Words(object):
 
 class Sentence(object):
     def __init__(self, thai: str, english: str, words: List["Word"]):
-        super().__init__()
         self.thai = thai.replace("-", "").replace("_", "")
         self.words = words
         self.english = english

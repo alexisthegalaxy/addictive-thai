@@ -7,6 +7,7 @@ from lexicon.items import Words
 class Fonts(object):
     def __init__(self):
         self.garuda64 = pygame.font.Font("../fonts/Garuda.ttf", 64)
+        self.garuda48 = pygame.font.Font("../fonts/Garuda.ttf", 48)
         self.garuda32 = pygame.font.Font("../fonts/Garuda.ttf", 32)
         self.garuda16 = pygame.font.Font("../fonts/Garuda.ttf", 16)
         self.garuda24 = pygame.font.Font("../fonts/Garuda.ttf", 24)
@@ -247,6 +248,8 @@ class Ui(object):
                         al.active_battle.end_battle()
                     elif al.active_sale:
                         al.active_sale = None
+                    elif al.active_presentation:
+                        al.active_presentation = None
                     else:
                         self.running = False
                 if event.key == pygame.K_s:

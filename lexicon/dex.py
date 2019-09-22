@@ -2,11 +2,65 @@ import pygame
 
 from db import get_db_cursor
 from lexicon.items import Word
+from lexicon.presentation import Presentation
 
 
 def draw_square(screen, color, x, y, width, height):
     pygame.draw.rect(screen, color, (x, y, width, height))
     pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
+
+
+class WordBox(object):
+    def __init__(self, x, y, width, height, word):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.word = word
+        self.hovered = False
+
+    def __contains__(self, item):
+        if not self.word or not item:
+            return False
+        (x, y) = item
+        return self.x < x < self.x + self.width and self.y < y < self.y + self.height
+
+    def draw_1(self, ui):
+        if not self.word:
+            return
+        screen = ui.screen
+        x = self.x
+        y = self.y
+        if self.word.total_xp > 0:
+            draw_square(screen, (220, 220, 220), x, y, self.width, self.height)
+
+        else:
+            draw_square(screen, (170, 170, 170), x, y, self.width, self.height)
+
+    def draw_2(self, ui):
+        if not self.word or not self.hovered:
+            return
+        screen = ui.screen
+        x = self.x
+        y = self.y
+        if self.word.total_xp > 0:
+            if self.hovered:
+                pygame.draw.rect(screen, (0, 255, 0), [x, y, self.width, self.height], 3)
+        else:
+            if self.hovered:
+                pygame.draw.rect(screen, (70, 70, 70), [x, y, self.width, self.height], 3)
+
+    def draw_3(self, ui):
+        if not self.word:
+            return
+        screen = ui.screen
+        x = self.x
+        y = self.y
+        if self.word.total_xp > 0:
+            screen.blit(ui.images["check_mark"], [x + 80, y - 10])
+            screen.blit(ui.fonts.garuda24.render(self.word.thai, True, (0, 0, 0)), (x + 10, y + 20))
+        else:
+            screen.blit(ui.fonts.garuda24.render(self.word.thai, True, (100, 100, 100)), (x + 10, y + 20))
 
 
 class Dex(object):
@@ -15,12 +69,13 @@ class Dex(object):
         self.active = False
         self.al = al
         self.offset = 0
-        self.words_to_show = []
-        self.word_count = len(self.words_to_show)
+        self.word_boxes = []
         # Drawing
         self.words_per_line = 7
         self.number_of_lines = 6
         self.max_items_to_show = self.words_per_line * self.number_of_lines
+        self.square_width = al.ui.percent_width(0.10)
+        self.square_height = al.ui.percent_height(0.15)
 
     def select_words_from_db(self):
         if not self.actualized:
@@ -30,12 +85,10 @@ class Dex(object):
                 f"JOIN user_word uw ON uw.word_id = w.id "
                 f"JOIN users u ON u.id = uw.user_id "
                 f"WHERE w.teaching_order > 0 "
-                # f"WHERE u.is_playing "
-                # f"AND uw.total_xp > 0 "
-                f"ORDER BY w.teaching_order DESC "
+                f"ORDER BY w.teaching_order "
                 f"LIMIT {self.max_items_to_show} OFFSET {self.offset};"
             ))
-            self.words_to_show = [Word(
+            words_to_show = [Word(
                 id=id,
                 split_form=split_form,
                 thai=thai,
@@ -44,84 +97,64 @@ class Dex(object):
                 pos=pos,
                 xp=xp,
             ) for (id, split_form, thai, english, tones, pos, xp) in words_db]
+
+            for line in range(self.number_of_lines):
+                for column in range(self.words_per_line):
+                    try:
+                        word = words_to_show[line * self.words_per_line + column]
+                    except IndexError:
+                        word = None
+                    self.word_boxes.append(WordBox(
+                        x=self.al.ui.percent_width(0.15) + column * self.square_width,
+                        y=self.al.ui.percent_height(0.05) + line * self.square_height,
+                        width=self.square_width,
+                        height=self.square_height,
+                        word=word,
+                    ))
             self.actualized = True
 
     def w(self):
         self.actualized = False
         self.active = not self.active
-        self.word_count = len(self.words_to_show)
+
+    def launch_presentation(self, word):
+        self.al.active_presentation = Presentation(self.al, word, from_dex=True)
 
     def interact(self):
-        if self.al.ui.down:
+        ui = self.al.ui
+        if self.al.active_presentation:
+            self.al.active_presentation.interact()
+            return
+        if ui.down:
             self.offset = self.offset + self.words_per_line
             self.actualized = False
-        if self.al.ui.up:
+        if ui.up:
             self.offset = max(0, self.offset - self.words_per_line)
             self.actualized = False
+        if ui.hover:
+            for box in self.word_boxes:
+                if ui.hover in box:
+                    ui.hover = None
+                    for other_box in self.word_boxes:
+                        other_box.hovered = False
+                    box.hovered = True
+                    break
+        if ui.click:
+            for box in self.word_boxes:
+                if ui.click in box:
+                    ui.click = None
+                    self.launch_presentation(box.word)
+                    break
 
     def draw(self):
         if not self.actualized:
             self.select_words_from_db()
-        # TODO Alexis
-        """
-        # 1 - draw background
-        # 2 - draw squares for each word
-            7 * 5
-        # 3 - 
-        """
-
-        # 1 - draw background
-        ui = self.al.ui
-        g24 = ui.fonts.garuda24
-        screen = ui.screen
-        draw_square(screen, (150, 150, 150), ui.percent_width(0.05), ui.percent_height(0.05), ui.percent_width(0.90), ui.percent_height(0.90))
-        # # Draw header
-        # y = ui.percent_height(0.11)
-        # x = ui.percent_width(0.12)
-        # screen.blit(g16.render("Thai", True, (0, 0, 0)), (x, y))
-        # x = ui.percent_width(0.28)
-        # screen.blit(g16.render("English", True, (0, 0, 0)), (x, y))
-        # x = ui.percent_width(0.65)
-        # screen.blit(g16.render("Level", True, (0, 0, 0)), (x, y))
-        # x = ui.percent_width(0.78)
-        # screen.blit(g16.render("Experience", True, (0, 0, 0)), (x, y))
-        square_width = ui.percent_width(0.10)
-        square_height = ui.percent_height(0.15)
-        for column in range(self.words_per_line):  # 0, ..., 6
-            for line in range(self.number_of_lines):  # 0, ..., 4
-                x = ui.percent_width(0.15) + column * square_width
-                y = ui.percent_height(0.05) + line * square_height
-                try:
-                    word = self.words_to_show[line * self.words_per_line + column]
-                    if word.total_xp > 0:
-                        draw_square(screen, (220, 220, 220), x, y, square_width, square_height)
-                    else:
-                        draw_square(screen, (170, 170, 170), x, y, square_width, square_height)
-                except IndexError:
-                    pass
-        for column in range(self.words_per_line):  # 0, ..., 6
-            for line in range(self.number_of_lines):  # 0, ..., 4
-                x = ui.percent_width(0.15) + column * square_width
-                y = ui.percent_height(0.05) + line * square_height
-                try:
-                    word = self.words_to_show[line * self.words_per_line + column]
-                    if word.total_xp > 0:
-                        screen.blit(ui.images["check_mark"], [x + 80, y - 10])
-                        screen.blit(g24.render(word.thai, True, (0, 0, 0)), (x + 10, y + 20))
-                    else:
-                        screen.blit(g24.render(word.thai, True, (100, 100, 100)), (x + 10, y + 20))
-                except IndexError:
-                    pass
-
-        # y = ui.percent_height(0.15)
-        # for i, word in enumerate(self.words_to_show):
-        #     # if 0 <= i - self.offset < self.max_items_to_show:
-        #     x = ui.percent_width(0.12)
-        #     screen.blit(g16.render(word.thai, True, (0, 0, 0)), (x, y))
-        #     x = ui.percent_width(0.28)
-        #     screen.blit(g16.render(word.english, True, (0, 0, 0)), (x, y))
-        #     x = ui.percent_width(0.65)
-        #     screen.blit(g16.render(str(word.level), True, (0, 0, 0)), (x, y))
-        #     x = ui.percent_width(0.78)
-        #     screen.blit(g16.render(str(word.total_xp), True, (0, 0, 0)), (x, y))
-        #     y += ui.percent_width(0.03)
+        draw_square(self.al.ui.screen, (150, 150, 150), self.al.ui.percent_width(0.05), self.al.ui.percent_height(0.05), self.al.ui.percent_width(0.90), self.al.ui.percent_height(0.90))
+        for box in self.word_boxes:
+            box.draw_1(self.al.ui)
+        for box in self.word_boxes:
+            box.draw_2(self.al.ui)
+        for box in self.word_boxes:
+            box.draw_3(self.al.ui)
+        if self.al.active_presentation:
+            self.al.active_presentation.draw()

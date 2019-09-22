@@ -2,7 +2,7 @@ import random
 import sqlite3
 
 # from db import get_db_cursor, get_db_conn
-CONN = sqlite3.connect('thai.db')
+CONN = sqlite3.connect("thai.db")
 CURSOR = CONN.cursor()
 
 
@@ -20,6 +20,7 @@ def find_word_by_id(id):
 
 def get_word_by_id(word_id):
     from lexicon.items import Word
+
     word_db = list(CURSOR.execute(f"SELECT * FROM words WHERE id = '{word_id}'"))[0]
     id = word_db[0]
     split_form = word_db[1]
@@ -29,12 +30,7 @@ def get_word_by_id(word_id):
     # in_sentence = word_db[5]  # TODO
     thai = word_db[5]
     word = Word(
-        id=id,
-        split_form=split_form,
-        thai=thai,
-        english=english,
-        tones=tones,
-        pos=pos,
+        id=id, split_form=split_form, thai=thai, english=english, tones=tones, pos=pos
     )
     return word
 
@@ -73,7 +69,9 @@ def get_current_xy(al):
 
 
 def get_current_x_y_money_hp(al):
-    answers = list(CURSOR.execute("SELECT x, y, money, hp FROM users WHERE is_playing = 1"))
+    answers = list(
+        CURSOR.execute("SELECT x, y, money, hp FROM users WHERE is_playing = 1")
+    )
     if answers:
         x = answers[0][0]
         y = answers[0][1]
@@ -83,7 +81,9 @@ def get_current_x_y_money_hp(al):
 
 
 def save_user_to_db(al, x, y, money, hp, current_map):
-    CURSOR.execute(f"UPDATE users SET x = {x}, y = {y}, money = {money}, hp = {hp}, current_map='{current_map}' WHERE is_playing = 1")
+    CURSOR.execute(
+        f"UPDATE users SET x = {x}, y = {y}, money = {money}, hp = {hp}, current_map='{current_map}' WHERE is_playing = 1"
+    )
     CONN.commit()
 
 
@@ -94,7 +94,9 @@ def find_word_by_id_get_thai(id):
 
 def insert_word(thai, english, tones):
     if not find_word_by_thai(thai):
-        CURSOR.execute(f"INSERT INTO words (thai, english, tones) VALUES ('{thai}', '{english}', '{tones}')")
+        CURSOR.execute(
+            f"INSERT INTO words (thai, english, tones) VALUES ('{thai}', '{english}', '{tones}')"
+        )
         CONN.commit()
 
 
@@ -106,28 +108,43 @@ def get_active_learner_id():
 
 def get_known_words():
     learner_id = get_active_learner_id()
-    answers = list(CURSOR.execute(f"SELECT id FROM user_word WHERE user_id = {learner_id} AND total_xp > 5"))
+    answers = list(
+        CURSOR.execute(
+            f"SELECT id FROM user_word WHERE user_id = {learner_id} AND total_xp > 5"
+        )
+    )
     if answers:
         return answers[0][0]
 
 
 def get_random_known_word_id():
     user_id = get_active_learner_id()
-    known_words = list(CURSOR.execute(f"""
+    known_words = list(
+        CURSOR.execute(
+            f"""
         SELECT word_id
         FROM user_word
         WHERE total_xp > 0
           AND user_id = '{user_id}'
-    """))
+    """
+        )
+    )
     return random.choice(known_words)[0]
 
 
-def get_random_word_id() -> 'Word':
+def get_random_word_id() -> "Word":
     from lexicon.items import Word
-    random_word_db = random.choice(list(CURSOR.execute(f"""
+
+    random_word_db = random.choice(
+        list(
+            CURSOR.execute(
+                f"""
         SELECT id, split_form, english, tones, pos, thai
         FROM words
-    """)))
+    """
+            )
+        )
+    )
     return Word(
         id=random_word_db[0],
         split_form=random_word_db[1],

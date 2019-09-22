@@ -2,6 +2,7 @@ import pygame
 from enum import Enum
 
 from all import All
+from lexicon.presentation import Presentation
 from lexicon.test_services import pick_sentence_test
 from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6
 from sounds.play_sound import play_transformed_thai_word
@@ -35,32 +36,8 @@ class Learning(object):
         if not self.test_5:
             self.test_5 = ThaiFromEnglish6(al, correct_word=word, learning=self)
         self.npc = npc
+        self.al.active_presentation = Presentation(al, word, from_learning=True)
         play_transformed_thai_word(self.word.thai)
-
-    def draw_presentation_screen(self):
-        ui = self.al.ui
-        x = ui.percent_width(0.1)
-        y = ui.percent_height(0.1)
-        height = ui.percent_height(0.8)
-        width = ui.percent_width(0.8)
-
-        screen = ui.screen
-        pygame.draw.rect(screen, (150, 150, 150), (x, y, width, height))
-        pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
-
-        # Draw Thai word
-        x = ui.percent_width(0.12)
-        y = ui.percent_height(0.12)
-        screen.blit(
-            self.al.ui.fonts.garuda64.render(self.word.thai, True, (0, 0, 0)), (x, y)
-        )
-
-        # Draw English
-        x = ui.percent_width(0.15)
-        y = ui.percent_height(0.28)
-        screen.blit(
-            self.al.ui.fonts.garuda64.render(self.word.english, True, (0, 0, 0)), (x, y)
-        )
 
     def draw(self):
         """
@@ -68,9 +45,11 @@ class Learning(object):
         We only need to show the phases of PRESENTATION and CONGRATULATION
         """
         if self.step == LearningStep.PRESENTATION:
-            self.draw_presentation_screen()
+            if self.al.active_presentation:
+                self.al.active_presentation.draw()
         if self.step == LearningStep.CONGRATULATION:
-            self.draw_presentation_screen()
+            if self.al.active_presentation:
+                self.al.active_presentation.draw()
 
     def interact(self, al: All):
         if self.step == LearningStep.PRESENTATION:
@@ -78,6 +57,8 @@ class Learning(object):
                 al.ui.space = False
                 al.active_test = self.test_1
                 self.step = LearningStep.TEST1
+            elif al.active_presentation:
+                al.active_presentation.interact()
         if self.step == LearningStep.CONGRATULATION:
             if al.ui.space:
                 self.step = LearningStep.END
@@ -87,6 +68,8 @@ class Learning(object):
                 if self.npc.defeat_dialog:
                     al.active_npc = self.npc
                     al.active_npc.switch_to_dialog(al.active_npc.defeat_dialog)
+            elif al.active_presentation:
+                al.active_presentation.interact()
 
     def goes_to_next_step(self):
         self.step = LearningStep(int(self.step.value) + 1)

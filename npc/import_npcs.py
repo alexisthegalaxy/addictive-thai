@@ -3367,7 +3367,6 @@ def phitsalunok(al):
 
 
 def import_npcs(al):
-    return
     chumphae_lomsak(al)
     chumphae_school(al)
     chumphae(al)
