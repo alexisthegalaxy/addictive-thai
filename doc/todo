@@ -18,6 +18,12 @@ Presentation Screen:
             - Name of place where it is
         - Tones
         - Words it is a part of?
+Map screen:
+    First, we need a function that translate the current map to a human readable map (mountain color all all brown, etc.)
+        Called postmap
+    Then, we show the postmap on the screen when clicking on m
+        We can move it around using the arrows
+        We show the name of the map in the title on the top part of the screen.
 get rid of pickle entirely
 Allow using an other character than Alexis
 Optimizing the beginning
