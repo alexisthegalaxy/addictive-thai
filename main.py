@@ -12,6 +12,9 @@ from ui.ui import Ui
 
 def main_interact(al: All):
     ow_frozen = False
+    if al.active_minimap:
+        ow_frozen = True
+        al.active_minimap.interact()
     if al.active_test:
         ow_frozen = True
         al.active_test.interact(al)
@@ -61,6 +64,8 @@ def main_draw(al: All):
         al.active_learning.draw()
     if al.dex.active:
         al.dex.draw()
+    if al.active_minimap:
+        al.active_minimap.draw()
     al.learner.draw_money_and_hp(al)
     pygame.display.flip()
 

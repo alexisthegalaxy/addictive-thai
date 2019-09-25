@@ -1,6 +1,7 @@
 import sqlite3
 from bag.bag import Bag
 from lexicon.dex import Dex
+from mechanics.minimap import Minimap
 from models import get_current_map
 from ui.ui import Ui
 
@@ -30,6 +31,7 @@ class All:
         self.active_battle = None
         self.active_sale = None
         self.dex: Dex = None
+        self.active_minimap: Minimap = None
         self.bag: Bag = Bag()
 
     def tick_activity(self):

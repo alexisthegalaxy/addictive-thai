@@ -3,44 +3,42 @@ from typing import List
 
 from PIL import Image
 
-from overworld import CellType
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
 def generate_postmap():
-    from overworld import CellTypes
-    cell_type_names = [a for a in dir(CellTypes) if not a.startswith("__")]
-    cells: List[CellType] = [getattr(CellTypes, name) for name in cell_type_names]
+    from overworld import get_cell_type_dictionary_by_color
+    cell_dictionary = get_cell_type_dictionary_by_color()
     input_file = DIR_PATH + "/map_image_files/full_map.bmp"
     original_map = Image.open(input_file)
-    # pix = im.load()
-
-    t = ""
     postmap = original_map.copy()
     pix = postmap.load()
-
+    _200200200 = cell_dictionary[(200, 200, 200)]
     # This method will show image in any image viewer
-
+    postmap_text = ""
     width, height = postmap.size
-    for x in range(height):
-        for y in range(width):
-            for cell in cells:
-                if pix[y, x] == cell.color:
-                    pix[y, x] = cell.postcolor
+    for x in range(width):
+        for y in range(height):
+            try:
+                cell = cell_dictionary[pix[x, y]]
+                color = cell.postcolor
+                letter = cell.letter
+                pix[x, y] = cell.postcolor
+            except:
+                color = pix[x, y]
+                letter = "無"
+            postmap_text += letter
+            pix[x, y] = color
+        postmap_text += "\n"
+    postmap_text = postmap_text[:-1]
+    print(postmap_text)
     postmap.save(f'{DIR_PATH}/map_image_files/postmap.bmp')
-    postmap.show()
-    # color_found = False
-    # for cell_type_name in cell_type_names:
-    #     cell_type = getattr(CellTypes, cell_type_name)
-    #     if color == cell_type.color:
-    #         color_found = True
-    #         t += cell_type.letter
-    # if not color_found:
-    #     t += CellTypes.none.letter
-    # t += "\n"
-    # t = t[:-1]
-    # return t
+
+    text_file_path = f'{DIR_PATH}/map_text_files/postmap'
+    with open(text_file_path, "w") as f:
+        f.write(postmap_text)
+    # postmap.show()
 
 
 generate_postmap()

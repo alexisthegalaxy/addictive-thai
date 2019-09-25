@@ -108,13 +108,6 @@ if __name__ == "__main__":
     mothermap.write_text_files()
 
 
-# print(DIR_PATH + "/map_text_files/" + 'yo')
-# print(DIR_PATH + "/map_text_files/" + 'yo')
-# print(DIR_PATH + "/map_text_files/" + 'yo')
-# print(DIR_PATH + "/map_text_files/" + 'yo')
-# print(DIR_PATH + "/map_text_files/" + 'yo')
-# #
-#
 # def convert_bmp_to_text(file_name: str):
 #     import os
 #

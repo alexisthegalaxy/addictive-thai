@@ -11,14 +11,14 @@ def draw_square(screen, color, x, y, width, height):
 
 
 class WordBox(object):
-    def __init__(self, x, y, width, height, word, blinks):
+    def __init__(self, x, y, width, height, word, blinking):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.word = word
         self.hovered = None  # contains (x, y) when hovered
-        self.blinks = blinks
+        self.blinking = blinking
 
     def __contains__(self, item):
         if not self.word or not item:
@@ -35,7 +35,7 @@ class WordBox(object):
         if self.word.total_xp > 0:
             draw_square(screen, (220, 220, 220), x, y, self.width, self.height)
         else:
-            if self.blinks and datetime.datetime.now().second % 2 == 0:
+            if self.blinking and datetime.datetime.now().second % 2 == 0:
                 draw_square(screen, (40, 170, 40), x, y, self.width, self.height)
             else:
                 draw_square(screen, (170, 170, 170), x, y, self.width, self.height)
@@ -66,7 +66,7 @@ class WordBox(object):
             screen.blit(ui.fonts.garuda24.render(self.word.thai, True, (100, 100, 100)), (x + 10, y + 20))
 
     def draw_tooltip(self, ui):
-        if not self.word or not self.blinks or not self.hovered:
+        if not self.word or not self.blinking or not self.hovered:
             return
         (x, y) = self.hovered
         screen = ui.screen
@@ -127,7 +127,7 @@ class Dex(object):
                         width=self.square_width,
                         height=self.square_height,
                         word=word,
-                        blinks=word and word.location == self.location
+                        blinking=word and word.location == self.location
                     ))
             self.actualized = True
 

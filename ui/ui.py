@@ -2,6 +2,7 @@ import time
 import pygame
 
 from lexicon.items import Words
+from mechanics.minimap import Minimap
 
 
 class Fonts(object):
@@ -184,6 +185,8 @@ class Ui(object):
         self.right = False
         self.space = False
         self.backspace = False
+        self.plus = False
+        self.minus = False
         self.w = False
 
     def can_draw_cell(self, x: int, y: int):
@@ -216,6 +219,10 @@ class Ui(object):
                     al.ui.right = True
                 if event.key == pygame.K_LEFT:
                     al.ui.left = True
+                if event.key == 61:  # PLUS
+                    al.ui.plus = True
+                if event.key == pygame.K_MINUS:
+                    al.ui.minus = True
                 if event.key == pygame.K_o:
                     al.learner.open()
                 if event.key == pygame.K_r:
@@ -231,6 +238,11 @@ class Ui(object):
                     al.ui.space = True
                 if event.key == pygame.K_w:
                     al.dex.w()
+                if event.key == pygame.K_m:
+                    if al.active_minimap:
+                        al.active_minimap = None
+                    else:
+                        al.active_minimap = Minimap(al)
                 if event.key == pygame.K_RETURN:
                     al.ui.space = True
                 if event.key == pygame.K_p:

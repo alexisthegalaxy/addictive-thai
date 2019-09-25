@@ -130,6 +130,24 @@ class Occurrence(object):
         self.rates = [rate / total_weight for rate in self.rates]
 
 
+def get_cell_type_dictionary():
+    """
+    Produce a dictionary, that given the letter, return the cell type
+    """
+    cell_type_names = [a for a in dir(CellTypes) if not a.startswith("__")]
+    cells: List[CellType] = [getattr(CellTypes, name) for name in cell_type_names]
+    return {cell.letter: cell for cell in cells}
+
+
+def get_cell_type_dictionary_by_color():
+    """
+    Produce a dictionary, that given the letter, return the cell type
+    """
+    cell_type_names = [a for a in dir(CellTypes) if not a.startswith("__")]
+    cells: List[CellType] = [getattr(CellTypes, name) for name in cell_type_names]
+    return {cell.color: cell for cell in cells}
+
+
 class Ma(object):
     def __init__(self, filename, cell_types, mas, x_shift=-1, y_shift=-1, parent=None):
         self.filename = filename
@@ -138,19 +156,17 @@ class Ma(object):
         self.ma = []
         x, y = (0, 0)
         file = open(f"{os.path.dirname(os.path.realpath(__file__))}/map_text_files/{filename}", "r")
+        cell_dictionary = get_cell_type_dictionary()
         for i, line in enumerate(file):
             y += 1
             x = 0
             new_line = []
             for j, character in enumerate(line):
-                x += 1
-                t = cell_types.none
-                cell_type_names = [a for a in dir(CellTypes) if not a.startswith('__')]
-                for cell_type_name in cell_type_names:
-                    cell_type = getattr(CellTypes, cell_type_name)
-                    if character == cell_type.letter:
-                        t = cell_type
-                new_line.append(Cell(x=j, y=i, typ=t))
+                try:
+                    cell_type = cell_dictionary[character]
+                except:
+                    cell_type = CellTypes.none
+                new_line.append(Cell(x=j, y=i, typ=cell_type))
             self.ma.append(new_line)
         self.width = x
         self.height = y
