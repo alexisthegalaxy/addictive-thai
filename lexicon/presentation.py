@@ -1,5 +1,7 @@
 import pygame
+
 from lexicon.items import Word
+from mechanics.minimap import Minimap
 from sounds.play_sound import play_transformed_thai_word
 
 
@@ -30,6 +32,7 @@ class Presentation(object):
                 ui.click = None
             if self.outside_presentation(ui.click, ui):
                 self.al.active_presentation = None
+                self.al.active_minimap = None
                 ui.click = None
         if ui.right:
             ui.right = None
@@ -41,6 +44,9 @@ class Presentation(object):
             self.selected_sentence_index -= 1
             if self.selected_sentence_index == -1:
                 self.selected_sentence_index = len(self.sentences) - 1
+        if ui.m:
+            ui.m = False
+            self.al.active_minimap = Minimap(self.al, interest_point=(self.word.x, self.word.y))
 
     def on_sound(self, point, ui):
         if not point:

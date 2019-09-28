@@ -95,7 +95,7 @@ class Dex(object):
     def select_words_from_db(self):
         if not self.actualized:
             words_db = list(get_db_cursor().execute(
-                f"SELECT w.id, w.split_form, w.thai, w.english, w.tones, w.pos, uw.total_xp, w.location "
+                f"SELECT w.id, w.split_form, w.thai, w.english, w.tones, w.pos, uw.total_xp, w.location, w.location_x, w.location_y "
                 f"FROM words w "
                 f"JOIN user_word uw ON uw.word_id = w.id "
                 f"JOIN users u ON u.id = uw.user_id "
@@ -112,7 +112,9 @@ class Dex(object):
                 pos=pos,
                 location=location,
                 xp=xp,
-            ) for (id, split_form, thai, english, tones, pos, xp, location) in words_db]
+                x=location_x,
+                y=location_y,
+            ) for (id, split_form, thai, english, tones, pos, xp, location, location_x, location_y) in words_db]
 
             self.word_boxes = []
             for line in range(self.number_of_lines):
@@ -171,6 +173,11 @@ class Dex(object):
                     ui.click = None
                     self.launch_presentation(box.word)
                     break
+            # for box in self.word_boxes:
+            #     if ui.click in box:
+            #         ui.click = None
+            #         self.launch_presentation(box.word)
+            #         break
 
     def draw(self):
         if not self.actualized:

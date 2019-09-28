@@ -190,13 +190,12 @@ class Ma(object):
                 x = cell.x * al.ui.cell_size + offset_x
                 y = cell.y * al.ui.cell_size + offset_y
                 if al.ui.can_draw_cell(x, y):
-                    color = cell.typ.color
                     if cell.typ.name in al.ui.sprites:
                         al.ui.screen.blit(al.ui.sprites[cell.typ.name], [x, y])
                     else:
                         pygame.draw.rect(
                             al.ui.screen,
-                            color,
+                            cell.typ.color,
                             pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size)
                         )
 
@@ -267,11 +266,8 @@ class Mas(object):
         self.phitsalunok = Ma(filename="phitsalunok", cell_types=cell_types, mas=self, x_shift=530, y_shift=545)
         self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", cell_types=cell_types, mas=self, x_shift=620, y_shift=548)
 
-        self.inn1 = Ma(filename="inn1", cell_types=cell_types, mas=self)
-        self.inn2 = Ma(filename="inn2", cell_types=cell_types, mas=self)
-        self.inn3 = Ma(filename="inn3", cell_types=cell_types, mas=self)
-        self.inn4 = Ma(filename="inn4", cell_types=cell_types, mas=self)
-        self.inn5 = Ma(filename="inn5", cell_types=cell_types, mas=self)
+        self.inn1 = Ma(filename="inn1", cell_types=cell_types, mas=self, parent=self.chumphae)
+        self.inn2 = Ma(filename="inn2", cell_types=cell_types, mas=self, parent=self.lomsak)
         self.inn_khonkaen = Ma(filename="inn_khonkaen", cell_types=cell_types, mas=self, parent=self.khonkaen)
         self.inn_buengsamphan = Ma(filename="inn_buengsamphan", cell_types=cell_types, mas=self, parent=self.buengsamphan)
 
@@ -342,7 +338,9 @@ class Mas(object):
         self.phetchabun_shop = Ma(filename="phetchabun_shop", cell_types=cell_types, mas=self, parent=self.phetchabun)
         self.lomsak_labyrinth_shop = Ma(filename="lomsak_labyrinth_shop", cell_types=cell_types, mas=self, parent=self.lomsak_labyrinth)
         self.chumphae_kasetsombum_cave = Ma(filename="chumphae_kasetsombum_cave", cell_types=cell_types, mas=self)
+        self.kasetsombum_cave = Ma(filename="kasetsombum_cave", cell_types=cell_types, mas=self)
         self.labyrinth_shop = Ma(filename="labyrinth_shop", cell_types=cell_types, mas=self)
+        self.kasetsombum_temple = Ma(filename="kasetsombum_temple", cell_types=cell_types, mas=self)
         self.current_map: Ma = self.chaiyaphum
 
     def get_map_from_name(self, name):
@@ -655,6 +653,10 @@ class Mas(object):
 
         self.chumphae_kasetsombum_cave.get_cell_at(18, 14).goes_to = (self.kasetsombum, 34, 15)
         self.kasetsombum.get_cell_at(34, 14).goes_to = (self.chumphae_kasetsombum_cave, 18, 13)
+        self.kasetsombum.get_cell_at(8, 8).goes_to = (self.kasetsombum_cave, 15, 9)
+        self.kasetsombum_cave.get_cell_at(15, 10).goes_to = (self.kasetsombum, 8, 9)
+        self.kasetsombum_cave.get_cell_at(5, 4).goes_to = (self.kasetsombum_temple, 11, 14)
+        self.kasetsombum_temple.get_cell_at(11, 13).goes_to = (self.kasetsombum_cave, 5, 3)
 
 
 

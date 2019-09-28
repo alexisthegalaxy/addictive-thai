@@ -32,7 +32,7 @@ def generate_postmap():
             pix[x, y] = color
         postmap_text += "\n"
     postmap_text = postmap_text[:-1]
-    print(postmap_text)
+    # print(postmap_text)
     postmap.save(f'{DIR_PATH}/map_image_files/postmap.bmp')
 
     text_file_path = f'{DIR_PATH}/map_text_files/postmap'
@@ -41,4 +41,5 @@ def generate_postmap():
     # postmap.show()
 
 
-generate_postmap()
+if __name__ == "__main__":
+    generate_postmap()

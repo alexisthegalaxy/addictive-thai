@@ -188,6 +188,7 @@ class Ui(object):
         self.plus = False
         self.minus = False
         self.w = False
+        self.m = False
 
     def can_draw_cell(self, x: int, y: int):
         min_x = -self.cell_size
@@ -239,17 +240,25 @@ class Ui(object):
                 if event.key == pygame.K_w:
                     al.dex.w()
                 if event.key == pygame.K_m:
-                    if al.active_minimap:
-                        al.active_minimap = None
+                    if not al.active_presentation:
+                        if al.active_minimap:
+                            al.active_minimap = None
+                        else:
+                            al.active_minimap = Minimap(al, show_learner=True)
                     else:
-                        al.active_minimap = Minimap(al)
+                        al.ui.m = True
                 if event.key == pygame.K_RETURN:
                     al.ui.space = True
                 if event.key == pygame.K_p:
                     al.learner.print_location()
                 if event.key == pygame.K_ESCAPE:
+                    # TODO All of this should be processed after all the al.interact
+                    #  so that each component can have its own way of dealing with the escape key
+                    #  eg Dex closing the presentation page.
                     if al.active_test:
                         al.active_test = None
+                    elif al.active_minimap:
+                        al.active_minimap = None
                     elif al.active_learning:
                         al.active_learning = None
                     elif al.active_npc:

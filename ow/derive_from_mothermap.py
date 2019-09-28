@@ -1,6 +1,7 @@
 from PIL import Image
 import os
 
+
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -22,26 +23,22 @@ class Minimap(object):
 
 
 def _get_text_from_mothermap():
-    from overworld import CellTypes
-    cell_type_names = [a for a in dir(CellTypes) if not a.startswith("__")]
+    from overworld import CellTypes, get_cell_type_dictionary_by_color
     input_file = DIR_PATH + "/map_image_files/full_map.bmp"
     im = Image.open(input_file)
     pix = im.load()
-
+    cell_dictionary = get_cell_type_dictionary_by_color()
     t = ""
 
     width, height = im.size
     for x in range(height):
         for y in range(width):
-            color = pix[y, x]
-            color_found = False
-            for cell_type_name in cell_type_names:
-                cell_type = getattr(CellTypes, cell_type_name)
-                if color == cell_type.color:
-                    color_found = True
-                    t += cell_type.letter
-            if not color_found:
-                t += CellTypes.none.letter
+            try:
+                cell = cell_dictionary[pix[y, x]]
+                letter = cell.letter
+            except:
+                letter = CellTypes.none.letter
+            t += letter
         t += "\n"
     t = t[:-1]
     return t
@@ -72,10 +69,11 @@ class Mothermap(object):
             'khonkaen': Minimap('khonkaen', x=897, y=611, x2=951, y2=655),
             'nakhon_sawan': Minimap('nakhon_sawan', x=502, y=703, x2=566, y2=745),
             'kasetsombum': Minimap('kasetsombum', x=761, y=635, x2=802, y2=663),
+            'kasetsombum_temple': Minimap('kasetsombum_temple', x=748, y=624, x2=790, y2=643),
             # Rerun 'derive_from_mothermap' after modifications to that file.'
         }
 
-    def write_text_files(self):
+    def old_write_text_files(self):  # Works!
         """
         Opens the main map, makes a huge in-memory text file
         Then, cut from it the smaller maps.
@@ -91,8 +89,6 @@ class Mothermap(object):
                         text_for_each_map[minimap.name] += char
                         if char_index == minimap.x2 and line_index != minimap.y2:
                             text_for_each_map[minimap.name] += '\n'
-            # Write in the text file
-            # pass
 
         for minimap in self.minimaps.values():
             output_file_name = DIR_PATH + "/map_text_files/" + minimap.name
@@ -100,12 +96,35 @@ class Mothermap(object):
             f.write(text_for_each_map[minimap.name])
         print('done')
 
+    def write_text_files(self):
+        """
+        Opens the main map, makes a huge in-memory text file
+        Then, cut from it the smaller maps.
+        """
+        t = _get_text_from_mothermap()
+        text_for_each_map = {}  # { map_name: map_text }
+        for minimap in self.minimaps.values():
+            text_for_each_map[minimap.name] = ""
+            for line_index, line in enumerate(t.split('\n')[minimap.y:minimap.y2 + 1]):
+                for char_index, char in enumerate(line[minimap.x:minimap.x2 + 1]):
+                    text_for_each_map[minimap.name] += char
+                # if char_index == minimap.x2 and line_index != minimap.y2:
+                text_for_each_map[minimap.name] += '\n'
 
-mothermap = Mothermap()
+        for minimap in self.minimaps.values():
+            output_file_name = DIR_PATH + "/map_text_files/" + minimap.name
+            f = open(output_file_name, "w+")
+            f.write(text_for_each_map[minimap.name])
+
+
+mothermap = Mothermap()  # is outside main so that files importing it can use it
 
 
 if __name__ == "__main__":
+    from generate_postmap import generate_postmap
     mothermap.write_text_files()
+    generate_postmap()
+    print('done')
 
 
 # def convert_bmp_to_text(file_name: str):

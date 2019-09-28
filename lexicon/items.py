@@ -78,6 +78,8 @@ class Word(Growable):
         pos="NOUN???",
         location="NOWHERE???",
         xp: Optional[str] = 0,
+        x: int = -1,
+        y: int = -1,
     ):
         super().__init__()
         self.id = id
@@ -88,6 +90,8 @@ class Word(Growable):
         self.pos = pos
         self.location = location
         self.total_xp = xp
+        self.x = x
+        self.y = y
 
     def increase_xp(self, al, value):
         super().increase_xp(al, value)

@@ -11,24 +11,30 @@ def draw_square(screen, color, x, y, width, height):
 
 
 class MinimapCell(object):
-    def __init__(self, x, y, typ):
+    def __init__(self, x, y, typ, blinking_color=None):
         self.x = x
         self.y = y
         self.typ = typ
+        self.blinking_color = blinking_color
 
-    def draw(self, ui, x, y, size, blinking=False):
+    def draw(self, ui, x, y, size):
         # print(x, y)
         screen = ui.screen
         color = self.typ.postcolor
 
-        if blinking and datetime.now().microsecond > 1000000/2:
-            color = (255, 0, 0)
+        if self.blinking_color and datetime.now().microsecond > 1_000_000 / 2:
+            color = self.blinking_color
         pygame.draw.rect(screen, color, (x, y, size, size))
 
 
 class Minimap(object):
-    def __init__(self, al, x=None, y=None, size=40):
+    def __init__(
+        self, al, x=None, y=None, size=40, show_learner=False, interest_point=None
+    ):
         from overworld import get_cell_type_dictionary
+
+        self.show_learner = show_learner
+        self.interest_point = interest_point
         self.learner_x = al.learner.x + al.mas.current_map.x_shift
         self.learner_y = al.learner.y + al.mas.current_map.y_shift
         self.al = al
@@ -41,79 +47,73 @@ class Minimap(object):
         self.y2 = self.y + self.size
         self.table = []
         self.cell_dictionary = get_cell_type_dictionary()
-        text_file_path = f'{DIR_PATH}/../ow/map_text_files/postmap'
+        text_file_path = f"{DIR_PATH}/../ow/map_text_files/postmap"
         with open(text_file_path, "r") as f:
             self.file_lines = f.readlines()
         self.recompute()
 
     def recompute(self):
         from overworld import CellTypes
+
         self.table = []
         self.x1 = self.x - self.size
         self.x2 = self.x + self.size
         self.y1 = self.y - self.size
         self.y2 = self.y + self.size
-        for x, file_line in enumerate(self.file_lines[self.x1:self.x2]):
+        for x, file_line in enumerate(self.file_lines[self.x1 : self.x2]):
             line = []
-            for y, character in enumerate(file_line[self.y1:self.y2]):
+            for y, character in enumerate(file_line[self.y1 : self.y2]):
                 try:
                     cell_type = self.cell_dictionary[character]
                 except KeyError:
                     cell_type = CellTypes.none
-                line.append(MinimapCell(x=x + self.x1, y=y + self.y1, typ=cell_type))
+                line.append(
+                    MinimapCell(
+                        x=x + self.x1,
+                        y=y + self.y1,
+                        typ=cell_type,
+                        blinking_color=self.cell_should_blink(x, y),
+                    )
+                )
             self.table.append(line)
 
     def change_size(self, goes_up=False, goes_down=False):
-        down = {
-            20: 40,
-            40: 60,
-            60: 90,
-            90: 120,
-            120: 120,
-        }
-        up = {
-            20: 20,
-            40: 20,
-            60: 40,
-            90: 60,
-            120: 90,
-        }
+        down = {20: 40, 40: 60, 60: 90, 90: 120, 120: 120}
+        up = {20: 20, 40: 20, 60: 40, 90: 60, 120: 90}
         if goes_up:
             self.size = up[self.size]
         if goes_down:
             self.size = down[self.size]
 
-
     def interact(self):
-        offset = self.size
         ui = self.al.ui
         if self.al.active_presentation:
             self.al.active_presentation.interact()
             return
         if ui.down:
-            self.y += offset
+            self.y += self.size
             ui.down = False
             self.recompute()
         if ui.up:
-            self.y -= offset
+            self.y = max(self.y - self.size, self.size)
             ui.up = False
             self.recompute()
         if ui.right:
-            self.x += offset
+            self.x += self.size
             ui.right = False
             self.recompute()
         if ui.left:
-            self.x -= offset
+            self.x = max(self.x - self.size, self.size)
             ui.left = False
             self.recompute()
         if ui.plus:
             self.change_size(goes_up=True)
             ui.plus = False
-            print(self.size)
             self.recompute()
+            self.x = max(self.x, self.size)
+            self.y = max(self.y, self.size)
         if ui.minus:
             self.change_size(goes_down=True)
-            print(self.size)
             ui.minus = False
             self.recompute()
 
@@ -121,10 +121,24 @@ class Minimap(object):
         x = x + self.x1
         y = y + self.y1
         offset = int(self.size / 30) or 1
-        return self.learner_x - offset < x < self.learner_x + offset and self.learner_y - offset < y < self.learner_y + offset
+        if (
+            self.show_learner
+            and self.learner_x - offset < x < self.learner_x + offset
+            and self.learner_y - offset < y < self.learner_y + offset
+        ):
+            return 255, 0, 0
+        if (
+            self.interest_point
+            and self.interest_point[0] - offset < x < self.interest_point[0] + offset
+            and self.interest_point[1] - offset < y < self.interest_point[1] + offset
+        ):
+            return 255, 255, 0
+
+        else:
+            return None
 
     def draw(self):
         pixel_size = 90 * 4 / self.size
         for x, line in enumerate(self.table):
             for y, cell in enumerate(line):
-                cell.draw(self.al.ui, 240 + x * pixel_size, y * pixel_size, pixel_size, blinking=self.cell_should_blink(x, y))
+                cell.draw(self.al.ui, 240 + x * pixel_size, y * pixel_size, pixel_size)

@@ -1,6 +1,5 @@
 from bag.bag import Compartment
 from bag.item import Item
-from derive_from_mothermap import Mothermap, mothermap
 from direction import Direction
 from lexicon.items import Word
 from npc.npc import Npc
@@ -762,45 +761,6 @@ def nurses(al):
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Lomsak!",
-                "You can rest here for a while, and you'll feel better!",
-            ],
-        ),
-        Npc(
-            al=al,
-            name="nurse",
-            ma=al.mas.get_map_from_name("inn3"),
-            x=4,
-            y=1,
-            sprite="vendor",
-            direction=Direction.DOWN,
-            standard_dialog=[
-                "Welcome to the inn of Chumphae!",
-                "You can rest here for a while, and you'll feel better!",
-            ],
-        ),
-        Npc(
-            al=al,
-            name="nurse",
-            ma=al.mas.get_map_from_name("inn4"),
-            x=4,
-            y=1,
-            sprite="vendor",
-            direction=Direction.DOWN,
-            standard_dialog=[
-                "Welcome to the inn of Chumphae!",
-                "You can rest here for a while, and you'll feel better!",
-            ],
-        ),
-        Npc(
-            al=al,
-            name="nurse",
-            ma=al.mas.get_map_from_name("inn5"),
-            x=4,
-            y=1,
-            sprite="vendor",
-            direction=Direction.DOWN,
-            standard_dialog=[
-                "Welcome to the inn of Chumphae!",
                 "You can rest here for a while, and you'll feel better!",
             ],
         ),
@@ -3367,6 +3327,41 @@ def phitsalunok(al):
         npc.ma.add_npc(npc)
 
 
+def kasetsombum(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="woman",
+            ma=al.mas.get_map_from_name("kasetsombum"),
+            x=30,
+            y=11,
+            sprite="woman",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Yes, it's mostly farmland around Kasetsombum.",
+                "Actually, \'เกษตร\' (kaset) means farmland, and \'สมบูรณ์\' (sombum) means perfect.",
+                "I wonder if that refers to how perfect my farmland is?",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="old_man",
+            ma=al.mas.get_map_from_name("kasetsombum"),
+            x=28,
+            y=16,
+            sprite="old_man",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "You're from Phetchabun?",
+                "Then you crossed that cave to come here?",
+                "Thank you! Welcome to Kasetsombum!",
+            ],
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
 """
     taught_word=Word.get_by_split_form("โรง"),
 """
@@ -3388,3 +3383,4 @@ def import_npcs(al):
     khonkaen(al)
     nakhon_sawan(al)
     phitsalunok(al)
+    kasetsombum(al)

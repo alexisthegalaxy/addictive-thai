@@ -12,15 +12,15 @@ from ui.ui import Ui
 
 def main_interact(al: All):
     ow_frozen = False
-    if al.active_minimap:
-        ow_frozen = True
-        al.active_minimap.interact()
     if al.active_test:
         ow_frozen = True
         al.active_test.interact(al)
     elif al.active_battle:
         ow_frozen = True
         al.active_battle.interact(al)
+    if al.active_minimap:  # must happen before dex
+        ow_frozen = True
+        al.active_minimap.interact()
     if al.dex.active:
         ow_frozen = True
         al.dex.interact()
