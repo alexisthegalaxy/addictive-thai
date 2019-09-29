@@ -5,17 +5,18 @@ import sqlite3
 CONN = sqlite3.connect("thai.db")
 CURSOR = CONN.cursor()
 
-
-def find_word_by_id(id):
-    word_db = list(c.execute(f"SELECT * FROM words WHERE id = '{id}'"))[0]
-    id = word_db[0]
-    split_form = word_db[1]
-    english = word_db[2]
-    tone = word_db[3]
-    pos = word_db[4]
-    in_sentence = word_db[5]
-    thai = word_db[6]
-    return word_db
+#
+# def find_word_by_id(id):
+#     word_db = list(CURSOR.execute(f"SELECT * FROM words WHERE id = '{id}'"))[0]
+#     # id = word_db[0]
+#     # split_form = word_db[1]
+#     # english = word_db[2]
+#     # tone = word_db[3]
+#     # pos = word_db[4]
+#     # in_sentence = word_db[5]
+#     # thai = word_db[6]
+#     return word_db
+#
 
 
 def get_word_by_id(word_id):
@@ -33,6 +34,17 @@ def get_word_by_id(word_id):
         id=id, split_form=split_form, thai=thai, english=english, tones=tones, pos=pos
     )
     return word
+
+
+def xp_from_word(word_id: int) -> int:
+    total_xp = list(CURSOR.execute(
+        f"SELECT user_word.total_xp FROM user_word "
+        f"WHERE word_id = '{word_id}'"
+    ))
+    if not total_xp:
+        return -1
+    wi = total_xp[0][0]
+    return wi
 
 
 def find_word_by_thai_get_id(thai):

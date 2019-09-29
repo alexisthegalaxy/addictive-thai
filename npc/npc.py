@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from datetime import datetime
-from time import mktime
 import time
 import pygame
 from typing import List, Tuple, Optional
@@ -9,6 +8,7 @@ from all import All
 from direction import string_from_direction, opposite_direction, Direction, dir_equal
 from lexicon.items import Word
 from lexicon.learning import Learning
+from models import xp_from_word
 from sounds.play_sound import play_thai_word
 
 
@@ -74,7 +74,7 @@ class Npc(object):
         self.color = (0, 222, 222)
         self.taught_word = taught_word
         self.battle_words = battle_words
-
+        self.has_learning_mark = self.taught_word and xp_from_word(self.taught_word.id) <= 0
         self.wants_battle = True
         self.wanna_meet = wanna_meet
         self.eyesight = eyesight
@@ -196,6 +196,7 @@ class Npc(object):
 
     def interact(self, al):
         self.wanna_meet = False
+        self.has_learning_mark = False
         self.reset_cursor()
         if not al.active_npc:
             if self.taught_word:  # If this NPC teaches
@@ -268,6 +269,10 @@ class Npc(object):
                 )
             else:
                 self.have_exclamation_mark_until = None
+        elif self.has_learning_mark:
+            al.ui.screen.blit(
+                al.ui.images["learning_mark"], [x, y - al.ui.cell_size]
+            )
 
     def draw(self, al):
         offset_x = -al.ui.cell_size * (al.learner.x - 7)

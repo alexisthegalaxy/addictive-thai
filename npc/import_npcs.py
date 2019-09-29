@@ -29,7 +29,7 @@ def chumphae_lomsak(al):
             ma=al.mas.get_map_from_name("chumphae_lomsak_house1"),
             x=6,
             y=11,
-            sprite="mom",
+            sprite="old_woman",
             direction=Direction.LEFT,
             standard_dialog=[
                 "Rice is an important word, it is very common.",
@@ -425,9 +425,10 @@ def chumphae(al):
             al=al,
             name="kid",
             ma=al.mas.get_map_from_name("chumphae"),
-            x=108,
-            y=37,
+            x=107,
+            y=38,
             sprite="kid",
+            appears_between=(7, 22),
             direction=Direction.UP,
             standard_dialog=[
                 "Grandma says a ghost appears by the spirit house at night,",

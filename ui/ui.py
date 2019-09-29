@@ -104,6 +104,14 @@ def random_images():
         "sound_icon": pygame.image.load("../images/sound_icon.png"),
         "sound_icon_green": pygame.image.load("../images/sound_icon_green.png"),
         "exclamation_mark": pygame.image.load("../images/exclamation_mark.png"),
+        "learning_mark": pygame.image.load("../images/learning_mark.png"),
+        "brain_0": pygame.image.load("../images/brain_0.png"),
+        "brain_1": pygame.image.load("../images/brain_1.png"),
+        "brain_2": pygame.image.load("../images/brain_2.png"),
+        "brain_3": pygame.image.load("../images/brain_3.png"),
+        "brain_4": pygame.image.load("../images/brain_4.png"),
+        "brain_5": pygame.image.load("../images/brain_5.png"),
+        "brain_6": pygame.image.load("../images/brain_6.png"),
     }
 
 

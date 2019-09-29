@@ -1,14 +1,10 @@
 TODO:
  Fix the XP. It doesn't work at the moment.
- Make the mountains look nice, with 4 different tiles (+ 4 corner tiles)
  Grid tests:
     Make grammar grid test
         Show the timer
         Use the word POS
  Tone From sound test
- When a teacher wants to teach you a word, they have a ! on their head!
- Make the list of gotten words much funnier!
-  It should look like a grid maybe, all clickable and allowing interaction
 
 TODO mid:
 Redo the occurrences so that the words that appear are taught indeed
@@ -31,8 +27,6 @@ Allow using an other character than Alexis
 Optimizing the beginning
 Test:
     Allow replaying audio in test using the mouse
-Learning:
-    Show the progression bar going up in a learning 1/6 or a brain getting full or something
 Battle:
     Show how the other trainer is fighting
         - See the gotten bubbles on each side!

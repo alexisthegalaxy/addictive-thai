@@ -1,4 +1,3 @@
-import pygame
 from enum import Enum
 
 from all import All
@@ -50,6 +49,25 @@ class Learning(object):
         if self.step == LearningStep.CONGRATULATION:
             if self.al.active_presentation:
                 self.al.active_presentation.draw()
+        self.draw_brain()
+
+    def draw_brain(self):
+        x = self.al.ui.width - 230
+        y = 100
+        if self.step == LearningStep.PRESENTATION:
+            self.al.ui.screen.blit(self.al.ui.images["brain_0"], [x, y])
+        elif self.step == LearningStep.TEST1:
+            self.al.ui.screen.blit(self.al.ui.images["brain_1"], [x, y])
+        elif self.step == LearningStep.TEST2:
+            self.al.ui.screen.blit(self.al.ui.images["brain_2"], [x, y])
+        elif self.step == LearningStep.TEST3:
+            self.al.ui.screen.blit(self.al.ui.images["brain_3"], [x, y])
+        elif self.step == LearningStep.TEST4:
+            self.al.ui.screen.blit(self.al.ui.images["brain_4"], [x, y])
+        elif self.step == LearningStep.TEST5:
+            self.al.ui.screen.blit(self.al.ui.images["brain_5"], [x, y])
+        elif self.step == LearningStep.CONGRATULATION:
+            self.al.ui.screen.blit(self.al.ui.images["brain_6"], [x, y])
 
     def interact(self, al: All):
         if self.step == LearningStep.PRESENTATION:
