@@ -135,6 +135,21 @@ class Test(object):
             self.learning.test_finished(failed=True)
 
 
+class ToneFromThai(Test):
+    def __init__(
+        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+    ):
+        super().__init__(al, learning, test_success_callback)
+        self.correct_word: Word = correct_word
+        self.number_of_distr: int = 3
+
+    def draw(self):
+        pass
+
+    def interact(self, al):
+        pass
+
+
 class ThaiFromEnglish(Test):
     def __init__(
         self, al: "All", correct_word: Word, learning=None, test_success_callback=None
@@ -611,6 +626,14 @@ class FromSound(Test):
         self.selector_on_sound = False
         play_transformed_thai_word(self.correct_word.thai)
 
+    @staticmethod
+    def point_on_sound(ui, point):
+        try:
+            x, y = point
+        except IndexError:
+            return False
+        return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(0.1) < y < ui.percent_width(0.15)
+
     def select_distractors(self):
         known_words = Word.get_known_words()
         distractors = []
@@ -663,6 +686,12 @@ class FromSound(Test):
                 play_transformed_thai_word(self.correct_word.thai)
             else:
                 self.learner_select_option()
+        if al.ui.hover:
+            self.selector_on_sound = self.point_on_sound(al.ui, al.ui.hover)
+        if al.ui.click:
+            if self.point_on_sound(al.ui, al.ui.click):
+                al.ui.click = False
+                play_transformed_thai_word(self.correct_word.thai)
 
     def learner_select_option(self):
         option = self.selected_option_index

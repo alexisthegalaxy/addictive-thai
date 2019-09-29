@@ -1,32 +1,19 @@
-TODO:
- Fix the XP. It doesn't work at the moment.
- Grid tests:
-    Make grammar grid test
-        Show the timer
-        Use the word POS
- Tone From sound test
-
-TODO mid:
+Tone From sound test
+Fix the XP. It doesn't work at the moment.
+get rid of pickle entirely
 Redo the occurrences so that the words that appear are taught indeed
 Register all the words taught so far in the Dex
 Presentation Screen:
-        - Location on map
-            - (Name of place where it is)
-        - Tones
-            - Show the tones
-            - Show the Thai in five colors
-        - Words it is a part of?
+    - Tones
+        - Show the tones
+        - Show the Thai in five colors
+    - Words it is a part of?
 Map screen:
     We show the name of the map in the title on the top part of the screen.
     If the map is accessed from the Inn, we can see the words taught in the vicinity are blinking
         The data would live in the map NPC
-    Devise a system for maps to work when inside a building.
-        Maybe it's a GPS so you need to be outside!
-get rid of pickle entirely
+
 Allow using an other character than Alexis
-Optimizing the beginning
-Test:
-    Allow replaying audio in test using the mouse
 Battle:
     Show how the other trainer is fighting
         - See the gotten bubbles on each side!
@@ -39,6 +26,11 @@ Battle:
     Have more sentences in trainer fights
 Have the beginning of tests/battles be less abrupt
 Have the full sentence being said when the test is a sentence
+
+Grid tests:
+   Make grammar grid test
+       Show the timer
+       Use the word POS
 
 TODO low:
 Tests types:
