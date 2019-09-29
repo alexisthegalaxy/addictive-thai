@@ -63,6 +63,7 @@ def npc_sprites():
         "kid_right": pygame.image.load("../npc/sprites/kid_right.png"),
         "kid_left": pygame.image.load("../npc/sprites/kid_left.png"),
         "lass_up": pygame.image.load("../npc/sprites/lass_up.png"),
+        "ghost_down": pygame.image.load("../npc/sprites/ghost_down.png"),
         "lass_down": pygame.image.load("../npc/sprites/lass_down.png"),
         "lass_right": pygame.image.load("../npc/sprites/lass_right.png"),
         "lass_left": pygame.image.load("../npc/sprites/lass_left.png"),

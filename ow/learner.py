@@ -115,7 +115,7 @@ class Learner(object):
         # Check for npcs:
         if next_position_walkable:
             for npc in al.mas.current_map.npcs:
-                if npc.x == next_x and npc.y == next_y:
+                if npc.x == next_x and npc.y == next_y and npc.should_appear():
                     next_position_walkable = False
                     break
 

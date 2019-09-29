@@ -423,6 +423,33 @@ def chumphae(al):
         ),
         Npc(
             al=al,
+            name="kid",
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=108,
+            y=37,
+            sprite="kid",
+            direction=Direction.UP,
+            standard_dialog=[
+                "Grandma says a ghost appears by the spirit house at night,",
+                "She says his feet are facing backward.",
+                "I really want to see it but I'm too scared!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="ghost",
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=108,
+            y=35,
+            sprite="ghost",
+            appears_between=(23, 6),
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "ฮ่าฮ่า",
+            ],
+        ),
+        Npc(
+            al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("chumphae"),
             x=126,

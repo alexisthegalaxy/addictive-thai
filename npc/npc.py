@@ -44,6 +44,7 @@ class Npc(object):
         eyesight: int = 5,  # how far the trainer can see
         wanna_meet: bool = False,  # if true, non trainers will also walk to the learner and start talking
         bubbles_max_hp: int = 1000,
+        appears_between: Tuple[int, int] = (0, 24),
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
@@ -82,6 +83,7 @@ class Npc(object):
         self.walked_float = 0
         self.draw_text_since = 0
         self.bubbles_max_hp = bubbles_max_hp
+        self.appears_between = appears_between
         self.process_dialog(al)
 
     def process_dialog(self, al):
@@ -218,7 +220,25 @@ class Npc(object):
         if dir_equal(self.direction, Direction.LEFT):
             return x - self.walked_float, y
 
+    def should_appear(self):
+        now = datetime.now().hour
+        # appears_between = 23 - 5
+        a0 = self.appears_between[0]
+        a1 = self.appears_between[1]
+        if a0 > a1:
+            # a0 = 23
+            # a1 = 5
+            return now >= a0 or now < a1
+        elif a1 > a0:
+            # a0 = 8
+            # a1 = 16
+            return a0 <= now < a1
+        return True
+
     def draw_ow(self, al, x, y):
+        if not self.should_appear():
+            return
+
         # get sprite
         sprite = None
         if can_turn(self.sprite):
