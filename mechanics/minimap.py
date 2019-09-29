@@ -5,7 +5,7 @@ import pygame, os
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
-def want_to_launch_map(al, x=None, y=None, size=40, show_learner=False, interest_point=None):
+def want_to_launch_map(al, x=None, y=None, size=40, show_learner=True, interest_point=None):
     # if al.mas.current_map.x_shift != -1 and al.mas.current_map.y_shift != -1:
     al.active_minimap = Minimap(al, x=x, y=y, size=size, show_learner=show_learner, interest_point=interest_point)
 
@@ -34,7 +34,7 @@ class MinimapCell(object):
 
 class Minimap(object):
     def __init__(
-        self, al, x=None, y=None, size=40, show_learner=False, interest_point=None
+        self, al, x=None, y=None, size=40, show_learner=True, interest_point=None
     ):
         from overworld import get_cell_type_dictionary
         self.show_learner = show_learner
@@ -42,7 +42,6 @@ class Minimap(object):
         self.learner_x = al.learner.x + al.mas.current_map.x_shift
         self.learner_y = al.learner.y + al.mas.current_map.y_shift
         self.al = al
-        print('self.interest_point', self.interest_point)
         if self.interest_point:
             self.x, self.y = self.interest_point
         elif x and y:
@@ -56,7 +55,6 @@ class Minimap(object):
         self.x2 = self.x + self.size
         self.y1 = self.y - self.size
         self.y2 = self.y + self.size
-        print('x1=', self.x1, 'x2=', self.x2, 'y1=', self.y1, 'y2=', self.y2)
         self.table = []
         self.cell_dictionary = get_cell_type_dictionary()
         text_file_path = f"{DIR_PATH}/../ow/map_text_files/postmap"
@@ -97,11 +95,15 @@ class Minimap(object):
         if goes_down:
             self.size = down[self.size]
 
+    def click_in_map(self, click):
+        try:
+            x, y = click
+            return 240 < x < 240 + len(self.table) * 90 * 4 / self.size and 0 < y < self.al.ui.percent_height(1)
+        except TypeError:
+            return False
+
     def interact(self):
         ui = self.al.ui
-        if self.al.active_presentation:
-            self.al.active_presentation.interact()
-            return
         if ui.down:
             self.y += self.size
             ui.down = False
@@ -128,6 +130,10 @@ class Minimap(object):
             self.change_size(goes_down=True)
             ui.minus = False
             self.recompute()
+        if ui.click:
+            if not self.click_in_map(ui.click):
+                self.al.active_minimap = None
+                ui.click = False
 
     def cell_should_blink(self, x, y):
         x = x + self.x1

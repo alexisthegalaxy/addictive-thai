@@ -15,15 +15,13 @@ Redo the occurrences so that the words that appear are taught indeed
 Register all the words taught so far in the Dex
 Presentation Screen:
         - Location on map
-            - Have a nice map button
-            - Have a nicer system with ESC
-            - Center the map on the word rather than on the player
             - (Name of place where it is)
         - Tones
+            - Show the tones
+            - Show the Thai in five colors
         - Words it is a part of?
 Map screen:
     We show the name of the map in the title on the top part of the screen.
-    We show the learner (blinking red dot)
     If the map is accessed from the Inn, we can see the words taught in the vicinity are blinking
         The data would live in the map NPC
     Devise a system for maps to work when inside a building.

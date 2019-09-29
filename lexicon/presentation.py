@@ -28,17 +28,20 @@ class Presentation(object):
         if ui.hover:
             self.selector_on_sound = self.on_sound(ui.hover, ui)
             self.selector_on_map = self.on_map(ui.hover, ui)
+            if not self.outside_presentation(ui.click, ui):
+                ui.hover = None
         if ui.click:
             if self.on_sound(ui.click, ui):
                 play_transformed_thai_word(self.word.thai)
                 ui.click = None
             if self.from_dex and self.on_map(ui.click, ui):
                 want_to_launch_map(self.al, interest_point=(self.word.x, self.word.y))
-                print(self.al.active_minimap)
                 ui.click = None
             if self.outside_presentation(ui.click, ui):
                 self.al.active_presentation = None
                 self.al.active_minimap = None
+                ui.click = None
+            else:
                 ui.click = None
         if ui.right:
             ui.right = None
@@ -81,10 +84,10 @@ class Presentation(object):
         if not point:
             return False
         x, y = point
-        x1 = ui.percent_width(0.75)
-        width = ui.percent_width(0.10)
+        x1 = ui.percent_width(0.73)
+        width = ui.percent_width(0.12)
         y1 = ui.percent_width(0.10)
-        height = ui.percent_width(0.08)
+        height = ui.percent_width(0.04)
         return x1 < x < x1 + width and y1 < y < y1 + height
 
     def draw_map_button(self):
