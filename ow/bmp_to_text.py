@@ -45,6 +45,7 @@ to_convert = [
     "chaiyaphum_house_1",
     "chaiyaphum_house_2",
     "house4",
+    "house5",
     "normal_inn",
     "banyaeng_cave",
     "phetchabun_school",
@@ -95,6 +96,13 @@ to_convert = [
     "chumphae_kasetsombum_cave",
     "kasetsombum_cave",
     "inn_banyaeng",
+    "inn_kasetsombum",
+    "kasetsombum_house1",
+    "kasetsombum_house2",
+    "kasetsombum_house3",
+    "kasetsombum_temple_temple",
+    "kasetsombum_shop",
+    "kasetsombum_school",
 ]
 
 for item in to_convert:

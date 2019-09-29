@@ -32,7 +32,7 @@ class WordBox(object):
         screen = ui.screen
         x = self.x
         y = self.y
-        if self.word.total_xp > 0:
+        if self.word.total_xp and self.word.total_xp > 0:
             draw_square(screen, (220, 220, 220), x, y, self.width, self.height)
         else:
             if self.blinking and datetime.datetime.now().second % 2 == 0:
@@ -46,7 +46,7 @@ class WordBox(object):
         screen = ui.screen
         x = self.x
         y = self.y
-        if self.word.total_xp > 0:
+        if self.word.total_xp and self.word.total_xp > 0:
             if self.hovered:
                 pygame.draw.rect(screen, (0, 255, 0), [x, y, self.width, self.height], 3)
         else:
@@ -59,7 +59,7 @@ class WordBox(object):
         screen = ui.screen
         x = self.x
         y = self.y
-        if self.word.total_xp > 0:
+        if self.word.total_xp and self.word.total_xp > 0:
             screen.blit(ui.images["check_mark"], [x + 80, y - 10])
             screen.blit(ui.fonts.garuda24.render(self.word.thai, True, (0, 0, 0)), (x + 10, y + 20))
         else:
@@ -95,10 +95,10 @@ class Dex(object):
     def select_words_from_db(self):
         if not self.actualized:
             words_db = list(get_db_cursor().execute(
-                f"SELECT w.id, w.split_form, w.thai, w.english, w.tones, w.pos, uw.total_xp, w.location, w.location_x, w.location_y "
+                f" SELECT w.id, w.split_form, w.thai, w.english, w.tones, w.pos, uw.total_xp, w.location, w.location_x, w.location_y "
                 f"FROM words w "
-                f"JOIN user_word uw ON uw.word_id = w.id "
-                f"JOIN users u ON u.id = uw.user_id "
+                f"LEFT JOIN user_word uw ON uw.word_id = w.id "
+                f"LEFT JOIN users u ON u.id = uw.user_id "
                 f"WHERE w.teaching_order > 0 "
                 f"ORDER BY w.teaching_order "
                 f"LIMIT {self.max_items_to_show} OFFSET {self.offset};"
@@ -148,9 +148,9 @@ class Dex(object):
 
     def interact(self):
         ui = self.al.ui
-        if self.al.active_presentation:
-            self.al.active_presentation.interact()
-            return
+        # if self.al.active_presentation:
+        #     self.al.active_presentation.interact()
+        #     return
         if ui.down:
             self.offset = self.offset + self.words_per_line
             self.actualized = False
@@ -173,11 +173,9 @@ class Dex(object):
                     ui.click = None
                     self.launch_presentation(box.word)
                     break
-            # for box in self.word_boxes:
-            #     if ui.click in box:
-            #         ui.click = None
-            #         self.launch_presentation(box.word)
-            #         break
+        if self.al.ui.escape:
+            self.active = False
+            self.al.ui.escape = False
 
     def draw(self):
         if not self.actualized:

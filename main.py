@@ -18,9 +18,15 @@ def main_interact(al: All):
     elif al.active_battle:
         ow_frozen = True
         al.active_battle.interact(al)
-    if al.active_minimap:  # must happen before dex
+    if al.active_minimap:  # must happen before active_presentation
         ow_frozen = True
         al.active_minimap.interact()
+    if al.active_learning:  # must happen before active_presentation
+        ow_frozen = True
+        al.active_learning.interact(al)
+    if al.active_presentation:  # must happen before dex
+        ow_frozen = True
+        al.active_presentation.interact()
     if al.dex.active:
         ow_frozen = True
         al.dex.interact()
@@ -28,9 +34,6 @@ def main_interact(al: All):
         ow_frozen = True
         if al.ui.space:
             al.learner.start_interacting(al)
-    if al.active_learning:
-        ow_frozen = True
-        al.active_learning.interact(al)
     if al.active_sale:
         ow_frozen = True
         al.active_sale.interact(al)
@@ -41,6 +44,8 @@ def main_interact(al: All):
             al.learner.start_interacting(al)
         if al.learner.can_move():
             al.learner.move(al)
+    if al.ui.escape:
+        al.ui.running = False
 
 
 def main_draw(al: All):
@@ -49,9 +54,8 @@ def main_draw(al: All):
     for npc in al.mas.current_map.npcs:
         npc.draw(al)
     al.learner.draw(al)
-    for npc in al.mas.current_map.npcs:
-        if not npc.active_line_index == -1:
-            npc.draw_text(al)
+    if al.active_npc and not al.active_npc.active_line_index == -1:
+        al.active_npc.draw_text(al)
     if al.active_test:
         al.active_test.draw()
         if al.active_battle:

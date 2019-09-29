@@ -65,11 +65,15 @@ class Learning(object):
                 al.ui.space = False
                 al.active_test = None
                 al.active_learning = None
+                al.active_presentation = None
                 if self.npc.defeat_dialog:
                     al.active_npc = self.npc
                     al.active_npc.switch_to_dialog(al.active_npc.defeat_dialog)
             elif al.active_presentation:
                 al.active_presentation.interact()
+        if self.al.ui.escape:
+            al.active_learning = None
+            self.al.ui.escape = False
 
     def goes_to_next_step(self):
         self.step = LearningStep(int(self.step.value) + 1)

@@ -5,6 +5,11 @@ import pygame, os
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
+def want_to_launch_map(al, x=None, y=None, size=40, show_learner=False, interest_point=None):
+    # if al.mas.current_map.x_shift != -1 and al.mas.current_map.y_shift != -1:
+    al.active_minimap = Minimap(al, x=x, y=y, size=size, show_learner=show_learner, interest_point=interest_point)
+
+
 def draw_square(screen, color, x, y, width, height):
     pygame.draw.rect(screen, color, (x, y, width, height))
     pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
@@ -32,19 +37,26 @@ class Minimap(object):
         self, al, x=None, y=None, size=40, show_learner=False, interest_point=None
     ):
         from overworld import get_cell_type_dictionary
-
         self.show_learner = show_learner
         self.interest_point = interest_point
         self.learner_x = al.learner.x + al.mas.current_map.x_shift
         self.learner_y = al.learner.y + al.mas.current_map.y_shift
         self.al = al
-        self.x = self.learner_x if x is None else x
-        self.y = self.learner_y if y is None else y
+        print('self.interest_point', self.interest_point)
+        if self.interest_point:
+            self.x, self.y = self.interest_point
+        elif x and y:
+            self.x = x
+            self.y = y
+        else:
+            self.x = self.learner_x
+            self.y = self.learner_y
         self.size = size
         self.x1 = self.x - self.size
         self.x2 = self.x + self.size
         self.y1 = self.y - self.size
         self.y2 = self.y + self.size
+        print('x1=', self.x1, 'x2=', self.x2, 'y1=', self.y1, 'y2=', self.y2)
         self.table = []
         self.cell_dictionary = get_cell_type_dictionary()
         text_file_path = f"{DIR_PATH}/../ow/map_text_files/postmap"

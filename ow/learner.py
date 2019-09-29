@@ -180,12 +180,15 @@ class Learner(object):
         return next_next_x, next_next_y
 
     def start_interacting_with_npcs(self, al: All):
+        if self.al.active_npc:
+            self.al.active_npc.interact(al)
+            return
         next_x, next_y = self.next_position()
-        next_next_x, next_next_y = self.next_next_position()
         for npc in al.mas.current_map.npcs:
             if npc.x == next_x and npc.y == next_y:
                 npc.interact(al)
                 return
+        next_next_x, next_next_y = self.next_next_position()
         for npc in al.mas.current_map.npcs:
             if npc.x == next_next_x and npc.y == next_next_y:
                 npc.interact(al)

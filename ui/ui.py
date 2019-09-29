@@ -2,7 +2,7 @@ import time
 import pygame
 
 from lexicon.items import Words
-from mechanics.minimap import Minimap
+from mechanics.minimap import Minimap, want_to_launch_map
 
 
 class Fonts(object):
@@ -134,6 +134,7 @@ class Ui(object):
             "temple_floor": pygame.image.load("../ow/sprites/temple_floor.bmp"),
             "cave_floor": pygame.image.load("../ow/sprites/cave_floor.bmp"),
             "boulder_2": pygame.image.load("../ow/sprites/boulder_2.bmp"),
+            "field_spirit_house": pygame.image.load("../ow/sprites/field_spirit_house.bmp"),
 
             'cave_0010': pygame.image.load("../ow/sprites/cave_0010.bmp"),
             'cave_0110': pygame.image.load("../ow/sprites/cave_0110.bmp"),
@@ -189,6 +190,7 @@ class Ui(object):
         self.minus = False
         self.w = False
         self.m = False
+        self.escape = False
 
     def can_draw_cell(self, x: int, y: int):
         min_x = -self.cell_size
@@ -244,7 +246,7 @@ class Ui(object):
                         if al.active_minimap:
                             al.active_minimap = None
                         else:
-                            al.active_minimap = Minimap(al, show_learner=True)
+                            want_to_launch_map(al, show_learner=True)
                     else:
                         al.ui.m = True
                 if event.key == pygame.K_RETURN:
@@ -255,24 +257,22 @@ class Ui(object):
                     # TODO All of this should be processed after all the al.interact
                     #  so that each component can have its own way of dealing with the escape key
                     #  eg Dex closing the presentation page.
+                    al.ui.escape = True
                     if al.active_test:
                         al.active_test = None
+                        al.ui.escape = False
                     elif al.active_minimap:
                         al.active_minimap = None
-                    elif al.active_learning:
-                        al.active_learning = None
+                        al.ui.escape = False
                     elif al.active_npc:
                         al.active_npc = None
-                    elif al.dex.active:
-                        al.dex.active = False
+                        al.ui.escape = False
                     elif al.active_battle:
                         al.active_battle.end_battle()
+                        al.ui.escape = False
                     elif al.active_sale:
                         al.active_sale = None
-                    elif al.active_presentation:
-                        al.active_presentation = None
-                    else:
-                        self.running = False
+                        al.ui.escape = False
                 if event.key == pygame.K_s:
                     al.profiles.current_profile.save(al)
                 if event.key == pygame.K_l:

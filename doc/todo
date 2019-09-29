@@ -11,17 +11,23 @@ TODO:
   It should look like a grid maybe, all clickable and allowing interaction
 
 TODO mid:
+Redo the occurrences so that the words that appear are taught indeed
 Register all the words taught so far in the Dex
 Presentation Screen:
         - Location on map
-            - x, y on the map
-            - Name of place where it is
+            - Have a nice map button
+            - Have a nicer system with ESC
+            - Center the map on the word rather than on the player
+            - (Name of place where it is)
         - Tones
         - Words it is a part of?
 Map screen:
     We show the name of the map in the title on the top part of the screen.
     We show the learner (blinking red dot)
-    We can pass a word as a parameter and show where the word is taught
+    If the map is accessed from the Inn, we can see the words taught in the vicinity are blinking
+        The data would live in the map NPC
+    Devise a system for maps to work when inside a building.
+        Maybe it's a GPS so you need to be outside!
 get rid of pickle entirely
 Allow using an other character than Alexis
 Optimizing the beginning

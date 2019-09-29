@@ -1,7 +1,7 @@
 import pygame
 
 from lexicon.items import Word
-from mechanics.minimap import Minimap
+from mechanics.minimap import Minimap, want_to_launch_map
 from sounds.play_sound import play_transformed_thai_word
 
 
@@ -18,6 +18,7 @@ class Presentation(object):
         self.from_dex = from_dex
         # drawing
         self.selector_on_sound = False
+        self.selector_on_map = False
         # obtained from DB
         self.sentences = word.get_sentences()
         self.selected_sentence_index = 0
@@ -26,9 +27,14 @@ class Presentation(object):
         ui = self.al.ui
         if ui.hover:
             self.selector_on_sound = self.on_sound(ui.hover, ui)
+            self.selector_on_map = self.on_map(ui.hover, ui)
         if ui.click:
             if self.on_sound(ui.click, ui):
                 play_transformed_thai_word(self.word.thai)
+                ui.click = None
+            if self.from_dex and self.on_map(ui.click, ui):
+                want_to_launch_map(self.al, interest_point=(self.word.x, self.word.y))
+                print(self.al.active_minimap)
                 ui.click = None
             if self.outside_presentation(ui.click, ui):
                 self.al.active_presentation = None
@@ -44,9 +50,12 @@ class Presentation(object):
             self.selected_sentence_index -= 1
             if self.selected_sentence_index == -1:
                 self.selected_sentence_index = len(self.sentences) - 1
-        if ui.m:
+        if self.from_dex and ui.m:
             ui.m = False
-            self.al.active_minimap = Minimap(self.al, interest_point=(self.word.x, self.word.y))
+            want_to_launch_map(self.al, interest_point=(self.word.x, self.word.y))
+        if self.al.ui.escape:
+            self.al.active_presentation = None
+            self.al.ui.escape = False
 
     def on_sound(self, point, ui):
         if not point:
@@ -67,6 +76,31 @@ class Presentation(object):
         height = ui.percent_height(0.76)
         width = ui.percent_width(0.76)
         return not (x < p_x < x + width and y < p_y < y + height)
+
+    def on_map(self, point, ui):
+        if not point:
+            return False
+        x, y = point
+        x1 = ui.percent_width(0.75)
+        width = ui.percent_width(0.10)
+        y1 = ui.percent_width(0.10)
+        height = ui.percent_width(0.08)
+        return x1 < x < x1 + width and y1 < y < y1 + height
+
+    def draw_map_button(self):
+        ui = self.al.ui
+        screen = ui.screen
+        x1 = ui.percent_width(0.73)
+        width = ui.percent_width(0.12)
+        y1 = ui.percent_width(0.10)
+        height = ui.percent_width(0.04)
+        color = (0, 255, 0) if self.selector_on_map else (0, 0, 0)
+        thickness = 2 if self.selector_on_map else 1
+        pygame.draw.rect(screen, (200, 200, 200), (x1, y1, width, height))
+        pygame.draw.rect(screen, color, [x1, y1, width, height], thickness)
+        screen.blit(
+            ui.fonts.garuda24.render(" See on map", True, color), (x1, y1)
+        )
 
     def draw(self):
         ui = self.al.ui
@@ -96,6 +130,9 @@ class Presentation(object):
         screen.blit(
             ui.fonts.garuda48.render(self.word.english, True, (0, 0, 0)), (x, y)
         )
+
+        if self.from_dex:
+            self.draw_map_button()
 
         if self.from_dex:
             x = ui.percent_width(0.26)

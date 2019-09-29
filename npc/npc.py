@@ -193,7 +193,6 @@ class Npc(object):
                     self.active_line_index = 0
 
     def interact(self, al):
-        # Then this is the beginning of the interaction with that NPC
         self.wanna_meet = False
         self.reset_cursor()
         if not al.active_npc:

@@ -123,7 +123,17 @@ lomsak-labyrinth
 ✓ 60 small เล็ก
 
 kasetsombun
-
+✓ 61 she เธอ
+✓ 62 man มัน
+✓ 63 delicious อ-ร่อย
+✓ 64 vegetable ผัก
+✓ 65 foreigner, guava ฝรั่ง
+✓ 66 potato มัน-ฝ-รั่ง
+temple:
+    ✓ 67 respect prefix พระ
+school
+    ✓ 68 this นี้
+    ✓ 69 that นั่น
 
 phitsalunok:
 - 61 temple วัด HIGH
@@ -135,11 +145,8 @@ school:
 
 to teach:
     List of common words https://en.wiktionary.org/wiki/Appendix:200_basic_Thai_words
-    to give
-    delicious
-    ter (she)
-    it มัน
-    time
+    here ที่นี่
+    to hit, strike, (morning hours) ตี
     forest, plant, tree, flower
     yesterday
     numbers
@@ -147,13 +154,25 @@ to teach:
     today, yesterday
     colors
     how much, how long, how many
+    อากาศ weather
+    directions (north, etc.)
+    seasons
+    but แต่
+    พ่อ father
+    เพื่อน friend
+    ลง to descend
+    และ and
 Grammar to teach
+    ถ้า if
     to give
     gam-lang (กำลัง)
     Future
     Past (already) Leo
     Classifiers
+    Telling time
 
+Advanced to teach:
+    policeman ตำรวจ
 
 to come, delicious
 (island) cute, beautiful/pretty
