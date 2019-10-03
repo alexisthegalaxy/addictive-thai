@@ -135,19 +135,123 @@ class Test(object):
             self.learning.test_finished(failed=True)
 
 
-class ToneFromThai(Test):
+class ToneBox(object):
+    def __init__(self, fonts, i, x, y, s):
+        self.i = i
+        self.x = x
+        self.y = y
+        self.s = s
+        self.rendered = fonts.garuda24.render(self.s, True, (0, 0, 0))
+        self.selected = False
+        self.width = 160
+        self.height = 100
+
+    def draw(self, ui):
+        screen = ui.screen
+        color = (0, 255, 0) if self.selected else (0, 0, 0)
+        pygame.draw.rect(screen, (200, 200, 200), (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(screen, color, [self.x, self.y, self.width, self.height], 1)
+        screen.blit(self.rendered, (self.x + 10, self.y + 30))
+        screen.blit(ui.images[self.s.lower()], [self.x - 50, self.y])
+
+    def interact(self, al, test):
+        if al.ui.hover:
+            x, y = al.ui.hover
+            self.selected = self.x < x < self.x + self.width and self.y < y < self.y + self.height
+        if al.ui.click:
+            x, y = al.ui.click
+            if self.x < x < self.x + self.width and self.y < y < self.y + self.height:
+                al.ui.click = False
+                test.selected_option_index = self.i
+
+
+class ToneFromThaiAndSound(Test):
     def __init__(
         self, al: "All", correct_word: Word, learning=None, test_success_callback=None
     ):
         super().__init__(al, learning, test_success_callback)
         self.correct_word: Word = correct_word
-        self.number_of_distr: int = 3
+        self.boxes = [
+            ToneBox(al.ui.fonts, 1, 140 + 188 * 0, 250, "Mid"),
+            ToneBox(al.ui.fonts, 2, 140 + 188 * 1, 250, "Low"),
+            ToneBox(al.ui.fonts, 3, 140 + 188 * 2, 250, "Falling"),
+            ToneBox(al.ui.fonts, 4, 140 + 188 * 3, 250, "High"),
+            ToneBox(al.ui.fonts, 5, 140 + 188 * 4, 250, "Rising"),
+        ]
+        play_transformed_thai_word(self.correct_word.thai)
+        self.selector_on_sound = False
+        self.selected_option_index = None
+        self.correct_option = self.select_correct_option()
+
+    @staticmethod
+    def point_on_sound(ui, point):
+        try:
+            x, y = point
+        except IndexError:
+            return False
+        return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(0.1) < y < ui.percent_width(0.15)
+
+    def select_correct_option(self):
+        if self.correct_word.tones[0] == 'M':
+            return 1
+        if self.correct_word.tones[0] == 'L':
+            return 2
+        if self.correct_word.tones[0] == 'F':
+            return 3
+        if self.correct_word.tones[0] == 'H':
+            return 4
+        if self.correct_word.tones[0] == 'R':
+            return 5
+
+    def learner_select_option(self):
+        if self.selected_option_index == self.correct_option:
+            self.succeeds()
+        else:
+            self.selected_option_index = None
+            self.fails()
 
     def draw(self):
-        pass
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        self.draw_background()
+
+        # Draw "What's the Thai word for"
+        explanatory_string = "What's the tone of:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.18)
+        screen.blit(
+            fonts.garuda32.render(self.correct_word.thai, True, (0, 0, 0)), (x, y)
+        )
+
+        # Draw prompt
+        x = ui.percent_width(0.60)
+        y = ui.percent_height(0.10)
+        image_name = "sound_icon_green" if self.selector_on_sound else "sound_icon"
+        ui.screen.blit(ui.images[image_name], [x, y])
+
+        # Draw all the options
+        for i, box in enumerate(self.boxes):
+            box.draw(ui)
 
     def interact(self, al):
-        pass
+        if al.ui.hover:
+            self.selector_on_sound = self.point_on_sound(al.ui, al.ui.hover)
+        if al.ui.click:
+            if self.point_on_sound(al.ui, al.ui.click):
+                al.ui.click = False
+                play_transformed_thai_word(self.correct_word.thai)
+        for box in self.boxes:
+            box.interact(al, self)
+        if self.selected_option_index:
+            self.learner_select_option()
 
 
 class ThaiFromEnglish(Test):
@@ -169,9 +273,8 @@ class ThaiFromEnglish(Test):
                     and distractor.thai != self.correct_word.thai
                 ):
                     distractors.append(distractor)
-        else:  # We don't know enough words!
+        else:  # We don't have know enough words!
             while len(distractors) < self.number_of_distr:
-                # TODO Alexis there is no more al.words
                 distractor = get_random_word_id()
                 if (
                     distractor not in distractors

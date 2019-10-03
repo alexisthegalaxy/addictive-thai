@@ -86,7 +86,7 @@ class CellTypes:
     arena_sign = CellType('競', 'arena_sign', (255, 192, 0), False, 0, WALL_COLOR)
     school_sign = CellType('学', 'school_sign', (103, 229, 216), False, 0, WALL_COLOR)
     shop_sign = CellType('買', 'shop_sign', (65, 71, 193), False, 0, WALL_COLOR)
-    field = CellType('畑', 'field', (225, 232, 168), True, 0.04, PATH_COLOR)
+    field = CellType('畑', 'field', (225, 232, 168), True, 0.4, PATH_COLOR)
     sand = CellType('砂', 'sand', (255, 218, 105), True, 0, PATH_COLOR)
     buddha_statue = CellType('仏', 'buddha_statue', (255, 215, 54), False, 0, WALL_COLOR)
     none = CellType('無', 'none', (0, 0, 0), False, 0, (0, 0, 0))

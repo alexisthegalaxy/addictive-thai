@@ -3,10 +3,12 @@ from all import All
 from lexicon.dex import Dex
 import pygame
 
+from models import get_words_with_a_teaching_order
 from npc.import_npcs import import_npcs
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
 from profile.profile import Profiles
+from sounds.thai.sound_processing import get_all_mp3_files
 from ui.ui import Ui
 
 
@@ -103,5 +105,17 @@ def main():
         al.ui.clock.tick(50)
 
 
+def print_thai_words_with_no_audio():
+    number_of_files_to_convert = 0
+    sound_files = get_all_mp3_files()
+    for thai, english in get_words_with_a_teaching_order():
+        if thai not in sound_files:
+            print(f"{thai}           {english}")
+            number_of_files_to_convert += 1
+    if number_of_files_to_convert > 0:
+        print(f"{number_of_files_to_convert} files to convert! 😅")
+
+
 if __name__ == "__main__":
+    # print_thai_words_with_no_audio()
     main()

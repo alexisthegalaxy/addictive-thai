@@ -129,6 +129,14 @@ def get_known_words():
         return answers[0][0]
 
 
+def get_words_with_a_teaching_order():
+    return list(
+        CURSOR.execute(
+            f"SELECT thai, english FROM main.words WHERE teaching_order > 0 "
+        )
+    )
+
+
 def get_random_known_word_id():
     user_id = get_active_learner_id()
     known_words = list(

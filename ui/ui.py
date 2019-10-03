@@ -112,6 +112,11 @@ def random_images():
         "brain_4": pygame.image.load("../images/brain_4.png"),
         "brain_5": pygame.image.load("../images/brain_5.png"),
         "brain_6": pygame.image.load("../images/brain_6.png"),
+        "rising": pygame.image.load("../images/rising.png"),
+        "mid": pygame.image.load("../images/mid.png"),
+        "low": pygame.image.load("../images/low.png"),
+        "falling": pygame.image.load("../images/falling.png"),
+        "high": pygame.image.load("../images/high.png"),
     }
 
 
