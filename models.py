@@ -57,12 +57,25 @@ def increase_xp(thai, value):
     """ increase xp by value """
     learner_id = get_active_learner_id()
     word_id = find_word_by_thai_get_id(thai)
-    CURSOR.execute(
-        f"UPDATE user_word "
-        f"SET total_xp = total_xp + {value} "
+    a = list(CURSOR.execute(
+        f"SELECT user_word.total_xp FROM user_word "
         f"WHERE user_word.word_id = {word_id} "
-        f"AND user_word.user_id = {learner_id}"
-    )
+        f"AND user_word.user_id = {learner_id};"
+    ))
+    if a:
+        CURSOR.execute(
+            f"UPDATE user_word "
+            f"SET total_xp = total_xp + {value} "
+            f"WHERE user_word.word_id = {word_id} "
+            f"AND user_word.user_id = {learner_id};"
+        )
+    else:
+        # we need to create the word
+        CURSOR.execute(
+            f"INSERT INTO user_word (word_id, user_id, total_xp, level, next_threshold, previous_threshold) "
+            f"VALUES ('{word_id}', '{learner_id}', 1, 1, 1, 1);"
+        )
+
     CONN.commit()
 
 
