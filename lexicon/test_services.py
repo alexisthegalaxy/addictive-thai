@@ -6,6 +6,10 @@ from lexicon.tests.tests import EnglishFromSound4, EnglishFromSound6, ThaiFromSo
     EnglishFromThai4, ToneFromThaiAndSound
 
 
+def can_be_tested_on_tone(word: 'Word'):
+    return '-' not in word.split_form
+
+
 def pick_sentence_test(al, chosen_word: 'Word', learning=False, test_success_callback=None):
     """
     Returns TappingTestSentence or SentenceGridTest or None if no sentence
@@ -38,8 +42,7 @@ def pick_a_test_for_word(al, chosen_word):
     test = None
     can_be_tested_on_sentence = True
     while test is None:
-        # r = random.randint(0, 16)  # can be 0, ..., n-1   (15)
-        r = 8
+        r = random.randint(0, 16)  # can be 0, ..., n-1   (15)
         from lexicon.tests.tests import ThaiFromEnglish6, ThaiFromEnglish4
         if r == 0:
             test = ThaiFromEnglish4(al, correct_word=chosen_word)
@@ -57,8 +60,9 @@ def pick_a_test_for_word(al, chosen_word):
             test = EnglishFromThai4(al, correct_word=chosen_word)
         elif r == 7:
             test = EnglishFromThai6(al, correct_word=chosen_word)
-        elif r == 8:
-            test = ToneFromThaiAndSound(al, correct_word=chosen_word)
+        elif r == 8 or r == 9:
+            if can_be_tested_on_tone(chosen_word):
+                test = ToneFromThaiAndSound(al, correct_word=chosen_word)
         else:
             if can_be_tested_on_sentence:
                 test = pick_sentence_test(al, chosen_word)

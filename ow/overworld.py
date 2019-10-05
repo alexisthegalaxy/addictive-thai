@@ -535,6 +535,8 @@ class Mas(object):
         self.phetchabun_house_2.get_cell_at(5, 13).goes_to = (self.phetchabun, 21, 51)
         self.phetchabun.get_cell_at(21, 56).goes_to = (self.phetchabun_shop, 5, 12)
         self.phetchabun_shop.get_cell_at(5, 13).goes_to = (self.phetchabun, 21, 57)
+        self.phetchabun.get_cell_at(28, 79).goes_to = (self.phetchabun_buengsamphan, 20, 12)
+        self.phetchabun_buengsamphan.get_cell_at(20, 11).goes_to = (self.phetchabun, 28, 78)
 
         self.buengsamphan.get_cell_at(7, 11).goes_to = (self.buengsamphan_chumsaeng, 657 - mothermap.daughtermaps['buengsamphan_chumsaeng'].x, 713 - mothermap.daughtermaps['buengsamphan_chumsaeng'].y)
         self.buengsamphan.get_cell_at(7, 10).goes_to = (self.buengsamphan_chumsaeng, 657 - mothermap.daughtermaps['buengsamphan_chumsaeng'].x, 712 - mothermap.daughtermaps['buengsamphan_chumsaeng'].y)
