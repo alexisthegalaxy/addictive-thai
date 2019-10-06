@@ -2,6 +2,7 @@ from typing import List
 
 from bag.item import Item
 from direction import Direction
+from models import get_item_from_name
 from npc.npc import Npc
 
 
@@ -17,14 +18,15 @@ class Vendor(Npc):
         vendor_dialog_end=None,
         direction=Direction.UP,
         sprite="vendor",
-        sold_items: List[Item] = None,
+        sold_items: List[str] = None,
     ):
         super().__init__(
             al=al, name=name, ma=ma, x=x, y=y, direction=direction, sprite=sprite
         )
         self.vendor_dialog_beginning = vendor_dialog_beginning
         self.vendor_dialog_end = vendor_dialog_end or ["Hope to see you again!"]
-        self.sold_items = sold_items
+        self.sold_items = [get_item_from_name(item_name) for item_name in sold_items]
+        # self.sold_items = sold_items
         self.active_dialog: List[str] = self.vendor_dialog_beginning
 
     def process_dialog(self, al):

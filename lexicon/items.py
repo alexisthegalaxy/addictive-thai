@@ -272,7 +272,7 @@ class Words(object):
     def reset_words(cls, xp):
         CURSOR.execute(
             f"UPDATE user_word "
-            f"SET total_xp = {xp} "
+            f"SET total_xp = {xp}, level = 1, next_threshold = 1 "
             f"where EXISTS (SELECT 1 "
             f"    FROM users "
             f"    WHERE users.id = user_word.user_id "

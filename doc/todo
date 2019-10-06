@@ -1,5 +1,4 @@
 Fix the XP. It doesn't work at the moment.
-get rid of pickle entirely
 Redo the occurrences so that the words that appear are taught indeed
 Register all the words taught so far in the Dex
 Presentation Screen:
@@ -50,9 +49,6 @@ Show the progression bar going up in a learning 1/6 or a brain getting full or s
 Each time you make a mistake on a test, it becomes easier
 Signs show their writing on the ow
 Have something show when the words level up
-
 Make water look nicer
-
 Make a nice map editor
 Have a script list all the words that do not appear in sentences.
-Have a script that lists all the words learnt (using the teaching order) that do not have an audio!

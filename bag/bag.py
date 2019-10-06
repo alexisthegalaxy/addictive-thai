@@ -5,10 +5,10 @@ from bag.item import Item
 
 
 class Compartment(Enum):
-    BATTLE_ITEMS = 1
-    OUT_OF_BATTLE_ITEMS = 2
-    BONUS_ITEMS = 3
-    QUEST_ITEMS = 4
+    BATTLE = 1
+    OUT_OF_BATTLE = 2
+    BONUS = 3
+    QUEST = 4
 
 
 class Bag(object):
@@ -20,24 +20,24 @@ class Bag(object):
         Quest items (labelled as other)
     """
     def __init__(self):
-        self.battle_items = []
-        self.out_of_battle_items = []
-        self.bonus_items = []
-        self.quest_items = []
+        self.battle = []
+        self.out_of_battle = []
+        self.bonus = []
+        self.quest = []
 
     def compartment_for_item(self, item: Item):
-        if item.compartment == Compartment.BATTLE_ITEMS:
-            return self.battle_items
-        if item.compartment == Compartment.OUT_OF_BATTLE_ITEMS:
-            return self.out_of_battle_items
-        if item.compartment == Compartment.BONUS_ITEMS:
-            return self.bonus_items
-        if item.compartment == Compartment.QUEST_ITEMS:
-            return self.quest_items
+        if item.compartment == Compartment.BATTLE:
+            return self.battle
+        if item.compartment == Compartment.OUT_OF_BATTLE:
+            return self.out_of_battle
+        if item.compartment == Compartment.BONUS:
+            return self.bonus
+        if item.compartment == Compartment.QUEST:
+            return self.quest
 
     def add_item(self, item: Item, quantity=0):
-        compartment_to_add_item_in = self.compartment_for_item(item)
         item_added = False
+        compartment_to_add_item_in = self.compartment_for_item(item)
         for compartment_item in compartment_to_add_item_in:
             if compartment_item.name == item.name:
                 compartment_item.amount += quantity if quantity else item.amount
@@ -46,6 +46,9 @@ class Bag(object):
             compartment_to_add_item_in.append(item)
             if quantity:
                 compartment_to_add_item_in[-1].amount = quantity
+
+    def get_all_items(self):
+        return self.battle + self.out_of_battle + self.bonus + self.quest
 
     def get_quantities(self, item_list: List[Item]) -> List[int]:
         list_to_return = []

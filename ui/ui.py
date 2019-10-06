@@ -127,7 +127,7 @@ class Ui(object):
         pygame.init()
         pygame.font.init()
         pygame.display.set_icon(logo)
-        pygame.display.set_caption("Learn Thai!")
+        pygame.display.set_caption("Once upon a Thai!")
         self.width = 1200
         self.height = 700
         self.screen = pygame.display.set_mode((self.width, self.height))

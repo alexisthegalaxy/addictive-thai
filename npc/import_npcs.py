@@ -617,20 +617,7 @@ def chumphae(al):
                 "You want to buy something?",
             ],
             vendor_dialog_end=["See you again!"],
-            sold_items=[
-                Item(
-                    name="apple",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="delicious apple from Lomsak",
-                    price=8,
-                ),
-                Item(
-                    name="water",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="a plastic one-liter bottle of water",
-                    price=12,
-                ),
-            ],
+            sold_items=['lomsak_apple', 'plastic_bottle_of_water'],
         ),
     ]
     for npc in npcs:
@@ -1468,27 +1455,14 @@ def lomsak(al):
         ),
         Vendor(
             al=al,
-            name="Vendor of Chumphae",
+            name="Vendor of Lomsak",
             ma=al.mas.get_map_from_name("lomsak_house_2"),
             x=10,
             y=8,
             sprite="fat_vendor",
             direction=Direction.DOWN,
             vendor_dialog_beginning=["Welcome to Lomsak!", "How can I help you?"],
-            sold_items=[
-                Item(
-                    name="apple",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="delicious apple from Chumphae",
-                    price=8,
-                ),
-                Item(
-                    name="water",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="a plastic one-liter bottle of water",
-                    price=12,
-                ),
-            ],
+            sold_items=["lomsak_apple", "plastic_bottle_of_water"],
         ),
         Npc(
             al=al,
@@ -1823,28 +1797,28 @@ def lomsak_labyrinth(al):
                 "Everybody likes them around here.",
             ],
         ),
-        Vendor(
-            al=al,
-            name="TODOAlexis",
-            ma=al.mas.get_map_from_name("lomsak_labyrinth_shop"),
-            x=8,
-            y=12,
-            sprite="old_woman",
-            direction=Direction.LEFT,
-            vendor_dialog_beginning=[
-                "There are no inns around here young one.",
-                "If you don't wanna travel back all the way to Lomsak",
-                "you can buy some apples and get your health back here.",
-            ],
-            sold_items=[
-                Item(
-                    name="apple",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="looks like a normal apple.",
-                    price=8,
-                ),
-            ],
-        ),
+        # Vendor(
+        #     al=al,
+        #     name="TODOAlexis",
+        #     ma=al.mas.get_map_from_name("lomsak_labyrinth_shop"),
+        #     x=8,
+        #     y=12,
+        #     sprite="old_woman",
+        #     direction=Direction.LEFT,
+        #     vendor_dialog_beginning=[
+        #         "There are no inns around here young one.",
+        #         "If you don't wanna travel back all the way to Lomsak",
+        #         "you can buy some apples and get your health back here.",
+        #     ],
+        #     sold_items=[
+        #         Item(
+        #             name="apple",
+        #             compartment=Compartment.BATTLE,
+        #             description="looks like a normal apple.",
+        #             price=8,
+        #         ),
+        #     ],
+        # ),
         Npc(
             al=al,
             name="Lomsak-Labyrinth Trainer",
@@ -2121,78 +2095,78 @@ def khonkaen(al):
                 "I'm watching right now.",
             ],
         ),
-        Vendor(
-            al=al,
-            name="Market vendor of Khonkaen",
-            ma=al.mas.get_map_from_name("khonkaen"),
-            x=32,
-            y=18,
-            sprite="mom",
-            direction=Direction.RIGHT,
-            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Are you interested in silk?"],
-            sold_items=[
-                Item(
-                    name="silk",
-                    compartment=Compartment.QUEST_ITEMS,
-                    description="good quality silk from Khonkaen",
-                    price=8,
-                ),
-            ],
-        ),
-        Vendor(
-            al=al,
-            name="Market vendor of Khonkaen",
-            ma=al.mas.get_map_from_name("khonkaen"),
-            x=32,
-            y=16,
-            sprite="dad",
-            direction=Direction.RIGHT,
-            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Want some water?"],
-            sold_items=[
-                Item(
-                    name="water",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="a plastic one-liter bottle of water",
-                    price=12,
-                ),
-            ],
-        ),
-        Vendor(
-            al=al,
-            name="Market vendor of Khonkaen",
-            ma=al.mas.get_map_from_name("khonkaen"),
-            x=34,
-            y=17,
-            sprite="old_man",
-            direction=Direction.LEFT,
-            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Want some water?"],
-            sold_items=[
-                Item(
-                    name="water",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="a plastic one-liter bottle of water",
-                    price=12,
-                ),
-            ],
-        ),
-        Vendor(
-            al=al,
-            name="Market vendor of Khonkaen",
-            ma=al.mas.get_map_from_name("khonkaen"),
-            x=34,
-            y=15,
-            sprite="lass",
-            direction=Direction.LEFT,
-            vendor_dialog_beginning=["Welcome to khonkaen street market!", "Are you interested in silk?"],
-            sold_items=[
-                Item(
-                    name="silk",
-                    compartment=Compartment.QUEST_ITEMS,
-                    description="good quality silk from Khonkaen",
-                    price=8,
-                ),
-            ],
-        ),
+        # Vendor(
+        #     al=al,
+        #     name="Market vendor of Khonkaen",
+        #     ma=al.mas.get_map_from_name("khonkaen"),
+        #     x=32,
+        #     y=18,
+        #     sprite="mom",
+        #     direction=Direction.RIGHT,
+        #     vendor_dialog_beginning=["Welcome to khonkaen street market!", "Are you interested in silk?"],
+        #     sold_items=[
+        #         Item(
+        #             name="silk",
+        #             compartment=Compartment.QUEST,
+        #             description="good quality silk from Khonkaen",
+        #             price=8,
+        #         ),
+        #     ],
+        # ),
+        # Vendor(
+        #     al=al,
+        #     name="Market vendor of Khonkaen",
+        #     ma=al.mas.get_map_from_name("khonkaen"),
+        #     x=32,
+        #     y=16,
+        #     sprite="dad",
+        #     direction=Direction.RIGHT,
+        #     vendor_dialog_beginning=["Welcome to khonkaen street market!", "Want some water?"],
+        #     sold_items=[
+        #         Item(
+        #             name="water",
+        #             compartment=Compartment.BATTLE,
+        #             description="a plastic one-liter bottle of water",
+        #             price=12,
+        #         ),
+        #     ],
+        # ),
+        # Vendor(
+        #     al=al,
+        #     name="Market vendor of Khonkaen",
+        #     ma=al.mas.get_map_from_name("khonkaen"),
+        #     x=34,
+        #     y=17,
+        #     sprite="old_man",
+        #     direction=Direction.LEFT,
+        #     vendor_dialog_beginning=["Welcome to khonkaen street market!", "Want some water?"],
+        #     sold_items=[
+        #         Item(
+        #             name="water",
+        #             compartment=Compartment.BATTLE,
+        #             description="a plastic one-liter bottle of water",
+        #             price=12,
+        #         ),
+        #     ],
+        # ),
+        # Vendor(
+        #     al=al,
+        #     name="Market vendor of Khonkaen",
+        #     ma=al.mas.get_map_from_name("khonkaen"),
+        #     x=34,
+        #     y=15,
+        #     sprite="lass",
+        #     direction=Direction.LEFT,
+        #     vendor_dialog_beginning=["Welcome to khonkaen street market!", "Are you interested in silk?"],
+        #     sold_items=[
+        #         Item(
+        #             name="silk",
+        #             compartment=Compartment.QUEST,
+        #             description="good quality silk from Khonkaen",
+        #             price=8,
+        #         ),
+        #     ],
+        # ),
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)
@@ -2260,26 +2234,26 @@ def phetchabun(al):
                 "Don't tell the teacher!",
             ],
         ),
-        Vendor(
-            al=al,
-            name="phetchabun vendor",
-            ma=al.mas.get_map_from_name("phetchabun_shop"),
-            x=5,
-            y=9,
-            sprite="fat_vendor",
-            direction=Direction.DOWN,
-            vendor_dialog_beginning=[
-                "Hey there! You wanna buy somethin'?",
-            ],
-            sold_items=[
-                Item(
-                    name="กล้วย",
-                    compartment=Compartment.BONUS_ITEMS,
-                    description="Banana from Phetchabun fruit farm.",
-                    price=9999,
-                ),
-            ],
-        ),
+        # Vendor(
+        #     al=al,
+        #     name="phetchabun vendor",
+        #     ma=al.mas.get_map_from_name("phetchabun_shop"),
+        #     x=5,
+        #     y=9,
+        #     sprite="fat_vendor",
+        #     direction=Direction.DOWN,
+        #     vendor_dialog_beginning=[
+        #         "Hey there! You wanna buy somethin'?",
+        #     ],
+        #     sold_items=[
+        #         Item(
+        #             name="กล้วย",
+        #             compartment=Compartment.BONUS,
+        #             description="Banana from Phetchabun fruit farm.",
+        #             price=9999,
+        #         ),
+        #     ],
+        # ),
         Npc(
             al=al,
             name="โฮ่งโฮ่ง",
@@ -2685,39 +2659,39 @@ def phetchabun(al):
                 "ครูของฉันไม่สวย ¬_¬",
             ],
         ),
-        Vendor(
-            al=al,
-            name="staff of phetchabun farm",
-            ma=al.mas.get_map_from_name("phetchabun_farm"),
-            x=12,
-            y=24,
-            sprite="woman",
-            direction=Direction.LEFT,
-            vendor_dialog_beginning=[
-                "Welcome to Phetchabun fruit farm!",
-                "You can explore here for free, or buy some fruits!",
-            ],
-            sold_items=[
-                Item(
-                    name="กล้วย",
-                    compartment=Compartment.BONUS_ITEMS,
-                    description="Banana from Phetchabun fruit farm.",
-                    price=9999,
-                ),
-                Item(
-                    name="มะม่วง",
-                    compartment=Compartment.BONUS_ITEMS,
-                    description="Mango from Phetchabun fruit farm.",
-                    price=9999,
-                ),
-                Item(
-                    name="สับปะรด",
-                    compartment=Compartment.BONUS_ITEMS,
-                    description="Pineapple from Phetchabun fruit farm.",
-                    price=9999,
-                ),
-            ],
-        ),
+        # Vendor(
+        #     al=al,
+        #     name="staff of phetchabun farm",
+        #     ma=al.mas.get_map_from_name("phetchabun_farm"),
+        #     x=12,
+        #     y=24,
+        #     sprite="woman",
+        #     direction=Direction.LEFT,
+        #     vendor_dialog_beginning=[
+        #         "Welcome to Phetchabun fruit farm!",
+        #         "You can explore here for free, or buy some fruits!",
+        #     ],
+        #     sold_items=[
+        #         Item(
+        #             name="กล้วย",
+        #             compartment=Compartment.BONUS,
+        #             description="Banana from Phetchabun fruit farm.",
+        #             price=9999,
+        #         ),
+        #         Item(
+        #             name="มะม่วง",
+        #             compartment=Compartment.BONUS,
+        #             description="Mango from Phetchabun fruit farm.",
+        #             price=9999,
+        #         ),
+        #         Item(
+        #             name="สับปะรด",
+        #             compartment=Compartment.BONUS,
+        #             description="Pineapple from Phetchabun fruit farm.",
+        #             price=9999,
+        #         ),
+        #     ],
+        # ),
         Npc(
             al=al,
             name="worker 1 of phetchabun farm",
@@ -3060,27 +3034,27 @@ def banyaeng(al):
                 "I have travelled a full day to arrive here, it's good to have some rest!",
             ],
         ),
-        Vendor(
-            al=al,
-            name="Vendor of Banyaeng",
-            ma=al.mas.get_map_from_name("inn_banyaeng"),
-            x=2,
-            y=6,
-            sprite="vendor",
-            direction=Direction.RIGHT,
-            vendor_dialog_beginning=[
-                "Welcome! You want to buy something?",
-            ],
-            vendor_dialog_end=["See you again!"],
-            sold_items=[
-                Item(
-                    name="postcard",
-                    compartment=Compartment.QUEST_ITEMS,
-                    description="A postcard showing millions of bats in the sky.",
-                    price=9,
-                ),
-            ],
-        ),
+        # Vendor(
+        #     al=al,
+        #     name="Vendor of Banyaeng",
+        #     ma=al.mas.get_map_from_name("inn_banyaeng"),
+        #     x=2,
+        #     y=6,
+        #     sprite="vendor",
+        #     direction=Direction.RIGHT,
+        #     vendor_dialog_beginning=[
+        #         "Welcome! You want to buy something?",
+        #     ],
+        #     vendor_dialog_end=["See you again!"],
+        #     sold_items=[
+        #         Item(
+        #             name="postcard",
+        #             compartment=Compartment.QUEST,
+        #             description="A postcard showing millions of bats in the sky.",
+        #             price=9,
+        #         ),
+        #     ],
+        # ),
         Npc(
             al=al,
             name="teacher of ที่",
@@ -3222,27 +3196,27 @@ def labyrinth(al):
                              "Also, let's fight!"],
             defeat_dialog=["Well fought!", "Here, have one Baht then.", "Sorry, I don't have much more money!"],
         ),
-        Vendor(
-            al=al,
-            name="Vendor of Banyaeng",
-            ma=al.mas.get_map_from_name("labyrinth_shop"),
-            x=8,
-            y=11,
-            sprite="old_man",
-            direction=Direction.LEFT,
-            vendor_dialog_beginning=[
-                "Welcome young one! You need something?",
-            ],
-            vendor_dialog_end=["Come back if you want something alright?"],
-            sold_items=[
-                Item(
-                    name="apple",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="looks like a normal apple.",
-                    price=8,
-                ),
-            ],
-        ),
+        # Vendor(
+        #     al=al,
+        #     name="Vendor of Labyrinth",
+        #     ma=al.mas.get_map_from_name("labyrinth_shop"),
+        #     x=8,
+        #     y=11,
+        #     sprite="old_man",
+        #     direction=Direction.LEFT,
+        #     vendor_dialog_beginning=[
+        #         "Welcome young one! You need something?",
+        #     ],
+        #     vendor_dialog_end=["Come back if you want something alright?"],
+        #     sold_items=[
+        #         Item(
+        #             name="apple",
+        #             compartment=Compartment.BATTLE,
+        #             description="looks like a normal apple.",
+        #             price=8,
+        #         ),
+        #     ],
+        # ),
         Npc(
             al=al,
             name="lass looking at shop",
@@ -3858,33 +3832,33 @@ def kasetsombum(al):
             defeat_dialog=["I come here to study Thai."],
         ),
 
-        Vendor(
-            al=al,
-            name="Vendor of Kasetsombum",
-            ma=al.mas.get_map_from_name("kasetsombum_shop"),
-            x=8,
-            y=10,
-            sprite="vendor",
-            direction=Direction.LEFT,
-            vendor_dialog_beginning=[
-                "สวัสดีครับ.",
-            ],
-            vendor_dialog_end=["See you again!"],
-            sold_items=[
-                Item(
-                    name="มันฝรั่ง",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="one kilogram of potatoes from Kasetsombum",
-                    price=28,
-                ),
-                Item(
-                    name="water",
-                    compartment=Compartment.BATTLE_ITEMS,
-                    description="a plastic one-liter bottle of water",
-                    price=12,
-                ),
-            ],
-        ),
+        # Vendor(
+        #     al=al,
+        #     name="Vendor of Kasetsombum",
+        #     ma=al.mas.get_map_from_name("kasetsombum_shop"),
+        #     x=8,
+        #     y=10,
+        #     sprite="vendor",
+        #     direction=Direction.LEFT,
+        #     vendor_dialog_beginning=[
+        #         "สวัสดีครับ.",
+        #     ],
+        #     vendor_dialog_end=["See you again!"],
+        #     sold_items=[
+        #         Item(
+        #             name="มันฝรั่ง",
+        #             compartment=Compartment.BATTLE,
+        #             description="one kilogram of potatoes from Kasetsombum",
+        #             price=28,
+        #         ),
+        #         Item(
+        #             name="water",
+        #             compartment=Compartment.BATTLE,
+        #             description="a plastic one-liter bottle of water",
+        #             price=12,
+        #         ),
+        #     ],
+        # ),
     ]
     for npc in npcs:
         npc.ma.add_npc(npc)

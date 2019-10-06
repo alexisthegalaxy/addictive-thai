@@ -1,7 +1,14 @@
+from datetime import datetime
 import random
 import sqlite3
 
 # from db import get_db_cursor, get_db_conn
+from typing import Optional
+
+from bag.bag import Compartment
+from bag.item import Item
+from direction import Direction
+
 CONN = sqlite3.connect("thai.db")
 CURSOR = CONN.cursor()
 
@@ -93,16 +100,131 @@ def get_current_xy(al):
         return x, y
 
 
-def get_current_x_y_money_hp(al):
+def save_user_details_to_db(al):
+    learner_id = get_active_learner_id()
+    last_healing_place_x, last_healing_place_y, last_healing_place_map = al.learner.last_healing_place
+    last_healing_place_map_filename = last_healing_place_map.filename
+    direction = al.learner.direction.value
+    max_hp = al.learner.max_hp
+    last_saved_timestamp = datetime.now().isoformat()
+    CURSOR.execute(
+        f"UPDATE user_details "
+        f"SET last_healing_map = '{last_healing_place_map_filename}',"
+        f"  last_healing_x = {last_healing_place_x},"
+        f"  last_healing_y = {last_healing_place_y},"
+        f"  direction = {direction},"
+        f"  max_hp = {max_hp},"
+        f"  last_saved_timestamp = '{last_saved_timestamp}' "
+        f"WHERE user_id={learner_id}"
+    )
+    CONN.commit()
+
+
+def load_user_details(al):
+    _, last_healing_map_name, last_healing_x, last_healing_y, direction, max_hp, last_saved_timestamp = list(CURSOR.execute(
+        f"SELECT user_details.* FROM user_details "
+        f"JOIN users ON users.id = user_details.user_id "
+        f"WHERE users.is_playing = 1"
+    ))[0]
+
+    al.learner.direction = Direction(direction)
+    al.learner.last_healing_place = (last_healing_x, last_healing_y, al.mas.get_map_from_name(last_healing_map_name))
+    al.learner.max_hp = max_hp
+    al.learner.last_saved_timestamp = datetime.fromisoformat(last_saved_timestamp)
+
+
+def load_current_x_y_money_hp_ma(al):
     answers = list(
-        CURSOR.execute("SELECT x, y, money, hp FROM users WHERE is_playing = 1")
+        CURSOR.execute("SELECT x, y, money, hp, current_map FROM users WHERE is_playing = 1")
     )
     if answers:
-        x = answers[0][0]
-        y = answers[0][1]
-        money = answers[0][2]
-        hp = answers[0][3]
-        return x, y, money, hp
+        al.learner.x = answers[0][0]
+        al.learner.y = answers[0][1]
+        al.learner.money = answers[0][2]
+        al.learner.hp = answers[0][3]
+        al.learner.ma = al.mas.get_map_from_name(answers[0][4])
+        al.mas.current_map = al.learner.ma
+
+
+def create_user_item(learner_id, item_id, quantity):
+    CURSOR.execute(
+        f"INSERT INTO user_items (user_id, item_id, quantity)"
+        f"VALUES ('{learner_id}', '{item_id}', '{quantity}')"
+    )
+    CONN.commit()
+
+
+def update_user_item(learner_id, item_id, quantity):
+    CURSOR.execute(
+        f"UPDATE user_items "
+        f"SET quantity = {quantity} "
+        f"WHERE user_id = '{learner_id}' AND item_id = '{item_id}'"
+    )
+    CONN.commit()
+
+
+def item_exists(learner_id, item_id) -> bool:
+    results = list(CURSOR.execute(
+        f"SELECT item_id "
+        f"FROM user_items "
+        f"WHERE user_id = '{learner_id}' AND item_id = '{item_id}'"
+    ))
+    return results and results[0]
+
+
+def save_bag(al: 'All'):
+    learner_id = get_active_learner_id()
+    for item in al.bag.get_all_items():
+        item_exist = item_exists(learner_id, item.name_id)
+        if item_exist:
+            update_user_item(learner_id, item.name_id, item.amount)
+        else:
+            create_user_item(learner_id, item.name_id, item.amount)
+
+
+def load_bag(al: 'All'):
+    learner_id = get_active_learner_id()
+    results = list(CURSOR.execute(
+        f"SELECT item.id, item.name, item.description, item.price, item.compartment, user_item.quantity "
+        f"FROM items item "
+        f"JOIN user_items user_item "
+        f"ON item.id = user_item.item_id "
+        f"WHERE user_item.user_id = {learner_id}"
+    ))
+    items = [Item(
+        name_id=item[0],
+        name=item[1],
+        description=item[2],
+        price=item[3],
+        compartment=Compartment(item[4]),
+        amount=item[5],
+    ) for item in results]
+    for item in items:
+        if item.compartment == Compartment.BATTLE:
+            al.bag.battle.append(item)
+        if item.compartment == Compartment.OUT_OF_BATTLE:
+            al.bag.out_of_battle.append(item)
+        if item.compartment == Compartment.BONUS:
+            al.bag.bonus.append(item)
+        if item.compartment == Compartment.QUEST:
+            al.bag.quest.append(item)
+
+
+def get_item_from_name(item_name: str) -> Optional[Item]:
+    results = list(CURSOR.execute(
+        f"SELECT item.name, item.id, item.description, item.price, item.compartment "
+        f"FROM items item "
+        f"WHERE item.id = '{item_name}'"
+    ))
+    name, item_id, description, price, compartment = results[0]
+    item = Item(
+        name_id=item_id,
+        name=name,
+        description=description,
+        price=price,
+        compartment=Compartment(compartment),
+    )
+    return item
 
 
 def save_user_to_db(al, x, y, money, hp, current_map):
