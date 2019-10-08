@@ -112,8 +112,17 @@ class Word(Growable):
             f"JOIN users u on u.id = uw.user_id "
             f"WHERE w.id = '{self.id}'"
             f"AND u.is_playing"
-        ))[0][0]
-        return total_xp
+        ))
+        if not total_xp:
+            user_id = get_active_learner_id()
+            CURSOR.execute(
+                f"INSERT INTO user_word (word_id, user_id, total_xp, level, next_threshold, previous_threshold) "
+                f"VALUES ('{self.id}', '{user_id}', 0, 1, 1, 0)"
+            )
+            CONN.commit()
+            return 0
+
+        return total_xp[0][0]
 
     def get_syllables(self):
         return self.split_form.split("-")

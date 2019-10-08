@@ -7,7 +7,7 @@ from models import get_words_with_a_teaching_order
 from npc.import_npcs import import_npcs
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
-from profile.profile import Profiles
+from profile.profile import load
 from sounds.thai.sound_processing import get_all_mp3_files
 from ui.ui import Ui
 
@@ -77,23 +77,15 @@ def main_draw(al: All):
 
 
 def main():
-    # derive_from_mothermap()
     cell_types = CellTypes()
-    mas = Mas(cell_types)
-    mas.form_links()
-    profiles = Profiles()
-    profiles.set_as_profile("Alexis")
     al = All(
-        mas=mas,
+        mas=Mas(cell_types),
         ui=Ui(),
         cell_types=cell_types,
-        profiles=profiles,
     )
-
-    al.learner = Learner(al)
+    al.learner = Learner(al, "Alexis")
     import_npcs(al)
-
-    profiles.current_profile.load(al)
+    load(al)
     al.dex = Dex(al)
     while al.ui.running:
         al.ui.listen_event(al)

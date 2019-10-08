@@ -970,7 +970,7 @@ def chaiyaphum(al):
             sprite="old_man",
             direction=Direction.RIGHT,
             standard_dialog=[
-                "มะลิ wanted to talk to you, she's waiting in the garden."
+                "Hey [Name], มะลิ wanted to talk to you, she's waiting in the garden."
             ],
         ),
         Npc(

@@ -2,6 +2,7 @@ import pygame
 import time
 
 from all import All
+from models import set_active_player
 from movement import Movement
 from ow.direction import Direction, dir_equal, string_from_direction, opposite_direction
 from ow.overworld import CellTypes
@@ -9,8 +10,9 @@ from sounds.play_sound import play_thai_word
 
 
 class Learner(object):
-    def __init__(self, al, x=45, y=9, color=(150, 0, 150)):
-        self.name = "Alexis"
+    def __init__(self, al, name, x=45, y=9, color=(150, 0, 150)):
+        self.name = name
+        set_active_player(name)
         self.sprite = self.name.lower()
         self.money = 5
         self.max_hp = 5

@@ -2,7 +2,6 @@ from datetime import datetime
 import random
 import sqlite3
 
-# from db import get_db_cursor, get_db_conn
 from typing import Optional
 
 from bag.bag import Compartment
@@ -86,6 +85,55 @@ def increase_xp(thai, value):
     CONN.commit()
 
 
+def create_new_user(name):
+    # Create a row in user and a row in user_details
+    starting_map = 'house_learner_f2'
+    starting_x = 5
+    starting_y = 10
+    starting_money = 0
+    starting_hp = 5
+
+    learner_id = CURSOR.execute(
+        f"INSERT INTO users (name, is_playing, current_map, x, y, money, hp)"
+        f"VALUES ('{name}', '1', '{starting_map}', '{starting_x}', '{starting_y}', '{starting_money}', '{starting_hp}')"
+    ).lastrowid
+    CONN.commit()
+
+    last_healing_map = 'house_learner_f2'
+    last_healing_x = 5
+    last_healing_y = 10
+    direction = Direction.DOWN.value
+    max_hp = 5
+    last_saved_timestamp = datetime.now().isoformat()
+    CURSOR.execute(
+        f"INSERT INTO user_details (user_id, last_healing_map, last_healing_x, last_healing_y, direction, max_hp, last_saved_timestamp)"
+        f"VALUES ('{learner_id}', '{last_healing_map}', '{last_healing_x}', '{last_healing_y}', '{direction}', '{max_hp}', '{last_saved_timestamp}')"
+    )
+    CONN.commit()
+
+
+def set_active_player(name):
+    # 1 - Set all users to non-playing
+    CURSOR.execute(
+        f"UPDATE users "
+        f"SET is_playing = 0 ")
+    CONN.commit()
+
+    # 1 - Check if there is a user in the DB under that name
+    no_user_found = list(
+        CURSOR.execute(f"SELECT is_playing FROM users WHERE name = '{name}'")
+    ) == []
+
+    if no_user_found:
+        create_new_user(name)
+    else:
+        CURSOR.execute(
+            f"UPDATE users "
+            f"SET is_playing = 1 "
+            f"WHERE name = '{name}'")
+        CONN.commit()
+
+
 def get_current_map(al):
     answers = list(CURSOR.execute("SELECT current_map FROM users WHERE is_playing = 1"))
     if answers:
@@ -121,6 +169,8 @@ def save_user_details_to_db(al):
 
 
 def load_user_details(al):
+    # TODO:
+    #  Create a user_details table for users that don't have one yet.
     _, last_healing_map_name, last_healing_x, last_healing_y, direction, max_hp, last_saved_timestamp = list(CURSOR.execute(
         f"SELECT user_details.* FROM user_details "
         f"JOIN users ON users.id = user_details.user_id "

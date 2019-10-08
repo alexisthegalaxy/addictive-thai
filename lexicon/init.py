@@ -1,7 +1,6 @@
 # from lexicon.items import Words, Sentences
 # from lexicon.items_creation import add_word, add_sentence
 from lexicon.tone import Tone
-# import os
 
 
 def tone_name_to_tone(tone_text: str):

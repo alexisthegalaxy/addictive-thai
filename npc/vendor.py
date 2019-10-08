@@ -1,6 +1,5 @@
 from typing import List
 
-from bag.item import Item
 from direction import Direction
 from models import get_item_from_name
 from npc.npc import Npc

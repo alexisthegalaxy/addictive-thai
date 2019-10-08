@@ -100,6 +100,7 @@ class Dex(object):
                 f"LEFT JOIN user_word uw ON uw.word_id = w.id "
                 f"LEFT JOIN users u ON u.id = uw.user_id "
                 f"WHERE w.teaching_order > 0 "
+                f"AND u.is_playing = 1 "
                 f"ORDER BY w.teaching_order "
                 f"LIMIT {self.max_items_to_show} OFFSET {self.offset};"
             ))

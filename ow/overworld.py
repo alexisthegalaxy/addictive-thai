@@ -244,6 +244,8 @@ class Ma(object):
 class Mas(object):
     def __init__(self, cell_types):
         self.al: 'All' = None
+        # Main maps:
+        # these maps are real overworld, not houses
         self.chaiyaphum = Ma(filename="chaiyaphum", cell_types=cell_types, mas=self, x_shift=780, y_shift=629)
         self.chumphae = Ma(filename="chumphae", cell_types=cell_types, mas=self, x_shift=699, y_shift=563)
         self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", cell_types=cell_types, mas=self, x_shift=824, y_shift=551)
@@ -267,10 +269,17 @@ class Mas(object):
         self.phitsalunok = Ma(filename="phitsalunok", cell_types=cell_types, mas=self, x_shift=530, y_shift=545)
         self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", cell_types=cell_types, mas=self, x_shift=620, y_shift=548)
 
+        # inns
         self.inn1 = Ma(filename="inn1", cell_types=cell_types, mas=self, parent=self.chumphae)
         self.inn2 = Ma(filename="inn2", cell_types=cell_types, mas=self, parent=self.lomsak)
         self.inn_khonkaen = Ma(filename="inn_khonkaen", cell_types=cell_types, mas=self, parent=self.khonkaen)
         self.inn_buengsamphan = Ma(filename="inn_buengsamphan", cell_types=cell_types, mas=self, parent=self.buengsamphan)
+        self.inn_banyaeng = Ma(filename="inn_banyaeng", cell_types=cell_types, mas=self)
+        self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", cell_types=cell_types, mas=self)
+        self.inn_chumsaeng = Ma(filename="inn_chumsaeng", cell_types=cell_types, mas=self)
+        self.inn_phetchabun = Ma(filename="inn_phetchabun", cell_types=cell_types, mas=self)
+        self.inn_phitsalunok = Ma(filename="inn_phitsalunok", cell_types=cell_types, mas=self)
+        self.inn_phitsalunok_2 = Ma(filename="inn_phitsalunok_2", cell_types=cell_types, mas=self)
 
         self.house_learner_f2 = Ma(filename="house_learner_f2", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
         self.house_learner_f1 = Ma(filename="house_learner_f1", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
@@ -312,14 +321,7 @@ class Mas(object):
         self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", cell_types=cell_types, mas=self)
         self.phetchabun_farm = Ma(filename="phetchabun_farm", cell_types=cell_types, mas=self)
 
-
         self.buengsamphan_cave = Ma(filename="buengsamphan_cave", cell_types=cell_types, mas=self)
-        self.inn_banyaeng = Ma(filename="inn_banyaeng", cell_types=cell_types, mas=self)
-        self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", cell_types=cell_types, mas=self)
-        self.inn_chumsaeng = Ma(filename="inn_chumsaeng", cell_types=cell_types, mas=self)
-        self.inn_phetchabun = Ma(filename="inn_phetchabun", cell_types=cell_types, mas=self)
-        self.inn_phitsalunok = Ma(filename="inn_phitsalunok", cell_types=cell_types, mas=self)
-        self.inn_phitsalunok_2 = Ma(filename="inn_phitsalunok_2", cell_types=cell_types, mas=self)
         self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", cell_types=cell_types, mas=self)
         self.banyaeng_cave = Ma(filename="banyaeng_cave", cell_types=cell_types, mas=self)
         self.phetchabun_school = Ma(filename="phetchabun_school", cell_types=cell_types, mas=self)
@@ -585,8 +587,6 @@ class Mas(object):
         self.khonkaen.get_cell_at(916 - mothermap.daughtermaps['khonkaen'].x, 630 - mothermap.daughtermaps['khonkaen'].y).goes_to = (self.inn_khonkaen, 4, 7)
 
         # Buengsamphan
-        self.chaiyaphum.get_cell_at(11, 92).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 721 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
-        self.chaiyaphum.get_cell_at(11, 93).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
         self.buengsamphan_chaiyaphum.get_cell_at(73, 32).goes_to = (self.chaiyaphum, 792 - mothermap.daughtermaps['chaiyaphum'].x, 721 - mothermap.daughtermaps['chaiyaphum'].y)
         self.buengsamphan_chaiyaphum.get_cell_at(73, 33).goes_to = (self.chaiyaphum, 792 - mothermap.daughtermaps['chaiyaphum'].x, 722 - mothermap.daughtermaps['chaiyaphum'].y)
         self.buengsamphan_chaiyaphum.get_cell_at(7, 32).goes_to = (self.buengsamphan, 726 - mothermap.daughtermaps['buengsamphan'].x, 721 - mothermap.daughtermaps['buengsamphan'].y)
@@ -682,3 +682,8 @@ class Mas(object):
         self.kasetsombum_school.get_cell_at(13, 25).goes_to = (self.kasetsombum, 12, 19)
         self.kasetsombum.get_cell_at(20, 14).goes_to = (self.kasetsombum_shop, 5, 12)
         self.kasetsombum_shop.get_cell_at(5, 13).goes_to = (self.kasetsombum, 20, 15)
+
+        self.buengsamphan.get_cell_at(78, 19).goes_to = (self.buengsamphan_chaiyaphum, 728 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 721 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
+        self.buengsamphan.get_cell_at(78, 20).goes_to = (self.buengsamphan_chaiyaphum, 728 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
+        self.chaiyaphum.get_cell_at(11, 92).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 721 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
+        self.chaiyaphum.get_cell_at(11, 93).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)

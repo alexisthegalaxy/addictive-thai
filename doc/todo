@@ -1,3 +1,5 @@
+Allow using an other character than Alexis
+
 Fix the XP. It doesn't work at the moment.
 Redo the occurrences so that the words that appear are taught indeed
 Register all the words taught so far in the Dex
@@ -11,7 +13,7 @@ Map screen:
     If the map is accessed from the Inn, we can see the words taught in the vicinity are blinking
         The data would live in the map NPC
 
-Allow using an other character than Alexis
+
 Battle:
     Show how the other trainer is fighting
         - See the gotten bubbles on each side!
@@ -30,7 +32,9 @@ Grid tests:
        Show the timer
        Use the word POS
 
-TODO low:
+Get rid of exclamation marks above the teachers as it gives away the discovery feeling
+The map shows in black the unexplored parts.
+
 Tests types:
     - TONE_FROM_SOUND
     - TONE_FROM_THAI
