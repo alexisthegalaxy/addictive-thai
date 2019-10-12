@@ -342,19 +342,30 @@ def get_event_status(event_key: str) -> int:
     event_status = list(
         CURSOR.execute(
             f"""
-        SELECT status
-        FROM events_user
-        WHERE event_key = '{event_key}'
-          AND user_id = '{user_id}'
-    """
+            SELECT status
+            FROM events_user
+            WHERE event_key = '{event_key}'
+              AND user_id = '{user_id}'
+            """
         )
     )
-    return_value = event_status[0][0] if event_status and event_status[0] else 0
-    return return_value
+    if event_status and event_status[0]:
+        return event_status[0][0]
+    else:
+        CURSOR.execute(
+            f"""
+            INSERT  
+            INTO events_user (user_id, event_key, status)
+            VALUES ('{user_id}', '{event_key}', 0)
+            """
+        )
+        CONN.commit()
+        return 0
 
 
 def increment_event(event_key: str):
     user_id = get_active_learner_id()
+    get_event_status(event_key)
     CURSOR.execute(
         f"UPDATE events_user "
         f"SET status = events_user.status + 1 "

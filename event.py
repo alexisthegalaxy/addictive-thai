@@ -3,9 +3,9 @@ import events
 
 """
 Can be triggered from:
-    - walking somewhere
+    - OK ! walking somewhere
     - talking to somebody
-    - a npc walking somewhere
+    - OK ! a npc walking somewhere
 """
 
 

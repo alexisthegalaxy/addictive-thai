@@ -34,7 +34,7 @@ class All:
         self.bag: Bag = Bag()
 
     def tick_activity(self):
-        # How we make the game check on things at every tick
+        # Called at every tick
         if self.active_battle:
             self.active_battle.tick()
             self.active_battle.opponent_play()
@@ -50,3 +50,9 @@ class All:
                         execute_event(trigger.event, self)
 
 
+"""
+Problem:
+    Just before turning, the NPC makes one step in the wrong direction.
+Solution:
+    When reaching the place you want to be at, change your direction to the correct one
+"""

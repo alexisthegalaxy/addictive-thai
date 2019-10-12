@@ -81,7 +81,8 @@ class Npc(object):
         self.wanna_meet = wanna_meet
         self.eyesight = eyesight
         self.have_exclamation_mark_until = None
-        self.must_walk_to: Position = None
+        # must_walk_to - list of position: must first walk to the first, then when reached the first is removed
+        self.must_walk_to: List[Position] = []
         self.walked_float = 0
         self.draw_text_since = 0
         self.bubbles_max_hp = bubbles_max_hp
@@ -100,10 +101,11 @@ class Npc(object):
     def is_trainer(self):
         return bool(self.battle_words)
 
-    def sees_learner(self, al) -> Optional[Position]:
+    def sees_learner(self, al) -> Optional[List[Position]]:
         """
         :return: the must_walk_to position if there's one, else None
         """
+        result = None
         if dir_equal(self.direction, Direction.UP):
             if (
                 al.learner.x == self.x
@@ -117,7 +119,7 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(self.x, y).walkable()
                     )
                 if can_walk_to_trainer:
-                    return Position(x=al.learner.x, y=al.learner.y + 1)
+                    result = Position(x=al.learner.x, y=al.learner.y + 1)
         elif dir_equal(self.direction, Direction.DOWN):
             if (
                 al.learner.x == self.x
@@ -131,7 +133,7 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(self.x, y).walkable()
                     )
                 if can_walk_to_trainer:
-                    return Position(x=al.learner.x, y=al.learner.y - 1)
+                    result = Position(x=al.learner.x, y=al.learner.y - 1)
         elif dir_equal(self.direction, Direction.RIGHT):
             if (
                 al.learner.y == self.y
@@ -145,7 +147,7 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(x, self.y).walkable()
                     )
                 if can_walk_to_trainer:
-                    return Position(x=al.learner.x - 1, y=al.learner.y)
+                    result = Position(x=al.learner.x - 1, y=al.learner.y)
         elif dir_equal(self.direction, Direction.LEFT):
             if (
                 al.learner.y == self.y
@@ -159,7 +161,9 @@ class Npc(object):
                         and al.mas.current_map.get_cell_at(x, self.y).walkable()
                     )
                 if can_walk_to_trainer:
-                    return Position(x=al.learner.x + 1, y=al.learner.y)
+                    result = Position(x=al.learner.x + 1, y=al.learner.y)
+        if result:
+            return [result]
         return None
 
     def is_saying_last_sentence(self) -> bool:
@@ -198,6 +202,7 @@ class Npc(object):
 
     def interact(self, al):
         from event import execute_event
+        self.direction = opposite_direction(al.learner.direction)
         self.wanna_meet = False
         self.has_learning_mark = False
         self.reset_cursor()
@@ -209,12 +214,19 @@ class Npc(object):
 
         self.special_interaction(al)
         self.active_line_index += 1
+
         if self.active_line_index >= len(self.active_dialog):
             self.active_line_index = -1
-            for event in self.end_dialog_trigger_event:
-                execute_event(event, al)
+            trigger_event = False
+            if self.taught_word:
+                if self.active_dialog == self.defeat_dialog:
+                    trigger_event = True
+            else:
+                trigger_event = True
+            if trigger_event:
+                for event in self.end_dialog_trigger_event:
+                    execute_event(event, al)
             al.active_npc = None
-        self.direction = opposite_direction(al.learner.direction)
 
     def get_precise_position(self, x, y):
         if dir_equal(self.direction, Direction.UP):
@@ -297,23 +309,37 @@ class Npc(object):
         self.have_exclamation_mark_until = now + 0.5
 
     def makes_a_step_towards_goal(self, al):
-        if self.must_walk_to.x > self.x:
-            self.direction = Direction.RIGHT
+        must_walk_to = self.must_walk_to[0]
+        if must_walk_to.x > self.x:
             self.x += 1
-        if self.must_walk_to.x < self.x:
-            self.direction = Direction.LEFT
+        elif must_walk_to.x < self.x:
             self.x -= 1
-        if self.must_walk_to.y > self.y:
-            self.direction = Direction.DOWN
+        elif must_walk_to.y > self.y:
             self.y += 1
-        if self.must_walk_to.y < self.y:
-            self.direction = Direction.UP
+        elif must_walk_to.y < self.y:
             self.y -= 1
-        if self.x == self.must_walk_to.x and self.y == self.must_walk_to.y:
-            self.must_walk_to = None
-            al.learner.direction = opposite_direction(self.direction)
-            if al.learner.next_position() == (self.x, self.y):
+
+        if self.x == must_walk_to.x and self.y == must_walk_to.y:
+            self.must_walk_to.pop(0)
+            if self.must_walk_to:
+                if self.must_walk_to[0] == Position(x=0, y=0):
+                    self.disappears(al)
+                else:
+                    must_walk_to = self.must_walk_to[0]
+                    if must_walk_to.x > self.x:
+                        self.direction = Direction.RIGHT
+                    elif must_walk_to.x < self.x:
+                        self.direction = Direction.LEFT
+                    elif must_walk_to.y > self.y:
+                        self.direction = Direction.DOWN
+                    elif must_walk_to.y < self.y:
+                        self.direction = Direction.UP
+            elif al.learner.next_position() == (self.x, self.y):
+                al.learner.direction = opposite_direction(self.direction)
                 self.interact(al)
+
+    def disappears(self, al):
+        al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc != self]
 
     def switch_to_dialog(self, dialog):
         self.active_dialog = dialog

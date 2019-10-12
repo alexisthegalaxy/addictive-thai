@@ -106,4 +106,5 @@ to_convert = [
 ]
 
 for item in to_convert:
+    print(item)
     convert_bmp_to_text(item)

@@ -87,9 +87,7 @@ def chumphae_lomsak(al):
             y=9,
             sprite="dog",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "โฮ่ง โฮ่ง",
-            ],
+            standard_dialog=["โฮ่ง โฮ่ง"],
         ),
         Npc(
             al=al,
@@ -131,7 +129,8 @@ def chumphae_lomsak(al):
             al=al,
             name="FirstBattleTrainer",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["ผม", "ฉัน", "ชอบ"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ผม", "ฉัน", "ชอบ"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
             x=108,
@@ -146,7 +145,8 @@ def chumphae_lomsak(al):
             al=al,
             name="SecondBattleTrainer",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["บ้าน", "โรง-เรียน"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["บ้าน", "โรง-เรียน"]
             ],
             ma=al.mas.get_map_from_name("chumphae"),
             x=102,
@@ -236,7 +236,7 @@ def chumphae_school(al):
             sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
-                "To say \"my\" or \"your\" or \"their\" and so on, you use ของ too.",
+                'To say "my" or "your" or "their" and so on, you use ของ too.',
                 "บ้าน ของ ผม = house of me = my house.",
             ],
         ),
@@ -444,9 +444,7 @@ def chumphae(al):
             sprite="ghost",
             appears_between=(23, 6),
             direction=Direction.DOWN,
-            standard_dialog=[
-                "ฮ่าฮ่า",
-            ],
+            standard_dialog=["ฮ่าฮ่า"],
         ),
         Npc(
             al=al,
@@ -616,7 +614,7 @@ def chumphae(al):
                 "You want to buy something?",
             ],
             vendor_dialog_end=["See you again!"],
-            sold_items=['lomsak_apple', 'plastic_bottle_of_water'],
+            sold_items=["lomsak_apple", "plastic_bottle_of_water"],
         ),
     ]
     for npc in npcs:
@@ -880,7 +878,7 @@ def chaiyaphum(al):
                 "Mom: Let me teach you the first word:",
             ],
             defeat_dialog=[
-                "That's how women say \"I\" in Thai, but actually, there's many ways to say \"I\".",
+                'That\'s how women say "I" in Thai, but actually, there\'s many ways to say "I".',
                 "Mom: I thought it woulb be a useful word for your adventure.",
             ],
         ),
@@ -918,7 +916,7 @@ def chaiyaphum(al):
                 "Here's an important word: how to say Thai in Thai!",
             ],
             defeat_dialog=[
-                "And to say \"Thai people\", we simply say \"People-Thai\": คนไทย",
+                'And to say "Thai people", we simply say "People-Thai": คนไทย'
             ],
         ),
         Npc(
@@ -937,47 +935,27 @@ def chaiyaphum(al):
                 "So you can remember this advice, I will teach you this very word: people.",
             ],
             defeat_dialog=[
-                "And to say \"Thai people\", we simply say \"People-Thai\": คนไทย",
+                'And to say "Thai people", we simply say "People-Thai": คนไทย'
             ],
         ),
+        # Npc(
+        #     al=al,
+        #     name="Lover",
+        #     ma=al.mas.get_map_from_name("chaiyaphum"),
+        #     x=18,
+        #     y=82,
+        #     sprite="mali",
+        #     direction=Direction.DOWN,
+        #     standard_dialog=["Yo [Name]!"],
+        #     defeat_dialog=[
+        #         "มะลิ> Don't forget the word, [Name]...",
+        #         "มะลิ> See you again!",
+        #     ],
+        #     end_dialog_trigger_event=['talk_to_lover'],
+        # ),
         Npc(
             al=al,
-            name="มะลิ",
-            taught_word=Word.get_by_split_form("ชอบ"),
-            ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=22,
-            y=80,
-            sprite="mali",
-            direction=Direction.DOWN,
-            standard_dialog=[
-                "มะลิ> Hey [Name]! I heard you're about to go on an adventure?",
-                "มะลิ> Before you go... I wanted to tell you that...",
-                "มะลิ> I like you.",
-                "มะลิ> Let me teach you the word 'to like' so you can remember me <3",
-            ],
-            defeat_dialog=[
-                "มะลิ> Don't forget the word, [Name]...",
-                "มะลิ> We'll meet again!",
-            ],
-        ),
-        Npc(
-            al=al,
-            name="Lover",
-            ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=18,
-            y=82,
-            sprite="mali",
-            direction=Direction.DOWN,
-            standard_dialog=["Yo [Name]!"],
-            defeat_dialog=[
-                "มะลิ> Don't forget the word, [Name]...",
-                "มะลิ> See you again!",
-            ],
-            end_dialog_trigger_event=['talk_to_lover'],
-        ),
-        Npc(
-            al=al,
-            name="Father of Mali",
+            name="father_of_lover",
             ma=al.mas.get_map_from_name("lover_house"),
             x=4,
             y=9,
@@ -985,19 +963,19 @@ def chaiyaphum(al):
             direction=Direction.RIGHT,
             standard_dialog=[
                 "Hey [Name], มะลิ wanted to talk to you, she's waiting in the garden."
+            ] if get_event_status('talk_to_lover') == 0 else [
+                "You're looking for มะลิ? She went north, to Chumphae."
             ],
         ),
         Npc(
             al=al,
             name="bed",
             ma=al.mas.get_map_from_name("house_learner_f2"),
-            x=4,
+            x=7,
             y=10,
             sprite="bed",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "Let's take a nap and restore my health!"
-            ],
+            standard_dialog=["Let's take a nap and restore my health!"],
         ),
         Npc(
             al=al,
@@ -1209,10 +1187,11 @@ def chaiyaphum(al):
             y=69,
             sprite="old_man",
             direction=Direction.DOWN,
-            standard_dialog=["These stones are quite famous around here.",
-                             "They are called มอหินขาว but tourists call those the Thai Stonehenge,",
-                             "although they are entirely natural.",
-                             ],
+            standard_dialog=[
+                "These stones are quite famous around here.",
+                "They are called มอหินขาว but tourists call those the Thai Stonehenge,",
+                "although they are entirely natural.",
+            ],
         ),
         Npc(
             al=al,
@@ -1222,10 +1201,11 @@ def chaiyaphum(al):
             y=72,
             sprite="mom",
             direction=Direction.RIGHT,
-            standard_dialog=["I pray here every day.",
-                             "A different spirit lives in each rock,",
-                             "and the one in that rock brings good health.",
-                             ],
+            standard_dialog=[
+                "I pray here every day.",
+                "A different spirit lives in each rock,",
+                "and the one in that rock brings good health.",
+            ],
         ),
         Npc(
             al=al,
@@ -1235,12 +1215,37 @@ def chaiyaphum(al):
             y=59,
             sprite="kid",
             direction=Direction.DOWN,
-            standard_dialog=["That path leads to มอหินขาว, the Thai Stonehenge.",
-                             "Be careful, you can also get attacked by words,",
-                             "on mountain paths like these!",
-                             ],
+            standard_dialog=[
+                "That path leads to มอหินขาว, the Thai Stonehenge.",
+                "Be careful, you can also get attacked by words,",
+                "on mountain paths like these!",
+            ],
         ),
     ]
+    if get_event_status('talk_to_lover') == 0:
+        npcs.append(
+            Npc(
+                al=al,
+                name="Lover",
+                # taught_word=Word.get_by_split_form("ชอบ"),
+                ma=al.mas.get_map_from_name("chaiyaphum"),
+                x=18,
+                y=82,
+                sprite="mali",
+                direction=Direction.LEFT,
+                standard_dialog=[
+                    "มะลิ> Hey [Name]! I heard you're about to go on an adventure?",
+                    "มะลิ> Before you go... I wanted to tell you that...",
+                    "มะลิ> I like you.",
+                    "มะลิ> Let me teach you the word 'to like' so you can remember me <3",
+                ],
+                defeat_dialog=[
+                    "มะลิ> Don't forget the word, [Name]...",
+                    "มะลิ> We'll meet again!",
+                ],
+                end_dialog_trigger_event=["talk_to_lover"],
+            )
+        )
     for npc in npcs:
         npc.ma.add_npc(npc)
 
@@ -1266,7 +1271,7 @@ def lomsak(al):
             al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("lomsak"),
-            x=21+6,
+            x=21 + 6,
             y=24,
             sprite="lass",
             direction=Direction.LEFT,
@@ -1290,7 +1295,7 @@ def lomsak(al):
             al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("lomsak"),
-            x=11+6,
+            x=11 + 6,
             y=29,
             sprite="mali",
             direction=Direction.DOWN,
@@ -1309,7 +1314,7 @@ def lomsak(al):
             sprite="kid",
             direction=Direction.UP,
             standard_dialog=[
-                "You shouldn't go this way if you haven't fought the leader yet.",
+                "You shouldn't go this way if you haven't fought the leader yet."
             ],
         ),
         Npc(
@@ -1320,9 +1325,7 @@ def lomsak(al):
             y=19,
             sprite="old_man",
             direction=Direction.UP,
-            standard_dialog=[
-                "คุณพูดภาษาไทยได้ไหมครับ",
-            ],
+            standard_dialog=["คุณพูดภาษาไทยได้ไหมครับ"],
         ),
         Npc(
             al=al,
@@ -1357,7 +1360,7 @@ def lomsak(al):
             name="Lomsak - Prof 1",
             taught_word=Word.get_by_split_form("ได้"),
             ma=al.mas.get_map_from_name("lomsak"),
-            x=32+6,
+            x=32 + 6,
             y=17,
             sprite="mom",
             direction=Direction.RIGHT,
@@ -1370,7 +1373,7 @@ def lomsak(al):
             al=al,
             name="Lomsak - Prof 1 - kid 1",
             ma=al.mas.get_map_from_name("lomsak"),
-            x=32+6,
+            x=32 + 6,
             y=19,
             sprite="kid",
             direction=Direction.UP,
@@ -1383,7 +1386,7 @@ def lomsak(al):
             al=al,
             name="Lomsak - Prof 1 - kid 2",
             ma=al.mas.get_map_from_name("lomsak"),
-            x=34+6,
+            x=34 + 6,
             y=19,
             sprite="lass",
             direction=Direction.UP,
@@ -1398,7 +1401,7 @@ def lomsak(al):
             al=al,
             name="Lomsak - Prof 1 - kid 1",
             ma=al.mas.get_map_from_name("lomsak"),
-            x=35+6,
+            x=35 + 6,
             y=17,
             sprite="kid",
             direction=Direction.LEFT,
@@ -1503,14 +1506,13 @@ def lomsak(al):
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=11,
             y=20,
-            standard_dialog=[
-                "Do you know your pronouns? I'll test you!",
-            ],
+            standard_dialog=["Do you know your pronouns? I'll test you!"],
             defeat_dialog=["You're too good!"],
             direction=Direction.RIGHT,
             sprite="lass",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["คุณ", "ผม", "ฉัน", "เขา"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["คุณ", "ผม", "ฉัน", "เขา"]
             ],
             money=4,
         ),
@@ -1521,7 +1523,8 @@ def lomsak(al):
             x=15,
             y=18,
             standard_dialog=[
-                "I like to be in that gym,", "I train against every body who comes to challenge the leader!",
+                "I like to be in that gym,",
+                "I train against every body who comes to challenge the leader!",
             ],
             defeat_dialog=["I lost! But I learned a lot from you."],
             direction=Direction.LEFT,
@@ -1537,14 +1540,13 @@ def lomsak(al):
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=11,
             y=16,
-            standard_dialog=[
-                "Let's see how well you know the polite words!",
-            ],
+            standard_dialog=["Let's see how well you know the polite words!"],
             defeat_dialog=["What, you won already?", "The leader won't be so easy!"],
             direction=Direction.RIGHT,
             sprite="lass",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["ขอบ-คุณ", "ขอ-โทษ", "ส-วัส-ดี"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ขอบ-คุณ", "ขอ-โทษ", "ส-วัส-ดี"]
             ],
             money=4,
         ),
@@ -1558,11 +1560,16 @@ def lomsak(al):
                 "I am the last one before the leader!",
                 "I'll do my best to give you a good fight!",
             ],
-            defeat_dialog=["I knew already that you'd win!", "I saw you fighting the others.", "You're good."],
+            defeat_dialog=[
+                "I knew already that you'd win!",
+                "I saw you fighting the others.",
+                "You're good.",
+            ],
             direction=Direction.RIGHT,
             sprite="kid",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["น้ำ", "ได้", "ภา-ษา"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["น้ำ", "ได้", "ภา-ษา"]
             ],
             money=4,
         ),
@@ -1578,11 +1585,25 @@ def lomsak(al):
                 "Oh, this is your first time battling a gym's leader?",
                 "If you can win this battle, I'll give you a something special!",
             ],
-            defeat_dialog=["Congratulations!", "You have great knowledge of the Thai language already!", "Here, as promised, have the Lomsak badge."],
+            defeat_dialog=[
+                "Congratulations!",
+                "You have great knowledge of the Thai language already!",
+                "Here, as promised, have the Lomsak badge.",
+            ],
             direction=Direction.DOWN,
             sprite="dad",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["ใช่", "ภา-ษา", "ภา-ษา-อัง-กฤษ", "ได้", "เรียน", "พูด", "ของ", "เรียน"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in [
+                    "ใช่",
+                    "ภา-ษา",
+                    "ภา-ษา-อัง-กฤษ",
+                    "ได้",
+                    "เรียน",
+                    "พูด",
+                    "ของ",
+                    "เรียน",
+                ]
             ],
             money=15,
             eyesight=2,
@@ -1599,7 +1620,7 @@ def lomsak(al):
             direction=Direction.DOWN,
             standard_dialog=[
                 "You came here to hear me speak?",
-                "Oh, you just want to learn how to say \"to speak\"?",
+                'Oh, you just want to learn how to say "to speak"?',
             ],
             defeat_dialog=[
                 "You can remember it easily:",
@@ -1617,11 +1638,11 @@ def lomsak(al):
             sprite="monk",
             direction=Direction.DOWN,
             standard_dialog=[
-                "This life is precious, and the best use you can make of it is to study.",
+                "This life is precious, and the best use you can make of it is to study."
             ],
             defeat_dialog=[
-                "If you already know how to say \"school\", remembering \"study\" is easy!",
-                "\"School\" is โรง-เรียน - \"building\"-\"study\".",
+                'If you already know how to say "school", remembering "study" is easy!',
+                '"School" is โรง-เรียน - "building"-"study".',
             ],
         ),
         Npc(
@@ -1635,11 +1656,11 @@ def lomsak(al):
             direction=Direction.DOWN,
             standard_dialog=[
                 "Life is not a matter of where you go, but a matter of where you are.",
-                "What, you still want to learn how to say \"to go\"?",
+                'What, you still want to learn how to say "to go"?',
             ],
             defeat_dialog=[
                 "You want a way to remember that?",
-                "Think \"Days go by, days go ไป\"!",
+                'Think "Days go by, days go ไป"!',
             ],
         ),
         Npc(
@@ -1655,9 +1676,7 @@ def lomsak(al):
                 "I will teach you the most useful adjective ever.",
                 "Good!",
             ],
-            defeat_dialog=[
-                "ดี is everywhere, even in hello: สวัสดี!",
-            ],
+            defeat_dialog=["ดี is everywhere, even in hello: สวัสดี!"],
         ),
         Npc(
             al=al,
@@ -1703,7 +1722,7 @@ def lomsak_labyrinth(al):
             ],
             defeat_dialog=[
                 "Good, good! Use this word a lot, it'll bring you far!",
-                "Remember that adjectives come after the noun, so \"Thai people\" is คน ไทย.",
+                'Remember that adjectives come after the noun, so "Thai people" is คน ไทย.',
             ],
         ),
         Npc(
@@ -1732,9 +1751,7 @@ def lomsak_labyrinth(al):
             y=9,
             sprite="lass",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "ขอโทษ ฉันพูดภาษาอังกฤษไม่ได้",
-            ],
+            standard_dialog=["ขอโทษ ฉันพูดภาษาอังกฤษไม่ได้"],
         ),
         Npc(
             al=al,
@@ -1744,9 +1761,7 @@ def lomsak_labyrinth(al):
             y=10,
             sprite="dog",
             direction=Direction.UP,
-            standard_dialog=[
-                "โฮ่ง",
-            ],
+            standard_dialog=["โฮ่ง"],
         ),
         Npc(
             al=al,
@@ -1764,7 +1779,7 @@ def lomsak_labyrinth(al):
             ],
             defeat_dialog=[
                 "What do you mean, playing and learning Thai is the same?",
-                "To remember that play is \"len\",",
+                'To remember that play is "len",',
                 "You can imagine children playing in a lane!",
             ],
         ),
@@ -1782,7 +1797,7 @@ def lomsak_labyrinth(al):
                 "You want to know how to say to do?",
             ],
             defeat_dialog=[
-                "I guess that to remember it, you can imagine me making tam tam drums.",
+                "I guess that to remember it, you can imagine me making tam tam drums."
             ],
         ),
         Npc(
@@ -1793,9 +1808,7 @@ def lomsak_labyrinth(al):
             y=10,
             sprite="kid",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "คุณพูดภาษาไทยได้ไหม",
-            ],
+            standard_dialog=["คุณพูดภาษาไทยได้ไหม"],
         ),
         Npc(
             al=al,
@@ -1807,7 +1820,7 @@ def lomsak_labyrinth(al):
             direction=Direction.UP,
             standard_dialog=[
                 "The people in that house are very nice, they taught me lots of new words!",
-                "They taught me \"to do\", \"child\", \"to play\", and \"people\".",
+                'They taught me "to do", "child", "to play", and "people".',
                 "Everybody likes them around here.",
             ],
         ),
@@ -1845,10 +1858,11 @@ def lomsak_labyrinth(al):
             y=16,
             sprite="kid",
             direction=Direction.RIGHT,
-            standard_dialog=["I learnt lots of new words!", "I'm gonna teach you a good lesson!"],
-            defeat_dialog=[
-                "I'm the one who was taught a good lesson!",
+            standard_dialog=[
+                "I learnt lots of new words!",
+                "I'm gonna teach you a good lesson!",
             ],
+            defeat_dialog=["I'm the one who was taught a good lesson!"],
         ),
         Npc(
             al=al,
@@ -1856,18 +1870,16 @@ def lomsak_labyrinth(al):
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ดอก-ไม้", "ทำ", "ใหญ่", "เรียน", "เล็ก"]
-
-
             ],
             ma=al.mas.get_map_from_name("lomsak_labyrinth"),
             x=18,
             y=19,
             sprite="woman",
             direction=Direction.RIGHT,
-            standard_dialog=["Let's see, between you and me, who is better at speaking Thai?"],
-            defeat_dialog=[
-                "I guess it was you.",
+            standard_dialog=[
+                "Let's see, between you and me, who is better at speaking Thai?"
             ],
+            defeat_dialog=["I guess it was you."],
         ),
         Npc(
             al=al,
@@ -1883,7 +1895,7 @@ def lomsak_labyrinth(al):
                 "Do you know how to say big?",
             ],
             defeat_dialog=[
-                "You can remember it like, \"Yay, yay, it's big!\".",
+                'You can remember it like, "Yay, yay, it\'s big!".',
                 "Although I must admit it can get lonely here sometimes.",
             ],
         ),
@@ -1901,7 +1913,7 @@ def lomsak_labyrinth(al):
                 "See how small that house is!",
             ],
             defeat_dialog=[
-                "To remember it, you can imagine a small person with very short legs",
+                "To remember it, you can imagine a small person with very short legs"
             ],
         ),
         Npc(
@@ -1912,9 +1924,7 @@ def lomsak_labyrinth(al):
             y=5,
             sprite="cat",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "เมี้ยว",
-            ],
+            standard_dialog=["เมี้ยว"],
         ),
         Npc(
             al=al,
@@ -1949,9 +1959,7 @@ def cat_cove(al):
                 "Oh, you found my secret cat paradise?",
                 "Let's have a deal: I teach you the word cat, and you tell nobody, ok?",
             ],
-            defeat_dialog=[
-                "Funny how it sounds like a cat meowing, right?"
-            ]
+            defeat_dialog=["Funny how it sounds like a cat meowing, right?"],
         ),
         Npc(
             al=al,
@@ -1961,9 +1969,7 @@ def cat_cove(al):
             y=12,
             sprite="cat",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -1973,9 +1979,7 @@ def cat_cove(al):
             y=10,
             sprite="cat",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -1985,9 +1989,7 @@ def cat_cove(al):
             y=12,
             sprite="cat",
             direction=Direction.UP,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -1997,9 +1999,7 @@ def cat_cove(al):
             y=15,
             sprite="cat",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -2009,9 +2009,7 @@ def cat_cove(al):
             y=22,
             sprite="cat",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -2021,9 +2019,7 @@ def cat_cove(al):
             y=7,
             sprite="cat",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -2034,12 +2030,8 @@ def cat_cove(al):
             sprite="cat",
             direction=Direction.UP,
             taught_word=Word.get_by_split_form("ปลา"),
-            standard_dialog=[
-                "Meow?",
-            ],
-            defeat_dialog=[
-                "Meow ผมอยากกินปลา meow",
-            ],
+            standard_dialog=["Meow?"],
+            defeat_dialog=["Meow ผมอยากกินปลา meow"],
         ),
         Npc(
             al=al,
@@ -2049,9 +2041,7 @@ def cat_cove(al):
             y=19,
             sprite="cat",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -2061,9 +2051,7 @@ def cat_cove(al):
             y=19,
             sprite="cat",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -2073,9 +2061,7 @@ def cat_cove(al):
             y=11,
             sprite="cat",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -2085,9 +2071,7 @@ def cat_cove(al):
             y=12,
             sprite="cat",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
     ]
     for npc in npcs:
@@ -2106,7 +2090,7 @@ def khonkaen(al):
             direction=Direction.UP,
             standard_dialog=[
                 "Everyday, they show a free movie on this tower screen."
-                "I'm watching right now.",
+                "I'm watching right now."
             ],
         ),
         # Vendor(
@@ -2226,10 +2210,7 @@ def phetchabun(al):
             y=45,
             sprite="kid",
             direction=Direction.UP,
-            standard_dialog=[
-                "You found us!",
-                "Don't tell the teacher!",
-            ],
+            standard_dialog=["You found us!", "Don't tell the teacher!"],
         ),
         Npc(
             al=al,
@@ -2243,10 +2224,7 @@ def phetchabun(al):
             y=44,
             sprite="lass",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "You found us!",
-                "Don't tell the teacher!",
-            ],
+            standard_dialog=["You found us!", "Don't tell the teacher!"],
         ),
         # Vendor(
         #     al=al,
@@ -2276,9 +2254,7 @@ def phetchabun(al):
             y=37,
             sprite="dog",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "โฮ่ง โฮ่ง",
-            ],
+            standard_dialog=["โฮ่ง โฮ่ง"],
             eyesight=10,
         ),
         Npc(
@@ -2289,9 +2265,7 @@ def phetchabun(al):
             y=37,
             sprite="cat",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "เหมียว",
-            ],
+            standard_dialog=["เหมียว"],
             eyesight=10,
         ),
         Npc(
@@ -2303,7 +2277,8 @@ def phetchabun(al):
             sprite="dad",
             direction=Direction.UP,
             standard_dialog=[
-                "You're looking for a dog?", "I just saw one running past me down there!",
+                "You're looking for a dog?",
+                "I just saw one running past me down there!",
             ],
         ),
         Npc(
@@ -2332,9 +2307,7 @@ def phetchabun(al):
             y=5,
             sprite="mom",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "Here's how to say 'where':",
-            ],
+            standard_dialog=["Here's how to say 'where':"],
         ),
         Npc(
             al=al,
@@ -2345,19 +2318,15 @@ def phetchabun(al):
             y=7,
             sprite="mom",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "Here's how to say 'who':",
-            ],
-            defeat_dialog=[
-                "To remember, imagine asking:",
-                "Who cries? Who krai?",
-            ],
+            standard_dialog=["Here's how to say 'who':"],
+            defeat_dialog=["To remember, imagine asking:", "Who cries? Who krai?"],
         ),
         Npc(
             al=al,
             name="MountainTrainer",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ใคร"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["อะ-ไร", "ที่-ไหน", "ใคร"]
             ],
             ma=al.mas.get_map_from_name("phetchabun"),
             x=21,
@@ -2365,7 +2334,10 @@ def phetchabun(al):
             sprite="kid",
             direction=Direction.RIGHT,
             money=2,
-            standard_dialog=["The mountain is full of interrogative words!", "Do you think you're ready?"],
+            standard_dialog=[
+                "The mountain is full of interrogative words!",
+                "Do you think you're ready?",
+            ],
             defeat_dialog=["Ha! I think you're ready!"],
             eyesight=10,
         ),
@@ -2373,7 +2345,8 @@ def phetchabun(al):
             al=al,
             name="MountainTrainer",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["ได้", "ข้าว", "อยาก"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ได้", "ข้าว", "อยาก"]
             ],
             ma=al.mas.get_map_from_name("phetchabun"),
             x=32,
@@ -2382,7 +2355,11 @@ def phetchabun(al):
             direction=Direction.RIGHT,
             money=2,
             standard_dialog=["Let's have a word battle!"],
-            defeat_dialog=["That was a cool fight!", "Huh? You're looking for a dog?", "Maybe it went to the cave?"],
+            defeat_dialog=[
+                "That was a cool fight!",
+                "Huh? You're looking for a dog?",
+                "Maybe it went to the cave?",
+            ],
             eyesight=10,
         ),
         Npc(
@@ -2396,9 +2373,7 @@ def phetchabun(al):
             direction=Direction.LEFT,
             wanna_meet=True,
             eyesight=2,
-            standard_dialog=[
-                "Here's how to say 'when':",
-            ],
+            standard_dialog=["Here's how to say 'when':"],
         ),
         Npc(
             al=al,
@@ -2411,11 +2386,9 @@ def phetchabun(al):
             wanna_meet=True,
             eyesight=2,
             direction=Direction.DOWN,
-            standard_dialog=[
-                "Here's how to say 'why':",
-            ],
+            standard_dialog=["Here's how to say 'why':"],
             defeat_dialog=[
-                "ทำ actually means \"to do\". ไม doesn't mean anything. ทำไม means why.",
+                'ทำ actually means "to do". ไม doesn\'t mean anything. ทำไม means why.',
                 "ทำไม?",
             ],
         ),
@@ -2430,14 +2403,11 @@ def phetchabun(al):
             wanna_meet=True,
             eyesight=2,
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "Here's how to say 'how':",
-            ],
+            standard_dialog=["Here's how to say 'how':"],
             defeat_dialog=[
-                "To remember that, you can imagine a manual on \"How to become a young guy\"",
-                "\"How to become a ยัง ไง\"",
+                'To remember that, you can imagine a manual on "How to become a young guy"',
+                '"How to become a ยัง ไง"',
             ],
-
         ),
         Npc(
             al=al,
@@ -2447,9 +2417,7 @@ def phetchabun(al):
             y=20,
             sprite="kid",
             direction=Direction.UP,
-            standard_dialog=[
-                "This cave is so cool!",
-            ],
+            standard_dialog=["This cave is so cool!"],
         ),
         Npc(
             al=al,
@@ -2460,10 +2428,12 @@ def phetchabun(al):
             sprite="lass",
             direction=Direction.DOWN,
             standard_dialog=[
-                "I'm a bit tired of exploring.", "How about a word fight?",
+                "I'm a bit tired of exploring.",
+                "How about a word fight?",
             ],
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["ใคร", "เมื่อ-ไหร่", "ชอบ"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["ใคร", "เมื่อ-ไหร่", "ชอบ"]
             ],
         ),
         Npc(
@@ -2474,9 +2444,7 @@ def phetchabun(al):
             y=37,
             sprite="old_man",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "I wonder how you reach that garden down there.",
-            ],
+            standard_dialog=["I wonder how you reach that garden down there."],
         ),
         Npc(
             al=al,
@@ -2514,9 +2482,7 @@ def phetchabun(al):
                 "and is nothing, just an illusion created in your mind.",
                 "What, you just wanted to learn a word?",
             ],
-            defeat_dialog=[
-                "To remember that, think \"one day\", \"วัน day\"!",
-            ],
+            defeat_dialog=['To remember that, think "one day", "วัน day"!'],
         ),
         Npc(
             al=al,
@@ -2527,10 +2493,12 @@ def phetchabun(al):
             sprite="old_man",
             direction=Direction.UP,
             standard_dialog=[
-                "Ho, young one!", "Would you be so kind as to have a word battle?",
+                "Ho, young one!",
+                "Would you be so kind as to have a word battle?",
             ],
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["อะ-ไร", "ที่-ไหน", "ทำ-ไม"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["อะ-ไร", "ที่-ไหน", "ทำ-ไม"]
             ],
         ),
         Npc(
@@ -2554,7 +2522,7 @@ def phetchabun(al):
             sprite="woman",
             direction=Direction.DOWN,
             standard_dialog=[
-                "เป็น (bpen) and คือ (keu) both mean \"to be\"",
+                'เป็น (bpen) and คือ (keu) both mean "to be"',
                 "เป็น (bpen) is used to give additional details about something.",
                 "Namely, about relationships, social status, sex, nationality, occupation,",
                 "physical characteristics, or condition.",
@@ -2571,9 +2539,9 @@ def phetchabun(al):
             sprite="woman",
             direction=Direction.DOWN,
             standard_dialog=[
-                "เป็น (bpen) and คือ (keu) both mean \"to be\"",
-                "คือ (keu) means \"is equal to\",",
-                "When you use คือ, \"A คือ B\" must be as true as \"B คือ A\".",
+                'เป็น (bpen) and คือ (keu) both mean "to be"',
+                'คือ (keu) means "is equal to",',
+                'When you use คือ, "A คือ B" must be as true as "B คือ A".',
                 "For example: คุณ คือ ครู ของ ฉัน: You are my teacher = My teacher is you.",
             ],
         ),
@@ -2588,12 +2556,14 @@ def phetchabun(al):
             direction=Direction.DOWN,
             standard_dialog=[
                 "In Thai, all adjectives are actually verbs.",
-                "For example, beautiful, สวย (suay) actually means \"to be beautiful\".",
-                "To say \"You are beautiful\", you just need to say \"You beautiful\".",
-                "No need for the word \"to be\"!",
+                'For example, beautiful, สวย (suay) actually means "to be beautiful".',
+                'To say "You are beautiful", you just need to say "You beautiful".',
+                'No need for the word "to be"!',
             ],
-            defeat_dialog=["It makes life easier right?",
-                           "It's the same for all adjectives!"],
+            defeat_dialog=[
+                "It makes life easier right?",
+                "It's the same for all adjectives!",
+            ],
         ),
         Npc(
             al=al,
@@ -2618,7 +2588,7 @@ def phetchabun(al):
             sprite="kid",
             direction=Direction.UP,
             standard_dialog=[
-                "In Thai, the adjective follow the noun, it's not like in English.",
+                "In Thai, the adjective follow the noun, it's not like in English."
             ],
         ),
         Npc(
@@ -2630,7 +2600,7 @@ def phetchabun(al):
             sprite="lass",
             direction=Direction.UP,
             standard_dialog=[
-                "It happens that เป็น and คือ can be used interchangeably.",
+                "It happens that เป็น and คือ can be used interchangeably."
             ],
         ),
         Npc(
@@ -2669,9 +2639,7 @@ def phetchabun(al):
             y=21,
             sprite="kid",
             direction=Direction.UP,
-            standard_dialog=[
-                "ครูของฉันไม่สวย ¬_¬",
-            ],
+            standard_dialog=["ครูของฉันไม่สวย ¬_¬"],
         ),
         # Vendor(
         #     al=al,
@@ -2738,7 +2706,6 @@ def phetchabun(al):
             standard_dialog=[
                 "My favorite fruit is the banana!",
                 "It is such a divine fruit, delicious, easy to transport, easy to peel, easy to eat.",
-
             ],
             defeat_dialog=[
                 "It's also easy to remember, right?",
@@ -2758,9 +2725,7 @@ def phetchabun(al):
                 "This tree right there is a pineapple tree. Have you ever seen one?",
                 "Here's how we say pineapple in Thai:",
             ],
-            defeat_dialog=[
-                "It sounds like \"sap parrot\", right?",
-            ],
+            defeat_dialog=['It sounds like "sap parrot", right?'],
         ),
         Npc(
             al=al,
@@ -2780,8 +2745,8 @@ def phetchabun(al):
             ],
             defeat_dialog=[
                 "To remember it, you can imagine two lovers speaking passionately.",
-                "\"I lost everything\" the man says.",
-                "\"But at least you have me!\" replies his lover.",
+                '"I lost everything" the man says.',
+                '"But at least you have me!" replies his lover.',
             ],
         ),
         Npc(
@@ -2816,7 +2781,8 @@ def phetchabun(al):
             al=al,
             name="Phetchabun farm trainer",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["กล้วย", "มะ-ม่วง", "สับ-ปะ-รด"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["กล้วย", "มะ-ม่วง", "สับ-ปะ-รด"]
             ],
             ma=al.mas.get_map_from_name("phetchabun"),
             x=51,
@@ -2835,9 +2801,11 @@ def phetchabun(al):
             y=56,
             sprite="old_woman",
             direction=Direction.RIGHT,
-            standard_dialog=["That cave, right there.",
-                             "I heard it leads somewhere strange.",
-                             "With cats."],
+            standard_dialog=[
+                "That cave, right there.",
+                "I heard it leads somewhere strange.",
+                "With cats.",
+            ],
         ),
         Npc(
             al=al,
@@ -2847,15 +2815,16 @@ def phetchabun(al):
             y=59,
             sprite="rich_woman",
             direction=Direction.RIGHT,
-            standard_dialog=["I often come to Phetchabun to buy fruits, they're better here.",
-                             "And also cheaper..."],
+            standard_dialog=[
+                "I often come to Phetchabun to buy fruits, they're better here.",
+                "And also cheaper...",
+            ],
         ),
         Npc(
             al=al,
             name="Phetchabun gym trainer 1",
             battle_words=[
-                Word.get_by_split_form(battle_word)
-                for battle_word in ["ทำ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
             ma=al.mas.get_map_from_name("phetchabun_gym"),
             x=12,
@@ -2864,16 +2833,13 @@ def phetchabun(al):
             sprite="lass",
             direction=Direction.DOWN,
             standard_dialog=["Oh! A new challenger!"],
-            defeat_dialog=[
-                "The first challenger in a while, and I lose...",
-            ],
+            defeat_dialog=["The first challenger in a while, and I lose..."],
         ),
         Npc(
             al=al,
             name="Phetchabun gym trainer 2",
             battle_words=[
-                Word.get_by_split_form(battle_word)
-                for battle_word in ["ทำ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
             ma=al.mas.get_map_from_name("phetchabun_gym"),
             x=15,
@@ -2887,8 +2853,7 @@ def phetchabun(al):
             al=al,
             name="Phetchabun gym trainer 3",
             battle_words=[
-                Word.get_by_split_form(battle_word)
-                for battle_word in ["ทำ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
             ma=al.mas.get_map_from_name("phetchabun_gym"),
             x=21,
@@ -2902,8 +2867,7 @@ def phetchabun(al):
             al=al,
             name="Phetchabun gym trainer 4",
             battle_words=[
-                Word.get_by_split_form(battle_word)
-                for battle_word in ["ทำ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
             ma=al.mas.get_map_from_name("phetchabun_gym"),
             x=14,
@@ -2917,8 +2881,7 @@ def phetchabun(al):
             al=al,
             name="Phetchabun gym trainer 5",
             battle_words=[
-                Word.get_by_split_form(battle_word)
-                for battle_word in ["ทำ"]
+                Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
             ma=al.mas.get_map_from_name("phetchabun_gym"),
             x=8,
@@ -3013,9 +2976,7 @@ def banyaeng(al):
                 "but I have troubles putting it into practice.",
                 "How about I teach you some Thai instead?",
             ],
-            defeat_dialog=[
-                "เวลา is time. Time is an illusion. Voilà."
-            ],
+            defeat_dialog=["เวลา is time. Time is an illusion. Voilà."],
         ),
         Npc(
             al=al,
@@ -3029,7 +2990,7 @@ def banyaeng(al):
             standard_dialog=[
                 "Did you come here to see the bats too?",
                 "I guess, there's nothing else to see here.",
-                "Wanna learn how to say \"to see\"?",
+                'Wanna learn how to say "to see"?',
             ],
             defeat_dialog=[
                 "It's quite easy to remember, you can remember that it sounds like a hen.",
@@ -3045,7 +3006,7 @@ def banyaeng(al):
             sprite="old_man",
             direction=Direction.UP,
             standard_dialog=[
-                "I have travelled a full day to arrive here, it's good to have some rest!",
+                "I have travelled a full day to arrive here, it's good to have some rest!"
             ],
         ),
         # Vendor(
@@ -3081,7 +3042,7 @@ def banyaeng(al):
             standard_dialog=[
                 "Pay attention, for today I will teach the most important word in Thai.",
                 "It's the most used word in Thai, and has many meanings.",
-                "The main ones are \"at\", as in \"at home\", and that, as in \"the person that...\".",
+                'The main ones are "at", as in "at home", and that, as in "the person that...".',
             ],
             defeat_dialog=[
                 "It is also has many other uses.",
@@ -3098,7 +3059,7 @@ def banyaeng(al):
             sprite="kid",
             direction=Direction.RIGHT,
             standard_dialog=[
-                "So, if I understand correctly, to say \"I'm at school\", I say:",
+                'So, if I understand correctly, to say "I\'m at school", I say:',
                 "I - to be at - at - school: ผม อยู่ ที่ โรง-เรียน",
             ],
         ),
@@ -3110,9 +3071,7 @@ def banyaeng(al):
             y=22,
             sprite="lass",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "I recognise this word ที่! It's in \"where\": ที่-ไหน!",
-            ],
+            standard_dialog=['I recognise this word ที่! It\'s in "where": ที่-ไหน!'],
         ),
         Npc(
             al=al,
@@ -3123,7 +3082,7 @@ def banyaeng(al):
             sprite="lass",
             direction=Direction.RIGHT,
             standard_dialog=[
-                "To say, \"the child that learns Thai eats rice\", you have to say:",
+                'To say, "the child that learns Thai eats rice", you have to say:',
                 "child - ที่ - to learn - Thai - to eat - rice: เด็ก ที่ เรียน ภาษาไทย กิน ข้าว",
             ],
         ),
@@ -3139,7 +3098,7 @@ def banyaeng(al):
                 "I find it crazy that the same word has two uses that are super common.",
                 "Don't Thai people get confused?",
                 "For example, to say, the child that is at a place, do you have two ที่?",
-                "The teacher said it's fine. \"The child that is at school eats rice\" simply gives:",
+                'The teacher said it\'s fine. "The child that is at school eats rice" simply gives:',
                 "child - ที่ - school - to eat - rice: เด็ก ที่ โรงเรียน กิน ข้าว",
             ],
         ),
@@ -3198,7 +3157,8 @@ def labyrinth(al):
             al=al,
             name="Labyrinth south trainer",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
             ],
             ma=al.mas.get_map_from_name("labyrinth"),
             x=18,
@@ -3206,9 +3166,15 @@ def labyrinth(al):
             sprite="kid",
             direction=Direction.RIGHT,
             money=1,
-            standard_dialog=["I just discovered a shortcut in the woods!",
-                             "Also, let's fight!"],
-            defeat_dialog=["Well fought!", "Here, have one Baht then.", "Sorry, I don't have much more money!"],
+            standard_dialog=[
+                "I just discovered a shortcut in the woods!",
+                "Also, let's fight!",
+            ],
+            defeat_dialog=[
+                "Well fought!",
+                "Here, have one Baht then.",
+                "Sorry, I don't have much more money!",
+            ],
         ),
         # Vendor(
         #     al=al,
@@ -3292,9 +3258,7 @@ def nakhon_sawan(al):
             y=24,
             sprite="clown_fish",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -3304,9 +3268,7 @@ def nakhon_sawan(al):
             y=15,
             sprite="gecko",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "ตุ๊กแก",
-            ],
+            standard_dialog=["ตุ๊กแก"],
         ),
         Npc(
             al=al,
@@ -3316,9 +3278,7 @@ def nakhon_sawan(al):
             y=16,
             sprite="crocodile",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -3328,9 +3288,7 @@ def nakhon_sawan(al):
             y=23,
             sprite="gecko",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "ตุ๊กแก",
-            ],
+            standard_dialog=["ตุ๊กแก"],
         ),
     ]
     for npc in npcs:
@@ -3347,9 +3305,7 @@ def phitsalunok(al):
             y=42,
             sprite="rich_woman",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "Yep, I'm rich.",
-            ],
+            standard_dialog=["Yep, I'm rich."],
         ),
         Npc(
             al=al,
@@ -3423,11 +3379,11 @@ def kasetsombum(al):
             direction=Direction.UP,
             standard_dialog=[
                 "Yes, it's mostly farmland around Kasetsombum.",
-                "Actually, \'เกษตร\' (kaset) means farmland, and \'สมบูรณ์\' (sombum) means perfect.",
+                "Actually, 'เกษตร' (kaset) means farmland, and 'สมบูรณ์' (sombum) means perfect.",
                 "I wonder if that refers to how perfect my farmland is?",
                 "Those words are a bit advanced, but I can teach you the word for vegetable!",
             ],
-            defeat_dialog=["To remember it, you can imagine pacman eating vegetables!"]
+            defeat_dialog=["To remember it, you can imagine pacman eating vegetables!"],
         ),
         Npc(
             al=al,
@@ -3452,13 +3408,10 @@ def kasetsombum(al):
             y=18,
             sprite="monk",
             direction=Direction.UP,
-            standard_dialog=[
-                "You want to learn a word?",
-                "How about พระ?",
-            ],
+            standard_dialog=["You want to learn a word?", "How about พระ?"],
             defeat_dialog=[
                 "Do you know about classifiers? Because พระ is the classifier for monks.",
-                "พระ is also a prefix to put before words like \"king\" or \"god\", showing respect.",
+                'พระ is also a prefix to put before words like "king" or "god", showing respect.',
                 "To remember it, think that Buddha, monks, kings and gods are praised, พระsed.",
             ],
         ),
@@ -3481,7 +3434,7 @@ def kasetsombum(al):
                 "ฝรั่งเศส (farangset).",
                 "Guavas are called farangs because they were brought to Thailand",
                 "by Portuguese people, a long time ago.",
-            ]
+            ],
         ),
         Npc(
             al=al,
@@ -3492,16 +3445,14 @@ def kasetsombum(al):
             y=10,
             sprite="mom",
             direction=Direction.LEFT,
-            standard_dialog=[
-                "You want a useful word? How about the pronoun \"it\"?",
-            ],
+            standard_dialog=['You want a useful word? How about the pronoun "it"?'],
             defeat_dialog=[
                 "I've got an idea for you to remember it!",
-                "Imagine a wife that despises her man and refers to him as \"it\".",
+                'Imagine a wife that despises her man and refers to him as "it".',
                 "No, I'm not doing that, hahaha. haha.",
                 "มัน also means yam or tuber.",
                 "Not that I'm calling my husband that either.",
-            ]
+            ],
         ),
         Npc(
             al=al,
@@ -3531,11 +3482,11 @@ def kasetsombum(al):
             direction=Direction.UP,
             standard_dialog=[
                 "I'm planting potatoes.",
-                "Ah, actually that's a funny word to learn if you already know \"it\" and \"foreigner\"!",
+                'Ah, actually that\'s a funny word to learn if you already know "it" and "foreigner"!',
             ],
             defeat_dialog=[
-                "Yes, potatoes mean \"western yams\", but it sounds like \"it foreigner\"!",
-            ]
+                'Yes, potatoes mean "western yams", but it sounds like "it foreigner"!'
+            ],
         ),
         Npc(
             al=al,
@@ -3545,9 +3496,7 @@ def kasetsombum(al):
             y=83,
             sprite="woman",
             direction=Direction.UP,
-            standard_dialog=[
-                "no dialog",
-            ],
+            standard_dialog=["no dialog"],
         ),
         Npc(
             al=al,
@@ -3562,14 +3511,14 @@ def kasetsombum(al):
                 "I don't have much longer to live, and I'm not much now -",
                 "But at least I have raised three strong women.",
                 "I believe women have the power to change Thailand.",
-                "As a parting gift, let me teach you how to say \"she\".",
+                'As a parting gift, let me teach you how to say "she".',
             ],
             defeat_dialog=[
-                "You can also use เขา, as it means \"he, she, they\",",
+                'You can also use เขา, as it means "he, she, they",',
                 "but เธอ is only for women.",
                 "To remember it, remember that each woman was once a daughter - a daughเธอ.",
-                "Note that it can be used to mean \"you\" as well.",
-            ]
+                'Note that it can be used to mean "you" as well.',
+            ],
         ),
         Npc(
             al=al,
@@ -3619,9 +3568,7 @@ def kasetsombum(al):
             y=7,
             sprite="old_woman",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "ผักของฉันอร่อย",
-            ],
+            standard_dialog=["ผักของฉันอร่อย"],
         ),
         Npc(
             al=al,
@@ -3631,9 +3578,7 @@ def kasetsombum(al):
             y=9,
             sprite="lass",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "อร่อย!",
-            ],
+            standard_dialog=["อร่อย!"],
         ),
         Npc(
             al=al,
@@ -3659,7 +3604,7 @@ def kasetsombum(al):
             sprite="kid",
             direction=Direction.LEFT,
             standard_dialog=[
-                "Mom made us some bittermelon with garlic for breakfast, with granny's vegetables.",
+                "Mom made us some bittermelon with garlic for breakfast, with granny's vegetables."
             ],
         ),
         Npc(
@@ -3670,9 +3615,7 @@ def kasetsombum(al):
             y=22,
             sprite="kid",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "We found a gecko!",
-            ],
+            standard_dialog=["We found a gecko!"],
         ),
         Npc(
             al=al,
@@ -3682,9 +3625,7 @@ def kasetsombum(al):
             y=22,
             sprite="gecko",
             direction=Direction.UP,
-            standard_dialog=[
-                "...",
-            ],
+            standard_dialog=["..."],
         ),
         Npc(
             al=al,
@@ -3694,9 +3635,7 @@ def kasetsombum(al):
             y=21,
             sprite="lass",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "มันเป็นตุ๊กแก!!",
-            ],
+            standard_dialog=["มันเป็นตุ๊กแก!!"],
         ),
         Npc(
             al=al,
@@ -3706,9 +3645,7 @@ def kasetsombum(al):
             y=11,
             sprite="kid",
             direction=Direction.RIGHT,
-            standard_dialog=[
-                "no dialog",
-            ],
+            standard_dialog=["no dialog"],
         ),
         Npc(
             al=al,
@@ -3718,9 +3655,7 @@ def kasetsombum(al):
             y=11,
             sprite="gecko",
             direction=Direction.UP,
-            standard_dialog=[
-                "no dialog",
-            ],
+            standard_dialog=["no dialog"],
         ),
         Npc(
             al=al,
@@ -3730,9 +3665,7 @@ def kasetsombum(al):
             y=10,
             sprite="lass",
             direction=Direction.DOWN,
-            standard_dialog=[
-                "no dialog",
-            ],
+            standard_dialog=["no dialog"],
         ),
         Npc(
             al=al,
@@ -3748,7 +3681,7 @@ def kasetsombum(al):
                 "Pronounced the same with a different tone:",
                 "นี้ can become นี่, and นั้น can become นั่น.",
                 "In that form, they can be used as objects.",
-                "For example, \"This eats that.\" is \"นี้ กิน นั่น\"",
+                'For example, "This eats that." is "นี้ กิน นั่น"',
                 "They're pronounced the same but with a different tone.",
             ],
         ),
@@ -3809,7 +3742,7 @@ def kasetsombum(al):
             defeat_dialog=[
                 "It's easy to remember, because นี้ has a 'i' sound like 'this'.",
                 "And นั่น has a 'a' sound like 'that'.",
-            ]
+            ],
         ),
         Npc(
             al=al,
@@ -3827,14 +3760,14 @@ def kasetsombum(al):
             defeat_dialog=[
                 "Imagine that you have a knee (นี้), and you see a nun (นั่น) faraway.",
                 "Naturally, your knee is closer to you that the nun.",
-            ]
+            ],
         ),
-
         Npc(
             al=al,
             name="Trainer",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["มัน-ฝ-รั่ง", "ผัก", "ฝรั่ง", "อ-ร่อย"]
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["มัน-ฝ-รั่ง", "ผัก", "ฝรั่ง", "อ-ร่อย"]
             ],
             ma=al.mas.get_map_from_name("kasetsombum_cave"),
             x=10,
@@ -3845,7 +3778,6 @@ def kasetsombum(al):
             standard_dialog=["This is my secret place!"],
             defeat_dialog=["I come here to study Thai."],
         ),
-
         # Vendor(
         #     al=al,
         #     name="Vendor of Kasetsombum",

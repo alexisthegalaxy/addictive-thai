@@ -12,21 +12,12 @@ Chaiyaphum:
 ✓ 5 Old man: Thai ไทย
 ✓ 6 Old woman: people คน
 
----You like Thai people
----Thai people like me (male)
----Thai people like me (female)
----I (male) like Thai people
----I (female) like Thai people
----I (male) am Thai
----I (female) am Thai
 
 chaiyaphum-chumphae:
 ✓ 7 to want อยาก
 ✓ 8 House บ้าน
 ✓ 9 To be at อยู่
 
----Thai people like to be at home.
----He doesn't like to be at home.
 
 chumphae:
 ✓ 10 school โรง-เรียน
@@ -35,13 +26,6 @@ School:
     ✓ 12 of ของ
     ✓ 13 not ไม่
     ✓ 14 mai (question) ไหม
-
----Do you like school?
----Do you like to be at school?
----He doesn't like Thai school.
----He doesn't want to be at school.
----Do Thai people like school?
----I'm glad you like it. ฉันดีใจที่คุณชอบมัน
 
 chumphae-khonkaen1:
 Temple:
@@ -72,13 +56,6 @@ Temple:
     ✓✓29 to speak พูด
     ✓✓30 to study เรียน
     ✓ 31 to go ไป => will disappear once the rival teaches ไป
-
----I like to go to school.
----I don't want to go to school.
----I don't want to be at home and eat.
----I don't want to return home and study Thai language.
----He doesn't like to speak.
----She doesn't want to speak.
 
 lomsak-phetchabun:
 ✓✓32 good ดี

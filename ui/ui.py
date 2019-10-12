@@ -158,6 +158,8 @@ class Ui(object):
             "cave_floor": pygame.image.load(f"{dir_path}/../ow/sprites/cave_floor.bmp"),
             "boulder_2": pygame.image.load(f"{dir_path}/../ow/sprites/boulder_2.bmp"),
             "field_spirit_house": pygame.image.load(f"{dir_path}/../ow/sprites/field_spirit_house.bmp"),
+            "stairs_up": pygame.image.load(f"{dir_path}/../ow/sprites/stairs_up.bmp"),
+            "stairs_down": pygame.image.load(f"{dir_path}/../ow/sprites/stairs_down.bmp"),
             'cave_0010': pygame.image.load(f"{dir_path}/../ow/sprites/cave_0010.bmp"),
             'cave_0110': pygame.image.load(f"{dir_path}/../ow/sprites/cave_0110.bmp"),
             'cave_0100': pygame.image.load(f"{dir_path}/../ow/sprites/cave_0100.bmp"),

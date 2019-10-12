@@ -104,11 +104,12 @@ class Learner(object):
         next_position_walkable = True
 
         # Check for walls:
-
         next_cell = al.mas.current_map.get_cell_at(next_x, next_y)
         if not next_cell.walkable():
             next_position_walkable = False
         if next_position_walkable and next_cell.typ.name == "cave_0011" and self.direction == Direction.DOWN:
+            next_position_walkable = False
+        if next_position_walkable and (next_cell.typ.name == "stairs_up" or next_cell.typ.name == "stairs_down") and (self.direction == Direction.RIGHT or self.direction == Direction.LEFT):
             next_position_walkable = False
         if next_position_walkable:
             current_cell = al.mas.current_map.get_cell_at(self.x, self.y)
@@ -139,8 +140,8 @@ class Learner(object):
                 if must_walk_to:
                     npc.gets_exclamation_mark()
                     npc.must_walk_to = must_walk_to
-                    if npc.must_walk_to.x == npc.x and npc.must_walk_to.y == npc.y:
-                        npc.must_walk_to = None
+                    if npc.must_walk_to[0].x == npc.x and npc.must_walk_to[0].y == npc.y:
+                        npc.must_walk_to.pop(0)
                         al.learner.direction = opposite_direction(npc.direction)
                         npc.interact(al)
 

@@ -54,7 +54,8 @@ class CellTypes:
     inn_map = CellType('図', 'inn_map', (99, 122, 80), False, 0, WALL_COLOR)
     temple_floor = CellType('寺', 'temple_floor', (183, 183, 183), True, 0, PATH_COLOR)
     field_spirit_house = CellType('社', 'field_spirit_house', (193, 200, 129), False, 0, PATH_COLOR)
-
+    stairs_up = CellType('上', 'stairs_up', (255, 192, 192), True, 0, PATH_COLOR)
+    stairs_down = CellType('下', 'stairs_down', (192, 255, 248), True, 0, PATH_COLOR)
     # Cave
     cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0.05, MOUNTAIN_PATH_COLOR)  # should be 0.05
     boulder_2 = CellType('岩', 'boulder_2', (53, 14, 14), False, 0, MOUNTAIN_WALL_COLOR)
@@ -364,7 +365,8 @@ class Mas(object):
         self.add_trigger_tiles()
 
     def add_trigger_tiles(self):
-        self.chaiyaphum.get_cell_at(18, 85).trigger = Trigger(event='lover_goes_right', npcs=['Lover'])
+        pass
+        # self.chaiyaphum.get_cell_at(20, 86).trigger = Trigger(event='lover_disappears', npcs=['Lover'])
 
     def get_map_from_name(self, name):
         return getattr(self, name)
@@ -382,8 +384,8 @@ class Mas(object):
         # chaiyaphum
         self.chaiyaphum.get_cell_at(28, 101).goes_to = (self.house_learner_f1, 5, 12)
         self.house_learner_f1.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 28, 102)
-        self.house_learner_f1.get_cell_at(8, 7).goes_to = (self.house_learner_f2, 8, 8, Direction.DOWN)
-        self.house_learner_f2.get_cell_at(8, 7).goes_to = (self.house_learner_f1, 8, 8, Direction.DOWN)
+        self.house_learner_f1.get_cell_at(2, 9).goes_to = (self.house_learner_f2, 2, 8, Direction.UP)
+        self.house_learner_f2.get_cell_at(2, 9).goes_to = (self.house_learner_f1, 2, 10, Direction.DOWN)
         self.chaiyaphum.get_cell_at(20, 89).goes_to = (self.lover_house, 5, 12)
         self.lover_house.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 20, 90)
         self.chaiyaphum.get_cell_at(20, 86).goes_to = (self.lover_house, 8, 8)
