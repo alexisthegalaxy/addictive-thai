@@ -1,5 +1,6 @@
 import sqlite3
 from bag.bag import Bag
+from event import execute_event
 from lexicon.dex import Dex
 from mechanics.minimap import Minimap
 from ui.ui import Ui
@@ -43,3 +44,9 @@ class All:
                 if npc.walked_float >= self.ui.cell_size:
                     npc.walked_float = 0
                     npc.makes_a_step_towards_goal(self)
+                    x, y = npc.x, npc.y
+                    trigger = self.mas.current_map.get_cell_at(x, y).trigger
+                    if trigger and npc.name in trigger.npcs:
+                        execute_event(trigger.event, self)
+
+

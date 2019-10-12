@@ -2,34 +2,39 @@ All the data for the wild words lie in ow/occurrences/map_name.occurrence
 ✓: The word exists in the DB
 ✓✓: Also, there is a NPC that teaches it
 ✓✓X: Also, the DB contains the location of the word and it has the teaching order
+--- A sentence to add in the DB
 
 Chaiyaphum:
-✓✓1 mom: I (female) ฉัน
-✓✓2 dad: I (male) ผม
-✓✓3 Rival: You คุณ
-✓✓4 Lover: to like ชอบ
-✓✓5 Old man: Thai ไทย
-✓✓6 Old woman: people คน
+✓ 1 mom: I (female) ฉัน
+✓ 2 dad: I (male) ผม
+✓ 3 Rival: You คุณ
+✓ 4 Lover: to like ชอบ
+✓ 5 Old man: Thai ไทย
+✓ 6 Old woman: people คน
 
 ---You like Thai people
----Thai people like me
----I like Thai people
+---Thai people like me (male)
+---Thai people like me (female)
+---I (male) like Thai people
+---I (female) like Thai people
+---I (male) am Thai
+---I (female) am Thai
 
-✓ chaiyaphum-chumphae:
-✓✓7 to want อยาก
-✓✓8 House บ้าน
-✓✓9 To be at อยู่
+chaiyaphum-chumphae:
+✓ 7 to want อยาก
+✓ 8 House บ้าน
+✓ 9 To be at อยู่
 
 ---Thai people like to be at home.
 ---He doesn't like to be at home.
 
 chumphae:
-✓✓10 school โรง-เรียน
-✓✓11 he/she/they เขา
+✓ 10 school โรง-เรียน
+✓ 11 he/she/they เขา
 School:
-    ✓✓12 of ของ
-    ✓✓13 not ไม่
-    ✓✓14 mai (question) ไหม
+    ✓ 12 of ของ
+    ✓ 13 not ไม่
+    ✓ 14 mai (question) ไหม
 
 ---Do you like school?
 ---Do you like to be at school?
@@ -38,22 +43,22 @@ School:
 ---Do Thai people like school?
 ---I'm glad you like it. ฉันดีใจที่คุณชอบมัน
 
-✓ chumphae-khonkaen1:
+chumphae-khonkaen1:
 Temple:
-✓✓15 krap ครับ
-✓✓16 kaa ค่ะ
-✓✓17 hello ส-วัส-ดี
-✓✓18 thank you ขอบ-คุณ
-✓✓19 sorry ขอ-โทษ
+✓ 15 krap ครับ
+✓ 16 kaa ค่ะ
+✓ 17 hello ส-วัส-ดี
+✓ 18 thank you ขอบ-คุณ
+✓ 19 sorry ขอ-โทษ
 
 Rival:
 Teach the fighting system.
 20 to go ไป if the learner wins.
 
-✓ chumphae-lomsak:
-✓✓21 to eat กิน
-✓✓22 water น้ำ
-✓✓23 rice ข้าว
+chumphae-lomsak:
+✓ 21 to eat กิน
+✓ 22 water น้ำ
+✓ 23 rice ข้าว
 
 lomsak:
 School:

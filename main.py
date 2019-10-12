@@ -77,11 +77,10 @@ def main_draw(al: All):
 
 
 def main():
-    cell_types = CellTypes()
     al = All(
-        mas=Mas(cell_types),
+        mas=Mas(),
         ui=Ui(),
-        cell_types=cell_types,
+        cell_types=CellTypes(),
     )
     al.learner = Learner(al, "Alexis")
     import_npcs(al)

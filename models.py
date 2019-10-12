@@ -337,6 +337,44 @@ def get_random_known_word_id():
     return random.choice(known_words)[0]
 
 
+def get_event_status(event_key: str) -> int:
+    user_id = get_active_learner_id()
+    event_status = list(
+        CURSOR.execute(
+            f"""
+        SELECT status
+        FROM events_user
+        WHERE event_key = '{event_key}'
+          AND user_id = '{user_id}'
+    """
+        )
+    )
+    return_value = event_status[0][0] if event_status and event_status[0] else 0
+    return return_value
+
+
+def increment_event(event_key: str):
+    user_id = get_active_learner_id()
+    CURSOR.execute(
+        f"UPDATE events_user "
+        f"SET status = events_user.status + 1 "
+        f"WHERE events_user.user_id = {user_id} "
+        f"AND events_user.event_key = '{event_key}';"
+    )
+    CONN.commit()
+
+
+def set_event(event_key: str, value: int):
+    user_id = get_active_learner_id()
+    CURSOR.execute(
+        f"UPDATE events_user "
+        f"SET status = '{value}' "
+        f"WHERE events_user.user_id = {user_id} "
+        f"AND events_user.event_key = '{event_key}';"
+    )
+    CONN.commit()
+
+
 def get_random_word_id() -> "Word":
     from lexicon.items import Word
 

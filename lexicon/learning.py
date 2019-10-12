@@ -1,6 +1,5 @@
 from enum import Enum
 
-from all import All
 from lexicon.presentation import Presentation
 from lexicon.test_services import pick_sentence_test
 from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6
@@ -69,7 +68,7 @@ class Learning(object):
         elif self.step == LearningStep.CONGRATULATION:
             self.al.ui.screen.blit(self.al.ui.images["brain_6"], [x, y])
 
-    def interact(self, al: All):
+    def interact(self, al):
         if self.step == LearningStep.PRESENTATION:
             if al.ui.space:
                 al.ui.space = False

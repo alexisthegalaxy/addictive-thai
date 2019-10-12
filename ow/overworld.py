@@ -1,11 +1,13 @@
 import os
 import random
-from typing import List
+from dataclasses import dataclass
+from typing import List, Optional
 
 import pygame
 
 from derive_from_mothermap import mothermap
 from direction import Direction
+from event import execute_event
 from lexicon.items import Word
 from lexicon.test_services import pick_a_test_for_word
 from npc.npc import Npc
@@ -92,12 +94,19 @@ class CellTypes:
     none = CellType('無', 'none', (0, 0, 0), False, 0, (0, 0, 0))
 
 
+@dataclass
+class Trigger:
+    event: str
+    npcs: Optional[List[str]]
+
+
 class Cell(object):
     def __init__(self, x, y, typ: CellType):
         self.x = x
         self.y = y
         self.typ: CellType = typ
         self.goes_to = None  # can be a tuple (Map, x, y)
+        self.trigger = None  # Can be a tuple ('event', None) or ('event')
 
     def walkable(self) -> bool:
         return self.typ.walkable
@@ -150,7 +159,7 @@ def get_cell_type_dictionary_by_color():
 
 
 class Ma(object):
-    def __init__(self, filename, cell_types, mas, x_shift=-1, y_shift=-1, parent=None):
+    def __init__(self, filename, mas, x_shift=-1, y_shift=-1, parent=None, trigger_tiles=None):
         self.filename = filename
         self.mas: Mas = mas
         self.parent = parent
@@ -175,6 +184,7 @@ class Ma(object):
         self.npcs: List[Npc] = []
         self.x_shift = x_shift
         self.y_shift = y_shift
+        self.trigger_tiles = trigger_tiles or []
 
     def draw(self, al):
         offset_x = -al.ui.cell_size * (al.learner.x - 7)
@@ -242,116 +252,119 @@ class Ma(object):
 
 
 class Mas(object):
-    def __init__(self, cell_types):
-        self.al: 'All' = None
+    def __init__(self):
         # Main maps:
         # these maps are real overworld, not houses
-        self.chaiyaphum = Ma(filename="chaiyaphum", cell_types=cell_types, mas=self, x_shift=780, y_shift=629)
-        self.chumphae = Ma(filename="chumphae", cell_types=cell_types, mas=self, x_shift=699, y_shift=563)
-        self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", cell_types=cell_types, mas=self, x_shift=824, y_shift=551)
-        self.phetchabun_buengsamphan = Ma(filename="phetchabun_buengsamphan", cell_types=cell_types, mas=self, x_shift=647, y_shift=640)
-        self.buengsamphan = Ma(filename="buengsamphan", cell_types=cell_types, mas=self, x_shift=650, y_shift=704)
-        self.taphan_hin = Ma(filename="taphan_hin", cell_types=cell_types, mas=self, x_shift=537, y_shift=597)
-        self.buengsamphan_chumsaeng = Ma(filename="buengsamphan_chumsaeng", cell_types=cell_types, mas=self, x_shift=569, y_shift=664)
-        self.thapkhlo = Ma(filename="thapkhlo", cell_types=cell_types, mas=self, x_shift=578, y_shift=648)
-        self.nakhon_sawan = Ma(filename="nakhon_sawan", cell_types=cell_types, mas=self, x_shift=502, y_shift=703)
-        self.chumsaeng = Ma(filename="chumsaeng", cell_types=cell_types, mas=self, x_shift=537, y_shift=660)
-        self.thapkhlo_phitsalunok = Ma(filename="thapkhlo_phitsalunok", cell_types=cell_types, mas=self, x_shift=572, y_shift=596)
-        self.khonkaen = Ma(filename="khonkaen", cell_types=cell_types, mas=self, x_shift=897, y_shift=611)
-        self.buengsamphan_chaiyaphum = Ma(filename="buengsamphan_chaiyaphum", cell_types=cell_types, mas=self, x_shift=697, y_shift=689)
-        self.buengsamphan_mountain = Ma(filename="buengsamphan_mountain", cell_types=cell_types, mas=self, x_shift=719, y_shift=689)
-        self.lomsak = Ma(filename="lomsak", cell_types=cell_types, mas=self, x_shift=676, y_shift=543)
-        self.cat_cove = Ma(filename="cat_cove", cell_types=cell_types, mas=self, x_shift=710, y_shift=616)
-        self.kasetsombum = Ma(filename="kasetsombum", cell_types=cell_types, mas=self, x_shift=761, y_shift=635)
-        self.phetchabun = Ma(filename="phetchabun", cell_types=cell_types, mas=self, x_shift=639, y_shift=572)
-        self.banyaeng = Ma(filename="banyaeng", cell_types=cell_types, mas=self, x_shift=599, y_shift=578)
-        self.labyrinth = Ma(filename="labyrinth", cell_types=cell_types, mas=self, x_shift=586, y_shift=545)
-        self.phitsalunok = Ma(filename="phitsalunok", cell_types=cell_types, mas=self, x_shift=530, y_shift=545)
-        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", cell_types=cell_types, mas=self, x_shift=620, y_shift=548)
+        self.chaiyaphum = Ma(filename="chaiyaphum", mas=self, x_shift=780, y_shift=629)
+        self.chumphae = Ma(filename="chumphae", mas=self, x_shift=699, y_shift=563)
+        self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", mas=self, x_shift=824, y_shift=551)
+        self.phetchabun_buengsamphan = Ma(filename="phetchabun_buengsamphan", mas=self, x_shift=647, y_shift=640)
+        self.buengsamphan = Ma(filename="buengsamphan", mas=self, x_shift=650, y_shift=704)
+        self.taphan_hin = Ma(filename="taphan_hin", mas=self, x_shift=537, y_shift=597)
+        self.buengsamphan_chumsaeng = Ma(filename="buengsamphan_chumsaeng", mas=self, x_shift=569, y_shift=664)
+        self.thapkhlo = Ma(filename="thapkhlo", mas=self, x_shift=578, y_shift=648)
+        self.nakhon_sawan = Ma(filename="nakhon_sawan", mas=self, x_shift=502, y_shift=703)
+        self.chumsaeng = Ma(filename="chumsaeng", mas=self, x_shift=537, y_shift=660)
+        self.thapkhlo_phitsalunok = Ma(filename="thapkhlo_phitsalunok", mas=self, x_shift=572, y_shift=596)
+        self.khonkaen = Ma(filename="khonkaen", mas=self, x_shift=897, y_shift=611)
+        self.buengsamphan_chaiyaphum = Ma(filename="buengsamphan_chaiyaphum", mas=self, x_shift=697, y_shift=689)
+        self.buengsamphan_mountain = Ma(filename="buengsamphan_mountain", mas=self, x_shift=719, y_shift=689)
+        self.lomsak = Ma(filename="lomsak", mas=self, x_shift=676, y_shift=543)
+        self.cat_cove = Ma(filename="cat_cove", mas=self, x_shift=710, y_shift=616)
+        self.kasetsombum = Ma(filename="kasetsombum", mas=self, x_shift=761, y_shift=635)
+        self.phetchabun = Ma(filename="phetchabun", mas=self, x_shift=639, y_shift=572)
+        self.banyaeng = Ma(filename="banyaeng", mas=self, x_shift=599, y_shift=578)
+        self.labyrinth = Ma(filename="labyrinth", mas=self, x_shift=586, y_shift=545)
+        self.phitsalunok = Ma(filename="phitsalunok", mas=self, x_shift=530, y_shift=545)
+        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", mas=self, x_shift=620, y_shift=548)
 
         # inns
-        self.inn1 = Ma(filename="inn1", cell_types=cell_types, mas=self, parent=self.chumphae)
-        self.inn2 = Ma(filename="inn2", cell_types=cell_types, mas=self, parent=self.lomsak)
-        self.inn_khonkaen = Ma(filename="inn_khonkaen", cell_types=cell_types, mas=self, parent=self.khonkaen)
-        self.inn_buengsamphan = Ma(filename="inn_buengsamphan", cell_types=cell_types, mas=self, parent=self.buengsamphan)
-        self.inn_banyaeng = Ma(filename="inn_banyaeng", cell_types=cell_types, mas=self)
-        self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", cell_types=cell_types, mas=self)
-        self.inn_chumsaeng = Ma(filename="inn_chumsaeng", cell_types=cell_types, mas=self)
-        self.inn_phetchabun = Ma(filename="inn_phetchabun", cell_types=cell_types, mas=self)
-        self.inn_phitsalunok = Ma(filename="inn_phitsalunok", cell_types=cell_types, mas=self)
-        self.inn_phitsalunok_2 = Ma(filename="inn_phitsalunok_2", cell_types=cell_types, mas=self)
+        self.inn1 = Ma(filename="inn1", mas=self, parent=self.chumphae)
+        self.inn2 = Ma(filename="inn2", mas=self, parent=self.lomsak)
+        self.inn_khonkaen = Ma(filename="inn_khonkaen", mas=self, parent=self.khonkaen)
+        self.inn_buengsamphan = Ma(filename="inn_buengsamphan", mas=self, parent=self.buengsamphan)
+        self.inn_banyaeng = Ma(filename="inn_banyaeng", mas=self)
+        self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", mas=self)
+        self.inn_chumsaeng = Ma(filename="inn_chumsaeng", mas=self)
+        self.inn_phetchabun = Ma(filename="inn_phetchabun", mas=self)
+        self.inn_phitsalunok = Ma(filename="inn_phitsalunok", mas=self)
+        self.inn_phitsalunok_2 = Ma(filename="inn_phitsalunok_2", mas=self)
 
-        self.house_learner_f2 = Ma(filename="house_learner_f2", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.house_learner_f1 = Ma(filename="house_learner_f1", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.house_rival_f1 = Ma(filename="house_rival_f1", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.house_rival_f2 = Ma(filename="house_rival_f2", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.chaiyaphum_house_1 = Ma(filename="chaiyaphum_house_1", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.chaiyaphum_house_2 = Ma(filename="chaiyaphum_house_2", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.lover_house = Ma(filename="lover_house", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.house4 = Ma(filename="house4", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
-        self.house5 = Ma(filename="house5", cell_types=cell_types, mas=self, parent=self.chaiyaphum)
+        self.house_learner_f2 = Ma(filename="house_learner_f2", mas=self, parent=self.chaiyaphum)
+        self.house_learner_f1 = Ma(filename="house_learner_f1", mas=self, parent=self.chaiyaphum)
+        self.house_rival_f1 = Ma(filename="house_rival_f1", mas=self, parent=self.chaiyaphum)
+        self.house_rival_f2 = Ma(filename="house_rival_f2", mas=self, parent=self.chaiyaphum)
+        self.chaiyaphum_house_1 = Ma(filename="chaiyaphum_house_1", mas=self, parent=self.chaiyaphum)
+        self.chaiyaphum_house_2 = Ma(filename="chaiyaphum_house_2", mas=self, parent=self.chaiyaphum)
+        self.lover_house = Ma(filename="lover_house", mas=self, parent=self.chaiyaphum)
+        self.house4 = Ma(filename="house4", mas=self, parent=self.chaiyaphum)
+        self.house5 = Ma(filename="house5", mas=self, parent=self.chaiyaphum)
 
-        self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
-        self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
-        self.chumphae_khonkaen_house_3 = Ma(filename="chumphae_khonkaen_house_3", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
-        self.chumphae_khonkaen_house_4 = Ma(filename="chumphae_khonkaen_house_4", cell_types=cell_types, mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_3 = Ma(filename="chumphae_khonkaen_house_3", mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_4 = Ma(filename="chumphae_khonkaen_house_4", mas=self, parent=self.chumphae_khonkaen)
 
-        self.chumphae_school = Ma(filename="chumphae_school", cell_types=cell_types, mas=self, parent=self.chumphae)
-        self.chumphae_house1 = Ma(filename="chumphae_house1", cell_types=cell_types, mas=self, parent=self.chumphae)
-        self.chumphae_house2 = Ma(filename="chumphae_house2", cell_types=cell_types, mas=self, parent=self.chumphae)
-        self.chumphae_house3 = Ma(filename="chumphae_house3", cell_types=cell_types, mas=self, parent=self.chumphae)
-        self.non_muang_house_1 = Ma(filename="non_muang_house_1", cell_types=cell_types, mas=self)
-        self.chumphae_lomsak_house1 = Ma(filename="chumphae_lomsak_house1", cell_types=cell_types, mas=self, parent=self.chumphae)
-        self.chumphae_lomsak_house2 = Ma(filename="chumphae_lomsak_house2", cell_types=cell_types, mas=self, parent=self.chumphae)
-        self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", cell_types=cell_types, mas=self, parent=self.chumphae)
+        self.chumphae_school = Ma(filename="chumphae_school", mas=self, parent=self.chumphae)
+        self.chumphae_house1 = Ma(filename="chumphae_house1", mas=self, parent=self.chumphae)
+        self.chumphae_house2 = Ma(filename="chumphae_house2", mas=self, parent=self.chumphae)
+        self.chumphae_house3 = Ma(filename="chumphae_house3", mas=self, parent=self.chumphae)
+        self.non_muang_house_1 = Ma(filename="non_muang_house_1", mas=self)
+        self.chumphae_lomsak_house1 = Ma(filename="chumphae_lomsak_house1", mas=self, parent=self.chumphae)
+        self.chumphae_lomsak_house2 = Ma(filename="chumphae_lomsak_house2", mas=self, parent=self.chumphae)
+        self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", mas=self, parent=self.chumphae)
 
-        self.lomsak_house_1 = Ma(filename="lomsak_house_1", cell_types=cell_types, mas=self, parent=self.lomsak)
-        self.lomsak_house_2 = Ma(filename="lomsak_house_2", cell_types=cell_types, mas=self, parent=self.lomsak)
-        self.lomsak_house_3 = Ma(filename="lomsak_house_3", cell_types=cell_types, mas=self, parent=self.lomsak)
-        self.lomsak_house_4 = Ma(filename="lomsak_house_4", cell_types=cell_types, mas=self, parent=self.lomsak)
-        self.lomsak_school = Ma(filename="lomsak_school", cell_types=cell_types, mas=self, parent=self.lomsak)
-        self.lomsak_gym = Ma(filename="lomsak_gym", cell_types=cell_types, mas=self, parent=self.lomsak)
-        self.lomsak_temple = Ma(filename="lomsak_temple", cell_types=cell_types, mas=self, parent=self.lomsak)
+        self.lomsak_house_1 = Ma(filename="lomsak_house_1", mas=self, parent=self.lomsak)
+        self.lomsak_house_2 = Ma(filename="lomsak_house_2", mas=self, parent=self.lomsak)
+        self.lomsak_house_3 = Ma(filename="lomsak_house_3", mas=self, parent=self.lomsak)
+        self.lomsak_house_4 = Ma(filename="lomsak_house_4", mas=self, parent=self.lomsak)
+        self.lomsak_school = Ma(filename="lomsak_school", mas=self, parent=self.lomsak)
+        self.lomsak_gym = Ma(filename="lomsak_gym", mas=self, parent=self.lomsak)
+        self.lomsak_temple = Ma(filename="lomsak_temple", mas=self, parent=self.lomsak)
 
-        self.question_cave = Ma(filename="question_cave", cell_types=cell_types, mas=self)
-        self.cat_cave = Ma(filename="cat_cave", cell_types=cell_types, mas=self, parent=self.phetchabun)
-        self.bat_cave = Ma(filename="bat_cave", cell_types=cell_types, mas=self, parent=self.banyaeng)
-        self.cat_cove_house = Ma(filename="cat_cove_house", cell_types=cell_types, mas=self)
-        self.phetchabun_mountain_house_1 = Ma(filename="phetchabun_mountain_house_1", cell_types=cell_types, mas=self)
-        self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", cell_types=cell_types, mas=self)
-        self.phetchabun_farm = Ma(filename="phetchabun_farm", cell_types=cell_types, mas=self)
+        self.question_cave = Ma(filename="question_cave", mas=self)
+        self.cat_cave = Ma(filename="cat_cave", mas=self, parent=self.phetchabun)
+        self.bat_cave = Ma(filename="bat_cave", mas=self, parent=self.banyaeng)
+        self.cat_cove_house = Ma(filename="cat_cove_house", mas=self)
+        self.phetchabun_mountain_house_1 = Ma(filename="phetchabun_mountain_house_1", mas=self)
+        self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", mas=self)
+        self.phetchabun_farm = Ma(filename="phetchabun_farm", mas=self)
 
-        self.buengsamphan_cave = Ma(filename="buengsamphan_cave", cell_types=cell_types, mas=self)
-        self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", cell_types=cell_types, mas=self)
-        self.banyaeng_cave = Ma(filename="banyaeng_cave", cell_types=cell_types, mas=self)
-        self.phetchabun_school = Ma(filename="phetchabun_school", cell_types=cell_types, mas=self)
-        self.phetchabun_cave = Ma(filename="phetchabun_cave", cell_types=cell_types, mas=self)
-        self.phetchabun_house_1 = Ma(filename="phetchabun_house_1", cell_types=cell_types, mas=self)
-        self.phetchabun_house_2 = Ma(filename="phetchabun_house_2", cell_types=cell_types, mas=self)
-        self.phitsalunok_underground = Ma(filename="phitsalunok_underground", cell_types=cell_types, mas=self)
-        self.lomsak_labyrinth_house_1 = Ma(filename="lomsak_labyrinth_house_1", cell_types=cell_types, mas=self)
-        self.lomsak_labyrinth_house_2 = Ma(filename="lomsak_labyrinth_house_2", cell_types=cell_types, mas=self)
-        self.phetchabun_temple = Ma(filename="phetchabun_temple", cell_types=cell_types, mas=self)
-        self.phetchabun_gym = Ma(filename="phetchabun_gym", cell_types=cell_types, mas=self)
-        self.banyaeng_house_1 = Ma(filename="banyaeng_house_1", cell_types=cell_types, mas=self, parent=self.banyaeng)
-        self.banyaeng_house_2 = Ma(filename="banyaeng_house_2", cell_types=cell_types, mas=self, parent=self.banyaeng)
-        self.banyaeng_school = Ma(filename="banyaeng_school", cell_types=cell_types, mas=self, parent=self.banyaeng)
-        self.banyaeng_temple = Ma(filename="banyaeng_temple", cell_types=cell_types, mas=self, parent=self.banyaeng)
-        self.banyaeng_house_3 = Ma(filename="banyaeng_house_3", cell_types=cell_types, mas=self, parent=self.banyaeng)
-        self.phetchabun_shop = Ma(filename="phetchabun_shop", cell_types=cell_types, mas=self, parent=self.phetchabun)
-        self.lomsak_labyrinth_shop = Ma(filename="lomsak_labyrinth_shop", cell_types=cell_types, mas=self, parent=self.lomsak_labyrinth)
-        self.chumphae_kasetsombum_cave = Ma(filename="chumphae_kasetsombum_cave", cell_types=cell_types, mas=self)
-        self.kasetsombum_cave = Ma(filename="kasetsombum_cave", cell_types=cell_types, mas=self)
-        self.labyrinth_shop = Ma(filename="labyrinth_shop", cell_types=cell_types, mas=self)
-        self.kasetsombum_temple = Ma(filename="kasetsombum_temple", cell_types=cell_types, mas=self, parent=self.kasetsombum, x_shift=748, y_shift=624)
-        self.inn_kasetsombum = Ma(filename="inn_kasetsombum", cell_types=cell_types, mas=self, parent=self.kasetsombum)
-        self.kasetsombum_temple_temple = Ma(filename="kasetsombum_temple_temple", cell_types=cell_types, mas=self, parent=self.kasetsombum)
-        self.kasetsombum_house1 = Ma(filename="kasetsombum_house1", cell_types=cell_types, mas=self, parent=self.kasetsombum)
-        self.kasetsombum_house2 = Ma(filename="kasetsombum_house2", cell_types=cell_types, mas=self, parent=self.kasetsombum)
-        self.kasetsombum_house3 = Ma(filename="kasetsombum_house3", cell_types=cell_types, mas=self, parent=self.kasetsombum)
-        self.kasetsombum_shop = Ma(filename="kasetsombum_shop", cell_types=cell_types, mas=self, parent=self.kasetsombum)
-        self.kasetsombum_school = Ma(filename="kasetsombum_school", cell_types=cell_types, mas=self, parent=self.kasetsombum)
+        self.buengsamphan_cave = Ma(filename="buengsamphan_cave", mas=self)
+        self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", mas=self)
+        self.banyaeng_cave = Ma(filename="banyaeng_cave", mas=self)
+        self.phetchabun_school = Ma(filename="phetchabun_school", mas=self)
+        self.phetchabun_cave = Ma(filename="phetchabun_cave", mas=self)
+        self.phetchabun_house_1 = Ma(filename="phetchabun_house_1", mas=self)
+        self.phetchabun_house_2 = Ma(filename="phetchabun_house_2", mas=self)
+        self.phitsalunok_underground = Ma(filename="phitsalunok_underground", mas=self)
+        self.lomsak_labyrinth_house_1 = Ma(filename="lomsak_labyrinth_house_1", mas=self)
+        self.lomsak_labyrinth_house_2 = Ma(filename="lomsak_labyrinth_house_2", mas=self)
+        self.phetchabun_temple = Ma(filename="phetchabun_temple", mas=self)
+        self.phetchabun_gym = Ma(filename="phetchabun_gym", mas=self)
+        self.banyaeng_house_1 = Ma(filename="banyaeng_house_1", mas=self, parent=self.banyaeng)
+        self.banyaeng_house_2 = Ma(filename="banyaeng_house_2", mas=self, parent=self.banyaeng)
+        self.banyaeng_school = Ma(filename="banyaeng_school", mas=self, parent=self.banyaeng)
+        self.banyaeng_temple = Ma(filename="banyaeng_temple", mas=self, parent=self.banyaeng)
+        self.banyaeng_house_3 = Ma(filename="banyaeng_house_3", mas=self, parent=self.banyaeng)
+        self.phetchabun_shop = Ma(filename="phetchabun_shop", mas=self, parent=self.phetchabun)
+        self.lomsak_labyrinth_shop = Ma(filename="lomsak_labyrinth_shop", mas=self, parent=self.lomsak_labyrinth)
+        self.chumphae_kasetsombum_cave = Ma(filename="chumphae_kasetsombum_cave", mas=self)
+        self.kasetsombum_cave = Ma(filename="kasetsombum_cave", mas=self)
+        self.labyrinth_shop = Ma(filename="labyrinth_shop", mas=self)
+        self.kasetsombum_temple = Ma(filename="kasetsombum_temple", mas=self, parent=self.kasetsombum, x_shift=748, y_shift=624)
+        self.inn_kasetsombum = Ma(filename="inn_kasetsombum", mas=self, parent=self.kasetsombum)
+        self.kasetsombum_temple_temple = Ma(filename="kasetsombum_temple_temple", mas=self, parent=self.kasetsombum)
+        self.kasetsombum_house1 = Ma(filename="kasetsombum_house1", mas=self, parent=self.kasetsombum)
+        self.kasetsombum_house2 = Ma(filename="kasetsombum_house2", mas=self, parent=self.kasetsombum)
+        self.kasetsombum_house3 = Ma(filename="kasetsombum_house3", mas=self, parent=self.kasetsombum)
+        self.kasetsombum_shop = Ma(filename="kasetsombum_shop", mas=self, parent=self.kasetsombum)
+        self.kasetsombum_school = Ma(filename="kasetsombum_school", mas=self, parent=self.kasetsombum)
         self.current_map: Ma = self.chaiyaphum
+        self.add_trigger_tiles()
+
+    def add_trigger_tiles(self):
+        self.chaiyaphum.get_cell_at(18, 85).trigger = Trigger(event='lover_goes_right', npcs=['Lover'])
 
     def get_map_from_name(self, name):
         return getattr(self, name)

@@ -1,7 +1,6 @@
-from bag.bag import Compartment
-from bag.item import Item
 from direction import Direction
 from lexicon.items import Word
+from models import get_event_status
 from npc.npc import Npc
 from npc.vendor import Vendor
 
@@ -946,8 +945,8 @@ def chaiyaphum(al):
             name="มะลิ",
             taught_word=Word.get_by_split_form("ชอบ"),
             ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=18,
-            y=82,
+            x=22,
+            y=80,
             sprite="mali",
             direction=Direction.DOWN,
             standard_dialog=[
@@ -960,6 +959,21 @@ def chaiyaphum(al):
                 "มะลิ> Don't forget the word, [Name]...",
                 "มะลิ> We'll meet again!",
             ],
+        ),
+        Npc(
+            al=al,
+            name="Lover",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=18,
+            y=82,
+            sprite="mali",
+            direction=Direction.DOWN,
+            standard_dialog=["Yo [Name]!"],
+            defeat_dialog=[
+                "มะลิ> Don't forget the word, [Name]...",
+                "มะลิ> See you again!",
+            ],
+            end_dialog_trigger_event=['talk_to_lover'],
         ),
         Npc(
             al=al,

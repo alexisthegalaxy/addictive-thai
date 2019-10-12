@@ -1,8 +1,3 @@
-Allow using an other character than Alexis
-
-Fix the XP. It doesn't work at the moment.
-Redo the occurrences so that the words that appear are taught indeed
-Register all the words taught so far in the Dex
 Presentation Screen:
     - Tones
         - Show the tones
@@ -12,8 +7,6 @@ Map screen:
     We show the name of the map in the title on the top part of the screen.
     If the map is accessed from the Inn, we can see the words taught in the vicinity are blinking
         The data would live in the map NPC
-
-
 Battle:
     Show how the other trainer is fighting
         - See the gotten bubbles on each side!
@@ -36,18 +29,13 @@ Get rid of exclamation marks above the teachers as it gives away the discovery f
 The map shows in black the unexplored parts.
 
 Tests types:
-    - TONE_FROM_SOUND
     - TONE_FROM_THAI
     - TAPPINGWORD
 Needed NPC sprites:
-    - Mali
-    - Rival
     - Man
-    - Old woman
     - Rich man
 Needed OW sprites:
     - Map of Thailand in the inns
-    - Buddha statues
 
 Show the progression bar going up in a learning 1/6 or a brain getting full or something
 Each time you make a mistake on a test, it becomes easier

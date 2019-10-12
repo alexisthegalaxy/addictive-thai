@@ -4,7 +4,7 @@ import time
 import pygame
 from typing import List, Tuple, Optional
 
-from all import All
+# from all import All
 from direction import string_from_direction, opposite_direction, Direction, dir_equal
 from lexicon.items import Word
 from lexicon.learning import Learning
@@ -45,11 +45,13 @@ class Npc(object):
         wanna_meet: bool = False,  # if true, non trainers will also walk to the learner and start talking
         bubbles_max_hp: int = 1000,
         appears_between: Tuple[int, int] = (0, 24),
+        end_dialog_trigger_event: List[str] = None,
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
         victory_dialog = victory_dialog or ["I won! Try again when you're stronger!"]
         dialog_3 = dialog_3 or []
+        self.end_dialog_trigger_event = end_dialog_trigger_event or []
 
         self.name = name
         self.ma = ma
@@ -79,7 +81,7 @@ class Npc(object):
         self.wanna_meet = wanna_meet
         self.eyesight = eyesight
         self.have_exclamation_mark_until = None
-        self.must_walk_to = None
+        self.must_walk_to: Position = None
         self.walked_float = 0
         self.draw_text_since = 0
         self.bubbles_max_hp = bubbles_max_hp
@@ -160,7 +162,7 @@ class Npc(object):
                     return Position(x=al.learner.x + 1, y=al.learner.y)
         return None
 
-    def is_saying_last_sentence(self):
+    def is_saying_last_sentence(self) -> bool:
         return self.active_line_index == len(self.active_dialog) - 1
 
     def special_interaction(self, al):
@@ -195,6 +197,7 @@ class Npc(object):
                     self.active_line_index = 0
 
     def interact(self, al):
+        from event import execute_event
         self.wanna_meet = False
         self.has_learning_mark = False
         self.reset_cursor()
@@ -208,6 +211,8 @@ class Npc(object):
         self.active_line_index += 1
         if self.active_line_index >= len(self.active_dialog):
             self.active_line_index = -1
+            for event in self.end_dialog_trigger_event:
+                execute_event(event, al)
             al.active_npc = None
         self.direction = opposite_direction(al.learner.direction)
 
@@ -293,17 +298,22 @@ class Npc(object):
 
     def makes_a_step_towards_goal(self, al):
         if self.must_walk_to.x > self.x:
+            self.direction = Direction.RIGHT
             self.x += 1
         if self.must_walk_to.x < self.x:
+            self.direction = Direction.LEFT
             self.x -= 1
         if self.must_walk_to.y > self.y:
+            self.direction = Direction.DOWN
             self.y += 1
         if self.must_walk_to.y < self.y:
+            self.direction = Direction.UP
             self.y -= 1
         if self.x == self.must_walk_to.x and self.y == self.must_walk_to.y:
             self.must_walk_to = None
             al.learner.direction = opposite_direction(self.direction)
-            self.interact(al)
+            if al.learner.next_position() == (self.x, self.y):
+                self.interact(al)
 
     def switch_to_dialog(self, dialog):
         self.active_dialog = dialog
@@ -313,7 +323,7 @@ class Npc(object):
     def reset_cursor(self):
         self.draw_text_since = time.time()
 
-    def draw_text(self, al: All):
+    def draw_text(self, al):
         # 1 - Background:
         ui = al.ui
         x = 0
