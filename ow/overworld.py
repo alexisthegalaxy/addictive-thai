@@ -361,6 +361,10 @@ class Mas(object):
         self.kasetsombum_house3 = Ma(filename="kasetsombum_house3", mas=self, parent=self.kasetsombum)
         self.kasetsombum_shop = Ma(filename="kasetsombum_shop", mas=self, parent=self.kasetsombum)
         self.kasetsombum_school = Ma(filename="kasetsombum_school", mas=self, parent=self.kasetsombum)
+        self.phitsalunok_maths_school_123 = Ma(filename="phitsalunok_maths_school_123", mas=self, parent=self.phitsalunok)
+        self.phitsalunok_maths_school_456 = Ma(filename="phitsalunok_maths_school_456", mas=self, parent=self.phitsalunok)
+        self.phitsalunok_maths_school_789 = Ma(filename="phitsalunok_maths_school_789", mas=self, parent=self.phitsalunok)
+        self.phitsalunok_maths_school_1011 = Ma(filename="phitsalunok_maths_school_1011", mas=self, parent=self.phitsalunok)
         self.current_map: Ma = self.chaiyaphum
         self.add_trigger_tiles()
 
@@ -702,3 +706,36 @@ class Mas(object):
         self.buengsamphan.get_cell_at(78, 20).goes_to = (self.buengsamphan_chaiyaphum, 728 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
         self.chaiyaphum.get_cell_at(11, 92).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 721 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
         self.chaiyaphum.get_cell_at(11, 93).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
+
+        self.phitsalunok.get_cell_at(37, 49).goes_to = (self.phitsalunok_maths_school_123, 13, 24)
+        self.phitsalunok_maths_school_123.get_cell_at(13, 25).goes_to = (self.phitsalunok, 37, 50)
+        self.phitsalunok_maths_school_123.get_cell_at(13, 17).goes_to = (self.phitsalunok_maths_school_123, 3, 9)
+        self.phitsalunok_maths_school_123.get_cell_at(3, 10).goes_to = (self.phitsalunok_maths_school_123, 13, 18)
+        self.phitsalunok_maths_school_123.get_cell_at(3, 1).goes_to = (self.phitsalunok_maths_school_123, 14, 9)
+        self.phitsalunok_maths_school_123.get_cell_at(14, 10).goes_to = (self.phitsalunok_maths_school_123, 3, 2)
+
+        self.phitsalunok_maths_school_123.get_cell_at(25, 9).goes_to = (self.phitsalunok_maths_school_456, 18, 25)
+        self.phitsalunok_maths_school_456.get_cell_at(18, 27).goes_to = (self.phitsalunok_maths_school_123, 25, 10)
+
+        self.phitsalunok_maths_school_456.get_cell_at(31, 26).goes_to = (self.phitsalunok_maths_school_456, 10, 22)
+        self.phitsalunok_maths_school_456.get_cell_at(9, 22).goes_to = (self.phitsalunok_maths_school_456, 30, 26)
+        self.phitsalunok_maths_school_456.get_cell_at(22, 21).goes_to = (self.phitsalunok_maths_school_456, 5, 9)
+        self.phitsalunok_maths_school_456.get_cell_at(5, 10).goes_to = (self.phitsalunok_maths_school_456, 22, 22)
+        self.phitsalunok_maths_school_456.get_cell_at(5, 4).goes_to = (self.phitsalunok_maths_school_456, 35, 12)
+        self.phitsalunok_maths_school_456.get_cell_at(35, 13).goes_to = (self.phitsalunok_maths_school_456, 5, 5)
+
+        self.phitsalunok_maths_school_456.get_cell_at(35, 1).goes_to = (self.phitsalunok_maths_school_789, 18, 26)
+        self.phitsalunok_maths_school_789.get_cell_at(18, 27).goes_to = (self.phitsalunok_maths_school_456, 35, 2)
+
+        self.phitsalunok_maths_school_789.get_cell_at(18, 19).goes_to = (self.phitsalunok_maths_school_789, 7, 11)
+        self.phitsalunok_maths_school_789.get_cell_at(7, 12).goes_to = (self.phitsalunok_maths_school_789, 18, 20)
+
+        self.phitsalunok_maths_school_789.get_cell_at(7, 0).goes_to = (self.phitsalunok_maths_school_789, 35, 11)
+        self.phitsalunok_maths_school_789.get_cell_at(35, 12).goes_to = (self.phitsalunok_maths_school_789, 7, 1)
+
+        self.phitsalunok_maths_school_789.get_cell_at(29, 26).goes_to = (self.phitsalunok_maths_school_789, 8, 26)
+        self.phitsalunok_maths_school_789.get_cell_at(7, 26).goes_to = (self.phitsalunok_maths_school_789, 28, 26)
+        self.phitsalunok_maths_school_789.get_cell_at(29, 23).goes_to = (self.phitsalunok_maths_school_789, 8, 23)
+        self.phitsalunok_maths_school_789.get_cell_at(7, 23).goes_to = (self.phitsalunok_maths_school_789, 28, 23)
+        self.phitsalunok_maths_school_789.get_cell_at(29, 20).goes_to = (self.phitsalunok_maths_school_789, 8, 20)
+        self.phitsalunok_maths_school_789.get_cell_at(7, 20).goes_to = (self.phitsalunok_maths_school_789, 28, 20)

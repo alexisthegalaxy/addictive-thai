@@ -25,6 +25,16 @@ CURSOR = CONN.cursor()
 #
 
 
+def find_word_by_thai(thai_word: str) -> Optional[int]:
+    """Return id of that db thai word"""
+    try:
+        word_id = list(CURSOR.execute(f"SELECT id FROM words WHERE thai = '{thai_word}'"))[0]
+        return word_id[0]
+    except IndexError:
+        print(f'COULD NOT FIND WORD IN DB FOR {thai_word}')
+        raise IndexError
+
+
 def get_word_by_id(word_id):
     from lexicon.items import Word
 

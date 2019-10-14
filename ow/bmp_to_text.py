@@ -103,6 +103,10 @@ to_convert = [
     "kasetsombum_temple_temple",
     "kasetsombum_shop",
     "kasetsombum_school",
+    "phitsalunok_maths_school_123",
+    "phitsalunok_maths_school_456",
+    "phitsalunok_maths_school_789",
+    "phitsalunok_maths_school_1011",
 ]
 
 for item in to_convert:

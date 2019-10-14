@@ -11,8 +11,8 @@ def retrieve_words_from_sentence(thai):
     word_ids = []
     for word in words:
         word = word.replace('-', '')
-        word_db = find_word_by_thai(word)
-        word_ids.append(word_db.id)
+        word_db_id = find_word_by_thai(word)
+        word_ids.append(word_db_id)
     return word_ids
 
 
@@ -168,8 +168,8 @@ def create_many_to_many_relationships():
 คน-ไทย_ชอบ_แมว | Thai people like cats.
 ฉัน_อยาก_เรียน_ภา-ษา_แมว | I (female) want to learn cat language.
 ฉัน_ชอบ_เห็น_ยิ้ม_ของ_คุณ | I like to see your smile.
-คุณ_คือ_ใคร | Who are you?"""
-sentences = """คุณ_ชอบ_คน-ไทย | You like Thai people.
+คุณ_คือ_ใคร | Who are you?
+คุณ_ชอบ_คน-ไทย | You like Thai people.
 คน-ไทย_ชอบ_ผม | Thai people like me (male).
 คน-ไทย_ชอบ_ฉัน | Thai people like me (female).
 ผม_ชอบ_คน-ไทย | I (male) like Thai people.
@@ -177,22 +177,24 @@ sentences = """คุณ_ชอบ_คน-ไทย | You like Thai people.
 ผม_เป็น_คน-ไทย | I (male) am Thai.
 ฉัน_เป็น_คน-ไทย | I (female) am Thai.
 คน-ไทย_ชอบ_อยู่_บ้าน | Thai people like to be at home.
-เขา_ไม่_ชอบ_อยู่_บ้าน | He doesn't like to be at home.
-คุณ_ชอบ_โรง-เรียน_ไหม? | Do you like school?
-คุณ_ชอบ_อยู่_ที่_โรง-เรียน_ไม่? | Do you like to be at school?
+คุณ_ชอบ_โรง-เรียน_ไหม | Do you like school?
+คุณ_ชอบ_อยู่_ที่_โรง-เรียน_ไหม | Do you like to be at school?
 เขา_ชอบ_โรง-เรียน_ไทย | He likes Thai school.
-เขา_ไม่_ชอบ_โรง-เรียน_ไทย | He doesn't like Thai school.
-เขา_ไม่_ต้อง_การ_ที่จะ_เป็น_โรง_เรียน | He doesn't want to be at school.
-คน-ไทย_ชอบ_โรง-เรียน_ไหม? | Do Thai people like school?
+คน-ไทย_ชอบ_โรง-เรียน_ไหม | Do Thai people like school?
 ผม_ชอบ_ไป_โรง-เรียน | I (male) like to go to school.
-ผม_ไม่_อยาก_ไป_โรง-เรียน | I (male) don't want to go to school.
 ฉัน_อยาก_อยู่_บ้าน_กิน_ข้าว | I (female) want to be at home and eat.
 ฉัน_อยาก_กลับ-บ้าน_เรียน_ภา-ษา-ไทย | I (male) want to return home and study Thai language.
-เขา_ไม่_ชอบ_พูด | He doesn't like to speak.
 เขา_อยาก_คุย_กับ_ฉัน | He wants to speak with me (female).
-เธอ_ไม่_อยาก_พูด | She doesn't want to speak.
-ฉัน_ดี-ใจ_ที่_คุณ_ชอบ_มัน | I'm glad you like it."""
+เขา_ไม่_ชอบ_อยู่_บ้าน | He doesnt like to be at home.
+เขา_ไม่_ชอบ_โรง-เรียน_ไทย | He doesnt like Thai school.
+เขา_ไม่_อยาก_อยู่_โรง-เรียน | He doesnt want to be at school.
+ผม_ไม่_อยาก_ไป_โรง-เรียน | I (male) dont want to go to school.
+เขา_ไม่_ชอบ_พูด | He doesnt like to speak.
+เธอ_ไม่_อยาก_พูด | She doesnt want to speak.
+ฉัน_ดี-ใจ_ที่_คุณ_ชอบ_มัน | Im glad you like it."""
+sentences = """"""
 for sentence in sentences.split('\n'):
+    print(sentence)
     split_values = sentence.split(' | ')
     thai, english = split_values[0], split_values[1]
     insert_sentence(thai, english)
