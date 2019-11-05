@@ -1,0 +1,37 @@
+At the very beginning of the game, the player is in another state.
+Maybe dreaming, maybe in an island, or outside of Thailand.
+It serves as a tutorial for all functionalities.
+4.5 islands
+    At the beginning, the brother says:
+        Hey [Name], you're ready?
+        As you know, Thailand faces a great danger,
+        and that's why we brought you on this island:
+        to learn the Thai alphabet.
+        Each inhabitant of the island will teach you a new letter,
+            so talk to everybody!
+        Come talk to me if you've learnt enoough,
+        and want to start your adventure on the main land.
+
+        You want to leave the island and start your adventure on the continent?
+
+Then, we start with the easiest of the lower letters of the alphabet
+
+1 - go gai
+2 - vowel a
+3 - vowel aa
+4 - kho khwai
+
+How do we test for the knowledge of the player without using the mechanics of:
+    - grass
+    - health
+    - money
+    - fights
+        ?
+    We could have the player be tested on the last letter they learnt.
+
+Vowels:
+    a
+    aa
+    ii
+
+

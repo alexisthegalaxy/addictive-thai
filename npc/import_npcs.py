@@ -753,13 +753,13 @@ def nurses(al):
         Npc(
             al=al,
             name="nurse",
-            ma=al.mas.get_map_from_name("inn_phitsalunok"),
+            ma=al.mas.get_map_from_name("inn_phitsanulok"),
             x=4,
             y=1,
             sprite="vendor",
             direction=Direction.DOWN,
             standard_dialog=[
-                "Welcome to the inn of Phitsalunok!",
+                "Welcome to the inn of Phitsanulok!",
                 "You can rest here for a while, and you'll feel better!",
             ],
         ),
@@ -851,6 +851,19 @@ def nurses(al):
             direction=Direction.DOWN,
             standard_dialog=[
                 "Welcome to the inn of Kasetsombum!",
+                "You can rest here for a while, and you'll feel better!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="nurse",
+            ma=al.mas.get_map_from_name("inn_bua_yai"),
+            x=4,
+            y=1,
+            sprite="lass",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Welcome to the inn of Bua Yai!",
                 "You can rest here for a while, and you'll feel better!",
             ],
         ),
@@ -2921,6 +2934,29 @@ def banyaeng(al):
         ),
         Npc(
             al=al,
+            name="Labyrinth south trainer",
+            battle_words=[
+                Word.get_by_split_form(battle_word)
+                for battle_word in ["มะ-ม่วง", "กล้วย", "สับ-ปะ-รด", "อ-ร่อย"]
+            ],
+            ma=al.mas.get_map_from_name("banyaeng_cave"),
+            x=12,
+            y=15,
+            sprite="kid",
+            direction=Direction.UP,
+            money=1,
+            standard_dialog=[
+                "I just found one Baht on the floor!",
+                "How about we fight, and the loser gives one Baht to the winner?",
+                "I'm trying to get enough money to buy a mango!",
+            ],
+            defeat_dialog=[
+                "Nooo!",
+                "How dare you take from a cute innocent child his only possession?",
+            ],
+        ),
+        Npc(
+            al=al,
             name="nobody from chaiyaphum",
             ma=al.mas.get_map_from_name("banyaeng"),
             x=51,
@@ -3412,12 +3448,12 @@ def nakhon_sawan(al):
         npc.ma.add_npc(npc)
 
 
-def phitsalunok(al):
+def phitsanulok(al):
     npcs = [
         Npc(
             al=al,
             name="rich_woman",
-            ma=al.mas.get_map_from_name("phitsalunok"),
+            ma=al.mas.get_map_from_name("phitsanulok"),
             x=23,
             y=42,
             sprite="rich_woman",
@@ -3427,31 +3463,79 @@ def phitsalunok(al):
         Npc(
             al=al,
             name="rich_woman",
-            ma=al.mas.get_map_from_name("phitsalunok"),
+            ma=al.mas.get_map_from_name("phitsanulok"),
             x=38,
             y=39,
             sprite="woman",
             direction=Direction.UP,
             standard_dialog=[
                 "According to my map, the market should be just there...",
-                "Phitsalunok is too big, that's so frustrating!",
+                "Phitsanulok is too big, that's so frustrating!",
                 "I always get lost!",
             ],
         ),
         Npc(
             al=al,
-            name="phitsalunok",
-            ma=al.mas.get_map_from_name("phitsalunok"),
+            name="girl with cat",
+            ma=al.mas.get_map_from_name("phitsanulok"),
+            x=3,
+            y=31,
+            sprite="lass",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "Good cat!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="cat with girl",
+            ma=al.mas.get_map_from_name("phitsanulok"),
+            x=4,
+            y=31,
+            sprite="cat",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "Rrrrrr",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="couple in Phitsanulok",
+            ma=al.mas.get_map_from_name("phitsanulok"),
+            x=22,
+            y=6,
+            sprite="man",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "I love you!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="couple in Phitsanulok",
+            ma=al.mas.get_map_from_name("phitsanulok"),
+            x=23,
+            y=6,
+            sprite="woman",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "I love you!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="phitsanulok",
+            ma=al.mas.get_map_from_name("phitsanulok"),
             x=42,
             y=16,
             sprite="sign",
             direction=Direction.RIGHT,
-            standard_dialog=["Phitsalunok"],
+            standard_dialog=["Phitsanulok"],
         ),
         Npc(
             al=al,
             name="Bird Observation Garden",
-            ma=al.mas.get_map_from_name("phitsalunok"),
+            ma=al.mas.get_map_from_name("phitsanulok"),
             x=38,
             y=27,
             sprite="sign",
@@ -3461,7 +3545,7 @@ def phitsalunok(al):
         Npc(
             al=al,
             name="Underground",
-            ma=al.mas.get_map_from_name("phitsalunok"),
+            ma=al.mas.get_map_from_name("phitsanulok"),
             x=27,
             y=28,
             sprite="sign",
@@ -3471,7 +3555,7 @@ def phitsalunok(al):
         Npc(
             al=al,
             name="Underground",
-            ma=al.mas.get_map_from_name("phitsalunok"),
+            ma=al.mas.get_map_from_name("phitsanulok"),
             x=25,
             y=40,
             sprite="sign",
@@ -3483,12 +3567,12 @@ def phitsalunok(al):
         npc.ma.add_npc(npc)
 
 
-def phitsalunok_maths_school(al):
+def phitsanulok_maths_school(al):
     npcs = [
         Npc(
             al=al,
-            name="Guardian of second level Phitsalunok in math academy",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            name="Guardian of second level Phitsanulok in math academy",
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=10,
             y=23,
             sprite="old_man",
@@ -3500,8 +3584,8 @@ def phitsalunok_maths_school(al):
         ),
         Npc(
             al=al,
-            name="Guardian of second level Phitsalunok in math academy",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            name="Guardian of second level Phitsanulok in math academy",
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=16,
             y=23,
             sprite="old_woman",
@@ -3516,13 +3600,13 @@ def phitsalunok_maths_school(al):
             al=al,
             name="Teacher of 1",
             taught_word=Word.get_by_split_form("หนึ่ง"),
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=13,
             y=19,
             sprite="nun",
             direction=Direction.DOWN,
             standard_dialog=[
-                "This is the Phitsalunok school of mathematics.",
+                "This is the Phitsanulok school of mathematics.",
                 "We have a brand new method to teach mathematics here,",
                 "using the power of mnemonics.",
                 "For example, as you can see, I am a nun, a female buddhist monk.",
@@ -3536,7 +3620,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Singer 1",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=0,
             y=7,
             sprite="dad",
@@ -3546,7 +3630,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Singer 2",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=6,
             y=7,
             sprite="lass",
@@ -3557,7 +3641,7 @@ def phitsalunok_maths_school(al):
             al=al,
             name="Teacher of number two",
             taught_word=Word.get_by_split_form("สอง"),
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=3,
             y=4,
             sprite="old_man",
@@ -3570,7 +3654,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Sam 1",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=19,
             y=3,
             sprite="kid",
@@ -3580,7 +3664,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Sam 2",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=20,
             y=3,
             sprite="kid",
@@ -3590,7 +3674,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Sam 3",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=21,
             y=3,
             sprite="kid",
@@ -3601,7 +3685,7 @@ def phitsalunok_maths_school(al):
             al=al,
             name="Teacher of number 3",
             taught_word=Word.get_by_split_form("สาม"),
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_123"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_123"),
             x=25,
             y=2,
             sprite="lass",
@@ -3613,7 +3697,7 @@ def phitsalunok_maths_school(al):
             al=al,
             name="Teacher of 4",
             taught_word=Word.get_by_split_form("สี่"),
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=20,
             y=24,
             sprite="old_man",
@@ -3626,7 +3710,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="laughing person 1",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=1,
             y=8,
             sprite="kid",
@@ -3636,7 +3720,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="laughing person 2",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=3,
             y=8,
             sprite="lass",
@@ -3646,7 +3730,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="laughing person 3",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=5,
             y=8,
             sprite="woman",
@@ -3656,7 +3740,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="laughing person 4",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=7,
             y=8,
             sprite="old_man",
@@ -3666,7 +3750,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="laughing person 5",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=9,
             y=8,
             sprite="mom",
@@ -3677,7 +3761,7 @@ def phitsalunok_maths_school(al):
             al=al,
             taught_word=Word.get_by_split_form("ห้า"),
             name="comic teaching number five",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=5,
             y=6,
             sprite="lass",
@@ -3693,7 +3777,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="hawk 1",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=36,
             y=7,
             sprite="hawk",
@@ -3703,7 +3787,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="hawk 2",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=34,
             y=7,
             sprite="hawk",
@@ -3713,7 +3797,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="hawk 3",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=30,
             y=9,
             sprite="hawk",
@@ -3723,7 +3807,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="hawk 4",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=40,
             y=9,
             sprite="hawk",
@@ -3733,7 +3817,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="hawk 5",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=30,
             y=5,
             sprite="hawk",
@@ -3743,7 +3827,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="hawk 6",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=40,
             y=5,
             sprite="hawk",
@@ -3754,7 +3838,7 @@ def phitsalunok_maths_school(al):
             al=al,
             name="Teacher of 6",
             taught_word=Word.get_by_split_form("หก"),
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_456"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_456"),
             x=35,
             y=3,
             sprite="woman",
@@ -3765,7 +3849,7 @@ def phitsalunok_maths_school(al):
             al=al,
             name="Teacher of 7",
             taught_word=Word.get_by_split_form("เจ็ด"),
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=17,
             y=20,
             sprite="dad",
@@ -3778,7 +3862,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 1",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=10,
             y=24,
             sprite="jetski",
@@ -3788,7 +3872,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 2",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=15,
             y=24,
             sprite="jetski",
@@ -3798,7 +3882,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 3",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=15,
             y=21,
             sprite="jetski",
@@ -3808,7 +3892,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 4",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=26,
             y=25,
             sprite="jetski",
@@ -3818,7 +3902,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 5",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=19,
             y=24,
             sprite="jetski",
@@ -3828,7 +3912,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 6",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=21,
             y=21,
             sprite="jetski",
@@ -3838,7 +3922,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 7",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=27,
             y=21,
             sprite="jetski",
@@ -3848,7 +3932,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 1",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=10 + 21,
             y=24,
             sprite="jetski",
@@ -3858,7 +3942,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 2",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=15 + 21,
             y=24,
             sprite="jetski",
@@ -3868,7 +3952,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 3",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=15 + 21,
             y=21,
             sprite="jetski",
@@ -3878,7 +3962,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 4",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=26 - 21,
             y=25,
             sprite="jetski",
@@ -3888,7 +3972,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 5",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=19 + 21,
             y=24,
             sprite="jetski",
@@ -3898,7 +3982,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 6",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=21 + 21,
             y=21,
             sprite="jetski",
@@ -3908,7 +3992,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 6",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=21 - 21,
             y=21,
             sprite="jetski",
@@ -3918,7 +4002,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Jet ski 7",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=27 - 21,
             y=21,
             sprite="jetski",
@@ -3928,7 +4012,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 1",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=7,
             y=10,
             sprite="dog",
@@ -3938,7 +4022,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 2",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=11,
             y=10,
             sprite="dog",
@@ -3948,7 +4032,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 3",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=11,
             y=6,
             sprite="dog",
@@ -3958,7 +4042,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 4",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=11,
             y=2,
             sprite="dog",
@@ -3968,7 +4052,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 5",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=7,
             y=2,
             sprite="dog",
@@ -3978,7 +4062,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 6",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=3,
             y=2,
             sprite="dog",
@@ -3988,7 +4072,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 7",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=3,
             y=6,
             sprite="dog",
@@ -3998,7 +4082,7 @@ def phitsalunok_maths_school(al):
         Npc(
             al=al,
             name="Dog 8",
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=3,
             y=10,
             sprite="dog",
@@ -4009,7 +4093,7 @@ def phitsalunok_maths_school(al):
             al=al,
             name="Teacher of 8",
             taught_word=Word.get_by_split_form("แปด"),
-            ma=al.mas.get_map_from_name("phitsalunok_maths_school_789"),
+            ma=al.mas.get_map_from_name("phitsanulok_maths_school_789"),
             x=7,
             y=3,
             sprite="old_woman",
@@ -4246,7 +4330,7 @@ def kasetsombum(al):
             direction=Direction.UP,
             standard_dialog=[
                 "My mom's vegetables are delicious - she grows the best in Kasetsombum.",
-                "Me? I have a restaurant down in Phitsalunok where I cook traditional food.",
+                "Me? I have a restaurant down in Phitsanulok where I cook traditional food.",
                 "I often come here so that my mom can see her grandchildren a bit.",
             ],
         ),
@@ -4465,6 +4549,33 @@ def kasetsombum(al):
         npc.ma.add_npc(npc)
 
 
+def sukhothai(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="Old man of Sukhothai",
+            ma=al.mas.get_map_from_name("sukhothai"),
+            x=24,
+            y=19,
+            sprite="old_man",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "Welcome to New Sukhothai.",
+                "This city's actual name is Sukhothai Thani",
+                "In Thai, ธานี (Thani) is a word for \"city\", and many cities use this word. ",
+                "For example, Udon thani or Ubon ratchathani.",
+                "Just west from here there is the real Sukhothai.",
+                "Sukhothai was the capital of the Sukhothai empire a long time ago.",
+                "But it's just ruins over there now.",
+                "There aren't any hotels in Sukhotai, but you can stay here in New Sukhothai.",
+            ]
+        ),
+    ]
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
+
 """
     taught_word=Word.get_by_split_form("โรง"),
 """
@@ -4485,6 +4596,7 @@ def import_npcs(al):
     cat_cove(al)
     khonkaen(al)
     nakhon_sawan(al)
-    phitsalunok(al)
-    phitsalunok_maths_school(al)
+    phitsanulok(al)
+    phitsanulok_maths_school(al)
     kasetsombum(al)
+    sukhothai(al)

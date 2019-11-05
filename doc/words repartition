@@ -12,12 +12,10 @@ Chaiyaphum:
 ✓ 5 Old man: Thai ไทย
 ✓ 6 Old woman: people คน
 
-
 chaiyaphum-chumphae:
 ✓ 7 to want อยาก
 ✓ 8 House บ้าน
 ✓ 9 To be at อยู่
-
 
 chumphae:
 ✓ 10 school โรง-เรียน
@@ -46,29 +44,29 @@ chumphae-lomsak:
 
 lomsak:
 School:
-    ✓✓24 to be able to ได้
-    ✓✓25 right? (>maichai) ใช่
-    ✓✓How to answer a question: rather than yes, you repeat the verb, eventually with no in front
-✓✓26 language ภา-ษา
-✓✓27 thai ภา-ษา-ไทย
-✓✓28 english ภา-ษา-อัง-กฤษ
+    ✓ 24 to be able to ได้
+    ✓ 25 right? (>maichai) ใช่
+    ✓ How to answer a question: rather than yes, you repeat the verb, eventually with no in front
+✓ 26 language ภา-ษา
+✓ 27 thai ภา-ษา-ไทย
+✓ 28 english ภา-ษา-อัง-กฤษ
 Temple:
-    ✓✓29 to speak พูด
-    ✓✓30 to study เรียน
+    ✓ 29 to speak พูด
+    ✓ 30 to study เรียน
     ✓ 31 to go ไป => will disappear once the rival teaches ไป
 
 lomsak-phetchabun:
-✓✓32 good ดี
-✓✓33 bad ไม่-ดี
+✓ 32 good ดี
+✓ 33 bad ไม่-ดี
 
 question mountain:
-✓✓34 what อะ-ไร
-✓✓35 where ที่-ไหน
-✓✓36 who ใคร
+✓ 34 what อะ-ไร
+✓ 35 where ที่-ไหน
+✓ 36 who ใคร
 
-✓✓37 when เมื่อ-ไหร่
-✓✓38 why ทำ-ไม
-✓✓39 how ยัง-ไง
+✓ 37 when เมื่อ-ไหร่
+✓ 38 why ทำ-ไม
+✓ 39 how ยัง-ไง
 
 Phetchabun
 ✓ 40 teacher ครู
@@ -117,15 +115,29 @@ school
     ✓ 68 this นี้
     ✓ 69 that นั่น
 
-phitsalunok:
+phitsanulok:
 - 61 temple วัด HIGH
 - 62 money
 - 63 buy
 - 64 expensive
+- boyfriend/girlfriend
 school:
-    more, most
+    - more, most
+Maths school:
+    - 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+phichit:
+- ที่นี่
+temple
+- now
+School:
+    - gamlang
+
+taphan hin:
+- ที่นี่
 
 to teach:
+    จะ will
     List of common words https://en.wiktionary.org/wiki/Appendix:200_basic_Thai_words
     here ที่นี่
     to hit, strike, (morning hours) ตี
