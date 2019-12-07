@@ -113,7 +113,11 @@ class TappingTestSentence(Test):
         # more common words
         while len(self.distractors) <= self.number_of_distr:
             sentence = Sentence.get_random_known_sentence()
-            for word in random.choices(population=sentence.words):
+            a = sentence.words
+            print(a)
+            b = random.choices(population=a)
+            print(b)
+            for word in b:
                 for syllable in word.get_syllables():
                     if syllable not in syllable_only:
                         self.distractors.append(syllable)

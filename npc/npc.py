@@ -7,7 +7,7 @@ from typing import List, Tuple, Optional
 # from all import All
 from direction import string_from_direction, opposite_direction, Direction, dir_equal
 from lexicon.items import Word
-from lexicon.learning import Learning
+from lexicon.learning import LetterLearning, WordLearning
 from models import xp_from_word
 from sounds.play_sound import play_thai_word
 
@@ -38,7 +38,7 @@ class Npc(object):
         dialog_3=None,
         direction=Direction.UP,
         sprite="kid",
-        taught_word: Word = None,
+        taught: Word = None,
         battle_words: List[Word] = None,
         money: int = 5,  # amount given when lost the fight
         eyesight: int = 5,  # how far the trainer can see
@@ -74,9 +74,9 @@ class Npc(object):
         self.direction = direction
         self.active_line_index = -1
         self.color = (0, 222, 222)
-        self.taught_word = taught_word
+        self.taught = taught
         self.battle_words = battle_words
-        self.has_learning_mark = self.taught_word and xp_from_word(self.taught_word.id) <= 0
+        self.has_learning_mark = self.taught and xp_from_word(self.taught.id) <= 0
         self.wants_battle = True
         self.wanna_meet = wanna_meet
         self.eyesight = eyesight
@@ -93,9 +93,9 @@ class Npc(object):
         for dialog in self.dialogs:
             for i, line in enumerate(dialog):
                 dialog[i] = line.replace("[Name]", al.learner.name)
-        if self.taught_word:
+        if self.taught:
             self.review_dialog[0] = (
-                self.review_dialog[0] + f" {self.taught_word.thai} ?"
+                self.review_dialog[0] + f" {self.taught.thai} ?"
             )
 
     def is_trainer(self):
@@ -180,12 +180,12 @@ class Npc(object):
                 al.learner.bed_heal()
         if self.active_line_index == -1:
             play_thai_word(self.name)
-        if self.taught_word:
+        if self.taught:
             if self.is_saying_last_sentence() and (
                 self.active_dialog == self.standard_dialog
                 or self.active_dialog == self.review_dialog
             ):
-                al.active_learning = Learning(al=al, word=self.taught_word, npc=self)
+                al.active_learning = WordLearning(al=al, word=self.taught, npc=self) if isinstance(self.taught, Word) else LetterLearning(al=al, letter=self.taught, npc=self)
                 al.active_learning.goes_to_first_step()
         if self.battle_words:
             if self.is_saying_last_sentence():
@@ -207,8 +207,8 @@ class Npc(object):
         self.has_learning_mark = False
         self.reset_cursor()
         if not al.active_npc:
-            if self.taught_word:  # If this NPC teaches
-                if self.taught_word.total_xp >= 5:  # If the word is known
+            if self.taught:  # If this NPC teaches
+                if self.taught.total_xp >= 5:  # If the word is known
                     self.active_dialog = self.review_dialog
         al.active_npc = self
 
@@ -218,7 +218,7 @@ class Npc(object):
         if self.active_line_index >= len(self.active_dialog):
             self.active_line_index = -1
             trigger_event = False
-            if self.taught_word:
+            if self.taught:
                 if self.active_dialog == self.defeat_dialog:
                     trigger_event = True
             else:

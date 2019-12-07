@@ -3,7 +3,7 @@ import pygame
 from enum import Enum
 from typing import List
 
-from lexicon.items import Word
+from lexicon.items import Word, Letter
 from models import get_random_word_id, increase_xp
 from sounds.play_sound import play_thai_word, play_transformed_thai_word
 
@@ -103,7 +103,7 @@ class Test(object):
     def succeeds(self):
         # 2 - Play sound
         try:
-            play_transformed_thai_word(self.correct_word.thai)
+            play_transformed_thai_word(self.correct.thai)
         except pygame.error:
             play_thai_word("right")
 
@@ -116,7 +116,7 @@ class Test(object):
 
         # 5 - Increase XP for the word
         try:
-            increase_xp(self.correct_word.thai, 1)
+            increase_xp(self.correct.thai, 1)
         except Exception as e:
             print('Error - 483912')
             print(e)
@@ -167,10 +167,10 @@ class ToneBox(object):
 
 class ToneFromThaiAndSound(Test):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
         super().__init__(al, learning, test_success_callback)
-        self.correct_word: Word = correct_word
+        self.correct: Word = correct
         self.boxes = [
             ToneBox(al.ui.fonts, 1, 140 + 188 * 0, 250, "Mid"),
             ToneBox(al.ui.fonts, 2, 140 + 188 * 1, 250, "Low"),
@@ -178,7 +178,7 @@ class ToneFromThaiAndSound(Test):
             ToneBox(al.ui.fonts, 4, 140 + 188 * 3, 250, "High"),
             ToneBox(al.ui.fonts, 5, 140 + 188 * 4, 250, "Rising"),
         ]
-        play_transformed_thai_word(self.correct_word.thai)
+        play_transformed_thai_word(self.correct.thai)
         self.selector_on_sound = False
         self.selected_option_index = None
         self.correct_option = self.select_correct_option()
@@ -192,15 +192,15 @@ class ToneFromThaiAndSound(Test):
         return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(0.1) < y < ui.percent_width(0.15)
 
     def select_correct_option(self):
-        if self.correct_word.tones[0] == 'M':
+        if self.correct.tones[0] == 'M':
             return 1
-        if self.correct_word.tones[0] == 'L':
+        if self.correct.tones[0] == 'L':
             return 2
-        if self.correct_word.tones[0] == 'F':
+        if self.correct.tones[0] == 'F':
             return 3
-        if self.correct_word.tones[0] == 'H':
+        if self.correct.tones[0] == 'H':
             return 4
-        if self.correct_word.tones[0] == 'R':
+        if self.correct.tones[0] == 'R':
             return 5
 
     def learner_select_option(self):
@@ -228,7 +228,7 @@ class ToneFromThaiAndSound(Test):
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct_word.thai, True, (0, 0, 0)), (x, y)
+            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
         )
 
         # Draw prompt
@@ -247,7 +247,7 @@ class ToneFromThaiAndSound(Test):
         if al.ui.click:
             if self.point_on_sound(al.ui, al.ui.click):
                 al.ui.click = False
-                play_transformed_thai_word(self.correct_word.thai)
+                play_transformed_thai_word(self.correct.thai)
         for box in self.boxes:
             box.interact(al, self)
         if self.selected_option_index:
@@ -256,10 +256,10 @@ class ToneFromThaiAndSound(Test):
 
 class ThaiFromEnglish(Test):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
         super().__init__(al, learning, test_success_callback)
-        self.correct_word: Word = correct_word
+        self.correct: Word = correct
         self.number_of_distr: int = 3
 
     def select_distractors(self):
@@ -270,7 +270,7 @@ class ThaiFromEnglish(Test):
                 distractor = random.choices(known_words)[0]
                 if (
                     distractor not in distractors
-                    and distractor.thai != self.correct_word.thai
+                    and distractor.thai != self.correct.thai
                 ):
                     distractors.append(distractor)
         else:  # We don't have know enough words!
@@ -278,7 +278,7 @@ class ThaiFromEnglish(Test):
                 distractor = get_random_word_id()
                 if (
                     distractor not in distractors
-                    and distractor.thai != self.correct_word.thai
+                    and distractor.thai != self.correct.thai
                 ):
                     distractors.append(distractor)
         return distractors
@@ -306,7 +306,7 @@ class ThaiFromEnglish(Test):
 
     def learner_select_option(self):
         option = self.selected_option_index
-        if self.choices[option] == self.correct_word:
+        if self.choices[option] == self.correct:
             self.succeeds()
         else:
             self.fails()
@@ -314,13 +314,13 @@ class ThaiFromEnglish(Test):
 
 class ThaiFromEnglish4(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, correct_word, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         self.boxes = [
@@ -376,7 +376,7 @@ class ThaiFromEnglish4(ThaiFromEnglish):
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct_word.english, True, (0, 0, 0)), (x, y)
+            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -404,13 +404,13 @@ class ThaiFromEnglish4(ThaiFromEnglish):
 
 class ThaiFromEnglish6(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, correct_word, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         y = 0.30
@@ -491,7 +491,7 @@ class ThaiFromEnglish6(ThaiFromEnglish):
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct_word.english, True, (0, 0, 0)), (x, y)
+            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -519,13 +519,13 @@ class ThaiFromEnglish6(ThaiFromEnglish):
 
 class EnglishFromThai4(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, correct_word, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         self.boxes = [
@@ -580,7 +580,7 @@ class EnglishFromThai4(ThaiFromEnglish):
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct_word.thai, True, (0, 0, 0)), (x, y)
+            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -608,13 +608,13 @@ class EnglishFromThai4(ThaiFromEnglish):
 
 class EnglishFromThai6(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, correct_word, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         y = 0.30
@@ -693,7 +693,7 @@ class EnglishFromThai6(ThaiFromEnglish):
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct_word.thai, True, (0, 0, 0)), (x, y)
+            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -721,13 +721,13 @@ class EnglishFromThai6(ThaiFromEnglish):
 
 class FromSound(Test):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
         super().__init__(al, learning, test_success_callback)
-        self.correct_word: Word = correct_word
+        self.correct: Word = correct
         self.number_of_distr: int = 3
         self.selector_on_sound = False
-        play_transformed_thai_word(self.correct_word.thai)
+        play_transformed_thai_word(self.correct.thai)
 
     @staticmethod
     def point_on_sound(ui, point):
@@ -745,7 +745,7 @@ class FromSound(Test):
                 distractor = random.choices(known_words)[0]
                 if (
                     distractor not in distractors
-                    and distractor.thai != self.correct_word.thai
+                    and distractor.thai != self.correct.thai
                 ):
                     distractors.append(distractor)
         else:  # We don't know enough words!
@@ -753,7 +753,7 @@ class FromSound(Test):
                 distractor = get_random_word_id()
                 if (
                     distractor not in distractors
-                    and distractor.thai != self.correct_word.thai
+                    and distractor.thai != self.correct.thai
                 ):
                     distractors.append(distractor)
         return distractors
@@ -786,7 +786,7 @@ class FromSound(Test):
         if al.ui.space:
             al.ui.space = False
             if self.selector_on_sound:
-                play_transformed_thai_word(self.correct_word.thai)
+                play_transformed_thai_word(self.correct.thai)
             else:
                 self.learner_select_option()
         if al.ui.hover:
@@ -794,11 +794,11 @@ class FromSound(Test):
         if al.ui.click:
             if self.point_on_sound(al.ui, al.ui.click):
                 al.ui.click = False
-                play_transformed_thai_word(self.correct_word.thai)
+                play_transformed_thai_word(self.correct.thai)
 
     def learner_select_option(self):
         option = self.selected_option_index
-        if self.choices[option] == self.correct_word:
+        if self.choices[option] == self.correct:
             self.succeeds()
         else:
             self.fails()
@@ -806,20 +806,20 @@ class FromSound(Test):
 
 class EnglishFromSound(FromSound):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, learning, correct_word, test_success_callback)
+        super().__init__(al, learning, correct, test_success_callback)
 
 
 class EnglishFromSound4(EnglishFromSound):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, learning, correct_word, test_success_callback)
+        super().__init__(al, learning, correct, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         self.boxes = [
@@ -902,13 +902,13 @@ class EnglishFromSound4(EnglishFromSound):
 
 class EnglishFromSound6(EnglishFromSound):
     def __init__(
-        self, al: "All", correct_word: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, learning, correct_word, test_success_callback)
+        super().__init__(al, learning, correct, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         y = 0.30
@@ -1018,15 +1018,15 @@ class ThaiFromSound4(EnglishFromSound):
     def __init__(
         self,
         al: "All",
-        correct_word: Word,
+        correct: Word,
         learning: "Learning" = None,
         test_success_callback=None,
     ):
-        super().__init__(al, learning, correct_word, test_success_callback)
+        super().__init__(al, learning, correct, test_success_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         self.boxes = [
@@ -1111,15 +1111,15 @@ class ThaiFromSound6(EnglishFromSound):
     def __init__(
         self,
         al: "All",
-        correct_word: Word,
+        correct: Word,
         learning: "Learning" = None,
         test_success_callback=None,
     ):
-        super().__init__(al, learning, correct_word, test_success_callback)
+        super().__init__(al, learning, correct, test_success_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
-        self.choices: List[Word] = [self.correct_word] + self.distractors
+        self.choices: List[Word] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
         y = 0.30
@@ -1223,3 +1223,152 @@ class ThaiFromSound6(EnglishFromSound):
                     al.ui.click = None
                     self.learner_select_option()
                     break
+
+
+class ThaiLetterFromEnglish(Test):
+    def __init__(
+        self, al: "All", correct: Letter, learning=None, test_success_callback=None
+    ):
+        super().__init__(al, learning, test_success_callback)
+        self.correct: Letter = correct
+        self.number_of_distr: int = 3
+
+    def select_distractors(self):
+        known_letters = Letter.get_known_letters()
+        distractors = []
+        if len(known_letters) > self.number_of_distr:
+            while len(distractors) < self.number_of_distr:
+                distractor = random.choices(known_letters)[0]
+                if (
+                    distractor not in distractors
+                    and distractor.thai != self.correct.thai
+                ):
+                    distractors.append(distractor)
+        else:  # We don't have know enough letters!
+            while len(distractors) < self.number_of_distr:
+                distractor = Letter.get_random_letter()
+                if (
+                    distractor not in distractors
+                    and distractor.thai != self.correct.thai
+                ):
+                    distractors.append(distractor)
+        return distractors
+
+    def interact(self, al):
+        if al.ui.up:
+            self.selected_option_index -= 2
+            if self.selected_option_index < 0:
+                self.selected_option_index += self.number_of_distr + 1
+            al.ui.up = False
+        if al.ui.down:
+            self.selected_option_index += 2
+            if self.selected_option_index >= (self.number_of_distr + 1):
+                self.selected_option_index -= self.number_of_distr + 1
+            al.ui.down = False
+        if al.ui.left or al.ui.right:
+            self.selected_option_index += (
+                1 if self.selected_option_index % 2 == 0 else -1
+            )
+            al.ui.left = False
+            al.ui.right = False
+        if al.ui.space:
+            al.ui.space = False
+            self.learner_select_option()
+
+    def learner_select_option(self):
+        option = self.selected_option_index
+        if self.choices[option] == self.correct:
+            self.succeeds()
+        else:
+            self.fails()
+
+
+class ThaiLetterFromEnglish4(ThaiLetterFromEnglish):
+    def __init__(
+        self, al: "All", correct: Letter, learning=None, test_success_callback=None
+    ):
+        super().__init__(al, correct, learning, test_success_callback)
+        self.number_of_distr: int = 3
+
+        self.distractors: List[Letter] = self.select_distractors()
+        self.choices: List[Letter] = [self.correct] + self.distractors
+        random.shuffle(self.choices)
+
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[0].thai,
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[1].thai,
+                index=1,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[2].thai,
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[3].thai,
+                index=3,
+            ),
+        ]
+
+    def draw(self):
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        self.draw_background()
+
+        # Draw "What's the Thai letter for"
+        explanatory_string = "What's the Thai letter for:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.18)
+        screen.blit(
+            fonts.garuda32.render(self.correct.pron, True, (0, 0, 0)), (x, y)
+        )
+
+        # Draw all the options
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
+
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
+

@@ -1,6 +1,6 @@
 import pygame
 
-from lexicon.items import Word
+from lexicon.items import Word, Letter
 from mechanics.minimap import Minimap, want_to_launch_map
 from sounds.play_sound import play_transformed_thai_word
 
@@ -10,18 +10,14 @@ class Presentation(object):
     An interactive screen that shows a word
     """
 
-    def __init__(self, al, word: Word, from_learning=False, from_dex=False):
-        self.al = al
-        self.word = word
-        # parameters
-        self.from_learning = from_learning
-        self.from_dex = from_dex
+    def __init__(self):
+        self.al = None
+        self.presented = None
+        self.from_learning = None
+        self.from_dex = None
         # drawing
-        self.selector_on_sound = False
-        self.selector_on_map = False
-        # obtained from DB
-        self.sentences = word.get_sentences()
-        self.selected_sentence_index = 0
+        self.selector_on_sound = None
+        self.selector_on_map = None
 
     def interact(self):
         ui = self.al.ui
@@ -32,10 +28,10 @@ class Presentation(object):
                 ui.hover = None
         if ui.click:
             if self.on_sound(ui.click, ui):
-                play_transformed_thai_word(self.word.thai)
+                play_transformed_thai_word(self.presented.thai)
                 ui.click = None
             if self.from_dex and self.on_map(ui.click, ui):
-                want_to_launch_map(self.al, interest_point=(self.word.x, self.word.y))
+                want_to_launch_map(self.al, interest_point=(self.presented.x, self.presented.y))
                 ui.click = None
             if self.outside_presentation(ui.click, ui):
                 self.al.active_presentation = None
@@ -55,7 +51,7 @@ class Presentation(object):
                 self.selected_sentence_index = len(self.sentences) - 1
         if self.from_dex and ui.m:
             ui.m = False
-            want_to_launch_map(self.al, interest_point=(self.word.x, self.word.y))
+            want_to_launch_map(self.al, interest_point=(self.presented.x, self.presented.y))
         if self.al.ui.escape:
             self.al.active_presentation = None
             self.al.ui.escape = False
@@ -106,6 +102,29 @@ class Presentation(object):
         )
 
     def draw(self):
+        pass
+
+
+class WordPresentation(Presentation):
+    """
+    An interactive screen that shows a word
+    """
+
+    def __init__(self, al, presented: Word, from_learning=False, from_dex=False):
+        super().__init__()
+        self.al = al
+        self.presented = presented
+        # parameters
+        self.from_learning = from_learning
+        self.from_dex = from_dex
+        # drawing
+        self.selector_on_sound = False
+        self.selector_on_map = False
+        # obtained from DB
+        self.sentences = presented.get_sentences()
+        self.selected_sentence_index = 0
+
+    def draw(self):
         ui = self.al.ui
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
@@ -125,13 +144,13 @@ class Presentation(object):
         # Draw Thai word
         x = ui.percent_width(0.26)
         y = ui.percent_height(0.15)
-        screen.blit(ui.fonts.garuda64.render(self.word.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(ui.fonts.garuda64.render(self.presented.thai, True, (0, 0, 0)), (x, y))
 
         # Draw English
         x = ui.percent_width(0.26)
         y = ui.percent_height(0.27)
         screen.blit(
-            ui.fonts.garuda48.render(self.word.english, True, (0, 0, 0)), (x, y)
+            ui.fonts.garuda48.render(self.presented.english, True, (0, 0, 0)), (x, y)
         )
 
         if self.from_dex:
@@ -140,7 +159,7 @@ class Presentation(object):
         if self.from_dex:
             x = ui.percent_width(0.26)
             y += ui.percent_height(0.10)
-            s = f"Level: {self.word.level}  XP: {self.word.total_xp}"
+            s = f"Level: {self.presented.level}  XP: {self.presented.total_xp}"
             screen.blit(ui.fonts.garuda16.render(s, True, (0, 0, 0)), (x, y))
 
         try:
@@ -162,3 +181,61 @@ class Presentation(object):
 
         except IndexError:
             pass
+
+
+class LetterPresentation(Presentation):
+    """
+    An interactive screen that shows a letter
+    """
+
+    def __init__(self, al, presented: "Letter", from_learning=False, from_dex=False):
+        super().__init__()
+        self.al = al
+        self.presented = presented
+        # parameters
+        self.from_learning = from_learning
+        self.from_dex = from_dex
+        # drawing
+        self.selector_on_sound = False
+        self.selector_on_map = False
+        # Show the 10 most early words using that letter
+        # self.words = presented.get_words()
+        # self.selected_word_index = 0
+
+    def draw(self):
+        ui = self.al.ui
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        height = ui.percent_height(0.76)
+        width = ui.percent_width(0.76)
+
+        screen = ui.screen
+        pygame.draw.rect(screen, (180, 180, 180), (x, y, width, height))
+        pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
+
+        # draw sound
+        sound_x = ui.percent_width(0.15)
+        sound_y = ui.percent_height(0.14)
+        sound = "sound_icon_green" if self.selector_on_sound else "sound_icon"
+        ui.screen.blit(ui.images[sound], [sound_x, sound_y])
+
+        # Draw Thai word
+        x = ui.percent_width(0.26)
+        y = ui.percent_height(0.15)
+        screen.blit(ui.fonts.garuda64.render(self.presented.thai, True, (0, 0, 0)), (x, y))
+
+        # Draw English
+        x = ui.percent_width(0.26)
+        y = ui.percent_height(0.27)
+        screen.blit(
+            ui.fonts.garuda48.render(self.presented.english, True, (0, 0, 0)), (x, y)
+        )
+
+        if self.from_dex:
+            self.draw_map_button()
+
+        if self.from_dex:
+            x = ui.percent_width(0.26)
+            y += ui.percent_height(0.10)
+            s = f"Level: {self.presented.level}  XP: {self.presented.total_xp}"
+            screen.blit(ui.fonts.garuda16.render(s, True, (0, 0, 0)), (x, y))

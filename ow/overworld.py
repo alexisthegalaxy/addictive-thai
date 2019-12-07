@@ -283,6 +283,8 @@ class Mas(object):
         self.old_sukhothai = Ma(filename="old_sukhothai", mas=self, x_shift=429, y_shift=514)
         self.bua_yai = Ma(filename="bua_yai", mas=self, x_shift=795, y_shift=699)
         self.phon = Ma(filename="phon", mas=self, x_shift=865, y_shift=644)
+        self.chaiyaphum_chatturat = Ma(filename="chaiyaphum_chatturat", mas=self, x_shift=750, y_shift=715)
+        self.chatturat = Ma(filename="chatturat", mas=self, x_shift=704, y_shift=762)
         self.ko_kut = Ma(filename="ko_kut", mas=self, x_shift=806, y_shift=1303)
 
         # inns
@@ -297,6 +299,7 @@ class Mas(object):
         self.inn_phitsanulok = Ma(filename="inn_phitsanulok", mas=self)
         self.inn_phitsanulok_2 = Ma(filename="inn_phitsanulok_2", mas=self)
         self.inn_bua_yai = Ma(filename="inn_bua_yai", mas=self)
+        self.inn_chatturat = Ma(filename="inn_chatturat", mas=self)
 
         self.house_learner_f2 = Ma(filename="house_learner_f2", mas=self, parent=self.chaiyaphum)
         self.house_learner_f1 = Ma(filename="house_learner_f1", mas=self, parent=self.chaiyaphum)
@@ -784,3 +787,15 @@ class Mas(object):
 
         self.chumphae_khonkaen.get_cell_at(7, 37).goes_to = (self.chumphae, 132, 25)
         self.chumphae.get_cell_at(133, 25).goes_to = (self.chumphae_khonkaen, 8, 37)
+
+        # chatturat
+        self.buengsamphan_chaiyaphum.get_cell_at(66, 37).goes_to = (self.chaiyaphum_chatturat, 35, 11)
+        self.chaiyaphum_chatturat.get_cell_at(36, 11).goes_to = (self.buengsamphan_chaiyaphum, 67, 37)
+        self.chaiyaphum_chatturat.get_cell_at(24, 11).goes_to = (self.buengsamphan_chaiyaphum, 55, 37)
+        self.buengsamphan_chaiyaphum.get_cell_at(56, 37).goes_to = (self.chaiyaphum_chatturat, 25, 11)
+
+        self.chaiyaphum_chatturat.get_cell_at(28, 52).goes_to = (self.chatturat, 74, 5)
+        self.chatturat.get_cell_at(74, 4).goes_to = (self.chaiyaphum_chatturat, 28, 51)
+
+        self.chatturat.get_cell_at(66, 14).goes_to = (self.inn_chatturat, 4, 7)
+        self.inn_chatturat.get_cell_at(4, 8).goes_to = (self.chatturat, 66, 15)

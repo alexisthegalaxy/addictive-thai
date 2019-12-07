@@ -101,6 +101,7 @@ to_convert = [
     "inn_kasetsombum",
     "inn_phitsanulok",
     "inn_phitsanulok_2",
+    "inn_chatturat",
     "kasetsombum_house1",
     "kasetsombum_house2",
     "kasetsombum_house3",

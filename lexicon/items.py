@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+import random
 from typing import List, Optional
 import json
 from db import get_db_cursor, get_db_conn
@@ -392,3 +395,152 @@ class Sentences(object):
 #     # def print(self):
 #     #     for word in self.words:
 #     #         word.print()
+
+
+class Letter(Growable):
+    def __init__(
+        self,
+        id: int,
+        thai: str = "no_thai",
+        pron="no_pron",
+        english="no_english",
+        alphabet_index=-1,
+        final=None,
+        _class="LOW/MID/HIGH/VOWEL",
+        frequency_index=-1,
+    ):
+        # A letter is very similar to a word,
+        # but the subset of tests is different, the presentation screen is different
+        super().__init__()
+        self.id = id
+        self.thai = thai
+        self.pron = pron
+        self.english = english
+        self.alphabet_index = alphabet_index
+        self.final = final
+        self._class = _class
+        self.frequency_index = frequency_index
+
+    # def increase_xp(self, al, value):
+    #     super().increase_xp(al, value)
+    #     learner_id = get_active_learner_id()
+    #     CURSOR.execute(
+    #         f"UPDATE user_word "
+    #         f"SET total_xp = {self.total_xp}, level = {self.level} "
+    #         f"WHERE user_word.word_id = {self.id} "
+    #         f"AND user_word.user_id = {learner_id}"
+    #     )
+    #     CONN.commit()
+
+    # def get_total_xp(self) -> int:
+    #     # TODO Alexis: add a check in the case that there is no column at all
+    #     total_xp = list(CURSOR.execute(
+    #         f"SELECT uw.total_xp FROM user_word uw "
+    #         f"JOIN words w on w.id = uw.word_id "
+    #         f"JOIN users u on u.id = uw.user_id "
+    #         f"WHERE w.id = '{self.id}'"
+    #         f"AND u.is_playing"
+    #     ))
+    #     if not total_xp:
+    #         user_id = get_active_learner_id()
+    #         CURSOR.execute(
+    #             f"INSERT INTO user_word (word_id, user_id, total_xp, level, next_threshold, previous_threshold) "
+    #             f"VALUES ('{self.id}', '{user_id}', 0, 1, 1, 0)"
+    #         )
+    #         CONN.commit()
+    #         return 0
+    #
+    #     return total_xp[0][0]
+
+    @classmethod
+    def get_known_letters(cls) -> List[Letter]:
+        letters = []
+        for letter_db in list(get_db_cursor().execute(
+            f"SELECT l.id, l.thai, pron, english, alphabet_index, final, class, frequency_index "
+            f"FROM letters l "
+            f"JOIN user_letter ul ON l.id = ul.letter_id "
+            f"JOIN users u on u.id = ul.user_id "
+            f"WHERE ul.total_xp > 5 AND u.is_playing = 1"
+        )):
+            letter = Letter(
+                id=letter_db[0],
+                thai=letter_db[1],
+                pron=letter_db[2],
+                english=letter_db[3],
+                alphabet_index=letter_db[4],
+                final=letter_db[5],
+                _class=letter_db[6],
+                frequency_index=letter_db[7],
+            )
+            letters.append(letter)
+        return letters
+
+    @classmethod
+    def get_random_letter(cls) -> Letter:
+        random_letter_db = random.choice(
+            list(
+                CURSOR.execute(
+                    f"""
+        SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index
+        FROM letters
+        """
+                )
+            )
+        )
+        return Letter(
+            id=random_letter_db[0],
+            thai=random_letter_db[1],
+            pron=random_letter_db[2],
+            english=random_letter_db[3],
+            alphabet_index=random_letter_db[4],
+            final=random_letter_db[5],
+            _class=random_letter_db[6],
+            frequency_index=random_letter_db[7],
+        )
+
+    # @classmethod
+    # def get_all(cls):
+    #     answers = list(get_db_cursor().execute(f"SELECT * FROM words"))
+    #     words = []
+    #     for answer in answers:
+    #         id = answer[0]
+    #         split_form = answer[1]
+    #         english = answer[2]
+    #         tones = answer[3]
+    #         pos = answer[4]
+    #         thai = answer[5]
+    #         words.append(Word(
+    #             id=id,
+    #             split_form=split_form,
+    #             thai=thai,
+    #             english=english,
+    #             tones=tones,
+    #             pos=pos,
+    #         ))
+    #     return words
+    #
+    @classmethod
+    def get_by_thai(cls, thai) -> Letter:
+        letter_db = list(
+            CURSOR.execute(
+                f"""
+                SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index
+                FROM letters
+                WHERE thai == '{thai}'
+                """
+            )
+        )[0]
+        return Letter(
+            id=letter_db[0],
+            thai=letter_db[1],
+            pron=letter_db[2],
+            english=letter_db[3],
+            alphabet_index=letter_db[4],
+            final=letter_db[5],
+            _class=letter_db[6],
+            frequency_index=letter_db[7],
+        )
+
+    def __str__(self):
+        return f"{self.thai} - {self.english}\n"
+

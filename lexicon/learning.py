@@ -1,8 +1,10 @@
 from enum import Enum
+from typing import Union
 
-from lexicon.presentation import Presentation
+from lexicon.items import Word, Letter
+from lexicon.presentation import LetterPresentation, WordPresentation
 from lexicon.test_services import pick_sentence_test
-from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6
+from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6, ThaiLetterFromEnglish4
 from sounds.play_sound import play_transformed_thai_word
 
 
@@ -20,23 +22,6 @@ class LearningStep(Enum):
 
 
 class Learning(object):
-    def __init__(self, word, al, npc):
-        self.al = al
-        self.word = word
-        self.step = LearningStep.NONE
-        self.test_1 = ThaiFromEnglish4(al, correct_word=word, learning=self)
-        self.test_2 = ThaiFromEnglish4(al, correct_word=word, learning=self)  # TODO
-        self.test_3 = ThaiFromEnglish6(al, correct_word=word, learning=self)
-        self.test_4 = ThaiFromEnglish4(al, correct_word=word, learning=self)  # TODO
-        # self.test_5 = TappingTestSentence(al, correct_word=word, learning=self)
-        # test_5 is a sentence if possible, a Thai from English 6 otherwise
-        self.test_5 = pick_sentence_test(al, word, learning=self)
-        if not self.test_5:
-            self.test_5 = ThaiFromEnglish6(al, correct_word=word, learning=self)
-        self.npc = npc
-        self.al.active_presentation = Presentation(al, word, from_learning=True)
-        play_transformed_thai_word(self.word.thai)
-
     def draw(self):
         """
         The showing is taken care of by the tests during the test phases.
@@ -113,3 +98,46 @@ class Learning(object):
                 self.al.active_test = self.test_4
             if self.step == LearningStep.TEST5:
                 self.al.active_test = self.test_5
+
+
+class WordLearning(Learning):
+    def __init__(self, word: Union[Word, Letter], al, npc):
+        self.al = al
+        self.word = word
+        self.npc = npc
+        self.step = LearningStep.NONE
+
+        self.al.active_presentation = WordPresentation(al, word, from_learning=True)
+        self.test_1 = ThaiFromEnglish4(al, correct_word=word, learning=self)
+        self.test_2 = ThaiFromEnglish4(al, correct_word=word, learning=self)  # TODO
+        self.test_3 = ThaiFromEnglish6(al, correct_word=word, learning=self)
+        self.test_4 = ThaiFromEnglish4(al, correct_word=word, learning=self)  # TODO
+        # self.test_5 = TappingTestSentence(al, correct_word=word, learning=self)
+        # test_5 is a sentence if possible, a Thai from English 6 otherwise
+        self.test_5 = pick_sentence_test(al, word, learning=self)
+        if not self.test_5:
+            self.test_5 = ThaiFromEnglish6(al, correct_word=word, learning=self)
+
+        play_transformed_thai_word(self.word.thai)
+
+
+class LetterLearning(Learning):
+    def __init__(self, letter: Letter, al, npc):
+        self.al = al
+        self.letter = letter
+        self.npc = npc
+        self.step = LearningStep.NONE
+
+        self.al.active_presentation = LetterPresentation(al, letter, from_learning=True)
+        self.test_1 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
+        self.test_2 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
+        self.test_3 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
+        self.test_4 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
+        self.test_5 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
+        # self.test_2 = EnglishLetterFromThai4(al, learning=self)
+        # self.test_3 = EnglishLetterFromThai16(al, learning=self)
+        # self.test_4 = ThaiLetterFromEnglish16(al, correct=letter, learning=self)
+        # self.test_5 = ThaiLetterFromSound(al, letter, learning=self)
+        # if not self.test_5:
+        #     self.test_5 = ThaiLetterFromEnglish6(al, correct=letter, learning=self)
+        play_transformed_thai_word(self.letter.thai)

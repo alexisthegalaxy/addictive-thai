@@ -5,21 +5,30 @@ It serves as a tutorial for all functionalities.
     At the beginning, the brother says:
         Hey [Name], you're ready?
         As you know, Thailand faces a great danger,
-        and that's why we brought you on this island:
-        to learn the Thai alphabet.
-        Each inhabitant of the island will teach you a new letter,
+        and that's why we brought you on this island: to learn the Thai alphabet.
+        We organise here a bootcamp for those who want to join the fight.
+        Everyone on the island is a rebel who will teach you a new letter,
             so talk to everybody!
-        Come talk to me if you've learnt enoough,
+        Come talk to me again if you've learnt enough,
         and want to start your adventure on the main land.
 
-        You want to leave the island and start your adventure on the continent?
+        2 - You want to leave the island and start your adventure on the continent?
+
+    Old woman:
+    So, you will try to save the Thai language from oblivion?
+    Let me teach you the most common consonant first: N.
+
+
+
+
 
 Then, we start with the easiest of the lower letters of the alphabet
 
-1 - go gai
-2 - vowel a
-3 - vowel aa
-4 - kho khwai
+1 - น - The most common letter in Thai
+2 - -ั-
+3 - ร
+4 - า
+5 - ก - the first letter of the Thai alphabet
 
 How do we test for the knowledge of the player without using the mechanics of:
     - grass
@@ -35,3 +44,127 @@ Vowels:
     ii
 
 
+Frequency list:
+1  0.0515 : -า-:U+0E32 THAI CHARACTER SARA AA
+2  0.0446 : -น-:U+0E19 THAI CHARACTER NO NU
+3  0.0428 : -ร-:U+0E23 THAI CHARACTER RO RUA
+4  0.0321 : -อ-:U+0E2D THAI CHARACTER O ANG
+5  0.0311 : -ก-:U+0E01 THAI CHARACTER KO KAI
+6  0.0306 : -เ-:U+0E40 THAI CHARACTER SARA E
+7  0.0293 : -ง-:U+0E07 THAI CHARACTER NGO NGU
+8  0.0282 : -่-:U+0E48 THAI CHARACTER MAI EK
+9  0.0258 : -ม-:U+0E21 THAI CHARACTER MO MA
+10 0.0255 : -ั-:U+0E31 THAI CHARACTER MAI HAN-AKAT
+11 0.0213 : -ย-:U+0E22 THAI CHARACTER YO YAK
+12 0.0211 : -ี-:U+0E35 THAI CHARACTER SARA II
+13 0.0211 : -้-:U+0E49 THAI CHARACTER MAI THO
+14 0.0206 : -ล-:U+0E25 THAI CHARACTER LO LING
+15 0.0195 : -ว-:U+0E27 THAI CHARACTER WO WAEN
+16 0.0180 : -ิ-:U+0E34 THAI CHARACTER SARA I
+17 0.0178 : -ท-:U+0E17 THAI CHARACTER THO THAHAN
+18 0.0178 : -ด-:U+0E14 THAI CHARACTER DO DEK
+19 0.0167 : -ส-:U+0E2A THAI CHARACTER SO SUA
+20 0.0158 : -ต-:U+0E15 THAI CHARACTER TO TAO
+21 0.0144 : -ะ-:U+0E30 THAI CHARACTER SARA A
+22 0.0139 : -บ-:U+0E1A THAI CHARACTER BO BAIMAI
+23 0.0139 : -ป-:U+0E1B THAI CHARACTER PO PLA
+24 0.0128 : -ค-:U+0E04 THAI CHARACTER KHO KHWAI
+25 0.0125 : -ห-:U+0E2B THAI CHARACTER HO HIP
+26 0.0114 : -แ-:U+0E41 THAI CHARACTER SARA AE
+27 0.0112 : -พ-:U+0E1E THAI CHARACTER PHO PHAN
+28 0.0108 : -จ-:U+0E08 THAI CHARACTER CHO CHAN
+
+1%
+0.0096 : -์-:U+0E4C THAI CHARACTER THANTHAKHAT
+0.0093 : -ช-:U+0E0A THAI CHARACTER CHO CHANG
+0.0080 : -ข-:U+0E02 THAI CHARACTER KHO KHAI
+0.0080 : -ุ-:U+0E38 THAI CHARACTER SARA U
+0.0075 : -ใ-:U+0E43 THAI CHARACTER SARA AI MAIMUAN
+0.0073 : -ื-:U+0E37 THAI CHARACTER SARA UEE
+0.0071 : -ไ-:U+0E44 THAI CHARACTER SARA AI MAIMALAI
+0.0066 : -โ-:U+0E42 THAI CHARACTER SARA O
+0.0065 : -็-:U+0E47 THAI CHARACTER MAITAIKHU
+0.0064 : -ู-:U+0E39 THAI CHARACTER SARA UU
+0.0059 : -ศ-:U+0E28 THAI CHARACTER SO SALA
+0.0054 : -ำ-:U+0E33 THAI CHARACTER SARA AM
+0.0037 : -ึ-:U+0E36 THAI CHARACTER SARA UE
+0.0036 : -ซ-:U+0E0B THAI CHARACTER SO SO
+0.0031 : -ถ-:U+0E16 THAI CHARACTER THO THUNG
+0.0031 : -ธ-:U+0E18 THAI CHARACTER THO THONG
+0.0028 : -ภ-:U+0E20 THAI CHARACTER PHO SAMPHAO
+0.0028 : -ณ-:U+0E13 THAI CHARACTER NO NEN
+0.0028 : -ษ-:U+0E29 THAI CHARACTER SO RUSI
+0.0024 : -ผ-:U+0E1C THAI CHARACTER PHO PHUNG
+0.0022 : -ญ-:U+0E0D THAI CHARACTER YO YING
+0.0017 : -ฟ-:U+0E1F THAI CHARACTER FO FAN
+0.0010 : -ฐ-:U+0E10 THAI CHARACTER THO THAN
+
+.1 %
+0.0008 : -ฮ-:U+0E2E THAI CHARACTER HO NOKHUK
+0.0006 : -ฉ-:U+0E09 THAI CHARACTER CHO CHING
+0.0006 : -ฤ-:U+0E24 THAI CHARACTER RU
+0.0006 : -ๆ-:U+0E46 THAI CHARACTER MAIYAMOK
+0.0005 : -ฝ-:U+0E1D THAI CHARACTER FO FA
+0.0004 : -ฎ-:U+0E0E THAI CHARACTER DO CHADA
+0.0004 : -ฏ-:U+0E0F THAI CHARACTER TO PATAK
+0.0003 : -ฒ-:U+0E12 THAI CHARACTER THO PHUTHAO
+0.0002 : -๊-:U+0E4A THAI CHARACTER MAI TRI
+0.0002 : -ฑ-:U+0E11 THAI CHARACTER THO NANGMONTHO
+0.0002 : -ฯ-:U+0E2F THAI CHARACTER PAIYANNOI
+0.0002 : -ฬ-:U+0E2C THAI CHARACTER LO CHULA
+0.0002 : -ฆ-:U+0E06 THAI CHARACTER KHO RAKHANG
+0.0001 : -๋-:U+0E4B THAI CHARACTER MAI CHATTAWA
+
+Do we have different tests for letters?
+Yes. because we will have random strings, for example:
+na -> นา
+These will all be words, but we're not tested on the meaning.
+
+- น -> N
+- N -> น
+
+
+1  ก	ก ไก่	ko kai	chicken	k	k	[k]	[k̚]	mid
+2  ข	ข ไข่	kho khai	egg	kh	k	[kʰ]	[k̚]	high
+3  ฃ	ฃ ขวด	kho khuat	bottle (obsolete)	kh	k	[kʰ]	[k̚]	high
+4  ค	ค ควาย	kho khwai	buffalo	kh	k	[kʰ]	[k̚]	low
+5  ฅ	ฅ คน	kho khon	person (obsolete)	kh	k	[kʰ]	[k̚]	low
+6  ฆ	ฆ ระฆัง	kho ra-khang	bell	kh	k	[kʰ]	[k̚]	low
+7  ง	ง งู	ngo ngu	snake	ng	ng	[ŋ]	[ŋ]	low
+8  จ	จ จาน	cho chan	plate	ch	t	[tɕ]	[t̚]	mid
+9  ฉ	ฉ ฉิ่ง	cho ching	cymbals	ch	 –	[tɕʰ]	–	high
+10 ช	ช ช้าง	cho chang	elephant	ch	t	[tɕʰ]	[t̚]	low
+11 ซ	ซ โซ่	so so	chain	s	t	[s]	[t̚]	low
+12 ฌ	ฌ เฌอ	cho choe	tree	ch	 –	[tɕʰ]	–	low
+13 ญ[1]	ญ หญิง	yo ying	woman	y	n	[j]	[n]	low
+14 ฎ	ฎ ชฎา	do cha-da	headdress	d	t	[d]	[t̚]	mid
+15 ฏ	ฏ ปฏัก	to pa-tak	goad, javelin	t	t	[t]	[t̚]	mid
+16 ฐ[2]	ฐ ฐาน	tho than	pedestal	th	t	[tʰ]	[t̚]	high
+17 ฑ	ฑ มณโฑ	tho montho	Montho, character from Ramayana	th	t	[tʰ]	[t̚]	low
+18 ฒ	ฒ ผู้เฒ่า	tho phu-thao	elder	th	t	[tʰ]	[t̚]	low
+19 ณ	ณ เณร	no nen	samanera	n	n	[n]	[n]	low
+20 ด	ด เด็ก	do dek	child	d	t	[d]	[t̚]	mid
+21 ต	ต เต่า	to tao	turtle	t	t	[t]	[t̚]	mid
+22 ถ	ถ ถุง	tho thung	sack	th	t	[tʰ]	[t̚]	high
+23 ท	ท ทหาร	tho thahan	soldier	th	t	[tʰ]	[t̚]	low
+24 ธ	ธ ธง	tho thong	flag	th	t	[tʰ]	[t̚]	low
+25 น	น หนู	no nu	mouse	n	n	[n]	[n]	low
+26 บ	บ ใบไม้	bo baimai	leaf	b	p	[b]	[p̚]	mid
+27 ป	ป ปลา	po pla	fish	p	p	[p]	[p̚]	mid
+28 ผ	ผ ผึ้ง	pho phueng	bee	ph	 –	[pʰ]	–	high
+29 ฝ	ฝ ฝา	fo fa	lid	f	 –	[f]	–	high
+30 พ	พ พาน	pho phan	phan	ph	p	[pʰ]	[p̚]	low
+31 ฟ	ฟ ฟัน	fo fan	teeth	f	p	[f]	[p̚]	low
+32 ภ	ภ สำเภา	pho sam-phao	Junk	ph	p	[pʰ]	[p̚]	low
+33 ม	ม ม้า	mo ma	horse	m	m	[m]	[m]	low
+34 ย	ย ยักษ์	yo yak	giant, yaksha	y	–
+35 ร	ร เรือ	ro ruea	boat	r	n	[r]	[n]	low
+36 ล	ล ลิง	lo ling	monkey	l	n	[l]	[n]	low
+37 ว	ว แหวน	wo waen	ring	w	–[4]	[w]	–	low
+38 ศ	ศ ศาลา	so sala	pavilion, sala	s	t	[s]	[t̚]	high
+39 ษ	ษ ฤๅษี	so rue-si	hermit	s	t	[s]	[t̚]	high
+40 ส	ส เสือ	so suea	tiger	s	t	[s]	[t̚]	high
+41 ห	ห หีบ	ho hip	chest, box	h	–	[h]	–	high
+42 ฬ	ฬ จุฬา	lo chu-la	kite	l	n	[l]	[n]	low
+43 อ	อ อ่าง	o ang	basin	–[5]	 –	[ʔ]	–	mid
+44 ฮ	ฮ นกฮูก	ho nok-huk	owl	h	 –	[h]	–	low

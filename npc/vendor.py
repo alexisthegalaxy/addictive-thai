@@ -32,9 +32,9 @@ class Vendor(Npc):
         for dialog in self.dialogs:
             for i, line in enumerate(dialog):
                 dialog[i] = line.replace("[Name]", al.learner.name)
-        if self.taught_word:
+        if self.taught:
             self.review_dialog[0] = (
-                self.review_dialog[0] + f" {self.taught_word.thai} ?"
+                self.review_dialog[0] + f" {self.taught.thai} ?"
             )
 
     def special_interaction(self, al):
