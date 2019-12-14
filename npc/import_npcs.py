@@ -4810,6 +4810,12 @@ def ko_kut(al):
                 "But you cannot just write า, because each vowel in Thai needs a consonant.",
                 "So you use instead the silent consonant placeholder อ.",
                 "So, \"uncle\" is อา.",
+            ],
+            defeat_dialog=[
+                "อ is quite easy to remember, because it looks like an o.",
+                "Because it's both a consonnant and a vowel,",
+                "\"ออ\" is a syllable read \"o\", meaning \"to congregate\"!",
+                "There's also this crazy word \"เออออ\", read \"er o\", meaning \"to agree\"!"
             ]
         ),
         Npc(

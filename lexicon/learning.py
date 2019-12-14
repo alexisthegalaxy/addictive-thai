@@ -131,8 +131,7 @@ class LetterLearning(Learning):
 
         self.al.active_presentation = LetterPresentation(al, letter, from_learning=True)
         self.test_1 = EnglishLetterFromThai4(self.al, learning=self)
-
-        play_transformed_thai_word(self.letter.thai)
+        play_transformed_thai_word(self.letter.audio)
 
     def test_finished(self, failed=False):
         """this is triggered by the test when it ends"""
@@ -148,4 +147,7 @@ class LetterLearning(Learning):
             if self.step == LearningStep.TEST4:
                 self.al.active_test = ThaiLetterFromEnglish16(self.al, correct=self.letter, learning=self)
             if self.step == LearningStep.TEST5:  # TODO ThaiLetterFromSound
+                # TODO The last test should be:
+                # How to write the english sound 'nao'
+                # There is no way to get it wrong,
                 self.al.active_test = ThaiLetterFromEnglish16(self.al, correct=self.letter, learning=self)

@@ -412,6 +412,7 @@ class Letter(Growable):
         final=None,
         _class="LOW/MID/HIGH/VOWEL",
         frequency_index=-1,
+        audio='',
     ):
         # A letter is very similar to a word,
         # but the subset of tests is different, the presentation screen is different
@@ -424,6 +425,9 @@ class Letter(Growable):
         self.final = final
         self._class = _class
         self.frequency_index = frequency_index
+        self.audio = audio
+
+        print('self.audio', self.audio)
 
     # def increase_xp(self, al, value):
     #     super().increase_xp(al, value)
@@ -460,7 +464,7 @@ class Letter(Growable):
     def get_known_letters(cls) -> List[Letter]:
         letters = []
         for letter_db in list(get_db_cursor().execute(
-            f"SELECT l.id, l.thai, pron, english, alphabet_index, final, class, frequency_index "
+            f"SELECT l.id, l.thai, pron, english, alphabet_index, final, class, frequency_index, audio "
             f"FROM letters l "
             f"JOIN user_letter ul ON l.id = ul.letter_id "
             f"JOIN users u on u.id = ul.user_id "
@@ -475,6 +479,7 @@ class Letter(Growable):
                 final=letter_db[5],
                 _class=letter_db[6],
                 frequency_index=letter_db[7],
+                audio=letter_db[8],
             )
             letters.append(letter)
         return letters
@@ -485,7 +490,7 @@ class Letter(Growable):
             list(
                 CURSOR.execute(
                     f"""
-        SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index
+        SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index, audio
         FROM letters
         """
                 )
@@ -500,6 +505,7 @@ class Letter(Growable):
             final=random_letter_db[5],
             _class=random_letter_db[6],
             frequency_index=random_letter_db[7],
+            audio=random_letter_db[8],
         )
 
     @classmethod
@@ -533,7 +539,7 @@ class Letter(Growable):
         letter_db = list(
             CURSOR.execute(
                 f"""
-                SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index
+                SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index, audio
                 FROM letters
                 WHERE id == '{chosen_id}'
                 """
@@ -549,6 +555,7 @@ class Letter(Growable):
             final=letter_db[5],
             _class=letter_db[6],
             frequency_index=letter_db[7],
+            audio=letter_db[8],
         )
 
     # @classmethod
@@ -577,7 +584,7 @@ class Letter(Growable):
         letter_db = list(
             CURSOR.execute(
                 f"""
-                SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index
+                SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index, audio
                 FROM letters
                 WHERE thai == '{thai}'
                 """
@@ -592,6 +599,7 @@ class Letter(Growable):
             final=letter_db[5],
             _class=letter_db[6],
             frequency_index=letter_db[7],
+            audio=letter_db[8],
         )
 
     def __str__(self):

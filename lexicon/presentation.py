@@ -28,7 +28,12 @@ class Presentation(object):
                 ui.hover = None
         if ui.click:
             if self.on_sound(ui.click, ui):
-                play_transformed_thai_word(self.presented.thai)
+                print('self.presented.audio', self.presented.audio)
+                if hasattr(self.presented, 'audio'):
+                    print('self.presented.audio', self.presented.audio)
+                    play_transformed_thai_word(self.presented.audio)
+                else:
+                    play_transformed_thai_word(self.presented.thai)
                 ui.click = None
             if self.from_dex and self.on_map(ui.click, ui):
                 want_to_launch_map(self.al, interest_point=(self.presented.x, self.presented.y))

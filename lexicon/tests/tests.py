@@ -83,6 +83,8 @@ class Test(object):
         self.learning = learning
         self.selected_option_index = 0
         self.test_success_callback = test_success_callback
+        self.will_hurt = True
+        self.has_audio_property = False
 
     def draw(self):
         pass
@@ -104,7 +106,10 @@ class Test(object):
     def succeeds(self):
         # 2 - Play sound
         try:
-            play_transformed_thai_word(self.correct.thai)
+            if self.has_audio_property:
+                play_transformed_thai_word(self.correct.audio)
+            else:
+                play_transformed_thai_word(self.correct.thai)
         except pygame.error:
             play_thai_word("right")
 
@@ -129,7 +134,8 @@ class Test(object):
 
     def fails(self):
         # 1 - Hurts the player.
-        self.al.learner.hurt(1)
+        if self.will_hurt:
+            self.al.learner.hurt(1)
 
         # 2 - Play sound.
         play_thai_word("wrong")
@@ -251,7 +257,10 @@ class ToneFromThaiAndSound(Test):
         if al.ui.click:
             if self.point_on_sound(al.ui, al.ui.click):
                 al.ui.click = False
-                play_transformed_thai_word(self.correct.thai)
+                if self.has_audio_property:
+                    play_transformed_thai_word(self.correct.audio)
+                else:
+                    play_transformed_thai_word(self.correct.thai)
         for box in self.boxes:
             box.interact(al, self)
         if self.selected_option_index:
@@ -790,7 +799,10 @@ class FromSound(Test):
         if al.ui.space:
             al.ui.space = False
             if self.selector_on_sound:
-                play_transformed_thai_word(self.correct.thai)
+                if self.has_audio_property:
+                    play_transformed_thai_word(self.correct.audio)
+                else:
+                    play_transformed_thai_word(self.correct.thai)
             else:
                 self.learner_select_option()
         if al.ui.hover:
@@ -798,7 +810,10 @@ class FromSound(Test):
         if al.ui.click:
             if self.point_on_sound(al.ui, al.ui.click):
                 al.ui.click = False
-                play_transformed_thai_word(self.correct.thai)
+                if self.has_audio_property:
+                    play_transformed_thai_word(self.correct.audio)
+                else:
+                    play_transformed_thai_word(self.correct.thai)
 
     def learner_select_option(self):
         option = self.selected_option_index
@@ -1234,6 +1249,8 @@ class ThaiLetterFromEnglish(Test):
         self, al: "All", correct: Letter, learning=None, test_success_callback=None
     ):
         super().__init__(al, learning, test_success_callback)
+        self.will_hurt = False
+        self.has_audio_property = True
         self.correct: Letter = correct
         self.number_of_distr: int = 3
 
@@ -1351,7 +1368,7 @@ class ThaiLetterFromEnglish4(ThaiLetterFromEnglish):
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct.pron, True, (0, 0, 0)), (x, y)
+            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -1448,7 +1465,7 @@ class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct.pron, True, (0, 0, 0)), (x, y)
+            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -1484,6 +1501,8 @@ class EnglishLetterFromThai(Test):
         """
         super().__init__(al, learning, test_success_callback)
         self.number_of_distr: int = -1
+        self.will_hurt = False
+        self.has_audio_property = True
 
     def select_distractors(self):
         known_letters = Letter.get_known_letters()
@@ -1553,7 +1572,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.35),
                 width=al.ui.percent_width(0.32),
                 height=al.ui.percent_height(0.225),
-                string=self.choices[0].pron,
+                string=self.choices[0].english,
                 index=0,
             ),
             TestAnswerBox(
@@ -1561,7 +1580,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.35),
                 width=al.ui.percent_width(0.32),
                 height=al.ui.percent_height(0.225),
-                string=self.choices[1].pron,
+                string=self.choices[1].english,
                 index=1,
             ),
             TestAnswerBox(
@@ -1569,7 +1588,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.625),
                 width=al.ui.percent_width(0.32),
                 height=al.ui.percent_height(0.225),
-                string=self.choices[2].pron,
+                string=self.choices[2].english,
                 index=2,
             ),
             TestAnswerBox(
@@ -1577,7 +1596,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.625),
                 width=al.ui.percent_width(0.32),
                 height=al.ui.percent_height(0.225),
-                string=self.choices[3].pron,
+                string=self.choices[3].english,
                 index=3,
             ),
         ]
@@ -1647,7 +1666,7 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.35) + i * h * r,
                 width=w,
                 height=h,
-                string=letter.pron,
+                string=letter.english,
                 index=i,
             ) for i, letter in enumerate(self.choices[0:4])
         ] + [
@@ -1656,7 +1675,7 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.35) + i * h * r,
                 width=w,
                 height=h,
-                string=letter.pron,
+                string=letter.english,
                 index=i + 4,
             ) for i, letter in enumerate(self.choices[4:8])
         ] + [
@@ -1665,7 +1684,7 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.35) + i * h * r,
                 width=w,
                 height=h,
-                string=letter.pron,
+                string=letter.english,
                 index=i + 8,
             ) for i, letter in enumerate(self.choices[8:12])
         ] + [
@@ -1674,7 +1693,7 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
                 y=al.ui.percent_height(0.35) + i * h * r,
                 width=w,
                 height=h,
-                string=letter.pron,
+                string=letter.english,
                 index=i + 12,
             ) for i, letter in enumerate(self.choices[12:16])
         ]

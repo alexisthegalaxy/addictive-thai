@@ -29,7 +29,7 @@ Then, we start with the easiest of the lower letters of the alphabet
 
 3 - ร
     รา - to stop / fungus, mould
-4 - -ั-
+4 - _ั_
     นา - field
 5 - ก - the first letter of the Thai alphabet
     นัก - very / student, footballer, etc.
@@ -40,9 +40,13 @@ Then, we start with the easiest of the lower letters of the alphabet
 7 - เ
 8 - อ
 9 - ล
-10 - -ี-
+10 - _ี_
 11 - ง
 12 - ท
+13 - _ิ_
+14 - ด
+15 - ย
+16 - ว
 
 
 How do we test for the knowledge of the player without using the mechanics of:
@@ -60,24 +64,24 @@ Vowels:
 
 
 Frequency list:
-ok 1  0.0515 : -า-:U+0E32 THAI CHARACTER SARA AA
-ok 2  0.0446 : -น-:U+0E19 THAI CHARACTER NO NU
-ok 3  0.0428 : -ร-:U+0E23 THAI CHARACTER RO RUA
-ok 4  0.0321 : -อ-:U+0E2D THAI CHARACTER O ANG
-ok 5  0.0311 : -ก-:U+0E01 THAI CHARACTER KO KAI
-ok 6  0.0306 : -เ-:U+0E40 THAI CHARACTER SARA E
-ok 7  0.0293 : -ง-:U+0E07 THAI CHARACTER NGO NGU
+ok! 1  0.0515 : -า-:U+0E32 THAI CHARACTER SARA AA
+ok! 2  0.0446 : -น-:U+0E19 THAI CHARACTER NO NU
+ok! 3  0.0428 : -ร-:U+0E23 THAI CHARACTER RO RUA
+ok! 4  0.0321 : -อ-:U+0E2D THAI CHARACTER O ANG
+ok! 5  0.0311 : -ก-:U+0E01 THAI CHARACTER KO KAI
+ok! 6  0.0306 : -เ-:U+0E40 THAI CHARACTER SARA E
+ok! 7  0.0293 : -ง-:U+0E07 THAI CHARACTER NGO NGU
 8  0.0282 : -่-:U+0E48 THAI CHARACTER MAI EK
-ok 9  0.0258 : -ม-:U+0E21 THAI CHARACTER MO MA
-ok 10 0.0255 : -ั-:U+0E31 THAI CHARACTER MAI HAN-AKAT
-11 0.0213 : -ย-:U+0E22 THAI CHARACTER YO YAK
-12 0.0211 : -ี-:U+0E35 THAI CHARACTER SARA II
+ok! 9  0.0258 : -ม-:U+0E21 THAI CHARACTER MO MA
+ok! 10 0.0255 : -ั-:U+0E31 THAI CHARACTER MAI HAN-AKAT
+ok! 11 0.0213 : -ย-:U+0E22 THAI CHARACTER YO YAK
+ok! 12 0.0211 : -ี-:U+0E35 THAI CHARACTER SARA II
 13 0.0211 : -้-:U+0E49 THAI CHARACTER MAI THO
-ok 14 0.0206 : -ล-:U+0E25 THAI CHARACTER LO LING
+ok! 14 0.0206 : -ล-:U+0E25 THAI CHARACTER LO LING
 15 0.0195 : -ว-:U+0E27 THAI CHARACTER WO WAEN
-16 0.0180 : -ิ-:U+0E34 THAI CHARACTER SARA I
-ok 17 0.0178 : -ท-:U+0E17 THAI CHARACTER THO THAHAN
-18 0.0178 : -ด-:U+0E14 THAI CHARACTER DO DEK
+ok! 16 0.0180 : -ิ-:U+0E34 THAI CHARACTER SARA I
+ok! 17 0.0178 : -ท-:U+0E17 THAI CHARACTER THO THAHAN
+ok! 18 0.0178 : -ด-:U+0E14 THAI CHARACTER DO DEK
 19 0.0167 : -ส-:U+0E2A THAI CHARACTER SO SUA
 20 0.0158 : -ต-:U+0E15 THAI CHARACTER TO TAO
 21 0.0144 : -ะ-:U+0E30 THAI CHARACTER SARA A
