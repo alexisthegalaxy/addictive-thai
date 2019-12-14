@@ -120,6 +120,8 @@ class Test(object):
         try:
             if isinstance(self.correct, Word):
                 increase_xp(self.correct.thai, 1)
+            elif isinstance(self.correct, Letter):
+                increase_xp_letter_by_id(self.correct.id, 1)
             else:
                 increase_xp_letter_by_id(letter_id=self.correct.id, xp_amount=1)
         except Exception as e:

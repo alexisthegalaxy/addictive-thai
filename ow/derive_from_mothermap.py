@@ -79,6 +79,7 @@ class Mothermap(object):
             'chatturat': Daughtermap('chatturat', x=704, y=762, x2=799, y2=805),
             # Islands
             'ko_kut': Daughtermap('ko_kut', x=806, y=1303, x2=871, y2=1367),
+            'ko_mak': Daughtermap('ko_mak', x=816, y=1305, x2=859, y2=1334),
             # Rerun 'derive_from_mothermap' after modifications to that file.'
         }
 

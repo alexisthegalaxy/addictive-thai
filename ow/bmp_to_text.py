@@ -48,6 +48,7 @@ to_convert = [
     "house5",
     "normal_inn",
     "inn_ko_kut",
+    "ko_kut_cave_1",
     "banyaeng_cave",
     "phetchabun_school",
     "buengsamphan_cave",

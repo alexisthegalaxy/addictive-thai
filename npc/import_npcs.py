@@ -4854,12 +4854,54 @@ def ko_kut(al):
         ),
         Npc(
             al=al,
+            name="Ko kut cave kid",
+            ma=al.mas.get_map_from_name("ko_kut_cave_1"),
+            x=15,
+            y=24,
+            sprite="kid",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "This cave goes underwater!",
+                "This is so awesome!",
+                "What do you mean, Thai kids shouldn't stay in underwater caves?",
+            ]
+        ),
+        Npc(
+            al=al,
+            name="Ko kut fisherman",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=50,
+            y=26,
+            sprite="man",
+            direction=Direction.UP,
+            standard_dialog=[
+                "What?",
+                "I'm fishing!",
+                "I've got to feed our growing population of rebels!",
+                "A tip? I'm not good at teaching, sorry.",
+                "Although I can tell you this:",
+                "it's okay if you forget stuff, you can always come back.",
+                "The only bad way to learn is to give up.",
+            ]
+        ),
+        Npc(
+            al=al,
             name="",
             ma=al.mas.get_map_from_name("ko_kut"),
             x=53,
             y=41,
             sprite="monkey",
-            direction=Direction.DOWN,
+            direction=Direction.RIGHT,
+            standard_dialog=["เจี๊ยก เจี๊ยก"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=43,
+            y=41,
+            sprite="monkey",
+            direction=Direction.LEFT,
             standard_dialog=["เจี๊ยก เจี๊ยก"]
         ),
     ]

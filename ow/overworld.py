@@ -287,6 +287,7 @@ class Mas(object):
         self.chaiyaphum_chatturat = Ma(filename="chaiyaphum_chatturat", mas=self, x_shift=750, y_shift=715)
         self.chatturat = Ma(filename="chatturat", mas=self, x_shift=704, y_shift=762)
         self.ko_kut = Ma(filename="ko_kut", mas=self, x_shift=806, y_shift=1303)
+        self.ko_mak = Ma(filename="ko_mak", mas=self, x_shift=816, y_shift=1305)
 
         # inns
         self.inn1 = Ma(filename="inn1", mas=self, parent=self.chumphae)
@@ -378,6 +379,7 @@ class Mas(object):
         self.phitsanulok_maths_school_456 = Ma(filename="phitsanulok_maths_school_456", mas=self, parent=self.phitsanulok)
         self.phitsanulok_maths_school_789 = Ma(filename="phitsanulok_maths_school_789", mas=self, parent=self.phitsanulok)
         self.phitsanulok_maths_school_1011 = Ma(filename="phitsanulok_maths_school_1011", mas=self, parent=self.phitsanulok)
+        self.ko_kut_cave_1 = Ma(filename="ko_kut_cave_1", mas=self, parent=self.ko_kut)
         self.current_map: Ma = self.chaiyaphum
         self.add_trigger_tiles()
 
@@ -396,6 +398,12 @@ class Mas(object):
         # ko_kut
         self.ko_kut.get_cell_at(47, 45).goes_to = (self.inn_ko_kut, 4, 7)
         self.inn_ko_kut.get_cell_at(4, 8).goes_to = (self.ko_kut, 47, 46)
+        self.ko_kut.get_cell_at(41, 31).goes_to = (self.ko_kut_cave_1, 14, 26)
+        self.ko_kut_cave_1.get_cell_at(14, 27).goes_to = (self.ko_kut, 41, 32)
+        # ko_mak
+        self.ko_kut_cave_1.get_cell_at(15, 7).goes_to = (self.ko_mak, 32, 10)
+        self.ko_mak.get_cell_at(32, 9).goes_to = (self.ko_kut_cave_1, 15, 6)
+
         # chaiyaphum - chumphae
         self.chaiyaphum.get_cell_at(42, 14).goes_to = (self.chumphae, 123, 80)
         self.chaiyaphum.get_cell_at(43, 14).goes_to = (self.chumphae, 124, 80)

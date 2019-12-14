@@ -104,10 +104,10 @@ def increase_xp_letter_by_id(letter_id, xp_amount):
     ))
     if a:
         CURSOR.execute(
-            f"UPDATE user_word "
-            f"SET total_xp = total_xp + {value} "
-            f"WHERE user_word.word_id = {letter_id} "
-            f"AND user_word.user_id = {learner_id};"
+            f"UPDATE user_letter "
+            f"SET total_xp = total_xp + {xp_amount} "
+            f"WHERE user_letter.letter_id = {letter_id} "
+            f"AND user_letter.user_id = {learner_id};"
         )
     else:
         # we need to create the word
