@@ -4,7 +4,8 @@ from typing import Union
 from lexicon.items import Word, Letter
 from lexicon.presentation import LetterPresentation, WordPresentation
 from lexicon.test_services import pick_sentence_test
-from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6, ThaiLetterFromEnglish4
+from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6, ThaiLetterFromEnglish4, EnglishLetterFromThai4, \
+    EnglishLetterFromThai16, ThaiLetterFromEnglish16
 from sounds.play_sound import play_transformed_thai_word
 
 
@@ -83,22 +84,6 @@ class Learning(object):
     def goes_to_first_step(self):
         self.step = LearningStep.PRESENTATION
 
-    def test_finished(self, failed=False):
-        """this is triggered by the test when it ends"""
-        if failed:
-            self.step = LearningStep.PRESENTATION
-            self.al.active_test = None
-        else:
-            self.goes_to_next_step()
-            if self.step == LearningStep.TEST2:
-                self.al.active_test = self.test_2
-            if self.step == LearningStep.TEST3:
-                self.al.active_test = self.test_3
-            if self.step == LearningStep.TEST4:
-                self.al.active_test = self.test_4
-            if self.step == LearningStep.TEST5:
-                self.al.active_test = self.test_5
-
 
 class WordLearning(Learning):
     def __init__(self, word: Union[Word, Letter], al, npc):
@@ -120,6 +105,22 @@ class WordLearning(Learning):
 
         play_transformed_thai_word(self.word.thai)
 
+    def test_finished(self, failed=False):
+        """this is triggered by the test when it ends"""
+        if failed:
+            self.step = LearningStep.PRESENTATION
+            self.al.active_test = None
+        else:
+            self.goes_to_next_step()
+            if self.step == LearningStep.TEST2:
+                self.al.active_test = self.test_2
+            if self.step == LearningStep.TEST3:
+                self.al.active_test = self.test_3
+            if self.step == LearningStep.TEST4:
+                self.al.active_test = self.test_4
+            if self.step == LearningStep.TEST5:
+                self.al.active_test = self.test_5
+
 
 class LetterLearning(Learning):
     def __init__(self, letter: Letter, al, npc):
@@ -129,15 +130,22 @@ class LetterLearning(Learning):
         self.step = LearningStep.NONE
 
         self.al.active_presentation = LetterPresentation(al, letter, from_learning=True)
-        self.test_1 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
-        self.test_2 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
-        self.test_3 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
-        self.test_4 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
-        self.test_5 = ThaiLetterFromEnglish4(al, correct=letter, learning=self)
-        # self.test_2 = EnglishLetterFromThai4(al, learning=self)
-        # self.test_3 = EnglishLetterFromThai16(al, learning=self)
-        # self.test_4 = ThaiLetterFromEnglish16(al, correct=letter, learning=self)
-        # self.test_5 = ThaiLetterFromSound(al, letter, learning=self)
-        # if not self.test_5:
-        #     self.test_5 = ThaiLetterFromEnglish6(al, correct=letter, learning=self)
+        self.test_1 = EnglishLetterFromThai4(self.al, learning=self)
+
         play_transformed_thai_word(self.letter.thai)
+
+    def test_finished(self, failed=False):
+        """this is triggered by the test when it ends"""
+        if failed:
+            self.step = LearningStep.PRESENTATION
+            self.al.active_test = None
+        else:
+            self.goes_to_next_step()
+            if self.step == LearningStep.TEST2:
+                self.al.active_test = ThaiLetterFromEnglish4(self.al, correct=self.letter, learning=self)
+            if self.step == LearningStep.TEST3:
+                self.al.active_test = EnglishLetterFromThai16(self.al, learning=self)
+            if self.step == LearningStep.TEST4:
+                self.al.active_test = ThaiLetterFromEnglish16(self.al, correct=self.letter, learning=self)
+            if self.step == LearningStep.TEST5:  # TODO ThaiLetterFromSound
+                self.al.active_test = ThaiLetterFromEnglish16(self.al, correct=self.letter, learning=self)

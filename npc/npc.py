@@ -2,11 +2,11 @@ from dataclasses import dataclass
 from datetime import datetime
 import time
 import pygame
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Union
 
 # from all import All
 from direction import string_from_direction, opposite_direction, Direction, dir_equal
-from lexicon.items import Word
+from lexicon.items import Word, Letter
 from lexicon.learning import LetterLearning, WordLearning
 from models import xp_from_word
 from sounds.play_sound import play_thai_word
@@ -38,7 +38,7 @@ class Npc(object):
         dialog_3=None,
         direction=Direction.UP,
         sprite="kid",
-        taught: Word = None,
+        taught: Union[Word, Letter] = None,
         battle_words: List[Word] = None,
         money: int = 5,  # amount given when lost the fight
         eyesight: int = 5,  # how far the trainer can see

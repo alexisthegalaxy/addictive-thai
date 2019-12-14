@@ -47,6 +47,7 @@ to_convert = [
     "house4",
     "house5",
     "normal_inn",
+    "inn_ko_kut",
     "banyaeng_cave",
     "phetchabun_school",
     "buengsamphan_cave",

@@ -95,6 +95,30 @@ def increase_xp(thai, value):
     CONN.commit()
 
 
+def increase_xp_letter_by_id(letter_id, xp_amount):
+    learner_id = get_active_learner_id()
+    a = list(CURSOR.execute(
+        f"SELECT user_letter.total_xp FROM user_letter "
+        f"WHERE user_letter.letter_id = {letter_id} "
+        f"AND user_letter.user_id = {learner_id};"
+    ))
+    if a:
+        CURSOR.execute(
+            f"UPDATE user_word "
+            f"SET total_xp = total_xp + {value} "
+            f"WHERE user_word.word_id = {letter_id} "
+            f"AND user_word.user_id = {learner_id};"
+        )
+    else:
+        # we need to create the word
+        CURSOR.execute(
+            f"INSERT INTO user_letter (letter_id, user_id, total_xp, level, next_threshold, previous_threshold) "
+            f"VALUES ('{letter_id}', '{learner_id}', 1, 1, 1, 1);"
+        )
+
+    CONN.commit()
+
+
 def create_new_user(name):
     # Create a row in user and a row in user_details
     starting_map = 'house_learner_f2'

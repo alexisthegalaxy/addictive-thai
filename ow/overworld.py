@@ -88,6 +88,7 @@ class CellTypes:
     fence = CellType('垣', 'fence', (102, 102, 102), False, 0, WALL_COLOR)
     arena_sign = CellType('競', 'arena_sign', (255, 192, 0), False, 0, WALL_COLOR)
     school_sign = CellType('学', 'school_sign', (103, 229, 216), False, 0, WALL_COLOR)
+    palm_tree = CellType('椰', 'palm_tree', (131, 148, 102), False, 0, TREE_COLOR)
     shop_sign = CellType('買', 'shop_sign', (65, 71, 193), False, 0, WALL_COLOR)
     field = CellType('畑', 'field', (225, 232, 168), True, 0.4, PATH_COLOR)
     sand = CellType('砂', 'sand', (255, 218, 105), True, 0, PATH_COLOR)
@@ -300,6 +301,7 @@ class Mas(object):
         self.inn_phitsanulok_2 = Ma(filename="inn_phitsanulok_2", mas=self)
         self.inn_bua_yai = Ma(filename="inn_bua_yai", mas=self)
         self.inn_chatturat = Ma(filename="inn_chatturat", mas=self)
+        self.inn_ko_kut = Ma(filename="inn_ko_kut", mas=self)
 
         self.house_learner_f2 = Ma(filename="house_learner_f2", mas=self, parent=self.chaiyaphum)
         self.house_learner_f1 = Ma(filename="house_learner_f1", mas=self, parent=self.chaiyaphum)
@@ -391,6 +393,9 @@ class Mas(object):
         In this function we define the 'links' (for example, a door leading to the
         inside of a house, i.e. to another map)
         """
+        # ko_kut
+        self.ko_kut.get_cell_at(47, 45).goes_to = (self.inn_ko_kut, 4, 7)
+        self.inn_ko_kut.get_cell_at(4, 8).goes_to = (self.ko_kut, 47, 46)
         # chaiyaphum - chumphae
         self.chaiyaphum.get_cell_at(42, 14).goes_to = (self.chumphae, 123, 80)
         self.chaiyaphum.get_cell_at(43, 14).goes_to = (self.chumphae, 124, 80)

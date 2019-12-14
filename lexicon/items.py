@@ -397,6 +397,10 @@ class Sentences(object):
 #     #         word.print()
 
 
+class NoLetterHasXp(Exception):
+    pass
+
+
 class Letter(Growable):
     def __init__(
         self,
@@ -496,6 +500,55 @@ class Letter(Growable):
             final=random_letter_db[5],
             _class=random_letter_db[6],
             frequency_index=random_letter_db[7],
+        )
+
+    @classmethod
+    def get_weighted_random_known_letter(cls) -> Letter:
+        """
+        Select a random letter, but gives more weight to letters with low XP.
+        weight = 1000 / exp
+        a 1XP   1000
+        b 3XP   333
+        c 10XP  100
+        d 100XP 10
+        """
+        letter_ids_db = list(
+            CURSOR.execute(
+                f"""
+                SELECT l.id, ul.total_xp
+                FROM letters l
+                JOIN user_letter ul on ul.letter_id = l.id
+                WHERE ul.total_xp <> 0
+                """
+            )
+        )
+        ids = []
+        for letter_id, xp in letter_ids_db:
+            weight = 1000 / xp
+            ids.extend(int(weight) * [letter_id])
+        if not letter_id:
+            raise NoLetterHasXp
+        chosen_id = random.choice(ids)
+
+        letter_db = list(
+            CURSOR.execute(
+                f"""
+                SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index
+                FROM letters
+                WHERE id == '{chosen_id}'
+                """
+            )
+        )[0]
+
+        return Letter(
+            id=letter_db[0],
+            thai=letter_db[1],
+            pron=letter_db[2],
+            english=letter_db[3],
+            alphabet_index=letter_db[4],
+            final=letter_db[5],
+            _class=letter_db[6],
+            frequency_index=letter_db[7],
         )
 
     # @classmethod
