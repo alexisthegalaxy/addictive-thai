@@ -292,6 +292,18 @@ class Words(object):
         )
         CONN.commit()
 
+    @classmethod
+    def select_words_of_length(cls, length, number_of_words_to_select, exclude):
+        words = [t[0] for t in list(
+            CURSOR.execute(
+                f"SELECT w.thai "
+                f"FROM words w "
+                f"WHERE length(w.thai) = {length} "
+                f"AND w.thai <> '{exclude}' "
+            )
+        )]
+        return random.sample(words, number_of_words_to_select)
+
 
 class Sentence(object):
     def __init__(self, thai: str, english: str, words: List["Word"]):
@@ -427,8 +439,6 @@ class Letter(Growable):
         self.frequency_index = frequency_index
         self.audio = audio
 
-        print('self.audio', self.audio)
-
     # def increase_xp(self, al, value):
     #     super().increase_xp(al, value)
     #     learner_id = get_active_learner_id()
@@ -490,9 +500,9 @@ class Letter(Growable):
             list(
                 CURSOR.execute(
                     f"""
-        SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index, audio
-        FROM letters
-        """
+                    SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index, audio
+                    FROM letters
+                    """
                 )
             )
         )
@@ -507,6 +517,45 @@ class Letter(Growable):
             frequency_index=random_letter_db[7],
             audio=random_letter_db[8],
         )
+
+    @classmethod
+    def get_readable_word_containing_letter(cls, letter) -> Optional[Word]:
+        cleaned_letter = letter.thai.strip('_')
+        words_containing_letter = [t[0] for t in list(
+            CURSOR.execute(
+                f"""
+                SELECT thai
+                FROM words
+                WHERE words.thai like '%{cleaned_letter}%'
+                """
+            )
+        )]
+
+        known_letters = [t[0] for t in list(
+            CURSOR.execute(
+                f"""
+                SELECT thai
+                FROM letters
+                JOIN user_letter ul on letters.id = ul.letter_id
+                WHERE ul.total_xp > 1
+                """
+            )
+        )]
+        if not words_containing_letter or not known_letters:
+            return None
+        readable_words = []
+        for word in words_containing_letter:
+            word_is_readable = True
+            for letter in word:
+                if letter not in known_letters:
+                    word_is_readable = False
+                    break
+            if word_is_readable:
+                readable_words.append(word)
+        if not readable_words:
+            return None
+        return random.choice(readable_words)
+
 
     @classmethod
     def get_weighted_random_known_letter(cls) -> Letter:

@@ -3,7 +3,7 @@ import pygame
 from enum import Enum
 from typing import List
 
-from lexicon.items import Word, Letter
+from lexicon.items import Word, Letter, Words
 from models import get_random_word_id, increase_xp, increase_xp_letter_by_id
 from sounds.play_sound import play_thai_word, play_transformed_thai_word
 
@@ -32,7 +32,18 @@ def get_correct_option(options: List[Option]):
     print("ERROR: no correct option in options!")
 
 
-def draw_box(screen, fonts, x, y, width, height, string, selected=False, font_size=32, bg=(220, 220, 220)):
+def draw_box(
+    screen,
+    fonts,
+    x,
+    y,
+    width,
+    height,
+    string,
+    selected=False,
+    font_size=32,
+    bg=(220, 220, 220),
+):
     # 1 - Draw background
     border_color = (0, 220, 0) if selected else (0, 0, 0)
     pygame.draw.rect(screen, border_color, [x - 5, y - 5, width + 10, height + 10])
@@ -125,7 +136,7 @@ class Test(object):
             else:
                 increase_xp_letter_by_id(letter_id=self.correct.id, xp_amount=1)
         except Exception as e:
-            print('Error - 483912')
+            print("Error - 483912")
             print(e)
         if self.test_success_callback:
             self.test_success_callback()
@@ -161,7 +172,9 @@ class ToneBox(object):
     def draw(self, ui):
         screen = ui.screen
         color = (0, 255, 0) if self.selected else (0, 0, 0)
-        pygame.draw.rect(screen, (200, 200, 200), (self.x, self.y, self.width, self.height))
+        pygame.draw.rect(
+            screen, (200, 200, 200), (self.x, self.y, self.width, self.height)
+        )
         pygame.draw.rect(screen, color, [self.x, self.y, self.width, self.height], 1)
         screen.blit(self.rendered, (self.x + 10, self.y + 30))
         screen.blit(ui.images[self.s.lower()], [self.x - 50, self.y])
@@ -169,7 +182,9 @@ class ToneBox(object):
     def interact(self, al, test):
         if al.ui.hover:
             x, y = al.ui.hover
-            self.selected = self.x < x < self.x + self.width and self.y < y < self.y + self.height
+            self.selected = (
+                self.x < x < self.x + self.width and self.y < y < self.y + self.height
+            )
         if al.ui.click:
             x, y = al.ui.click
             if self.x < x < self.x + self.width and self.y < y < self.y + self.height:
@@ -201,18 +216,20 @@ class ToneFromThaiAndSound(Test):
             x, y = point
         except IndexError:
             return False
-        return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(0.1) < y < ui.percent_width(0.15)
+        return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(
+            0.1
+        ) < y < ui.percent_width(0.15)
 
     def select_correct_option(self):
-        if self.correct.tones[0] == 'M':
+        if self.correct.tones[0] == "M":
             return 1
-        if self.correct.tones[0] == 'L':
+        if self.correct.tones[0] == "L":
             return 2
-        if self.correct.tones[0] == 'F':
+        if self.correct.tones[0] == "F":
             return 3
-        if self.correct.tones[0] == 'H':
+        if self.correct.tones[0] == "H":
             return 4
-        if self.correct.tones[0] == 'R':
+        if self.correct.tones[0] == "R":
             return 5
 
     def learner_select_option(self):
@@ -239,9 +256,7 @@ class ToneFromThaiAndSound(Test):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
-        )
+        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.60)
@@ -594,9 +609,7 @@ class EnglishFromThai4(ThaiFromEnglish):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
-        )
+        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -707,9 +720,7 @@ class EnglishFromThai6(ThaiFromEnglish):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
-        )
+        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -750,7 +761,9 @@ class FromSound(Test):
             x, y = point
         except IndexError:
             return False
-        return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(0.1) < y < ui.percent_width(0.15)
+        return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(
+            0.1
+        ) < y < ui.percent_width(0.15)
 
     def select_distractors(self):
         known_words = Word.get_known_words()
@@ -1411,43 +1424,52 @@ class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
         h = al.ui.percent_height(0.1)
         r = 1.3
 
-        self.boxes = [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.15),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.thai,
-                index=i,
-            ) for i, letter in enumerate(self.choices[0:4])
-        ] + [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.34),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.thai,
-                index=i + 4,
-            ) for i, letter in enumerate(self.choices[4:8])
-        ] + [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.53),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.thai,
-                index=i + 8,
-            ) for i, letter in enumerate(self.choices[8:12])
-        ] + [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.72),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.thai,
-                index=i + 12,
-            ) for i, letter in enumerate(self.choices[12:16])
-        ]
+        self.boxes = (
+            [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.15),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.thai,
+                    index=i,
+                )
+                for i, letter in enumerate(self.choices[0:4])
+            ]
+            + [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.34),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.thai,
+                    index=i + 4,
+                )
+                for i, letter in enumerate(self.choices[4:8])
+            ]
+            + [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.53),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.thai,
+                    index=i + 8,
+                )
+                for i, letter in enumerate(self.choices[8:12])
+            ]
+            + [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.72),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.thai,
+                    index=i + 12,
+                )
+                for i, letter in enumerate(self.choices[12:16])
+            ]
+        )
 
     def draw(self):
         ui = self.al.ui
@@ -1494,9 +1516,7 @@ class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
 
 
 class EnglishLetterFromThai(Test):
-    def __init__(
-        self, al: "All", learning=None, test_success_callback=None
-    ):
+    def __init__(self, al: "All", learning=None, test_success_callback=None):
         """
         In this test, the tested letter is actually random.
         It's used only in the learning phases.
@@ -1557,9 +1577,7 @@ class EnglishLetterFromThai(Test):
 
 
 class EnglishLetterFromThai4(EnglishLetterFromThai):
-    def __init__(
-        self, al: "All", learning=None, test_success_callback=None
-    ):
+    def __init__(self, al: "All", learning=None, test_success_callback=None):
         super().__init__(al, learning, test_success_callback)
         self.correct: Letter = Letter.get_weighted_random_known_letter()
         self.number_of_distr: int = 3
@@ -1620,9 +1638,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
-        )
+        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -1648,9 +1664,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
 
 
 class EnglishLetterFromThai16(EnglishLetterFromThai):
-    def __init__(
-        self, al: "All", learning=None, test_success_callback=None
-    ):
+    def __init__(self, al: "All", learning=None, test_success_callback=None):
         super().__init__(al, learning, test_success_callback)
         self.correct: Letter = Letter.get_weighted_random_known_letter()
         self.number_of_distr: int = 15
@@ -1662,43 +1676,52 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
         w = al.ui.percent_width(0.11)
         h = al.ui.percent_height(0.1)
         r = 1.3
-        self.boxes = [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.15),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.english,
-                index=i,
-            ) for i, letter in enumerate(self.choices[0:4])
-        ] + [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.34),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.english,
-                index=i + 4,
-            ) for i, letter in enumerate(self.choices[4:8])
-        ] + [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.53),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.english,
-                index=i + 8,
-            ) for i, letter in enumerate(self.choices[8:12])
-        ] + [
-            TestAnswerBox(
-                x=al.ui.percent_width(0.72),
-                y=al.ui.percent_height(0.35) + i * h * r,
-                width=w,
-                height=h,
-                string=letter.english,
-                index=i + 12,
-            ) for i, letter in enumerate(self.choices[12:16])
-        ]
+        self.boxes = (
+            [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.15),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.english,
+                    index=i,
+                )
+                for i, letter in enumerate(self.choices[0:4])
+            ]
+            + [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.34),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.english,
+                    index=i + 4,
+                )
+                for i, letter in enumerate(self.choices[4:8])
+            ]
+            + [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.53),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.english,
+                    index=i + 8,
+                )
+                for i, letter in enumerate(self.choices[8:12])
+            ]
+            + [
+                TestAnswerBox(
+                    x=al.ui.percent_width(0.72),
+                    y=al.ui.percent_height(0.35) + i * h * r,
+                    width=w,
+                    height=h,
+                    string=letter.english,
+                    index=i + 12,
+                )
+                for i, letter in enumerate(self.choices[12:16])
+            ]
+        )
 
     def draw(self):
         ui = self.al.ui
@@ -1717,9 +1740,191 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
+        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
+
+        # Draw all the options
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i)
+
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
+        if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option()
+                    break
+
+
+class ThaiLettersFromSound(Test):
+    def __init__(
+        self,
+        al: "All",
+        correct: Letter,
+        learning=None,
+        test_success_callback=None,
+        word="",
+    ):
+        super().__init__(al, learning, test_success_callback)
+        self.will_hurt = False
+        self.has_audio_property = True
+        self.correct: Letter = correct
+        self.number_of_distr: int = 3
+        self.selector_on_sound = False
+        self.word: str = word
+        print('correct word', word)
+        play_transformed_thai_word(word)
+
+    @staticmethod
+    def point_on_sound(ui, point):
+        try:
+            x, y = point
+        except IndexError:
+            return False
+        return ui.percent_width(0.6) < x < ui.percent_width(0.72) and ui.percent_width(
+            0.1
+        ) < y < ui.percent_width(0.15)
+
+    def select_distractors(self) -> List[str]:
+        words = Words.select_words_of_length(len(self.word), 3, self.correct.thai)
+        print('yeyeye')
+        print(words)
+        return words
+
+    def interact(self, al):
+        if al.ui.up:
+            al.ui.up = False
+            if self.selector_on_sound:
+                self.selector_on_sound = False
+                self.selected_option_index = self.number_of_distr - 1
+            else:
+                self.selected_option_index -= 2
+                if self.selected_option_index < 0:
+                    self.selector_on_sound = True
+        if al.ui.down:
+            al.ui.down = False
+            if self.selector_on_sound:
+                self.selector_on_sound = False
+                self.selected_option_index = 0
+            else:
+                self.selected_option_index += 2
+                if self.selected_option_index >= (self.number_of_distr + 1):
+                    self.selector_on_sound = True
+        if al.ui.left or al.ui.right:
+            self.selected_option_index += (
+                1 if self.selected_option_index % 2 == 0 else -1
+            )
+            al.ui.left = False
+            al.ui.right = False
+        if al.ui.space:
+            al.ui.space = False
+            if self.selector_on_sound:
+                if self.has_audio_property:
+                    play_transformed_thai_word(self.correct.audio)
+                else:
+                    play_transformed_thai_word(self.correct.thai)
+            else:
+                self.learner_select_option()
+        if al.ui.hover:
+            self.selector_on_sound = self.point_on_sound(al.ui, al.ui.hover)
+        if al.ui.click:
+            if self.point_on_sound(al.ui, al.ui.click):
+                al.ui.click = False
+                play_transformed_thai_word(self.word)
+
+    def learner_select_option(self):
+        option = self.selected_option_index
+        if self.choices[option] == self.word:
+            self.succeeds()
+        else:
+            self.fails()
+
+
+class ThaiLettersFromSound4(ThaiLettersFromSound):
+    def __init__(
+        self,
+        al: "All",
+        correct: Letter,
+        learning=None,
+        word="",
+        test_success_callback=None,
+    ):
+        super().__init__(
+            al=al,
+            correct=correct,
+            learning=learning,
+            test_success_callback=test_success_callback,
+            word=word,
         )
+        self.number_of_distr: int = 3
+
+        self.distractors: List[str] = self.select_distractors()
+        self.choices: List[Letter] = [self.word] + self.distractors
+        random.shuffle(self.choices)
+        a = self.choices
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[0],
+                index=0,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.35),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[1],
+                index=1,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[2],
+                index=2,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.625),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.225),
+                string=self.choices[3],
+                index=3,
+            ),
+        ]
+
+    def draw(self):
+        ui = self.al.ui
+
+        screen = ui.screen
+        fonts = ui.fonts
+        # Draw the background
+        self.draw_background()
+
+        # Draw "What's the English word for"
+        explanatory_string = "What's the Thai word for:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.60)
+        y = ui.percent_height(0.10)
+        image_name = "sound_icon_green" if self.selector_on_sound else "sound_icon"
+        ui.screen.blit(ui.images[image_name], [x, y])
 
         # Draw all the options
         for i, box in enumerate(self.boxes):

@@ -4820,6 +4820,47 @@ def ko_kut(al):
         ),
         Npc(
             al=al,
+            name="Teacher of inherent vowel",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=56,
+            y=37,
+            sprite="dad",
+            direction=Direction.RIGHT,
+            wanna_meet=True,
+            eyesight=1,
+            standard_dialog=[
+                "Did you know? Thai is the opposite of English.",
+                "English can have words without consonants,",
+                "while Thai can have words without vowels.",
+                "For example, รก.",
+                "However!",
+                "Even though there is no vowel, we still pronounce it with a short \"o\" sound.",
+                "For example, รก is pronounced \"rok\", and not \"rk!\"",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="9th letter ล",
+            taught=Letter.get_by_thai("ล"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=54,
+            y=36,
+            sprite="man",
+            direction=Direction.UP,
+            wanna_meet=True,
+            eyesight=1,
+            standard_dialog=[
+                "I will teach you the consonant l: ล.",
+                "Don't get ล confused with the s: ส!",
+            ],
+            defeat_dialog=[
+                "At the end of a word, l in pronounced \"n\".",
+                "For example, มล is pronounced \"mon\", not \"mol\"!"
+                "You can't end a word in l in Thai."
+            ]
+        ),
+        Npc(
+            al=al,
             name="Explainer of why the letters are different in the final form",
             ma=al.mas.get_map_from_name("ko_kut"),
             x=43,
@@ -4837,7 +4878,7 @@ def ko_kut(al):
         ),
         Npc(
             al=al,
-            name="Explainer of why the letters are different in the final form",
+            name="",
             ma=al.mas.get_map_from_name("inn_ko_kut"),
             x=3,
             y=6,
@@ -4847,7 +4888,6 @@ def ko_kut(al):
                 "Did you know?",
                 "All the places in this game are based off real Thailand!",
                 "We're now in Ko Kut, which is often called the most beautiful island in Thailand.",
-                "It's the fifth biggest island in Thailand.",
                 "It's all empty beaches, primordial mangroves, white sand, and clear water!",
                 "And we have more monkeys than people!",
             ]

@@ -4,8 +4,15 @@ from typing import Union
 from lexicon.items import Word, Letter
 from lexicon.presentation import LetterPresentation, WordPresentation
 from lexicon.test_services import pick_sentence_test
-from lexicon.tests.tests import ThaiFromEnglish4, ThaiFromEnglish6, ThaiLetterFromEnglish4, EnglishLetterFromThai4, \
-    EnglishLetterFromThai16, ThaiLetterFromEnglish16
+from lexicon.tests.tests import (
+    ThaiFromEnglish4,
+    ThaiFromEnglish6,
+    ThaiLetterFromEnglish4,
+    EnglishLetterFromThai4,
+    EnglishLetterFromThai16,
+    ThaiLetterFromEnglish16,
+    ThaiLettersFromSound4,
+)
 from sounds.play_sound import play_transformed_thai_word
 
 
@@ -141,13 +148,27 @@ class LetterLearning(Learning):
         else:
             self.goes_to_next_step()
             if self.step == LearningStep.TEST2:
-                self.al.active_test = ThaiLetterFromEnglish4(self.al, correct=self.letter, learning=self)
+                self.al.active_test = ThaiLetterFromEnglish4(
+                    self.al, correct=self.letter, learning=self
+                )
             if self.step == LearningStep.TEST3:
                 self.al.active_test = EnglishLetterFromThai16(self.al, learning=self)
             if self.step == LearningStep.TEST4:
-                self.al.active_test = ThaiLetterFromEnglish16(self.al, correct=self.letter, learning=self)
-            if self.step == LearningStep.TEST5:  # TODO ThaiLetterFromSound
-                # TODO The last test should be:
-                # How to write the english sound 'nao'
-                # There is no way to get it wrong,
-                self.al.active_test = ThaiLetterFromEnglish16(self.al, correct=self.letter, learning=self)
+                self.al.active_test = ThaiLetterFromEnglish16(
+                    self.al, correct=self.letter, learning=self
+                )
+            if self.step == LearningStep.TEST5:
+                word_containing_letter = Letter.get_readable_word_containing_letter(
+                    self.letter
+                )
+                if word_containing_letter:
+                    self.al.active_test = ThaiLettersFromSound4(
+                        self.al,
+                        correct=self.letter,
+                        word=word_containing_letter,
+                        learning=self,
+                    )
+                else:
+                    self.al.active_test = ThaiLetterFromEnglish16(
+                        self.al, correct=self.letter, learning=self
+                    )
