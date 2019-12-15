@@ -8,8 +8,8 @@ import pygame
 from derive_from_mothermap import mothermap
 from direction import Direction
 from event import execute_event
-from lexicon.items import Word
-from lexicon.test_services import pick_a_test_for_word
+from lexicon.items import Word, Letter
+from lexicon.test_services import pick_a_test_for_word, pick_a_test_for_letter
 from npc.npc import Npc
 
 PATH_COLOR = (176, 246, 176)
@@ -132,12 +132,20 @@ class Occurrence(object):
         total_weight = 0
         for line in file:
             line = line.replace("\n", "")
-            elements = line.split(" ")
+            letter = ' L ' in line
+            if letter:
+                elements = line.split(" L ")
+            else:
+                elements = line.split(" ")
             weight = int(elements[0])
             # TODO Alexis do it so that it fetches word by id rather than by thai to avoid confusions
-            word = Word.get_by_split_form(elements[1])
+            if letter:
+                letter = Letter.get_by_thai(elements[1])
+                self.candidates.append(letter)
+            else:
+                word = Word.get_by_split_form(elements[1])
+                self.candidates.append(word)
             total_weight += weight
-            self.candidates.append(word)
             self.rates.append(weight)
         self.rates = [rate / total_weight for rate in self.rates]
 
@@ -238,16 +246,19 @@ class Ma(object):
                 pass
             return
 
-        # 2 - Test for word encounter
+        # 2 - Test for Word or Letter encounter
         if learner.free_steps <= 0:
             rate = cell.typ.encounter_rate
             rand = random.uniform(0, 1)
             if rand < rate:
                 if len(self.occ.candidates) > 0:
-                    chosen_word = random.choices(population=self.occ.candidates,
+                    chosen_candidate = random.choices(population=self.occ.candidates,
                                                  weights=self.occ.rates,
                                                  k=1)[0]
-                    pick_a_test_for_word(self.mas.al, chosen_word)
+                    if isinstance(chosen_candidate, Word):
+                        pick_a_test_for_word(self.mas.al, chosen_candidate)
+                    elif isinstance(chosen_candidate, Letter):
+                        pick_a_test_for_letter(self.mas.al, chosen_candidate)
                     learner.free_steps = learner.max_free_steps
                 else:
                     print(f"ERROR: You didn't specify the encounter rate for {self.filename}")

@@ -1516,12 +1516,15 @@ class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
 
 
 class EnglishLetterFromThai(Test):
-    def __init__(self, al: "All", learning=None, test_success_callback=None):
+    def __init__(self, al: "All", learning=None, test_success_callback=None, letter=None):
         """
         In this test, the tested letter is actually random.
         It's used only in the learning phases.
         """
         super().__init__(al, learning, test_success_callback)
+        self.correct = letter
+        if not self.correct:
+            self.correct: Letter = Letter.get_weighted_random_known_letter()
         self.number_of_distr: int = -1
         self.will_hurt = False
         self.has_audio_property = True
@@ -1577,9 +1580,8 @@ class EnglishLetterFromThai(Test):
 
 
 class EnglishLetterFromThai4(EnglishLetterFromThai):
-    def __init__(self, al: "All", learning=None, test_success_callback=None):
-        super().__init__(al, learning, test_success_callback)
-        self.correct: Letter = Letter.get_weighted_random_known_letter()
+    def __init__(self, al: "All", learning=None, test_success_callback=None, letter=None):
+        super().__init__(al, learning, test_success_callback, letter)
         self.number_of_distr: int = 3
 
         self.distractors: List[Letter] = self.select_distractors()
@@ -1664,9 +1666,8 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
 
 
 class EnglishLetterFromThai16(EnglishLetterFromThai):
-    def __init__(self, al: "All", learning=None, test_success_callback=None):
-        super().__init__(al, learning, test_success_callback)
-        self.correct: Letter = Letter.get_weighted_random_known_letter()
+    def __init__(self, al: "All", learning=None, test_success_callback=None, letter=None):
+        super().__init__(al, learning, test_success_callback, letter)
         self.number_of_distr: int = 15
 
         self.distractors: List[Letter] = self.select_distractors()

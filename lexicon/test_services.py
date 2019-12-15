@@ -1,9 +1,10 @@
 import random
 from typing import List
-
 from lexicon.tests.grid_test import GrammarGridTest, SentenceGridTest
 from lexicon.tests.tests import EnglishFromSound4, EnglishFromSound6, ThaiFromSound6, ThaiFromSound4, EnglishFromThai6, \
-    EnglishFromThai4, ToneFromThaiAndSound
+    EnglishFromThai4, ToneFromThaiAndSound, EnglishLetterFromThai4, ThaiLetterFromEnglish4, EnglishLetterFromThai16, \
+    ThaiLetterFromEnglish16, ThaiLettersFromSound4
+from lexicon.items import Letter
 
 
 def can_be_tested_on_tone(word: 'Word'):
@@ -68,6 +69,31 @@ def pick_a_test_for_word(al, chosen_word):
                 test = pick_sentence_test(al, chosen_word)
                 if not test:
                     can_be_tested_on_sentence = False
+    al.active_test = test
+
+
+def pick_a_test_for_letter(al, chosen_letter):
+    test = None
+    while test is None:
+        r = random.randint(0, 6)  # can be 0, ..., n-1   (5)
+        if r == 0:
+            test = EnglishLetterFromThai4(al, letter=chosen_letter)
+        elif r == 1:
+            test = ThaiLetterFromEnglish4(al, correct=chosen_letter)
+        elif r == 2:
+            test = EnglishLetterFromThai16(al, letter=chosen_letter)
+        elif r == 3:
+            test = ThaiLetterFromEnglish16(al, correct=chosen_letter)
+        else:
+            word_containing_letter = Letter.get_readable_word_containing_letter(chosen_letter)
+            if word_containing_letter:
+                test = ThaiLettersFromSound4(
+                    al,
+                    correct=chosen_letter,
+                    word=word_containing_letter,
+                )
+            else:
+                test = ThaiLetterFromEnglish16(al, correct=chosen_letter)
     al.active_test = test
 
 
