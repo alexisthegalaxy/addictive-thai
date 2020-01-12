@@ -178,6 +178,16 @@ def chumphae_lomsak(al):
         ),
         Npc(
             al=al,
+            name="Meditating monk in Chumphae-Lomsak",
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=29,
+            y=28,
+            sprite="monk_levitating",
+            direction=Direction.DOWN,
+            standard_dialog=["..."],
+        ),
+        Npc(
+            al=al,
             name="FourthBattleTrainer",
             battle_words=[
                 Word.get_by_split_form(battle_word)
@@ -432,7 +442,8 @@ def chumphae(al):
             standard_dialog=[
                 "Grandma says a ghost appears by the spirit house at night,",
                 "She says his feet are facing backward.",
-                "I really want to see it but I'm too scared!",
+                "I really want to see it,",
+                "but I'm too scared to stay here when the night falls!",
             ],
         ),
         Npc(
@@ -444,7 +455,13 @@ def chumphae(al):
             sprite="ghost",
             appears_between=(23, 6),
             direction=Direction.DOWN,
-            standard_dialog=["ฮ่าฮ่า"],
+            standard_dialog=[
+                "ฮ่าฮ่า",
+                "I have come to punish you, mortals!",
+                "For you are destroying this place!",
+                "In the rivers around here, many plastic bags are killing the fish.",
+                "If you want to stay alive, you'd better clean that tonight!",
+            ],
         ),
         Npc(
             al=al,
@@ -640,6 +657,36 @@ def chumphae_khonkaen(al):
         ),
         Npc(
             al=al,
+            name="Mischievous quest child 1",
+            ma=al.mas.get_map_from_name("chumphae_khonkaen"),
+            x=35,
+            y=68,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "Please help us!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Mischievous quest child 1",
+            ma=al.mas.get_map_from_name("chumphae_khonkaen"),
+            x=35,
+            y=70,
+            sprite="lass",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "You see these monks over there?",
+                "It's a monastery.",
+                "You know what's fun about it?",
+                "When they meditate, they levitate, but as soon as you talk to them, they fall.",
+                "It's the best to see them fall!",
+                "But they don't allow us to go on their island anymore because of that.",
+                "If you go and make them all fall, we'll give you something!",
+            ],
+        ),
+        Npc(
+            al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("chumphae_khonkaen_house_1"),
             x=11,
@@ -753,7 +800,7 @@ def chumphae_khonkaen(al):
             x=9,
             y=11,
             sprite="monk",
-            direction=Direction.DOWN,
+            direction=Direction.LEFT,
             standard_dialog=["ครับ is the male polite particle."],
         ),
         Npc(
@@ -779,8 +826,58 @@ def chumphae_khonkaen(al):
             x=5,
             y=11,
             sprite="monk",
-            direction=Direction.DOWN,
+            direction=Direction.RIGHT,
             standard_dialog=["ค่ะ is the female polite particle."],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chumphae_khonkaen"),
+            x=40,
+            y=69,
+            sprite="monk_levitating",
+            direction=Direction.DOWN,
+            standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chumphae_khonkaen"),
+            x=37,
+            y=66,
+            sprite="monk_levitating",
+            direction=Direction.RIGHT,
+            standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chumphae_khonkaen"),
+            x=46,
+            y=65,
+            sprite="monk_levitating",
+            direction=Direction.UP,
+            standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chumphae_khonkaen"),
+            x=52,
+            y=67,
+            sprite="monk_levitating",
+            direction=Direction.UP,
+            standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chumphae_khonkaen"),
+            x=52,
+            y=62,
+            sprite="monk_levitating",
+            direction=Direction.RIGHT,
+            standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
         ),
     ]
     for npc in npcs:
@@ -956,12 +1053,10 @@ def chaiyaphum(al):
             al=al,
             name="Mom",
             taught=Word.get_by_split_form("ฉัน"),
-            ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=16,
-            y=98,
+            ma=al.mas.get_map_from_name("house_learner_f1"),
+            x=5,
+            y=10,
             sprite="mom",
-            eyesight=10,
-            wanna_meet=True,
             direction=Direction.RIGHT,
             standard_dialog=[
                 "Mom: [Name]!",
@@ -995,24 +1090,28 @@ def chaiyaphum(al):
         ),
         Npc(
             al=al,
-            name="old man in chaiyaphum",
+            name="Grandpa",
             taught=Word.get_by_split_form("ไทย"),
-            ma=al.mas.get_map_from_name("chaiyaphum_house_1"),
-            x=5,
-            y=11,
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=33,
+            y=104,
+            wanna_meet=True,
+            eyesight=3,
             sprite="old_man",
-            direction=Direction.RIGHT,
+            direction=Direction.LEFT,
             standard_dialog=[
-                "Oh, hello [Name]. Are you ready to begin your Thai language adventure?",
-                "Here's an important word: how to say Thai in Thai!",
+                "Grandpa: Oh, [Name].",
+                "Grandpa: So, you're leaving... How can I help you, I don't know much words...",
+                "Grandpa: Oh, I know a word that would be useful for you!",
+                "Grandpa: How to say Thai in Thai!",
             ],
             defeat_dialog=[
-                'And to say "Thai people", we simply say "People-Thai": คนไทย'
+                'Grandpa: And to say "Thai people", we simply say "People-Thai": คนไทย'
             ],
         ),
         Npc(
             al=al,
-            name="old lady in chaiyaphum",
+            name="Granny",
             taught=Word.get_by_split_form("คน"),
             ma=al.mas.get_map_from_name("chaiyaphum_house_1"),
             x=8,
@@ -1020,13 +1119,14 @@ def chaiyaphum(al):
             sprite="old_woman",
             direction=Direction.LEFT,
             standard_dialog=[
-                "Is that you, [Name]? Your mother told me your going on an adventure to learn Thai?",
-                "My advice is: talk to everybody!",
-                "People will teach you new words and help you greatly.",
-                "So you can remember this advice, I will teach you this very word: people.",
+                "Granny: Is that you, [Name]? Your mother told me your going on an adventure to learn Thai?",
+                "Granny: My advice is: talk to everybody!",
+                "Granny: People will teach you new words and help you greatly.",
+                "Granny: So you can remember this advice, I will teach you this very word: people.",
             ],
             defeat_dialog=[
-                'And to say "Thai people", we simply say "People-Thai": คนไทย'
+                'Granny: And to say "Thai people", we simply say "People-Thai": คนไทย',
+                "Granny: If you're looking for grandpa, he's working in the field.",
             ],
         ),
         # Npc(
@@ -1060,12 +1160,39 @@ def chaiyaphum(al):
         ),
         Npc(
             al=al,
+            name="television",
+            ma=al.mas.get_map_from_name("house_learner_f2"),
+            x=5,
+            y=8,
+            sprite="_television_on",
+            standard_dialog=["It's a video game involving geckos."],
+        ),
+        Npc(
+            al=al,
+            name="bed of Nim",
+            ma=al.mas.get_map_from_name("house_learner_f2"),
+            x=2,
+            y=12,
+            sprite="bed",
+            standard_dialog=["That's the bed of Nim."],
+        ),
+        Npc(
+            al=al,
+            name="Nim",
+            ma=al.mas.get_map_from_name("house_learner_f2"),
+            x=5,
+            y=10,
+            sprite="Nim",
+            direction=Direction.UP,
+            standard_dialog=["Nim: Yo, brother!"],
+        ),
+        Npc(
+            al=al,
             name="bed",
             ma=al.mas.get_map_from_name("house_learner_f2"),
-            x=7,
-            y=10,
+            x=8,
+            y=12,
             sprite="bed",
-            direction=Direction.RIGHT,
             standard_dialog=["Let's take a nap and restore my health!"],
         ),
         Npc(
@@ -1162,8 +1289,9 @@ def chaiyaphum(al):
             sprite="lass",
             direction=Direction.LEFT,
             standard_dialog=[
-                "That road east is quite dangerous if you don't know thai.",
-                "I wouldn't go there myself although I have been learning thai for three months already!",
+                "That road east is quite dangerous if you don't know Thai.",
+                "I wouldn't go there myself,",
+                "although I have been learning thai for three months already!",
             ],
         ),
         Npc(
@@ -1210,14 +1338,29 @@ def chaiyaphum(al):
             al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=35,
-            y=60,
+            x=39,
+            y=57,
             sprite="mom",
             direction=Direction.RIGHT,
             standard_dialog=[
                 "It's quite frustrating to meet words I never learnt,",
-                "but I guess that's how life works.",
+                "but I guess that's how it is.",
                 "I heard you can learn these words in the houses along this path though.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="Nobody",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=42,
+            y=63,
+            sprite="kid",
+            direction=Direction.RIGHT,
+            standard_dialog=[
+                "You see how the grass is darker and taller over there?",
+                "It means that more Byspells will jump at you than usual.",
+                "It's good if you want to meet a lot!",
+                "But I find it a bit scary so I'll try to stay out.",
             ],
         ),
         Npc(
@@ -1262,26 +1405,44 @@ def chaiyaphum(al):
         ),
         Npc(
             al=al,
-            name="Rob",
+            name="old_man",
             ma=al.mas.get_map_from_name("chaiyaphum"),
             x=31,
             y=22,
             sprite="old_man",
             direction=Direction.DOWN,
-            standard_dialog=["Yo, my name is Rob!"],
+            standard_dialog=["Yo, Rob made me!"],
         ),
         Npc(
             al=al,
             name="old man looking at stones",
             ma=al.mas.get_map_from_name("chaiyaphum"),
             x=31,
-            y=69,
+            y=71,
             sprite="old_man",
-            direction=Direction.DOWN,
+            direction=Direction.UP,
             standard_dialog=[
                 "These stones are quite famous around here.",
                 "They are called มอหินขาว but tourists call those the Thai Stonehenge,",
                 "although they are entirely natural.",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="old woman looking at stones",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=29,
+            y=74,
+            sprite="old_woman",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "I'm quite worried.",
+                "I can see that not a single one of these five rock pillars is inhabited by a Byspell.",
+                "Last time I came, all five were protected by their spirits.",
+                "But now, it's only a matter of time before they crumble, if their Byspell are gone!",
+                "Please, if you find them, help them find their way back into the pillars.",
+                "I remember the spirits were Byspells of Wind, Rock, Rain, Sun and Time.",
+                "I will mark them in your Tablet, so that you know when you see them.",
             ],
         ),
         Npc(
@@ -1293,9 +1454,9 @@ def chaiyaphum(al):
             sprite="mom",
             direction=Direction.RIGHT,
             standard_dialog=[
-                "I pray here every day.",
-                "A different spirit lives in each rock,",
-                "and the one in that rock brings good health.",
+                "I use to pray here every day to the Byspell of Wind.",
+                "But it has been gone for more than a week already...",
+                "I wonder what happened.",
             ],
         ),
         Npc(
@@ -1337,6 +1498,25 @@ def chaiyaphum(al):
                 end_dialog_trigger_event=["talk_to_lover"],
             )
         )
+    for npc in npcs:
+        npc.ma.add_npc(npc)
+
+
+def buengsamphan_chaiyaphum(al):
+    npcs = [
+        Npc(
+            al=al,
+            name="first treasure chest",
+            ma=al.mas.get_map_from_name("buengsamphan_chaiyaphum"),
+            x=57,
+            y=26,
+            sprite="chest_closed",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "You can't open the chest.",
+            ],
+        ),
+    ]
     for npc in npcs:
         npc.ma.add_npc(npc)
 
@@ -4408,7 +4588,7 @@ def kasetsombum(al):
             direction=Direction.UP,
             standard_dialog=[
                 "My mom's vegetables are delicious - she grows the best in Kasetsombum.",
-                "Me? I have a restaurant down in Phitsanulok where I cook traditional food.",
+                "Me? I have a restaurant down in Lomsak where I cook traditional food.",
                 "I often come here so that my mom can see her grandchildren a bit.",
             ],
         ),
@@ -4961,6 +5141,7 @@ def import_npcs(al):
     chumphae(al)
     chumphae_khonkaen(al)
     chaiyaphum(al)
+    buengsamphan_chaiyaphum(al)
     nurses(al)
     lomsak(al)
     lomsak_labyrinth(al)

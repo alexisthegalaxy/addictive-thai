@@ -2,7 +2,7 @@ import pygame
 import datetime
 from db import get_db_cursor
 from lexicon.items import Word
-from lexicon.presentation import Presentation
+from lexicon.presentation import Presentation, WordPresentation
 
 
 def draw_square(screen, color, x, y, width, height):
@@ -145,7 +145,7 @@ class Dex(object):
         self.active = not self.active
 
     def launch_presentation(self, word):
-        self.al.active_presentation = Presentation(self.al, word, from_dex=True)
+        self.al.active_presentation = WordPresentation(self.al, word, from_dex=True)
 
     def interact(self):
         ui = self.al.ui

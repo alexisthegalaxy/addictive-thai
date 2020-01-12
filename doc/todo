@@ -1,7 +1,8 @@
 Letters:
-    Improve presentation screen for letters
-    Show the dex for letters
     Improve the navigation on letter tests
+    Show the dex for letters
+    Improve presentation screen for letters
+    Add audio for all words without audio - there's a script for finding them
 
 Presentation Screen:
     - Tones

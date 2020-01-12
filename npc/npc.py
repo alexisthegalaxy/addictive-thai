@@ -12,10 +12,23 @@ from models import xp_from_word
 from sounds.play_sound import play_thai_word
 
 
-def can_turn(sprite_type):
-    if sprite_type == "sign" or sprite_type == "bed":
-        return False
-    return True
+def _get_time_type():
+    now = datetime.now().microsecond
+    if now < 250_000:
+        return 1
+    if now < 500_000:
+        return 2
+    if now < 750_000:
+        return 3
+    return 4
+
+
+def _can_turn(sprite_type):
+    return sprite_type not in ["sign", "bed", "chest_open", "chest_closed", "television_on", "television_off"]
+
+
+def _is_giff(sprite):
+    return sprite and sprite[0] == "_"
 
 
 @dataclass
@@ -258,14 +271,15 @@ class Npc(object):
             return
 
         # get sprite
+        time_type = _get_time_type()
+        sprite_name = self.sprite
         sprite = None
-        if can_turn(self.sprite):
-            sprite_name = f"{self.sprite}_{string_from_direction(self.direction)}"
-            if sprite_name in al.ui.npc_sprites:
-                sprite = al.ui.npc_sprites[sprite_name]
-        else:
-            if self.sprite in al.ui.npc_sprites:
-                sprite = al.ui.npc_sprites[self.sprite]
+        if _can_turn(self.sprite):
+            sprite_name += f"_{string_from_direction(self.direction)}"
+        if _is_giff(self.sprite):
+            sprite_name = f"{self.sprite}_{time_type}"
+        if sprite_name in al.ui.npc_sprites:
+            sprite = al.ui.npc_sprites[sprite_name]
 
         x, y = self.get_precise_position(x, y)
 

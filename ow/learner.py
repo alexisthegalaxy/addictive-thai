@@ -10,7 +10,7 @@ from sounds.play_sound import play_thai_word
 
 
 class Learner(object):
-    def __init__(self, al, name, x=45, y=9, color=(150, 0, 150)):
+    def __init__(self, al, name, x=8, y=12, color=(150, 0, 150)):
         self.name = name
         set_active_player(name)
         self.sprite = self.name.lower()
@@ -27,7 +27,7 @@ class Learner(object):
         self.al: "All" = al
         self.max_free_steps = 3
         self.free_steps = self.max_free_steps
-        self.last_healing_place = (28, 92, self.al.mas.chaiyaphum)
+        self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
         self.movement: Movement = None
         self.follower = None
 

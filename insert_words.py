@@ -64,10 +64,6 @@ def insert_word(thai, english, tones, split_form):
 insert_word(thai='เล็ก', english='small', tones='H', split_form='เล็ก')
 
 
-# # # c.execute(f"INSERT INTO users (name) VALUES ('Kana')")
-# # # c.execute(f"INSERT INTO users (name) VALUES ('Rob')")
-# # # conn.commit()
-# #
 # # # insert_word('เอา-เถอะ', 'okay, alright', 'ML')
 # # # insert_word('แก้ว', 'glass, classifier for glasses', 'F')
 # # # insert_word('เครื่อง', 'machine, classifier for machines', 'F')

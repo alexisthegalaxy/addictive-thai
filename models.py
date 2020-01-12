@@ -122,8 +122,8 @@ def increase_xp_letter_by_id(letter_id, xp_amount):
 def create_new_user(name):
     # Create a row in user and a row in user_details
     starting_map = 'house_learner_f2'
-    starting_x = 5
-    starting_y = 10
+    starting_x = 8
+    starting_y = 12
     starting_money = 0
     starting_hp = 5
 

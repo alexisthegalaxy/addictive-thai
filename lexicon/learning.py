@@ -100,15 +100,15 @@ class WordLearning(Learning):
         self.step = LearningStep.NONE
 
         self.al.active_presentation = WordPresentation(al, word, from_learning=True)
-        self.test_1 = ThaiFromEnglish4(al, correct_word=word, learning=self)
-        self.test_2 = ThaiFromEnglish4(al, correct_word=word, learning=self)  # TODO
-        self.test_3 = ThaiFromEnglish6(al, correct_word=word, learning=self)
-        self.test_4 = ThaiFromEnglish4(al, correct_word=word, learning=self)  # TODO
+        self.test_1 = ThaiFromEnglish4(al, correct=word, learning=self)
+        self.test_2 = ThaiFromEnglish4(al, correct=word, learning=self)  # TODO
+        self.test_3 = ThaiFromEnglish6(al, correct=word, learning=self)
+        self.test_4 = ThaiFromEnglish4(al, correct=word, learning=self)  # TODO
         # self.test_5 = TappingTestSentence(al, correct_word=word, learning=self)
         # test_5 is a sentence if possible, a Thai from English 6 otherwise
         self.test_5 = pick_sentence_test(al, word, learning=self)
         if not self.test_5:
-            self.test_5 = ThaiFromEnglish6(al, correct_word=word, learning=self)
+            self.test_5 = ThaiFromEnglish6(al, correct=word, learning=self)
 
         play_transformed_thai_word(self.word.thai)
 

@@ -1497,7 +1497,30 @@ class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
             box.draw(screen, fonts, selected=self.selected_option_index == i)
 
     def interact(self, al):
-        super().interact(al)
+        if al.ui.up:
+            self.selected_option_index -= 1
+            if self.selected_option_index % 4 == 3:
+                self.selected_option_index += 4
+            al.ui.up = False
+        if al.ui.down:
+            self.selected_option_index += 1
+            if self.selected_option_index % 4 == 0:
+                self.selected_option_index -= 4
+            al.ui.down = False
+        if al.ui.right:
+            self.selected_option_index += 4
+            if self.selected_option_index >= 16:
+                self.selected_option_index -= 16
+            al.ui.right = False
+        if al.ui.left:
+            self.selected_option_index -= 4
+            if self.selected_option_index < 0:
+                self.selected_option_index += 16
+            al.ui.left = False
+        if al.ui.space:
+            al.ui.space = False
+            self.learner_select_option()
+
         if al.ui.hover:
             for box in self.boxes:
                 if box.contains(al.ui.hover):
@@ -1748,7 +1771,26 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
             box.draw(screen, fonts, selected=self.selected_option_index == i)
 
     def interact(self, al):
-        super().interact(al)
+        if al.ui.up:
+            self.selected_option_index -= 1
+            if self.selected_option_index % 4 == 3:
+                self.selected_option_index += 4
+            al.ui.up = False
+        if al.ui.down:
+            self.selected_option_index += 1
+            if self.selected_option_index % 4 == 0:
+                self.selected_option_index -= 4
+            al.ui.down = False
+        if al.ui.right:
+            self.selected_option_index += 4
+            if self.selected_option_index >= 16:
+                self.selected_option_index -= 16
+            al.ui.right = False
+        if al.ui.left:
+            self.selected_option_index -= 4
+            if self.selected_option_index < 0:
+                self.selected_option_index += 16
+            al.ui.left = False
         if al.ui.hover:
             for box in self.boxes:
                 if box.contains(al.ui.hover):
@@ -1764,6 +1806,10 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
                     al.ui.click = None
                     self.learner_select_option()
                     break
+
+        if al.ui.space:
+            al.ui.space = False
+            self.learner_select_option()
 
 
 class ThaiLettersFromSound(Test):
@@ -1830,9 +1876,9 @@ class ThaiLettersFromSound(Test):
             al.ui.space = False
             if self.selector_on_sound:
                 if self.has_audio_property:
-                    play_transformed_thai_word(self.correct.audio)
+                    play_transformed_thai_word(self.word)
                 else:
-                    play_transformed_thai_word(self.correct.thai)
+                    play_transformed_thai_word(self.word)
             else:
                 self.learner_select_option()
         if al.ui.hover:

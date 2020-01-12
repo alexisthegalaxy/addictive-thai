@@ -287,13 +287,13 @@ class GrammarGridTest(Test):
     def __init__(
         self,
         al: "All",
-        correct_word: Word,
+        correct: Word,
         sentence,
         learning=None,
         test_success_callback=None,
     ):
         super().__init__(al, learning, test_success_callback)
-        self.correct_word = correct_word
+        self.correct = correct
         self.grid = Grid(al=al, sentence=sentence)
         self.timer = Timer(al=al)
         self.sentence = sentence
@@ -359,13 +359,13 @@ class SentenceGridTest(Test):
     def __init__(
         self,
         al: "All",
-        correct_word: Word,
+        correct: Word,
         sentence,
         learning=None,
         test_success_callback=None,
     ):
         super().__init__(al, learning, test_success_callback)
-        self.correct_word = correct_word
+        self.correct = correct
         self.grid = Grid(al=al, sentence=sentence)
         self.timer = Timer(al=al)
         self.sentence = sentence

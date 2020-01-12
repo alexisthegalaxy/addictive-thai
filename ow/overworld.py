@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import random
 from dataclasses import dataclass
@@ -7,7 +8,7 @@ import pygame
 
 from derive_from_mothermap import mothermap
 from direction import Direction
-from event import execute_event
+# from event import execute_event
 from lexicon.items import Word, Letter
 from lexicon.test_services import pick_a_test_for_word, pick_a_test_for_letter
 from npc.npc import Npc
@@ -30,70 +31,112 @@ class CellType(object):
         self.color = color
         self.walkable = walkable
         self.encounter_rate = encounter_rate
-        self.postcolor = postcolor  # the color used for transforming the map into the postmap
+        self.postcolor = (
+            postcolor
+        )  # the color used for transforming the map into the postmap
 
 
 class CellTypes:
-    grass = CellType('草', 'grass', (100, 200, 100), True, 0.05, GRASS_COLOR)
-    tree = CellType('树', 'tree', (85, 107, 47), False, 0, TREE_COLOR)
-    ground = CellType('土', 'ground', (176, 246, 176), True, 0, PATH_COLOR)
-    tall_grass = CellType('稂', 'tall_grass', (0, 128, 0), True, 0.1, GRASS_COLOR)
-    path = CellType('道', 'path', (200, 200, 200), True, 0, PATH_COLOR)
-    road = CellType('路', 'road', (154, 154, 154), True, 0, PATH_COLOR)
-    wall = CellType('壁', 'wall', (22, 22, 22), False, 0, WALL_COLOR)
-    sign = CellType('標', 'sign', (71, 71, 71), False, 0, WALL_COLOR)
-    water = CellType('水', 'water', (57, 62, 255), False, 0.05, WATER_COLOR)
-    cave_water = CellType('湿', 'cave_water', (24, 24, 58), False, 0.05, WATER_COLOR)
-    decoration = CellType('飾', 'decoration', (123, 9, 9), False, 0, ROOF_COLOR)
-    flower = CellType('花', 'flower', (231, 148, 193), True, 0, PATH_COLOR)
-    flower_2 = CellType('李', 'flower_2', (231, 148, 194), True, 0, PATH_COLOR)
-    nenuphar = CellType('华', 'nenuphar', (189, 176, 246), True, 0, WATER_COLOR)
-    door = CellType('门', 'door', (255, 0, 204), True, 0, WALL_COLOR)
-    inn_floor = CellType('床', 'inn_floor', (117, 199, 242), True, 0, PATH_COLOR)
-    inn_sign = CellType('館', 'inn_sign', (255, 152, 234), False, 0, WALL_COLOR)
-    inn_map = CellType('図', 'inn_map', (99, 122, 80), False, 0, WALL_COLOR)
-    temple_floor = CellType('寺', 'temple_floor', (183, 183, 183), True, 0, PATH_COLOR)
-    field_spirit_house = CellType('社', 'field_spirit_house', (193, 200, 129), False, 0, PATH_COLOR)
-    stairs_up = CellType('上', 'stairs_up', (255, 192, 192), True, 0, PATH_COLOR)
-    stairs_down = CellType('下', 'stairs_down', (192, 255, 248), True, 0, PATH_COLOR)
+    grass = CellType("草", "_grass", (100, 200, 100), True, 0.05, GRASS_COLOR)
+    hole_in_grass = CellType("坑", "hole_in_grass", (0, 50, 0), True, 0, GRASS_COLOR)
+    tree = CellType("树", "tree", (85, 107, 47), False, 0, TREE_COLOR)
+    ground = CellType("土", "ground", (176, 246, 176), True, 0, PATH_COLOR)
+    tall_grass = CellType("稂", "_tall_grass", (0, 128, 0), True, 0.1, GRASS_COLOR)
+    path = CellType("道", "path", (200, 200, 200), True, 0, PATH_COLOR)
+    road = CellType("路", "road", (154, 154, 154), True, 0, PATH_COLOR)
+    wall = CellType("壁", "wall", (22, 22, 22), False, 0, WALL_COLOR)
+    sign = CellType("標", "sign", (71, 71, 71), False, 0, WALL_COLOR)
+    water = CellType("水", "water", (57, 62, 255), False, 0.05, WATER_COLOR)
+    cave_water = CellType("湿", "cave_water", (24, 24, 58), False, 0.05, WATER_COLOR)
+    decoration = CellType("飾", "decoration", (123, 9, 9), False, 0, ROOF_COLOR)
+    flower_1 = CellType("花", "_flower_1", (231, 148, 193), True, 0, PATH_COLOR)
+    flower_2 = CellType("李", "_flower_2", (231, 148, 194), True, 0, PATH_COLOR)
+    nenuphar = CellType("华", "nenuphar", (189, 176, 246), True, 0, WATER_COLOR)
+    door = CellType("门", "door", (255, 0, 204), True, 0, WALL_COLOR)
+    inn_floor = CellType("床", "inn_floor", (117, 199, 242), True, 0, PATH_COLOR)
+    inn_sign = CellType("館", "inn_sign", (255, 152, 234), False, 0, WALL_COLOR)
+    inn_map = CellType("図", "inn_map", (99, 122, 80), False, 0, WALL_COLOR)
+    temple_floor = CellType("寺", "temple_floor", (183, 183, 183), True, 0, PATH_COLOR)
+    field_spirit_house = CellType(
+        "社", "field_spirit_house", (193, 200, 129), False, 0, PATH_COLOR
+    )
+    stairs_up = CellType("上", "stairs_up", (255, 192, 192), True, 0, PATH_COLOR)
+    stairs_down = CellType("下", "stairs_down", (192, 255, 248), True, 0, PATH_COLOR)
     # Cave
-    cave_floor = CellType('穴', 'cave_floor', (159, 122, 120), True, 0.05, MOUNTAIN_PATH_COLOR)  # should be 0.05
-    boulder_2 = CellType('岩', 'boulder_2', (53, 14, 14), False, 0, MOUNTAIN_WALL_COLOR)
-    rock = CellType('石', 'rock', (94, 37, 37), False, 0, MOUNTAIN_WALL_COLOR)
-    rocky_ground = CellType('嶝', 'rocky_path', (210, 185, 184), True, 0.05, MOUNTAIN_PATH_COLOR)  # should be 0.05
-    boulder = CellType('砾', 'boulder', (172, 92, 113), False, 0, MOUNTAIN_WALL_COLOR)
-    entrance = CellType('入', 'entrance', (227, 25, 77), True, 0, MOUNTAIN_PATH_COLOR)
-    cave_0010 = CellType('┏', 'cave_0010', (63, 222, 141), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_0110 = CellType('┣', 'cave_0110', (63, 201, 222), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_0100 = CellType('┗', 'cave_0100', (63, 104, 222), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_1100 = CellType('┻', 'cave_1100', (149, 63, 222), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_1000 = CellType('┛', 'cave_1000', (209, 63, 222), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_1001 = CellType('┫', 'cave_1001', (222, 63, 104), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_0001 = CellType('┓', 'cave_0001', (222, 100, 63), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_0011 = CellType('┳', 'cave_0011', (183, 222, 63), True, 0, MOUNTAIN_WALL_COLOR)
-    cave_1110 = CellType('┐', 'cave_1110', (80, 95, 138), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_1101 = CellType('┌', 'cave_1101', (122, 95, 124), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_entrance_down = CellType('u', 'cave_entrance_down', (25, 227, 58), True, 0, MOUNTAIN_PATH_COLOR)
-    cave_stairs_1100 = CellType('║', 'cave_stairs_1100', (138, 0, 255), True, 0, MOUNTAIN_PATH_COLOR)
-    cave_stairs_0110 = CellType('═', 'cave_stairs_0110', (77, 178, 193), True, 0, MOUNTAIN_PATH_COLOR)
-    cave_stairs_1001 = CellType('─', 'cave_stairs_1001', (177, 85, 109), True, 0, MOUNTAIN_PATH_COLOR)
-    cave_stairs_0011 = CellType('│', 'cave_stairs_0011', (161, 186, 87), True, 0.05, MOUNTAIN_PATH_COLOR)
-    cave_0010_over_edge = CellType('┲', 'cave_0010_over_edge', (121, 222, 103), False, 0, MOUNTAIN_WALL_COLOR)
-    cave_0001_over_edge = CellType('┱', 'cave_0001_over_edge', (203, 159, 63), False, 0, MOUNTAIN_WALL_COLOR)
+    cave_floor = CellType(
+        "穴", "cave_floor", (159, 122, 120), True, 0.05, MOUNTAIN_PATH_COLOR
+    )
+    cave_rock_pillar_1 = CellType(
+        "鍾", "cave_rock_pillar_1", (54, 14, 14), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    boulder_2 = CellType("岩", "boulder_2", (53, 14, 14), False, 0, MOUNTAIN_WALL_COLOR)
+    rock = CellType("石", "rock", (94, 37, 37), False, 0, MOUNTAIN_WALL_COLOR)
+    rocky_ground = CellType(
+        "嶝", "rocky_path", (210, 185, 184), True, 0.05, MOUNTAIN_PATH_COLOR
+    )
+    boulder = CellType("砾", "boulder", (172, 92, 113), False, 0, MOUNTAIN_WALL_COLOR)
+    entrance = CellType("入", "entrance", (227, 25, 77), True, 0, MOUNTAIN_PATH_COLOR)
+    cave_0010 = CellType(
+        "┏", "cave_0010", (63, 222, 141), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_0110 = CellType(
+        "┣", "cave_0110", (63, 201, 222), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_0100 = CellType(
+        "┗", "cave_0100", (63, 104, 222), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_1100 = CellType(
+        "┻", "cave_1100", (149, 63, 222), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_1000 = CellType(
+        "┛", "cave_1000", (209, 63, 222), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_1001 = CellType(
+        "┫", "cave_1001", (222, 63, 104), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_0001 = CellType(
+        "┓", "cave_0001", (222, 100, 63), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_0011 = CellType("┳", "cave_0011", (183, 222, 63), True, 0, MOUNTAIN_WALL_COLOR)
+    cave_1110 = CellType("┐", "cave_1110", (80, 95, 138), False, 0, MOUNTAIN_WALL_COLOR)
+    cave_1101 = CellType(
+        "┌", "cave_1101", (122, 95, 124), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_entrance_down = CellType(
+        "u", "cave_entrance_down", (25, 227, 58), True, 0, MOUNTAIN_PATH_COLOR
+    )
+    cave_stairs_1100 = CellType(
+        "║", "cave_stairs_1100", (138, 0, 255), True, 0, MOUNTAIN_PATH_COLOR
+    )
+    cave_stairs_0110 = CellType(
+        "═", "cave_stairs_0110", (77, 178, 193), True, 0, MOUNTAIN_PATH_COLOR
+    )
+    cave_stairs_1001 = CellType(
+        "─", "cave_stairs_1001", (177, 85, 109), True, 0, MOUNTAIN_PATH_COLOR
+    )
+    cave_stairs_0011 = CellType(
+        "│", "cave_stairs_0011", (161, 186, 87), True, 0.05, MOUNTAIN_PATH_COLOR
+    )
+    cave_0010_over_edge = CellType(
+        "┲", "cave_0010_over_edge", (121, 222, 103), False, 0, MOUNTAIN_WALL_COLOR
+    )
+    cave_0001_over_edge = CellType(
+        "┱", "cave_0001_over_edge", (203, 159, 63), False, 0, MOUNTAIN_WALL_COLOR
+    )
 
-    fruit_tree = CellType('果', 'fruit_tree', (192, 255, 81), False, 0, TREE_COLOR)
-    waterfall = CellType('滝', 'waterfall', (57, 150, 255), True, 0.1, WATER_COLOR)
-    bridge_hor = CellType('橋', 'bridge_hor', (163, 165, 255), True, 0, WATER_COLOR)
-    bridge_ver = CellType('圯', 'bridge_ver', (163, 164, 255), True, 0, WATER_COLOR)
-    fence = CellType('垣', 'fence', (102, 102, 102), False, 0, WALL_COLOR)
-    arena_sign = CellType('競', 'arena_sign', (255, 192, 0), False, 0, WALL_COLOR)
-    school_sign = CellType('学', 'school_sign', (103, 229, 216), False, 0, WALL_COLOR)
-    palm_tree = CellType('椰', 'palm_tree', (131, 148, 102), False, 0, TREE_COLOR)
-    shop_sign = CellType('買', 'shop_sign', (65, 71, 193), False, 0, WALL_COLOR)
-    field = CellType('畑', 'field', (225, 232, 168), True, 0.4, PATH_COLOR)
-    sand = CellType('砂', 'sand', (255, 218, 105), True, 0, PATH_COLOR)
-    buddha_statue = CellType('仏', 'buddha_statue', (255, 215, 54), False, 0, WALL_COLOR)
-    none = CellType('無', 'none', (0, 0, 0), False, 0, (0, 0, 0))
+    fruit_tree = CellType("果", "fruit_tree", (192, 255, 81), False, 0, TREE_COLOR)
+    waterfall = CellType("滝", "_waterfall", (57, 150, 255), True, 0.1, WATER_COLOR)
+    bridge_hor = CellType("橋", "bridge_hor", (163, 165, 255), True, 0, WATER_COLOR)
+    bridge_ver = CellType("圯", "bridge_ver", (163, 164, 255), True, 0, WATER_COLOR)
+    fence = CellType("垣", "fence", (102, 102, 102), False, 0, WALL_COLOR)
+    arena_sign = CellType("競", "arena_sign", (255, 192, 0), False, 0, WALL_COLOR)
+    school_sign = CellType("学", "school_sign", (103, 229, 216), False, 0, WALL_COLOR)
+    palm_tree = CellType("椰", "palm_tree", (131, 148, 102), False, 0, TREE_COLOR)
+    shop_sign = CellType("買", "shop_sign", (65, 71, 193), False, 0, WALL_COLOR)
+    field = CellType("畑", "field", (225, 232, 168), True, 0.4, PATH_COLOR)
+    sand = CellType("砂", "sand", (255, 218, 105), True, 0, PATH_COLOR)
+    buddha_statue = CellType("仏", "buddha_statue", (255, 215, 54), False, 0, WALL_COLOR)
+    none = CellType("無", "none", (0, 0, 0), False, 0, (0, 0, 0))
 
 
 @dataclass
@@ -119,6 +162,7 @@ class Occurrence(object):
     Each map (Ma) has an occurrence.
     An occurrence gives for the map the probability for each word to appear
     """
+
     def __init__(self, ma):
         self.ma = ma
         self.candidates = []
@@ -132,7 +176,7 @@ class Occurrence(object):
         total_weight = 0
         for line in file:
             line = line.replace("\n", "")
-            letter = ' L ' in line
+            letter = " L " in line
             if letter:
                 elements = line.split(" L ")
             else:
@@ -168,14 +212,30 @@ def get_cell_type_dictionary_by_color():
     return {cell.color: cell for cell in cells}
 
 
+def _get_time_type():
+    now = datetime.now().microsecond
+    if now < 250_000:
+        return 1
+    if now < 500_000:
+        return 2
+    if now < 750_000:
+        return 3
+    return 4
+
+
 class Ma(object):
-    def __init__(self, filename, mas, x_shift=-1, y_shift=-1, parent=None, trigger_tiles=None):
+    def __init__(
+        self, filename, mas, x_shift=-1, y_shift=-1, parent=None, trigger_tiles=None
+    ):
         self.filename = filename
         self.mas: Mas = mas
         self.parent = parent
         self.ma = []
         x, y = (0, 0)
-        file = open(f"{os.path.dirname(os.path.realpath(__file__))}/map_text_files/{filename}", "r")
+        file = open(
+            f"{os.path.dirname(os.path.realpath(__file__))}/map_text_files/{filename}",
+            "r",
+        )
         cell_dictionary = get_cell_type_dictionary()
         for i, line in enumerate(file):
             y += 1
@@ -205,28 +265,31 @@ class Ma(object):
             movement_offset_x, movement_offset_y = al.learner.movement.get_offset()
             offset_x += movement_offset_x * al.ui.cell_size
             offset_y += movement_offset_y * al.ui.cell_size
-
+        time_type = _get_time_type()
         for line in self.ma:
             for cell in line:
                 x = cell.x * al.ui.cell_size + offset_x
                 y = cell.y * al.ui.cell_size + offset_y
                 if al.ui.can_draw_cell(x, y):
-                    if cell.typ.name in al.ui.sprites:
-                        al.ui.screen.blit(al.ui.sprites[cell.typ.name], [x, y])
+                    name = cell.typ.name
+                    if name[0] == "_":
+                        name = f"{name}_{time_type}"
+                    if name in al.ui.sprites:
+                        al.ui.screen.blit(al.ui.sprites[name], [x, y])
                     else:
                         pygame.draw.rect(
                             al.ui.screen,
                             cell.typ.color,
-                            pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size)
+                            pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
                         )
 
     def get_cell_at(self, x, y) -> Cell:
         try:
             return self.ma[y][x]
         except:
-            print('The map', self.filename)
-            print(f' only has dimensions ({len(self.ma)}, {len(self.ma[0])})')
-            print(f' and the cell requested is ({x}, {y})')
+            print("The map", self.filename)
+            print(f" only has dimensions ({len(self.ma)}, {len(self.ma[0])})")
+            print(f" and the cell requested is ({x}, {y})")
 
     def add_npc(self, npc):
         self.npcs.append(npc)
@@ -252,16 +315,18 @@ class Ma(object):
             rand = random.uniform(0, 1)
             if rand < rate:
                 if len(self.occ.candidates) > 0:
-                    chosen_candidate = random.choices(population=self.occ.candidates,
-                                                 weights=self.occ.rates,
-                                                 k=1)[0]
+                    chosen_candidate = random.choices(
+                        population=self.occ.candidates, weights=self.occ.rates, k=1
+                    )[0]
                     if isinstance(chosen_candidate, Word):
                         pick_a_test_for_word(self.mas.al, chosen_candidate)
                     elif isinstance(chosen_candidate, Letter):
                         pick_a_test_for_letter(self.mas.al, chosen_candidate)
                     learner.free_steps = learner.max_free_steps
                 else:
-                    print(f"ERROR: You didn't specify the encounter rate for {self.filename}")
+                    print(
+                        f"ERROR: You didn't specify the encounter rate for {self.filename}"
+                    )
 
 
 class Mas(object):
@@ -270,32 +335,63 @@ class Mas(object):
         # these maps are real overworld, not houses
         self.chaiyaphum = Ma(filename="chaiyaphum", mas=self, x_shift=780, y_shift=629)
         self.chumphae = Ma(filename="chumphae", mas=self, x_shift=699, y_shift=563)
-        self.chumphae_khonkaen = Ma(filename="chumphae_khonkaen", mas=self, x_shift=824, y_shift=551)
-        self.phetchabun_buengsamphan = Ma(filename="phetchabun_buengsamphan", mas=self, x_shift=647, y_shift=640)
-        self.buengsamphan = Ma(filename="buengsamphan", mas=self, x_shift=650, y_shift=704)
+        self.chumphae_khonkaen = Ma(
+            filename="chumphae_khonkaen", mas=self, x_shift=824, y_shift=551
+        )
+        self.phetchabun_buengsamphan = Ma(
+            filename="phetchabun_buengsamphan", mas=self, x_shift=647, y_shift=640
+        )
+        self.buengsamphan = Ma(
+            filename="buengsamphan", mas=self, x_shift=650, y_shift=704
+        )
         self.taphan_hin = Ma(filename="taphan_hin", mas=self, x_shift=537, y_shift=597)
-        self.buengsamphan_chumsaeng = Ma(filename="buengsamphan_chumsaeng", mas=self, x_shift=569, y_shift=664)
+        self.buengsamphan_chumsaeng = Ma(
+            filename="buengsamphan_chumsaeng", mas=self, x_shift=569, y_shift=664
+        )
         self.thapkhlo = Ma(filename="thapkhlo", mas=self, x_shift=578, y_shift=648)
-        self.nakhon_sawan = Ma(filename="nakhon_sawan", mas=self, x_shift=502, y_shift=703)
+        self.nakhon_sawan = Ma(
+            filename="nakhon_sawan", mas=self, x_shift=502, y_shift=703
+        )
         self.chumsaeng = Ma(filename="chumsaeng", mas=self, x_shift=537, y_shift=660)
-        self.thapkhlo_phitsanulok = Ma(filename="thapkhlo_phitsanulok", mas=self, x_shift=572, y_shift=596)
+        self.thapkhlo_phitsanulok = Ma(
+            filename="thapkhlo_phitsanulok", mas=self, x_shift=572, y_shift=596
+        )
         self.khonkaen = Ma(filename="khonkaen", mas=self, x_shift=897, y_shift=611)
-        self.buengsamphan_chaiyaphum = Ma(filename="buengsamphan_chaiyaphum", mas=self, x_shift=697, y_shift=689)
-        self.buengsamphan_mountain = Ma(filename="buengsamphan_mountain", mas=self, x_shift=719, y_shift=689)
+        self.buengsamphan_chaiyaphum = Ma(
+            filename="buengsamphan_chaiyaphum", mas=self, x_shift=697, y_shift=689
+        )
+        self.buengsamphan_mountain = Ma(
+            filename="buengsamphan_mountain", mas=self, x_shift=719, y_shift=689
+        )
         self.lomsak = Ma(filename="lomsak", mas=self, x_shift=676, y_shift=543)
         self.cat_cove = Ma(filename="cat_cove", mas=self, x_shift=710, y_shift=616)
-        self.kasetsombum = Ma(filename="kasetsombum", mas=self, x_shift=761, y_shift=635)
+        self.cat_cove_hidden_house = Ma(
+            filename="cat_cove_hidden_house", mas=self, x_shift=720, y_shift=611
+        )
+        self.kasetsombum = Ma(
+            filename="kasetsombum", mas=self, x_shift=761, y_shift=635
+        )
         self.phetchabun = Ma(filename="phetchabun", mas=self, x_shift=639, y_shift=572)
         self.banyaeng = Ma(filename="banyaeng", mas=self, x_shift=599, y_shift=578)
         self.labyrinth = Ma(filename="labyrinth", mas=self, x_shift=586, y_shift=545)
-        self.phitsanulok = Ma(filename="phitsanulok", mas=self, x_shift=530, y_shift=545)
-        self.lomsak_labyrinth = Ma(filename="lomsak_labyrinth", mas=self, x_shift=620, y_shift=548)
-        self.phitsanulok_sukhothai = Ma(filename="phitsanulok_sukhothai", mas=self, x_shift=493, y_shift=540)
+        self.phitsanulok = Ma(
+            filename="phitsanulok", mas=self, x_shift=530, y_shift=545
+        )
+        self.lomsak_labyrinth = Ma(
+            filename="lomsak_labyrinth", mas=self, x_shift=620, y_shift=548
+        )
+        self.phitsanulok_sukhothai = Ma(
+            filename="phitsanulok_sukhothai", mas=self, x_shift=493, y_shift=540
+        )
         self.sukhothai = Ma(filename="sukhothai", mas=self, x_shift=468, y_shift=513)
-        self.old_sukhothai = Ma(filename="old_sukhothai", mas=self, x_shift=429, y_shift=514)
+        self.old_sukhothai = Ma(
+            filename="old_sukhothai", mas=self, x_shift=429, y_shift=514
+        )
         self.bua_yai = Ma(filename="bua_yai", mas=self, x_shift=795, y_shift=699)
         self.phon = Ma(filename="phon", mas=self, x_shift=865, y_shift=644)
-        self.chaiyaphum_chatturat = Ma(filename="chaiyaphum_chatturat", mas=self, x_shift=750, y_shift=715)
+        self.chaiyaphum_chatturat = Ma(
+            filename="chaiyaphum_chatturat", mas=self, x_shift=750, y_shift=715
+        )
         self.chatturat = Ma(filename="chatturat", mas=self, x_shift=704, y_shift=762)
         self.ko_kut = Ma(filename="ko_kut", mas=self, x_shift=806, y_shift=1303)
         self.ko_mak = Ma(filename="ko_mak", mas=self, x_shift=816, y_shift=1305)
@@ -304,7 +400,9 @@ class Mas(object):
         self.inn1 = Ma(filename="inn1", mas=self, parent=self.chumphae)
         self.inn2 = Ma(filename="inn2", mas=self, parent=self.lomsak)
         self.inn_khonkaen = Ma(filename="inn_khonkaen", mas=self, parent=self.khonkaen)
-        self.inn_buengsamphan = Ma(filename="inn_buengsamphan", mas=self, parent=self.buengsamphan)
+        self.inn_buengsamphan = Ma(
+            filename="inn_buengsamphan", mas=self, parent=self.buengsamphan
+        )
         self.inn_banyaeng = Ma(filename="inn_banyaeng", mas=self)
         self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", mas=self)
         self.inn_chumsaeng = Ma(filename="inn_chumsaeng", mas=self)
@@ -315,48 +413,108 @@ class Mas(object):
         self.inn_chatturat = Ma(filename="inn_chatturat", mas=self)
         self.inn_ko_kut = Ma(filename="inn_ko_kut", mas=self)
 
-        self.house_learner_f2 = Ma(filename="house_learner_f2", mas=self, parent=self.chaiyaphum)
-        self.house_learner_f1 = Ma(filename="house_learner_f1", mas=self, parent=self.chaiyaphum)
-        self.house_rival_f1 = Ma(filename="house_rival_f1", mas=self, parent=self.chaiyaphum)
-        self.house_rival_f2 = Ma(filename="house_rival_f2", mas=self, parent=self.chaiyaphum)
-        self.chaiyaphum_house_1 = Ma(filename="chaiyaphum_house_1", mas=self, parent=self.chaiyaphum)
-        self.chaiyaphum_house_2 = Ma(filename="chaiyaphum_house_2", mas=self, parent=self.chaiyaphum)
+        self.house_learner_f2 = Ma(
+            filename="house_learner_f2", mas=self, parent=self.chaiyaphum
+        )
+        self.house_learner_f1 = Ma(
+            filename="house_learner_f1", mas=self, parent=self.chaiyaphum
+        )
+        self.house_rival_f1 = Ma(
+            filename="house_rival_f1", mas=self, parent=self.chaiyaphum
+        )
+        self.house_rival_f2 = Ma(
+            filename="house_rival_f2", mas=self, parent=self.chaiyaphum
+        )
+        self.chaiyaphum_house_1 = Ma(
+            filename="chaiyaphum_house_1", mas=self, parent=self.chaiyaphum
+        )
+        self.chaiyaphum_house_2 = Ma(
+            filename="chaiyaphum_house_2", mas=self, parent=self.chaiyaphum
+        )
         self.lover_house = Ma(filename="lover_house", mas=self, parent=self.chaiyaphum)
         self.house4 = Ma(filename="house4", mas=self, parent=self.chaiyaphum)
         self.house5 = Ma(filename="house5", mas=self, parent=self.chaiyaphum)
 
-        self.chumphae_khonkaen_house_1 = Ma(filename="chumphae_khonkaen_house_1", mas=self, parent=self.chumphae_khonkaen)
-        self.chumphae_khonkaen_house_2 = Ma(filename="chumphae_khonkaen_house_2", mas=self, parent=self.chumphae_khonkaen)
-        self.chumphae_khonkaen_house_3 = Ma(filename="chumphae_khonkaen_house_3", mas=self, parent=self.chumphae_khonkaen)
-        self.chumphae_khonkaen_house_4 = Ma(filename="chumphae_khonkaen_house_4", mas=self, parent=self.chumphae_khonkaen)
+        self.chumphae_khonkaen_house_1 = Ma(
+            filename="chumphae_khonkaen_house_1",
+            mas=self,
+            parent=self.chumphae_khonkaen,
+        )
+        self.chumphae_khonkaen_house_2 = Ma(
+            filename="chumphae_khonkaen_house_2",
+            mas=self,
+            parent=self.chumphae_khonkaen,
+        )
+        self.chumphae_khonkaen_house_3 = Ma(
+            filename="chumphae_khonkaen_house_3",
+            mas=self,
+            parent=self.chumphae_khonkaen,
+        )
+        self.chumphae_khonkaen_house_4 = Ma(
+            filename="chumphae_khonkaen_house_4",
+            mas=self,
+            parent=self.chumphae_khonkaen,
+        )
 
-        self.chumphae_school = Ma(filename="chumphae_school", mas=self, parent=self.chumphae)
-        self.chumphae_house1 = Ma(filename="chumphae_house1", mas=self, parent=self.chumphae)
-        self.chumphae_house2 = Ma(filename="chumphae_house2", mas=self, parent=self.chumphae)
-        self.chumphae_house3 = Ma(filename="chumphae_house3", mas=self, parent=self.chumphae)
+        self.chumphae_school = Ma(
+            filename="chumphae_school", mas=self, parent=self.chumphae
+        )
+        self.chumphae_house1 = Ma(
+            filename="chumphae_house1", mas=self, parent=self.chumphae
+        )
+        self.chumphae_house2 = Ma(
+            filename="chumphae_house2", mas=self, parent=self.chumphae
+        )
+        self.chumphae_house3 = Ma(
+            filename="chumphae_house3", mas=self, parent=self.chumphae
+        )
         self.non_muang_house_1 = Ma(filename="non_muang_house_1", mas=self)
-        self.chumphae_lomsak_house1 = Ma(filename="chumphae_lomsak_house1", mas=self, parent=self.chumphae)
-        self.chumphae_lomsak_house2 = Ma(filename="chumphae_lomsak_house2", mas=self, parent=self.chumphae)
-        self.chumphae_lomsak_house3 = Ma(filename="chumphae_lomsak_house3", mas=self, parent=self.chumphae)
+        self.chumphae_lomsak_house1 = Ma(
+            filename="chumphae_lomsak_house1", mas=self, parent=self.chumphae
+        )
+        self.chumphae_lomsak_house2 = Ma(
+            filename="chumphae_lomsak_house2", mas=self, parent=self.chumphae
+        )
+        self.chumphae_lomsak_house3 = Ma(
+            filename="chumphae_lomsak_house3", mas=self, parent=self.chumphae
+        )
 
-        self.lomsak_house_1 = Ma(filename="lomsak_house_1", mas=self, parent=self.lomsak)
-        self.lomsak_house_2 = Ma(filename="lomsak_house_2", mas=self, parent=self.lomsak)
-        self.lomsak_house_3 = Ma(filename="lomsak_house_3", mas=self, parent=self.lomsak)
-        self.lomsak_house_4 = Ma(filename="lomsak_house_4", mas=self, parent=self.lomsak)
+        self.lomsak_house_1 = Ma(
+            filename="lomsak_house_1", mas=self, parent=self.lomsak
+        )
+        self.lomsak_house_2 = Ma(
+            filename="lomsak_house_2", mas=self, parent=self.lomsak
+        )
+        self.lomsak_house_3 = Ma(
+            filename="lomsak_house_3", mas=self, parent=self.lomsak
+        )
+        self.lomsak_house_4 = Ma(
+            filename="lomsak_house_4", mas=self, parent=self.lomsak
+        )
         self.lomsak_school = Ma(filename="lomsak_school", mas=self, parent=self.lomsak)
         self.lomsak_gym = Ma(filename="lomsak_gym", mas=self, parent=self.lomsak)
         self.lomsak_temple = Ma(filename="lomsak_temple", mas=self, parent=self.lomsak)
 
         self.question_cave = Ma(filename="question_cave", mas=self)
         self.cat_cave = Ma(filename="cat_cave", mas=self, parent=self.phetchabun)
+        self.cat_cave_2 = Ma(
+            filename="cat_cave_2", mas=self, parent=self.cat_cove_hidden_house
+        )
         self.bat_cave = Ma(filename="bat_cave", mas=self, parent=self.banyaeng)
-        self.mystery_cave = Ma(filename="mystery_cave", mas=self, parent=self.chaiyaphum)
+        self.mystery_cave = Ma(
+            filename="mystery_cave", mas=self, parent=self.chaiyaphum
+        )
         self.cat_cove_house = Ma(filename="cat_cove_house", mas=self)
-        self.phetchabun_mountain_house_1 = Ma(filename="phetchabun_mountain_house_1", mas=self)
-        self.phetchabun_mountain_house_2 = Ma(filename="phetchabun_mountain_house_2", mas=self)
+        self.phetchabun_mountain_house_1 = Ma(
+            filename="phetchabun_mountain_house_1", mas=self
+        )
+        self.phetchabun_mountain_house_2 = Ma(
+            filename="phetchabun_mountain_house_2", mas=self
+        )
         self.phetchabun_farm = Ma(filename="phetchabun_farm", mas=self)
 
         self.buengsamphan_cave = Ma(filename="buengsamphan_cave", mas=self)
+        self.buengsamphan_chaiyaphum_cave = Ma(filename="buengsamphan_chaiyaphum_cave", mas=self)
         self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", mas=self)
         self.banyaeng_cave = Ma(filename="banyaeng_cave", mas=self)
         self.phetchabun_school = Ma(filename="phetchabun_school", mas=self)
@@ -364,32 +522,80 @@ class Mas(object):
         self.phetchabun_house_1 = Ma(filename="phetchabun_house_1", mas=self)
         self.phetchabun_house_2 = Ma(filename="phetchabun_house_2", mas=self)
         self.phitsanulok_underground = Ma(filename="phitsanulok_underground", mas=self)
-        self.lomsak_labyrinth_house_1 = Ma(filename="lomsak_labyrinth_house_1", mas=self)
-        self.lomsak_labyrinth_house_2 = Ma(filename="lomsak_labyrinth_house_2", mas=self)
+        self.lomsak_labyrinth_house_1 = Ma(
+            filename="lomsak_labyrinth_house_1", mas=self
+        )
+        self.lomsak_labyrinth_house_2 = Ma(
+            filename="lomsak_labyrinth_house_2", mas=self
+        )
         self.phetchabun_temple = Ma(filename="phetchabun_temple", mas=self)
         self.phetchabun_gym = Ma(filename="phetchabun_gym", mas=self)
-        self.banyaeng_house_1 = Ma(filename="banyaeng_house_1", mas=self, parent=self.banyaeng)
-        self.banyaeng_house_2 = Ma(filename="banyaeng_house_2", mas=self, parent=self.banyaeng)
-        self.banyaeng_school = Ma(filename="banyaeng_school", mas=self, parent=self.banyaeng)
-        self.banyaeng_temple = Ma(filename="banyaeng_temple", mas=self, parent=self.banyaeng)
-        self.banyaeng_house_3 = Ma(filename="banyaeng_house_3", mas=self, parent=self.banyaeng)
-        self.phetchabun_shop = Ma(filename="phetchabun_shop", mas=self, parent=self.phetchabun)
-        self.lomsak_labyrinth_shop = Ma(filename="lomsak_labyrinth_shop", mas=self, parent=self.lomsak_labyrinth)
-        self.chumphae_kasetsombum_cave = Ma(filename="chumphae_kasetsombum_cave", mas=self)
+        self.banyaeng_house_1 = Ma(
+            filename="banyaeng_house_1", mas=self, parent=self.banyaeng
+        )
+        self.banyaeng_house_2 = Ma(
+            filename="banyaeng_house_2", mas=self, parent=self.banyaeng
+        )
+        self.banyaeng_school = Ma(
+            filename="banyaeng_school", mas=self, parent=self.banyaeng
+        )
+        self.banyaeng_temple = Ma(
+            filename="banyaeng_temple", mas=self, parent=self.banyaeng
+        )
+        self.banyaeng_house_3 = Ma(
+            filename="banyaeng_house_3", mas=self, parent=self.banyaeng
+        )
+        self.phetchabun_shop = Ma(
+            filename="phetchabun_shop", mas=self, parent=self.phetchabun
+        )
+        self.lomsak_labyrinth_shop = Ma(
+            filename="lomsak_labyrinth_shop", mas=self, parent=self.lomsak_labyrinth
+        )
+        self.chumphae_kasetsombum_cave = Ma(
+            filename="chumphae_kasetsombum_cave", mas=self
+        )
         self.kasetsombum_cave = Ma(filename="kasetsombum_cave", mas=self)
         self.labyrinth_shop = Ma(filename="labyrinth_shop", mas=self)
-        self.kasetsombum_temple = Ma(filename="kasetsombum_temple", mas=self, parent=self.kasetsombum, x_shift=748, y_shift=624)
-        self.inn_kasetsombum = Ma(filename="inn_kasetsombum", mas=self, parent=self.kasetsombum)
-        self.kasetsombum_temple_temple = Ma(filename="kasetsombum_temple_temple", mas=self, parent=self.kasetsombum)
-        self.kasetsombum_house1 = Ma(filename="kasetsombum_house1", mas=self, parent=self.kasetsombum)
-        self.kasetsombum_house2 = Ma(filename="kasetsombum_house2", mas=self, parent=self.kasetsombum)
-        self.kasetsombum_house3 = Ma(filename="kasetsombum_house3", mas=self, parent=self.kasetsombum)
-        self.kasetsombum_shop = Ma(filename="kasetsombum_shop", mas=self, parent=self.kasetsombum)
-        self.kasetsombum_school = Ma(filename="kasetsombum_school", mas=self, parent=self.kasetsombum)
-        self.phitsanulok_maths_school_123 = Ma(filename="phitsanulok_maths_school_123", mas=self, parent=self.phitsanulok)
-        self.phitsanulok_maths_school_456 = Ma(filename="phitsanulok_maths_school_456", mas=self, parent=self.phitsanulok)
-        self.phitsanulok_maths_school_789 = Ma(filename="phitsanulok_maths_school_789", mas=self, parent=self.phitsanulok)
-        self.phitsanulok_maths_school_1011 = Ma(filename="phitsanulok_maths_school_1011", mas=self, parent=self.phitsanulok)
+        self.kasetsombum_temple = Ma(
+            filename="kasetsombum_temple",
+            mas=self,
+            parent=self.kasetsombum,
+            x_shift=748,
+            y_shift=624,
+        )
+        self.inn_kasetsombum = Ma(
+            filename="inn_kasetsombum", mas=self, parent=self.kasetsombum
+        )
+        self.kasetsombum_temple_temple = Ma(
+            filename="kasetsombum_temple_temple", mas=self, parent=self.kasetsombum
+        )
+        self.kasetsombum_house1 = Ma(
+            filename="kasetsombum_house1", mas=self, parent=self.kasetsombum
+        )
+        self.kasetsombum_house2 = Ma(
+            filename="kasetsombum_house2", mas=self, parent=self.kasetsombum
+        )
+        self.kasetsombum_house3 = Ma(
+            filename="kasetsombum_house3", mas=self, parent=self.kasetsombum
+        )
+        self.kasetsombum_shop = Ma(
+            filename="kasetsombum_shop", mas=self, parent=self.kasetsombum
+        )
+        self.kasetsombum_school = Ma(
+            filename="kasetsombum_school", mas=self, parent=self.kasetsombum
+        )
+        self.phitsanulok_maths_school_123 = Ma(
+            filename="phitsanulok_maths_school_123", mas=self, parent=self.phitsanulok
+        )
+        self.phitsanulok_maths_school_456 = Ma(
+            filename="phitsanulok_maths_school_456", mas=self, parent=self.phitsanulok
+        )
+        self.phitsanulok_maths_school_789 = Ma(
+            filename="phitsanulok_maths_school_789", mas=self, parent=self.phitsanulok
+        )
+        self.phitsanulok_maths_school_1011 = Ma(
+            filename="phitsanulok_maths_school_1011", mas=self, parent=self.phitsanulok
+        )
         self.ko_kut_cave_1 = Ma(filename="ko_kut_cave_1", mas=self, parent=self.ko_kut)
         self.current_map: Ma = self.chaiyaphum
         self.add_trigger_tiles()
@@ -423,18 +629,38 @@ class Mas(object):
         # chaiyaphum
         self.chaiyaphum.get_cell_at(28, 101).goes_to = (self.house_learner_f1, 5, 12)
         self.house_learner_f1.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 28, 102)
-        self.house_learner_f1.get_cell_at(2, 9).goes_to = (self.house_learner_f2, 2, 8, Direction.UP)
-        self.house_learner_f2.get_cell_at(2, 9).goes_to = (self.house_learner_f1, 2, 10, Direction.DOWN)
+        self.house_learner_f1.get_cell_at(2, 9).goes_to = (
+            self.house_learner_f2,
+            2,
+            8,
+            Direction.UP,
+        )
+        self.house_learner_f2.get_cell_at(2, 9).goes_to = (
+            self.house_learner_f1,
+            2,
+            10,
+            Direction.DOWN,
+        )
         self.chaiyaphum.get_cell_at(20, 89).goes_to = (self.lover_house, 5, 12)
         self.lover_house.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 20, 90)
         self.chaiyaphum.get_cell_at(20, 86).goes_to = (self.lover_house, 8, 8)
         self.lover_house.get_cell_at(8, 7).goes_to = (self.chaiyaphum, 20, 85)
         self.chaiyaphum.get_cell_at(32, 91).goes_to = (self.house_rival_f1, 5, 12)
         self.house_rival_f1.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 32, 92)
-        self.house_rival_f1.get_cell_at(8, 7).goes_to = (self.house_rival_f2, 8, 8, Direction.DOWN)
-        self.house_rival_f2.get_cell_at(8, 7).goes_to = (self.house_rival_f1, 8, 8, Direction.DOWN)
-        self.chaiyaphum.get_cell_at(26, 87).goes_to = (self.chaiyaphum_house_1, 5, 12)
-        self.chaiyaphum_house_1.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 26, 88)
+        self.house_rival_f1.get_cell_at(8, 7).goes_to = (
+            self.house_rival_f2,
+            8,
+            8,
+            Direction.DOWN,
+        )
+        self.house_rival_f2.get_cell_at(8, 7).goes_to = (
+            self.house_rival_f1,
+            8,
+            8,
+            Direction.DOWN,
+        )
+        self.chaiyaphum.get_cell_at(25, 99).goes_to = (self.chaiyaphum_house_1, 5, 12)
+        self.chaiyaphum_house_1.get_cell_at(5, 13).goes_to = (self.chaiyaphum, 25, 100)
         self.chaiyaphum.get_cell_at(34, 97).goes_to = (self.chaiyaphum_house_2, 4, 12)
         self.bua_yai.get_cell_at(22, 27).goes_to = (self.chaiyaphum_house_2, 10, 12)
         self.chaiyaphum_house_2.get_cell_at(4, 13).goes_to = (self.chaiyaphum, 34, 98)
@@ -474,8 +700,16 @@ class Mas(object):
         self.chumphae_house3.get_cell_at(7, 13).goes_to = (self.chumphae, 118, 74)
         self.chumphae.get_cell_at(118, 73).goes_to = (self.chumphae_house3, 7, 12)
 
-        self.chumphae.get_cell_at(97, 77).goes_to = (self.chumphae_kasetsombum_cave, 19, 4)
-        self.chumphae_kasetsombum_cave.get_cell_at(19, 5).goes_to = (self.chumphae, 97, 78)
+        self.chumphae.get_cell_at(97, 77).goes_to = (
+            self.chumphae_kasetsombum_cave,
+            19,
+            4,
+        )
+        self.chumphae_kasetsombum_cave.get_cell_at(19, 5).goes_to = (
+            self.chumphae,
+            97,
+            78,
+        )
 
         self.non_muang_house_1.get_cell_at(7, 13).goes_to = (self.chumphae, 113, 76)
         self.chumphae.get_cell_at(113, 75).goes_to = (self.non_muang_house_1, 7, 12)
@@ -484,21 +718,61 @@ class Mas(object):
         self.chumphae_khonkaen.get_cell_at(12, 79).goes_to = (self.chumphae, 137, 67)
         self.chumphae.get_cell_at(138, 66).goes_to = (self.chumphae_khonkaen, 13, 78)
         self.chumphae.get_cell_at(138, 67).goes_to = (self.chumphae_khonkaen, 13, 79)
-        self.chumphae_khonkaen.get_cell_at(18, 76).goes_to = (self.chumphae_khonkaen_house_1, 5, 12)
-        self.chumphae_khonkaen_house_1.get_cell_at(5, 13).goes_to = (self.chumphae_khonkaen, 18, 77)
-        self.chumphae_khonkaen.get_cell_at(29, 71).goes_to = (self.chumphae_khonkaen_house_2, 5, 12)
-        self.chumphae_khonkaen_house_2.get_cell_at(5, 13).goes_to = (self.chumphae_khonkaen, 29, 72)
-        self.chumphae_khonkaen.get_cell_at(34, 83).goes_to = (self.chumphae_khonkaen_house_3, 5, 12)
-        self.chumphae_khonkaen_house_3.get_cell_at(5, 13).goes_to = (self.chumphae_khonkaen, 34, 84)
-        self.chumphae_khonkaen.get_cell_at(43, 69).goes_to = (self.chumphae_khonkaen_house_4, 7, 12)
-        self.chumphae_khonkaen_house_4.get_cell_at(7, 13).goes_to = (self.chumphae_khonkaen, 43, 70)
+        self.chumphae_khonkaen.get_cell_at(18, 76).goes_to = (
+            self.chumphae_khonkaen_house_1,
+            5,
+            12,
+        )
+        self.chumphae_khonkaen_house_1.get_cell_at(5, 13).goes_to = (
+            self.chumphae_khonkaen,
+            18,
+            77,
+        )
+        self.chumphae_khonkaen.get_cell_at(29, 71).goes_to = (
+            self.chumphae_khonkaen_house_2,
+            5,
+            12,
+        )
+        self.chumphae_khonkaen_house_2.get_cell_at(5, 13).goes_to = (
+            self.chumphae_khonkaen,
+            29,
+            72,
+        )
+        self.chumphae_khonkaen.get_cell_at(34, 83).goes_to = (
+            self.chumphae_khonkaen_house_3,
+            5,
+            12,
+        )
+        self.chumphae_khonkaen_house_3.get_cell_at(5, 13).goes_to = (
+            self.chumphae_khonkaen,
+            34,
+            84,
+        )
+        self.chumphae_khonkaen.get_cell_at(43, 69).goes_to = (
+            self.chumphae_khonkaen_house_4,
+            7,
+            12,
+        )
+        self.chumphae_khonkaen_house_4.get_cell_at(7, 13).goes_to = (
+            self.chumphae_khonkaen,
+            43,
+            70,
+        )
         # chumphae_lomsak
-        self.chumphae.get_cell_at(104, 42).goes_to = (self.chumphae_lomsak_house1, 5, 12)
-        self.chumphae_lomsak_house1.get_cell_at(5, 13).goes_to = (self.chumphae, 104, 43)
+        self.chumphae.get_cell_at(104, 42).goes_to = (
+            self.chumphae_lomsak_house1,
+            5,
+            12,
+        )
+        self.chumphae_lomsak_house1.get_cell_at(5, 13).goes_to = (
+            self.chumphae,
+            104,
+            43,
+        )
         self.chumphae.get_cell_at(87, 36).goes_to = (self.chumphae_lomsak_house2, 5, 12)
         self.chumphae_lomsak_house2.get_cell_at(5, 13).goes_to = (self.chumphae, 87, 37)
-        self.chumphae.get_cell_at(36, 32).goes_to = (self.chumphae_lomsak_house3, 5, 12)
-        self.chumphae_lomsak_house3.get_cell_at(5, 13).goes_to = (self.chumphae, 36, 33)
+        self.chumphae.get_cell_at(37, 34).goes_to = (self.chumphae_lomsak_house3, 5, 12)
+        self.chumphae_lomsak_house3.get_cell_at(5, 13).goes_to = (self.chumphae, 37, 35)
         # lomsak
         self.chumphae.get_cell_at(13, 19).goes_to = (self.lomsak, 36 + 6, 39)
         self.chumphae.get_cell_at(13, 20).goes_to = (self.lomsak, 36 + 6, 40)
@@ -519,11 +793,37 @@ class Mas(object):
         self.lomsak.get_cell_at(21 + 6, 12).goes_to = (self.lomsak_temple, 13, 24)
         self.lomsak_temple.get_cell_at(13, 25).goes_to = (self.lomsak, 21 + 6, 13)
 
+        # cat cove
         self.cat_cave.get_cell_at(13, 3).goes_to = (self.cat_cove, 19, 29)
         self.cat_cove.get_cell_at(19, 30).goes_to = (self.cat_cave, 13, 4)
-
         self.cat_cove.get_cell_at(11, 6).goes_to = (self.cat_cove_house, 5, 12)
         self.cat_cove_house.get_cell_at(5, 13).goes_to = (self.cat_cove, 11, 7)
+
+        self.cat_cove.get_cell_at(25, 10).goes_to = (self.cat_cave_2, 8, 17)
+        self.kasetsombum_temple.get_cell_at(33, 5).goes_to = (self.cat_cave_2, 54, 12)
+        self.cat_cave_2.get_cell_at(54, 13).goes_to = (self.kasetsombum_temple, 33, 6)
+        self.cat_cave_2.get_cell_at(43, 8).goes_to = (self.cat_cave_2, 54, 8)
+        self.kasetsombum_temple.get_cell_at(18, 4).goes_to = (self.cat_cave_2, 39, 19)
+        self.cat_cave_2.get_cell_at(27, 11).goes_to = (
+            self.cat_cove_hidden_house,
+            34,
+            11,
+        )
+        self.cat_cove_hidden_house.get_cell_at(28, 11).goes_to = (
+            self.cat_cave_2,
+            21,
+            11,
+        )
+        self.cat_cave_2.get_cell_at(21, 12).goes_to = (
+            self.cat_cove_hidden_house,
+            28,
+            12,
+        )
+        self.cat_cove_hidden_house.get_cell_at(34, 10).goes_to = (
+            self.cat_cave_2,
+            27,
+            10,
+        )
 
         self.phetchabun.get_cell_at(49, 8).goes_to = (self.lomsak, 12 + 6, 37)
         self.lomsak.get_cell_at(12 + 6, 38).goes_to = (self.phetchabun, 49, 9)
@@ -546,10 +846,38 @@ class Mas(object):
         self.lomsak_labyrinth.get_cell_at(7, 6).goes_to = (self.labyrinth, 41, 9)
         self.lomsak_labyrinth.get_cell_at(7, 7).goes_to = (self.labyrinth, 41, 10)
 
-        self.lomsak.get_cell_at(677 - mothermap.daughtermaps['lomsak'].x, 567 - mothermap.daughtermaps['lomsak'].y).goes_to = (self.lomsak_labyrinth, 677 - mothermap.daughtermaps['lomsak_labyrinth'].x, 567 - mothermap.daughtermaps['lomsak_labyrinth'].y)
-        self.lomsak.get_cell_at(677 - mothermap.daughtermaps['lomsak'].x, 568 - mothermap.daughtermaps['lomsak'].y).goes_to = (self.lomsak_labyrinth, 677 - mothermap.daughtermaps['lomsak_labyrinth'].x, 568 - mothermap.daughtermaps['lomsak_labyrinth'].y)
-        self.lomsak_labyrinth.get_cell_at(677 + 1 - mothermap.daughtermaps['lomsak_labyrinth'].x, 567 - mothermap.daughtermaps['lomsak_labyrinth'].y).goes_to = (self.lomsak, 677 + 1 - mothermap.daughtermaps['lomsak'].x, 567 - mothermap.daughtermaps['lomsak'].y)
-        self.lomsak_labyrinth.get_cell_at(677 + 1 - mothermap.daughtermaps['lomsak_labyrinth'].x, 568 - mothermap.daughtermaps['lomsak_labyrinth'].y).goes_to = (self.lomsak, 677 + 1 - mothermap.daughtermaps['lomsak'].x, 568 - mothermap.daughtermaps['lomsak'].y)
+        self.lomsak.get_cell_at(
+            677 - mothermap.daughtermaps["lomsak"].x,
+            567 - mothermap.daughtermaps["lomsak"].y,
+        ).goes_to = (
+            self.lomsak_labyrinth,
+            677 - mothermap.daughtermaps["lomsak_labyrinth"].x,
+            567 - mothermap.daughtermaps["lomsak_labyrinth"].y,
+        )
+        self.lomsak.get_cell_at(
+            677 - mothermap.daughtermaps["lomsak"].x,
+            568 - mothermap.daughtermaps["lomsak"].y,
+        ).goes_to = (
+            self.lomsak_labyrinth,
+            677 - mothermap.daughtermaps["lomsak_labyrinth"].x,
+            568 - mothermap.daughtermaps["lomsak_labyrinth"].y,
+        )
+        self.lomsak_labyrinth.get_cell_at(
+            677 + 1 - mothermap.daughtermaps["lomsak_labyrinth"].x,
+            567 - mothermap.daughtermaps["lomsak_labyrinth"].y,
+        ).goes_to = (
+            self.lomsak,
+            677 + 1 - mothermap.daughtermaps["lomsak"].x,
+            567 - mothermap.daughtermaps["lomsak"].y,
+        )
+        self.lomsak_labyrinth.get_cell_at(
+            677 + 1 - mothermap.daughtermaps["lomsak_labyrinth"].x,
+            568 - mothermap.daughtermaps["lomsak_labyrinth"].y,
+        ).goes_to = (
+            self.lomsak,
+            677 + 1 - mothermap.daughtermaps["lomsak"].x,
+            568 - mothermap.daughtermaps["lomsak"].y,
+        )
 
         # Phetchabun
         self.phetchabun.get_cell_at(8, 57).goes_to = (self.banyaeng, 48, 51)
@@ -578,22 +906,82 @@ class Mas(object):
         self.lomsak_house_3.get_cell_at(13, 25).goes_to = (self.phetchabun, 42, 19)
         self.phetchabun.get_cell_at(59, 13).goes_to = (self.lomsak_house_4, 13, 24)
         self.lomsak_house_4.get_cell_at(13, 25).goes_to = (self.phetchabun, 59, 14)
-        self.phetchabun.get_cell_at(24, 10).goes_to = (self.phetchabun_mountain_house_1, 7, 12)
-        self.phetchabun_mountain_house_1.get_cell_at(7, 13).goes_to = (self.phetchabun, 24, 11)
-        self.phetchabun.get_cell_at(22, 24).goes_to = (self.phetchabun_mountain_house_2, 7, 12)
-        self.phetchabun_mountain_house_2.get_cell_at(7, 13).goes_to = (self.phetchabun, 22, 25)
+        self.phetchabun.get_cell_at(24, 10).goes_to = (
+            self.phetchabun_mountain_house_1,
+            7,
+            12,
+        )
+        self.phetchabun_mountain_house_1.get_cell_at(7, 13).goes_to = (
+            self.phetchabun,
+            24,
+            11,
+        )
+        self.phetchabun.get_cell_at(22, 24).goes_to = (
+            self.phetchabun_mountain_house_2,
+            7,
+            12,
+        )
+        self.phetchabun_mountain_house_2.get_cell_at(7, 13).goes_to = (
+            self.phetchabun,
+            22,
+            25,
+        )
         self.phetchabun.get_cell_at(46, 62).goes_to = (self.phetchabun_farm, 10, 24)
         self.phetchabun_farm.get_cell_at(10, 25).goes_to = (self.phetchabun, 46, 63)
         self.phetchabun_farm.get_cell_at(16, 25).goes_to = (self.phetchabun, 49, 63)
         self.phetchabun.get_cell_at(49, 62).goes_to = (self.phetchabun_farm, 16, 24)
-        self.phetchabun.get_cell_at(677 - mothermap.daughtermaps['phetchabun'].x, 645 - mothermap.daughtermaps['phetchabun'].y).goes_to = (self.phetchabun_buengsamphan, 677 - mothermap.daughtermaps['phetchabun_buengsamphan'].x, 645 - mothermap.daughtermaps['phetchabun_buengsamphan'].y)
-        self.phetchabun.get_cell_at(678 - mothermap.daughtermaps['phetchabun'].x, 645 - mothermap.daughtermaps['phetchabun'].y).goes_to = (self.phetchabun_buengsamphan, 678 - mothermap.daughtermaps['phetchabun_buengsamphan'].x, 645 - mothermap.daughtermaps['phetchabun_buengsamphan'].y)
-        self.phetchabun_buengsamphan.get_cell_at(677 - mothermap.daughtermaps['phetchabun_buengsamphan'].x, 643 - mothermap.daughtermaps['phetchabun_buengsamphan'].y).goes_to = (self.phetchabun, 677 - mothermap.daughtermaps['phetchabun'].x, 643 - mothermap.daughtermaps['phetchabun'].y)
-        self.phetchabun_buengsamphan.get_cell_at(678 - mothermap.daughtermaps['phetchabun_buengsamphan'].x, 643 - mothermap.daughtermaps['phetchabun_buengsamphan'].y).goes_to = (self.phetchabun, 678 - mothermap.daughtermaps['phetchabun'].x, 643 - mothermap.daughtermaps['phetchabun'].y)
-        self.phetchabun_buengsamphan.get_cell_at(21, 67).goes_to = (self.buengsamphan, 668 - mothermap.daughtermaps['buengsamphan'].x, 706 - mothermap.daughtermaps['buengsamphan'].y)
-        self.phetchabun_buengsamphan.get_cell_at(21, 68).goes_to = (self.buengsamphan, 668 - mothermap.daughtermaps['buengsamphan'].x, 707 - mothermap.daughtermaps['buengsamphan'].y)
-        self.buengsamphan.get_cell_at(19, 5).goes_to = (self.phetchabun_buengsamphan, 669 - mothermap.daughtermaps['phetchabun_buengsamphan'].x, 707 - mothermap.daughtermaps['phetchabun_buengsamphan'].y)
-        self.buengsamphan.get_cell_at(19, 4).goes_to = (self.phetchabun_buengsamphan, 669 - mothermap.daughtermaps['phetchabun_buengsamphan'].x, 706 - mothermap.daughtermaps['phetchabun_buengsamphan'].y)
+        self.phetchabun.get_cell_at(
+            677 - mothermap.daughtermaps["phetchabun"].x,
+            645 - mothermap.daughtermaps["phetchabun"].y,
+        ).goes_to = (
+            self.phetchabun_buengsamphan,
+            677 - mothermap.daughtermaps["phetchabun_buengsamphan"].x,
+            645 - mothermap.daughtermaps["phetchabun_buengsamphan"].y,
+        )
+        self.phetchabun.get_cell_at(
+            678 - mothermap.daughtermaps["phetchabun"].x,
+            645 - mothermap.daughtermaps["phetchabun"].y,
+        ).goes_to = (
+            self.phetchabun_buengsamphan,
+            678 - mothermap.daughtermaps["phetchabun_buengsamphan"].x,
+            645 - mothermap.daughtermaps["phetchabun_buengsamphan"].y,
+        )
+        self.phetchabun_buengsamphan.get_cell_at(
+            677 - mothermap.daughtermaps["phetchabun_buengsamphan"].x,
+            643 - mothermap.daughtermaps["phetchabun_buengsamphan"].y,
+        ).goes_to = (
+            self.phetchabun,
+            677 - mothermap.daughtermaps["phetchabun"].x,
+            643 - mothermap.daughtermaps["phetchabun"].y,
+        )
+        self.phetchabun_buengsamphan.get_cell_at(
+            678 - mothermap.daughtermaps["phetchabun_buengsamphan"].x,
+            643 - mothermap.daughtermaps["phetchabun_buengsamphan"].y,
+        ).goes_to = (
+            self.phetchabun,
+            678 - mothermap.daughtermaps["phetchabun"].x,
+            643 - mothermap.daughtermaps["phetchabun"].y,
+        )
+        self.phetchabun_buengsamphan.get_cell_at(21, 67).goes_to = (
+            self.buengsamphan,
+            668 - mothermap.daughtermaps["buengsamphan"].x,
+            706 - mothermap.daughtermaps["buengsamphan"].y,
+        )
+        self.phetchabun_buengsamphan.get_cell_at(21, 68).goes_to = (
+            self.buengsamphan,
+            668 - mothermap.daughtermaps["buengsamphan"].x,
+            707 - mothermap.daughtermaps["buengsamphan"].y,
+        )
+        self.buengsamphan.get_cell_at(19, 5).goes_to = (
+            self.phetchabun_buengsamphan,
+            669 - mothermap.daughtermaps["phetchabun_buengsamphan"].x,
+            707 - mothermap.daughtermaps["phetchabun_buengsamphan"].y,
+        )
+        self.buengsamphan.get_cell_at(19, 4).goes_to = (
+            self.phetchabun_buengsamphan,
+            669 - mothermap.daughtermaps["phetchabun_buengsamphan"].x,
+            706 - mothermap.daughtermaps["phetchabun_buengsamphan"].y,
+        )
         self.phetchabun.get_cell_at(13, 52).goes_to = (self.phetchabun_school, 13, 24)
         self.phetchabun_school.get_cell_at(13, 25).goes_to = (self.phetchabun, 13, 53)
         self.phetchabun.get_cell_at(26, 52).goes_to = (self.inn_phetchabun, 4, 7)
@@ -610,70 +998,315 @@ class Mas(object):
         self.phetchabun_house_2.get_cell_at(5, 13).goes_to = (self.phetchabun, 21, 51)
         self.phetchabun.get_cell_at(21, 56).goes_to = (self.phetchabun_shop, 5, 12)
         self.phetchabun_shop.get_cell_at(5, 13).goes_to = (self.phetchabun, 21, 57)
-        self.phetchabun.get_cell_at(28, 79).goes_to = (self.phetchabun_buengsamphan, 20, 12)
-        self.phetchabun_buengsamphan.get_cell_at(20, 11).goes_to = (self.phetchabun, 28, 78)
+        self.phetchabun.get_cell_at(28, 79).goes_to = (
+            self.phetchabun_buengsamphan,
+            20,
+            12,
+        )
+        self.phetchabun_buengsamphan.get_cell_at(20, 11).goes_to = (
+            self.phetchabun,
+            28,
+            78,
+        )
 
-        self.buengsamphan.get_cell_at(7, 11).goes_to = (self.buengsamphan_chumsaeng, 657 - mothermap.daughtermaps['buengsamphan_chumsaeng'].x, 713 - mothermap.daughtermaps['buengsamphan_chumsaeng'].y)
-        self.buengsamphan.get_cell_at(7, 10).goes_to = (self.buengsamphan_chumsaeng, 657 - mothermap.daughtermaps['buengsamphan_chumsaeng'].x, 712 - mothermap.daughtermaps['buengsamphan_chumsaeng'].y)
-        self.buengsamphan_chumsaeng.get_cell_at(89, 48).goes_to = (self.buengsamphan, 658 - mothermap.daughtermaps['buengsamphan'].x, 712 - mothermap.daughtermaps['buengsamphan'].y)
-        self.buengsamphan_chumsaeng.get_cell_at(89, 49).goes_to = (self.buengsamphan, 658 - mothermap.daughtermaps['buengsamphan'].x, 713 - mothermap.daughtermaps['buengsamphan'].y)
+        self.buengsamphan.get_cell_at(7, 11).goes_to = (
+            self.buengsamphan_chumsaeng,
+            657 - mothermap.daughtermaps["buengsamphan_chumsaeng"].x,
+            713 - mothermap.daughtermaps["buengsamphan_chumsaeng"].y,
+        )
+        self.buengsamphan.get_cell_at(7, 10).goes_to = (
+            self.buengsamphan_chumsaeng,
+            657 - mothermap.daughtermaps["buengsamphan_chumsaeng"].x,
+            712 - mothermap.daughtermaps["buengsamphan_chumsaeng"].y,
+        )
+        self.buengsamphan_chumsaeng.get_cell_at(89, 48).goes_to = (
+            self.buengsamphan,
+            658 - mothermap.daughtermaps["buengsamphan"].x,
+            712 - mothermap.daughtermaps["buengsamphan"].y,
+        )
+        self.buengsamphan_chumsaeng.get_cell_at(89, 49).goes_to = (
+            self.buengsamphan,
+            658 - mothermap.daughtermaps["buengsamphan"].x,
+            713 - mothermap.daughtermaps["buengsamphan"].y,
+        )
 
-        self.buengsamphan_chumsaeng.get_cell_at(32, 6).goes_to = (self.thapkhlo, 601 - mothermap.daughtermaps['thapkhlo'].x, 670 - mothermap.daughtermaps['thapkhlo'].y)
-        self.buengsamphan_chumsaeng.get_cell_at(33, 6).goes_to = (self.thapkhlo, 602 - mothermap.daughtermaps['thapkhlo'].x, 670 - mothermap.daughtermaps['thapkhlo'].y)
-        self.thapkhlo.get_cell_at(23, 23).goes_to = (self.buengsamphan_chumsaeng, 601 - mothermap.daughtermaps['buengsamphan_chumsaeng'].x, 671 - mothermap.daughtermaps['buengsamphan_chumsaeng'].y)
-        self.thapkhlo.get_cell_at(24, 23).goes_to = (self.buengsamphan_chumsaeng, 602 - mothermap.daughtermaps['buengsamphan_chumsaeng'].x, 671 - mothermap.daughtermaps['buengsamphan_chumsaeng'].y)
+        self.buengsamphan_chumsaeng.get_cell_at(32, 6).goes_to = (
+            self.thapkhlo,
+            601 - mothermap.daughtermaps["thapkhlo"].x,
+            670 - mothermap.daughtermaps["thapkhlo"].y,
+        )
+        self.buengsamphan_chumsaeng.get_cell_at(33, 6).goes_to = (
+            self.thapkhlo,
+            602 - mothermap.daughtermaps["thapkhlo"].x,
+            670 - mothermap.daughtermaps["thapkhlo"].y,
+        )
+        self.thapkhlo.get_cell_at(23, 23).goes_to = (
+            self.buengsamphan_chumsaeng,
+            601 - mothermap.daughtermaps["buengsamphan_chumsaeng"].x,
+            671 - mothermap.daughtermaps["buengsamphan_chumsaeng"].y,
+        )
+        self.thapkhlo.get_cell_at(24, 23).goes_to = (
+            self.buengsamphan_chumsaeng,
+            602 - mothermap.daughtermaps["buengsamphan_chumsaeng"].x,
+            671 - mothermap.daughtermaps["buengsamphan_chumsaeng"].y,
+        )
 
-        self.thapkhlo.get_cell_at(7, 16).goes_to = (self.chumsaeng, 585 - mothermap.daughtermaps['chumsaeng'].x, 664 - mothermap.daughtermaps['chumsaeng'].y)
-        self.thapkhlo.get_cell_at(7, 17).goes_to = (self.chumsaeng, 585 - mothermap.daughtermaps['chumsaeng'].x, 665 - mothermap.daughtermaps['chumsaeng'].y)
-        self.chumsaeng.get_cell_at(49, 4).goes_to = (self.thapkhlo, 586 - mothermap.daughtermaps['thapkhlo'].x, 664 - mothermap.daughtermaps['thapkhlo'].y)
-        self.chumsaeng.get_cell_at(49, 5).goes_to = (self.thapkhlo, 586 - mothermap.daughtermaps['thapkhlo'].x, 665 - mothermap.daughtermaps['thapkhlo'].y)
+        self.thapkhlo.get_cell_at(7, 16).goes_to = (
+            self.chumsaeng,
+            585 - mothermap.daughtermaps["chumsaeng"].x,
+            664 - mothermap.daughtermaps["chumsaeng"].y,
+        )
+        self.thapkhlo.get_cell_at(7, 17).goes_to = (
+            self.chumsaeng,
+            585 - mothermap.daughtermaps["chumsaeng"].x,
+            665 - mothermap.daughtermaps["chumsaeng"].y,
+        )
+        self.chumsaeng.get_cell_at(49, 4).goes_to = (
+            self.thapkhlo,
+            586 - mothermap.daughtermaps["thapkhlo"].x,
+            664 - mothermap.daughtermaps["thapkhlo"].y,
+        )
+        self.chumsaeng.get_cell_at(49, 5).goes_to = (
+            self.thapkhlo,
+            586 - mothermap.daughtermaps["thapkhlo"].x,
+            665 - mothermap.daughtermaps["thapkhlo"].y,
+        )
 
-        self.taphan_hin.get_cell_at(23, 6).goes_to = (self.phitsanulok, 560 - mothermap.daughtermaps['phitsanulok'].x, 600 - mothermap.daughtermaps['phitsanulok'].y)
-        self.taphan_hin.get_cell_at(24, 6).goes_to = (self.phitsanulok, 561 - mothermap.daughtermaps['phitsanulok'].x, 600 - mothermap.daughtermaps['phitsanulok'].y)
-        self.phitsanulok.get_cell_at(30, 56).goes_to = (self.taphan_hin, 560 - mothermap.daughtermaps['taphan_hin'].x, 601 - mothermap.daughtermaps['taphan_hin'].y)
-        self.phitsanulok.get_cell_at(31, 56).goes_to = (self.taphan_hin, 561 - mothermap.daughtermaps['taphan_hin'].x, 601 - mothermap.daughtermaps['taphan_hin'].y)
+        self.taphan_hin.get_cell_at(23, 6).goes_to = (
+            self.phitsanulok,
+            560 - mothermap.daughtermaps["phitsanulok"].x,
+            600 - mothermap.daughtermaps["phitsanulok"].y,
+        )
+        self.taphan_hin.get_cell_at(24, 6).goes_to = (
+            self.phitsanulok,
+            561 - mothermap.daughtermaps["phitsanulok"].x,
+            600 - mothermap.daughtermaps["phitsanulok"].y,
+        )
+        self.phitsanulok.get_cell_at(30, 56).goes_to = (
+            self.taphan_hin,
+            560 - mothermap.daughtermaps["taphan_hin"].x,
+            601 - mothermap.daughtermaps["taphan_hin"].y,
+        )
+        self.phitsanulok.get_cell_at(31, 56).goes_to = (
+            self.taphan_hin,
+            561 - mothermap.daughtermaps["taphan_hin"].x,
+            601 - mothermap.daughtermaps["taphan_hin"].y,
+        )
 
-        self.phitsanulok.get_cell_at(21, 68).goes_to = (self.taphan_hin, 560 - mothermap.daughtermaps['taphan_hin'].x, 601 - mothermap.daughtermaps['taphan_hin'].y)
-        self.phitsanulok.get_cell_at(21, 68).goes_to = (self.taphan_hin, 561 - mothermap.daughtermaps['taphan_hin'].x, 601 - mothermap.daughtermaps['taphan_hin'].y)
+        self.phitsanulok.get_cell_at(21, 68).goes_to = (
+            self.taphan_hin,
+            560 - mothermap.daughtermaps["taphan_hin"].x,
+            601 - mothermap.daughtermaps["taphan_hin"].y,
+        )
+        self.phitsanulok.get_cell_at(21, 68).goes_to = (
+            self.taphan_hin,
+            561 - mothermap.daughtermaps["taphan_hin"].x,
+            601 - mothermap.daughtermaps["taphan_hin"].y,
+        )
 
-        self.thapkhlo.get_cell_at(597 - mothermap.daughtermaps['thapkhlo'].x, 652 - mothermap.daughtermaps['thapkhlo'].y).goes_to = (self.thapkhlo_phitsanulok, 597 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 652 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y)
-        self.thapkhlo.get_cell_at(598 - mothermap.daughtermaps['thapkhlo'].x, 652 - mothermap.daughtermaps['thapkhlo'].y).goes_to = (self.thapkhlo_phitsanulok, 598 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 652 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y)
-        self.thapkhlo_phitsanulok.get_cell_at(597 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 653 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y).goes_to = (self.thapkhlo, 597 - mothermap.daughtermaps['thapkhlo'].x, 653 - mothermap.daughtermaps['thapkhlo'].y)
-        self.thapkhlo_phitsanulok.get_cell_at(598 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 653 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y).goes_to = (self.thapkhlo, 598 - mothermap.daughtermaps['thapkhlo'].x, 653 - mothermap.daughtermaps['thapkhlo'].y)
+        self.thapkhlo.get_cell_at(
+            597 - mothermap.daughtermaps["thapkhlo"].x,
+            652 - mothermap.daughtermaps["thapkhlo"].y,
+        ).goes_to = (
+            self.thapkhlo_phitsanulok,
+            597 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            652 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        )
+        self.thapkhlo.get_cell_at(
+            598 - mothermap.daughtermaps["thapkhlo"].x,
+            652 - mothermap.daughtermaps["thapkhlo"].y,
+        ).goes_to = (
+            self.thapkhlo_phitsanulok,
+            598 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            652 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        )
+        self.thapkhlo_phitsanulok.get_cell_at(
+            597 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            653 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        ).goes_to = (
+            self.thapkhlo,
+            597 - mothermap.daughtermaps["thapkhlo"].x,
+            653 - mothermap.daughtermaps["thapkhlo"].y,
+        )
+        self.thapkhlo_phitsanulok.get_cell_at(
+            598 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            653 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        ).goes_to = (
+            self.thapkhlo,
+            598 - mothermap.daughtermaps["thapkhlo"].x,
+            653 - mothermap.daughtermaps["thapkhlo"].y,
+        )
 
-        self.thapkhlo_phitsanulok.get_cell_at(579 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 602 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y).goes_to = (self.phitsanulok, 579 - mothermap.daughtermaps['phitsanulok'].x, 602 - mothermap.daughtermaps['phitsanulok'].y)
-        self.thapkhlo_phitsanulok.get_cell_at(579 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 603 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y).goes_to = (self.phitsanulok, 579 - mothermap.daughtermaps['phitsanulok'].x, 603 - mothermap.daughtermaps['phitsanulok'].y)
-        self.phitsanulok.get_cell_at(580 - mothermap.daughtermaps['phitsanulok'].x, 602 - mothermap.daughtermaps['phitsanulok'].y).goes_to = (self.thapkhlo_phitsanulok, 580 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 602 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y)
-        self.phitsanulok.get_cell_at(580 - mothermap.daughtermaps['phitsanulok'].x, 603 - mothermap.daughtermaps['phitsanulok'].y).goes_to = (self.thapkhlo_phitsanulok, 580 - mothermap.daughtermaps['thapkhlo_phitsanulok'].x, 603 - mothermap.daughtermaps['thapkhlo_phitsanulok'].y)
+        self.thapkhlo_phitsanulok.get_cell_at(
+            579 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            602 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        ).goes_to = (
+            self.phitsanulok,
+            579 - mothermap.daughtermaps["phitsanulok"].x,
+            602 - mothermap.daughtermaps["phitsanulok"].y,
+        )
+        self.thapkhlo_phitsanulok.get_cell_at(
+            579 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            603 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        ).goes_to = (
+            self.phitsanulok,
+            579 - mothermap.daughtermaps["phitsanulok"].x,
+            603 - mothermap.daughtermaps["phitsanulok"].y,
+        )
+        self.phitsanulok.get_cell_at(
+            580 - mothermap.daughtermaps["phitsanulok"].x,
+            602 - mothermap.daughtermaps["phitsanulok"].y,
+        ).goes_to = (
+            self.thapkhlo_phitsanulok,
+            580 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            602 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        )
+        self.phitsanulok.get_cell_at(
+            580 - mothermap.daughtermaps["phitsanulok"].x,
+            603 - mothermap.daughtermaps["phitsanulok"].y,
+        ).goes_to = (
+            self.thapkhlo_phitsanulok,
+            580 - mothermap.daughtermaps["thapkhlo_phitsanulok"].x,
+            603 - mothermap.daughtermaps["thapkhlo_phitsanulok"].y,
+        )
 
-        self.taphan_hin.get_cell_at(22, 73).goes_to = (self.chumsaeng, 559 - mothermap.daughtermaps['chumsaeng'].x, 667 - mothermap.daughtermaps['chumsaeng'].y)
-        self.taphan_hin.get_cell_at(23, 73).goes_to = (self.chumsaeng, 560 - mothermap.daughtermaps['chumsaeng'].x, 667 - mothermap.daughtermaps['chumsaeng'].y)
-        self.chumsaeng.get_cell_at(22, 6).goes_to = (self.taphan_hin, 559 - mothermap.daughtermaps['taphan_hin'].x, 666 - mothermap.daughtermaps['taphan_hin'].y)
-        self.chumsaeng.get_cell_at(23, 6).goes_to = (self.taphan_hin, 560 - mothermap.daughtermaps['taphan_hin'].x, 666 - mothermap.daughtermaps['taphan_hin'].y)
+        self.taphan_hin.get_cell_at(22, 73).goes_to = (
+            self.chumsaeng,
+            559 - mothermap.daughtermaps["chumsaeng"].x,
+            667 - mothermap.daughtermaps["chumsaeng"].y,
+        )
+        self.taphan_hin.get_cell_at(23, 73).goes_to = (
+            self.chumsaeng,
+            560 - mothermap.daughtermaps["chumsaeng"].x,
+            667 - mothermap.daughtermaps["chumsaeng"].y,
+        )
+        self.chumsaeng.get_cell_at(22, 6).goes_to = (
+            self.taphan_hin,
+            559 - mothermap.daughtermaps["taphan_hin"].x,
+            666 - mothermap.daughtermaps["taphan_hin"].y,
+        )
+        self.chumsaeng.get_cell_at(23, 6).goes_to = (
+            self.taphan_hin,
+            560 - mothermap.daughtermaps["taphan_hin"].x,
+            666 - mothermap.daughtermaps["taphan_hin"].y,
+        )
 
         # Khonkaen
-        self.chumphae_khonkaen.get_cell_at(82, 80).goes_to = (self.khonkaen, 906 - mothermap.daughtermaps['khonkaen'].x, 631 - mothermap.daughtermaps['khonkaen'].y)
-        self.chumphae_khonkaen.get_cell_at(82, 81).goes_to = (self.khonkaen, 906 - mothermap.daughtermaps['khonkaen'].x, 632 - mothermap.daughtermaps['khonkaen'].y)
-        self.khonkaen.get_cell_at(8, 20).goes_to = (self.chumphae_khonkaen, 905 - mothermap.daughtermaps['chumphae_khonkaen'].x, 631 - mothermap.daughtermaps['chumphae_khonkaen'].y)
-        self.khonkaen.get_cell_at(8, 21).goes_to = (self.chumphae_khonkaen, 905 - mothermap.daughtermaps['chumphae_khonkaen'].x, 632 - mothermap.daughtermaps['chumphae_khonkaen'].y)
-        self.inn_khonkaen.get_cell_at(4, 8).goes_to = (self.khonkaen, 916 - mothermap.daughtermaps['khonkaen'].x, 631 - mothermap.daughtermaps['khonkaen'].y)
-        self.khonkaen.get_cell_at(916 - mothermap.daughtermaps['khonkaen'].x, 630 - mothermap.daughtermaps['khonkaen'].y).goes_to = (self.inn_khonkaen, 4, 7)
+        self.chumphae_khonkaen.get_cell_at(82, 80).goes_to = (
+            self.khonkaen,
+            906 - mothermap.daughtermaps["khonkaen"].x,
+            631 - mothermap.daughtermaps["khonkaen"].y,
+        )
+        self.chumphae_khonkaen.get_cell_at(82, 81).goes_to = (
+            self.khonkaen,
+            906 - mothermap.daughtermaps["khonkaen"].x,
+            632 - mothermap.daughtermaps["khonkaen"].y,
+        )
+        self.khonkaen.get_cell_at(8, 20).goes_to = (
+            self.chumphae_khonkaen,
+            905 - mothermap.daughtermaps["chumphae_khonkaen"].x,
+            631 - mothermap.daughtermaps["chumphae_khonkaen"].y,
+        )
+        self.khonkaen.get_cell_at(8, 21).goes_to = (
+            self.chumphae_khonkaen,
+            905 - mothermap.daughtermaps["chumphae_khonkaen"].x,
+            632 - mothermap.daughtermaps["chumphae_khonkaen"].y,
+        )
+        self.inn_khonkaen.get_cell_at(4, 8).goes_to = (
+            self.khonkaen,
+            916 - mothermap.daughtermaps["khonkaen"].x,
+            631 - mothermap.daughtermaps["khonkaen"].y,
+        )
+        self.khonkaen.get_cell_at(
+            916 - mothermap.daughtermaps["khonkaen"].x,
+            630 - mothermap.daughtermaps["khonkaen"].y,
+        ).goes_to = (self.inn_khonkaen, 4, 7)
 
         # Buengsamphan
-        self.buengsamphan_chaiyaphum.get_cell_at(73, 32).goes_to = (self.chaiyaphum, 792 - mothermap.daughtermaps['chaiyaphum'].x, 721 - mothermap.daughtermaps['chaiyaphum'].y)
-        self.buengsamphan_chaiyaphum.get_cell_at(73, 33).goes_to = (self.chaiyaphum, 792 - mothermap.daughtermaps['chaiyaphum'].x, 722 - mothermap.daughtermaps['chaiyaphum'].y)
-        self.buengsamphan_chaiyaphum.get_cell_at(7, 32).goes_to = (self.buengsamphan, 726 - mothermap.daughtermaps['buengsamphan'].x, 721 - mothermap.daughtermaps['buengsamphan'].y)
-        self.buengsamphan_chaiyaphum.get_cell_at(7, 33).goes_to = (self.buengsamphan, 726 - mothermap.daughtermaps['buengsamphan'].x, 722 - mothermap.daughtermaps['buengsamphan'].y)
+        self.buengsamphan_chaiyaphum.get_cell_at(73, 32).goes_to = (
+            self.chaiyaphum,
+            792 - mothermap.daughtermaps["chaiyaphum"].x,
+            721 - mothermap.daughtermaps["chaiyaphum"].y,
+        )
+        self.buengsamphan_chaiyaphum.get_cell_at(73, 33).goes_to = (
+            self.chaiyaphum,
+            792 - mothermap.daughtermaps["chaiyaphum"].x,
+            722 - mothermap.daughtermaps["chaiyaphum"].y,
+        )
+        self.buengsamphan_chaiyaphum.get_cell_at(7, 32).goes_to = (
+            self.buengsamphan,
+            726 - mothermap.daughtermaps["buengsamphan"].x,
+            721 - mothermap.daughtermaps["buengsamphan"].y,
+        )
+        self.buengsamphan_chaiyaphum.get_cell_at(7, 33).goes_to = (
+            self.buengsamphan,
+            726 - mothermap.daughtermaps["buengsamphan"].x,
+            722 - mothermap.daughtermaps["buengsamphan"].y,
+        )
+
+
+        self.chaiyaphum.get_cell_at(12, 87).goes_to = (
+            self.buengsamphan_chaiyaphum_cave,
+            15,
+            14,
+        )
+        self.buengsamphan_chaiyaphum_cave.get_cell_at(15, 15).goes_to = (
+            self.chaiyaphum,
+            12,
+            88,
+        )
+        self.buengsamphan_chaiyaphum_cave.get_cell_at(8, 12).goes_to = (
+            self.buengsamphan_chaiyaphum,
+            66,
+            25,
+        )
+        self.buengsamphan_chaiyaphum.get_cell_at(66, 24).goes_to = (
+            self.buengsamphan_chaiyaphum_cave,
+            8,
+            11,
+        )
+
+
+
+
         self.buengsamphan.get_cell_at(20, 22).goes_to = (self.inn_buengsamphan, 4, 7)
-        self.inn_buengsamphan.get_cell_at(4, 8).goes_to = (self.buengsamphan, 670 - mothermap.daughtermaps['buengsamphan'].x, 725 - mothermap.daughtermaps['buengsamphan'].y)
+        self.inn_buengsamphan.get_cell_at(4, 8).goes_to = (
+            self.buengsamphan,
+            670 - mothermap.daughtermaps["buengsamphan"].x,
+            725 - mothermap.daughtermaps["buengsamphan"].y,
+        )
         self.buengsamphan.get_cell_at(61, 6).goes_to = (self.buengsamphan_cave, 10, 21)
         self.buengsamphan_cave.get_cell_at(10, 22).goes_to = (self.buengsamphan, 61, 7)
-        self.buengsamphan_cave.get_cell_at(17, 17).goes_to = (self.buengsamphan_mountain, 718 - mothermap.daughtermaps['buengsamphan_mountain'].x, 704 - mothermap.daughtermaps['buengsamphan_mountain'].y)
-        self.buengsamphan_cave.get_cell_at(3, 10).goes_to = (self.buengsamphan_mountain, 704 - mothermap.daughtermaps['buengsamphan_mountain'].x, 697 - mothermap.daughtermaps['buengsamphan_mountain'].y)
-        self.buengsamphan_cave.get_cell_at(35, 10).goes_to = (self.buengsamphan_mountain, 736 - mothermap.daughtermaps['buengsamphan_mountain'].x, 697 - mothermap.daughtermaps['buengsamphan_mountain'].y)
-        self.buengsamphan_mountain.get_cell_at(7, 7).goes_to = (self.buengsamphan_cave, 3, 9)
-        self.buengsamphan_mountain.get_cell_at(21, 14).goes_to = (self.buengsamphan_cave, 17, 16)
-        self.buengsamphan_mountain.get_cell_at(39, 7).goes_to = (self.buengsamphan_cave, 35, 9)
+        self.buengsamphan_cave.get_cell_at(17, 17).goes_to = (
+            self.buengsamphan_mountain,
+            718 - mothermap.daughtermaps["buengsamphan_mountain"].x,
+            704 - mothermap.daughtermaps["buengsamphan_mountain"].y,
+        )
+        self.buengsamphan_cave.get_cell_at(3, 10).goes_to = (
+            self.buengsamphan_mountain,
+            704 - mothermap.daughtermaps["buengsamphan_mountain"].x,
+            697 - mothermap.daughtermaps["buengsamphan_mountain"].y,
+        )
+        self.buengsamphan_cave.get_cell_at(35, 10).goes_to = (
+            self.buengsamphan_mountain,
+            736 - mothermap.daughtermaps["buengsamphan_mountain"].x,
+            697 - mothermap.daughtermaps["buengsamphan_mountain"].y,
+        )
+        self.buengsamphan_mountain.get_cell_at(7, 7).goes_to = (
+            self.buengsamphan_cave,
+            3,
+            9,
+        )
+        self.buengsamphan_mountain.get_cell_at(21, 14).goes_to = (
+            self.buengsamphan_cave,
+            17,
+            16,
+        )
+        self.buengsamphan_mountain.get_cell_at(39, 7).goes_to = (
+            self.buengsamphan_cave,
+            35,
+            9,
+        )
 
         # Banyaeng
         self.banyaeng.get_cell_at(45, 6).goes_to = (self.bat_cave, 9, 15)
@@ -681,8 +1314,22 @@ class Mas(object):
         self.banyaeng.get_cell_at(36, 12).goes_to = (self.inn_banyaeng, 4, 7)
         self.inn_banyaeng.get_cell_at(4, 8).goes_to = (self.banyaeng, 36, 13)
 
-        self.chumsaeng.get_cell_at(553 - mothermap.daughtermaps['chumsaeng'].x, 714 - mothermap.daughtermaps['chumsaeng'].y).goes_to = (self.nakhon_sawan, 553 - mothermap.daughtermaps['nakhon_sawan'].x, 714 - mothermap.daughtermaps['nakhon_sawan'].y)
-        self.nakhon_sawan.get_cell_at(553 - mothermap.daughtermaps['nakhon_sawan'].x, 713 - mothermap.daughtermaps['nakhon_sawan'].y).goes_to = (self.chumsaeng, 553 - mothermap.daughtermaps['chumsaeng'].x, 713 - mothermap.daughtermaps['chumsaeng'].y)
+        self.chumsaeng.get_cell_at(
+            553 - mothermap.daughtermaps["chumsaeng"].x,
+            714 - mothermap.daughtermaps["chumsaeng"].y,
+        ).goes_to = (
+            self.nakhon_sawan,
+            553 - mothermap.daughtermaps["nakhon_sawan"].x,
+            714 - mothermap.daughtermaps["nakhon_sawan"].y,
+        )
+        self.nakhon_sawan.get_cell_at(
+            553 - mothermap.daughtermaps["nakhon_sawan"].x,
+            713 - mothermap.daughtermaps["nakhon_sawan"].y,
+        ).goes_to = (
+            self.chumsaeng,
+            553 - mothermap.daughtermaps["chumsaeng"].x,
+            713 - mothermap.daughtermaps["chumsaeng"].y,
+        )
 
         self.chumsaeng.get_cell_at(30, 27).goes_to = (self.inn_chumsaeng, 4, 7)
         self.inn_chumsaeng.get_cell_at(4, 8).goes_to = (self.chumsaeng, 30, 28)
@@ -690,15 +1337,47 @@ class Mas(object):
         # Phitsanulok
         self.phitsanulok.get_cell_at(38, 17).goes_to = (self.inn_phitsanulok, 4, 7)
         self.inn_phitsanulok.get_cell_at(4, 8).goes_to = (self.phitsanulok, 38, 18)
-        self.phitsanulok.get_cell_at(26, 28).goes_to = (self.phitsanulok_underground, 6, 4)
-        self.phitsanulok.get_cell_at(40, 42).goes_to = (self.phitsanulok_underground, 20, 18)
-        self.phitsanulok.get_cell_at(24, 40).goes_to = (self.phitsanulok_underground, 4, 16)
-        self.phitsanulok_underground.get_cell_at(20, 19).goes_to = (self.phitsanulok, 40, 43)
-        self.phitsanulok_underground.get_cell_at(6, 5).goes_to = (self.phitsanulok, 26, 29)
-        self.phitsanulok_underground.get_cell_at(4, 17).goes_to = (self.phitsanulok, 24, 41)
+        self.phitsanulok.get_cell_at(26, 28).goes_to = (
+            self.phitsanulok_underground,
+            6,
+            4,
+        )
+        self.phitsanulok.get_cell_at(40, 42).goes_to = (
+            self.phitsanulok_underground,
+            20,
+            18,
+        )
+        self.phitsanulok.get_cell_at(24, 40).goes_to = (
+            self.phitsanulok_underground,
+            4,
+            16,
+        )
+        self.phitsanulok_underground.get_cell_at(20, 19).goes_to = (
+            self.phitsanulok,
+            40,
+            43,
+        )
+        self.phitsanulok_underground.get_cell_at(6, 5).goes_to = (
+            self.phitsanulok,
+            26,
+            29,
+        )
+        self.phitsanulok_underground.get_cell_at(4, 17).goes_to = (
+            self.phitsanulok,
+            24,
+            41,
+        )
 
-        self.nakhon_sawan.get_cell_at(57, 19).goes_to = (self.nakhon_sawan_aquarium, 13, 24)
-        self.nakhon_sawan_aquarium.get_cell_at(13, 25).goes_to = (self.nakhon_sawan, 57, 20)
+        self.nakhon_sawan.get_cell_at(57, 19).goes_to = (
+            self.nakhon_sawan_aquarium,
+            13,
+            24,
+        )
+        self.nakhon_sawan_aquarium.get_cell_at(13, 25).goes_to = (
+            self.nakhon_sawan,
+            57,
+            20,
+        )
         self.nakhon_sawan.get_cell_at(32, 20).goes_to = (self.inn_nakhon_sawan, 4, 7)
         self.inn_nakhon_sawan.get_cell_at(4, 8).goes_to = (self.nakhon_sawan, 32, 21)
         self.banyaeng.get_cell_at(37, 55).goes_to = (self.banyaeng_cave, 16, 10)
@@ -707,14 +1386,46 @@ class Mas(object):
         self.banyaeng_cave.get_cell_at(16, 11).goes_to = (self.banyaeng, 37, 56)
 
         # Lomsak Labyrinth
-        self.lomsak_labyrinth.get_cell_at(48, 12).goes_to = (self.lomsak_labyrinth_house_1, 5, 12)
-        self.lomsak_labyrinth_house_1.get_cell_at(5, 13).goes_to = (self.lomsak_labyrinth, 48, 13)
-        self.lomsak_labyrinth.get_cell_at(49, 11).goes_to = (self.lomsak_labyrinth_house_1, 8, 3)
-        self.lomsak_labyrinth_house_1.get_cell_at(8, 2).goes_to = (self.lomsak_labyrinth, 49, 10)
-        self.lomsak_labyrinth.get_cell_at(33, 12).goes_to = (self.lomsak_labyrinth_house_2, 13, 24)
-        self.lomsak_labyrinth_house_2.get_cell_at(13, 25).goes_to = (self.lomsak_labyrinth, 33, 13)
-        self.lomsak_labyrinth.get_cell_at(25, 16).goes_to = (self.lomsak_labyrinth_shop, 5, 12)
-        self.lomsak_labyrinth_shop.get_cell_at(5, 13).goes_to = (self.lomsak_labyrinth, 25, 17)
+        self.lomsak_labyrinth.get_cell_at(48, 12).goes_to = (
+            self.lomsak_labyrinth_house_1,
+            5,
+            12,
+        )
+        self.lomsak_labyrinth_house_1.get_cell_at(5, 13).goes_to = (
+            self.lomsak_labyrinth,
+            48,
+            13,
+        )
+        self.lomsak_labyrinth.get_cell_at(49, 11).goes_to = (
+            self.lomsak_labyrinth_house_1,
+            8,
+            3,
+        )
+        self.lomsak_labyrinth_house_1.get_cell_at(8, 2).goes_to = (
+            self.lomsak_labyrinth,
+            49,
+            10,
+        )
+        self.lomsak_labyrinth.get_cell_at(33, 12).goes_to = (
+            self.lomsak_labyrinth_house_2,
+            13,
+            24,
+        )
+        self.lomsak_labyrinth_house_2.get_cell_at(13, 25).goes_to = (
+            self.lomsak_labyrinth,
+            33,
+            13,
+        )
+        self.lomsak_labyrinth.get_cell_at(25, 16).goes_to = (
+            self.lomsak_labyrinth_shop,
+            5,
+            12,
+        )
+        self.lomsak_labyrinth_shop.get_cell_at(5, 13).goes_to = (
+            self.lomsak_labyrinth,
+            25,
+            17,
+        )
 
         # Labyrinth
         self.labyrinth.get_cell_at(21, 21).goes_to = (self.labyrinth_shop, 5, 12)
@@ -734,19 +1445,43 @@ class Mas(object):
         self.banyaeng.get_cell_at(31, 9).goes_to = (self.banyaeng_house_3, 5, 12)
         self.banyaeng_house_3.get_cell_at(5, 13).goes_to = (self.banyaeng, 31, 10)
 
-        self.chumphae_kasetsombum_cave.get_cell_at(18, 14).goes_to = (self.kasetsombum, 34, 15)
-        self.kasetsombum.get_cell_at(34, 14).goes_to = (self.chumphae_kasetsombum_cave, 18, 13)
+        self.chumphae_kasetsombum_cave.get_cell_at(18, 14).goes_to = (
+            self.kasetsombum,
+            34,
+            15,
+        )
+        self.kasetsombum.get_cell_at(34, 14).goes_to = (
+            self.chumphae_kasetsombum_cave,
+            18,
+            13,
+        )
         self.kasetsombum.get_cell_at(8, 8).goes_to = (self.kasetsombum_cave, 15, 9)
         self.kasetsombum_cave.get_cell_at(15, 10).goes_to = (self.kasetsombum, 8, 9)
-        self.kasetsombum_cave.get_cell_at(5, 4).goes_to = (self.kasetsombum_temple, 11, 14)
-        self.kasetsombum_temple.get_cell_at(11, 13).goes_to = (self.kasetsombum_cave, 5, 3)
+        self.kasetsombum_cave.get_cell_at(5, 4).goes_to = (
+            self.kasetsombum_temple,
+            11,
+            14,
+        )
+        self.kasetsombum_temple.get_cell_at(11, 13).goes_to = (
+            self.kasetsombum_cave,
+            5,
+            3,
+        )
         self.kasetsombum.get_cell_at(17, 19).goes_to = (self.inn_kasetsombum, 4, 7)
         self.inn_kasetsombum.get_cell_at(4, 8).goes_to = (self.kasetsombum, 17, 20)
-        self.kasetsombum_temple.get_cell_at(30, 8).goes_to = (self.kasetsombum_temple_temple, 13, 24)
-        self.kasetsombum_temple_temple.get_cell_at(13, 25).goes_to = (self.kasetsombum_temple, 30, 9)
+        self.kasetsombum_temple.get_cell_at(30, 8).goes_to = (
+            self.kasetsombum_temple_temple,
+            13,
+            24,
+        )
+        self.kasetsombum_temple_temple.get_cell_at(13, 25).goes_to = (
+            self.kasetsombum_temple,
+            30,
+            9,
+        )
 
-        self.kasetsombum.get_cell_at(16, 9).goes_to = (self.kasetsombum_house1, 7, 12)
-        self.kasetsombum_house1.get_cell_at(7, 13).goes_to = (self.kasetsombum, 16, 10)
+        self.kasetsombum.get_cell_at(15, 10).goes_to = (self.kasetsombum_house1, 7, 12)
+        self.kasetsombum_house1.get_cell_at(7, 13).goes_to = (self.kasetsombum, 15, 11)
         self.kasetsombum.get_cell_at(22, 20).goes_to = (self.kasetsombum_house2, 7, 12)
         self.kasetsombum_house2.get_cell_at(7, 13).goes_to = (self.kasetsombum, 22, 21)
         self.kasetsombum.get_cell_at(25, 15).goes_to = (self.kasetsombum_house3, 5, 12)
@@ -756,56 +1491,208 @@ class Mas(object):
         self.kasetsombum.get_cell_at(20, 14).goes_to = (self.kasetsombum_shop, 5, 12)
         self.kasetsombum_shop.get_cell_at(5, 13).goes_to = (self.kasetsombum, 20, 15)
 
-        self.buengsamphan.get_cell_at(78, 19).goes_to = (self.buengsamphan_chaiyaphum, 728 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 721 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
-        self.buengsamphan.get_cell_at(78, 20).goes_to = (self.buengsamphan_chaiyaphum, 728 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
-        self.chaiyaphum.get_cell_at(11, 92).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 721 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
-        self.chaiyaphum.get_cell_at(11, 93).goes_to = (self.buengsamphan_chaiyaphum, 791 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].x, 722 - mothermap.daughtermaps['buengsamphan_chaiyaphum'].y)
+        self.buengsamphan.get_cell_at(78, 19).goes_to = (
+            self.buengsamphan_chaiyaphum,
+            728 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].x,
+            721 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].y,
+        )
+        self.buengsamphan.get_cell_at(78, 20).goes_to = (
+            self.buengsamphan_chaiyaphum,
+            728 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].x,
+            722 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].y,
+        )
+        self.chaiyaphum.get_cell_at(11, 92).goes_to = (
+            self.buengsamphan_chaiyaphum,
+            791 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].x,
+            721 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].y,
+        )
+        self.chaiyaphum.get_cell_at(11, 93).goes_to = (
+            self.buengsamphan_chaiyaphum,
+            791 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].x,
+            722 - mothermap.daughtermaps["buengsamphan_chaiyaphum"].y,
+        )
 
-        self.phitsanulok.get_cell_at(37, 49).goes_to = (self.phitsanulok_maths_school_123, 13, 24)
-        self.phitsanulok_maths_school_123.get_cell_at(13, 25).goes_to = (self.phitsanulok, 37, 50)
-        self.phitsanulok_maths_school_123.get_cell_at(13, 17).goes_to = (self.phitsanulok_maths_school_123, 3, 9)
-        self.phitsanulok_maths_school_123.get_cell_at(3, 10).goes_to = (self.phitsanulok_maths_school_123, 13, 18)
-        self.phitsanulok_maths_school_123.get_cell_at(3, 1).goes_to = (self.phitsanulok_maths_school_123, 14, 9)
-        self.phitsanulok_maths_school_123.get_cell_at(14, 10).goes_to = (self.phitsanulok_maths_school_123, 3, 2)
+        self.phitsanulok.get_cell_at(37, 49).goes_to = (
+            self.phitsanulok_maths_school_123,
+            13,
+            24,
+        )
+        self.phitsanulok_maths_school_123.get_cell_at(13, 25).goes_to = (
+            self.phitsanulok,
+            37,
+            50,
+        )
+        self.phitsanulok_maths_school_123.get_cell_at(13, 17).goes_to = (
+            self.phitsanulok_maths_school_123,
+            3,
+            9,
+        )
+        self.phitsanulok_maths_school_123.get_cell_at(3, 10).goes_to = (
+            self.phitsanulok_maths_school_123,
+            13,
+            18,
+        )
+        self.phitsanulok_maths_school_123.get_cell_at(3, 1).goes_to = (
+            self.phitsanulok_maths_school_123,
+            14,
+            9,
+        )
+        self.phitsanulok_maths_school_123.get_cell_at(14, 10).goes_to = (
+            self.phitsanulok_maths_school_123,
+            3,
+            2,
+        )
 
-        self.phitsanulok_maths_school_123.get_cell_at(25, 9).goes_to = (self.phitsanulok_maths_school_456, 18, 25)
-        self.phitsanulok_maths_school_456.get_cell_at(18, 27).goes_to = (self.phitsanulok_maths_school_123, 25, 10)
+        self.phitsanulok_maths_school_123.get_cell_at(25, 9).goes_to = (
+            self.phitsanulok_maths_school_456,
+            18,
+            25,
+        )
+        self.phitsanulok_maths_school_456.get_cell_at(18, 27).goes_to = (
+            self.phitsanulok_maths_school_123,
+            25,
+            10,
+        )
 
-        self.phitsanulok_maths_school_456.get_cell_at(31, 26).goes_to = (self.phitsanulok_maths_school_456, 10, 22)
-        self.phitsanulok_maths_school_456.get_cell_at(9, 22).goes_to = (self.phitsanulok_maths_school_456, 30, 26)
-        self.phitsanulok_maths_school_456.get_cell_at(22, 21).goes_to = (self.phitsanulok_maths_school_456, 5, 9)
-        self.phitsanulok_maths_school_456.get_cell_at(5, 10).goes_to = (self.phitsanulok_maths_school_456, 22, 22)
-        self.phitsanulok_maths_school_456.get_cell_at(5, 4).goes_to = (self.phitsanulok_maths_school_456, 35, 12)
-        self.phitsanulok_maths_school_456.get_cell_at(35, 13).goes_to = (self.phitsanulok_maths_school_456, 5, 5)
+        self.phitsanulok_maths_school_456.get_cell_at(31, 26).goes_to = (
+            self.phitsanulok_maths_school_456,
+            10,
+            22,
+        )
+        self.phitsanulok_maths_school_456.get_cell_at(9, 22).goes_to = (
+            self.phitsanulok_maths_school_456,
+            30,
+            26,
+        )
+        self.phitsanulok_maths_school_456.get_cell_at(22, 21).goes_to = (
+            self.phitsanulok_maths_school_456,
+            5,
+            9,
+        )
+        self.phitsanulok_maths_school_456.get_cell_at(5, 10).goes_to = (
+            self.phitsanulok_maths_school_456,
+            22,
+            22,
+        )
+        self.phitsanulok_maths_school_456.get_cell_at(5, 4).goes_to = (
+            self.phitsanulok_maths_school_456,
+            35,
+            12,
+        )
+        self.phitsanulok_maths_school_456.get_cell_at(35, 13).goes_to = (
+            self.phitsanulok_maths_school_456,
+            5,
+            5,
+        )
 
-        self.phitsanulok_maths_school_456.get_cell_at(35, 1).goes_to = (self.phitsanulok_maths_school_789, 18, 26)
-        self.phitsanulok_maths_school_789.get_cell_at(18, 27).goes_to = (self.phitsanulok_maths_school_456, 35, 2)
+        self.phitsanulok_maths_school_456.get_cell_at(35, 1).goes_to = (
+            self.phitsanulok_maths_school_789,
+            18,
+            26,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(18, 27).goes_to = (
+            self.phitsanulok_maths_school_456,
+            35,
+            2,
+        )
 
-        self.phitsanulok_maths_school_789.get_cell_at(18, 19).goes_to = (self.phitsanulok_maths_school_789, 7, 11)
-        self.phitsanulok_maths_school_789.get_cell_at(7, 12).goes_to = (self.phitsanulok_maths_school_789, 18, 20)
+        self.phitsanulok_maths_school_789.get_cell_at(18, 19).goes_to = (
+            self.phitsanulok_maths_school_789,
+            7,
+            11,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(7, 12).goes_to = (
+            self.phitsanulok_maths_school_789,
+            18,
+            20,
+        )
 
-        self.phitsanulok_maths_school_789.get_cell_at(7, 0).goes_to = (self.phitsanulok_maths_school_789, 35, 11)
-        self.phitsanulok_maths_school_789.get_cell_at(35, 12).goes_to = (self.phitsanulok_maths_school_789, 7, 1)
+        self.phitsanulok_maths_school_789.get_cell_at(7, 0).goes_to = (
+            self.phitsanulok_maths_school_789,
+            35,
+            11,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(35, 12).goes_to = (
+            self.phitsanulok_maths_school_789,
+            7,
+            1,
+        )
 
-        self.phitsanulok_maths_school_789.get_cell_at(29, 26).goes_to = (self.phitsanulok_maths_school_789, 8, 26)
-        self.phitsanulok_maths_school_789.get_cell_at(7, 26).goes_to = (self.phitsanulok_maths_school_789, 28, 26)
-        self.phitsanulok_maths_school_789.get_cell_at(29, 23).goes_to = (self.phitsanulok_maths_school_789, 8, 23)
-        self.phitsanulok_maths_school_789.get_cell_at(7, 23).goes_to = (self.phitsanulok_maths_school_789, 28, 23)
-        self.phitsanulok_maths_school_789.get_cell_at(29, 20).goes_to = (self.phitsanulok_maths_school_789, 8, 20)
-        self.phitsanulok_maths_school_789.get_cell_at(7, 20).goes_to = (self.phitsanulok_maths_school_789, 28, 20)
+        self.phitsanulok_maths_school_789.get_cell_at(29, 26).goes_to = (
+            self.phitsanulok_maths_school_789,
+            8,
+            26,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(7, 26).goes_to = (
+            self.phitsanulok_maths_school_789,
+            28,
+            26,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(29, 23).goes_to = (
+            self.phitsanulok_maths_school_789,
+            8,
+            23,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(7, 23).goes_to = (
+            self.phitsanulok_maths_school_789,
+            28,
+            23,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(29, 20).goes_to = (
+            self.phitsanulok_maths_school_789,
+            8,
+            20,
+        )
+        self.phitsanulok_maths_school_789.get_cell_at(7, 20).goes_to = (
+            self.phitsanulok_maths_school_789,
+            28,
+            20,
+        )
 
-        self.phitsanulok.get_cell_at(7, 10).goes_to = (self.phitsanulok_sukhothai, 537 - mothermap.daughtermaps['phitsanulok_sukhothai'].x, 555 - mothermap.daughtermaps['phitsanulok_sukhothai'].y)
-        self.phitsanulok.get_cell_at(7, 9).goes_to = (self.phitsanulok_sukhothai, 537 - mothermap.daughtermaps['phitsanulok_sukhothai'].x, 554 - mothermap.daughtermaps['phitsanulok_sukhothai'].y)
-        self.phitsanulok_sukhothai.get_cell_at(46, 15).goes_to = (self.phitsanulok, 9, 10)
-        self.phitsanulok_sukhothai.get_cell_at(46, 14).goes_to = (self.phitsanulok, 9, 9)
+        self.phitsanulok.get_cell_at(7, 10).goes_to = (
+            self.phitsanulok_sukhothai,
+            537 - mothermap.daughtermaps["phitsanulok_sukhothai"].x,
+            555 - mothermap.daughtermaps["phitsanulok_sukhothai"].y,
+        )
+        self.phitsanulok.get_cell_at(7, 9).goes_to = (
+            self.phitsanulok_sukhothai,
+            537 - mothermap.daughtermaps["phitsanulok_sukhothai"].x,
+            554 - mothermap.daughtermaps["phitsanulok_sukhothai"].y,
+        )
+        self.phitsanulok_sukhothai.get_cell_at(46, 15).goes_to = (
+            self.phitsanulok,
+            9,
+            10,
+        )
+        self.phitsanulok_sukhothai.get_cell_at(46, 14).goes_to = (
+            self.phitsanulok,
+            9,
+            9,
+        )
 
-        self.phitsanulok_sukhothai.get_cell_at(11, 4).goes_to = (self.sukhothai, 504 - mothermap.daughtermaps['sukhothai'].x, 544 - mothermap.daughtermaps['sukhothai'].y)
-        self.phitsanulok_sukhothai.get_cell_at(12, 4).goes_to = (self.sukhothai, 505 - mothermap.daughtermaps['sukhothai'].x, 544 - mothermap.daughtermaps['sukhothai'].y)
+        self.phitsanulok_sukhothai.get_cell_at(11, 4).goes_to = (
+            self.sukhothai,
+            504 - mothermap.daughtermaps["sukhothai"].x,
+            544 - mothermap.daughtermaps["sukhothai"].y,
+        )
+        self.phitsanulok_sukhothai.get_cell_at(12, 4).goes_to = (
+            self.sukhothai,
+            505 - mothermap.daughtermaps["sukhothai"].x,
+            544 - mothermap.daughtermaps["sukhothai"].y,
+        )
         self.sukhothai.get_cell_at(36, 32).goes_to = (self.phitsanulok_sukhothai, 11, 5)
         self.sukhothai.get_cell_at(37, 32).goes_to = (self.phitsanulok_sukhothai, 12, 5)
 
-        self.sukhothai.get_cell_at(7, 17).goes_to = (self.old_sukhothai, 475 - mothermap.daughtermaps['old_sukhothai'].x, 530 - mothermap.daughtermaps['old_sukhothai'].y)
-        self.sukhothai.get_cell_at(7, 18).goes_to = (self.old_sukhothai, 475 - mothermap.daughtermaps['old_sukhothai'].x, 531 - mothermap.daughtermaps['old_sukhothai'].y)
+        self.sukhothai.get_cell_at(7, 17).goes_to = (
+            self.old_sukhothai,
+            475 - mothermap.daughtermaps["old_sukhothai"].x,
+            530 - mothermap.daughtermaps["old_sukhothai"].y,
+        )
+        self.sukhothai.get_cell_at(7, 18).goes_to = (
+            self.old_sukhothai,
+            475 - mothermap.daughtermaps["old_sukhothai"].x,
+            531 - mothermap.daughtermaps["old_sukhothai"].y,
+        )
         self.old_sukhothai.get_cell_at(47, 16).goes_to = (self.sukhothai, 8, 17)
         self.old_sukhothai.get_cell_at(47, 17).goes_to = (self.sukhothai, 8, 18)
 
@@ -813,10 +1700,26 @@ class Mas(object):
         self.chumphae.get_cell_at(133, 25).goes_to = (self.chumphae_khonkaen, 8, 37)
 
         # chatturat
-        self.buengsamphan_chaiyaphum.get_cell_at(66, 37).goes_to = (self.chaiyaphum_chatturat, 35, 11)
-        self.chaiyaphum_chatturat.get_cell_at(36, 11).goes_to = (self.buengsamphan_chaiyaphum, 67, 37)
-        self.chaiyaphum_chatturat.get_cell_at(24, 11).goes_to = (self.buengsamphan_chaiyaphum, 55, 37)
-        self.buengsamphan_chaiyaphum.get_cell_at(56, 37).goes_to = (self.chaiyaphum_chatturat, 25, 11)
+        self.buengsamphan_chaiyaphum.get_cell_at(66, 37).goes_to = (
+            self.chaiyaphum_chatturat,
+            35,
+            11,
+        )
+        self.chaiyaphum_chatturat.get_cell_at(36, 11).goes_to = (
+            self.buengsamphan_chaiyaphum,
+            67,
+            37,
+        )
+        self.chaiyaphum_chatturat.get_cell_at(24, 11).goes_to = (
+            self.buengsamphan_chaiyaphum,
+            55,
+            37,
+        )
+        self.buengsamphan_chaiyaphum.get_cell_at(56, 37).goes_to = (
+            self.chaiyaphum_chatturat,
+            25,
+            11,
+        )
 
         self.chaiyaphum_chatturat.get_cell_at(28, 52).goes_to = (self.chatturat, 74, 5)
         self.chatturat.get_cell_at(74, 4).goes_to = (self.chaiyaphum_chatturat, 28, 51)

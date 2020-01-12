@@ -10,13 +10,13 @@ class TappingTestSentence(Test):
     def __init__(
         self,
         al: "All",
-        correct_word: Word,
+        correct: Word,
         sentence: Sentence,
         learning=None,
         test_success_callback=None,
     ):
         super().__init__(al, learning, test_success_callback)
-        self.correct_word = correct_word
+        self.correct = correct
         self.number_of_distr = 1  # 6 is better no?
         self.selected_picked_syllable_index = 0
         self.constructed_sentence = []  # List of syllables
@@ -115,6 +115,9 @@ class TappingTestSentence(Test):
             sentence = Sentence.get_random_known_sentence()
             a = sentence.words
             print(a)
+            if not a:
+                print('Error: distractors are empty!')
+                return
             b = random.choices(population=a)
             print(b)
             for word in b:
@@ -294,4 +297,5 @@ class TappingTestSentence(Test):
     def remove_last_word(self):
         if len(self.constructed_sentence) > 0:
             self.constructed_sentence.pop()
+            self.set_boxes()
 
