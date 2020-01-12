@@ -1,0 +1,1456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a2744141-60d6-4c70-95ad-395cf2337863" name="Default Changelist" comment="database">
+      <change afterPath="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/letters world" beforeDir="false" afterPath="$PROJECT_DIR$/doc/letters world" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/links" beforeDir="false" afterPath="$PROJECT_DIR$/doc/links" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/todo" beforeDir="false" afterPath="$PROJECT_DIR$/doc/todo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/words repartition" beforeDir="false" afterPath="$PROJECT_DIR$/doc/words repartition" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insert_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/insert_words.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexicon/dex.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/dex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexicon/learning.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/learning.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexicon/test_services.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/test_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexicon/tests/grid_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/tests/grid_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexicon/tests/tapping_test_sentence.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/tests/tapping_test_sentence.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexicon/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/tests/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/npc/import_npcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc/import_npcs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/npc/npc.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc/npc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/bmp_to_text.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/bmp_to_text.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/derive_from_mothermap.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/derive_from_mothermap.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/learner.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/learner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_image_files/cat_cave.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/cat_cave.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_image_files/full_map.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/full_map.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_image_files/full_map.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/full_map.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_image_files/postmap.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/postmap.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/bua_yai" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/bua_yai" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/buengsamphan_chaiyaphum" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/buengsamphan_chaiyaphum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/cat_cave" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/cat_cave" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/cat_cove" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/cat_cove" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/chaiyaphum" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/chaiyaphum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/chaiyaphum_chatturat" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/chaiyaphum_chatturat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/chumphae" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/chumphae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/chumphae_khonkaen" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/chumphae_khonkaen" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/chumsaeng" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/chumsaeng" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/kasetsombum" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/kasetsombum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/kasetsombum_temple" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/kasetsombum_temple" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/ko_kut" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/ko_kut" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/ko_mak" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/ko_mak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/lomsak" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/lomsak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/lomsak_labyrinth" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/lomsak_labyrinth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/postmap" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/postmap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/taphan_hin" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/taphan_hin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/overworld.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/overworld.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds/play_sound.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds/play_sound.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thai.db" beforeDir="false" afterPath="$PROJECT_DIR$/thai.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/thai$bmp_to_text__1_.coverage" NAME="bmp_to_text Coverage Results" MODIFIED="1548615952215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
+    <SUITE FILE_PATH="coverage/thai$sound_processing.coverage" NAME="sound_processing Coverage Results" MODIFIED="1549832969131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sounds/thai" />
+    <SUITE FILE_PATH="coverage/thai$testfile.coverage" NAME="testfile Coverage Results" MODIFIED="1547905836668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$grammar.coverage" NAME="grammar Coverage Results" MODIFIED="1558257631419" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$init.coverage" NAME="init Coverage Results" MODIFIED="1547405221416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lexicon" />
+    <SUITE FILE_PATH="coverage/thai$bmp_to_text.coverage" NAME="bmp_to_text Coverage Results" MODIFIED="1557673130801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
+    <SUITE FILE_PATH="coverage/thai$models.coverage" NAME="models Coverage Results" MODIFIED="1558283346741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$overworld.coverage" NAME="overworld Coverage Results" MODIFIED="1547326828773" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/overworld" />
+    <SUITE FILE_PATH="coverage/thai$tests.coverage" NAME="tests Coverage Results" MODIFIED="1547315296747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$ooo.coverage" NAME="ooo Coverage Results" MODIFIED="1558292254528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$profile.coverage" NAME="profile Coverage Results" MODIFIED="1547671216705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/profile" />
+    <SUITE FILE_PATH="coverage/thai$main.coverage" NAME="main Coverage Results" MODIFIED="1558397564835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="thai" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="thai" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="thai" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="thai" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="words: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="thai" type="feb32156:DbDataSourceImpl" />
+        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ExecutionTargetDialog">
+    <checked>
+      <node key="93e04833-da51-41d0-9b29-1773d5372142" />
+    </checked>
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5107296">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ui/ui.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="86">
+                  <caret line="123" column="95" lean-forward="true" selection-start-line="123" selection-start-column="95" selection-end-line="123" selection-end-column="95" />
+                  <folding>
+                    <element signature="e#0#11#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/users">
+              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+                <state projectRestartId="e62cb257-621e-4ef5-9d8b-85bcb3d645f5">
+                  <filtering>
+                    <filter text="" />
+                  </filtering>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lexicon/dex.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="161">
+                  <caret line="147" column="43" selection-start-line="147" selection-start-column="43" selection-end-line="147" selection-end-column="43" />
+                  <folding>
+                    <element signature="e#0#13#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/main.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="161">
+                  <caret line="84" column="34" selection-start-line="84" selection-start-column="34" selection-end-line="84" selection-end-column="34" />
+                  <folding>
+                    <element signature="e#0#34#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ow/learner.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="298">
+                  <caret line="29" column="71" lean-forward="true" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lexicon/presentation.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="-2592">
+                  <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/npc/import_npcs.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="1181" column="62" lean-forward="true" selection-start-line="1181" selection-start-column="62" selection-end-line="1181" selection-end-column="62" />
+                  <folding>
+                    <element signature="e#0#31#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ow/overworld.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="122">
+                  <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lexicon/tests/tapping_test_sentence.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="315">
+                  <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/npc/npc.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="86">
+                  <caret line="275" column="21" lean-forward="true" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
+                  <folding>
+                    <element signature="e#0#33#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/doc/links">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="270">
+                  <caret line="18" selection-start-line="18" selection-end-line="18" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="251">
+                  <caret line="127" column="19" lean-forward="true" selection-start-line="127" selection-start-column="19" selection-end-line="127" selection-end-column="19" />
+                  <folding>
+                    <element signature="e#0#29#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ow/bmp_to_text.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="645">
+                  <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+                  <folding>
+                    <element signature="e#0#21#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lexicon/learning.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1230">
+                  <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
+                  <folding>
+                    <element signature="e#0#21#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/sounds/play_sound.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="555">
+                  <caret line="41" column="70" selection-start-line="41" selection-start-column="70" selection-end-line="41" selection-end-column="70" />
+                  <folding>
+                    <element signature="e#0#14#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/words">
+              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+                <state projectRestartId="e62cb257-621e-4ef5-9d8b-85bcb3d645f5">
+                  <filtering />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ow/derive_from_mothermap.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="176">
+                  <caret line="68" column="21" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
+                  <folding>
+                    <element signature="e#0#21#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lexicon/items.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="9510">
+                  <caret line="640" column="12" selection-start-line="640" selection-start-column="12" selection-end-line="640" selection-end-column="12" />
+                  <folding>
+                    <element signature="e#0#34#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/lexicon/test_services.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="454">
+                  <caret line="135" column="47" selection-start-line="135" selection-start-column="47" selection-end-line="135" selection-end-column="47" />
+                  <caret line="137" column="47" selection-start-line="137" selection-start-column="47" selection-end-line="137" selection-end-column="47" />
+                  <caret line="139" column="45" selection-start-line="139" selection-start-column="45" selection-end-line="139" selection-end-column="45" />
+                  <caret line="141" column="45" selection-start-line="141" selection-start-column="45" selection-end-line="141" selection-end-column="45" />
+                  <folding>
+                    <element signature="e#0#13#0" expanded="true" />
+                    <marker date="1578230343097" expanded="true" signature="1884:1900" ph="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>_waterfall_3</find>
+      <find>_flower_2_1</find>
+      <find>flower_2</find>
+      <find>if you don't</find>
+      <find>buengsamphan_cave</find>
+      <find>buengsamphan_chaiyaphum_cave</find>
+      <find>buengsamphan_chaiyaphum</find>
+      <find>monk_down</find>
+      <find>flower_2_2</find>
+      <find>I wouldn</find>
+      <find>flower</find>
+      <find>flower_1_2</find>
+      <find>Presentation(self.al, word, from_dex=True)</find>
+      <find>alexis_up</find>
+      <find>Rob</find>
+      <find>Oh, hello</find>
+      <find>So, you decided</find>
+      <find>grass</find>
+      <find>chest_open</find>
+      <find>npc/sprites/chest_clo</find>
+      <find>chest&quot;</find>
+      <find>chest_open&quot;</find>
+      <find>time_type =</find>
+      <find>bed&quot;</find>
+      <find>bed</find>
+      <find>_get_time_type</find>
+      <find>television</find>
+      <find>&quot;Alexis&quot;</find>
+      <find>(5, 10)</find>
+      <find>house_learner_f2</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>North</replace>
+      <replace>standard_dialog</replace>
+      <replace>defeat_dialog</replace>
+      <replace>victory_dialog</replace>
+      <replace>battle_word, al)</replace>
+      <replace>Word.get_by_thai</replace>
+      <replace>get_by_split_form</replace>
+      <replace>battle_word</replace>
+      <replace>PATH_COLOR)</replace>
+      <replace>WATER_COLOR)</replace>
+      <replace>WALL_COLOR)</replace>
+      <replace>MOUNTAIN_WALL_COLOR</replace>
+      <replace>Daughtermap</replace>
+      <replace>daughtermaps</replace>
+      <replace>OUT_OF_BATTLE</replace>
+      <replace>BONUS</replace>
+      <replace>QUEST</replace>
+      <replace>BATTLE</replace>
+      <replace>load(f&quot;{dir_path}/../images</replace>
+      <replace>Font(f&quot;{dir_path}/../fonts</replace>
+      <replace>load(f&quot;{dir_path}/../npc</replace>
+      <replace>_</replace>
+      <replace>&quot;, mas=self</replace>
+      <replace>_§</replace>
+      <replace>Phitsanulok</replace>
+      <replace>phitsanulok</replace>
+      <replace>taught</replace>
+      <replace>correct</replace>
+      <replace>ThaiLettersFromSound</replace>
+      <replace>ThaiLettersFromSound4</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/sounds</dir>
+      <dir>$PROJECT_DIR$/npc</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/ow/occurrences/lomsak_labyrinth.occurrence" />
+        <option value="$PROJECT_DIR$/ow/cells.py" />
+        <option value="$PROJECT_DIR$/ow/generate_postmap.py" />
+        <option value="$PROJECT_DIR$/ow/old_map_text_files/bmp_to_text.py" />
+        <option value="$PROJECT_DIR$/ow/occurrences/kasetsombum.occurrence" />
+        <option value="$PROJECT_DIR$/ow/occurrences/kasetsombum_temple.occurrence" />
+        <option value="$PROJECT_DIR$/ow/occurrences/kasetsombum_cave.occurrence" />
+        <option value="$PROJECT_DIR$/mechanics/minimap.py" />
+        <option value="$PROJECT_DIR$/sounds/thai/sound_processing.py" />
+        <option value="$PROJECT_DIR$/bag/bag.py" />
+        <option value="$PROJECT_DIR$/bag/item.py" />
+        <option value="$PROJECT_DIR$/doc/world" />
+        <option value="$PROJECT_DIR$/doc/story" />
+        <option value="$PROJECT_DIR$/lexicon/init.py" />
+        <option value="$PROJECT_DIR$/profile/profile.py" />
+        <option value="$PROJECT_DIR$/npc/vendor.py" />
+        <option value="$PROJECT_DIR$/ow/occurrences/chaiyaphum.occurrence" />
+        <option value="$PROJECT_DIR$/all.py" />
+        <option value="$PROJECT_DIR$/events.py" />
+        <option value="$PROJECT_DIR$/insert_sentence.py" />
+        <option value="$PROJECT_DIR$/doc/ideas" />
+        <option value="$PROJECT_DIR$/doc/city information" />
+        <option value="$PROJECT_DIR$/event.py" />
+        <option value="$PROJECT_DIR$/lexicon/presentation.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
+        <option value="$PROJECT_DIR$/lexicon/items.py" />
+        <option value="$PROJECT_DIR$/ow/occurrences/repartition.occurrence" />
+        <option value="$PROJECT_DIR$/ow/occurrences/ko_kut.occurrence" />
+        <option value="$PROJECT_DIR$/doc/todo" />
+        <option value="$PROJECT_DIR$/lexicon/tests/tests.py" />
+        <option value="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" />
+        <option value="$PROJECT_DIR$/sounds/play_sound.py" />
+        <option value="$PROJECT_DIR$/doc/letters world" />
+        <option value="$PROJECT_DIR$/doc/concepts" />
+        <option value="$PROJECT_DIR$/doc/words repartition" />
+        <option value="$PROJECT_DIR$/lexicon/test_services.py" />
+        <option value="$PROJECT_DIR$/lexicon/learning.py" />
+        <option value="$PROJECT_DIR$/lexicon/tests/grid_test.py" />
+        <option value="$PROJECT_DIR$/lexicon/tests/tapping_test_sentence.py" />
+        <option value="$PROJECT_DIR$/doc/links" />
+        <option value="$PROJECT_DIR$/ow/derive_from_mothermap.py" />
+        <option value="$PROJECT_DIR$/ow/bmp_to_text.py" />
+        <option value="$PROJECT_DIR$/lexicon/dex.py" />
+        <option value="$PROJECT_DIR$/insert_words.py" />
+        <option value="$PROJECT_DIR$/ui/ui.py" />
+        <option value="$PROJECT_DIR$/ow/overworld.py" />
+        <option value="$PROJECT_DIR$/npc/import_npcs.py" />
+        <option value="$PROJECT_DIR$/npc/npc.py" />
+        <option value="$PROJECT_DIR$/models.py" />
+        <option value="$PROJECT_DIR$/ow/learner.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="877" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="thai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thai" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thai" type="462c0819:PsiDirectoryNode" />
+              <item name="doc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thai" type="462c0819:PsiDirectoryNode" />
+              <item name="lexicon" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thai" type="462c0819:PsiDirectoryNode" />
+              <item name="lexicon" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thai" type="462c0819:PsiDirectoryNode" />
+              <item name="ow" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thai" type="462c0819:PsiDirectoryNode" />
+              <item name="ow" type="462c0819:PsiDirectoryNode" />
+              <item name="occurrences" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="thai" type="b2602c69:ProjectViewProjectNode" />
+              <item name="thai" type="462c0819:PsiDirectoryNode" />
+              <item name="sounds" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ow/occurrences" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ow/occurrences" />
+      <recent name="$PROJECT_DIR$/doc" />
+      <recent name="$PROJECT_DIR$/mechanics" />
+      <recent name="$PROJECT_DIR$/ow" />
+      <recent name="$PROJECT_DIR$/lexicon" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lexicon/tests" />
+      <recent name="$PROJECT_DIR$/lexicon" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/ow/map_image_files" />
+      <recent name="$PROJECT_DIR$/overworld/map_image_files" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.main">
+    <configuration name="bmp_to_text" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ow" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ow/bmp_to_text.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="derive_from_mothermap" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ow" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ow/derive_from_mothermap.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="insert_sentence" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/insert_sentence.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="play_sound" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="thai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/sounds" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sounds/play_sound.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.derive_from_mothermap" />
+      <item itemvalue="Python.bmp_to_text" />
+      <item itemvalue="Python.insert_sentence" />
+      <item itemvalue="Python.play_sound" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.derive_from_mothermap" />
+        <item itemvalue="Python.bmp_to_text" />
+        <item itemvalue="Python.play_sound" />
+        <item itemvalue="Python.insert_sentence" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a2744141-60d6-4c70-95ad-395cf2337863" name="Default Changelist" comment="" />
+      <created>1547304618954</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1547304618954</updated>
+      <workItem from="1547304620186" duration="39976000" />
+      <workItem from="1547448253781" duration="574000" />
+      <workItem from="1547492293869" duration="8672000" />
+      <workItem from="1547661942425" duration="6884000" />
+      <workItem from="1547752542027" duration="8762000" />
+      <workItem from="1547843777928" duration="41852000" />
+      <workItem from="1548271933844" duration="9084000" />
+      <workItem from="1548355765630" duration="5659000" />
+      <workItem from="1548440629688" duration="37311000" />
+      <workItem from="1548704567056" duration="6463000" />
+      <workItem from="1548713805234" duration="2693000" />
+      <workItem from="1548875241853" duration="4347000" />
+      <workItem from="1548964283256" duration="3378000" />
+      <workItem from="1549050040208" duration="19304000" />
+      <workItem from="1549649384867" duration="24280000" />
+      <workItem from="1549822256443" duration="1414000" />
+      <workItem from="1549825043471" duration="8873000" />
+      <workItem from="1549912510227" duration="1320000" />
+      <workItem from="1551037051364" duration="8051000" />
+      <workItem from="1551292247665" duration="3090000" />
+      <workItem from="1551296862786" duration="2177000" />
+      <workItem from="1551360633006" duration="873000" />
+      <workItem from="1551992213120" duration="3156000" />
+      <workItem from="1552118949733" duration="2729000" />
+      <workItem from="1552513039059" duration="1643000" />
+      <workItem from="1552814917049" duration="1001000" />
+      <workItem from="1552901655985" duration="39000" />
+      <workItem from="1553034597090" duration="3895000" />
+      <workItem from="1553211619272" duration="4016000" />
+      <workItem from="1553336265910" duration="17791000" />
+      <workItem from="1553951001162" duration="14951000" />
+      <workItem from="1554546543265" duration="762000" />
+      <workItem from="1554547672611" duration="9110000" />
+      <workItem from="1554590521727" duration="9284000" />
+      <workItem from="1554761295636" duration="7204000" />
+      <workItem from="1555198057830" duration="9568000" />
+      <workItem from="1555352176841" duration="205000" />
+      <workItem from="1555669636935" duration="2087000" />
+      <workItem from="1556438763793" duration="972000" />
+      <workItem from="1556995136259" duration="27365000" />
+      <workItem from="1557267229869" duration="3861000" />
+      <workItem from="1557523905531" duration="35338000" />
+      <workItem from="1558115860309" duration="5962000" />
+      <workItem from="1558126480809" duration="1727000" />
+      <workItem from="1558128379423" duration="32228000" />
+      <workItem from="1558285078237" duration="13731000" />
+      <workItem from="1558374743564" duration="7073000" />
+      <workItem from="1558553835373" duration="13139000" />
+      <workItem from="1558612073949" duration="710000" />
+      <workItem from="1558804244480" duration="24275000" />
+      <workItem from="1559732456151" duration="200000" />
+      <workItem from="1560707135168" duration="7951000" />
+      <workItem from="1562518586426" duration="478000" />
+      <workItem from="1563096691211" duration="5303000" />
+      <workItem from="1564850043399" duration="12199000" />
+      <workItem from="1565028818119" duration="8003000" />
+      <workItem from="1565120004236" duration="8513000" />
+      <workItem from="1565364571242" duration="9961000" />
+      <workItem from="1565588716321" duration="57000" />
+      <workItem from="1565625085747" duration="4769000" />
+      <workItem from="1566363809675" duration="176000" />
+      <workItem from="1566372852928" duration="14998000" />
+      <workItem from="1567337344796" duration="67621000" />
+      <workItem from="1568543964379" duration="15872000" />
+      <workItem from="1568659843458" duration="2127000" />
+      <workItem from="1568719003414" duration="91000" />
+      <workItem from="1568744016283" duration="10371000" />
+      <workItem from="1568831970741" duration="987000" />
+      <workItem from="1568917985223" duration="7482000" />
+      <workItem from="1569004042233" duration="17993000" />
+      <workItem from="1569153675114" duration="2683000" />
+      <workItem from="1569161185568" duration="19696000" />
+      <workItem from="1569350269504" duration="8596000" />
+      <workItem from="1569435158938" duration="11779000" />
+      <workItem from="1569535302019" duration="4919000" />
+      <workItem from="1569616269027" duration="48706000" />
+      <workItem from="1570045921313" duration="3146000" />
+      <workItem from="1570137580528" duration="2976000" />
+      <workItem from="1570214388421" duration="16763000" />
+      <workItem from="1570308902711" duration="17654000" />
+      <workItem from="1570562718242" duration="9445000" />
+      <workItem from="1570643884021" duration="2110000" />
+      <workItem from="1570733034611" duration="3616000" />
+      <workItem from="1570817936361" duration="19418000" />
+      <workItem from="1570930734608" duration="12134000" />
+      <workItem from="1571166765408" duration="1479000" />
+      <workItem from="1571248241586" duration="6255000" />
+      <workItem from="1571345369733" duration="4236000" />
+      <workItem from="1571480536705" duration="5180000" />
+      <workItem from="1571611473201" duration="625000" />
+      <workItem from="1572023940443" duration="2578000" />
+      <workItem from="1572256318970" duration="6000" />
+      <workItem from="1572693576675" duration="3335000" />
+      <workItem from="1572904647288" duration="1722000" />
+      <workItem from="1572973058867" duration="9555000" />
+      <workItem from="1573005084739" duration="28000" />
+      <workItem from="1573236673120" duration="3911000" />
+      <workItem from="1573463208206" duration="350000" />
+      <workItem from="1573901376779" duration="1261000" />
+      <workItem from="1574518491912" duration="7043000" />
+      <workItem from="1575707084148" duration="17342000" />
+      <workItem from="1576323407864" duration="28521000" />
+      <workItem from="1577404336967" duration="908000" />
+      <workItem from="1577894842925" duration="1272000" />
+      <workItem from="1578088137064" duration="28263000" />
+      <workItem from="1578439116334" duration="1309000" />
+      <workItem from="1578613802849" duration="3953000" />
+      <workItem from="1578690625599" duration="16132000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1022916000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="877" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" weight="0.13376252" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.65477705" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32356688" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32356688" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3299363" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Database Console" order="13" weight="0.3299363" />
+      <window_info anchor="bottom" id="Concurrent Activities Diagram" order="14" weight="0.3299363" />
+      <window_info anchor="bottom" id="Messages" order="15" weight="0.3299363" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" weight="0.23319027" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lexicon/tests/tests.py</url>
+          <line>46</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mechanics/battle.py</url>
+          <line>293</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/grammar.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/grammar.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="96" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/grammar.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="98" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mechanics/battle.py</url>
+          <line>290</line>
+          <option name="timeStamp" value="109" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lexicon/tests/grid_test.py</url>
+          <line>335</line>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lexicon/items.py</url>
+          <line>219</line>
+          <option name="timeStamp" value="127" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ooo.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="128" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/npc/npc.py</url>
+          <line>109</line>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lexicon/items.py</url>
+          <line>141</line>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lexicon/presentation.py</url>
+          <line>57</line>
+          <option name="timeStamp" value="158" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lexicon/items.py</url>
+          <line>127</line>
+          <option name="timeStamp" value="165" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/npc/npc.py</url>
+          <line>339</line>
+          <option name="timeStamp" value="172" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/npc/npc.py</url>
+          <line>337</line>
+          <option name="timeStamp" value="173" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/events.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/models.py</url>
+          <line>31</line>
+          <option name="timeStamp" value="177" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/lexicon/tests/tests.py</url>
+          <line>1920</line>
+          <option name="timeStamp" value="185" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="time_str" />
+        <watch expression="self.selected_cells" />
+        <watch expression="self.sentence" />
+        <watch expression="self.lomsak.ma" />
+        <watch expression="al.ui.escape" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/thai$generate_postmap.coverage" NAME="generate_postmap Coverage Results" MODIFIED="1569446036174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
+    <SUITE FILE_PATH="coverage/thai$main.coverage" NAME="main Coverage Results" MODIFIED="1578841920311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$grammar.coverage" NAME="grammar Coverage Results" MODIFIED="1558568821172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$sound_processing.coverage" NAME="sound_processing Coverage Results" MODIFIED="1570047067785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sounds/thai" />
+    <SUITE FILE_PATH="coverage/thai$derive_from_mothermap.coverage" NAME="derive_from_mothermap Coverage Results" MODIFIED="1578838077372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
+    <SUITE FILE_PATH="coverage/thai$ooo.coverage" NAME="ooo Coverage Results" MODIFIED="1565365780921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$insert_words.coverage" NAME="insert_words Coverage Results" MODIFIED="1568275487984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$models.coverage" NAME="models Coverage Results" MODIFIED="1570924164199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$bmp_to_text.coverage" NAME="bmp_to_text Coverage Results" MODIFIED="1578790409056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
+    <SUITE FILE_PATH="coverage/thai$insert_sentence.coverage" NAME="insert_sentence Coverage Results" MODIFIED="1570924766397" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$play_sound.coverage" NAME="play_sound Coverage Results" MODIFIED="1576454304966" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sounds" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="breakpointCondition">
+      <expression>
+        <expression-string>npc.x == 13 and npc.y == 7</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>self.choices</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/ow/map_text_files/full_map">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8204">
+          <caret line="19" column="63" lean-forward="true" selection-start-line="19" selection-start-column="63" selection-end-line="19" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/movement.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/events">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="95994be3-60b1-40a6-9c7c-ec80ee8c5693">
+          <filtering>
+            <filter text="" />
+          </filtering>
+          <column-attributes>
+            <column name="rowid" enabled="false" position="-1" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/events.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="13" column="39" lean-forward="true" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/events_user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="95994be3-60b1-40a6-9c7c-ec80ee8c5693">
+          <filtering>
+            <filter text="" />
+          </filtering>
+          <column-attributes>
+            <column name="rowid" enabled="false" position="-1" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/occurrences/lomsak_labyrinth.occurrence">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insert_sentence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/occurrences/labyrinth.occurrence">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="5" selection-start-line="4" selection-start-column="5" selection-end-line="4" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.7/site-packages/PIL/Image.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39420">
+          <caret line="2633" selection-start-line="2633" selection-end-line="2633" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/user_details">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="a483b28f-efb4-4d41-9cc7-c709a98e2a7e">
+          <filtering />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/old_map_text_files/bmp_to_text.py" />
+    <entry file="file://$PROJECT_DIR$/ow/occurrences/banyaeng.occurrence">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="9" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/city information">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="72" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/event.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/user_word">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="bce0a22d-ea75-4677-9d35-04842329f367">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/letters">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="bce0a22d-ea75-4677-9d35-04842329f367">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/letters world">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/todo">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/occurrences/ko_kut.occurrence">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="8" column="5" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sounds/thai/sound_processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/tests/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1845">
+          <caret line="130" column="12" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#44035#44801#0" />
+            <element signature="e#50271#51024#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/story">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/concepts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="58" column="30" selection-start-line="58" selection-start-column="30" selection-end-line="58" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5160">
+          <caret line="353" column="26" selection-start-line="353" selection-start-column="26" selection-end-line="353" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/ideas">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="32" selection-start-line="45" selection-start-column="32" selection-end-line="45" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/links">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/bmp_to_text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="45" column="25" selection-start-line="45" selection-start-column="25" selection-end-line="45" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/learning.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1230">
+          <caret line="97" column="24" selection-start-line="97" selection-start-column="24" selection-end-line="97" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sounds/play_sound.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="41" column="70" selection-start-line="41" selection-start-column="70" selection-end-line="41" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/words">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="e62cb257-621e-4ef5-9d8b-85bcb3d645f5">
+          <filtering />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9510">
+          <caret line="640" column="12" selection-start-line="640" selection-start-column="12" selection-end-line="640" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/datetime.pyi">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/tests/grid_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="294" column="50" selection-start-line="294" selection-start-column="50" selection-end-line="294" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+            <element signature="e#2515#2739#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/words repartition">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/derive_from_mothermap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="68" column="21" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/user_letter">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="e62cb257-621e-4ef5-9d8b-85bcb3d645f5">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/user_items">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="e62cb257-621e-4ef5-9d8b-85bcb3d645f5">
+          <filtering>
+            <filter text="" />
+          </filtering>
+          <column-attributes>
+            <column name="rowid" enabled="false" position="-1" />
+          </column-attributes>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/users">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="e62cb257-621e-4ef5-9d8b-85bcb3d645f5">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/tests/tapping_test_sentence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/presentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2592">
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="123" column="95" lean-forward="true" selection-start-line="123" selection-start-column="95" selection-end-line="123" selection-end-column="95" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/dex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="147" column="43" selection-start-line="147" selection-start-column="43" selection-end-line="147" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc/import_npcs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="1181" column="62" lean-forward="true" selection-start-line="1181" selection-start-column="62" selection-end-line="1181" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/overworld.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="212" lean-forward="true" selection-start-line="212" selection-end-line="212" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/npc/npc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="275" column="21" lean-forward="true" selection-start-line="275" selection-start-column="21" selection-end-line="275" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/test_services.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="135" column="47" selection-start-line="135" selection-start-column="47" selection-end-line="135" selection-end-column="47" />
+          <caret line="137" column="47" selection-start-line="137" selection-start-column="47" selection-end-line="137" selection-end-column="47" />
+          <caret line="139" column="45" selection-start-line="139" selection-start-column="45" selection-end-line="139" selection-end-column="45" />
+          <caret line="141" column="45" selection-start-line="141" selection-start-column="45" selection-end-line="141" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1578230343097" expanded="true" signature="1884:1900" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="127" column="19" lean-forward="true" selection-start-line="127" selection-start-column="19" selection-end-line="127" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/learner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="29" column="71" lean-forward="true" selection-start-line="29" selection-start-column="71" selection-end-line="29" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="84" column="34" selection-start-line="84" selection-start-column="34" selection-end-line="84" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
