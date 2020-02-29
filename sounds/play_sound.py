@@ -12,7 +12,7 @@ def play_thai_word(thai_word: str):
         pygame.mixer.music.load(path)
         pygame.mixer.music.play(0)
     except pygame.error:
-        print(f"Error: This sound could not be played:\n{path}")
+        print(f"Error: This sound could not be played: {path}")
 
 
 def play_transformed_thai_word(thai_word: str):

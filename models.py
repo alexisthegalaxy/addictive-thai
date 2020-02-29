@@ -119,11 +119,15 @@ def increase_xp_letter_by_id(letter_id, xp_amount):
     CONN.commit()
 
 
-def create_new_user(name):
-    # Create a row in user and a row in user_details
-    starting_map = 'house_learner_f2'
-    starting_x = 8
-    starting_y = 12
+def create_new_user(name: str, learns_letters: bool):
+    if learns_letters:
+        starting_map = 'ko_kut'
+        starting_x = 47
+        starting_y = 54
+    else:
+        starting_map = 'house_learner_f2'
+        starting_x = 8
+        starting_y = 12
     starting_money = 0
     starting_hp = 5
 
@@ -146,7 +150,7 @@ def create_new_user(name):
     CONN.commit()
 
 
-def set_active_player(name):
+def set_active_player(name, learns_letters):
     # 1 - Set all users to non-playing
     CURSOR.execute(
         f"UPDATE users "
@@ -159,7 +163,7 @@ def set_active_player(name):
     ) == []
 
     if no_user_found:
-        create_new_user(name)
+        create_new_user(name, learns_letters)
     else:
         CURSOR.execute(
             f"UPDATE users "
@@ -258,7 +262,7 @@ def item_exists(learner_id, item_id) -> bool:
 
 def save_bag(al: 'All'):
     learner_id = get_active_learner_id()
-    for item in al.bag.get_all_items():
+    for item in al.bag.items:
         item_exist = item_exists(learner_id, item.name_id)
         if item_exist:
             update_user_item(learner_id, item.name_id, item.amount)
@@ -269,7 +273,7 @@ def save_bag(al: 'All'):
 def load_bag(al: 'All'):
     learner_id = get_active_learner_id()
     results = list(CURSOR.execute(
-        f"SELECT item.id, item.name, item.description, item.price, item.compartment, user_item.quantity "
+        f"SELECT item.id, item.name, item.description, item.price, user_item.quantity "
         f"FROM items item "
         f"JOIN user_items user_item "
         f"ON item.id = user_item.item_id "
@@ -280,33 +284,24 @@ def load_bag(al: 'All'):
         name=item[1],
         description=item[2],
         price=item[3],
-        compartment=Compartment(item[4]),
-        amount=item[5],
+        amount=item[4],
     ) for item in results]
     for item in items:
-        if item.compartment == Compartment.BATTLE:
-            al.bag.battle.append(item)
-        if item.compartment == Compartment.OUT_OF_BATTLE:
-            al.bag.out_of_battle.append(item)
-        if item.compartment == Compartment.BONUS:
-            al.bag.bonus.append(item)
-        if item.compartment == Compartment.QUEST:
-            al.bag.quest.append(item)
+        al.bag.items.append(item)
 
 
 def get_item_from_name(item_name: str) -> Optional[Item]:
     results = list(CURSOR.execute(
-        f"SELECT item.name, item.id, item.description, item.price, item.compartment "
+        f"SELECT item.name, item.id, item.description, item.price "
         f"FROM items item "
         f"WHERE item.id = '{item_name}'"
     ))
-    name, item_id, description, price, compartment = results[0]
+    name, item_id, description, price = results[0]
     item = Item(
         name_id=item_id,
         name=name,
         description=description,
         price=price,
-        compartment=Compartment(compartment),
     )
     return item
 
@@ -463,3 +458,18 @@ def insert_user_word(
             f"INSERT INTO user_word (user_id, word_id, total_xp, level, next_threshold, previous_threshold) VALUES ('{user_id}', '{word_id}', '{total_xp}', '{level}', '{next_threshold}', '{previous_threshold}')"
         )
         CONN.commit()
+
+
+def list_words_that_are_not_in_sentences():
+    all_words = list(CURSOR.execute(
+        "select thai from words where words.id not in ("
+        "SELECT word_id "
+        "FROM words "
+        "  JOIN word_sentence "
+        "    ON word_id = words.id )"
+    ))
+    for word in all_words:
+        print(word)
+
+list_words_that_are_not_in_sentences()
+# print_sentence_46()

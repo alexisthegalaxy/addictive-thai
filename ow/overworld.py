@@ -368,6 +368,9 @@ class Mas(object):
         self.cat_cove_hidden_house = Ma(
             filename="cat_cove_hidden_house", mas=self, x_shift=720, y_shift=611
         )
+        self.cat_cove_hidden_shop = Ma(
+            filename="cat_cove_hidden_shop", mas=self,
+        )
         self.kasetsombum = Ma(
             filename="kasetsombum", mas=self, x_shift=761, y_shift=635
         )
@@ -395,6 +398,8 @@ class Mas(object):
         self.chatturat = Ma(filename="chatturat", mas=self, x_shift=704, y_shift=762)
         self.ko_kut = Ma(filename="ko_kut", mas=self, x_shift=806, y_shift=1303)
         self.ko_mak = Ma(filename="ko_mak", mas=self, x_shift=816, y_shift=1305)
+        self.ko_klum = Ma(filename="ko_klum", mas=self, x_shift=811, y_shift=1297)
+        self.ko_chang = Ma(filename="ko_chang", mas=self, x_shift=802, y_shift=1263)
 
         # inns
         self.inn1 = Ma(filename="inn1", mas=self, parent=self.chumphae)
@@ -615,11 +620,21 @@ class Mas(object):
         # ko_kut
         self.ko_kut.get_cell_at(47, 45).goes_to = (self.inn_ko_kut, 4, 7)
         self.inn_ko_kut.get_cell_at(4, 8).goes_to = (self.ko_kut, 47, 46)
-        self.ko_kut.get_cell_at(41, 31).goes_to = (self.ko_kut_cave_1, 14, 26)
-        self.ko_kut_cave_1.get_cell_at(14, 27).goes_to = (self.ko_kut, 41, 32)
+
+        self.ko_kut.get_cell_at(53, 28).goes_to = (self.ko_mak, 36, 9)
+        self.ko_mak.get_cell_at(37, 9).goes_to = (self.ko_kut, 52, 28)
+
+        self.ko_mak.get_cell_at(26, 20).goes_to = (self.ko_kut_cave_1, 14, 26)
+        self.ko_kut_cave_1.get_cell_at(14, 27).goes_to = (self.ko_mak, 26, 21)
         # ko_mak
         self.ko_kut_cave_1.get_cell_at(15, 7).goes_to = (self.ko_mak, 32, 10)
         self.ko_mak.get_cell_at(32, 9).goes_to = (self.ko_kut_cave_1, 15, 6)
+
+        self.ko_mak.get_cell_at(8, 14).goes_to = (self.ko_klum, 8, 8)
+        self.ko_klum.get_cell_at(7, 8).goes_to = (self.ko_mak, 8, 15)
+
+        self.ko_klum.get_cell_at(24, 12).goes_to = (self.ko_chang, 44, 37)
+        self.ko_chang.get_cell_at(45, 37).goes_to = (self.ko_klum, 23, 12)
 
         # chaiyaphum - chumphae
         self.chaiyaphum.get_cell_at(42, 14).goes_to = (self.chumphae, 123, 80)
@@ -799,8 +814,10 @@ class Mas(object):
         self.cat_cove.get_cell_at(11, 6).goes_to = (self.cat_cove_house, 5, 12)
         self.cat_cove_house.get_cell_at(5, 13).goes_to = (self.cat_cove, 11, 7)
 
+        self.cat_cove_hidden_house.get_cell_at(40, 10).goes_to = (self.cat_cove_hidden_shop, 13, 24)
+        self.cat_cove_hidden_shop.get_cell_at(13, 25).goes_to = (self.cat_cove_hidden_house, 40, 11)
+
         self.cat_cove.get_cell_at(25, 10).goes_to = (self.cat_cave_2, 8, 17)
-        self.kasetsombum_temple.get_cell_at(33, 5).goes_to = (self.cat_cave_2, 54, 12)
         self.cat_cave_2.get_cell_at(54, 13).goes_to = (self.kasetsombum_temple, 33, 6)
         self.cat_cave_2.get_cell_at(43, 8).goes_to = (self.cat_cave_2, 54, 8)
         self.kasetsombum_temple.get_cell_at(18, 4).goes_to = (self.cat_cave_2, 39, 19)

@@ -192,7 +192,49 @@ def create_many_to_many_relationships():
 เขา_ไม่_ชอบ_พูด | He doesnt like to speak.
 เธอ_ไม่_อยาก_พูด | She doesnt want to speak.
 ฉัน_ดี-ใจ_ที่_คุณ_ชอบ_มัน | Im glad you like it."""
-sentences = """"""
+sentences = """
+ฉัน_ไม่_ชอบ_ตะ-เกียบ_ไม้ | I (female) don't like wooden chopsticks.
+ตุ๊ก-แก_เป็น_ส-กุล_ของ_สัตว์-เลื้อย-คลาน | Geckos are a family of reptiles.
+งู_เป็น_ส-กุล_ของ_สัตว์-เลื้อย-คลาน | Snakes are a family of reptiles.
+ตุ๊ก-แก_มี_ขา_มาก_กว่า_งู | Geckos have more legs than snakes.
+เพื่อน_ของ_เขา_กลาย-เป็น_วิศวกร_เมื่อ_ปี_ที่_แล้ว | His friend became an engineer last year.
+ขอบ-คุณ_มาก_ครับ | Thank you very much (said by a male)!
+ผม_กลัว_งู | I'm afraid of snakes.
+คุณ_ดู_สวย_มาก | You're looking beautiful!
+คุณ_รู้_ไหม_ว่า_พระ-เจ้า_คือ_อะ-ไร | Do you know what a god is?
+ขอ-โทษ_ที่_ทำ-ให้_คุณ_ต้อง_รอ | Sorry to have made you have to wait.
+พวก-เขา_อา-ศัย_อยู่_ใน_ป่า | They live in the jungle.
+เรา_จะ_ไม่-เป็น-ไร | We're going to be fine!
+คุณ_รู้-จัก_เขา_ไหม | Do you know him?
+คุณ_รู้_ไหม_ว่า_ทำ-ไม? | Do you know why?
+ฉัน_คิด_ว่า_รอง-เท้า_คุณ_สกปรก_เกิน-ไป | I (female) think your shoes are too dirty!
+ฉัน_รู้_ว่า-คุณ-ไม่-ชอบ-ฉัน-แต่_ไม่-เป็น-ไร | I (female) know you don't like me, but it's fine.
+ฉัน_กำ-ลัง_จะ_ตาย_เร็ว-ๆ-นี้_แต่_ไม่-เป็น-ไร | I'm (female) going to die soon, but it's fine.
+ฉัน_เห็น_หิ-มะ_เป็น_ครั้ง-แรก_ใน_แค-นา-ดา | I (female) saw snow for the first time in Canada.
+คุณ_เคย_ไป_มาเลเซีย_ไหม | Have you ever been to Malaysia?
+อา-หาร_ไทย_อ-ร่อย_มาก | Thai food is really delicious.
+ฉัน_ไป_เที่ยว_เวียด-นาม_และ_กัม-พู-ชา_ใน_ช่วง_ฤดู_หนาว | I (female) visited Vietnam and Cambodia during winter.
+คุณ_ชอบ_อา-หาร_ไทย_ไหม | Do you like Thai food?
+ฉัน_ไม่-ใช่_คน_ลาว | I'm (female) not Lao.
+เขา_ซื้อ_น้ำ_สับ-ปะ-รด_ให้_เธอ_แต่เ_ธอ_ปฏิ-เสธ_ที่_จะ_รับ-มัน | He bought her a pineapple juice but she refused to take it.
+ฉัน_คิด_ว่า_มะ-ม่วง_มี_ความ-หวาน_มาก_กว่า_สับ-ปะ-รด | I think mangoes are sweeter than pineapples.
+เด็ก-ๆ_ไม่_ชอบ_กิน_ผัก | The children don't like eating vegetables.
+ผม_จะ_ขึ้น_รถ-ไฟ-ใต้-ดิน_ทุก-วัน_เมื่อ_ผม_อา-ศัย_อยู่_ใน_กรุง-เทพ | I will take the subway everyday when I live in Bangkok.
+ผม_ดี-ใจ_ที่_คุณ_ชอบ | I'm glad you like it (said by a male).
+ฉัน_ดี-ใจ_ที่_ได้_พบ_คุณ | I'm glad I met you (said by a female).
+ลา-ก่อน_ทุก-คน | Goodbye everybody!
+"""
+new_sentences = """
+ฉัน_เริ่ม_หิว | I'm (female) getting hungry.
+ผม_หิว_น้ำ | I'm (male) hungry for water.
+บ้าน_ของ_ผม_อยู่_ใกล้_บ้าน_ของ_คุณ | My house (male) is close to your house.
+คุณ_ง่วง_รึ-ป่าว | Are you sleepy (or not?)
+ประ-เทศ_ฝ-รั่ง-เศส_อยู่_ใกล้_ประ-เทศ_อัง-กฤษ | France is close to Britain.
+ประ-เทศ_ไทย_ไกล_จาก_ประ-เทศ_อัง-กฤษ | Thailand is far from Britain.
+หนัง-สือ_เล่ม_นี้_ทำ-ให้_ฉัน_ง่วง-นอน | This book makes me (female) sleepy.
+ทุก-วัน_ผม_ขึ้น_รถ-ไฟ_ไป_ทํา-งาน | Every day, I take the train to work.
+อา-หาร_โปรด_ของ_ผม_คือ_พิซ-ซ่า | My favourite food is pizza.
+"""
 for sentence in sentences.split('\n'):
     print(sentence)
     split_values = sentence.split(' | ')

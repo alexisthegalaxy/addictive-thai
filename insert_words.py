@@ -389,8 +389,10 @@ insert_word(thai='เล็ก', english='small', tones='H', split_form='เล�
 # # # insert_word('กาง-เกง-ขา-สั้น', 'shorts', 'MMRF')
 # # # insert_word('ภา-ษา-อัง-กฤษ', 'English language', 'MRML')
 # # # insert_word('เยอ-ร-ม-นี', 'Germany', 'MHHM')
-# # # insert_word('อเ-ม-ริ-กัน', 'American', 'LMHM')
-# #
+# insert_word('อเ-ม-ริ-กัน', 'American', 'LMHM')
+insert_word('สัตว์-เลื้อย-คลาน', 'reptile', 'LHM')
+insert_word('สกปรก', 'dirty', 'LLL')
+#
 # # # # get a single row
 # # # print('all')
 # # # c.execute('SELECT * FROM cont')

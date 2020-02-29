@@ -126,6 +126,7 @@ def npc_sprites():
         "woman_right": pygame.image.load(f"{dir_path}/../npc/sprites/woman_right.png"),
         "woman_up": pygame.image.load(f"{dir_path}/../npc/sprites/woman_up.png"),
         "woman_down": pygame.image.load(f"{dir_path}/../npc/sprites/woman_down.png"),
+        "boat": pygame.image.load(f"{dir_path}/../npc/sprites/boat.png"),
         "chest_closed": pygame.image.load(f"{dir_path}/../npc/sprites/chest_closed_down.png"),
         "chest_open": pygame.image.load(f"{dir_path}/../npc/sprites/chest_open_down.png"),
         "television_off": pygame.image.load(f"{dir_path}/../npc/sprites/television_off.png"),
@@ -133,6 +134,10 @@ def npc_sprites():
         "_television_on_2": pygame.image.load(f"{dir_path}/../npc/sprites/television_on_2.png"),
         "_television_on_3": pygame.image.load(f"{dir_path}/../npc/sprites/television_on_3.png"),
         "_television_on_4": pygame.image.load(f"{dir_path}/../npc/sprites/television_on_4.png"),
+        "nim_down": pygame.image.load(f"{dir_path}/../npc/sprites/nim_down.png"),
+        "nim_up": pygame.image.load(f"{dir_path}/../npc/sprites/nim_up.png"),
+        "nim_right": pygame.image.load(f"{dir_path}/../npc/sprites/nim_right.png"),
+        "nim_left": pygame.image.load(f"{dir_path}/../npc/sprites/nim_left.png"),
     }
 
 

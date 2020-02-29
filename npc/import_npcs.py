@@ -1182,9 +1182,9 @@ def chaiyaphum(al):
             ma=al.mas.get_map_from_name("house_learner_f2"),
             x=5,
             y=10,
-            sprite="Nim",
+            sprite="nim",
             direction=Direction.UP,
-            standard_dialog=["Nim: Yo, brother!"],
+            standard_dialog=["Nim: Yo, [Name]!"],
         ),
         Npc(
             al=al,
@@ -2111,7 +2111,6 @@ def lomsak_labyrinth(al):
         #     sold_items=[
         #         Item(
         #             name="apple",
-        #             compartment=Compartment.BATTLE,
         #             description="looks like a normal apple.",
         #             price=8,
         #         ),
@@ -2376,7 +2375,6 @@ def khonkaen(al):
         #     sold_items=[
         #         Item(
         #             name="silk",
-        #             compartment=Compartment.QUEST,
         #             description="good quality silk from Khonkaen",
         #             price=8,
         #         ),
@@ -2394,7 +2392,6 @@ def khonkaen(al):
         #     sold_items=[
         #         Item(
         #             name="water",
-        #             compartment=Compartment.BATTLE,
         #             description="a plastic one-liter bottle of water",
         #             price=12,
         #         ),
@@ -2412,7 +2409,6 @@ def khonkaen(al):
         #     sold_items=[
         #         Item(
         #             name="water",
-        #             compartment=Compartment.BATTLE,
         #             description="a plastic one-liter bottle of water",
         #             price=12,
         #         ),
@@ -2430,7 +2426,6 @@ def khonkaen(al):
         #     sold_items=[
         #         Item(
         #             name="silk",
-        #             compartment=Compartment.QUEST,
         #             description="good quality silk from Khonkaen",
         #             price=8,
         #         ),
@@ -2511,7 +2506,6 @@ def phetchabun(al):
         #     sold_items=[
         #         Item(
         #             name="กล้วย",
-        #             compartment=Compartment.BONUS,
         #             description="Banana from Phetchabun fruit farm.",
         #             price=9999,
         #         ),
@@ -2927,19 +2921,16 @@ def phetchabun(al):
         #     sold_items=[
         #         Item(
         #             name="กล้วย",
-        #             compartment=Compartment.BONUS,
         #             description="Banana from Phetchabun fruit farm.",
         #             price=9999,
         #         ),
         #         Item(
         #             name="มะม่วง",
-        #             compartment=Compartment.BONUS,
         #             description="Mango from Phetchabun fruit farm.",
         #             price=9999,
         #         ),
         #         Item(
         #             name="สับปะรด",
-        #             compartment=Compartment.BONUS,
         #             description="Pineapple from Phetchabun fruit farm.",
         #             price=9999,
         #         ),
@@ -3318,7 +3309,6 @@ def banyaeng(al):
         #     sold_items=[
         #         Item(
         #             name="postcard",
-        #             compartment=Compartment.QUEST,
         #             description="A postcard showing millions of bats in the sky.",
         #             price=9,
         #         ),
@@ -3602,7 +3592,6 @@ def labyrinth(al):
         #     sold_items=[
         #         Item(
         #             name="apple",
-        #             compartment=Compartment.BATTLE,
         #             description="looks like a normal apple.",
         #             price=8,
         #         ),
@@ -4382,6 +4371,47 @@ def kasetsombum(al):
             ],
             defeat_dialog=["To remember it, you can imagine pacman eating vegetables!"],
         ),
+        Vendor(
+            al=al,
+            name="Vendor of Brushes and Paint",
+            ma=al.mas.get_map_from_name("cat_cove_hidden_shop"),
+            x=13,
+            y=21,
+            sprite="vendor",
+            direction=Direction.DOWN,
+            vendor_dialog_beginning=[
+                "Hey, welcome to the most secret shop of Thailand!",
+                "How can I serve you?",
+            ],
+            vendor_dialog_end=["See you again!"],
+            sold_items=["blue_paint"],
+        ),
+        Npc(
+            al=al,
+            name="old_man painting waterfall",
+            ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+            # taught=Word.get_by_split_form("สี-ฟ้า"),
+            x=26,
+            y=21,
+            sprite="old_man",
+            direction=Direction.UP,
+            standard_dialog=[
+                "I moved here just because I love this waterfall so much.",
+                "I paint it every day.",
+                "I've painted it so much that I've run out of blue paint.",
+                "Could you buy some for me?",
+            ],
+            extra_dialog_1=[
+                "Perfect! Just the right shade!",
+                "Now I can finally paint my 97th painting of the waterfall",
+                "As a token of my gratitude, please take these 10 bahts!",
+                "[Name] received 10 Bahts.",
+            ],
+            extra_dialog_2=[
+                "If only somebody loved me as much as I love this waterfall!",
+            ],
+            beginning_dialog_trigger_event=["talk_to_painter"],
+        ),
         Npc(
             al=al,
             name="old_man",
@@ -4790,13 +4820,11 @@ def kasetsombum(al):
         #     sold_items=[
         #         Item(
         #             name="มันฝรั่ง",
-        #             compartment=Compartment.BATTLE,
         #             description="one kilogram of potatoes from Kasetsombum",
         #             price=28,
         #         ),
         #         Item(
         #             name="water",
-        #             compartment=Compartment.BATTLE,
         #             description="a plastic one-liter bottle of water",
         #             price=12,
         #         ),
@@ -4837,6 +4865,75 @@ def ko_kut(al):
     npcs = [
         Npc(
             al=al,
+            name="Nim",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=49,
+            y=53,
+            sprite="nim",
+            direction=Direction.DOWN,
+            wanna_meet=True,
+            eyesight=1,
+            standard_dialog=[
+                "[Name], you just made your first step on Ko Kut!",
+                "Ko Kut is the island where we send young people to learn their first letters.",
+                "Our parents sent me here too, when I was your age!",
+                "As you know, Thai is a magical language,",
+                "and each word is a spell that can change the world around you.",
+                "But of course, before you turn into a powerful Lingtwister,",
+                "the first step is to learn the letters.",
+                "Alright [Name], one last advice before you start your adventure:",
+                "speak with every body (using the space bar), and have fun!",
+            ]
+        ),
+        Npc(
+            al=al,
+            name="Nim",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=49,
+            y=28,
+            sprite="nim",
+            direction=Direction.RIGHT,
+            wanna_meet=True,
+            eyesight=1,
+            standard_dialog=[
+                "Amazing, you learnt quite quickly, [Name]!",
+                "Let's take the boat to the next island.",
+            ]
+        ),
+        Npc(
+            al=al,
+            name="Nim",
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=35,
+            y=10,
+            sprite="nim",
+            direction=Direction.UP,
+            eyesight=1,
+            standard_dialog=[
+                "This is Ko Mak.",
+                "You can check where we are on the map by pressing m.",
+            ]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=51,
+            y=46,
+            sprite="rich_woman",
+            direction=Direction.UP,
+            wanna_meet=True,
+            eyesight=1,
+            standard_dialog=[
+                "You see that tall grass?",
+                "This is where the letters live.",
+                "In other areas of Thailand, words also live in tall grass,",
+                "But this island is special because there are no words here, only letters.",
+                "So, be prepared to have letters jumping at you!",
+            ]
+        ),
+        Npc(
+            al=al,
             name="First letter",
             taught=Letter.get_by_thai("น"),
             ma=al.mas.get_map_from_name("ko_kut"),
@@ -4847,8 +4944,9 @@ def ko_kut(al):
             wanna_meet=True,
             eyesight=1,
             standard_dialog=[
-                "So, you will try to save the Thai language from oblivion?",
+                "Hello, young one.",
                 "Let me teach you the most common consonant first: N.",
+                "I will first show it to you, and then test you on it.",
             ]
         ),
         Npc(
@@ -5010,11 +5108,11 @@ def ko_kut(al):
             eyesight=1,
             standard_dialog=[
                 "Did you know? Thai is the opposite of English.",
-                "English can have words without consonants,",
-                "while Thai can have words without vowels.",
+                "English can write words without consonants,",
+                "while Thai can write words without vowels.",
                 "For example, รก.",
                 "However!",
-                "Even though there is no vowel, we still pronounce it with a short \"o\" sound.",
+                'Even though there\'s no vowel written, we still pronounce it with a short "o" sound.',
                 "For example, รก is pronounced \"rok\", and not \"rk!\"",
             ],
         ),
@@ -5035,7 +5133,7 @@ def ko_kut(al):
             ],
             defeat_dialog=[
                 "At the end of a word, l in pronounced \"n\".",
-                "For example, มล is pronounced \"mon\", not \"mol\"!"
+                "For example, มล is pronounced \"mon\", not \"mol\"!",
                 "You can't end a word in l in Thai."
             ]
         ),
@@ -5088,24 +5186,6 @@ def ko_kut(al):
         ),
         Npc(
             al=al,
-            name="Ko kut fisherman",
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=50,
-            y=26,
-            sprite="man",
-            direction=Direction.UP,
-            standard_dialog=[
-                "What?",
-                "I'm fishing!",
-                "I've got to feed our growing population of rebels!",
-                "A tip? I'm not good at teaching, sorry.",
-                "Although I can tell you this:",
-                "it's okay if you forget stuff, you can always come back.",
-                "The only bad way to learn is to give up.",
-            ]
-        ),
-        Npc(
-            al=al,
             name="",
             ma=al.mas.get_map_from_name("ko_kut"),
             x=53,
@@ -5123,6 +5203,69 @@ def ko_kut(al):
             sprite="monkey",
             direction=Direction.LEFT,
             standard_dialog=["เจี๊ยก เจี๊ยก"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=53,
+            y=27,
+            sprite="boat",
+            standard_dialog=["Enter the boat?"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=46,
+            y=54,
+            sprite="boat",
+            standard_dialog=["Enter the boat?"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=37,
+            y=8,
+            sprite="boat",
+            standard_dialog=["Enter the boat?"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=7,
+            y=14,
+            sprite="boat",
+            standard_dialog=["Enter the boat?"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_klum"),
+            x=7,
+            y=9,
+            sprite="boat",
+            standard_dialog=["Enter the boat?"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_chang"),
+            x=45,
+            y=38,
+            sprite="boat",
+            standard_dialog=["Enter the boat?"]
+        ),
+        Npc(
+            al=al,
+            name="",
+            ma=al.mas.get_map_from_name("ko_klum"),
+            x=24,
+            y=13,
+            sprite="boat",
+            standard_dialog=["Enter the boat?"]
         ),
     ]
     for npc in npcs:

@@ -137,8 +137,14 @@ class LetterLearning(Learning):
         self.step = LearningStep.NONE
 
         self.al.active_presentation = LetterPresentation(al, letter, from_learning=True)
-        self.test_1 = EnglishLetterFromThai4(self.al, learning=self)
+        self.test_1 = EnglishLetterFromThai4(self.al, learning=self, letter=self.letter)
         play_transformed_thai_word(self.letter.audio)
+
+        # remove following
+        word_containing_letter = Letter.get_readable_word_containing_letter(
+            self.letter
+        )
+        print('word_containing_letter', word_containing_letter)
 
     def test_finished(self, failed=False):
         """this is triggered by the test when it ends"""
@@ -152,7 +158,7 @@ class LetterLearning(Learning):
                     self.al, correct=self.letter, learning=self
                 )
             if self.step == LearningStep.TEST3:
-                self.al.active_test = EnglishLetterFromThai16(self.al, learning=self)
+                self.al.active_test = EnglishLetterFromThai16(self.al, learning=self, letter=self.letter)
             if self.step == LearningStep.TEST4:
                 self.al.active_test = ThaiLetterFromEnglish16(
                     self.al, correct=self.letter, learning=self

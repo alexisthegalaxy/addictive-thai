@@ -13,53 +13,43 @@ class Compartment(Enum):
 
 class Bag(object):
     """
-    A bag has four compartments:
-        Battle items
-        Out-of-battle items
-        Bonus items (bike, swimming wear, train pass, etc.)
-        Quest items (labelled as other)
     """
     def __init__(self):
-        self.battle = []
-        self.out_of_battle = []
-        self.bonus = []
-        self.quest = []
-
-    def compartment_for_item(self, item: Item):
-        if item.compartment == Compartment.BATTLE:
-            return self.battle
-        if item.compartment == Compartment.OUT_OF_BATTLE:
-            return self.out_of_battle
-        if item.compartment == Compartment.BONUS:
-            return self.bonus
-        if item.compartment == Compartment.QUEST:
-            return self.quest
+        self.items = []
 
     def add_item(self, item: Item, quantity=0):
         item_added = False
-        compartment_to_add_item_in = self.compartment_for_item(item)
-        for compartment_item in compartment_to_add_item_in:
-            if compartment_item.name == item.name:
-                compartment_item.amount += quantity if quantity else item.amount
+        for item in self.items:
+            if item.name == item.name:
+                item.amount += quantity if quantity else item.amount
                 item_added = True
         if not item_added:
-            compartment_to_add_item_in.append(item)
+            self.items.append(item)
             if quantity:
-                compartment_to_add_item_in[-1].amount = quantity
+                self.items[-1].amount = quantity
 
-    def get_all_items(self):
-        return self.battle + self.out_of_battle + self.bonus + self.quest
+    def remove_item(self, item_name: 'name', quantity=1):
+        for item in self.items:
+            if item.name == item.name:
+                item.amount -= quantity
 
     def get_quantities(self, item_list: List[Item]) -> List[int]:
         list_to_return = []
         for item in item_list:
-            compartment = self.compartment_for_item(item)
             item_added = False
-            for compartment_item in compartment:
-                if compartment_item.name == item.name:
-                    list_to_return.append(compartment_item.amount)
+            for item_in_bag in self.items:
+                if item_in_bag.name == item.name:
+                    list_to_return.append(item_in_bag.amount)
                     item_added = True
             if not item_added:
                 list_to_return.append(0)
         return list_to_return
+
+    def get_item_quantity(self, item_name):
+        for item_in_bag in self.items:
+            if item_in_bag.name_id == item_name:
+                return item_in_bag.amount
+        return 0
+
+
 

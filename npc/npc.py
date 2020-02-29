@@ -23,8 +23,13 @@ def _get_time_type():
     return 4
 
 
+def _process_dialog(dialog: List[str], al: "All"):
+    for i, line in enumerate(dialog):
+        dialog[i] = line.replace("[Name]", al.learner.name)
+
+
 def _can_turn(sprite_type):
-    return sprite_type not in ["sign", "bed", "chest_open", "chest_closed", "television_on", "television_off"]
+    return sprite_type not in ["sign", "bed", "chest_open", "chest_closed", "television_on", "television_off", "boat"]
 
 
 def _is_giff(sprite):
@@ -48,7 +53,8 @@ class Npc(object):
         standard_dialog=None,  # pre-fight, normal talk, pre-learn
         defeat_dialog=None,  # post-fight
         victory_dialog=None,  # post-fight
-        dialog_3=None,
+        extra_dialog_1=None,  # use in triggers
+        extra_dialog_2=None,  # use in triggers
         direction=Direction.UP,
         sprite="kid",
         taught: Union[Word, Letter] = None,
@@ -59,12 +65,15 @@ class Npc(object):
         bubbles_max_hp: int = 1000,
         appears_between: Tuple[int, int] = (0, 24),
         end_dialog_trigger_event: List[str] = None,
+        beginning_dialog_trigger_event: List[str] = None,
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
         victory_dialog = victory_dialog or ["I won! Try again when you're stronger!"]
-        dialog_3 = dialog_3 or []
         self.end_dialog_trigger_event = end_dialog_trigger_event or []
+        self.beginning_dialog_trigger_event = beginning_dialog_trigger_event or []
+        self.extra_dialog_1 = extra_dialog_1 or []
+        self.extra_dialog_2 = extra_dialog_2 or []
 
         self.name = name
         self.ma = ma
@@ -75,13 +84,13 @@ class Npc(object):
         self.standard_dialog: List[str] = standard_dialog
         self.defeat_dialog: List[str] = defeat_dialog
         self.victory_dialog: List[str] = victory_dialog
-        self.dialog_3: List[str] = dialog_3
         self.review_dialog: List[str] = ["Do you want to review the word"]
         self.dialogs = [
             self.standard_dialog,
             self.defeat_dialog,
             self.victory_dialog,
-            self.dialog_3,
+            self.extra_dialog_1,
+            self.extra_dialog_2,
         ]
         self.active_dialog: List[str] = self.standard_dialog
         self.direction = direction
@@ -104,8 +113,9 @@ class Npc(object):
 
     def process_dialog(self, al):
         for dialog in self.dialogs:
-            for i, line in enumerate(dialog):
-                dialog[i] = line.replace("[Name]", al.learner.name)
+            _process_dialog(dialog, al)
+            # for i, line in enumerate(dialog):
+            #     dialog[i] = line.replace("[Name]", al.learner.name)
         if self.taught:
             self.review_dialog[0] = (
                 self.review_dialog[0] + f" {self.taught.thai} ?"
@@ -183,6 +193,10 @@ class Npc(object):
         return self.active_line_index == len(self.active_dialog) - 1
 
     def special_interaction(self, al):
+        from event import execute_event
+        if self.active_line_index == -1 and self.active_dialog == self.standard_dialog:
+            for event in self.beginning_dialog_trigger_event:
+                execute_event(event, al)
         if self.name == "nurse":
             if self.active_line_index == -1:
                 play_thai_word("welcome")
@@ -228,7 +242,7 @@ class Npc(object):
         self.special_interaction(al)
         self.active_line_index += 1
 
-        if self.active_line_index >= len(self.active_dialog):
+        if self.active_line_index >= len(self.active_dialog):  # if this is the end of the current dialog
             self.active_line_index = -1
             trigger_event = False
             if self.taught:

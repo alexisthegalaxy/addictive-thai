@@ -1271,6 +1271,7 @@ class ThaiLetterFromEnglish(Test):
 
     def select_distractors(self):
         known_letters = Letter.get_known_letters()
+        print('known_letters', known_letters)
         distractors = []
         if len(known_letters) > self.number_of_distr:
             while len(distractors) < self.number_of_distr:
@@ -1545,9 +1546,8 @@ class EnglishLetterFromThai(Test):
         It's used only in the learning phases.
         """
         super().__init__(al, learning, test_success_callback)
-        self.correct = letter
-        if not self.correct:
-            self.correct: Letter = Letter.get_weighted_random_known_letter()
+        random_letter = Letter.get_weighted_random_known_letter()
+        self.correct = random_letter if random_letter else letter
         self.number_of_distr: int = -1
         self.will_hurt = False
         self.has_audio_property = True
@@ -1606,7 +1606,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
     def __init__(self, al: "All", learning=None, test_success_callback=None, letter=None):
         super().__init__(al, learning, test_success_callback, letter)
         self.number_of_distr: int = 3
-
+        print('learning the letter', self.correct.thai)
         self.distractors: List[Letter] = self.select_distractors()
         self.choices: List[Letter] = [self.correct] + self.distractors
         random.shuffle(self.choices)
@@ -1961,8 +1961,7 @@ class ThaiLettersFromSound4(ThaiLettersFromSound):
         # Draw the background
         self.draw_background()
 
-        # Draw "What's the English word for"
-        explanatory_string = "What's the Thai word for:"
+        explanatory_string = "How do you write that sound:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
         screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))

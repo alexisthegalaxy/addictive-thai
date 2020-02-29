@@ -28,7 +28,6 @@ class Presentation(object):
                 ui.hover = None
         if ui.click:
             if self.on_sound(ui.click, ui):
-                print('self.presented.audio', self.presented.audio)
                 if hasattr(self.presented, 'audio'):
                     print('self.presented.audio', self.presented.audio)
                     play_transformed_thai_word(self.presented.audio)

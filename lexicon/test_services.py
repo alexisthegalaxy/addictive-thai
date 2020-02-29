@@ -27,7 +27,7 @@ def pick_sentence_test(al, chosen_word: 'Word', learning=False, test_success_cal
         sentence = random.choice(can_be_selected_sentences)
 
         r = random.randint(0, 20)  # can be 0, ..., n-1
-        if r != 0:
+        if r == 0:
             from lexicon.tests.tapping_test_sentence import TappingTestSentence
             test = TappingTestSentence(al, correct=chosen_word, sentence=sentence, learning=learning, test_success_callback=test_success_callback)
         else:

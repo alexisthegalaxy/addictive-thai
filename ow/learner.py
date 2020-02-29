@@ -10,11 +10,12 @@ from sounds.play_sound import play_thai_word
 
 
 class Learner(object):
-    def __init__(self, al, name, x=8, y=12, color=(150, 0, 150)):
+    def __init__(self, al, name, x=8, y=12, color=(150, 0, 150), learns_letters=True):
         self.name = name
-        set_active_player(name)
+        set_active_player(name, learns_letters)
         self.sprite = self.name.lower()
         self.money = 5
+        self.learns_letters = learns_letters
         self.max_hp = 5
         self.must_wait = 0.1
         self.hp = self.max_hp

@@ -8,7 +8,9 @@ from npc.import_npcs import import_npcs
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
 from profile.profile import load
+from sounds.play_sound import play_thai_word
 from sounds.thai.sound_processing import get_all_mp3_files
+from teleports.vocabulary import get_links_from_city_word
 from ui.ui import Ui
 
 
@@ -82,10 +84,11 @@ def main():
         ui=Ui(),
         cell_types=CellTypes(),
     )
-    al.learner = Learner(al, "Alexis")
+    al.learner = Learner(al, "Rob")
     import_npcs(al)
     load(al)
     al.dex = Dex(al)
+    # get_links_from_city_word("ดี", al)
     while al.ui.running:
         al.ui.listen_event(al)
         main_interact(al)
@@ -97,6 +100,7 @@ def main():
 
 
 def print_thai_words_with_no_audio():
+    print('all words with no audio...')
     number_of_files_to_convert = 0
     sound_files = get_all_mp3_files()
     for thai, english in get_words_with_a_teaching_order():

@@ -318,7 +318,10 @@ class Sentence(object):
     def get_words_in_sentence(sentence_id):
         words_db = list(
             CURSOR.execute(
-                f"SELECT * FROM words JOIN word_sentence ON words.id = word_sentence.word_id WHERE word_sentence.sentence_id = '{sentence_id}'"
+                f"SELECT * "
+                f"FROM words "
+                f"  JOIN word_sentence ON words.id = word_sentence.word_id "
+                f"WHERE word_sentence.sentence_id = '{sentence_id}'"
             )
         )
         words = []
@@ -530,14 +533,15 @@ class Letter(Growable):
                 """
             )
         )]
-
         known_letters = [t[0] for t in list(
             CURSOR.execute(
                 f"""
-                SELECT thai
-                FROM letters
-                JOIN user_letter ul on letters.id = ul.letter_id
+                SELECT l.thai
+                FROM letters l
+                JOIN user_letter ul on l.id = ul.letter_id
+                JOIN users u on u.id = ul.user_id
                 WHERE ul.total_xp > 1
+                AND u.is_playing
                 """
             )
         )]
@@ -558,7 +562,7 @@ class Letter(Growable):
 
 
     @classmethod
-    def get_weighted_random_known_letter(cls) -> Letter:
+    def get_weighted_random_known_letter(cls) -> Optional[Letter]:
         """
         Select a random letter, but gives more weight to letters with low XP.
         weight = 1000 / exp
@@ -566,6 +570,7 @@ class Letter(Growable):
         b 3XP   333
         c 10XP  100
         d 100XP 10
+        e 0 XP  0
         """
         letter_ids_db = list(
             CURSOR.execute(
@@ -573,18 +578,20 @@ class Letter(Growable):
                 SELECT l.id, ul.total_xp
                 FROM letters l
                 JOIN user_letter ul on ul.letter_id = l.id
+                JOIN users u on u.id = ul.user_id
                 WHERE ul.total_xp <> 0
+                AND u.is_playing
                 """
             )
         )
+        if not letter_ids_db:
+            return None
+        print('letter_ids_db', letter_ids_db)
         ids = []
         for letter_id, xp in letter_ids_db:
             weight = 1000 / xp
             ids.extend(int(weight) * [letter_id])
-        if not letter_id:
-            raise NoLetterHasXp
         chosen_id = random.choice(ids)
-
         letter_db = list(
             CURSOR.execute(
                 f"""
