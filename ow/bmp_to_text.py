@@ -77,6 +77,7 @@ to_convert = [
     "cat_cave",
     "cat_cave_2",
     "cat_cove_house",
+    "cat_cove_house_2",
     "cat_cove_hidden_shop",
     "phetchabun_mountain_house_1",
     "phetchabun_mountain_house_2",
@@ -120,5 +121,4 @@ to_convert = [
 ]
 
 for item in to_convert:
-    print(item)
     convert_bmp_to_text(item)

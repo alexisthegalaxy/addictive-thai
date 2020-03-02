@@ -510,6 +510,7 @@ class Mas(object):
             filename="mystery_cave", mas=self, parent=self.chaiyaphum
         )
         self.cat_cove_house = Ma(filename="cat_cove_house", mas=self)
+        self.cat_cove_house_2 = Ma(filename="cat_cove_house_2", mas=self)
         self.phetchabun_mountain_house_1 = Ma(
             filename="phetchabun_mountain_house_1", mas=self
         )
@@ -813,6 +814,9 @@ class Mas(object):
         self.cat_cove.get_cell_at(19, 30).goes_to = (self.cat_cave, 13, 4)
         self.cat_cove.get_cell_at(11, 6).goes_to = (self.cat_cove_house, 5, 12)
         self.cat_cove_house.get_cell_at(5, 13).goes_to = (self.cat_cove, 11, 7)
+
+        self.cat_cove_hidden_house.get_cell_at(21, 17).goes_to = (self.cat_cove_house_2, 5, 12)
+        self.cat_cove_house_2.get_cell_at(5, 13).goes_to = (self.cat_cove_hidden_house, 21, 18)
 
         self.cat_cove_hidden_house.get_cell_at(40, 10).goes_to = (self.cat_cove_hidden_shop, 13, 24)
         self.cat_cove_hidden_shop.get_cell_at(13, 25).goes_to = (self.cat_cove_hidden_house, 40, 11)

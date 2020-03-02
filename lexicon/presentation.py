@@ -235,6 +235,13 @@ class LetterPresentation(Presentation):
             ui.fonts.garuda48.render(self.presented.english, True, (0, 0, 0)), (x, y)
         )
 
+        # Draw Space bar instruction
+        x = ui.percent_width(0.38)
+        y = ui.percent_height(0.80)  # >78
+        screen.blit(
+            ui.fonts.garuda24.render("Press Space bar to continue", True, (100, 100, 100)), (x, y)
+        )
+
         if self.from_dex:
             self.draw_map_button()
 

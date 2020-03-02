@@ -471,5 +471,5 @@ def list_words_that_are_not_in_sentences():
     for word in all_words:
         print(word)
 
-list_words_that_are_not_in_sentences()
+# list_words_that_are_not_in_sentences()
 # print_sentence_46()

@@ -1106,8 +1106,7 @@ class ThaiFromSound4(EnglishFromSound):
         # Draw the background
         self.draw_background()
 
-        # Draw "What's the English word for"
-        explanatory_string = "What's the English word for:"
+        explanatory_string = "What's the Thai word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
         screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
@@ -1224,8 +1223,7 @@ class ThaiFromSound6(EnglishFromSound):
         # Draw the background
         self.draw_background()
 
-        # Draw "What's the English word for"
-        explanatory_string = "What's the English word for:"
+        explanatory_string = "What's the Thai word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
         screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))

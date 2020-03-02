@@ -206,7 +206,8 @@ class Learner(object):
         return time.time() - self.last_movement > self.must_wait
 
     def print_location(self):
-        print(f"location: {self.al.mas.current_map.filename} ({self.x}, {self.y})")
+        print(f"location: {self.al.mas.current_map.filename} ({self.x}, {self.y})"
+              f"({self.x + self.al.mas.current_map.x_shift}, {self.y + self.al.mas.current_map.y_shift})")
 
     def hurt(self, damage):
         self.hp = max(self.hp - damage, 0)

@@ -4380,17 +4380,17 @@ def kasetsombum(al):
             sprite="vendor",
             direction=Direction.DOWN,
             vendor_dialog_beginning=[
-                "Hey, welcome to the most secret shop of Thailand!",
+                "Hey, welcome to my paint shop.",
                 "How can I serve you?",
             ],
-            vendor_dialog_end=["See you again!"],
-            sold_items=["blue_paint"],
+            vendor_dialog_end=["สี you again!"],
+            sold_items=["green_paint", "blue_paint", "white_paint", "red_paint"],
         ),
         Npc(
             al=al,
-            name="old_man painting waterfall",
+            name="painter painting waterfall",
             ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
-            # taught=Word.get_by_split_form("สี-ฟ้า"),
+            taught=Word.get_by_split_form("สี-ฟ้า"),
             x=26,
             y=21,
             sprite="old_man",
@@ -4411,6 +4411,85 @@ def kasetsombum(al):
                 "If only somebody loved me as much as I love this waterfall!",
             ],
             beginning_dialog_trigger_event=["talk_to_painter"],
+        ),
+        Npc(
+            al=al,
+            name="kid who lost the geckos",
+            ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+            x=21,
+            y=21,
+            sprite="kid",
+            direction=Direction.UP,
+            wanna_meet=True,
+            standard_dialog=[
+                "Hey you!",
+                "I was playing with my geckos but then a cat came and they got afraid.",
+                "They ran away all in a different direction.",
+                "Can you help me find my three geckos?",
+                "My dad is too busy painting the waterfall to help me.",
+            ],
+            extra_dialog_1=[
+                "Thank you for finding my gecko!",
+                "I'm so happy to see ตุ๊กต้อง is fine!",
+                "I'm still worried about the other two though...",
+            ],
+            extra_dialog_2=[
+                "Thank you so much!",
+                "I'm so relieved to see both ทุกวัน and ตุ๊กต้อง are fine!",
+                "I'm so worried about บันตุ๊ก though...",
+                "He's such a baby geck...",
+            ],
+            extra_dialog_3=[
+                "Oh! You found all of them!",
+                "They're all fine!",
+                "We'll be careful not to play too close from the cats now.",
+                "To thank you, how about I teach you the word for gecko?",
+            ],
+            extra_dialog_4=[
+                "[Name] สวัสดีครับ",
+                "ผมรักตุ๊กแกของผม",
+                "ขอบคุณนะครับ",
+            ],
+            defeat_dialog=[
+                "Come again if you wanna play with the gecks!",
+            ],
+            beginning_dialog_trigger_event=["talk_to_gecko_kid"],
+        ),
+        Npc(
+            al=al,
+            name="kid who lost the geckos",
+            ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+            x=16,
+            y=14,
+            sprite="cat",
+            direction=Direction.RIGHT,
+        ),
+        Npc(
+            al=al,
+            name="kid who lost the geckos",
+            ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+            x=14,
+            y=16,
+            sprite="cat",
+            direction=Direction.RIGHT,
+        ),
+        Npc(
+            al=al,
+            name="kid who lost the geckos",
+            ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+            x=15,
+            y=16,
+            sprite="cat",
+            direction=Direction.LEFT,
+        ),
+        Npc(
+            al=al,
+            name="kid who lost the geckos",
+            ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+            x=12,
+            y=12,
+            sprite="cat",
+            direction=Direction.DOWN,
         ),
         Npc(
             al=al,
@@ -4831,6 +4910,60 @@ def kasetsombum(al):
         #     ],
         # ),
     ]
+    if get_event_status("find_gecko_1") == 0:
+        npcs.append(
+            Npc(
+                al=al,
+                name="gecko_to_collect_1",
+                ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+                x=43,
+                y=4,
+                sprite="gecko",
+                direction=Direction.DOWN,
+                standard_dialog=[
+                    "ตุ๊กแก",
+                    "It looks like the gecko wants to come in your pocket.",
+                    "[Name] lets the gecko come in their pocket.",
+                ],
+                end_dialog_trigger_event=["find_gecko_1"],
+            ),
+        )
+    if get_event_status("find_gecko_2") == 0:
+        npcs.append(
+            Npc(
+                al=al,
+                name="gecko_to_collect_2",
+                ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+                x=34,
+                y=20,
+                sprite="gecko",
+                direction=Direction.DOWN,
+                standard_dialog=[
+                    "ตุ๊กแก",
+                    "It looks like the gecko wants to come in your pocket.",
+                    "[Name] lets the gecko come in their pocket.",
+                ],
+                end_dialog_trigger_event=["find_gecko_2"],
+            ),
+        )
+    if get_event_status("find_gecko_3") == 0:
+        npcs.append(
+            Npc(
+                al=al,
+                name="gecko_to_collect_3",
+                ma=al.mas.get_map_from_name("cat_cove_hidden_house"),
+                x=14,
+                y=4,
+                sprite="gecko",
+                direction=Direction.DOWN,
+                standard_dialog=[
+                    "ตุ๊กแก",
+                    "It looks like the gecko wants to come in your pocket.",
+                    "[Name] lets the gecko come in their pocket.",
+                ],
+                end_dialog_trigger_event=["find_gecko_3"],
+            ),
+        )
     for npc in npcs:
         npc.ma.add_npc(npc)
 

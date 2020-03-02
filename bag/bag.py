@@ -12,25 +12,23 @@ class Compartment(Enum):
 
 
 class Bag(object):
-    """
-    """
     def __init__(self):
         self.items = []
 
-    def add_item(self, item: Item, quantity=0):
+    def add_item(self, item_to_add: Item, quantity=0):
         item_added = False
         for item in self.items:
-            if item.name == item.name:
+            if item.name == item_to_add.name:
                 item.amount += quantity if quantity else item.amount
                 item_added = True
         if not item_added:
-            self.items.append(item)
+            self.items.append(item_to_add)
             if quantity:
                 self.items[-1].amount = quantity
 
-    def remove_item(self, item_name: 'name', quantity=1):
+    def reduce_item_quantity(self, item_name_id: str, quantity=1):
         for item in self.items:
-            if item.name == item.name:
+            if item.name_id == item_name_id:
                 item.amount -= quantity
 
     def get_quantities(self, item_list: List[Item]) -> List[int]:
