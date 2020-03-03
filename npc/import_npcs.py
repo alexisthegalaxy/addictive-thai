@@ -5189,12 +5189,13 @@ def ko_kut(al):
             wanna_meet=True,
             eyesight=1,
             standard_dialog=[
-                "I will teach you the vowel เ!",
+                "I will teach you the very common vowel เ!",
                 "It's pronounced e, like in 'neck'.",
                 "It's quite similar to the french é, like in Pokémon.",
-                "It's the first letter of the Thai alphabet, and it's a very common letter.",
                 "It's an interesting vowel, because it comes before the consonant:",
                 "For example, to write 'nay', you write เน!",
+                "เ can also be combined with า and sandwich a consonant to form the ao sound!",
+                "For example, เนา is read nao!",
             ],
             defeat_dialog=[
                 "The vowel เ has a very similar friend, the vowel แ!",
