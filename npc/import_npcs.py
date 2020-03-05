@@ -2006,7 +2006,7 @@ def lomsak_labyrinth(al):
             sprite="old_woman",
             direction=Direction.DOWN,
             standard_dialog=[
-                "Ah, I love to see my grandchildren play in the sunshine!",
+                "Ah, I love to see my grandchildren play in the sunshine! // ยท_พ",
                 "Do you know how to say child in Thai?",
             ],
             defeat_dialog=[
@@ -2342,6 +2342,16 @@ def cat_cove(al):
             sprite="cat",
             direction=Direction.RIGHT,
             standard_dialog=["..."],
+        ),
+        Npc(
+            al=al,
+            name="แมว",
+            ma=al.mas.get_map_from_name("cat_cave_2"),
+            x=37,
+            y=9,
+            sprite="cat",
+            direction=Direction.RIGHT,
+            standard_dialog=["I am a cat//ผม_คือ_แมว_ครับ"],
         ),
     ]
     for npc in npcs:
@@ -4516,9 +4526,9 @@ def kasetsombum(al):
             direction=Direction.UP,
             standard_dialog=["You want to learn a word?", "How about พระ?"],
             defeat_dialog=[
-                "Do you know about classifiers? Because พระ is the classifier for monks.",
                 'พระ is also a prefix to put before words like "king" or "god", showing respect.',
-                "To remember it, think that Buddha, monks, kings and gods are praised, พระsed.",
+                '"King" is พระราชา, and "god" is พระเจ้า.',
+                "To remember it, think that Buddha, monks, kings and gods are praised, พระised.",
             ],
         ),
         Npc(
@@ -4710,7 +4720,8 @@ def kasetsombum(al):
             sprite="kid",
             direction=Direction.LEFT,
             standard_dialog=[
-                "Mom made us some bittermelon with garlic for breakfast, with granny's vegetables."
+                "Mom made us some bittermelon with garlic for breakfast,",
+                "with granny's vegetables."
             ],
         ),
         Npc(
@@ -4864,8 +4875,8 @@ def kasetsombum(al):
                 "นี้ is for what is close, นั่น for what is far away.",
             ],
             defeat_dialog=[
-                "Imagine that you have a knee (นี้), and you see a nun (นั่น) faraway.",
-                "Naturally, your knee is closer to you that the nun.",
+                "Imagine that you have a knee (นี้), and you see a nun (นั่น) far away.",
+                "Naturally, your knee is closer to you than the nun.",
             ],
         ),
         Npc(
@@ -4882,7 +4893,7 @@ def kasetsombum(al):
             direction=Direction.UP,
             money=3,
             standard_dialog=["This is my secret place!"],
-            defeat_dialog=["I come here to study Thai."],
+            defeat_dialog=["Maybe I should brush up on my vegetables."],
         ),
         # Vendor(
         #     al=al,

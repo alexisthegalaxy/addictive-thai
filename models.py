@@ -2,7 +2,7 @@ from datetime import datetime
 import random
 import sqlite3
 
-from typing import Optional
+from typing import Optional, List
 
 from bag.bag import Compartment
 from bag.item import Item
@@ -33,6 +33,23 @@ def find_word_by_thai(thai_word: str) -> Optional[int]:
     except IndexError:
         print(f'COULD NOT FIND WORD IN DB FOR {thai_word}')
         raise IndexError
+
+
+def get_xp_for_word(split_form: str) -> int:
+    try:
+        word_xp = list(CURSOR.execute(
+            f"SELECT total_xp "
+            f"FROM user_word "
+            f"JOIN words "
+            f"  ON words.id = user_word.word_id "
+            f"JOIN users "
+            f"  ON users.id = user_word.user_id "
+            f"WHERE words.split_form = '{split_form}' "
+            f"AND users.is_playing "
+        ))[0][0]
+        return word_xp
+    except:
+        return 0
 
 
 def get_word_by_id(word_id):
@@ -460,6 +477,17 @@ def insert_user_word(
         CONN.commit()
 
 
+def should_we_show_thai(sentence: str) -> bool:
+    words = sentence.split("_")
+    score = 0
+    for word in words:
+        xp = get_xp_for_word(word)
+        if xp >= 1:
+            score += 1
+    total_score = score / len(words)
+    return total_score > 0.8
+
+
 def list_words_that_are_not_in_sentences():
     all_words = list(CURSOR.execute(
         "select thai from words where words.id not in ("
@@ -473,3 +501,20 @@ def list_words_that_are_not_in_sentences():
 
 # list_words_that_are_not_in_sentences()
 # print_sentence_46()
+
+
+def are_they_all_true(l: List[bool]) -> bool:
+    result = True
+    for e in l:
+        result = result and e
+    return result
+
+
+def is_at_least_one_true(l: List[bool]) -> bool:
+    result = False
+    for e in l:
+        result = result or e
+    return result
+
+
+are_they_all_true(True, True, True)
