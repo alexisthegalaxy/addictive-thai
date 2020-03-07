@@ -46,10 +46,10 @@ class Npc(object):
     def __init__(
         self,
         al,
-        name,
         ma,
         x,
         y,
+        name="...",
         standard_dialog=None,  # pre-fight, normal talk, pre-learn
         defeat_dialog=None,  # post-fight
         victory_dialog=None,  # post-fight
@@ -57,6 +57,7 @@ class Npc(object):
         extra_dialog_2=None,  # use in triggers
         extra_dialog_3=None,  # use in triggers
         extra_dialog_4=None,  # use in triggers
+        extra_dialog_5=None,  # use in triggers
         direction=Direction.UP,
         sprite="kid",
         taught: Union[Word, Letter] = None,
@@ -78,6 +79,7 @@ class Npc(object):
         self.extra_dialog_2 = extra_dialog_2 or []
         self.extra_dialog_3 = extra_dialog_3 or []
         self.extra_dialog_4 = extra_dialog_4 or []
+        self.extra_dialog_5 = extra_dialog_5 or []
 
         self.name = name
         self.ma = ma
@@ -97,6 +99,7 @@ class Npc(object):
             self.extra_dialog_2,
             self.extra_dialog_3,
             self.extra_dialog_4,
+            self.extra_dialog_5,
         ]
         self.active_dialog: List[str] = self.standard_dialog
         self.direction = direction

@@ -21,7 +21,6 @@ class Learner(object):
         self.hp = self.max_hp
         self.x = x
         self.y = y
-        self.type = type
         self.color = color
         self.last_movement = time.time()
         self.direction = Direction.DOWN
@@ -30,7 +29,7 @@ class Learner(object):
         self.free_steps = self.max_free_steps
         self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
         self.movement: Movement = None
-        self.follower = None
+        self.follower = []
 
     def draw(self, al):
         cell_size = al.ui.cell_size
@@ -88,6 +87,8 @@ class Learner(object):
         has_moved = False
         next_x = self.x
         next_y = self.y
+        self.previous_x = self.x
+        self.previous_y = self.y
 
         if al.ui.up:
             next_y -= 1

@@ -822,7 +822,8 @@ class Mas(object):
         self.cat_cove_hidden_shop.get_cell_at(13, 25).goes_to = (self.cat_cove_hidden_house, 40, 11)
 
         self.cat_cove.get_cell_at(25, 10).goes_to = (self.cat_cave_2, 8, 17)
-        self.cat_cave_2.get_cell_at(54, 13).goes_to = (self.kasetsombum_temple, 33, 6)
+        self.cat_cave_2.get_cell_at(54, 13).goes_to = (self.kasetsombum_temple, 33, 5)
+        self.kasetsombum_temple.get_cell_at(33, 4).goes_to = (self.cat_cave_2, 54, 12)
         self.cat_cave_2.get_cell_at(43, 8).goes_to = (self.cat_cave_2, 54, 8)
         self.kasetsombum_temple.get_cell_at(18, 4).goes_to = (self.cat_cave_2, 39, 19)
         self.cat_cave_2.get_cell_at(27, 11).goes_to = (

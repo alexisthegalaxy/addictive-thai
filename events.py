@@ -1,8 +1,8 @@
 from bag.item import Item
 from direction import Direction
+from follower import Follower
 from lexicon.items import Word
-from models import set_event
-
+from models import set_event, get_event_status, get_xp_for_word
 
 # These are called by the function execute_event
 # The event is increased to n+1 just before calling the function _function_n
@@ -39,14 +39,23 @@ def _talk_to_lover_0(al: "All"):
 
 def _talk_to_painter_0(al: "All"):
     """
+    First time we speak, it's always asking for paint,
+    and also teaching the word for blue if we don't know it
+    """
+    learner_knows_word = get_xp_for_word(split_form="สี-ฟ้า")
+    al.active_npc.standard_dialog = al.active_npc.extra_dialog_3
+    al.active_npc.active_dialog = al.active_npc.standard_dialog
+    if not learner_knows_word:
+        al.active_npc.taught = Word.get_by_split_form("สี-ฟ้า")
+
+
+def _talk_to_painter_1(al: "All"):
+    """
     If player has blue_paint:
         - we remove one blue_paint
         - we give them 100 bahts
     Else:
-        - reset the event to 0
-
-    TODO: sometimes this quest doesnt work
-        Maybe it's linked to learning the word blue?
+        - reset the event to 1
     """
     has_blue_paint = al.bag.get_item_quantity('blue_paint')
     if has_blue_paint > 0:
@@ -57,13 +66,15 @@ def _talk_to_painter_0(al: "All"):
         al.active_npc.active_dialog = al.active_npc.standard_dialog
         _process_dialog(al.active_npc.active_dialog, al)
     else:
-        set_event('talk_to_lover', 0)
+        al.active_npc.standard_dialog = al.active_npc.defeat_dialog
+        al.active_npc.active_dialog = al.active_npc.defeat_dialog
+        set_event('talk_to_painter', 1)
 
 
-def _talk_to_painter_1(al: "All"):
+def _talk_to_painter_2(al: "All"):
     al.active_npc.standard_dialog = al.active_npc.extra_dialog_2
     al.active_npc.active_dialog = al.active_npc.standard_dialog
-    set_event('talk_to_lover', 1)
+    set_event('talk_to_painter', 1)
 
 
 def _find_gecko_1_0(al: "All"):
@@ -82,10 +93,13 @@ def _find_gecko_3_0(al: "All"):
 
 
 def _talk_to_gecko_kid_0(al: "All"):
-    number_of_collected_geckos = al.bag.get_item_quantity('gecko')
+    found_gecko_1 = int(bool(get_event_status('find_gecko_1')))
+    found_gecko_2 = int(bool(get_event_status('find_gecko_2')))
+    found_gecko_3 = int(bool(get_event_status('find_gecko_3')))
+    number_of_collected_geckos = found_gecko_1 + found_gecko_2 + found_gecko_3
     if number_of_collected_geckos == 0:
         play_thai_word("ขอบคุณนะครับ")
-        al.active_npc.standard_dialog = al.active_npc.extra_dialog_1
+        al.active_npc.standard_dialog = al.active_npc.extra_dialog_5
         al.active_npc.active_dialog = al.active_npc.standard_dialog
         _process_dialog(al.active_npc.active_dialog, al)
         set_event('talk_to_gecko_kid', 0)
@@ -113,6 +127,28 @@ def _talk_to_gecko_kid_1(al: "All"):
     _process_dialog(al.active_npc.active_dialog, al)
     set_event('talk_to_gecko_kid', 1)
 
+
+def _talk_to_kid_looking_for_dog_0(al: "All"):
+    al.bag.add_item(Item('disgusting_bone'))
+
+
+def _talk_to_kid_looking_for_dog_1(al: "All"):
+    al.active_npc.standard_dialog = al.active_npc.extra_dialog_1
+    al.active_npc.active_dialog = al.active_npc.standard_dialog
+    set_event('talk_to_kid_looking_for_dog', 1)
+
+
+def _talk_to_sushi_0(al: "All"):
+    al.learner.follower.append(
+        Follower(
+            al,
+            direction=Direction.DOWN,
+            sprite='dog',
+            name='ซูชิ',
+            x=42,
+            y=47,
+        )
+    )
 
 
 # for npc in al.mas.current_map.npcs:

@@ -84,7 +84,7 @@ def main():
         ui=Ui(),
         cell_types=CellTypes(),
     )
-    al.learner = Learner(al, "Rob")
+    al.learner = Learner(al, "Alexis")
     import_npcs(al)
     load(al)
     al.dex = Dex(al)

@@ -501,20 +501,3 @@ def list_words_that_are_not_in_sentences():
 
 # list_words_that_are_not_in_sentences()
 # print_sentence_46()
-
-
-def are_they_all_true(l: List[bool]) -> bool:
-    result = True
-    for e in l:
-        result = result and e
-    return result
-
-
-def is_at_least_one_true(l: List[bool]) -> bool:
-    result = False
-    for e in l:
-        result = result or e
-    return result
-
-
-are_they_all_true(True, True, True)
