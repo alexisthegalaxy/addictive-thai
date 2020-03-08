@@ -195,6 +195,8 @@ class Ui(object):
             "_waterfall_4": pygame.image.load(f"{dir_path}/../ow/sprites/waterfall2.bmp"),
             "bridge_hor": pygame.image.load(f"{dir_path}/../ow/sprites/bridge_hor.bmp"),
             "bridge_ver": pygame.image.load(f"{dir_path}/../ow/sprites/bridge_ver.bmp"),
+            "flower_3": pygame.image.load(f"{dir_path}/../ow/sprites/flower_3.bmp"),
+            "flower_4": pygame.image.load(f"{dir_path}/../ow/sprites/flower_4.bmp"),
             "_flower_1_1": pygame.image.load(f"{dir_path}/../ow/sprites/flower_1_1.bmp"),
             "_flower_1_2": pygame.image.load(f"{dir_path}/../ow/sprites/flower_1_2.bmp"),
             "_flower_1_3": pygame.image.load(f"{dir_path}/../ow/sprites/flower_1_3.bmp"),

@@ -12,15 +12,16 @@ class Movement(object):
         self.learner = learner
 
     def update(self):
+        progressive_movement = 1 - ((time.time() - self.learner.last_movement) / self.learner.must_wait)
         if self.direction.value == Direction.LEFT.value:
-            self.x = - 1 + ((time.time() - self.learner.last_movement) / self.learner.must_wait)
+            self.x = -progressive_movement
         elif self.direction.value == Direction.UP.value:
-            self.y = - 1 + ((time.time() - self.learner.last_movement) / self.learner.must_wait)
+            self.y = -progressive_movement
 
         elif self.direction.value == Direction.RIGHT.value:
-            self.x = 1 - ((time.time() - self.learner.last_movement) / self.learner.must_wait)
+            self.x = progressive_movement
         elif self.direction.value == Direction.DOWN.value:
-            self.y = 1 - ((time.time() - self.learner.last_movement) / self.learner.must_wait)
+            self.y = progressive_movement
 
     def get_offset(self):
         return self.x, self.y

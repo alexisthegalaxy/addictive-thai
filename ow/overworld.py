@@ -49,6 +49,8 @@ class CellTypes:
     water = CellType("水", "water", (57, 62, 255), False, 0.05, WATER_COLOR)
     cave_water = CellType("湿", "cave_water", (24, 24, 58), False, 0.05, WATER_COLOR)
     decoration = CellType("飾", "decoration", (123, 9, 9), False, 0, ROOF_COLOR)
+    flower_4 = CellType("萓", "flower_4", (231, 148, 191), True, 0, PATH_COLOR)
+    flower_3 = CellType("菫", "flower_3", (231, 148, 192), True, 0, PATH_COLOR)
     flower_1 = CellType("花", "_flower_1", (231, 148, 193), True, 0, PATH_COLOR)
     flower_2 = CellType("李", "_flower_2", (231, 148, 194), True, 0, PATH_COLOR)
     nenuphar = CellType("华", "nenuphar", (189, 176, 246), True, 0, WATER_COLOR)

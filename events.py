@@ -6,7 +6,7 @@ from models import set_event, get_event_status, get_xp_for_word
 
 # These are called by the function execute_event
 # The event is increased to n+1 just before calling the function _function_n
-from npc.npc import Position, _process_dialog
+from npc.npc import Position, _process_dialog, Npc
 from sounds.play_sound import play_thai_word
 
 
@@ -133,22 +133,55 @@ def _talk_to_kid_looking_for_dog_0(al: "All"):
 
 
 def _talk_to_kid_looking_for_dog_1(al: "All"):
-    al.active_npc.standard_dialog = al.active_npc.extra_dialog_1
+    if get_event_status("talk_to_sushi") == 1:
+        # Has the dog following
+        al.active_npc.standard_dialog = al.active_npc.extra_dialog_2
+        al.active_npc.active_dialog = al.active_npc.standard_dialog
+        al.active_npc.taught = Word.get_by_split_form("หมา")
+        # Remove follower dog
+        al.learner.followers = [follower for follower in al.learner.followers if follower.name != "ซูชิ"]
+
+        dog = Npc(
+            al=al,
+            name="Sushi",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=42,
+            y=48,
+            sprite="dog",
+            direction=Direction.UP,
+            standard_dialog=["โฮ่ง โฮ่ง"],
+        )
+        al.mas.current_map.add_npc(dog)
+        set_event('sushi_is_following', 2)
+
+    else:
+        al.active_npc.standard_dialog = al.active_npc.extra_dialog_1
+        al.active_npc.active_dialog = al.active_npc.standard_dialog
+        set_event('talk_to_kid_looking_for_dog', 1)
+
+
+def _talk_to_kid_looking_for_dog_2(al: "All"):
+    al.active_npc.standard_dialog = al.active_npc.extra_dialog_3
     al.active_npc.active_dialog = al.active_npc.standard_dialog
-    set_event('talk_to_kid_looking_for_dog', 1)
+    al.active_npc.taught = Word.get_by_split_form("หมา")
+    set_event('talk_to_kid_looking_for_dog', 2)
 
 
 def _talk_to_sushi_0(al: "All"):
-    al.learner.follower.append(
+    al.learner.followers.append(
         Follower(
             al,
             direction=Direction.DOWN,
             sprite='dog',
             name='ซูชิ',
-            x=42,
-            y=47,
+            x=51,
+            y=10,
         )
     )
+    # set_event('talk_to_sushi', 0)
+    set_event('sushi_is_following', 1)
+    # Remove sushi
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "sushi"]
 
 
 # for npc in al.mas.current_map.npcs:

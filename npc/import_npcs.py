@@ -1481,7 +1481,6 @@ def chaiyaphum(al):
             y=47,
             sprite="kid",
             direction=Direction.RIGHT,
-            wanna_meet=True,
             standard_dialog=[
                 "You!",
                 "I'm looking for ซูชิ, my dog!",
@@ -1495,6 +1494,14 @@ def chaiyaphum(al):
             extra_dialog_1=[
                 "I think he went north, up that hill...",
             ],
+            extra_dialog_2=[
+                "ซูชิ, oh I'm so happy to see you!",
+                "Thank you for bringing ซูชิ back!",
+                "As promised, I'll teach you the word for dog!",
+            ],
+            extra_dialog_3=[
+                "Thank you again!",
+            ],
             beginning_dialog_trigger_event=['talk_to_kid_looking_for_dog'],
         ),
         Npc(
@@ -1505,22 +1512,39 @@ def chaiyaphum(al):
             sprite="cat",
             direction=Direction.DOWN,
         ),
-        Npc(
-            al=al,
-            name="sushi",
-            ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=51,
-            y=10,
-            sprite="dog",
-            direction=Direction.UP,
-            standard_dialog=[
-                "This is ซูชิ, the lost dog!",
-                "[Name] gives the bone to ซูชิ.",
-                "ซูชิ seems to recognise the bone, and follows you.",
-            ],
-            beginning_dialog_trigger_event=['talk_to_sushi'],
-        ),
     ]
+    if get_event_status("talk_to_sushi") == 0:
+        npcs.append(
+            Npc(
+                al=al,
+                name="sushi",
+                ma=al.mas.get_map_from_name("chaiyaphum"),
+                x=51,
+                y=10,
+                sprite="dog",
+                direction=Direction.UP,
+                standard_dialog=[
+                    "This is ซูชิ, the lost dog!",
+                    "[Name] gives the bone to ซูชิ.",
+                    "ซูชิ seems to recognise the bone, and follows you.",
+                ],
+                beginning_dialog_trigger_event=['talk_to_sushi'],
+            ),
+        )
+    if get_event_status("sushi_is_following") == 2:
+        npcs.append(
+            Npc(
+                al=al,
+                name="Sushi",
+                ma=al.mas.get_map_from_name("chaiyaphum"),
+                x=42,
+                y=48,
+                sprite="dog",
+                direction=Direction.UP,
+                standard_dialog=["โฮ่ง โฮ่ง"],
+            ),
+        )
+
     if get_event_status("talk_to_lover") == 0:
         npcs.append(
             Npc(

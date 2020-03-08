@@ -29,7 +29,7 @@ class Learner(object):
         self.free_steps = self.max_free_steps
         self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
         self.movement: Movement = None
-        self.follower = []
+        self.followers = []
 
     def draw(self, al):
         cell_size = al.ui.cell_size
@@ -52,6 +52,9 @@ class Learner(object):
                 self.color,
                 pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
             )
+
+        for follower in self.followers:
+            follower.draw(al)
 
     def draw_money(self, al):
         color = (0, 0, 0)
@@ -135,6 +138,13 @@ class Learner(object):
             self.free_steps -= 1
             self.last_movement = time.time()
 
+            previous_x = self.previous_x
+            previous_y = self.previous_y
+            for follower in self.followers:
+                follower.move(al, previous_x, previous_y)
+                previous_x = follower.previous_x
+                previous_y = follower.previous_y
+
         # check for trainers seeing the learner
         for npc in al.mas.current_map.npcs:
             if (npc.is_trainer() or npc.wanna_meet) and npc.wants_battle and not npc.must_walk_to and not al.active_npc:
@@ -146,6 +156,7 @@ class Learner(object):
                         npc.must_walk_to.pop(0)
                         al.learner.direction = opposite_direction(npc.direction)
                         npc.interact(al)
+
 
     def open(self):
         x, y = self.next_position()
