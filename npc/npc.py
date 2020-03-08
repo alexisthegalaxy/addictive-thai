@@ -29,7 +29,8 @@ def _process_dialog(dialog: List[str], al: "All"):
 
 
 def _can_turn(sprite_type):
-    return sprite_type not in ["sign", "bed", "chest_open", "chest_closed", "television_on", "television_off", "boat"]
+    return sprite_type not in ["sign", "bed", "chest_open", "chest_closed", "television_on", "television_off", "boat",
+                               "green_byspell", "red_byspell", "grey_byspell", "black_byspell", "white_byspell"]
 
 
 def _is_giff(sprite):
