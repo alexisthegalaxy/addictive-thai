@@ -215,6 +215,9 @@ def get_cell_type_dictionary_by_color():
 
 
 def _get_time_type():
+    """
+    Returns 1, 2, 3 or 4
+    """
     now = datetime.now().microsecond
     if now < 250_000:
         return 1

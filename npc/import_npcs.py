@@ -2,6 +2,7 @@ from direction import Direction
 from lexicon.items import Word, Letter
 from models import get_event_status
 from npc.npc import Npc
+from npc.spell import Spell
 from npc.vendor import Vendor
 
 
@@ -430,6 +431,20 @@ def chumphae(al):
             direction=Direction.RIGHT,
             standard_dialog=["ชุมแพ"],
         ),
+        Spell(
+            al=al,
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=92,
+            y=31,
+            color="red",
+        ),
+        Spell(
+            al=al,
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=118,
+            y=30,
+            color="black",
+        ),
         Npc(
             al=al,
             name="kid",
@@ -580,6 +595,14 @@ def chumphae(al):
             sprite="sign",
             direction=Direction.RIGHT,
             standard_dialog=["นนเมือง"],
+        ),
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("chumphae"),
+            x=103,
+            y=59,
+            sprite="leopard_gecko",
+            direction=Direction.RIGHT,
         ),
         Npc(
             al=al,
@@ -1358,7 +1381,7 @@ def chaiyaphum(al):
             direction=Direction.RIGHT,
             standard_dialog=[
                 "You see how the grass is darker and taller over there?",
-                "It means that more Byspells will jump at you than usual.",
+                "It means that more Spells will jump at you than usual.",
                 "It's good if you want to meet a lot!",
                 "But I find it a bit scary so I'll try to stay out.",
             ],
@@ -1437,11 +1460,11 @@ def chaiyaphum(al):
             direction=Direction.LEFT,
             standard_dialog=[
                 "I'm quite worried.",
-                "I can see that not a single one of these five rock pillars is inhabited by a Byspell.",
+                "I can see that not a single one of these five rock pillars is inhabited by a Spell.",
                 "Last time I came, all five were protected by their spirits.",
-                "But now, it's only a matter of time before they crumble, if their Byspell are gone!",
+                "But now, it's only a matter of time before they crumble, if their Spell are gone!",
                 "Please, if you find them, help them find their way back into the pillars.",
-                "I remember the spirits were Byspells of Wind, Rock, Rain, Sun and Time.",
+                "I remember the spirits were Spells of Wind, Rock, Rain, Sun and Time.",
                 "I will mark them in your Tablet, so that you know when you see them.",
             ],
         ),
@@ -1453,18 +1476,18 @@ def chaiyaphum(al):
             sprite="old_woman",
             direction=Direction.DOWN,
             standard_dialog=[
-                "This, here, is a Byspell.",
+                "This, here, is a Spell.",
                 "Do you know how to catch it?",
                 "First, you need to know the word it is linked to.",
                 "Then, you need to put it in a receptacle.",
             ],
         ),
-        Npc(
+        Spell(
             al=al,
             ma=al.mas.get_map_from_name("chaiyaphum"),
             x=56,
             y=39,
-            sprite="white_byspell",
+            color="white",
         ),
         Npc(
             al=al,
@@ -1475,7 +1498,7 @@ def chaiyaphum(al):
             direction=Direction.UP,
             standard_dialog=[
                 "You see up there?",
-                "It looks like it's a Byspell!",
+                "It looks like it's a Spell!",
             ],
         ),
         Npc(
@@ -1487,7 +1510,7 @@ def chaiyaphum(al):
             sprite="mom",
             direction=Direction.RIGHT,
             standard_dialog=[
-                "I use to pray here every day to the Byspell of Wind.",
+                "I use to pray here every day to the Spell of Wind.",
                 "But it has been gone for more than a week already...",
                 "I wonder what happened.",
             ],
@@ -1517,7 +1540,7 @@ def chaiyaphum(al):
             standard_dialog=[
                 "You!",
                 "I'm looking for ซูชิ, my dog!",
-                "He went chasing after a Byspell, and I lost him.",
+                "He went chasing after a Spell, and I lost him.",
                 "Can you help me find him?",
                 "If you do, I'll teach you the word for dog!",
                 "If you find him, give him his favorite bone, and he'll follow you!",
@@ -5013,6 +5036,20 @@ def kasetsombum(al):
             money=3,
             standard_dialog=["This is my secret place!"],
             defeat_dialog=["Maybe I should brush up on my vegetables."],
+        ),
+        Spell(
+            al=al,
+            ma=al.mas.get_map_from_name("kasetsombum_temple"),
+            x=33,
+            y=15,
+            color="grey",
+        ),
+        Spell(
+            al=al,
+            ma=al.mas.get_map_from_name("kasetsombum"),
+            x=20,
+            y=4,
+            color="grey",
         ),
         # Vendor(
         #     al=al,

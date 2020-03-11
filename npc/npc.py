@@ -30,7 +30,7 @@ def _process_dialog(dialog: List[str], al: "All"):
 
 def _can_turn(sprite_type):
     return sprite_type not in ["sign", "bed", "chest_open", "chest_closed", "television_on", "television_off", "boat",
-                               "green_byspell", "red_byspell", "grey_byspell", "black_byspell", "white_byspell"]
+                               "green_spell", "red_spell", "grey_spell", "black_spell", "white_spell"]
 
 
 def _is_giff(sprite):
@@ -70,6 +70,7 @@ class Npc(object):
         appears_between: Tuple[int, int] = (0, 24),
         end_dialog_trigger_event: List[str] = None,
         beginning_dialog_trigger_event: List[str] = None,
+        wobble=False,
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
@@ -120,6 +121,7 @@ class Npc(object):
         self.bubbles_max_hp = bubbles_max_hp
         self.appears_between = appears_between
         self.process_dialog(al)
+        self.wobble = wobble
 
     def process_dialog(self, al):
         for dialog in self.dialogs:
@@ -306,6 +308,13 @@ class Npc(object):
             sprite = al.ui.npc_sprites[sprite_name]
 
         x, y = self.get_precise_position(x, y)
+        if self.wobble:
+            if time_type == 1:
+                y -= 1
+            elif time_type == 2:
+                y -= 2
+            elif time_type == 3:
+                y -= 1
 
         if sprite:
             al.ui.screen.blit(sprite, [x, y])

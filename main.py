@@ -1,5 +1,7 @@
 from __future__ import annotations
 from all import All
+from direction import Direction
+from follower import Follower
 from lexicon.dex import Dex
 import pygame
 
