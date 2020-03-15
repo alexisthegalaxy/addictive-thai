@@ -437,6 +437,15 @@ def chumphae(al):
             x=92,
             y=31,
             color="red",
+            word=Word.get_by_split_form("โรง-เรียน"),
+        ),
+        Spell(
+            al=al,
+            ma=al.mas.get_map_from_name("sikhiu"),
+            x=61,
+            y=6,
+            color="red",
+            word=Word.get_by_split_form("เรียน"),
         ),
         Spell(
             al=al,

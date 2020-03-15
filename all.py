@@ -26,6 +26,7 @@ class All:
         self.active_sale: "Sale" = None
         self.active_npc: "Npc" = None
         self.active_learning = None
+        self.active_spell_identification = None
         self.active_presentation = None
         self.active_battle = None
         self.active_sale = None

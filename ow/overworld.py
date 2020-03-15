@@ -400,6 +400,12 @@ class Mas(object):
         self.chaiyaphum_chatturat = Ma(
             filename="chaiyaphum_chatturat", mas=self, x_shift=750, y_shift=715
         )
+        self.chatturat_sikhiu = Ma(
+            filename="chatturat_sikhiu", mas=self, x_shift=716, y_shift=790
+        )
+        self.sikhiu = Ma(
+            filename="sikhiu", mas=self, x_shift=704, y_shift=837
+        )
         self.chatturat = Ma(filename="chatturat", mas=self, x_shift=704, y_shift=762)
         self.ko_kut = Ma(filename="ko_kut", mas=self, x_shift=806, y_shift=1303)
         self.ko_mak = Ma(filename="ko_mak", mas=self, x_shift=816, y_shift=1305)
@@ -1753,3 +1759,13 @@ class Mas(object):
 
         self.chatturat.get_cell_at(66, 14).goes_to = (self.inn_chatturat, 4, 7)
         self.inn_chatturat.get_cell_at(4, 8).goes_to = (self.chatturat, 66, 15)
+
+        self.chatturat.get_cell_at(67, 34).goes_to = (self.chatturat_sikhiu, 55, 6)
+        self.chatturat.get_cell_at(68, 34).goes_to = (self.chatturat_sikhiu, 56, 6)
+        self.chatturat_sikhiu.get_cell_at(55, 5).goes_to = (self.chatturat, 67, 33)
+        self.chatturat_sikhiu.get_cell_at(56, 5).goes_to = (self.chatturat, 68, 33)
+
+        self.chatturat_sikhiu.get_cell_at(32, 58).goes_to = (self.sikhiu, 44, 11)
+        self.chatturat_sikhiu.get_cell_at(33, 58).goes_to = (self.sikhiu, 45, 11)
+        self.sikhiu.get_cell_at(44, 10).goes_to = (self.chatturat_sikhiu, 32, 57)
+        self.sikhiu.get_cell_at(45, 10).goes_to = (self.chatturat_sikhiu, 33, 57)

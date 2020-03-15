@@ -29,11 +29,22 @@ def _process_dialog(dialog: List[str], al: "All"):
 
 
 def _can_turn(sprite_type):
-    return sprite_type not in ["sign", "bed", "chest_open", "chest_closed", "television_on", "television_off", "boat",
-                               "green_spell", "red_spell", "grey_spell", "black_spell", "white_spell"]
+    return not (
+        sprite_type
+        in [
+            "sign",
+            "bed",
+            "chest_open",
+            "chest_closed",
+            "television_on",
+            "television_off",
+            "boat",
+        ]
+        or "spell" in sprite_type
+    )
 
 
-def _is_giff(sprite):
+def _is_gif(sprite):
     return sprite and sprite[0] == "_"
 
 
@@ -129,9 +140,7 @@ class Npc(object):
             # for i, line in enumerate(dialog):
             #     dialog[i] = line.replace("[Name]", al.learner.name)
         if self.taught:
-            self.review_dialog[0] = (
-                self.review_dialog[0] + f" {self.taught.thai} ?"
-            )
+            self.review_dialog[0] = self.review_dialog[0] + f" {self.taught.thai} ?"
 
     def is_trainer(self):
         return bool(self.battle_words)
@@ -206,6 +215,7 @@ class Npc(object):
 
     def special_interaction(self, al):
         from event import execute_event
+
         if self.active_line_index == -1 and self.active_dialog == self.standard_dialog:
             for event in self.beginning_dialog_trigger_event:
                 execute_event(event, al)
@@ -224,7 +234,22 @@ class Npc(object):
                 self.active_dialog == self.standard_dialog
                 or self.active_dialog == self.review_dialog
             ):
-                al.active_learning = WordLearning(al=al, word=self.taught, npc=self) if isinstance(self.taught, Word) else LetterLearning(al=al, letter=self.taught, npc=self)
+                al.active_learning = (
+                    WordLearning(al=al, word=self.taught, npc=self)
+                    if isinstance(self.taught, Word)
+                    else LetterLearning(al=al, letter=self.taught, npc=self)
+                )
+                al.active_learning.goes_to_first_step()
+        if self == "is a spell": # TODO
+            if self.is_saying_last_sentence() and (
+                self.active_dialog == self.standard_dialog
+                or self.active_dialog == self.review_dialog
+            ):
+                al.active_learning = (
+                    WordLearning(al=al, word=self.taught, npc=self)
+                    if isinstance(self.taught, Word)
+                    else LetterLearning(al=al, letter=self.taught, npc=self)
+                )
                 al.active_learning.goes_to_first_step()
         if self.battle_words:
             if self.is_saying_last_sentence():
@@ -241,6 +266,7 @@ class Npc(object):
 
     def interact(self, al):
         from event import execute_event
+
         self.direction = opposite_direction(al.learner.direction)
         self.wanna_meet = False
         self.has_learning_mark = False
@@ -254,7 +280,9 @@ class Npc(object):
         self.special_interaction(al)
         self.active_line_index += 1
 
-        if self.active_line_index >= len(self.active_dialog):  # if this is the end of the current dialog
+        if self.active_line_index >= len(
+            self.active_dialog
+        ):  # if this is the end of the current dialog
             self.active_line_index = -1
             trigger_event = False
             if self.taught:
@@ -302,7 +330,7 @@ class Npc(object):
         sprite = None
         if _can_turn(self.sprite):
             sprite_name += f"_{string_from_direction(self.direction)}"
-        if _is_giff(self.sprite):
+        if _is_gif(self.sprite):
             sprite_name = f"{self.sprite}_{time_type}"
         if sprite_name in al.ui.npc_sprites:
             sprite = al.ui.npc_sprites[sprite_name]
@@ -334,9 +362,7 @@ class Npc(object):
             else:
                 self.have_exclamation_mark_until = None
         elif self.has_learning_mark:
-            al.ui.screen.blit(
-                al.ui.images["learning_mark"], [x, y - al.ui.cell_size]
-            )
+            al.ui.screen.blit(al.ui.images["learning_mark"], [x, y - al.ui.cell_size])
 
     def draw(self, al):
         offset_x = -al.ui.cell_size * (al.learner.x - 7)
@@ -386,7 +412,9 @@ class Npc(object):
                 self.interact(al)
 
     def disappears(self, al):
-        al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc != self]
+        al.mas.current_map.npcs = [
+            npc for npc in al.mas.current_map.npcs if npc != self
+        ]
 
     def switch_to_dialog(self, dialog):
         self.active_dialog = dialog
@@ -396,7 +424,9 @@ class Npc(object):
     def reset_cursor(self):
         self.draw_text_since = time.time()
 
-    def _progressively_draw_line(self, line: str, number_of_characters_to_show, ui, screen, height, x, y):
+    def _progressively_draw_line(
+        self, line: str, number_of_characters_to_show, ui, screen, height, x, y
+    ):
         line = line[:number_of_characters_to_show]
         rendered_text = ui.fonts.garuda32.render(line, True, (0, 0, 0))
         screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
@@ -415,15 +445,21 @@ class Npc(object):
 
         # 2 - Draw text:
         now = time.time()
-        number_of_characters_to_show = int((now - self.draw_text_since)*75)
+        number_of_characters_to_show = int((now - self.draw_text_since) * 75)
         text = self.active_dialog[self.active_line_index]
         if "//" in text:
-            english, thai = text.split('//')
+            english, thai = text.split("//")
             we_should_show_thai = should_we_show_thai(thai)
             if we_should_show_thai:
-                thai = thai.replace('_', '').replace('-', '')
-                self._progressively_draw_line(thai, number_of_characters_to_show, ui, screen, height, x, y)
+                thai = thai.replace("_", "").replace("-", "")
+                self._progressively_draw_line(
+                    thai, number_of_characters_to_show, ui, screen, height, x, y
+                )
             else:
-                self._progressively_draw_line(english, number_of_characters_to_show, ui, screen, height, x, y)
+                self._progressively_draw_line(
+                    english, number_of_characters_to_show, ui, screen, height, x, y
+                )
         else:
-            self._progressively_draw_line(text, number_of_characters_to_show, ui, screen, height, x, y)
+            self._progressively_draw_line(
+                text, number_of_characters_to_show, ui, screen, height, x, y
+            )

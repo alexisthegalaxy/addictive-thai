@@ -75,7 +75,7 @@ class Word(Growable):
         self,
         id: int,
         split_form: str = "no_split_form",
-        thai: str ="no_thai",
+        thai: str = "no_thai",
         english="no_english",
         tones="LHMRF",
         pos="NOUN???",

@@ -38,6 +38,7 @@ class Vendor(Npc):
             )
 
     def special_interaction(self, al):
+        super().special_interaction(al)
         if self.is_saying_last_sentence() and (self.active_dialog == self.vendor_dialog_beginning):
             from mechanics.sale import Sale
             # al.active_npc = None

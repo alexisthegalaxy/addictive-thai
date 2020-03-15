@@ -77,6 +77,8 @@ class Mothermap(object):
             'bua_yai': Daughtermap('bua_yai', x=795, y=699, x2=880, y2=769),
             'phon': Daughtermap('phon', x=865, y=644, x2=931, y2=760),
             'chaiyaphum_chatturat': Daughtermap('chaiyaphum_chatturat', x=750, y=715, x2=809, y2=774),
+            'chatturat_sikhiu': Daughtermap('chatturat_sikhiu', x=716, y=790, x2=782, y2=852),
+            'sikhiu': Daughtermap('sikhiu', x=704, y=837, x2=774, y2=900),
             'chatturat': Daughtermap('chatturat', x=704, y=762, x2=799, y2=805),
             # Islands
             'ko_kut': Daughtermap('ko_kut', x=806, y=1303, x2=871, y2=1367),

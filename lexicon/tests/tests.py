@@ -41,27 +41,37 @@ def draw_box(
     height,
     string,
     selected=False,
+    hovered=False,
     font_size=32,
     bg=(220, 220, 220),
+    sound_box: bool = False,
+    images=None,
 ):
     # 1 - Draw background
-    border_color = (0, 220, 0) if selected else (0, 0, 0)
+    if sound_box:
+        border_color = (0, 220, 0) if hovered else (0, 0, 0)
+    else:
+        border_color = (0, 220, 0) if selected else (0, 0, 0)
     pygame.draw.rect(screen, border_color, [x - 5, y - 5, width + 10, height + 10])
     pygame.draw.rect(screen, bg, (x, y, width, height))
 
-    # 2 - Draw the word inside
-    if font_size == 24:
-        font = fonts.garuda24
-    elif font_size == 28:
-        font = fonts.garuda28
+    # 2 - Draw the inside
+    if sound_box:
+        image_name = "sound_icon_green" if selected else "sound_icon"
+        screen.blit(images[image_name], [x+130, y+10])
     else:
-        font = fonts.garuda32
-    rendered_text = font.render(string, True, (0, 0, 0))
-    screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
+        if font_size == 24:
+            font = fonts.garuda24
+        elif font_size == 28:
+            font = fonts.garuda28
+        else:
+            font = fonts.garuda32
+        rendered_text = font.render(string, True, (0, 0, 0))
+        screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
 
 
 class TestAnswerBox(object):
-    def __init__(self, x, y, width, height, string, index):
+    def __init__(self, x, y, width, height, string, index, sound_box: bool = False):
         self.x = x
         self.y = y
         self.selected = False
@@ -69,8 +79,9 @@ class TestAnswerBox(object):
         self.height = height
         self.string = string
         self.index = index
+        self.sound_box = sound_box
 
-    def draw(self, screen, fonts, selected):
+    def draw(self, screen, fonts, selected, hovered, images=None):
         draw_box(
             screen,
             fonts,
@@ -80,6 +91,9 @@ class TestAnswerBox(object):
             height=self.height,
             string=self.string,
             selected=selected or self.selected,
+            hovered=hovered,
+            sound_box=self.sound_box,
+            images=images,
         )
 
     def contains(self, point):
@@ -1137,6 +1151,194 @@ class ThaiFromSound4(EnglishFromSound):
                 if box.contains(al.ui.click):
                     al.ui.click = None
                     self.learner_select_option()
+                    break
+
+
+class SoundFromThai(Test):
+    def __init__(
+        self, al: "All", correct: Word, learning=None, test_success_callback=None
+    ):
+        super().__init__(al, learning=learning, test_success_callback=test_success_callback)
+        self.correct: Word = correct
+        self.number_of_distr: int = 3
+        self.selector_on_continue_button = False
+        self.hovered_option_index = None
+
+    def select_distractors(self):
+        known_words = Word.get_known_words()
+        distractors = []
+        if len(known_words) > self.number_of_distr:
+            while len(distractors) < self.number_of_distr:
+                distractor = random.choices(known_words)[0]
+                if (
+                    distractor not in distractors
+                    and distractor.thai != self.correct.thai
+                ):
+                    distractors.append(distractor)
+        else:  # We don't know enough words!
+            while len(distractors) < self.number_of_distr:
+                distractor = get_random_word_id()
+                if (
+                    distractor not in distractors
+                    and distractor.thai != self.correct.thai
+                ):
+                    distractors.append(distractor)
+        return distractors
+
+    def interact(self, al):
+        if al.ui.up:
+            al.ui.up = False
+            if self.selector_on_continue_button:
+                self.selector_on_continue_button = False
+                self.selected_option_index = self.number_of_distr - 1
+            else:
+                self.selected_option_index -= 2
+                if self.selected_option_index < 0:
+                    self.selector_on_continue_button = True
+        if al.ui.down:
+            al.ui.down = False
+            if self.selector_on_continue_button:
+                self.selector_on_continue_button = False
+                self.selected_option_index = 0
+            else:
+                self.selected_option_index += 2
+                if self.selected_option_index >= (self.number_of_distr + 1):
+                    self.selector_on_continue_button = True
+        if al.ui.left or al.ui.right:
+            self.selected_option_index += (
+                1 if self.selected_option_index % 2 == 0 else -1
+            )
+            al.ui.left = False
+            al.ui.right = False
+        if al.ui.space:
+            al.ui.space = False
+            if self.selector_on_continue_button:
+                print('TODO!')
+            else:
+                self.click_on_continue()
+
+        if al.ui.hover:
+            ui = al.ui
+            x, y = ui.hover
+            if ui.percent_width(0.35) < x < ui.percent_width(0.65) and ui.percent_height(0.75) < y < ui.percent_height(0.85):
+                self.selector_on_continue_button = True
+            else:
+                self.selector_on_continue_button = False
+        if al.ui.click:
+            ui = al.ui
+            x, y = ui.click
+            if ui.percent_width(0.35) < x < ui.percent_width(0.65) and ui.percent_height(0.75) < y < ui.percent_height(0.85):
+                self.click_on_continue()
+
+    def learner_select_option(self, box, index):
+        thai = box.string
+        play_transformed_thai_word(thai)
+        self.selected_option_index = index
+
+    def click_on_continue(self):
+        option = self.selected_option_index
+        if self.choices[option] == self.correct:
+            self.succeeds()
+        else:
+            self.fails()
+
+
+class SoundFromThai4(SoundFromThai):
+    def __init__(
+        self,
+        al: "All",
+        correct: Word,
+        learning: "Learning" = None,
+        test_success_callback=None,
+    ):
+        super().__init__(al, learning=learning, correct=correct, test_success_callback=test_success_callback)
+        self.number_of_distr: int = 3
+
+        self.distractors: List[Word] = self.select_distractors()
+        self.choices: List[Word] = [self.correct] + self.distractors
+        random.shuffle(self.choices)
+
+        self.boxes = [
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.27),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.2),
+                string=self.choices[0].thai,
+                index=0,
+                sound_box=True,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.27),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.2),
+                string=self.choices[1].thai,
+                index=1,
+                sound_box=True,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.15),
+                y=al.ui.percent_height(0.52),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.2),
+                string=self.choices[2].thai,
+                index=2,
+                sound_box=True,
+            ),
+            TestAnswerBox(
+                x=al.ui.percent_width(0.53),
+                y=al.ui.percent_height(0.52),
+                width=al.ui.percent_width(0.32),
+                height=al.ui.percent_height(0.2),
+                string=self.choices[3].thai,
+                index=3,
+                sound_box=True,
+            ),
+        ]
+
+    def draw(self):
+        ui = self.al.ui
+        screen = ui.screen
+        fonts = ui.fonts
+        self.draw_background()
+
+        explanatory_string = "How would you read the word:"
+        x = ui.percent_width(0.12)
+        y = ui.percent_height(0.12)
+        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+
+        # Draw prompt
+        x = ui.percent_width(0.15)
+        y = ui.percent_height(0.18)
+        screen.blit(
+            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
+        )
+
+        # Draw continue button
+        x = ui.percent_width(0.35)
+        y = ui.percent_height(0.75)
+        width = ui.percent_width(0.3)
+        height = ui.percent_height(0.1)
+        draw_box(screen, fonts, x, y, width, height, "continue", self.selector_on_continue_button)
+
+        # Draw all the options
+        for i, box in enumerate(self.boxes):
+            box.draw(screen, fonts, selected=self.selected_option_index == i, images=ui.images, hovered=self.hovered_option_index == i)
+
+    def interact(self, al):
+        super().interact(al)
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    self.hovered_option_index = box.index
+                    break
+        if al.ui.click:
+            for index, box in enumerate(self.boxes):
+                if box.contains(al.ui.click):
+                    al.ui.click = None
+                    self.learner_select_option(box, index)
                     break
 
 

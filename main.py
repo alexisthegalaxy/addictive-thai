@@ -1,7 +1,5 @@
 from __future__ import annotations
 from all import All
-from direction import Direction
-from follower import Follower
 from lexicon.dex import Dex
 import pygame
 
@@ -10,9 +8,7 @@ from npc.import_npcs import import_npcs
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
 from profile.profile import load
-from sounds.play_sound import play_thai_word
 from sounds.thai.sound_processing import get_all_mp3_files
-from teleports.vocabulary import get_links_from_city_word
 from ui.ui import Ui
 
 
@@ -76,6 +72,8 @@ def main_draw(al: All):
         al.dex.draw()
     if al.active_minimap:
         al.active_minimap.draw()
+    if al.active_spell_identification:
+        al.active_spell_identification.draw()
     al.learner.draw_money_and_hp(al)
     pygame.display.flip()
 
