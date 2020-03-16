@@ -4,6 +4,9 @@ from lexicon.tests.tests import (
 
 
 # The 6 steps in a Learning
+from lexicon.tests.typing_test import TypingTestFromEnglish
+
+
 class IdentificationStep(Enum):
     NONE = 0
     STEP_1 = 1  # get audio
@@ -52,7 +55,7 @@ class SpellIdentification(object):
                 self.test_3 = EnglishFromThai6(self.al, correct=self.word, learning=self)
                 self.al.active_test = self.test_3
             if self.step == IdentificationStep.STEP_4:
-                self.test_4 = TypingTestFromEnglish(self.al, correct=self.word, learning=self)  # TODO
+                self.test_4 = TypingTestFromEnglish(self.al, correct=self.word, learning=self)
                 self.al.active_test = self.test_4
 
     def draw(self):

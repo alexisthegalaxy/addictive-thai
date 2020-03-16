@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2744141-60d6-4c70-95ad-395cf2337863" name="Default Changelist" comment="database">
-      <change beforePath="$PROJECT_DIR$/doc/letters world" beforeDir="false" afterPath="$PROJECT_DIR$/doc/letters world" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lexicon/tests/typing_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexicon/spell_identification.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/spell_identification.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexicon/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/tests/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/npc/import_npcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc/import_npcs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/npc/spell.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc/spell.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ooo.py" beforeDir="false" afterPath="$PROJECT_DIR$/ooo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ow/occurrences/ko_kut.occurrence" beforeDir="false" afterPath="$PROJECT_DIR$/ow/occurrences/ko_kut.occurrence" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" beforeDir="false" afterPath="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/thai.db" beforeDir="false" afterPath="$PROJECT_DIR$/thai.db" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,14 +67,14 @@
     </checked>
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.37672412">
+    <splitter split-orientation="horizontal" split-proportion="0.60264903">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/lexicon/tests/tests.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="80">
-                  <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
+                <state relative-caret-position="163">
+                  <caret line="651" column="8" selection-start-line="651" selection-start-column="8" selection-end-line="651" selection-end-column="8" />
                   <folding>
                     <element signature="e#0#13#0" expanded="true" />
                     <element signature="e#299#525#0" />
@@ -96,31 +89,14 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/ooo.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/doc/letters world">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="155">
-                  <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file pinned="false" current-in-tab="true">
-            <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/letters">
-              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-                <state projectRestartId="8e3b13b6-5753-4437-8f75-e882842f7f13">
-                  <filtering>
-                    <filter text="" />
-                  </filtering>
+            <entry file="file://$PROJECT_DIR$/lexicon/tests/typing_test.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="90">
+                  <caret line="6" selection-start-line="6" selection-end-line="6" />
+                  <folding>
+                    <element signature="e#0#13#0" expanded="true" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -128,8 +104,8 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/lexicon/spell_identification.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="414">
-                  <caret line="54" column="51" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="51" />
+                <state relative-caret-position="401">
+                  <caret line="57" column="42" lean-forward="true" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
                   <folding>
                     <element signature="e#0#21#0" expanded="true" />
                     <element signature="e#2965#4010#0" />
@@ -157,18 +133,6 @@
                   <caret line="27" selection-start-line="27" selection-end-line="27" />
                   <folding>
                     <element signature="e#0#31#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/ui/ui.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="111">
-                  <caret line="123" column="36" selection-start-line="123" selection-start-column="31" selection-end-line="123" selection-end-column="36" />
-                  <folding>
-                    <element signature="e#0#11#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -239,11 +203,11 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="90">
-                  <caret line="6" column="6" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="6" />
+                  <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="6" />
                 </state>
               </provider>
             </entry>
@@ -293,7 +257,7 @@
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/npc/import_npcs.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="133">
@@ -350,16 +314,16 @@
       <find>Tone</find>
       <find>play</find>
       <find>Spell</find>
-      <find>play_transformed_thai_word</find>
       <find>&quot;Alexis</find>
       <find>draw</find>
       <find>_ั_</find>
       <find>ี</find>
-      <find>ี&quot;</find>
       <find>_ี_</find>
       <find>&quot;เ&quot;</find>
       <find>not to be</find>
       <find>I will teach you the con</find>
+      <find>play_transformed_thai_word</find>
+      <find>ี&quot;</find>
     </findStrings>
     <replaceStrings>
       <replace>North</replace>
@@ -404,7 +368,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sounds/thai/sound_processing.py" />
         <option value="$PROJECT_DIR$/doc/world" />
         <option value="$PROJECT_DIR$/doc/story" />
         <option value="$PROJECT_DIR$/lexicon/init.py" />
@@ -447,7 +410,6 @@
         <option value="$PROJECT_DIR$/lexicon/items.py" />
         <option value="$PROJECT_DIR$/npc/spell.py" />
         <option value="$PROJECT_DIR$/lexicon/tests/tests.py" />
-        <option value="$PROJECT_DIR$/lexicon/spell_identification.py" />
         <option value="$PROJECT_DIR$/ooo.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/ow/occurrences/ko_kut.occurrence" />
@@ -455,6 +417,8 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" />
         <option value="$PROJECT_DIR$/npc/import_npcs.py" />
+        <option value="$PROJECT_DIR$/lexicon/spell_identification.py" />
+        <option value="$PROJECT_DIR$/lexicon/tests/typing_test.py" />
       </list>
     </option>
   </component>
@@ -521,7 +485,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ui" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lexicon/tests" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -533,19 +497,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ui" />
-      <recent name="$PROJECT_DIR$/lexicon" />
-      <recent name="$PROJECT_DIR$/npc" />
-      <recent name="$PROJECT_DIR$/ow" />
-      <recent name="$PROJECT_DIR$/ow/occurrences" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/lexicon/tests" />
       <recent name="$PROJECT_DIR$/lexicon" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ow/map_image_files" />
       <recent name="$PROJECT_DIR$/overworld/map_image_files" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lexicon/tests" />
+      <recent name="$PROJECT_DIR$/ui" />
+      <recent name="$PROJECT_DIR$/lexicon" />
+      <recent name="$PROJECT_DIR$/npc" />
+      <recent name="$PROJECT_DIR$/ow" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -821,12 +785,12 @@
       <workItem from="1583874935846" duration="918000" />
       <workItem from="1583962027303" duration="1919000" />
       <workItem from="1584183251867" duration="10958000" />
-      <workItem from="1584292512827" duration="3610000" />
+      <workItem from="1584292512827" duration="4326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1126782000" />
+    <option name="totallyTimeSpent" value="1127498000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -837,7 +801,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.65477705" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28025478" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28025478" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.477707" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -956,7 +920,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/lexicon/spell_identification.py</url>
-          <line>104</line>
+          <line>107</line>
           <option name="timeStamp" value="216" />
         </line-breakpoint>
       </breakpoints>
@@ -1008,7 +972,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mechanics/bag.py" />
     <entry file="file://$PROJECT_DIR$/ow/occurrences/cat_cove_hidden_house.occurrence">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1348,37 +1311,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lexicon/spell_identification.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="54" column="51" selection-start-line="54" selection-start-column="30" selection-end-line="54" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-            <element signature="e#2965#4010#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lexicon/tests/tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5085">
-          <caret line="359" column="8" selection-start-line="359" selection-start-column="8" selection-end-line="359" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#299#525#0" />
-            <element signature="e#554#624#0" />
-            <element signature="e#678#803#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ooo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lexicon/items.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="444">
@@ -1400,13 +1332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/doc/letters world">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="36" column="11" lean-forward="true" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -1414,22 +1339,6 @@
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/letters">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="8e3b13b6-5753-4437-8f75-e882842f7f13">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -1446,6 +1355,74 @@
           <caret line="5438" selection-start-line="5438" selection-end-line="5438" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/tests/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="163">
+          <caret line="651" column="8" selection-start-line="651" selection-start-column="8" selection-end-line="651" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#299#525#0" />
+            <element signature="e#554#624#0" />
+            <element signature="e#678#803#0" />
+            <element signature="e#9117#11224#0" />
+            <element signature="e#11272#14332#0" />
+            <element signature="e#14380#18244#0" />
+            <element signature="e#18292#21300#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/letters world">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="36" column="11" lean-forward="true" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ooo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/letters">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="8e3b13b6-5753-4437-8f75-e882842f7f13">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/spell_identification.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="57" column="42" lean-forward="true" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#2965#4010#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="5" lean-forward="true" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lexicon/tests/typing_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
