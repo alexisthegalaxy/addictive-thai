@@ -5305,7 +5305,7 @@ def ko_kut(al):
         Npc(
             al=al,
             name="Fourth letter",
-            taught=Letter.get_by_thai("_ั_"),
+            taught=Letter.get_by_thai("◌ั"),
             ma=al.mas.get_map_from_name("ko_kut"),
             x=55,
             y=48,
@@ -5356,7 +5356,7 @@ def ko_kut(al):
         Npc(
             al=al,
             name="7th letter",
-            taught=Letter.get_by_thai("เ"),
+            taught=Letter.get_by_thai("เ◌"),
             ma=al.mas.get_map_from_name("ko_kut"),
             x=57,
             y=42,
@@ -5433,7 +5433,7 @@ def ko_kut(al):
             ma=al.mas.get_map_from_name("ko_kut"),
             x=54,
             y=36,
-            sprite="man",
+            sprite="rich_woman",
             direction=Direction.UP,
             wanna_meet=True,
             eyesight=1,

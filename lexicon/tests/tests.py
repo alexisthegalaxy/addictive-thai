@@ -81,7 +81,7 @@ class TestAnswerBox(object):
         self.index = index
         self.sound_box = sound_box
 
-    def draw(self, screen, fonts, selected, hovered, images=None):
+    def draw(self, screen, fonts, selected, hovered=False, images=None):
         draw_box(
             screen,
             fonts,
@@ -1222,6 +1222,7 @@ class SoundFromThai(Test):
             x, y = ui.hover
             if ui.percent_width(0.35) < x < ui.percent_width(0.65) and ui.percent_height(0.75) < y < ui.percent_height(0.85):
                 self.selector_on_continue_button = True
+                self.hovered_option_index = None
             else:
                 self.selector_on_continue_button = False
         if al.ui.click:

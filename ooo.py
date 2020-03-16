@@ -8,11 +8,11 @@
 # print(answers)
 #
 #
+# #
+# #
+# #
+# a = "aa\nbb"
+# for line in a.split('\n'):
+#     print(f'_{line}_')
 #
 #
-#
-a = "aa\nbb"
-for line in a.split('\n'):
-    print(f'_{line}_')
-
-

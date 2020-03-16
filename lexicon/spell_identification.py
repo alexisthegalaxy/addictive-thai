@@ -1,19 +1,6 @@
 from enum import Enum
-from typing import Union
-
-from lexicon.items import Word, Letter
-from lexicon.presentation import LetterPresentation, WordPresentation
-from lexicon.test_services import pick_sentence_test
 from lexicon.tests.tests import (
-    ThaiFromEnglish4,
-    ThaiFromEnglish6,
-    ThaiLetterFromEnglish4,
-    EnglishLetterFromThai4,
-    EnglishLetterFromThai16,
-    ThaiLetterFromEnglish16,
-    ThaiLettersFromSound4,
-    SoundFromThai4)
-from sounds.play_sound import play_transformed_thai_word
+    SoundFromThai4, ToneFromThaiAndSound, EnglishFromThai6)
 
 
 # The 6 steps in a Learning
@@ -37,14 +24,12 @@ class SpellIdentification(object):
         self.al = al
         self.spell = spell
         self.word = spell.word
-        self.step = IdentificationStep.NONE
+        self.step = IdentificationStep.STEP_1
 
-        # self.al.active_presentation = WordPresentation(al, self.word, from_learning=True)
         self.test_1 = SoundFromThai4(al, correct=self.word, learning=self)
-
-        # self.test_2 = ToneFromThai(al, correct=word, learning=self)  # TODO
-        # self.test_3 = EnglishFromThai4(al, correct=word, learning=self)
-        # self.test_4 = Typing(al, correct=word, learning=self)  # TODO
+        self.test_2 = None
+        self.test_3 = None
+        self.test_4 = None
         # self.test_5 = TappingTestSentence(al, correct_word=word, learning=self)
         # test_5 is a sentence if possible, a Thai from English 6 otherwise
         # self.test_5 = pick_sentence_test(al, word, learning=self)
@@ -53,16 +38,27 @@ class SpellIdentification(object):
 
         self.al.active_test = self.test_1
 
+    def test_finished(self, failed=False):
+        """this is triggered by the test when it ends"""
+        if failed:
+            self.step = IdentificationStep.PRESENTATION
+            self.al.active_test = None
+        else:
+            self.goes_to_next_step()
+            if self.step == IdentificationStep.STEP_2:
+                self.test_2 = ToneFromThaiAndSound(self.al, correct=self.word, learning=self)
+                self.al.active_test = self.test_2
+            if self.step == IdentificationStep.STEP_3:
+                self.test_3 = EnglishFromThai6(self.al, correct=self.word, learning=self)
+                self.al.active_test = self.test_3
+            if self.step == IdentificationStep.STEP_4:
+                self.test_4 = TypingTestFromEnglish(self.al, correct=self.word, learning=self)  # TODO
+                self.al.active_test = self.test_4
+
     def draw(self):
         """
         The showing is taken care of by the tests during the test phases.
         """
-        # if self.step == LearningStep.PRESENTATION:
-        #     if self.al.active_presentation:
-        #         self.al.active_presentation.draw()
-        # if self.step == LearningStep.CONGRATULATION:
-        #     if self.al.active_presentation:
-        #         self.al.active_presentation.draw()
         self.draw_brain()
 
     def draw_brain(self):
@@ -103,24 +99,13 @@ class SpellIdentification(object):
             self.al.ui.escape = False
 
     def goes_to_next_step(self):
+        a = self.step.value
+        b = int(self.step.value) + 1
+        c = IdentificationStep(int(self.step.value) + 1)
         self.step = IdentificationStep(int(self.step.value) + 1)
 
     # def goes_to_first_step(self):
     #     self.step = IdentificationStep.NONE
-
-    def test_finished(self, failed=False):
-        """this is triggered by the test when it ends"""
-        if failed:
-            self.step = IdentificationStep.PRESENTATION
-            self.al.active_test = None
-        else:
-            self.goes_to_next_step()
-            if self.step == IdentificationStep.STEP_2:
-                self.al.active_test = self.test_1
-            if self.step == IdentificationStep.STEP_3:
-                self.al.active_test = self.test_3
-            if self.step == IdentificationStep.STEP_4:
-                self.al.active_test = self.test_4
 #
 #
 # class WordLearning(Learning):

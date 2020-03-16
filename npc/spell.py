@@ -13,6 +13,7 @@ class Spell(Npc):
             direction=direction,
             sprite=color + '_spell',
             wobble=True,
+            standard_dialog=["The Spell comes closer...", "...and attacks!"],
         )
         self.word = word
 
@@ -29,7 +30,4 @@ class Spell(Npc):
         super().special_interaction(al)
         from lexicon.spell_identification import SpellIdentification
         if self.is_saying_last_sentence():
-            # and (self.active_dialog == self.vendor_dialog_beginning):
-            # al.active_npc = None
             al.active_spell_identification = SpellIdentification(al=al, spell=self)
-            # al.active_battle.goes_to_first_step()
