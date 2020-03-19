@@ -14,8 +14,9 @@ class TappingTestSentence(Test):
         sentence: Sentence,
         learning=None,
         test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback)
         self.correct = correct
         self.number_of_distr = 1  # 6 is better no?
         self.selected_picked_syllable_index = 0

@@ -139,6 +139,9 @@ class Ui(object):
                     elif al.active_battle:
                         al.active_battle.end_battle()
                         al.ui.escape = False
+                    elif al.active_fight:
+                        al.active_fight.end_fight()
+                        al.ui.escape = False
                     elif al.active_sale:
                         al.active_sale = None
                         al.ui.escape = False

@@ -58,7 +58,7 @@ def draw_box(
     # 2 - Draw the inside
     if sound_box:
         image_name = "sound_icon_green" if selected else "sound_icon"
-        screen.blit(images[image_name], [x+130, y+10])
+        screen.blit(images[image_name], [x + 130, y + 10])
     else:
         if font_size == 24:
             font = fonts.garuda24
@@ -102,12 +102,19 @@ class TestAnswerBox(object):
 
 
 class Test(object):
-    def __init__(self, al: "All", learning=None, test_success_callback=None):
+    def __init__(
+        self,
+        al: "All",
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
+    ):
         self.al = al
         self.correct = None
         self.learning = learning
         self.selected_option_index = 0
         self.test_success_callback = test_success_callback
+        self.test_failure_callback = test_failure_callback
         self.will_hurt = True
         self.has_audio_property = False
 
@@ -166,6 +173,9 @@ class Test(object):
 
         # 2 - Play sound.
         play_thai_word("wrong")
+
+        if self.test_failure_callback:
+            self.test_failure_callback()
 
         # 3 - If part of a learning, pass the baton to the next test
         if self.learning:
@@ -358,7 +368,12 @@ class ThaiFromEnglish(Test):
 
 class ThaiFromEnglish4(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
         super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 3
@@ -448,7 +463,12 @@ class ThaiFromEnglish4(ThaiFromEnglish):
 
 class ThaiFromEnglish6(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
         super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 5
@@ -563,7 +583,12 @@ class ThaiFromEnglish6(ThaiFromEnglish):
 
 class EnglishFromThai4(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
         super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 3
@@ -650,7 +675,12 @@ class EnglishFromThai4(ThaiFromEnglish):
 
 class EnglishFromThai6(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
         super().__init__(al, correct, learning, test_success_callback)
         self.number_of_distr: int = 5
@@ -761,9 +791,14 @@ class EnglishFromThai6(ThaiFromEnglish):
 
 class FromSound(Test):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback)
         self.correct: Word = correct
         self.number_of_distr: int = 3
         self.selector_on_sound = False
@@ -854,16 +889,30 @@ class FromSound(Test):
 
 class EnglishFromSound(FromSound):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, correct, test_success_callback)
+        super().__init__(
+            al, learning, correct, test_success_callback, test_failure_callback
+        )
 
 
 class EnglishFromSound4(EnglishFromSound):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, correct, test_success_callback)
+        super().__init__(
+            al, learning, correct, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -950,9 +999,16 @@ class EnglishFromSound4(EnglishFromSound):
 
 class EnglishFromSound6(EnglishFromSound):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, correct, test_success_callback)
+        super().__init__(
+            al, learning, correct, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -1069,8 +1125,11 @@ class ThaiFromSound4(EnglishFromSound):
         correct: Word,
         learning: "Learning" = None,
         test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, correct, test_success_callback)
+        super().__init__(
+            al, learning, correct, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -1158,7 +1217,9 @@ class SoundFromThai(Test):
     def __init__(
         self, al: "All", correct: Word, learning=None, test_success_callback=None
     ):
-        super().__init__(al, learning=learning, test_success_callback=test_success_callback)
+        super().__init__(
+            al, learning=learning, test_success_callback=test_success_callback
+        )
         self.correct: Word = correct
         self.number_of_distr: int = 3
         self.selector_on_continue_button = False
@@ -1213,14 +1274,16 @@ class SoundFromThai(Test):
         if al.ui.space:
             al.ui.space = False
             if self.selector_on_continue_button:
-                print('TODO!')
+                print("TODO!")
             else:
                 self.click_on_continue()
 
         if al.ui.hover:
             ui = al.ui
             x, y = ui.hover
-            if ui.percent_width(0.35) < x < ui.percent_width(0.65) and ui.percent_height(0.75) < y < ui.percent_height(0.85):
+            if ui.percent_width(0.35) < x < ui.percent_width(
+                0.65
+            ) and ui.percent_height(0.75) < y < ui.percent_height(0.85):
                 self.selector_on_continue_button = True
                 self.hovered_option_index = None
             else:
@@ -1228,7 +1291,9 @@ class SoundFromThai(Test):
         if al.ui.click:
             ui = al.ui
             x, y = ui.click
-            if ui.percent_width(0.35) < x < ui.percent_width(0.65) and ui.percent_height(0.75) < y < ui.percent_height(0.85):
+            if ui.percent_width(0.35) < x < ui.percent_width(
+                0.65
+            ) and ui.percent_height(0.75) < y < ui.percent_height(0.85):
                 self.click_on_continue()
 
     def learner_select_option(self, box, index):
@@ -1252,7 +1317,12 @@ class SoundFromThai4(SoundFromThai):
         learning: "Learning" = None,
         test_success_callback=None,
     ):
-        super().__init__(al, learning=learning, correct=correct, test_success_callback=test_success_callback)
+        super().__init__(
+            al,
+            learning=learning,
+            correct=correct,
+            test_success_callback=test_success_callback,
+        )
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -1312,20 +1382,33 @@ class SoundFromThai4(SoundFromThai):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(
-            fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y)
-        )
+        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw continue button
         x = ui.percent_width(0.35)
         y = ui.percent_height(0.75)
         width = ui.percent_width(0.3)
         height = ui.percent_height(0.1)
-        draw_box(screen, fonts, x, y, width, height, "continue", self.selector_on_continue_button)
+        draw_box(
+            screen,
+            fonts,
+            x,
+            y,
+            width,
+            height,
+            "continue",
+            self.selector_on_continue_button,
+        )
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
-            box.draw(screen, fonts, selected=self.selected_option_index == i, images=ui.images, hovered=self.hovered_option_index == i)
+            box.draw(
+                screen,
+                fonts,
+                selected=self.selected_option_index == i,
+                images=ui.images,
+                hovered=self.hovered_option_index == i,
+            )
 
     def interact(self, al):
         super().interact(al)
@@ -1350,8 +1433,11 @@ class ThaiFromSound6(EnglishFromSound):
         correct: Word,
         learning: "Learning" = None,
         test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, correct, test_success_callback)
+        super().__init__(
+            al, learning, correct, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -1462,9 +1548,14 @@ class ThaiFromSound6(EnglishFromSound):
 
 class ThaiLetterFromEnglish(Test):
     def __init__(
-        self, al: "All", correct: Letter, learning=None, test_success_callback=None
+        self,
+        al: "All",
+        correct: Letter,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback)
         self.will_hurt = False
         self.has_audio_property = True
         self.correct: Letter = correct
@@ -1472,7 +1563,7 @@ class ThaiLetterFromEnglish(Test):
 
     def select_distractors(self):
         known_letters = Letter.get_known_letters()
-        print('known_letters', known_letters)
+        print("known_letters", known_letters)
         distractors = []
         if len(known_letters) > self.number_of_distr:
             while len(distractors) < self.number_of_distr:
@@ -1741,12 +1832,19 @@ class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
 
 
 class EnglishLetterFromThai(Test):
-    def __init__(self, al: "All", learning=None, test_success_callback=None, letter=None):
+    def __init__(
+        self,
+        al: "All",
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
+        letter=None,
+    ):
         """
         In this test, the tested letter is actually random.
         It's used only in the learning phases.
         """
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback)
         random_letter = Letter.get_weighted_random_known_letter()
         self.correct = random_letter if random_letter else letter
         self.number_of_distr: int = -1
@@ -1804,10 +1902,12 @@ class EnglishLetterFromThai(Test):
 
 
 class EnglishLetterFromThai4(EnglishLetterFromThai):
-    def __init__(self, al: "All", learning=None, test_success_callback=None, letter=None):
+    def __init__(
+        self, al: "All", learning=None, test_success_callback=None, letter=None
+    ):
         super().__init__(al, learning, test_success_callback, letter)
         self.number_of_distr: int = 3
-        print('learning the letter', self.correct.thai)
+        print("learning the letter", self.correct.thai)
         self.distractors: List[Letter] = self.select_distractors()
         self.choices: List[Letter] = [self.correct] + self.distractors
         random.shuffle(self.choices)
@@ -1890,7 +1990,9 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
 
 
 class EnglishLetterFromThai16(EnglishLetterFromThai):
-    def __init__(self, al: "All", learning=None, test_success_callback=None, letter=None):
+    def __init__(
+        self, al: "All", learning=None, test_success_callback=None, letter=None
+    ):
         super().__init__(al, learning, test_success_callback, letter)
         self.number_of_distr: int = 15
 
@@ -2020,16 +2122,17 @@ class ThaiLettersFromSound(Test):
         correct: Letter,
         learning=None,
         test_success_callback=None,
+        test_failure_callback=None,
         word="",
     ):
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback)
         self.will_hurt = False
         self.has_audio_property = True
         self.correct: Letter = correct
         self.number_of_distr: int = 3
         self.selector_on_sound = False
         self.word: str = word
-        print('correct word', word)
+        print("correct word", word)
         play_transformed_thai_word(word)
 
     @staticmethod
@@ -2044,7 +2147,7 @@ class ThaiLettersFromSound(Test):
 
     def select_distractors(self) -> List[str]:
         words = Words.select_words_of_length(len(self.word), 3, self.correct.thai)
-        print('yeyeye')
+        print("yeyeye")
         print(words)
         return words
 

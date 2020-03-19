@@ -253,7 +253,7 @@ class Battle(object):
                 pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
             )
 
-        # draw learner face
+        # draw opponent face
         face_x = ui.percent_width(1.0) - ui.cell_size - 10
         pygame.draw.rect(
             screen, (150, 150, 150), (face_x, face_y, ui.cell_size, ui.cell_size)

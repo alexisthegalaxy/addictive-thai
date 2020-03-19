@@ -447,6 +447,22 @@ def chumphae(al):
             color="red",
             word=Word.get_by_split_form("เรียน"),
         ),
+        Npc(
+            al=al,
+            name="first fighter",
+            ma=al.mas.get_map_from_name("sikhiu"),
+            x=57,
+            y=9,
+            standard_dialog=[
+                "Let's fight",
+            ],
+            direction=Direction.DOWN,
+            sprite="leopard_gecko",
+            battle_words=[
+                Word.get_by_split_form(battle_word) for battle_word in ["ใช่", "ภา-ษา"]
+            ],
+            money=4,
+        ),
         Spell(
             al=al,
             ma=al.mas.get_map_from_name("chumphae"),

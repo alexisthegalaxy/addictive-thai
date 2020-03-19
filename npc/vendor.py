@@ -43,5 +43,4 @@ class Vendor(Npc):
             from mechanics.sale import Sale
             # al.active_npc = None
             al.active_sale = Sale(al=al, vendor=self)
-            # al.active_battle.goes_to_first_step()
 

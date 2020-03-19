@@ -231,6 +231,7 @@ class Learner(object):
         self.teleport(x, y, ma)
         self.al.active_test = None
         self.al.active_battle = None
+        self.al.active_fight = None
         self.al.active_npc = None
         self.al.active_learning = None
         self.hp = self.max_hp

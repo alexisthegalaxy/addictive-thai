@@ -29,6 +29,7 @@ class All:
         self.active_spell_identification = None
         self.active_presentation = None
         self.active_battle = None
+        self.active_fight = None
         self.active_sale = None
         self.dex: Dex = None
         self.active_minimap: Minimap = None

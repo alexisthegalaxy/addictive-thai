@@ -20,6 +20,9 @@ def main_interact(al: All):
     elif al.active_battle:
         ow_frozen = True
         al.active_battle.interact(al)
+    elif al.active_fight:
+        ow_frozen = True
+        al.active_fight.interact(al)
     if al.active_minimap:  # must happen before active_presentation
         ow_frozen = True
         al.active_minimap.interact()
@@ -62,10 +65,14 @@ def main_draw(al: All):
         al.active_test.draw()
         if al.active_battle:
             al.active_battle.draw_secondary()
+        if al.active_fight:
+            al.active_fight.draw_secondary()
     elif al.active_sale:
         al.active_sale.draw()
     elif al.active_battle:
         al.active_battle.draw()
+    elif al.active_fight:
+        al.active_fight.draw()
     if al.active_learning:
         al.active_learning.draw()
     if al.dex.active:
@@ -84,7 +91,7 @@ def main():
         ui=Ui(),
         cell_types=CellTypes(),
     )
-    al.learner = Learner(al, "new")
+    al.learner = Learner(al, "Alexis")
     import_npcs(al)
     load(al)
     al.dex = Dex(al)

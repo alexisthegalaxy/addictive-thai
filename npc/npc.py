@@ -254,10 +254,14 @@ class Npc(object):
         if self.battle_words:
             if self.is_saying_last_sentence():
                 if self.active_dialog == self.standard_dialog:
-                    from mechanics.battle import Battle
+                    # from mechanics.battle import Battle
+                    from mechanics.fight.fight import Fight
 
-                    al.active_battle = Battle(
-                        al=al, words=self.battle_words, trainer=self
+                    # al.active_battle = Battle(
+                    #     al=al, words=self.battle_words, trainer=self
+                    # )
+                    al.active_fight = Fight(
+                        al=al, words=self.battle_words, npc=self, starting="npc"
                     )
                 if self.active_dialog == self.victory_dialog:
                     al.learner.faints()
