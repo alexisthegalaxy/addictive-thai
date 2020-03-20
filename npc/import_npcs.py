@@ -447,14 +447,27 @@ def chumphae(al):
             color="red",
             word=Word.get_by_split_form("เรียน"),
         ),
+
         Npc(
             al=al,
-            name="first fighter",
+            name="kid",
+            ma=al.mas.get_map_from_name("sikhiu"),
+            x=47,
+            y=12,
+            sprite="kid",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "Welcome to Sikhiu!",
+            ],
+        ),
+        Npc(
+            al=al,
+            name="the leopard gecko",
             ma=al.mas.get_map_from_name("sikhiu"),
             x=57,
             y=9,
             standard_dialog=[
-                "Let's fight",
+                "Wahan?",
             ],
             direction=Direction.DOWN,
             sprite="leopard_gecko",

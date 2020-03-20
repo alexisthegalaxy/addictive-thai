@@ -39,20 +39,24 @@ def draw_box(
     y,
     width,
     height,
-    string,
+    string=None,
+    strings=None,
     selected=False,
     hovered=False,
     font_size=32,
     bg=(220, 220, 220),
+    default_color=(0, 0, 0),
+    selected_color=(0, 220, 0),
     sound_box: bool = False,
     images=None,
+    thickness=5,
 ):
     # 1 - Draw background
     if sound_box:
-        border_color = (0, 220, 0) if hovered else (0, 0, 0)
+        border_color = selected_color if hovered else default_color
     else:
-        border_color = (0, 220, 0) if selected else (0, 0, 0)
-    pygame.draw.rect(screen, border_color, [x - 5, y - 5, width + 10, height + 10])
+        border_color = selected_color if selected else default_color
+    pygame.draw.rect(screen, border_color, [x - thickness, y - thickness, width + thickness * 2, height + thickness * 2])
     pygame.draw.rect(screen, bg, (x, y, width, height))
 
     # 2 - Draw the inside
@@ -64,10 +68,19 @@ def draw_box(
             font = fonts.garuda24
         elif font_size == 28:
             font = fonts.garuda28
+        elif font_size == 16:
+            font = fonts.garuda16
         else:
             font = fonts.garuda32
-        rendered_text = font.render(string, True, (0, 0, 0))
-        screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
+        if strings:
+            y = y + int(height / 2.2) - 20
+            for string in strings:
+                rendered_text = font.render(string, True, default_color)
+                screen.blit(rendered_text, (x + 10, y))
+                y += font_size
+        elif string:
+            rendered_text = font.render(string, True, default_color)
+            screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
 
 
 class TestAnswerBox(object):
@@ -218,9 +231,9 @@ class ToneBox(object):
 
 class ToneFromThaiAndSound(Test):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None, test_failure_callback=None
     ):
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback)
         self.correct: Word = correct
         self.boxes = [
             ToneBox(al.ui.fonts, 1, 140 + 188 * 0, 250, "Mid"),

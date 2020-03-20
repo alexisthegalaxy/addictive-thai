@@ -5,6 +5,7 @@ import pygame
 
 from models import get_words_with_a_teaching_order
 from npc.import_npcs import import_npcs
+from npc.npc_default_text import draw_npc_text
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
 from profile.profile import load
@@ -22,7 +23,7 @@ def main_interact(al: All):
         al.active_battle.interact(al)
     elif al.active_fight:
         ow_frozen = True
-        al.active_fight.interact(al)
+        al.active_fight.interact()
     if al.active_minimap:  # must happen before active_presentation
         ow_frozen = True
         al.active_minimap.interact()
@@ -60,7 +61,7 @@ def main_draw(al: All):
         npc.draw(al)
     al.learner.draw(al)
     if al.active_npc and not al.active_npc.active_line_index == -1:
-        al.active_npc.draw_text(al)
+        draw_npc_text(al, al.active_npc)
     if al.active_test:
         al.active_test.draw()
         if al.active_battle:

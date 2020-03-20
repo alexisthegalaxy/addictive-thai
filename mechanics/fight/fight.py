@@ -1,69 +1,39 @@
 from enum import Enum
+import time
 
 import pygame
 from typing import List
 from all import All
 from lexicon.items import Word
-from lexicon.test_services import (
-    pick_a_test_for_english_word,
-    pick_a_test_for_thai_word,
-)
+from mechanics.fight.attack_phase import AttackPhase
+from mechanics.fight.defense_phase import DefensePhase
+from mechanics.fight.fight_steps import FightStep
 from npc.npc import Npc
 from direction import string_from_direction, Direction
-
-
-class AttackPhase(object):
-    def __init__(self):
-        pass
-
-    def draw(self):
-        pass
-
-
-class DefensePhase(object):
-    def __init__(self):
-        pass
-
-    def draw(self):
-        pass
-
-
-class FightStep(Enum):
-    NONE = 0
-    BEGINNING = 1
-
-    DEFENSE_PHASE_STARTING_MESSAGE = 2
-    DEFENSE_PHASE_TEST = 3
-    DEFENSE_PHASE_END_MESSAGE = 4
-    DEFENSE_PHASE_END_SPECIAL_EFFECT = 5
-
-    ATTACK_PHASE_STARTING_MESSAGE = 6
-    ATTACK_PHASE_PICK_WEAPON = 7
-    ATTACK_PHASE_TEST = 8
-    ATTACK_PHASE_TEST_RESULT = 9
-    ATTACK_PHASE_SPECIAL_EFFECT = 10
-
-    CONGRATULATION_MESSAGE = 11
-    END = 12
 
 
 class Fight(object):
     """
     https://docs.google.com/document/d/1VutaI2jjKVKtTi7dJIlB5unj_gQUbOEqOrTINYCJXpQ
     """
+
     def __init__(self, al: All, words, npc: Npc, starting: str = "player") -> None:
         self.al: All = al
         self.npc = npc
         self.words: List[Word] = words
 
+        self.attack_phase = AttackPhase(al, self, words, npc)
+        self.defense_phase = DefensePhase(al, self, words, npc)
+
         if starting == "player":
-            self.current_step = FightStep.ATTACK_PHASE_STARTING_MESSAGE.value
-            self.active_phase = AttackPhase(al, words, npc)
+            self.current_step = FightStep.ATTACK_PHASE_PICK_WEAPON.value
+            self.active_phase = self.attack_phase
         elif starting == "npc":
             self.current_step = FightStep.DEFENSE_PHASE_STARTING_MESSAGE.value
-            self.active_phase = DefensePhase()
+            self.active_phase = self.defense_phase
         else:
             raise ValueError
+        print(self.current_step)
 
         # UI
         self.x = al.ui.percent_width(0.07)
@@ -77,33 +47,8 @@ class Fight(object):
         """
         pass
 
-    def interact(self, al):
-        if al.ui.click:
-            for bubble in []:
-                if bubble.contains_point(al.ui.click):
-                    if bubble.is_shown_in_thai:
-                        pick_a_test_for_thai_word(
-                            al,
-                            chosen_word=bubble.word,
-                            test_success_callback=self.solves_test,
-                            test_failure_callback=self.fails_test,
-                        )
-                    else:
-                        pick_a_test_for_english_word(
-                            al,
-                            chosen_word=bubble.word,
-                            test_success_callback=self.solves_test,
-                            test_failure_callback=self.fails_test,
-                        )
-                    bubble.hp = 0
-                    break
-            al.ui.click = None
-
-    def solves_test(self):
-        pass
-
-    def fails_test(self):
-        pass
+    def interact(self):
+        self.active_phase.interact()
 
     def draw_secondary(self):
         ui = self.al.ui
@@ -118,7 +63,9 @@ class Fight(object):
         pygame.draw.rect(
             screen, (0, 0, 0), (face_x, face_y, ui.cell_size, ui.cell_size), 1
         )
-        sprite_name = f"{self.al.learner.sprite}_{string_from_direction(Direction.DOWN)}"
+        sprite_name = (
+            f"{self.al.learner.sprite}_{string_from_direction(Direction.DOWN)}"
+        )
         if sprite_name in ui.npc_sprites:
             sprite = ui.npc_sprites[sprite_name]
             ui.screen.blit(sprite, [face_x, face_y])
@@ -158,26 +105,9 @@ class Fight(object):
         pygame.draw.rect(
             screen, (0, 0, 0), [self.x, self.y, self.width, self.height], 1
         )
-        self.active_phase.draw()
-        # for bubble in self.bubbles:
-        #     if bubble.status == BUBBLE_STATUS_FREE:
-        #         bubble.draw()
-        # self.draw_secondary()
 
+        self.active_phase.draw()
 
     def end_fight(self):
         self.al.active_fight = None
         self.al.active_npc = self.npc
-        # victory = self.bubbles_solved >= self.bubbles_solved_by_opponent
-        # if victory:
-        #     self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog
-        #     self.al.active_npc.active_line_index = 0
-        #     self.al.active_npc.wants_battle = False
-        #     battle_money = self.al.active_npc.money
-        #     self.al.learner.money += battle_money
-        #     self.al.active_battle = None
-        #     print('VICTORY!!!')
-        # else:
-        #     self.al.active_npc.active_dialog = self.al.active_npc.victory_dialog
-        #     self.al.active_npc.active_line_index = 0
-        #     print('DEFEAT!!!')

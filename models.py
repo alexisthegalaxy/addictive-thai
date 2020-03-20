@@ -2,9 +2,8 @@ from datetime import datetime
 import random
 import sqlite3
 
-from typing import Optional, List
+from typing import Optional
 
-from bag.bag import Compartment
 from bag.item import Item
 from direction import Direction
 
@@ -381,6 +380,26 @@ def get_random_known_word_id():
         )
     )
     return random.choice(known_words)[0]
+
+
+def get_least_known_known_words(number_of_words_to_get: int = 4, sample_size: int = 10):
+    user_id = get_active_learner_id()
+    known_words = list(
+        CURSOR.execute(
+            f"""
+        SELECT word_id
+        FROM user_word
+        WHERE total_xp > 0
+          AND user_id = '{user_id}'
+        ORDER BY total_xp
+        LIMIT {sample_size}
+    """
+        )
+    )
+
+    selected_words = [get_word_by_id(item[0]) for item in random.choices(known_words, k=number_of_words_to_get)]
+
+    return selected_words
 
 
 def get_event_status(event_key: str) -> int:

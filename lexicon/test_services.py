@@ -78,7 +78,7 @@ def pick_sentence_test(
     return test
 
 
-def pick_a_test_for_word(al, chosen_word):
+def pick_a_test_for_word(al, chosen_word, test_success_callback=None, test_failure_callback=None):
     test = None
     can_be_tested_on_sentence = True
     while test is None:
@@ -86,27 +86,27 @@ def pick_a_test_for_word(al, chosen_word):
         from lexicon.tests.tests import ThaiFromEnglish6, ThaiFromEnglish4
 
         if r == 0:
-            test = ThaiFromEnglish4(al, correct=chosen_word)
+            test = ThaiFromEnglish4(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 1:
-            test = ThaiFromEnglish6(al, correct=chosen_word)
+            test = ThaiFromEnglish6(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 2:
-            test = EnglishFromSound4(al, correct=chosen_word)
+            test = EnglishFromSound4(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 3:
-            test = EnglishFromSound6(al, correct=chosen_word)
+            test = EnglishFromSound6(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 4:
-            test = ThaiFromSound4(al, correct=chosen_word)
+            test = ThaiFromSound4(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 5:
-            test = ThaiFromSound6(al, correct=chosen_word)
+            test = ThaiFromSound6(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 6:
-            test = EnglishFromThai4(al, correct=chosen_word)
+            test = EnglishFromThai4(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 7:
-            test = EnglishFromThai6(al, correct=chosen_word)
+            test = EnglishFromThai6(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         elif r == 8 or r == 9:
             if can_be_tested_on_tone(chosen_word):
-                test = ToneFromThaiAndSound(al, correct=chosen_word)
+                test = ToneFromThaiAndSound(al, correct=chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         else:
             if can_be_tested_on_sentence:
-                test = pick_sentence_test(al, chosen_word)
+                test = pick_sentence_test(al, chosen_word, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
                 if not test:
                     can_be_tested_on_sentence = False
     al.active_test = test
