@@ -1,64 +1,52 @@
-from typing import Tuple, List
+import random
+from math import log as ln
+
+# from mechanics.fight.fighter import Fighter
+#
+#
+# def deals_damage(al, fight, attacker: Fighter, receiver: Fighter, amount: float) -> float:
+#     """
+#     attacker and receiver can be Player or Opponent
+#     """
+#     damage_dealt = amount * attacker.attack / receiver.defense
+#     receiver.hp -= damage_dealt
+#     return damage_dealt
+#
+#
+# def heals(al, fight, fighter: Fighter, amount):
+#     health_healed = amount * fighter.healing_power
+#     fighter.hp += health_healed
+#
+#
+# def deals_vampiric_damage(al, fight, attacker, receiver, amount):
+#     damage_dealt = deals_damage(al, fight, attacker, receiver, amount)
+#     health_healed = damage_dealt / 2
+#     attacker.hp += health_healed
 
 
-Color = Tuple[int, int, int]
+def perform_attack(tones_effects, attacker, receiver):
+    damage_amount = 1  # eventually, will be different for each word, rarer words being hard-hitters
+
+    damage_multiplier = tones_effects.get("damage_multiplier", 1)
+    damage_dealt = damage_amount * damage_multiplier * attacker.attack / receiver.defense
+
+    time_multiplier = tones_effects.get("time_multiplier", 1)
+    available_time = time_multiplier * receiver.time
+    # The following formula returns 0.5 if available_time = 10, which is the default.
+    probability_pass_test = min(max(0.5 * ln(available_time) / ln(10), 0.05), 0.95)
+    if random.uniform(0, 1) > probability_pass_test:
+        # then, test fails
+        receiver.hp -= damage_dealt
+        has_vampiric_effect = tones_effects.get("has_vampiric_effect", False)
+        if has_vampiric_effect:
+            attacker.hp += damage_dealt / 2
 
 
-def get_explanatory_effects_from_tone(tones: str) -> Tuple[str, str, List[str], Color, Color]:
-    if tones == "M":
-        return (
-            "Mid Tone",
-            "Normal test",
-            ["If the opponent answers incorrectly, they lose 1 HP."],
-            (128, 128, 128),
-            (0, 0, 0),
-        )
-    if tones == "L":
-        return (
-            "Low Tone",
-            "Hard test",
-            ["The opponent only has 10 seconds to answer this."],
-            (50, 50, 50),
-            (255, 255, 255),
-        )
-    if tones == "F":
-        return (
-            "Falling Tone",
-            "Hard-Hitter",
-            ["If the opponent answers incorrectly, they lose 3 HP."],
-            (200, 100, 100),
-            (0, 0, 0),
-        )
-    if tones == "R":
-        return (
-            "Rising Tone",
-            "Vampiric test",
-            ["If the opponent answers incorrectly, you steal 1 HP from them."],
-            (100, 200, 100),
-            (0, 0, 0),
-        )
-    if tones == "H":
-        return (
-            "High Tone",
-            "Double-down",
-            ["After you test your opponent, you can test them again."],
-            (240, 240, 240),
-            (0, 0, 0),
-        )
-    if tones == "MM":
-        return (
-            "Mid-Mid Tone",
-            "Increase difficulty",
-            ["The difficulty of your tests increases:", "your opponent will have lower accuracy for this test,", "and all your following tests."],
-            (240, 240, 240),
-            (0, 0, 0),
-        )
-    elif tones == "FL":
-        return (
-            "Mid-Mid Tone",
-            "Increase difficulty",
-            ["The time your opponent get to answer tests gets decreased"],
-            (240, 240, 240),
-            (0, 0, 0),
-        )
-    return f"{tones}", "Complex tones", ["Not done yet"], (240, 0, 240), (0, 0, 0)
+def apply_effects(tones_effects, attacker, receiver):
+    if "reduce_time" in tones_effects:
+        receiver.time *= tones_effects["reduce_time"]
+    may_induce_flinching = tones_effects.get("may_induce_flinching", False)
+    if may_induce_flinching:
+        probability_flinches = min(max(0.5 * ln(receiver.flinching_resistance) / ln(10), 0.05), 0.95)
+        receiver.flinched = random.uniform(0, 1) > probability_flinches
+

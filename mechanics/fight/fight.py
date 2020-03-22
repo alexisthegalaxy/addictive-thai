@@ -1,13 +1,13 @@
-from enum import Enum
-import time
-
 import pygame
 from typing import List
+
 from all import All
 from lexicon.items import Word
 from mechanics.fight.attack_phase import AttackPhase
 from mechanics.fight.defense_phase import DefensePhase
 from mechanics.fight.fight_steps import FightStep
+from mechanics.fight.opponent import Opponent
+from mechanics.fight.player import Player
 from npc.npc import Npc
 from direction import string_from_direction, Direction
 
@@ -19,10 +19,12 @@ class Fight(object):
 
     def __init__(self, al: All, words, npc: Npc, starting: str = "player") -> None:
         self.al: All = al
-        self.npc = npc
+        self.npc = npc  # used for the sprite mainly
+        self.opponent = Opponent(al, npc)
+        self.player = Player(al)
         self.words: List[Word] = words
 
-        self.attack_phase = AttackPhase(al, self, words, npc)
+        self.attack_phase = AttackPhase(al, self, words, npc, self.player, self.opponent)
         self.defense_phase = DefensePhase(al, self, words, npc)
 
         if starting == "player":
@@ -51,6 +53,7 @@ class Fight(object):
         self.active_phase.interact()
 
     def draw_secondary(self):
+        print('draw_secondary!!!')
         ui = self.al.ui
         screen = ui.screen
 
@@ -107,6 +110,7 @@ class Fight(object):
         )
 
         self.active_phase.draw()
+        self.draw_secondary()
 
     def end_fight(self):
         self.al.active_fight = None

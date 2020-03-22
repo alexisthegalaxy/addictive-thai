@@ -98,12 +98,14 @@ class Ui(object):
                 if event.key == pygame.K_o:
                     al.learner.open()
                 if event.key == pygame.K_r:
-                    Words.reset_words(xp=0)
-                    al.learner.money = 3
+                    # Words.reset_words(xp=0)
+                    # al.learner.money = 3
                     al.learner.hp = 5
                     al.learner.max_hp = 5
-                if event.key == pygame.K_t:
-                    Words.reset_words(xp=100)
+                if event.key == pygame.K_u:
+                    al.learner.hp = max(al.learner.hp - 1/8, 0)
+                # if event.key == pygame.K_t:
+                #     Words.reset_words(xp=100)
                 if event.key == pygame.K_BACKSPACE:
                     al.ui.backspace = True
                 if event.key == pygame.K_SPACE:

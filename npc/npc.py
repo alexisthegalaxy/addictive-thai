@@ -82,6 +82,7 @@ class Npc(object):
         end_dialog_trigger_event: List[str] = None,
         beginning_dialog_trigger_event: List[str] = None,
         wobble=False,
+        hp=5,
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
@@ -133,6 +134,7 @@ class Npc(object):
         self.appears_between = appears_between
         self.process_dialog(al)
         self.wobble = wobble
+        self.hp = hp
 
     def process_dialog(self, al):
         for dialog in self.dialogs:

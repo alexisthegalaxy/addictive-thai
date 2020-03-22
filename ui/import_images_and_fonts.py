@@ -219,12 +219,19 @@ def npc_sprites():
 
 def random_images():
     return {
-        "full_heart": pygame.image.load(f"{dir_path}/../images/full_heart.png"),
         "check_mark": pygame.image.load(f"{dir_path}/../images/check_mark.png"),
         "selection_arrow": pygame.image.load(
             f"{dir_path}/../images/selection_arrow.png"
         ),
-        "empty_heart": pygame.image.load(f"{dir_path}/../images/empty_heart.png"),
+        "heart_0": pygame.image.load(f"{dir_path}/../images/heart_0.png"),
+        "heart_1": pygame.image.load(f"{dir_path}/../images/heart_1.png"),
+        "heart_2": pygame.image.load(f"{dir_path}/../images/heart_2.png"),
+        "heart_3": pygame.image.load(f"{dir_path}/../images/heart_3.png"),
+        "heart_4": pygame.image.load(f"{dir_path}/../images/heart_4.png"),
+        "heart_5": pygame.image.load(f"{dir_path}/../images/heart_5.png"),
+        "heart_6": pygame.image.load(f"{dir_path}/../images/heart_6.png"),
+        "heart_7": pygame.image.load(f"{dir_path}/../images/heart_7.png"),
+        "heart_8": pygame.image.load(f"{dir_path}/../images/heart_8.png"),
         "sound_icon": pygame.image.load(f"{dir_path}/../images/sound_icon.png"),
         "sound_icon_green": pygame.image.load(
             f"{dir_path}/../images/sound_icon_green.png"

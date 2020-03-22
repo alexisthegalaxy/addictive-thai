@@ -1,0 +1,11 @@
+class Fighter(object):
+    def __init__(self, al, hp):
+        self.al = al
+        self.hp = hp
+        self.time = 10  # seconds available to answer the test
+        self.defense = 1  # a multiplier applied to the damage received
+        self.attack = 1  # a multiplier applied to the damage dealt
+        self.healing_power = 1  # a multiplier applied to the healing
+        self.critical_ratio = 1.1  #
+        self.speed = 1  # will attack every 1 turn. if speed = 2, will only attack once every two turns
+        self.flinching_resistance = 10  # similar to time: the higher, the lesser the probability to suffer it

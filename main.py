@@ -64,6 +64,7 @@ def main_draw(al: All):
         draw_npc_text(al, al.active_npc)
     if al.active_test:
         al.active_test.draw()
+        # the following is used to draw fighter's sprites even during other elements are active - for example, tests
         if al.active_battle:
             al.active_battle.draw_secondary()
         if al.active_fight:
@@ -82,7 +83,8 @@ def main_draw(al: All):
         al.active_minimap.draw()
     if al.active_spell_identification:
         al.active_spell_identification.draw()
-    al.learner.draw_money_and_hp(al)
+    if not al.active_fight:
+        al.learner.draw_money_and_hp(al)
     pygame.display.flip()
 
 

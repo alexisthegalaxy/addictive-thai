@@ -2,7 +2,8 @@ import time
 
 from lexicon.items import Word
 from lexicon.tests.tests import TestAnswerBox, draw_box
-from mechanics.fight.powers import get_explanatory_effects_from_tone
+from mechanics.fight.fight_steps import FightStep
+from mechanics.fight.tones_effects import get_explanatory_effects_from_tone
 from models import get_least_known_known_words
 
 
@@ -15,14 +16,24 @@ class ExplanatoryBox(object):
         self.word = word
         self.width = al.ui.percent_width(0.4)
         self.height = al.ui.percent_height(0.15)
-        tone_name, test_type, test_description, bg_color, color = get_explanatory_effects_from_tone(
+        tones_parameters = get_explanatory_effects_from_tone(
             self.word.tones
         )
-        self.tone_name = tone_name
-        self.test_type = test_type
-        self.test_description = test_description
-        self.bg_color = bg_color
-        self.color = color
+
+        self.tone_name = tones_parameters["tone_name"]
+        self.test_type = tones_parameters["test_type"]
+        self.test_description = tones_parameters["test_description"]
+        self.bg_color = tones_parameters["bg_color"]
+        self.color = tones_parameters["color"]
+        self.effects = tones_parameters["effects"]
+
+        # self.tone_name = tones_parameters.get("tone_name", "empty")
+        # tone_name, test_type, test_description, bg_color, color
+        # self.tone_name = tone_name
+        # self.test_type = test_type
+        # self.test_description = test_description
+        # self.bg_color = bg_color
+        # self.color = color
 
     def draw(self):
         screen = self.al.ui.screen
@@ -47,12 +58,10 @@ class ExplanatoryBox(object):
 
 
 class PickWeapon(object):
-    def __init__(self, al, fight, words, npc, attack_phase):
+    def __init__(self, al, fight, attack_phase):
         self.draw_text_since = time.time()
         self.al = al
         self.fight = fight
-        self.words = words
-        self.npc = npc
         self.attack_phase = attack_phase
         self.selected_words = get_least_known_known_words(number_of_words_to_get=4)
         self.hovered_option_index = -1
@@ -146,4 +155,14 @@ class PickWeapon(object):
             for i, box in enumerate(self.boxes):
                 if box.contains(self.al.ui.hover):
                     self.hovered_option_index = i
+                    break
             self.al.ui.hover = None
+        if self.al.ui.click:
+            for i, box in enumerate(self.boxes):
+                if box.contains(self.al.ui.click):
+                    self.attack_phase.chosen_weapon = self.selected_words[i]
+                    self.attack_phase.chosen_weapon_effects = self.explanatory_boxes[i].effects
+                    self.fight.current_step = FightStep.ATTACK_PHASE_TEST.value
+                    self.attack_phase.draw_text_since = time.time()
+                    break
+            self.al.ui.click = None
