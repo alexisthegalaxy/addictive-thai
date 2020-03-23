@@ -462,19 +462,24 @@ def chumphae(al):
         ),
         Npc(
             al=al,
-            name="the leopard gecko",
+            name="El Gecko",
             ma=al.mas.get_map_from_name("sikhiu"),
             x=57,
             y=9,
             standard_dialog=[
                 "Wahan?",
             ],
+            defeat_dialog=[
+                "Wahan!",
+                "Wahan! Wahan!",
+            ],
             direction=Direction.DOWN,
             sprite="leopard_gecko",
             battle_words=[
-                Word.get_by_split_form(battle_word) for battle_word in ["ใช่", "ภา-ษา"]
+                Word.get_by_split_form(battle_word) for battle_word in ["เรียน", "โลก", "ใช่", "ภา-ษา"]
             ],
             money=4,
+            hp=7,
         ),
         Spell(
             al=al,

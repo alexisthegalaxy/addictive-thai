@@ -24,9 +24,9 @@ class Keyboard(object):
 
 class TypingTestFromEnglish(ThaiFromEnglish):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None, test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()

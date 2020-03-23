@@ -291,8 +291,9 @@ class GrammarGridTest(Test):
         sentence,
         learning=None,
         test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback)
         self.correct = correct
         self.grid = Grid(al=al, sentence=sentence)
         self.timer = Timer(al=al)

@@ -47,13 +47,14 @@ def perform_attack(tones_effects, attacker, receiver) -> bool:
 
 def apply_effects(tones_effects, attacker, receiver) -> List[str]:
     special_effects_text = []
+    # special_effects_text.append(f"There was no special effect.")
     if "reduce_time" in tones_effects:
         receiver.time *= tones_effects["reduce_time"]
-        special_effects_text.append(f"{receiver.name} has less time to answer tests!")
+        special_effects_text.append(f"{receiver.name.capitalize()}'s time to answer all tests was reduced by 25%!")
     may_induce_flinching = tones_effects.get("may_induce_flinching", False)
     if may_induce_flinching:
         probability_flinches = min(max(0.5 * ln(receiver.flinching_resistance) / ln(10), 0.05), 0.95)
         receiver.flinched = random.uniform(0, 1) > probability_flinches
         if receiver.flinched:
-            special_effects_text.append(f"{receiver.name} flinched and can't attack for one turn!")
+            special_effects_text.append(f"{receiver.name.capitalize()} flinched and can't attack for one turn!")
     return special_effects_text

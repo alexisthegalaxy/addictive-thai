@@ -121,6 +121,7 @@ class Test(object):
         learning=None,
         test_success_callback=None,
         test_failure_callback=None,
+        will_hurt=True,
     ):
         self.al = al
         self.correct = None
@@ -128,7 +129,7 @@ class Test(object):
         self.selected_option_index = 0
         self.test_success_callback = test_success_callback
         self.test_failure_callback = test_failure_callback
-        self.will_hurt = True
+        self.will_hurt = will_hurt
         self.has_audio_property = False
 
     def draw(self):
@@ -180,12 +181,10 @@ class Test(object):
             self.learning.test_finished()
 
     def fails(self):
-        # 1 - Hurts the player.
+        play_thai_word("wrong")
+
         if self.will_hurt:
             self.al.learner.hurt(1)
-
-        # 2 - Play sound.
-        play_thai_word("wrong")
 
         if self.test_failure_callback:
             self.test_failure_callback()
@@ -323,9 +322,9 @@ class ToneFromThaiAndSound(Test):
 
 class ThaiFromEnglish(Test):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None
+        self, al: "All", correct: Word, learning=None, test_success_callback=None, test_failure_callback=None, will_hurt=True,
     ):
-        super().__init__(al, learning, test_success_callback)
+        super().__init__(al, learning, test_success_callback, test_failure_callback, will_hurt)
         self.correct: Word = correct
         self.number_of_distr: int = 3
 
@@ -388,7 +387,7 @@ class ThaiFromEnglish4(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -482,8 +481,9 @@ class ThaiFromEnglish6(ThaiFromEnglish):
         learning=None,
         test_success_callback=None,
         test_failure_callback=None,
+        will_hurt=True,
     ):
-        super().__init__(al, correct, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback, test_failure_callback, will_hurt)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -603,7 +603,7 @@ class EnglishFromThai4(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -695,7 +695,7 @@ class EnglishFromThai6(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -1627,9 +1627,9 @@ class ThaiLetterFromEnglish(Test):
 
 class ThaiLetterFromEnglish4(ThaiLetterFromEnglish):
     def __init__(
-        self, al: "All", correct: Letter, learning=None, test_success_callback=None
+        self, al: "All", correct: Letter, learning=None, test_success_callback=None, test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
         self.number_of_distr: int = 3
 
         self.distractors: List[Letter] = self.select_distractors()
@@ -1717,9 +1717,9 @@ class ThaiLetterFromEnglish4(ThaiLetterFromEnglish):
 
 class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
     def __init__(
-        self, al: "All", correct: Letter, learning=None, test_success_callback=None
+        self, al: "All", correct: Letter, learning=None, test_success_callback=None, test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback)
+        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
         self.number_of_distr: int = 15
 
         self.distractors: List[Letter] = self.select_distractors()

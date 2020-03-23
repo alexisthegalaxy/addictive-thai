@@ -24,6 +24,7 @@ class Fight(object):
         self.opponent = Opponent(al, npc)
         self.player = Player(al)
         self.words: List[Word] = words
+        self.round = 0
 
         self.defense_phase = DefensePhase(al, self)
         self.attack_phase = None
@@ -36,7 +37,6 @@ class Fight(object):
             self.active_phase = self.defense_phase
         else:
             raise ValueError
-        print(self.current_step)
 
         # UI
         self.x = al.ui.percent_width(0.07)
@@ -52,6 +52,9 @@ class Fight(object):
 
     def interact(self):
         self.active_phase.interact()
+
+    def increase_round(self):
+        self.round += 1
 
     def draw_secondary(self):
         ui = self.al.ui
@@ -78,7 +81,13 @@ class Fight(object):
                 self.npc.color,
                 pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
             )
-        draw_hp(self.al, self.player.hp, self.player.max_hp, x=face_x + 40 * self.player.max_hp, y=face_y + 80)
+        draw_hp(
+            self.al,
+            self.player.hp,
+            self.player.max_hp,
+            x=face_x - 40 + 40 * self.player.max_hp,
+            y=face_y + 80,
+        )
 
         # draw opponent face
         face_x = ui.percent_width(1.0) - ui.cell_size - 10
@@ -98,7 +107,13 @@ class Fight(object):
                 self.npc.color,
                 pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
             )
-        draw_hp(self.al, self.opponent.hp, self.opponent.max_hp, x=face_x + 40, y=face_y + 80)
+        draw_hp(
+            self.al,
+            self.opponent.hp,
+            self.opponent.max_hp,
+            x=face_x + 40,
+            y=face_y + 80,
+        )
 
     def draw(self):
         # draw background
@@ -114,6 +129,20 @@ class Fight(object):
         self.active_phase.draw()
         self.draw_secondary()
 
+    def defeat(self):
+        self.end_fight()
+        self.al.learner.hp = 0
+
+        self.al.active_npc.active_dialog = self.al.active_npc.victory_dialog
+
+    def victory(self):
+        self.end_fight()
+
+        self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog
+        self.al.active_npc.wants_battle = False
+        self.al.learner.money += self.al.active_npc.money
+
     def end_fight(self):
         self.al.active_fight = None
         self.al.active_npc = self.npc
+        self.al.active_npc.active_line_index = 0
