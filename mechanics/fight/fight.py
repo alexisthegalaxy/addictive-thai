@@ -2,6 +2,7 @@ import pygame
 from typing import List
 
 from all import All
+from learner import draw_hp
 from lexicon.items import Word
 from mechanics.fight.attack_phase import AttackPhase
 from mechanics.fight.defense_phase import DefensePhase
@@ -24,8 +25,8 @@ class Fight(object):
         self.player = Player(al)
         self.words: List[Word] = words
 
-        self.attack_phase = AttackPhase(al, self, words, npc, self.player, self.opponent)
-        self.defense_phase = DefensePhase(al, self, words, npc)
+        self.defense_phase = DefensePhase(al, self)
+        self.attack_phase = None
 
         if starting == "player":
             self.current_step = FightStep.ATTACK_PHASE_PICK_WEAPON.value
@@ -53,7 +54,6 @@ class Fight(object):
         self.active_phase.interact()
 
     def draw_secondary(self):
-        print('draw_secondary!!!')
         ui = self.al.ui
         screen = ui.screen
 
@@ -78,6 +78,7 @@ class Fight(object):
                 self.npc.color,
                 pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
             )
+        draw_hp(self.al, self.player.hp, self.player.max_hp, x=face_x + 40 * self.player.max_hp, y=face_y + 80)
 
         # draw opponent face
         face_x = ui.percent_width(1.0) - ui.cell_size - 10
@@ -97,6 +98,7 @@ class Fight(object):
                 self.npc.color,
                 pygame.Rect(face_x, face_y, ui.cell_size, ui.cell_size),
             )
+        draw_hp(self.al, self.opponent.hp, self.opponent.max_hp, x=face_x + 40, y=face_y + 80)
 
     def draw(self):
         # draw background

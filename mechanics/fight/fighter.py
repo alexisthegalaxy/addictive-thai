@@ -1,7 +1,9 @@
 class Fighter(object):
-    def __init__(self, al, hp):
+    def __init__(self, al, name, hp, max_hp):
         self.al = al
+        self.name = name
         self.hp = hp
+        self.max_hp = hp
         self.time = 10  # seconds available to answer the test
         self.defense = 1  # a multiplier applied to the damage received
         self.attack = 1  # a multiplier applied to the damage dealt

@@ -65,28 +65,6 @@ class Learner(object):
             y = 20
         al.ui.screen.blit(rendered, (x, y))
 
-    def draw_hp(self, al, x=None, y=0):
-        rounded_hp = round(self.hp*8)/8
-        decimal_part = round(rounded_hp - int(rounded_hp), 3)
-        heart_index = int(decimal_part * 8)
-        if heart_index == 0:
-            heart_index = 8
-        last_full_heart_image = al.ui.images[f"heart_{heart_index}"]
-
-        full_hearts = int(rounded_hp) + (1 if decimal_part > 0 else 0)
-        empty_hearts = self.max_hp - full_hearts
-        if not x:
-            x = al.ui.width - 40
-        for i in range(empty_hearts):
-            al.ui.screen.blit(al.ui.images["heart_0"], [x, y])
-            x -= 40
-        for i in range(full_hearts):
-            if i == 0:
-                al.ui.screen.blit(last_full_heart_image, [x, y])
-            else:
-                al.ui.screen.blit(al.ui.images["heart_8"], [x, y])
-            x -= 40
-
     def draw_money_and_hp(self, al):
         x = al.ui.width - self.max_hp * 40
         y = 0
@@ -98,7 +76,7 @@ class Learner(object):
         pygame.draw.rect(al.ui.screen, grey, (x + 1, y, width, height - 1))
 
         self.draw_money(al)
-        self.draw_hp(al)
+        draw_hp(al, self.hp, self.max_hp)
 
     def move(self, al: "All"):
         has_moved = False
@@ -268,3 +246,28 @@ class Learner(object):
     def heal(self, amount):
         self.hp = min(self.hp + amount, self.max_hp)
         play_thai_word("heal")
+
+
+def draw_hp(al, hp, max_hp, x=None, y=0):
+    if hp < 0:
+        hp = 0
+    rounded_hp = round(hp*8)/8
+    decimal_part = round(rounded_hp - int(rounded_hp), 3)
+    heart_index = int(decimal_part * 8)
+    if heart_index == 0:
+        heart_index = 8
+    last_full_heart_image = al.ui.images[f"heart_{heart_index}"]
+
+    full_hearts = int(rounded_hp) + (1 if decimal_part > 0 else 0)
+    empty_hearts = max_hp - full_hearts
+    if not x:
+        x = al.ui.width - 40
+    for i in range(empty_hearts):
+        al.ui.screen.blit(al.ui.images["heart_0"], [x, y])
+        x -= 40
+    for i in range(full_hearts):
+        if i == 0:
+            al.ui.screen.blit(last_full_heart_image, [x, y])
+        else:
+            al.ui.screen.blit(al.ui.images["heart_8"], [x, y])
+        x -= 40
