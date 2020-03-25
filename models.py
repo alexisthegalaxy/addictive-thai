@@ -145,7 +145,7 @@ def create_new_user(name: str, learns_letters: bool):
         starting_x = 8
         starting_y = 12
     starting_money = 0
-    starting_hp = 5
+    starting_hp = 1
 
     learner_id = CURSOR.execute(
         f"INSERT INTO users (name, is_playing, current_map, x, y, money, hp)"
@@ -157,7 +157,7 @@ def create_new_user(name: str, learns_letters: bool):
     last_healing_x = 5
     last_healing_y = 10
     direction = Direction.DOWN.value
-    max_hp = 5
+    max_hp = 1
     last_saved_timestamp = datetime.now().isoformat()
     CURSOR.execute(
         f"INSERT INTO user_details (user_id, last_healing_map, last_healing_x, last_healing_y, direction, max_hp, last_saved_timestamp)"

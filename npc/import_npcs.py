@@ -128,7 +128,7 @@ def chumphae_lomsak(al):
         ),
         Npc(
             al=al,
-            name="FirstBattleTrainer",
+            name="the street boy",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ผม", "ฉัน", "ชอบ"]
@@ -144,7 +144,7 @@ def chumphae_lomsak(al):
         ),
         Npc(
             al=al,
-            name="SecondBattleTrainer",
+            name="the old man",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["บ้าน", "โรง-เรียน"]
@@ -159,7 +159,7 @@ def chumphae_lomsak(al):
         ),
         Npc(
             al=al,
-            name="ThirdBattleTrainer",
+            name="the young girl",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
@@ -189,7 +189,7 @@ def chumphae_lomsak(al):
         ),
         Npc(
             al=al,
-            name="FourthBattleTrainer",
+            name="the girl",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ฉัน", "คุณ", "ผม", "เขา"]
@@ -204,7 +204,7 @@ def chumphae_lomsak(al):
         ),
         Npc(
             al=al,
-            name="FifthBattleTrainer",
+            name="the girl",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["น้ำ", "ข้าว", "กิน", "เขา"]
@@ -447,7 +447,6 @@ def chumphae(al):
             color="red",
             word=Word.get_by_split_form("เรียน"),
         ),
-
         Npc(
             al=al,
             name="kid",
@@ -643,9 +642,10 @@ def chumphae(al):
             al=al,
             ma=al.mas.get_map_from_name("chumphae"),
             x=103,
-            y=59,
+            y=58,
             sprite="leopard_gecko",
             direction=Direction.RIGHT,
+            standard_dialog=["ตุ๊กแก", "The gecko winks at you and falls back asleep."],
         ),
         Npc(
             al=al,
@@ -1924,7 +1924,7 @@ def lomsak(al):
         ),
         Npc(
             al=al,
-            name="lomsak_gym_battle_1",
+            name="your challenger",
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=14,
             y=22,
@@ -1943,7 +1943,7 @@ def lomsak(al):
         ),
         Npc(
             al=al,
-            name="lomsak_gym_battle_2",
+            name="your challenger",
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=11,
             y=20,
@@ -1959,7 +1959,7 @@ def lomsak(al):
         ),
         Npc(
             al=al,
-            name="lomsak_gym_battle_3",
+            name="your challenger",
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=15,
             y=18,
@@ -1977,7 +1977,7 @@ def lomsak(al):
         ),
         Npc(
             al=al,
-            name="lomsak_gym_battle_4",
+            name="your challenger",
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=11,
             y=16,
@@ -1993,7 +1993,7 @@ def lomsak(al):
         ),
         Npc(
             al=al,
-            name="lomsak_gym_battle_5",
+            name="your challenger",
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=12,
             y=14,
@@ -2016,7 +2016,7 @@ def lomsak(al):
         ),
         Npc(
             al=al,
-            name="lomsak_gym_leader",
+            name="the boss",
             ma=al.mas.get_map_from_name("lomsak_gym"),
             x=13,
             y=5,
@@ -2288,7 +2288,7 @@ def lomsak_labyrinth(al):
         # ),
         Npc(
             al=al,
-            name="Lomsak-Labyrinth Trainer",
+            name="the labyrinth boy",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ทำ", "เด็ก", "กิน", "เขา", "ได้"]
@@ -2306,7 +2306,7 @@ def lomsak_labyrinth(al):
         ),
         Npc(
             al=al,
-            name="Lomsak-Labyrinth Trainer",
+            name="the labyrinth woman",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ดอก-ไม้", "ทำ", "ใหญ่", "เรียน", "เล็ก"]
@@ -2660,7 +2660,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="girl in love",
+            name="the girl",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ฉัน", "ชอบ", "เขา"]
@@ -2768,7 +2768,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="MountainTrainer",
+            name="the hiker",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["อะ-ไร", "ที่-ไหน", "ใคร"]
@@ -2788,7 +2788,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="MountainTrainer",
+            name="the hiker",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["ได้", "ข้าว", "อยาก"]
@@ -2870,7 +2870,7 @@ def phetchabun(al):
             ma=al.mas.get_map_from_name("question_cave"),
             x=14,
             y=29,
-            sprite="lass",
+            sprite="the explorer",
             direction=Direction.DOWN,
             standard_dialog=[
                 "I'm a bit tired of exploring.",
@@ -2935,7 +2935,7 @@ def phetchabun(al):
             ma=al.mas.get_map_from_name("question_cave"),
             x=15,
             y=39,
-            sprite="old_man",
+            sprite="the elder",
             direction=Direction.UP,
             standard_dialog=[
                 "Ho, young one!",
@@ -3221,7 +3221,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="Phetchabun farm trainer",
+            name="the fruit lover",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["กล้วย", "มะ-ม่วง", "สับ-ปะ-รด"]
@@ -3264,7 +3264,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="Phetchabun gym trainer 1",
+            name="your challenger",
             battle_words=[
                 Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
@@ -3279,7 +3279,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="Phetchabun gym trainer 2",
+            name="your challenger",
             battle_words=[
                 Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
@@ -3293,7 +3293,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="Phetchabun gym trainer 3",
+            name="your challenger",
             battle_words=[
                 Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
@@ -3307,7 +3307,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="Phetchabun gym trainer 4",
+            name="your challenger",
             battle_words=[
                 Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
@@ -3321,7 +3321,7 @@ def phetchabun(al):
         ),
         Npc(
             al=al,
-            name="Phetchabun gym trainer 5",
+            name="your challenger",
             battle_words=[
                 Word.get_by_split_form(battle_word) for battle_word in ["ทำ"]
             ],
@@ -3363,7 +3363,7 @@ def banyaeng(al):
         ),
         Npc(
             al=al,
-            name="Labyrinth south trainer",
+            name="the labyrinth kid",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["มะ-ม่วง", "กล้วย", "สับ-ปะ-รด", "อ-ร่อย"]
@@ -3619,7 +3619,7 @@ def labyrinth(al):
     npcs = [
         Npc(
             al=al,
-            name="Labyrinth south trainer",
+            name="the labyrinth boy",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
@@ -3642,7 +3642,7 @@ def labyrinth(al):
         ),
         Npc(
             al=al,
-            name="Labyrinth trainer 1",
+            name="the explorer",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
@@ -3665,7 +3665,7 @@ def labyrinth(al):
         ),
         Npc(
             al=al,
-            name="Labyrinth trainer 2",
+            name="the annoying brat",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
@@ -3688,7 +3688,7 @@ def labyrinth(al):
         ),
         Npc(
             al=al,
-            name="Labyrinth trainer 3",
+            name="the kid",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
@@ -3711,7 +3711,7 @@ def labyrinth(al):
         ),
         Npc(
             al=al,
-            name="Labyrinth trainer 4",
+            name="the kid",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
@@ -3735,7 +3735,7 @@ def labyrinth(al):
         ),
         Npc(
             al=al,
-            name="Labyrinth trainer 5",
+            name="the kid",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["เป็น", "คือ", "เห็น", "ที่"]
@@ -5066,7 +5066,7 @@ def kasetsombum(al):
         ),
         Npc(
             al=al,
-            name="Trainer",
+            name="the young ermit",
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in ["มัน-ฝ-รั่ง", "ผัก", "ฝรั่ง", "อ-ร่อย"]

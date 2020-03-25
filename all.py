@@ -1,6 +1,7 @@
 import sqlite3
 from bag.bag import Bag
 from event import execute_event
+from form_links import form_links
 from lexicon.dex import Dex
 from mechanics.minimap import Minimap
 from ui.ui import Ui
@@ -16,7 +17,7 @@ class All:
         from lexicon.tests.tests import Test
 
         self.mas = mas
-        self.mas.form_links()
+        form_links(self.mas)
         self.cursor = sqlite3.connect("../thai.db").cursor()
         self.mas.al = self
         self.ui: Ui = ui

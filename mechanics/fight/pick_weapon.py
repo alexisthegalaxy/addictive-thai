@@ -1,3 +1,4 @@
+import random
 import time
 
 from lexicon.items import Word
@@ -63,7 +64,7 @@ class PickWeapon(object):
         self.al = al
         self.fight = fight
         self.attack_phase = attack_phase
-        self.selected_words = get_least_known_known_words(number_of_words_to_get=4)
+        self.selected_words = self.fight.player.word_cards
         self.hovered_option_index = -1
 
         self.boxes = [
@@ -160,9 +161,22 @@ class PickWeapon(object):
         if self.al.ui.click:
             for i, box in enumerate(self.boxes):
                 if box.contains(self.al.ui.click):
-                    self.attack_phase.chosen_weapon = self.selected_words[i]
-                    self.attack_phase.chosen_weapon_effects = self.explanatory_boxes[i].effects
-                    self.fight.current_step = FightStep.ATTACK_PHASE_TEST.value
-                    self.attack_phase.draw_text_since = time.time()
+                    self.picks_weapon(self.selected_words[i], self.explanatory_boxes[i].effects)
                     break
             self.al.ui.click = None
+
+    def picks_weapon(self, selected_word: Word, effects):
+        self.attack_phase.chosen_weapon = selected_word
+        self.attack_phase.chosen_weapon_effects = effects
+        self.fight.current_step = FightStep.ATTACK_PHASE_TEST.value
+        self.attack_phase.draw_text_since = time.time()
+
+        # remove the card from the player's cards
+        new_cards = [word_card for word_card in self.fight.player.word_cards if word_card.split_form != selected_word.split_form]
+        old_cards_split_forms = [word_card.split_form for word_card in self.fight.player.word_cards]
+        least_known_known_words = get_least_known_known_words(number_of_words_to_get=20)
+        new_word = random.choice(least_known_known_words)
+        while new_word.split_form in old_cards_split_forms:
+            new_word = random.choice(least_known_known_words)
+        new_cards.append(new_word)
+        self.fight.player.word_cards = new_cards

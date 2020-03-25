@@ -1,4 +1,7 @@
 from __future__ import annotations
+
+import time
+
 from all import All
 from lexicon.dex import Dex
 import pygame
@@ -105,7 +108,9 @@ def main():
         if al.ui.lapsed_tick():
             al.ui.tick()
             al.tick_activity()
+        before_draw = time.time()
         main_draw(al)
+        print(f"fps = {1 / (time.time() - before_draw)}")
         al.ui.clock.tick(50)
 
 

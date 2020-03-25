@@ -82,7 +82,7 @@ class Npc(object):
         end_dialog_trigger_event: List[str] = None,
         beginning_dialog_trigger_event: List[str] = None,
         wobble=False,
-        hp=5,
+        hp=2,
     ):
         standard_dialog = standard_dialog or ["Hello"]
         defeat_dialog = defeat_dialog or ["Well done!"]
