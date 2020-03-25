@@ -273,11 +273,13 @@ class Ma(object):
             offset_x += movement_offset_x * al.ui.cell_size
             offset_y += movement_offset_y * al.ui.cell_size
         time_type = _get_time_type()
-        for cell_y in range(learner_y - 5, learner_y + 6):
-            for cell_x in range(learner_x - 8, learner_x + 9):
+        for cell_y in range(max(learner_y - 5, 0), learner_y + 6):
+            for cell_x in range(max(learner_x - 8, 0), learner_x + 9):
                 cell = self.get_cell_at(cell_x, cell_y)
-                x = cell.x * al.ui.cell_size + offset_x
-                y = cell.y * al.ui.cell_size + offset_y
+                if not cell:
+                    continue
+                x = cell_x * al.ui.cell_size + offset_x
+                y = cell_y * al.ui.cell_size + offset_y
                 if al.ui.can_draw_cell(x, y):
                     name = cell.typ.name
                     if name[0] == "_":
@@ -291,13 +293,14 @@ class Ma(object):
                             pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
                         )
 
-    def get_cell_at(self, x, y) -> Cell:
+    def get_cell_at(self, x, y) -> Optional[Cell]:
         try:
             return self.ma[y][x]
         except:
-            print("The map", self.filename)
-            print(f" only has dimensions ({len(self.ma)}, {len(self.ma[0])})")
-            print(f" and the cell requested is ({x}, {y})")
+            return None
+            # print("The map", self.filename)
+            # print(f" only has dimensions ({len(self.ma)}, {len(self.ma[0])})")
+            # print(f" and the cell requested is ({x}, {y})")
 
     def add_npc(self, npc):
         self.npcs.append(npc)
