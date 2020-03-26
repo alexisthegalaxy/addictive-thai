@@ -107,16 +107,33 @@ class AttackPhase(object):
             self.draw_text_since = time.time()
             self.fight.attack_phase = None
         else:
-            self.fight.current_step = FightStep.DEFENSE_PHASE_STARTING_MESSAGE.value
-            self.fight.active_phase = DefensePhase(self.al, self.fight)
-            self.fight.active_phase.draw_text_since = time.time()
-            self.fight.attack_phase = None
-            self.fight.increase_round()
+            if self.opponent.flinched:
+                self.restart_attack_phase()
+            else:
+                self.fight.current_step = FightStep.DEFENSE_PHASE_STARTING_MESSAGE.value
+                self.fight.active_phase = DefensePhase(self.al, self.fight)
+                self.fight.active_phase.draw_text_since = time.time()
+                self.fight.attack_phase = None
+                self.fight.increase_round()
+
+    def restart_attack_phase(self):
+        self.fight.current_step = FightStep.ATTACK_PHASE_PICK_WEAPON.value
+
+        self.al.ui.space = False
+        self.draw_text_since = time.time()
+
+        # self.fight.active_phase = DefensePhase(self.al, self.fight)
+        # self.fight.active_phase.draw_text_since = time.time()
+        # self.fight.attack_phase = None
+        self.fight.increase_round()
 
     def perform_attack_and_apply_effects(self):
         self.opponent_takes_damage = perform_attack(
             self.chosen_weapon_effects, attacker=self.player, receiver=self.opponent
         )
         self.special_effects_text = apply_effects(
-            self.chosen_weapon_effects, attacker=self.player, receiver=self.opponent
+            self.chosen_weapon_effects,
+            attacker=self.player,
+            receiver=self.opponent,
+            receiver_took_damage=self.opponent_takes_damage,
         )

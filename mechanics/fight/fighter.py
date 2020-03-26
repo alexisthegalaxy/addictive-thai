@@ -12,6 +12,8 @@ class Fighter(object):
         self.speed = (
             1
         )  # will attack every 1 turn. if speed = 2, will only attack once every two turns
+        self.active_healing = 0  # TODO
+        self.flinched = False
         self.flinching_resistance = (
             10
         )  # similar to time: the higher, the lesser the probability to suffer it

@@ -108,10 +108,10 @@ def main():
         if al.ui.lapsed_tick():
             al.ui.tick()
             al.tick_activity()
-        before_draw = time.time()
+        # before_draw = time.time()
         main_draw(al)
-        print(f"fps = {1 / (time.time() - before_draw)}")
-        al.ui.clock.tick(50)
+        # print(f"fps = {1 / (time.time() - before_draw)}")
+        # al.ui.clock.tick(50)
 
 
 def print_thai_words_with_no_audio():

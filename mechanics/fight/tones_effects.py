@@ -21,7 +21,7 @@ def get_explanatory_effects_from_tone(tones: str) -> Dict[Any, Any]:
         }
     if tones == "L":
         return {
-            "tone_name": "Low Tone",
+            "tone_name": "Low tone",
             "test_type": "Fast test",
             "test_description": [
                 "The opponent only has a third of the usual time to answer this",
@@ -33,7 +33,7 @@ def get_explanatory_effects_from_tone(tones: str) -> Dict[Any, Any]:
         }
     if tones == "F":
         return {
-            "tone_name": "Falling Tone",
+            "tone_name": "Falling tone",
             "test_type": "Damaging test",
             "test_description": [
                 "If the opponent answers incorrectly,",
@@ -45,8 +45,8 @@ def get_explanatory_effects_from_tone(tones: str) -> Dict[Any, Any]:
         }
     if tones == "R":
         return {
-            "tone_name": "Rising Tone",
-            "test_type": "Vampiric test",
+            "tone_name": "Rising tone",
+            "test_type": "Vampiric",
             "test_description": [
                 "The attacker's HP is restored by half the damage taken by the",
                 "target.",
@@ -57,8 +57,8 @@ def get_explanatory_effects_from_tone(tones: str) -> Dict[Any, Any]:
         }
     if tones == "H":
         return {
-            "tone_name": "High Tone",
-            "test_type": "Flincher test",
+            "tone_name": "High tone",
+            "test_type": "Flincher",
             "test_description": [
                 "Has a probability to make the target flinch, allowing for attacking",
                 "again.",
@@ -66,6 +66,39 @@ def get_explanatory_effects_from_tone(tones: str) -> Dict[Any, Any]:
             "bg_color": (240, 240, 240),
             "color": (0, 0, 0),
             "effects": {"may_induce_flinching": True},
+        }
+    if tones == "LLH":
+        return {
+            "tone_name": "Low-low-high tone",
+            "test_type": "Good news anyway",
+            "test_description": [
+                "Restores 1 HP if the target passes the test.",
+            ],
+            "bg_color": (50, 220, 50),
+            "color": (0, 0, 0),
+            "effects": {"has_happy_effect": True},
+        }
+    if tones == "FL":
+        return {
+            "tone_name": "Falling-low tone",
+            "test_type": "Increase defense",
+            "test_description": [
+                "Reduce by a third the damage taken when failing a test.",
+            ],
+            "bg_color": (50, 220, 50),
+            "color": (0, 0, 0),
+            "effects": {"raise_defense_by": 1.5},
+        }
+    if tones == "RF":
+        return {
+            "tone_name": "Rising-falling tone",
+            "test_type": "Increase attack",
+            "test_description": [
+                "Increase by 50% the damage dealt when the target fails the test.",
+            ],
+            "bg_color": (50, 220, 50),
+            "color": (0, 0, 0),
+            "effects": {"multiply_damage_by": 1.5},
         }
     return {
         "tone_name": tones,

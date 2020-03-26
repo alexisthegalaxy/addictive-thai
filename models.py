@@ -27,25 +27,29 @@ CURSOR = CONN.cursor()
 def find_word_by_thai(thai_word: str) -> Optional[int]:
     """Return id of that db thai word"""
     try:
-        word_id = list(CURSOR.execute(f"SELECT id FROM words WHERE thai = '{thai_word}'"))[0]
+        word_id = list(
+            CURSOR.execute(f"SELECT id FROM words WHERE thai = '{thai_word}'")
+        )[0]
         return word_id[0]
     except IndexError:
-        print(f'COULD NOT FIND WORD IN DB FOR {thai_word}')
+        print(f"COULD NOT FIND WORD IN DB FOR {thai_word}")
         raise IndexError
 
 
 def get_xp_for_word(split_form: str) -> int:
     try:
-        word_xp = list(CURSOR.execute(
-            f"SELECT total_xp "
-            f"FROM user_word "
-            f"JOIN words "
-            f"  ON words.id = user_word.word_id "
-            f"JOIN users "
-            f"  ON users.id = user_word.user_id "
-            f"WHERE words.split_form = '{split_form}' "
-            f"AND users.is_playing "
-        ))[0][0]
+        word_xp = list(
+            CURSOR.execute(
+                f"SELECT total_xp "
+                f"FROM user_word "
+                f"JOIN words "
+                f"  ON words.id = user_word.word_id "
+                f"JOIN users "
+                f"  ON users.id = user_word.user_id "
+                f"WHERE words.split_form = '{split_form}' "
+                f"AND users.is_playing "
+            )
+        )[0][0]
         return word_xp
     except:
         return 0
@@ -69,10 +73,11 @@ def get_word_by_id(word_id):
 
 
 def xp_from_word(word_id: int) -> int:
-    total_xp = list(CURSOR.execute(
-        f"SELECT user_word.total_xp FROM user_word "
-        f"WHERE word_id = '{word_id}'"
-    ))
+    total_xp = list(
+        CURSOR.execute(
+            f"SELECT user_word.total_xp FROM user_word " f"WHERE word_id = '{word_id}'"
+        )
+    )
     if not total_xp:
         return -1
     wi = total_xp[0][0]
@@ -89,11 +94,13 @@ def increase_xp(thai, value):
     """ increase xp by value """
     learner_id = get_active_learner_id()
     word_id = find_word_by_thai_get_id(thai)
-    a = list(CURSOR.execute(
-        f"SELECT user_word.total_xp FROM user_word "
-        f"WHERE user_word.word_id = {word_id} "
-        f"AND user_word.user_id = {learner_id};"
-    ))
+    a = list(
+        CURSOR.execute(
+            f"SELECT user_word.total_xp FROM user_word "
+            f"WHERE user_word.word_id = {word_id} "
+            f"AND user_word.user_id = {learner_id};"
+        )
+    )
     if a:
         CURSOR.execute(
             f"UPDATE user_word "
@@ -113,11 +120,13 @@ def increase_xp(thai, value):
 
 def increase_xp_letter_by_id(letter_id, xp_amount):
     learner_id = get_active_learner_id()
-    a = list(CURSOR.execute(
-        f"SELECT user_letter.total_xp FROM user_letter "
-        f"WHERE user_letter.letter_id = {letter_id} "
-        f"AND user_letter.user_id = {learner_id};"
-    ))
+    a = list(
+        CURSOR.execute(
+            f"SELECT user_letter.total_xp FROM user_letter "
+            f"WHERE user_letter.letter_id = {letter_id} "
+            f"AND user_letter.user_id = {learner_id};"
+        )
+    )
     if a:
         CURSOR.execute(
             f"UPDATE user_letter "
@@ -137,11 +146,11 @@ def increase_xp_letter_by_id(letter_id, xp_amount):
 
 def create_new_user(name: str, learns_letters: bool):
     if learns_letters:
-        starting_map = 'ko_kut'
+        starting_map = "ko_kut"
         starting_x = 47
         starting_y = 54
     else:
-        starting_map = 'house_learner_f2'
+        starting_map = "house_learner_f2"
         starting_x = 8
         starting_y = 12
     starting_money = 0
@@ -153,7 +162,7 @@ def create_new_user(name: str, learns_letters: bool):
     ).lastrowid
     CONN.commit()
 
-    last_healing_map = 'house_learner_f2'
+    last_healing_map = "house_learner_f2"
     last_healing_x = 5
     last_healing_y = 10
     direction = Direction.DOWN.value
@@ -168,23 +177,19 @@ def create_new_user(name: str, learns_letters: bool):
 
 def set_active_player(name, learns_letters):
     # 1 - Set all users to non-playing
-    CURSOR.execute(
-        f"UPDATE users "
-        f"SET is_playing = 0 ")
+    CURSOR.execute(f"UPDATE users " f"SET is_playing = 0 ")
     CONN.commit()
 
     # 1 - Check if there is a user in the DB under that name
-    no_user_found = list(
-        CURSOR.execute(f"SELECT is_playing FROM users WHERE name = '{name}'")
-    ) == []
+    no_user_found = (
+        list(CURSOR.execute(f"SELECT is_playing FROM users WHERE name = '{name}'"))
+        == []
+    )
 
     if no_user_found:
         create_new_user(name, learns_letters)
     else:
-        CURSOR.execute(
-            f"UPDATE users "
-            f"SET is_playing = 1 "
-            f"WHERE name = '{name}'")
+        CURSOR.execute(f"UPDATE users " f"SET is_playing = 1 " f"WHERE name = '{name}'")
         CONN.commit()
 
 
@@ -204,7 +209,9 @@ def get_current_xy(al):
 
 def save_user_details_to_db(al):
     learner_id = get_active_learner_id()
-    last_healing_place_x, last_healing_place_y, last_healing_place_map = al.learner.last_healing_place
+    last_healing_place_x, last_healing_place_y, last_healing_place_map = (
+        al.learner.last_healing_place
+    )
     last_healing_place_map_filename = last_healing_place_map.filename
     direction = al.learner.direction.value
     max_hp = al.learner.max_hp
@@ -225,21 +232,31 @@ def save_user_details_to_db(al):
 def load_user_details(al):
     # TODO:
     #  Create a user_details table for users that don't have one yet.
-    _, last_healing_map_name, last_healing_x, last_healing_y, direction, max_hp, last_saved_timestamp = list(CURSOR.execute(
-        f"SELECT user_details.* FROM user_details "
-        f"JOIN users ON users.id = user_details.user_id "
-        f"WHERE users.is_playing = 1"
-    ))[0]
+    _, last_healing_map_name, last_healing_x, last_healing_y, direction, max_hp, last_saved_timestamp = list(
+        CURSOR.execute(
+            f"SELECT user_details.* FROM user_details "
+            f"JOIN users ON users.id = user_details.user_id "
+            f"WHERE users.is_playing = 1"
+        )
+    )[
+        0
+    ]
 
     al.learner.direction = Direction(direction)
-    al.learner.last_healing_place = (last_healing_x, last_healing_y, al.mas.get_map_from_name(last_healing_map_name))
+    al.learner.last_healing_place = (
+        last_healing_x,
+        last_healing_y,
+        al.mas.get_map_from_name(last_healing_map_name),
+    )
     al.learner.max_hp = max_hp
     al.learner.last_saved_timestamp = datetime.fromisoformat(last_saved_timestamp)
 
 
 def load_current_x_y_money_hp_ma(al):
     answers = list(
-        CURSOR.execute("SELECT x, y, money, hp, current_map FROM users WHERE is_playing = 1")
+        CURSOR.execute(
+            "SELECT x, y, money, hp, current_map FROM users WHERE is_playing = 1"
+        )
     )
     if answers:
         al.learner.x = answers[0][0]
@@ -268,15 +285,17 @@ def update_user_item(learner_id, item_id, quantity):
 
 
 def item_exists(learner_id, item_id) -> bool:
-    results = list(CURSOR.execute(
-        f"SELECT item_id "
-        f"FROM user_items "
-        f"WHERE user_id = '{learner_id}' AND item_id = '{item_id}'"
-    ))
+    results = list(
+        CURSOR.execute(
+            f"SELECT item_id "
+            f"FROM user_items "
+            f"WHERE user_id = '{learner_id}' AND item_id = '{item_id}'"
+        )
+    )
     return results and results[0]
 
 
-def save_bag(al: 'All'):
+def save_bag(al: "All"):
     learner_id = get_active_learner_id()
     for item in al.bag.items:
         item_exist = item_exists(learner_id, item.name_id)
@@ -286,39 +305,41 @@ def save_bag(al: 'All'):
             create_user_item(learner_id, item.name_id, item.amount)
 
 
-def load_bag(al: 'All'):
+def load_bag(al: "All"):
     learner_id = get_active_learner_id()
-    results = list(CURSOR.execute(
-        f"SELECT item.id, item.name, item.description, item.price, user_item.quantity "
-        f"FROM items item "
-        f"JOIN user_items user_item "
-        f"ON item.id = user_item.item_id "
-        f"WHERE user_item.user_id = {learner_id}"
-    ))
-    items = [Item(
-        name_id=item[0],
-        name=item[1],
-        description=item[2],
-        price=item[3],
-        amount=item[4],
-    ) for item in results]
+    results = list(
+        CURSOR.execute(
+            f"SELECT item.id, item.name, item.description, item.price, user_item.quantity "
+            f"FROM items item "
+            f"JOIN user_items user_item "
+            f"ON item.id = user_item.item_id "
+            f"WHERE user_item.user_id = {learner_id}"
+        )
+    )
+    items = [
+        Item(
+            name_id=item[0],
+            name=item[1],
+            description=item[2],
+            price=item[3],
+            amount=item[4],
+        )
+        for item in results
+    ]
     for item in items:
         al.bag.items.append(item)
 
 
 def get_item_from_name(item_name: str) -> Optional[Item]:
-    results = list(CURSOR.execute(
-        f"SELECT item.name, item.id, item.description, item.price "
-        f"FROM items item "
-        f"WHERE item.id = '{item_name}'"
-    ))
-    name, item_id, description, price = results[0]
-    item = Item(
-        name_id=item_id,
-        name=name,
-        description=description,
-        price=price,
+    results = list(
+        CURSOR.execute(
+            f"SELECT item.name, item.id, item.description, item.price "
+            f"FROM items item "
+            f"WHERE item.id = '{item_name}'"
+        )
     )
+    name, item_id, description, price = results[0]
+    item = Item(name_id=item_id, name=name, description=description, price=price)
     return item
 
 
@@ -392,13 +413,12 @@ def get_least_known_known_words(number_of_words_to_get: int = 4, sample_size: in
         WHERE total_xp > 0
           AND user_id = '{user_id}'
         ORDER BY total_xp
-        LIMIT {sample_size}
+        LIMIT {sample_size * 2}
     """
         )
     )
-
-    selected_words = [get_word_by_id(item[0]) for item in random.choices(known_words, k=number_of_words_to_get)]
-
+    selected_items = random.sample(known_words, k=number_of_words_to_get)
+    selected_words = [get_word_by_id(item[0]) for item in selected_items]
     return selected_words
 
 
@@ -508,15 +528,18 @@ def should_we_show_thai(sentence: str) -> bool:
 
 
 def list_words_that_are_not_in_sentences():
-    all_words = list(CURSOR.execute(
-        "select thai from words where words.id not in ("
-        "SELECT word_id "
-        "FROM words "
-        "  JOIN word_sentence "
-        "    ON word_id = words.id )"
-    ))
+    all_words = list(
+        CURSOR.execute(
+            "select thai from words where words.id not in ("
+            "SELECT word_id "
+            "FROM words "
+            "  JOIN word_sentence "
+            "    ON word_id = words.id )"
+        )
+    )
     for word in all_words:
         print(word)
+
 
 # list_words_that_are_not_in_sentences()
 # print_sentence_46()

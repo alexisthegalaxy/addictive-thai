@@ -2048,7 +2048,7 @@ def lomsak(al):
             ],
             money=15,
             eyesight=2,
-            bubbles_max_hp=200,
+            hp=8,
         ),
         Npc(
             al=al,
