@@ -29,6 +29,7 @@ def perform_attack(tones_effects, attacker, receiver) -> bool:
     damage_amount = 1  # eventually, will be different for each word, rarer words being hard-hitters
 
     damage_multiplier = tones_effects.get("damage_multiplier", 1)
+
     damage_dealt = damage_amount * damage_multiplier * attacker.attack / receiver.defense
     time_multiplier = tones_effects.get("time_multiplier", 1)
     available_time = time_multiplier * receiver.time

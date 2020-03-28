@@ -1,4 +1,6 @@
 import random
+import time
+
 import pygame
 from enum import Enum
 from typing import List
@@ -56,7 +58,11 @@ def draw_box(
         border_color = selected_color if hovered else default_color
     else:
         border_color = selected_color if selected else default_color
-    pygame.draw.rect(screen, border_color, [x - thickness, y - thickness, width + thickness * 2, height + thickness * 2])
+    pygame.draw.rect(
+        screen,
+        border_color,
+        [x - thickness, y - thickness, width + thickness * 2, height + thickness * 2],
+    )
     pygame.draw.rect(screen, bg, (x, y, width, height))
 
     # 2 - Draw the inside
@@ -122,6 +128,7 @@ class Test(object):
         test_success_callback=None,
         test_failure_callback=None,
         will_hurt=True,
+        shows_timer=None,
     ):
         self.al = al
         self.correct = None
@@ -132,6 +139,9 @@ class Test(object):
         self.will_hurt = will_hurt
         self.has_audio_property = False
 
+        self.shows_timer = shows_timer
+        self.starting_time = time.time()
+
     def draw(self):
         pass
 
@@ -139,14 +149,35 @@ class Test(object):
         pass
 
     def draw_background(self):
+        if self.shows_timer:
+            self.draw_background_timer()
+        else:
+            ui = self.al.ui
+            x = ui.percent_width(0.1)
+            y = ui.percent_height(0.1)
+            height = ui.percent_height(0.8)
+            width = ui.percent_width(0.8)
+            screen = ui.screen
+            pygame.draw.rect(screen, (150, 150, 150), (x, y, width, height))
+            pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
+
+    def is_timer_over(self):
+        return time.time() - self.starting_time > self.shows_timer
+
+    def draw_background_timer(self):
         ui = self.al.ui
+        screen = ui.screen
         x = ui.percent_width(0.1)
         y = ui.percent_height(0.1)
         height = ui.percent_height(0.8)
         width = ui.percent_width(0.8)
 
-        screen = ui.screen
-        pygame.draw.rect(screen, (150, 150, 150), (x, y, width, height))
+        time_ratio = min((time.time() - self.starting_time) / self.shows_timer, 1)
+        y_ratio = int(height * time_ratio)
+        one_minus_y_ratio = int(height * (1 - time_ratio))
+
+        pygame.draw.rect(screen, (150, 150, 150), (x, y, width, height - y_ratio))
+        pygame.draw.rect(screen, (255, 0, 0), (x, y + one_minus_y_ratio, width, y_ratio))
         pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
 
     def succeeds(self):
@@ -230,7 +261,12 @@ class ToneBox(object):
 
 class ToneFromThaiAndSound(Test):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None, test_failure_callback=None
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
         super().__init__(al, learning, test_success_callback, test_failure_callback)
         self.correct: Word = correct
@@ -322,9 +358,23 @@ class ToneFromThaiAndSound(Test):
 
 class ThaiFromEnglish(Test):
     def __init__(
-        self, al: "All", correct: Word, learning=None, test_success_callback=None, test_failure_callback=None, will_hurt=True,
+        self,
+        al: "All",
+        correct: Word,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
+        will_hurt=True,
+        shows_timer=None,
     ):
-        super().__init__(al, learning, test_success_callback, test_failure_callback, will_hurt)
+        super().__init__(
+            al,
+            learning,
+            test_success_callback,
+            test_failure_callback,
+            will_hurt,
+            shows_timer,
+        )
         self.correct: Word = correct
         self.number_of_distr: int = 3
 
@@ -387,7 +437,9 @@ class ThaiFromEnglish4(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
+        super().__init__(
+            al, correct, learning, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -482,8 +534,17 @@ class ThaiFromEnglish6(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
         will_hurt=True,
+        shows_timer=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback, test_failure_callback, will_hurt)
+        super().__init__(
+            al,
+            correct,
+            learning,
+            test_success_callback,
+            test_failure_callback,
+            will_hurt,
+            shows_timer,
+        )
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -603,7 +664,9 @@ class EnglishFromThai4(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
+        super().__init__(
+            al, correct, learning, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 3
 
         self.distractors: List[Word] = self.select_distractors()
@@ -695,7 +758,9 @@ class EnglishFromThai6(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
+        super().__init__(
+            al, correct, learning, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 5
 
         self.distractors: List[Word] = self.select_distractors()
@@ -1627,9 +1692,16 @@ class ThaiLetterFromEnglish(Test):
 
 class ThaiLetterFromEnglish4(ThaiLetterFromEnglish):
     def __init__(
-        self, al: "All", correct: Letter, learning=None, test_success_callback=None, test_failure_callback=None,
+        self,
+        al: "All",
+        correct: Letter,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
+        super().__init__(
+            al, correct, learning, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 3
 
         self.distractors: List[Letter] = self.select_distractors()
@@ -1717,9 +1789,16 @@ class ThaiLetterFromEnglish4(ThaiLetterFromEnglish):
 
 class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
     def __init__(
-        self, al: "All", correct: Letter, learning=None, test_success_callback=None, test_failure_callback=None,
+        self,
+        al: "All",
+        correct: Letter,
+        learning=None,
+        test_success_callback=None,
+        test_failure_callback=None,
     ):
-        super().__init__(al, correct, learning, test_success_callback, test_failure_callback)
+        super().__init__(
+            al, correct, learning, test_success_callback, test_failure_callback
+        )
         self.number_of_distr: int = 15
 
         self.distractors: List[Letter] = self.select_distractors()

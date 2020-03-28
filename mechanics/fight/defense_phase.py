@@ -52,6 +52,7 @@ class DefensePhase(object):
                     test_success_callback=self.pass_test,
                     test_failure_callback=self.fails_test,
                     will_hurt=False,
+                    shows_timer=4,
                 )
             elif self.fight.current_step == FightStep.DEFENSE_PHASE_END_MESSAGE.value:
                 # if self.fight.player.hp == 0:
