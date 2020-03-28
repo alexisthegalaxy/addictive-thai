@@ -2,18 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2744141-60d6-4c70-95ad-395cf2337863" name="Default Changelist" comment="database">
-      <change beforePath="$PROJECT_DIR$/all.py" beforeDir="false" afterPath="$PROJECT_DIR$/all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insert_sentence.py" beforeDir="false" afterPath="$PROJECT_DIR$/insert_sentence.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insert_words.py" beforeDir="false" afterPath="$PROJECT_DIR$/insert_words.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexicon/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/lexicon/tests/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mechanics/fight/attack_phase.py" beforeDir="false" afterPath="$PROJECT_DIR$/mechanics/fight/attack_phase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mechanics/fight/defense_phase.py" beforeDir="false" afterPath="$PROJECT_DIR$/mechanics/fight/defense_phase.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mechanics/fight/fight_steps.py" beforeDir="false" afterPath="$PROJECT_DIR$/mechanics/fight/fight_steps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mechanics/fight/fighter.py" beforeDir="false" afterPath="$PROJECT_DIR$/mechanics/fight/fighter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mechanics/fight/powers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mechanics/fight/powers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mechanics/fight/tones_effects.py" beforeDir="false" afterPath="$PROJECT_DIR$/mechanics/fight/tones_effects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/npc/import_npcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc/import_npcs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/cells.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_image_files/full_map.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/full_map.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_image_files/full_map.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/full_map.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_image_files/postmap.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/postmap.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/chatturat" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/chatturat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/chumphae" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/chumphae" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/map_text_files/postmap" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/postmap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ow/overworld.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/overworld.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thai.db" beforeDir="false" afterPath="$PROJECT_DIR$/thai.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/import_images_and_fonts.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/import_images_and_fonts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ui.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,20 +86,11 @@
   <component name="FileEditorManager">
     <splitter split-orientation="horizontal" split-proportion="0.6950523">
       <split-first>
-        <splitter split-orientation="horizontal" split-proportion="0.6136986">
+        <splitter split-orientation="horizontal" split-proportion="0.6552632">
           <split-first>
             <splitter split-orientation="vertical" split-proportion="0.4210993">
               <split-first>
                 <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-                  <file pinned="false" current-in-tab="false">
-                    <entry file="file://$PROJECT_DIR$/ui/import_images_and_fonts.py">
-                      <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="3390">
-                          <caret line="234" selection-start-line="234" selection-end-line="234" />
-                        </state>
-                      </provider>
-                    </entry>
-                  </file>
                   <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/main.py">
                       <provider selected="true" editor-type-id="text-editor">
@@ -111,11 +103,11 @@
                       </provider>
                     </entry>
                   </file>
-                  <file pinned="false" current-in-tab="false">
+                  <file pinned="false" current-in-tab="true">
                     <entry file="file://$PROJECT_DIR$/ui/ui.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="179">
-                          <caret line="77" column="9" lean-forward="true" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
+                        <state relative-caret-position="232">
+                          <caret line="69" column="35" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="35" />
                           <folding>
                             <element signature="e#0#11#0" expanded="true" />
                           </folding>
@@ -139,7 +131,7 @@
                     <entry file="file://$PROJECT_DIR$/mechanics/fight/fight_steps.py">
                       <provider selected="true" editor-type-id="text-editor">
                         <state relative-caret-position="135">
-                          <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+                          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
                         </state>
                       </provider>
                     </entry>
@@ -168,11 +160,11 @@
                       </provider>
                     </entry>
                   </file>
-                  <file pinned="false" current-in-tab="true">
+                  <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/models.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="127">
-                          <caret line="34" column="59" lean-forward="true" selection-start-line="34" selection-start-column="59" selection-end-line="34" selection-end-column="59" />
+                        <state relative-caret-position="232">
+                          <caret line="41" column="7" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
                           <folding>
                             <element signature="e#0#29#0" expanded="true" />
                           </folding>
@@ -183,11 +175,15 @@
                   <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/ow/overworld.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="4260">
-                          <caret line="297" column="32" selection-start-line="297" selection-start-column="32" selection-end-line="297" selection-end-column="32" />
+                        <state relative-caret-position="178">
+                          <caret line="296" column="22" lean-forward="true" selection-start-line="296" selection-start-column="22" selection-end-line="296" selection-end-column="22" />
                           <folding>
                             <element signature="e#0#29#0" expanded="true" />
-                            <element signature="e#683#1038#0" />
+                            <element signature="e#7061#8341#0" />
+                            <element signature="e#8380#8669#0" />
+                            <element signature="e#8717#9005#0" />
+                            <element signature="e#9034#9237#0" />
+                            <element signature="e#13585#26908#0" />
                           </folding>
                         </state>
                       </provider>
@@ -258,7 +254,7 @@
                     <entry file="file://$PROJECT_DIR$/mechanics/fight/tones_effects.py">
                       <provider selected="true" editor-type-id="text-editor">
                         <state relative-caret-position="217">
-                          <caret line="133" column="28" lean-forward="true" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
+                          <caret line="133" column="28" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
                         </state>
                       </provider>
                     </entry>
@@ -266,8 +262,8 @@
                   <file pinned="false" current-in-tab="true">
                     <entry file="file://$PROJECT_DIR$/insert_sentence.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="353">
-                          <caret line="237" column="16" lean-forward="true" selection-start-line="237" selection-start-column="16" selection-end-line="237" selection-end-column="17" />
+                        <state relative-caret-position="197">
+                          <caret line="220" column="57" selection-start-line="220" selection-start-column="57" selection-end-line="220" selection-end-column="57" />
                         </state>
                       </provider>
                     </entry>
@@ -276,7 +272,7 @@
                     <entry file="file://$PROJECT_DIR$/insert_words.py">
                       <provider selected="true" editor-type-id="text-editor">
                         <state relative-caret-position="413">
-                          <caret line="431" lean-forward="true" selection-start-line="431" selection-end-line="431" />
+                          <caret line="431" selection-start-line="431" selection-end-line="431" />
                         </state>
                       </provider>
                     </entry>
@@ -292,8 +288,8 @@
                   <file pinned="false" current-in-tab="true">
                     <entry file="file://$PROJECT_DIR$/mechanics/fight/attack_phase.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="168">
-                          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
+                        <state relative-caret-position="266">
+                          <caret line="120" selection-start-line="120" selection-end-line="120" />
                           <folding>
                             <element signature="e#0#11#0" expanded="true" />
                           </folding>
@@ -347,8 +343,8 @@
                   <file pinned="false" current-in-tab="true">
                     <entry file="file://$PROJECT_DIR$/mechanics/fight/defense_phase.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="96">
-                          <caret line="122" selection-start-line="122" selection-end-line="122" />
+                        <state relative-caret-position="111">
+                          <caret line="123" column="40" lean-forward="true" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="40" />
                           <folding>
                             <element signature="e#0#11#0" expanded="true" />
                           </folding>
@@ -446,7 +442,7 @@
             <entry file="file://$PROJECT_DIR$/npc/import_npcs.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="400">
-                  <caret line="2038" column="28" selection-start-line="2038" selection-start-column="28" selection-end-line="2038" selection-end-column="28" />
+                  <caret line="2044" column="28" selection-start-line="2044" selection-start-column="28" selection-end-line="2044" selection-end-column="28" />
                   <folding>
                     <element signature="e#0#31#0" expanded="true" />
                   </folding>
@@ -499,14 +495,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>flinched</find>
-      <find>1.25</find>
-      <find>number_of_poisons</find>
-      <find>poison_strength</find>
-      <find>Sorry</find>
-      <find>กลาย-เป็น</find>
-      <find>insert_word</find>
-      <find>กลายเป็น</find>
       <find>กลัว</find>
       <find>ดู</find>
       <find>รู้</find>
@@ -529,6 +517,14 @@
       <find>เล่ม</find>
       <find>ง่ว</find>
       <find>classi</find>
+      <find>花</find>
+      <find>(100, 100, 100)</find>
+      <find>泰</find>
+      <find>buddha_statue</find>
+      <find>house_4x4</find>
+      <find>class Cell</find>
+      <find>cells_to_draw_again_on_top</find>
+      <find>levitating</find>
     </findStrings>
     <replaceStrings>
       <replace>victory_dialog</replace>
@@ -597,8 +593,6 @@
         <option value="$PROJECT_DIR$/npc/npc_default_text.py" />
         <option value="$PROJECT_DIR$/lexicon/test_services.py" />
         <option value="$PROJECT_DIR$/mechanics/fight/pick_weapon_phase.py" />
-        <option value="$PROJECT_DIR$/ui/ui.py" />
-        <option value="$PROJECT_DIR$/ui/import_images_and_fonts.py" />
         <option value="$PROJECT_DIR$/ow/learner.py" />
         <option value="$PROJECT_DIR$/mechanics/fight/opponent.py" />
         <option value="$PROJECT_DIR$/lexicon/tests/grid_test.py" />
@@ -609,11 +603,9 @@
         <option value="$PROJECT_DIR$/mechanics/fight/pick_weapon.py" />
         <option value="$PROJECT_DIR$/npc/npc.py" />
         <option value="$PROJECT_DIR$/ow/form_links.py" />
-        <option value="$PROJECT_DIR$/ow/overworld.py" />
         <option value="$PROJECT_DIR$/models.py" />
         <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/mechanics/fight/fight_steps.py" />
-        <option value="$PROJECT_DIR$/npc/import_npcs.py" />
         <option value="$PROJECT_DIR$/all.py" />
         <option value="$PROJECT_DIR$/lexicon/tests/tests.py" />
         <option value="$PROJECT_DIR$/mechanics/fight/tones_effects.py" />
@@ -624,6 +616,10 @@
         <option value="$PROJECT_DIR$/insert_words.py" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/insert_sentence.py" />
+        <option value="$PROJECT_DIR$/ui/import_images_and_fonts.py" />
+        <option value="$PROJECT_DIR$/ow/overworld.py" />
+        <option value="$PROJECT_DIR$/ui/ui.py" />
+        <option value="$PROJECT_DIR$/npc/import_npcs.py" />
       </list>
     </option>
   </component>
@@ -745,7 +741,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.insert_sentence">
+  <component name="RunManager" selected="Python.main">
     <configuration name="aliens" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="thai" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -865,11 +861,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main" />
+        <item itemvalue="Python.derive_from_mothermap" />
         <item itemvalue="Python.insert_sentence" />
         <item itemvalue="Python.insert_words" />
-        <item itemvalue="Python.main" />
         <item itemvalue="Python.aliens" />
-        <item itemvalue="Python.derive_from_mothermap" />
       </list>
     </recent_temporary>
   </component>
@@ -1013,18 +1009,18 @@
       <workItem from="1584990233776" duration="10648000" />
       <workItem from="1585077049706" duration="6490000" />
       <workItem from="1585175240563" duration="4393000" />
-      <workItem from="1585343940134" duration="19600000" />
+      <workItem from="1585343940134" duration="22616000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1198970000" />
+    <option name="totallyTimeSpent" value="1201986000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-583" y="-1417" width="2560" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16521049" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1310564" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -1143,7 +1139,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/npc/import_npcs.py</url>
-          <line>476</line>
+          <line>477</line>
           <option name="timeStamp" value="217" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -1165,6 +1161,11 @@
           <url>file://$PROJECT_DIR$/insert_sentence.py</url>
           <line>239</line>
           <option name="timeStamp" value="229" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui/ui.py</url>
+          <line>71</line>
+          <option name="timeStamp" value="235" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -1188,10 +1189,10 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thai$generate_postmap.coverage" NAME="generate_postmap Coverage Results" MODIFIED="1569446036174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
     <SUITE FILE_PATH="coverage/thai$aliens.coverage" NAME="aliens Coverage Results" MODIFIED="1584797663899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/lib/python3.7/site-packages/pygame/examples" />
-    <SUITE FILE_PATH="coverage/thai$main.coverage" NAME="main Coverage Results" MODIFIED="1585423585632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$main.coverage" NAME="main Coverage Results" MODIFIED="1585438601011" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$grammar.coverage" NAME="grammar Coverage Results" MODIFIED="1558568821172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$sound_processing.coverage" NAME="sound_processing Coverage Results" MODIFIED="1570047067785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sounds/thai" />
-    <SUITE FILE_PATH="coverage/thai$derive_from_mothermap.coverage" NAME="derive_from_mothermap Coverage Results" MODIFIED="1584200851211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
+    <SUITE FILE_PATH="coverage/thai$derive_from_mothermap.coverage" NAME="derive_from_mothermap Coverage Results" MODIFIED="1585437805468" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
     <SUITE FILE_PATH="coverage/thai$ooo.coverage" NAME="ooo Coverage Results" MODIFIED="1565365780921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$insert_words.coverage" NAME="insert_words Coverage Results" MODIFIED="1585432323289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$models.coverage" NAME="models Coverage Results" MODIFIED="1582662261954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -1216,15 +1217,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/letters">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="8e3b13b6-5753-4437-8f75-e882842f7f13">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lexicon/spell_identification.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
@@ -1325,17 +1317,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3390">
           <caret line="234" selection-start-line="234" selection-end-line="234" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ow/overworld.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4260">
-          <caret line="297" column="32" selection-start-line="297" selection-start-column="32" selection-end-line="297" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-            <element signature="e#683#1038#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1464,16 +1445,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="77" column="9" lean-forward="true" selection-start-line="77" selection-start-column="9" selection-end-line="77" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/npc/npc.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="166">
@@ -1543,7 +1514,7 @@
     <entry file="file://$PROJECT_DIR$/npc/import_npcs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
-          <caret line="2038" column="28" selection-start-line="2038" selection-start-column="28" selection-end-line="2038" selection-end-column="28" />
+          <caret line="2044" column="28" selection-start-line="2044" selection-start-column="28" selection-end-line="2044" selection-end-column="28" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -1559,18 +1530,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mechanics/fight/attack_phase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mechanics/fight/defense_phase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="122" selection-start-line="122" selection-end-line="122" />
+        <state relative-caret-position="266">
+          <caret line="120" selection-start-line="120" selection-end-line="120" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
@@ -1580,14 +1541,14 @@
     <entry file="file://$PROJECT_DIR$/mechanics/fight/fight_steps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="33" lean-forward="true" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mechanics/fight/tones_effects.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="217">
-          <caret line="133" column="28" lean-forward="true" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
+          <caret line="133" column="28" selection-start-line="133" selection-start-column="28" selection-end-line="133" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -1604,7 +1565,7 @@
     <entry file="file://$PROJECT_DIR$/insert_words.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="413">
-          <caret line="431" lean-forward="true" selection-start-line="431" selection-end-line="431" />
+          <caret line="431" selection-start-line="431" selection-end-line="431" />
         </state>
       </provider>
     </entry>
@@ -1620,6 +1581,30 @@
             <filter text="" />
             <filter text="english like '%like wooden chopsticks%'" />
           </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="41" column="7" selection-start-line="41" selection-start-column="7" selection-end-line="41" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/insert_sentence.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="220" column="57" selection-start-line="220" selection-start-column="57" selection-end-line="220" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/cells.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="71" column="2" lean-forward="true" selection-start-line="71" selection-start-column="2" selection-end-line="71" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1641,19 +1626,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/insert_sentence.py">
+    <entry file="file://$PROJECT_DIR$/ow/overworld.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="237" column="16" lean-forward="true" selection-start-line="237" selection-start-column="16" selection-end-line="237" selection-end-column="17" />
+        <state relative-caret-position="178">
+          <caret line="296" column="22" lean-forward="true" selection-start-line="296" selection-start-column="22" selection-end-line="296" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#7061#8341#0" />
+            <element signature="e#8380#8669#0" />
+            <element signature="e#8717#9005#0" />
+            <element signature="e#9034#9237#0" />
+            <element signature="e#13585#26908#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models.py">
+    <entry file="file://$PROJECT_DIR$/ui/ui.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="34" column="59" lean-forward="true" selection-start-line="34" selection-start-column="59" selection-end-line="34" selection-end-column="59" />
+        <state relative-caret-position="232">
+          <caret line="69" column="35" selection-start-line="69" selection-start-column="35" selection-end-line="69" selection-end-column="35" />
           <folding>
-            <element signature="e#0#29#0" expanded="true" />
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mechanics/fight/defense_phase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="123" column="40" lean-forward="true" selection-start-line="123" selection-start-column="40" selection-end-line="123" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -356,4 +356,5 @@ def get_sprites():
         "arena_sign": pygame.image.load(f"{dir_path}/../ow/sprites/arena_sign.bmp"),
         "shop_sign": pygame.image.load(f"{dir_path}/../ow/sprites/shop_sign.bmp"),
         "field": pygame.image.load(f"{dir_path}/../ow/sprites/field.bmp"),
+        "house_4x4": pygame.image.load(f"{dir_path}/../ow/sprites/house_4x4.png"),
     }

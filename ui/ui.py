@@ -61,10 +61,15 @@ class Ui(object):
         self.m = False
         self.escape = False
 
-    def can_draw_cell(self, x: int, y: int):
-        min_x = -self.cell_size
-        min_y = -self.cell_size
-        return min_x <= x <= self.width and min_y <= y <= self.height
+    def can_draw_cell(self, x: int, y: int, cell_is_special=False):
+        if not cell_is_special:
+            min_x = -self.cell_size
+            min_y = -self.cell_size
+            return min_x <= x <= self.width and min_y <= y <= self.height
+        min_x = -self.cell_size * 4
+        min_y = -self.cell_size * 4
+        result = min_x <= x <= self.width * 3 and min_y <= y <= self.height * 3
+        return result
 
     def percent_height(self, ratio):
         return int(ratio * self.height)

@@ -25,7 +25,7 @@ VOID_COLOR = (0, 0, 0)
 
 
 class CellType(object):
-    def __init__(self, letter, name, color, walkable, encounter_rate, postcolor):
+    def __init__(self, letter, name, color, walkable, encounter_rate, postcolor, special_shape=None, special_offset=None):
         self.letter = letter
         self.name = name
         self.color = color
@@ -34,6 +34,8 @@ class CellType(object):
         self.postcolor = (
             postcolor
         )  # the color used for transforming the map into the postmap
+        self.special_shape = special_shape
+        self.offset_x, self.offset_y = special_offset if special_offset else (0, 0)
 
 
 class CellTypes:
@@ -138,6 +140,9 @@ class CellTypes:
     field = CellType("畑", "field", (225, 232, 168), True, 0.4, PATH_COLOR)
     sand = CellType("砂", "sand", (255, 218, 105), True, 0, PATH_COLOR)
     buddha_statue = CellType("仏", "buddha_statue", (255, 215, 54), False, 0, WALL_COLOR)
+
+    house_4x4 = CellType("泰", "house_4x4", (100, 100, 100), False, 0, WALL_COLOR, special_shape="0000_0000_0000_0100", special_offset=(1, 2))
+
     none = CellType("無", "none", (0, 0, 0), False, 0, (0, 0, 0))
 
 
@@ -154,9 +159,10 @@ class Cell(object):
         self.typ: CellType = typ
         self.goes_to = None  # can be a tuple (Map, x, y)
         self.trigger = None  # Can be a tuple ('event', None) or ('event')
+        self.unwalkable = False  # True if a cell around it is a big formation (ex: house_4x4)
 
     def walkable(self) -> bool:
-        return self.typ.walkable
+        return self.typ.walkable and not self.unwalkable
 
 
 class Occurrence(object):
@@ -273,25 +279,33 @@ class Ma(object):
             offset_x += movement_offset_x * al.ui.cell_size
             offset_y += movement_offset_y * al.ui.cell_size
         time_type = _get_time_type()
-        for cell_y in range(max(learner_y - 5, 0), learner_y + 6):
-            for cell_x in range(max(learner_x - 8, 0), learner_x + 9):
+        cells_to_draw_again_on_top = []
+        for cell_y in range(max(learner_y - 5 - 2, 0), learner_y + 6 + 2):
+            for cell_x in range(max(learner_x - 8 - 2, 0), learner_x + 9 + 2):
                 cell = self.get_cell_at(cell_x, cell_y)
                 if not cell:
                     continue
-                x = cell_x * al.ui.cell_size + offset_x
-                y = cell_y * al.ui.cell_size + offset_y
-                if al.ui.can_draw_cell(x, y):
-                    name = cell.typ.name
-                    if name[0] == "_":
-                        name = f"{name}_{time_type}"
-                    if name in al.ui.sprites:
-                        al.ui.screen.blit(al.ui.sprites[name], [x, y])
-                    else:
-                        pygame.draw.rect(
-                            al.ui.screen,
-                            cell.typ.color,
-                            pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
-                        )
+                if cell.typ.special_shape:
+                    cells_to_draw_again_on_top.append(cell)
+                self.maybe_draw_cell(al, cell, offset_x, offset_y, time_type)
+        for cell_to_draw_again_on_top in cells_to_draw_again_on_top:
+            self.maybe_draw_cell(al, cell_to_draw_again_on_top, offset_x, offset_y, time_type)
+
+    def maybe_draw_cell(self, al, cell, offset_x, offset_y, time_type):
+        x = (cell.x - cell.typ.offset_x) * al.ui.cell_size + offset_x
+        y = (cell.y - cell.typ.offset_y) * al.ui.cell_size + offset_y
+        if al.ui.can_draw_cell(x, y, cell_is_special=cell.typ.special_shape):
+            name = cell.typ.name
+            if name[0] == "_":
+                name = f"{name}_{time_type}"
+            if name in al.ui.sprites:
+                al.ui.screen.blit(al.ui.sprites[name], [x, y])
+            else:
+                pygame.draw.rect(
+                    al.ui.screen,
+                    cell.typ.color,
+                    pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
+                )
 
     def get_cell_at(self, x, y) -> Optional[Cell]:
         try:

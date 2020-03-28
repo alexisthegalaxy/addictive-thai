@@ -186,6 +186,7 @@ def chumphae_lomsak(al):
             sprite="monk_levitating",
             direction=Direction.DOWN,
             standard_dialog=["..."],
+            wobble=True,
         ),
         Npc(
             al=al,
@@ -904,6 +905,7 @@ def chumphae_khonkaen(al):
             sprite="monk_levitating",
             direction=Direction.DOWN,
             standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+            wobble=True,
         ),
         Npc(
             al=al,
@@ -914,6 +916,7 @@ def chumphae_khonkaen(al):
             sprite="monk_levitating",
             direction=Direction.RIGHT,
             standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+            wobble=True,
         ),
         Npc(
             al=al,
@@ -924,6 +927,7 @@ def chumphae_khonkaen(al):
             sprite="monk_levitating",
             direction=Direction.UP,
             standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+            wobble=True,
         ),
         Npc(
             al=al,
@@ -934,6 +938,7 @@ def chumphae_khonkaen(al):
             sprite="monk_levitating",
             direction=Direction.UP,
             standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+            wobble=True,
         ),
         Npc(
             al=al,
@@ -944,6 +949,7 @@ def chumphae_khonkaen(al):
             sprite="monk_levitating",
             direction=Direction.RIGHT,
             standard_dialog=["นะโม ตัสสะ ภะคะวะโต อะระหะโต สัมมาสัมพุทธัสสะ"],
+            wobble=True,
         ),
     ]
     for npc in npcs:
