@@ -41,7 +41,7 @@ class All:
         if self.active_battle:
             self.active_battle.tick()
             self.active_battle.opponent_play()
-        if self.active_test and self.active_test.shows_timer:
+        if self.active_test and self.active_test.allowed_time:
             if self.active_test.is_timer_over():
                 self.active_test.fails()
         for npc in self.mas.current_map.npcs:

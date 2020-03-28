@@ -128,7 +128,7 @@ class Test(object):
         test_success_callback=None,
         test_failure_callback=None,
         will_hurt=True,
-        shows_timer=None,
+        allowed_time=None,
     ):
         self.al = al
         self.correct = None
@@ -139,7 +139,7 @@ class Test(object):
         self.will_hurt = will_hurt
         self.has_audio_property = False
 
-        self.shows_timer = shows_timer
+        self.allowed_time = allowed_time
         self.starting_time = time.time()
 
     def draw(self):
@@ -149,7 +149,7 @@ class Test(object):
         pass
 
     def draw_background(self):
-        if self.shows_timer:
+        if self.allowed_time:
             self.draw_background_timer()
         else:
             ui = self.al.ui
@@ -162,7 +162,7 @@ class Test(object):
             pygame.draw.rect(screen, (0, 0, 0), [x, y, width, height], 1)
 
     def is_timer_over(self):
-        return time.time() - self.starting_time > self.shows_timer
+        return time.time() - self.starting_time > self.allowed_time
 
     def draw_background_timer(self):
         ui = self.al.ui
@@ -172,7 +172,7 @@ class Test(object):
         height = ui.percent_height(0.8)
         width = ui.percent_width(0.8)
 
-        time_ratio = min((time.time() - self.starting_time) / self.shows_timer, 1)
+        time_ratio = min((time.time() - self.starting_time) / self.allowed_time, 1)
         y_ratio = int(height * time_ratio)
         one_minus_y_ratio = int(height * (1 - time_ratio))
 
@@ -365,7 +365,7 @@ class ThaiFromEnglish(Test):
         test_success_callback=None,
         test_failure_callback=None,
         will_hurt=True,
-        shows_timer=None,
+        allowed_time=None,
     ):
         super().__init__(
             al,
@@ -373,7 +373,7 @@ class ThaiFromEnglish(Test):
             test_success_callback,
             test_failure_callback,
             will_hurt,
-            shows_timer,
+            allowed_time,
         )
         self.correct: Word = correct
         self.number_of_distr: int = 3
@@ -534,7 +534,7 @@ class ThaiFromEnglish6(ThaiFromEnglish):
         test_success_callback=None,
         test_failure_callback=None,
         will_hurt=True,
-        shows_timer=None,
+        allowed_time=None,
     ):
         super().__init__(
             al,
@@ -543,7 +543,7 @@ class ThaiFromEnglish6(ThaiFromEnglish):
             test_success_callback,
             test_failure_callback,
             will_hurt,
-            shows_timer,
+            allowed_time,
         )
         self.number_of_distr: int = 5
 

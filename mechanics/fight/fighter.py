@@ -12,8 +12,22 @@ class Fighter(object):
         self.speed = (
             1
         )  # will attack every 1 turn. if speed = 2, will only attack once every two turns
-        self.active_healing = 0  # TODO
+        self.active_healing = 0
         self.flinched = False
         self.flinching_resistance = (
             10
         )  # similar to time: the higher, the lesser the probability to suffer it
+        self.number_of_poisons = 0  # the more poisons you have, the more damage you take each turn
+        self.poison_strength = 1  # the multiplier applied to the opponent's number of poisons to compute the damage
+
+    def heals(self, amount) -> float:
+        future_hp = min(self.hp + amount, self.max_hp)
+        healed_amount = future_hp - self.hp
+        self.hp = future_hp
+        return healed_amount
+
+    def gets_damaged(self, amount) -> float:
+        future_hp = max(self.hp - amount, 0)
+        damage = self.hp - future_hp
+        self.hp = future_hp
+        return damage

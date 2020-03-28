@@ -55,13 +55,14 @@ def find_word(thai):
         return None
 
 
-def insert_word(thai, english, tones, split_form):
+def insert_word(split_form, english, tones):
+    thai = split_form.replace('-', '').replace('_', '')
     if not find_word(thai):
         c.execute(f"INSERT INTO words (thai, english, tones, split_form) VALUES ('{thai}', '{english}', '{tones}', '{split_form}')")
         conn.commit()
 
 
-insert_word(thai='เล็ก', english='small', tones='H', split_form='เล็ก')
+# insert_word(thai='เล็ก', english='small', tones='H', split_form='เล็ก')
 
 
 # # # insert_word('เอา-เถอะ', 'okay, alright', 'ML')
@@ -390,9 +391,45 @@ insert_word(thai='เล็ก', english='small', tones='H', split_form='เล�
 # # # insert_word('ภา-ษา-อัง-กฤษ', 'English language', 'MRML')
 # # # insert_word('เยอ-ร-ม-นี', 'Germany', 'MHHM')
 # insert_word('อเ-ม-ริ-กัน', 'American', 'LMHM')
-insert_word('สัตว์-เลื้อย-คลาน', 'reptile', 'LHM')
-insert_word('สกปรก', 'dirty', 'LLL')
-#
+# insert_word('สัตว์-เลื้อย-คลาน', 'reptile', 'LHM')
+# insert_word('สก-ปรก', 'dirty', 'LLL')
+# insert_word('ตะ-เกียบ', 'chopsticks', 'LLL')
+# insert_word('ตะ-เกียบ', 'chopsticks', 'LL')
+# insert_word('ครอบ-ครัว', 'family', 'FM')
+# insert_word('ห้อง-ครัว', 'kitchen', 'FM')
+# insert_word('ส-กุล', 'family, ancestor, lineage', 'LM')
+# insert_word('มาก', 'very', 'F')
+# insert_word('กลัว', 'to fear', 'M')
+# insert_word('ดู', 'to watch, look', 'M')
+# insert_word('รอ', 'to watch, look', 'M')
+# insert_word('รู้', 'to know', 'H')
+# insert_word('รอ', 'to wait', 'M')
+# insert_word('ตาย', 'to die', 'M')
+# insert_word('ลา-ก่อน', 'to say goodbye, leave', 'ML')
+# insert_word('พบ', 'to find, meet, discover', 'H')
+# insert_word('ขึ้น', 'to enter', 'F')
+# insert_word('เที่ยว', 'to travel', 'F')
+# insert_word('ความ-หวาน', 'sweetness', 'MR')
+# insert_word('ครั้ง-แรก', 'the first time', 'HF')
+# insert_word('กลาย-เป็น', 'to become', 'MM')
+# insert_word('เด็ก-ๆ', 'children', 'LL')
+# insert_word('เด็ก-ๆ', 'children', 'LL')
+# insert_word('เมื่อ', 'when, as, at', 'F')
+# insert_word('เกิน-ไป', 'too much', 'MM')
+# insert_word('เร็ว-ๆ-นี้', 'soon, recently', 'MMF')
+# insert_word('เวียด-นาม', 'Vietnam', 'FM')
+# insert_word('และ', 'and', 'H')
+# insert_word('ช่วง', 'period, ', 'F')
+# insert_word('ฤ-ดู-หนาว', 'winter, ', 'HMR')
+# insert_word('หนาว', 'cold, ', 'R')
+# insert_word('ฤ-ดู', 'season, ', 'HM')
+# insert_word('ป-ฏิ-เสธ', 'refuse', 'LLL')
+# insert_word('เริ่ม', 'to start, begin', 'F')
+# insert_word('รึ-ป่าว', 'or not', 'HL')
+# insert_word('เล่ม', 'classifier for books, knives, candles', 'F')
+# insert_word('ทํา-งาน', 'to work', 'MM')
+insert_word('ง่วง-นอน', 'sleepy', 'FM')
+
 # # # # get a single row
 # # # print('all')
 # # # c.execute('SELECT * FROM cont')

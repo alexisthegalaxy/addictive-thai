@@ -2036,12 +2036,12 @@ def lomsak(al):
             battle_words=[
                 Word.get_by_split_form(battle_word)
                 for battle_word in [
-                    "ใช่",
                     "ภา-ษา",
-                    "ภา-ษา-อัง-กฤษ",
                     "ได้",
+                    "ใช่",
                     "เรียน",
                     "พูด",
+                    "ภา-ษา-อัง-กฤษ",
                     "ของ",
                     "เรียน",
                 ]

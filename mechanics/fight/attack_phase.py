@@ -3,7 +3,7 @@ import time
 
 from mechanics.fight.fight_steps import FightStep
 from mechanics.fight.pick_weapon import PickWeapon
-from mechanics.fight.powers import perform_attack, apply_effects
+from mechanics.fight.powers import perform_attack, apply_effects, maybe_perform_attack
 from npc.npc_default_text import draw_text
 
 
@@ -121,14 +121,10 @@ class AttackPhase(object):
 
         self.al.ui.space = False
         self.draw_text_since = time.time()
-
-        # self.fight.active_phase = DefensePhase(self.al, self.fight)
-        # self.fight.active_phase.draw_text_since = time.time()
-        # self.fight.attack_phase = None
         self.fight.increase_round()
 
     def perform_attack_and_apply_effects(self):
-        self.opponent_takes_damage = perform_attack(
+        self.opponent_takes_damage = maybe_perform_attack(
             self.chosen_weapon_effects, attacker=self.player, receiver=self.opponent
         )
         self.special_effects_text = apply_effects(
