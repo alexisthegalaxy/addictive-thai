@@ -5,7 +5,7 @@ from form_links import form_links
 from lexicon.dex import Dex
 from mechanics.minimap import Minimap
 from ui.ui import Ui
-from weather.weather import no_weather, plane_crashing
+from weather.weather import Weather
 
 
 class All:
@@ -36,11 +36,16 @@ class All:
         self.dex: Dex = None
         self.active_minimap: Minimap = None
         self.bag: Bag = Bag()
-        self.weather = no_weather
+        # self.weather = no_weather
+        self.weather = Weather(
+            al=self,
+            # rain=True,
+        )
         # self.weather = plane_crashing
 
     def tick_activity(self):
         # Called at every tick
+        self.weather.tick(self)
         if self.active_battle:
             self.active_battle.tick()
             self.active_battle.opponent_play()
