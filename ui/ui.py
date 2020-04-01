@@ -14,15 +14,21 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class Fonts(object):
     def __init__(self):
-        self.garuda64 = pygame.font.Font(f"{dir_path}/../fonts/Garuda.ttf", 64)
-        self.garuda48 = pygame.font.Font(f"{dir_path}/../fonts/Garuda.ttf", 48)
-        self.garuda32 = pygame.font.Font(f"{dir_path}/../fonts/Garuda.ttf", 32)
-        self.garuda16 = pygame.font.Font(f"{dir_path}/../fonts/Garuda.ttf", 16)
-        self.garuda24 = pygame.font.Font(f"{dir_path}/../fonts/Garuda.ttf", 24)
-        self.garuda28 = pygame.font.Font(f"{dir_path}/../fonts/Garuda.ttf", 28)
-        self.setha64 = pygame.font.Font(f"{dir_path}/../fonts/JS-Setha-Normal.ttf", 64)
-        self.setha32 = pygame.font.Font(f"{dir_path}/../fonts/JS-Setha-Normal.ttf", 32)
-        self.setha16 = pygame.font.Font(f"{dir_path}/../fonts/JS-Setha-Normal.ttf", 16)
+        # garuda_path = f"{dir_path}/../fonts/Garuda.ttf"
+        # setha_path = f"{dir_path}/../fonts/JS-Setha-Normal.ttf"
+        garuda_path = f"{dir_path}/../fonts/Sarabun-Medium.ttf"
+        # garuda_path = f"{dir_path}/../fonts/NotoSans-Medium.ttf"
+        # garuda_path = f"{dir_path}/../fonts/Calibri Regular.ttf"
+        setha_path = f"{dir_path}/../fonts/Garuda.ttf"
+        self.garuda64 = pygame.font.Font(garuda_path, 64)
+        self.garuda48 = pygame.font.Font(garuda_path, 48)
+        self.garuda32 = pygame.font.Font(garuda_path, 32)
+        self.garuda16 = pygame.font.Font(garuda_path, 16)
+        self.garuda24 = pygame.font.Font(garuda_path, 24)
+        self.garuda28 = pygame.font.Font(garuda_path, 28)
+        self.setha64 = pygame.font.Font(setha_path, 64)
+        self.setha32 = pygame.font.Font(setha_path, 32)
+        self.setha16 = pygame.font.Font(setha_path, 16)
 
 
 class Ui(object):

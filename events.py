@@ -1,7 +1,7 @@
 from bag.item import Item
 from direction import Direction
 from follower import Follower
-from lexicon.items import Word
+from lexicon.items import Word, Letter
 from models import set_event, get_event_status, get_xp_for_word
 
 # These are called by the function execute_event
@@ -182,6 +182,63 @@ def _talk_to_sushi_0(al: "All"):
     set_event('sushi_is_following', 1)
     # Remove sushi
     al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "sushi"]
+
+
+def _talked_to_nim_in_plane_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
+
+    new_nim_teaching_second_letter = Npc(
+        al=al,
+        name="Nim",
+        taught=Letter.get_by_thai("า"),
+        ma=al.mas.get_map_from_name("plane"),
+        x=8,
+        y=7,
+        sprite="nim",
+        direction=Direction.RIGHT,
+        wanna_meet=True,
+        eyesight=1,
+        standard_dialog=[
+            "Nim: Good, that was your first letter.",
+            "After the most common consonnant, here's the most common vowel:",
+            "า is the vowel 'ā' (ā), and note the accent on top, meaning it's a long vowel.",
+            "Thai has a short 'a' (-ั) and a long 'ā' (า)",
+            "It's easy to use it: นา = 'nā'.",
+        ],
+        defeat_dialog=[
+            "It's easy to remember:",
+            "า looks like the letter A but without the left part and the bar.",
+        ],
+        end_dialog_trigger_event=["talked_to_nim_in_plane"],
+    )
+    al.mas.current_map.add_npc(new_nim_teaching_second_letter)
+
+
+def _talked_to_nim_in_plane_1(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
+    # TODO: set weather to shaking and red
+    new_nim_teaching_second_letter = Npc(
+        al=al,
+        name="Nim",
+        ma=al.mas.get_map_from_name("plane"),
+        x=8,
+        y=7,
+        sprite="nim",
+        direction=Direction.RIGHT,
+        wanna_meet=True,
+        eyesight=1,
+        standard_dialog=[
+            "Nim: What was that?",
+            "PA: The plane is experiencing technical difficulties.",
+            "We will attempt a landing.",
+            "Brace for impact!",
+        ],
+        end_dialog_trigger_event=["talked_to_nim_in_plane"],
+    )
+    al.mas.current_map.add_npc(new_nim_teaching_second_letter)
+
+
+
 
 
 # for npc in al.mas.current_map.npcs:

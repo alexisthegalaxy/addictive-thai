@@ -43,6 +43,7 @@ to_convert = [
     "house_rival_f1",
     "lover_house",
     "chaiyaphum_house_1",
+    "plane",
     "chaiyaphum_house_2",
     "house4",
     "house5",

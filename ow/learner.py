@@ -10,7 +10,7 @@ from sounds.play_sound import play_thai_word
 
 
 class Learner(object):
-    def __init__(self, al, name, x=8, y=12, color=(150, 0, 150), learns_letters=True):
+    def __init__(self, al, name, x=8, y=12, color=(150, 0, 150), learns_letters=True, gender=1):
         self.name = name
         set_active_player(name, learns_letters)
         self.sprite = self.name.lower()
@@ -30,6 +30,7 @@ class Learner(object):
         self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
         self.movement: Movement = None
         self.followers = []
+        self.gender = gender
 
     def draw(self, al):
         cell_size = al.ui.cell_size
@@ -42,6 +43,10 @@ class Learner(object):
         else:  # cell_size == 80:
             x = 7 * al.ui.cell_size
             y = 4 * al.ui.cell_size
+
+        x += al.weather.get_offset_x()
+        y += al.weather.get_offset_y()
+
         sprite_name = f"{self.sprite}_{string_from_direction(self.direction)}"
         if sprite_name in al.ui.npc_sprites:
             sprite = al.ui.npc_sprites[sprite_name]

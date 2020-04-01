@@ -4,7 +4,6 @@ import time
 import pygame
 from typing import List, Tuple, Optional, Union
 
-# from all import All
 from direction import string_from_direction, opposite_direction, Direction, dir_equal
 from lexicon.items import Word, Letter
 from lexicon.learning import LetterLearning, WordLearning
@@ -26,6 +25,12 @@ def _get_time_type():
 def _process_dialog(dialog: List[str], al: "All"):
     for i, line in enumerate(dialog):
         dialog[i] = line.replace("[Name]", al.learner.name)
+        if "[sibling_gender_of_player]" in dialog[i]:
+            if al.learner.gender == 0:
+                sibling = "sister"
+            else:
+                sibling = "brother"
+            dialog[i] = line.replace("[sibling_gender_of_player]", sibling)
 
 
 def _can_turn(sprite_type):
@@ -139,8 +144,6 @@ class Npc(object):
     def process_dialog(self, al):
         for dialog in self.dialogs:
             _process_dialog(dialog, al)
-            # for i, line in enumerate(dialog):
-            #     dialog[i] = line.replace("[Name]", al.learner.name)
         if self.taught:
             self.review_dialog[0] = self.review_dialog[0] + f" {self.taught.thai} ?"
 
@@ -349,6 +352,9 @@ class Npc(object):
                 y -= 2
             elif time_type == 3:
                 y -= 1
+
+        x += al.weather.get_offset_x()
+        y += al.weather.get_offset_y()
 
         if sprite:
             al.ui.screen.blit(sprite, [x, y])

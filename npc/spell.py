@@ -1,5 +1,5 @@
 from direction import Direction
-from npc.npc import Npc
+from npc.npc import Npc, _process_dialog
 
 
 class Spell(Npc):
@@ -19,8 +19,9 @@ class Spell(Npc):
 
     def process_dialog(self, al):
         for dialog in self.dialogs:
-            for i, line in enumerate(dialog):
-                dialog[i] = line.replace("[Name]", al.learner.name)
+            _process_dialog(dialog, al)
+            # for i, line in enumerate(dialog):
+            #     dialog[i] = line.replace("[Name]", al.learner.name)
         if self.taught:
             self.review_dialog[0] = (
                 self.review_dialog[0] + f" {self.taught.thai} ?"

@@ -247,6 +247,10 @@ def random_images():
         "brain_4": pygame.image.load(f"{dir_path}/../images/brain_4.png"),
         "brain_5": pygame.image.load(f"{dir_path}/../images/brain_5.png"),
         "brain_6": pygame.image.load(f"{dir_path}/../images/brain_6.png"),
+        "rain_drop_0": pygame.image.load(f"{dir_path}/../images/rain_drop_0.png"),
+        "rain_drop_1": pygame.image.load(f"{dir_path}/../images/rain_drop_1.png"),
+        "rain_drop_2": pygame.image.load(f"{dir_path}/../images/rain_drop_2.png"),
+        "rain_drop_3": pygame.image.load(f"{dir_path}/../images/rain_drop_3.png"),
         "rising": pygame.image.load(f"{dir_path}/../images/rising.png"),
         "mid": pygame.image.load(f"{dir_path}/../images/mid.png"),
         "low": pygame.image.load(f"{dir_path}/../images/low.png"),
@@ -356,5 +360,7 @@ def get_sprites():
         "arena_sign": pygame.image.load(f"{dir_path}/../ow/sprites/arena_sign.bmp"),
         "shop_sign": pygame.image.load(f"{dir_path}/../ow/sprites/shop_sign.bmp"),
         "field": pygame.image.load(f"{dir_path}/../ow/sprites/field.bmp"),
+        "plane_seat": pygame.image.load(f"{dir_path}/../ow/sprites/plane_seat.bmp"),
+        "plane_floor": pygame.image.load(f"{dir_path}/../ow/sprites/plane_floor.bmp"),
         "house_4x4": pygame.image.load(f"{dir_path}/../ow/sprites/house_4x4.png"),
     }

@@ -376,48 +376,53 @@
       <DataType>int|0s</DataType>
       <DefaultExpression>5</DefaultExpression>
     </column>
-    <index id="96" parent="17" name="users_id_uindex">
+    <column id="96" parent="17" name="gender">
+      <Position>9</Position>
+      <DataType>int|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <index id="97" parent="17" name="users_id_uindex">
       <ColNames>id</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="97" parent="17" name="users_pk">
+    <key id="98" parent="17" name="users_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>users_id_uindex</UnderlyingIndexName>
     </key>
-    <column id="98" parent="18" name="id">
+    <column id="99" parent="18" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="99" parent="18" name="sentence_id">
+    <column id="100" parent="18" name="sentence_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="100" parent="18" name="word_id">
+    <column id="101" parent="18" name="word_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="101" parent="18" name="i">
+    <column id="102" parent="18" name="i">
       <Position>4</Position>
       <DataType>smallint|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="102" parent="18" name="word_sentence_id_uindex">
+    <index id="103" parent="18" name="word_sentence_id_uindex">
       <ColNames>id</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="103" parent="18" name="word_sentence_pk">
+    <key id="104" parent="18" name="word_sentence_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>word_sentence_id_uindex</UnderlyingIndexName>
     </key>
-    <foreign-key id="104" parent="18">
+    <foreign-key id="105" parent="18">
       <ColNames>sentence_id</ColNames>
       <RefTableName>sentences</RefTableName>
       <RefKeyName>sentences_pk</RefKeyName>
@@ -425,7 +430,7 @@
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <foreign-key id="105" parent="18">
+    <foreign-key id="106" parent="18">
       <ColNames>word_id</ColNames>
       <RefTableName>words</RefTableName>
       <RefKeyName>cont_pk</RefKeyName>
@@ -433,52 +438,52 @@
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="106" parent="19" name="id">
+    <column id="107" parent="19" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="107" parent="19" name="split_form">
+    <column id="108" parent="19" name="split_form">
       <Position>2</Position>
       <DataType>varchar(120)|0s</DataType>
     </column>
-    <column id="108" parent="19" name="english">
+    <column id="109" parent="19" name="english">
       <Position>3</Position>
       <DataType>varchar(120)|0s</DataType>
     </column>
-    <column id="109" parent="19" name="tones">
+    <column id="110" parent="19" name="tones">
       <Position>4</Position>
       <DataType>varchar(16)|0s</DataType>
     </column>
-    <column id="110" parent="19" name="pos">
+    <column id="111" parent="19" name="pos">
       <Position>5</Position>
       <DataType>varchar(4)|0s</DataType>
     </column>
-    <column id="111" parent="19" name="thai">
+    <column id="112" parent="19" name="thai">
       <Position>6</Position>
       <DataType>varchar(120)|0s</DataType>
     </column>
-    <column id="112" parent="19" name="location_x">
+    <column id="113" parent="19" name="location_x">
       <Position>7</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>-1</DefaultExpression>
     </column>
-    <column id="113" parent="19" name="location_y">
+    <column id="114" parent="19" name="location_y">
       <Position>8</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>-1</DefaultExpression>
     </column>
-    <column id="114" parent="19" name="teaching_order">
+    <column id="115" parent="19" name="teaching_order">
       <Position>9</Position>
       <DataType>float|0s</DataType>
       <DefaultExpression>-1</DefaultExpression>
     </column>
-    <column id="115" parent="19" name="location">
+    <column id="116" parent="19" name="location">
       <Position>10</Position>
       <DataType>varchar(40)|0s</DataType>
       <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <key id="116" parent="19" name="cont_pk">
+    <key id="117" parent="19" name="cont_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>

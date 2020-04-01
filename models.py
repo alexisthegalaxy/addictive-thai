@@ -255,7 +255,7 @@ def load_user_details(al):
 def load_current_x_y_money_hp_ma(al):
     answers = list(
         CURSOR.execute(
-            "SELECT x, y, money, hp, current_map FROM users WHERE is_playing = 1"
+            "SELECT x, y, money, hp, current_map, gender FROM users WHERE is_playing = 1"
         )
     )
     if answers:
@@ -265,6 +265,9 @@ def load_current_x_y_money_hp_ma(al):
         al.learner.hp = answers[0][3]
         al.learner.ma = al.mas.get_map_from_name(answers[0][4])
         al.mas.current_map = al.learner.ma
+        al.learner.gender = answers[0][5]
+        a = al.learner.gender
+        print(al.learner.gender)
 
 
 def create_user_item(learner_id, item_id, quantity):

@@ -1147,3 +1147,5 @@ def form_links(mas):
     mas.chatturat_sikhiu.get_cell_at(33, 58).goes_to = (mas.sikhiu, 45, 11)
     mas.sikhiu.get_cell_at(44, 10).goes_to = (mas.chatturat_sikhiu, 32, 57)
     mas.sikhiu.get_cell_at(45, 10).goes_to = (mas.chatturat_sikhiu, 33, 57)
+
+    mas.ko_kut.get_cell_at(56, 55).goes_to = (mas.plane, 5, 5)

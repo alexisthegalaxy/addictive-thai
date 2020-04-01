@@ -63,6 +63,7 @@ def main_draw(al: All):
     for npc in al.mas.current_map.npcs:
         npc.draw(al)
     al.learner.draw(al)
+    al.weather.draw(al)
     if al.active_npc and not al.active_npc.active_line_index == -1:
         draw_npc_text(al, al.active_npc)
     if al.active_test:
@@ -98,8 +99,8 @@ def main():
         cell_types=CellTypes(),
     )
     al.learner = Learner(al, "Alexis")
-    import_npcs(al)
     load(al)
+    import_npcs(al)
     al.dex = Dex(al)
     # get_links_from_city_word("ดี", al)
     while al.ui.running:

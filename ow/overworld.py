@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 import random
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 import pygame
 
@@ -132,6 +132,8 @@ class CellTypes:
     waterfall = CellType("滝", "_waterfall", (57, 150, 255), True, 0.1, WATER_COLOR)
     bridge_hor = CellType("橋", "bridge_hor", (163, 165, 255), True, 0, WATER_COLOR)
     bridge_ver = CellType("圯", "bridge_ver", (163, 164, 255), True, 0, WATER_COLOR)
+    plane_seat = CellType("機", "plane_seat", (181, 188, 185), False, 0, WALL_COLOR)
+    plane_floor = CellType("翼", "plane_floor", (192, 192, 192), True, 0, PATH_COLOR)
     fence = CellType("垣", "fence", (102, 102, 102), False, 0, WALL_COLOR)
     arena_sign = CellType("競", "arena_sign", (255, 192, 0), False, 0, WALL_COLOR)
     school_sign = CellType("学", "school_sign", (103, 229, 216), False, 0, WALL_COLOR)
@@ -202,7 +204,7 @@ class Occurrence(object):
         self.rates = [rate / total_weight for rate in self.rates]
 
 
-def get_cell_type_dictionary():
+def get_cell_type_dictionary() -> Dict[str, CellType]:
     """
     Produce a dictionary, that given the letter, return the cell type
     """
@@ -248,6 +250,7 @@ class Ma(object):
             "r",
         )
         cell_dictionary = get_cell_type_dictionary()
+        special_cells = []
         for i, line in enumerate(file):
             y += 1
             x = 0
@@ -257,8 +260,13 @@ class Ma(object):
                     cell_type = cell_dictionary[character]
                 except:
                     cell_type = CellTypes.none
-                new_line.append(Cell(x=j, y=i, typ=cell_type))
+                cell = Cell(x=j, y=i, typ=cell_type)
+                new_line.append(cell)
+                if cell_type.special_shape:
+                    special_cells.append(cell)
             self.ma.append(new_line)
+        self.set_cells_in_structures_as_not_walkable(special_cells)
+
         self.width = x
         self.height = y
         self.occ = Occurrence(self)
@@ -267,11 +275,23 @@ class Ma(object):
         self.y_shift = y_shift
         self.trigger_tiles = trigger_tiles or []
 
+    def set_cells_in_structures_as_not_walkable(self, special_cells):
+        for special_cell in special_cells:
+            special_cell_origin_x = special_cell.x - special_cell.typ.offset_x
+            special_cell_origin_y = special_cell.y - special_cell.typ.offset_y
+            for adjacent_cell_y, line in enumerate(special_cell.typ.special_shape.split('_')):
+                # line = "0000"
+                for adjacent_cell_x, is_walkable in enumerate(line):
+                    if is_walkable == "0":
+                        cell = self.get_cell_at(special_cell_origin_x + adjacent_cell_x, special_cell_origin_y + adjacent_cell_y)
+                        if cell:
+                            cell.unwalkable = True
+
     def draw(self, al):
         learner_x = al.learner.x
         learner_y = al.learner.y
-        offset_x = -al.ui.cell_size * (learner_x - 7)
-        offset_y = -al.ui.cell_size * (learner_y - 4)
+        offset_x = -al.ui.cell_size * (learner_x - 7) + al.weather.get_offset_x()
+        offset_y = -al.ui.cell_size * (learner_y - 4) + al.weather.get_offset_y()
 
         if (not al.learner.can_move()) and al.learner.movement:
             al.learner.movement.update()
@@ -463,6 +483,9 @@ class Mas(object):
         )
         self.chaiyaphum_house_1 = Ma(
             filename="chaiyaphum_house_1", mas=self, parent=self.chaiyaphum
+        )
+        self.plane = Ma(
+            filename="plane", mas=self, parent=self.ko_kut
         )
         self.chaiyaphum_house_2 = Ma(
             filename="chaiyaphum_house_2", mas=self, parent=self.chaiyaphum
