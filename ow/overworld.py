@@ -138,12 +138,14 @@ class CellTypes:
     arena_sign = CellType("競", "arena_sign", (255, 192, 0), False, 0, WALL_COLOR)
     school_sign = CellType("学", "school_sign", (103, 229, 216), False, 0, WALL_COLOR)
     palm_tree = CellType("椰", "palm_tree", (131, 148, 102), False, 0, TREE_COLOR)
+    jungle_tree = CellType("棋", "jungle_tree", (69, 88, 35), False, 0, TREE_COLOR)
     shop_sign = CellType("買", "shop_sign", (65, 71, 193), False, 0, WALL_COLOR)
     field = CellType("畑", "field", (225, 232, 168), True, 0.4, PATH_COLOR)
     sand = CellType("砂", "sand", (255, 218, 105), True, 0, PATH_COLOR)
     buddha_statue = CellType("仏", "buddha_statue", (255, 215, 54), False, 0, WALL_COLOR)
 
     house_4x4 = CellType("泰", "house_4x4", (100, 100, 100), False, 0, WALL_COLOR, special_shape="0000_0000_0000_0100", special_offset=(1, 2))
+    big_tree = CellType("杉", "big_tree", (58, 78, 22), False, 0, TREE_COLOR, special_shape="00_00", special_offset=(0, 0))
 
     none = CellType("無", "none", (0, 0, 0), False, 0, (0, 0, 0))
 

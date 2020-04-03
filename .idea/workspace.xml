@@ -2,37 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2744141-60d6-4c70-95ad-395cf2337863" name="Default Changelist" comment="database">
-      <change afterPath="$PROJECT_DIR$/fonts/Sarabun-Medium.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fonts/Sarabun-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/keyboard.xcf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/letter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/blue_spell.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/crashed_plane_0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/crashed_plane_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/crashed_plane_2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/crashed_plane_3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/plane.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/purple_spell.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/spirit_bird.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/spirit_bird.xcf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/teal_spell.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/npc/sprites/yellow_spell.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lightning_strike_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lightning_strike_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/lightning_strike_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/rain_drop_0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/rain_drop_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/rain_drop_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/rain_drop_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/npc/sprites/spirit_gecko.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/npc/sprites/spirit_gecko.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/big_tree.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/house_4x4.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/house_4x4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/house_4x4.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/jungle_tree.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/plane_floor.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/plane_seat.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ow/sprites/temple.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/all.py" beforeDir="false" afterPath="$PROJECT_DIR$/all.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/events.py" beforeDir="false" afterPath="$PROJECT_DIR$/events.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/npc/import_npcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc/import_npcs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/npc/npc.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc/npc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ow/form_links.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/form_links.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/map_image_files/full_map.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/full_map.bmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/map_image_files/full_map.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/full_map.xcf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/map_image_files/postmap.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_image_files/postmap.bmp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ow/map_text_files/ko_chang" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/ko_chang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ow/map_text_files/ko_klum" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/ko_klum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/map_text_files/ko_kut" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/ko_kut" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/map_text_files/ko_mak" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/ko_mak" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/map_text_files/postmap" beforeDir="false" afterPath="$PROJECT_DIR$/ow/map_text_files/postmap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ow/occurrences/ko_kut.occurrence" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" beforeDir="false" afterPath="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/overworld.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/overworld.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ow/weather/weather.py" beforeDir="false" afterPath="$PROJECT_DIR$/ow/weather/weather.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/thai.db" beforeDir="false" afterPath="$PROJECT_DIR$/thai.db" afterDir="false" />
@@ -118,8 +114,8 @@
                   <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/ui/ui.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="202">
-                          <caret line="47" column="24" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="24" />
+                        <state relative-caret-position="166">
+                          <caret line="77" selection-start-line="77" selection-end-line="77" />
                           <folding>
                             <element signature="e#0#11#0" expanded="true" />
                           </folding>
@@ -127,11 +123,11 @@
                       </provider>
                     </entry>
                   </file>
-                  <file pinned="false" current-in-tab="false">
+                  <file pinned="false" current-in-tab="true">
                     <entry file="file://$PROJECT_DIR$/ui/import_images_and_fonts.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="90">
-                          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+                        <state relative-caret-position="310">
+                          <caret line="280" selection-start-line="280" selection-end-line="280" />
                         </state>
                       </provider>
                     </entry>
@@ -148,11 +144,11 @@
                       </provider>
                     </entry>
                   </file>
-                  <file pinned="false" current-in-tab="true">
+                  <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/ow/overworld.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="397">
-                          <caret line="144" selection-start-line="144" selection-end-line="144" />
+                        <state relative-caret-position="143">
+                          <caret line="149" column="57" selection-start-line="149" selection-start-column="57" selection-end-line="149" selection-end-column="57" />
                           <folding>
                             <element signature="e#0#29#0" expanded="true" />
                             <element signature="e#7061#8341#0" />
@@ -187,8 +183,8 @@
                   <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/all.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="98">
-                          <caret line="43" column="63" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
+                        <state relative-caret-position="262">
+                          <caret line="43" column="65" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
                           <folding>
                             <element signature="e#0#14#0" expanded="true" />
                           </folding>
@@ -355,10 +351,13 @@
                   <file pinned="false" current-in-tab="true">
                     <entry file="file://$PROJECT_DIR$/ow/weather/weather.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="330">
-                          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+                        <state relative-caret-position="379">
+                          <caret line="41" column="41" lean-forward="true" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
                           <folding>
                             <element signature="e#0#11#0" expanded="true" />
+                            <element signature="e#687#883#0" />
+                            <element signature="e#921#1117#0" />
+                            <element signature="e#1455#1871#0" />
                           </folding>
                         </state>
                       </provider>
@@ -367,8 +366,8 @@
                   <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/doc/letters world">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="415">
-                          <caret line="195" column="51" selection-start-line="195" selection-start-column="51" selection-end-line="195" selection-end-column="51" />
+                        <state relative-caret-position="371">
+                          <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
                         </state>
                       </provider>
                     </entry>
@@ -390,8 +389,8 @@
                   <file pinned="false" current-in-tab="false">
                     <entry file="file://$PROJECT_DIR$/npc/npc.py">
                       <provider selected="true" editor-type-id="text-editor">
-                        <state relative-caret-position="272">
-                          <caret line="310" column="43" selection-start-line="310" selection-start-column="43" selection-end-line="310" selection-end-column="43" />
+                        <state relative-caret-position="169">
+                          <caret line="345" column="96" selection-start-line="345" selection-start-column="96" selection-end-line="345" selection-end-column="96" />
                           <folding>
                             <element signature="e#0#33#0" expanded="true" />
                           </folding>
@@ -500,8 +499,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/npc/import_npcs.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="690">
-                  <caret line="5772" column="16" selection-start-line="5772" selection-start-column="16" selection-end-line="5772" selection-end-column="16" />
+                <state relative-caret-position="501">
+                  <caret line="5847" column="38" selection-start-line="5847" selection-start-column="38" selection-end-line="5847" selection-end-column="38" />
                   <folding>
                     <element signature="e#0#31#0" expanded="true" />
                     <element signature="e#220#7384#0" />
@@ -564,26 +563,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Enter the bo</find>
-      <find>ฤดู</find>
-      <find>sprite =</find>
-      <find>npc_sprites</find>
-      <find>yellow_spell</find>
-      <find>taught=Letter.get_by_thai(&quot;ร&quot;),</find>
-      <find>letter=Letter.get_by_thai(&quot;ม&quot;),</find>
-      <find>[Name]</find>
-      <find>sprite='Nim',</find>
-      <find>name='Nim',</find>
-      <find>draw(</find>
-      <find>draw_ow(</find>
-      <find>draw_ow</find>
-      <find>Press</find>
-      <find>rendered</find>
-      <find>เ</find>
-      <find>I will teach you the</find>
-      <find>I will teach you the con</find>
-      <find>defeat_dialog</find>
-      <find>WAEN</find>
       <find>ย</find>
       <find>letter=Letter.get_by_thai(&quot;ล&quot;),</find>
       <find>I will teach you the conso</find>
@@ -594,6 +573,26 @@
       <find>crashed_plane</find>
       <find>sprite=&quot;&quot;,</find>
       <find>Kyaa</find>
+      <find>monkey</find>
+      <find>I will teach you the ver</find>
+      <find>ิ</find>
+      <find>defeat_dialog</find>
+      <find>ส</find>
+      <find>spirit_bird</find>
+      <find>class Weather</find>
+      <find>ต</find>
+      <find>cos</find>
+      <find>Rain</find>
+      <find>Weather</find>
+      <find>time.time()</find>
+      <find>brain_0</find>
+      <find>al.ui.images</find>
+      <find>self.image</find>
+      <find>maybe_restart</find>
+      <find>lightning_strike_</find>
+      <find>house_4x4</find>
+      <find>palm_tree</find>
+      <find>jungle_tree</find>
     </findStrings>
     <replaceStrings>
       <replace>victory_dialog</replace>
@@ -679,16 +678,16 @@
         <option value="$PROJECT_DIR$/doc/letters world" />
         <option value="$PROJECT_DIR$/ow/occurrences/ko_kut.occurrence" />
         <option value="$PROJECT_DIR$/ow/occurrences/ko_kut_cave_1.occurrence" />
-        <option value="$PROJECT_DIR$/all.py" />
         <option value="$PROJECT_DIR$/npc/letter.py" />
         <option value="$PROJECT_DIR$/events.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/ow/form_links.py" />
-        <option value="$PROJECT_DIR$/ow/overworld.py" />
-        <option value="$PROJECT_DIR$/ow/weather/weather.py" />
-        <option value="$PROJECT_DIR$/ui/import_images_and_fonts.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/npc/npc.py" />
         <option value="$PROJECT_DIR$/npc/import_npcs.py" />
+        <option value="$PROJECT_DIR$/all.py" />
+        <option value="$PROJECT_DIR$/ow/weather/weather.py" />
+        <option value="$PROJECT_DIR$/ui/import_images_and_fonts.py" />
+        <option value="$PROJECT_DIR$/ow/overworld.py" />
       </list>
     </option>
   </component>
@@ -714,12 +713,12 @@
             <path>
               <item name="thai" type="b2602c69:ProjectViewProjectNode" />
               <item name="thai" type="462c0819:PsiDirectoryNode" />
-              <item name="npc" type="462c0819:PsiDirectoryNode" />
+              <item name="ow" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="thai" type="b2602c69:ProjectViewProjectNode" />
               <item name="thai" type="462c0819:PsiDirectoryNode" />
-              <item name="npc" type="462c0819:PsiDirectoryNode" />
+              <item name="ow" type="462c0819:PsiDirectoryNode" />
               <item name="sprites" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -1041,23 +1040,23 @@
       <workItem from="1584990233776" duration="10648000" />
       <workItem from="1585077049706" duration="6490000" />
       <workItem from="1585175240563" duration="4393000" />
-      <workItem from="1585343940134" duration="53068000" />
+      <workItem from="1585343940134" duration="60396000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1232438000" />
+    <option name="totallyTimeSpent" value="1239766000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-583" y="-1417" width="2560" height="1417" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13939634" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13939634" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.65477705" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.14792453" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.14792453" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28754717" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1189,11 +1188,6 @@
           <line>239</line>
           <option name="timeStamp" value="229" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ui/ui.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="235" />
-        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -1216,10 +1210,10 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/thai$generate_postmap.coverage" NAME="generate_postmap Coverage Results" MODIFIED="1569446036174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
     <SUITE FILE_PATH="coverage/thai$aliens.coverage" NAME="aliens Coverage Results" MODIFIED="1584797663899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/venv/lib/python3.7/site-packages/pygame/examples" />
-    <SUITE FILE_PATH="coverage/thai$main.coverage" NAME="main Coverage Results" MODIFIED="1585876200793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/thai$main.coverage" NAME="main Coverage Results" MODIFIED="1585926504408" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$grammar.coverage" NAME="grammar Coverage Results" MODIFIED="1558568821172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$sound_processing.coverage" NAME="sound_processing Coverage Results" MODIFIED="1570047067785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sounds/thai" />
-    <SUITE FILE_PATH="coverage/thai$derive_from_mothermap.coverage" NAME="derive_from_mothermap Coverage Results" MODIFIED="1585876191802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
+    <SUITE FILE_PATH="coverage/thai$derive_from_mothermap.coverage" NAME="derive_from_mothermap Coverage Results" MODIFIED="1585926495972" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ow" />
     <SUITE FILE_PATH="coverage/thai$ooo.coverage" NAME="ooo Coverage Results" MODIFIED="1565365780921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$insert_words.coverage" NAME="insert_words Coverage Results" MODIFIED="1585432323289" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/thai$models.coverage" NAME="models Coverage Results" MODIFIED="1582662261954" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -1500,8 +1494,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="48" column="54" selection-start-line="48" selection-start-column="54" selection-end-line="48" selection-end-column="54" />
+        <state relative-caret-position="214">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
@@ -1562,16 +1556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/all.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="98">
-          <caret line="43" column="63" selection-start-line="43" selection-start-column="63" selection-end-line="43" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ow/learner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1603,13 +1587,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/import_images_and_fonts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/npc/letter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -1623,16 +1600,6 @@
           <caret line="203" column="36" selection-start-line="203" selection-start-column="36" selection-end-line="203" selection-end-column="36" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/npc/npc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="310" column="43" selection-start-line="310" selection-start-column="43" selection-end-line="310" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1654,36 +1621,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/letters">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="beaefe59-8d78-43f5-a9da-136c979795e3">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/ui.py">
+    <entry file="file://$PROJECT_DIR$/npc/npc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="47" column="24" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="24" />
+        <state relative-caret-position="169">
+          <caret line="345" column="96" selection-start-line="345" selection-start-column="96" selection-end-line="345" selection-end-column="96" />
           <folding>
-            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#0#33#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/doc/letters world">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="53" column="6" selection-start-line="53" selection-start-column="6" selection-end-line="53" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ow/overworld.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="397">
-          <caret line="144" selection-start-line="144" selection-end-line="144" />
+        <state relative-caret-position="143">
+          <caret line="149" column="57" selection-start-line="149" selection-start-column="57" selection-end-line="149" selection-end-column="57" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
             <element signature="e#7061#8341#0" />
@@ -1693,20 +1644,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ow/weather/weather.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/npc/import_npcs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="5772" column="16" selection-start-line="5772" selection-start-column="16" selection-end-line="5772" selection-end-column="16" />
+        <state relative-caret-position="501">
+          <caret line="5847" column="38" selection-start-line="5847" selection-start-column="38" selection-end-line="5847" selection-end-column="38" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
             <element signature="e#220#7384#0" />
@@ -1719,6 +1660,62 @@
             <element signature="e#54845#69949#0" />
             <element signature="e#69982#78135#0" />
             <element signature="e#78160#81991#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/doc/letters world">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="371">
+          <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/all.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="262">
+          <caret line="43" column="65" selection-start-line="43" selection-start-column="65" selection-end-line="43" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/import_images_and_fonts.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="280" selection-start-line="280" selection-end-line="280" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://93e04833-da51-41d0-9b29-1773d5372142/schema/main/table/letters">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="beaefe59-8d78-43f5-a9da-136c979795e3">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ow/weather/weather.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="41" column="41" lean-forward="true" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#687#883#0" />
+            <element signature="e#921#1117#0" />
+            <element signature="e#1455#1871#0" />
           </folding>
         </state>
       </provider>

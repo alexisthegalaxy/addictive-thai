@@ -40,8 +40,9 @@ class All:
         self.weather = Weather(
             al=self,
             rain=True,
-            wind=50,
-            overlay=Overlay(color=(30, 30, 30), transparency=92)
+            wind=30,
+            overlay=Overlay(color=(30, 30, 30), transparency=92),
+            lightning=True,
         )
         # self.weather = plane_crashing
 

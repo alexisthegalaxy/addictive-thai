@@ -343,7 +343,7 @@ class Npc(object):
 
     def _maybe_draw_letter(self, ui, x, y):
         if self.letter:
-            rendered_letter = ui.fonts.garuda32.render(self.letter.thai, True, (0, 0, 0))
+            rendered_letter = ui.fonts.garuda32.render(f" {self.letter.thai} ", True, (0, 0, 0))
             x += int(ui.cell_size / 2 - rendered_letter.get_width() / 2)
             y += int(ui.cell_size / 2 - rendered_letter.get_height() / 2)
             ui.screen.blit(rendered_letter, (x, y))

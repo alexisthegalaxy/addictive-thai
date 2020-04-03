@@ -200,6 +200,7 @@ def npc_sprites():
         "teal_spell": pygame.image.load(f"{dir_path}/../npc/sprites/teal_spell.png"),
         "blue_spell": pygame.image.load(f"{dir_path}/../npc/sprites/blue_spell.png"),
         "spirit_bird": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_bird.png"),
+        "spirit_gecko": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_gecko.png"),
         "television_off": pygame.image.load(
             f"{dir_path}/../npc/sprites/television_off.png"
         ),
@@ -273,6 +274,9 @@ def random_images():
         "low": pygame.image.load(f"{dir_path}/../images/low.png"),
         "falling": pygame.image.load(f"{dir_path}/../images/falling.png"),
         "high": pygame.image.load(f"{dir_path}/../images/high.png"),
+        "lightning_strike_0": pygame.image.load(f"{dir_path}/../images/lightning_strike_0.png"),
+        "lightning_strike_1": pygame.image.load(f"{dir_path}/../images/lightning_strike_1.png"),
+        "lightning_strike_2": pygame.image.load(f"{dir_path}/../images/lightning_strike_2.png"),
     }
 
 
@@ -284,6 +288,7 @@ def get_sprites():
         "_grass_4": pygame.image.load(f"{dir_path}/../ow/sprites/grass_4.bmp"),
         "path": pygame.image.load(f"{dir_path}/../ow/sprites/path.bmp"),
         "tree": pygame.image.load(f"{dir_path}/../ow/sprites/tree.bmp"),
+        "big_tree": pygame.image.load(f"{dir_path}/../ow/sprites/big_tree.bmp"),
         "_waterfall_1": pygame.image.load(f"{dir_path}/../ow/sprites/waterfall1.bmp"),
         "_waterfall_2": pygame.image.load(f"{dir_path}/../ow/sprites/waterfall2.bmp"),
         "_waterfall_3": pygame.image.load(f"{dir_path}/../ow/sprites/waterfall3.bmp"),
@@ -373,11 +378,13 @@ def get_sprites():
         "inn_sign": pygame.image.load(f"{dir_path}/../ow/sprites/inn_sign.bmp"),
         "school_sign": pygame.image.load(f"{dir_path}/../ow/sprites/school_sign.bmp"),
         "palm_tree": pygame.image.load(f"{dir_path}/../ow/sprites/palm_tree.bmp"),
+        "jungle_tree": pygame.image.load(f"{dir_path}/../ow/sprites/jungle_tree.bmp"),
         "sand": pygame.image.load(f"{dir_path}/../ow/sprites/sand.bmp"),
         "arena_sign": pygame.image.load(f"{dir_path}/../ow/sprites/arena_sign.bmp"),
         "shop_sign": pygame.image.load(f"{dir_path}/../ow/sprites/shop_sign.bmp"),
         "field": pygame.image.load(f"{dir_path}/../ow/sprites/field.bmp"),
         "plane_seat": pygame.image.load(f"{dir_path}/../ow/sprites/plane_seat.bmp"),
         "plane_floor": pygame.image.load(f"{dir_path}/../ow/sprites/plane_floor.bmp"),
+        "big_tree": pygame.image.load(f"{dir_path}/../ow/sprites/big_tree.bmp"),
         "house_4x4": pygame.image.load(f"{dir_path}/../ow/sprites/house_4x4.png"),
     }
