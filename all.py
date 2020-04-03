@@ -5,7 +5,7 @@ from form_links import form_links
 from lexicon.dex import Dex
 from mechanics.minimap import Minimap
 from ui.ui import Ui
-from weather.weather import Weather
+from weather.weather import Weather, Overlay
 
 
 class All:
@@ -39,7 +39,9 @@ class All:
         # self.weather = no_weather
         self.weather = Weather(
             al=self,
-            # rain=True,
+            rain=True,
+            wind=50,
+            overlay=Overlay(color=(30, 30, 30), transparency=92)
         )
         # self.weather = plane_crashing
 

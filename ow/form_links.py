@@ -8,14 +8,7 @@ def form_links(mas):
     inside of a house, i.e. to another map)
     """
     # ko_kut
-    mas.ko_kut.get_cell_at(47, 45).goes_to = (mas.inn_ko_kut, 4, 7)
-    mas.inn_ko_kut.get_cell_at(4, 8).goes_to = (mas.ko_kut, 47, 46)
 
-    mas.ko_kut.get_cell_at(53, 28).goes_to = (mas.ko_mak, 36, 9)
-    mas.ko_mak.get_cell_at(37, 9).goes_to = (mas.ko_kut, 52, 28)
-
-    mas.ko_mak.get_cell_at(26, 20).goes_to = (mas.ko_kut_cave_1, 14, 26)
-    mas.ko_kut_cave_1.get_cell_at(14, 27).goes_to = (mas.ko_mak, 26, 21)
     # ko_mak
     mas.ko_kut_cave_1.get_cell_at(15, 7).goes_to = (mas.ko_mak, 32, 10)
     mas.ko_mak.get_cell_at(32, 9).goes_to = (mas.ko_kut_cave_1, 15, 6)
@@ -1148,4 +1141,5 @@ def form_links(mas):
     mas.sikhiu.get_cell_at(44, 10).goes_to = (mas.chatturat_sikhiu, 32, 57)
     mas.sikhiu.get_cell_at(45, 10).goes_to = (mas.chatturat_sikhiu, 33, 57)
 
-    mas.ko_kut.get_cell_at(56, 55).goes_to = (mas.plane, 5, 5)
+    mas.ko_kut.get_cell_at(54, 57).goes_to = (mas.plane, 5, 5)
+    mas.plane.get_cell_at(7, 0).goes_to = (mas.ko_kut, 50, 50)

@@ -195,6 +195,11 @@ def npc_sprites():
         "red_spell": pygame.image.load(f"{dir_path}/../npc/sprites/red_spell.png"),
         "green_spell": pygame.image.load(f"{dir_path}/../npc/sprites/green_spell.png"),
         "grey_spell": pygame.image.load(f"{dir_path}/../npc/sprites/grey_spell.png"),
+        "yellow_spell": pygame.image.load(f"{dir_path}/../npc/sprites/yellow_spell.png"),
+        "purple_spell": pygame.image.load(f"{dir_path}/../npc/sprites/purple_spell.png"),
+        "teal_spell": pygame.image.load(f"{dir_path}/../npc/sprites/teal_spell.png"),
+        "blue_spell": pygame.image.load(f"{dir_path}/../npc/sprites/blue_spell.png"),
+        "spirit_bird": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_bird.png"),
         "television_off": pygame.image.load(
             f"{dir_path}/../npc/sprites/television_off.png"
         ),
@@ -209,6 +214,18 @@ def npc_sprites():
         ),
         "_television_on_4": pygame.image.load(
             f"{dir_path}/../npc/sprites/television_on_4.png"
+        ),
+        "_crashed_plane_1": pygame.image.load(
+            f"{dir_path}/../npc/sprites/crashed_plane_0.png"
+        ),
+        "_crashed_plane_2": pygame.image.load(
+            f"{dir_path}/../npc/sprites/crashed_plane_1.png"
+        ),
+        "_crashed_plane_3": pygame.image.load(
+            f"{dir_path}/../npc/sprites/crashed_plane_2.png"
+        ),
+        "_crashed_plane_4": pygame.image.load(
+            f"{dir_path}/../npc/sprites/crashed_plane_3.png"
         ),
         "nim_down": pygame.image.load(f"{dir_path}/../npc/sprites/nim_down.png"),
         "nim_up": pygame.image.load(f"{dir_path}/../npc/sprites/nim_up.png"),

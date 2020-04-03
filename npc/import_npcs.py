@@ -5233,6 +5233,184 @@ def ko_kut(al):
             ],
             end_dialog_trigger_event=["talked_to_nim_in_plane"],
         ),
+        Npc(
+            al=al,
+            name="crashed_plane",
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=57,
+            y=54,
+            sprite="_crashed_plane",
+            direction=Direction.UP,
+            standard_dialog=[
+                "The plane is on fire!",
+                "Better get some help quick.",
+            ]
+        ),
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=57,
+            y=55,
+            sprite="",
+            standard_dialog=[
+                "The plane is on fire!",
+                "Better get some help quick.",
+            ],
+        ),
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=58,
+            y=54,
+            sprite="",
+            standard_dialog=[
+                "The plane is on fire!",
+                "Better get some help quick.",
+            ],
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("ม"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=51,
+            y=55,
+            standard_dialog=[
+                "Nim: oh, you see that letter? It's the m!",
+            ],
+            defeat_dialog=[
+                "Nim: Well done [Name], that's one more letter!",
+                "It looks a lot like the n: น - but in the m, the loops are on the sa>M<e side.",
+                "And for the น (n) the loops are >N<ot on the same side.",
+            ]
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("-ั"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=50,
+            y=53,
+            standard_dialog=[
+                "Nim: You see this thing, blocking our way?",
+                "That is a wild letter.",
+                "To have it go away, we have to learn it!",
+                "This one is -ั: shorter version of the letter a า.",
+            ],
+            defeat_dialog=[
+                "Nim: If you put it over a consonant like so: นั ,",
+                "Then you get the sound na.",
+                "Alright, let's carry on!",
+            ]
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("ก"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=50,
+            y=49,
+            standard_dialog=[
+                "Nim: Another one?",
+                "This one is ก, the consonnant g - and it's the first letter of the Thai alphabet.",
+            ],
+            defeat_dialog=[
+                "Nim: Well done [Name]!",
+            ]
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("เ-"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=52,
+            y=45,
+            standard_dialog=[
+                "Nim: This is the very common vowel เ!",
+                "It's pronounced e, like in 'neck'.",
+                "It's quite similar to the french é, like in café or Pokémon.",
+                "It's an interesting vowel, because it comes before the consonant:",
+                "For example, to write 'nay', you write เน!",
+                "เ can also be combined with า and sandwich a consonant to form the ao sound!",
+                "For example, เนา is read nao!",
+            ],
+            defeat_dialog=[
+                "Nim: The vowel เ has a very similar friend, the vowel แ!",
+                "You'll learn it later, but แ is pronounced ae, pronounced like in ham.",
+            ]
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("อ"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=54,
+            y=41,
+            standard_dialog=[
+                "Nim: This is the very common vowel เ!",
+                "It's pronounced e, like in 'neck'.",
+                "It's quite similar to the french é, like in café or Pokémon.",
+                "It's an interesting vowel, because it comes before the consonant:",
+                "For example, to write 'nay', you write เน!",
+                "เ can also be combined with า and sandwich a consonant to form the ao sound!",
+                "For example, เนา is read nao!",
+            ],
+            defeat_dialog=[
+                "Nim: The vowel เ has a very similar friend, the vowel แ!",
+                "You'll learn it later, but แ is pronounced ae, pronounced like in ham.",
+            ]
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("ว"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=51,
+            y=41,
+            standard_dialog=[
+                "Nim: This is the very common vowel เ!",
+                "It's pronounced e, like in 'neck'.",
+                "It's quite similar to the french é, like in café or Pokémon.",
+                "It's an interesting vowel, because it comes before the consonant:",
+                "For example, to write 'nay', you write เน!",
+                "เ can also be combined with า and sandwich a consonant to form the ao sound!",
+                "For example, เนา is read nao!",
+            ],
+            defeat_dialog=[
+                "Nim: The vowel เ has a very similar friend, the vowel แ!",
+                "You'll learn it later, but แ is pronounced ae, pronounced like in ham.",
+            ]
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("ย"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=44,
+            y=48,
+            standard_dialog=[
+                "Nim: This is the very common vowel เ!",
+                "It's pronounced e, like in 'neck'.",
+                "It's quite similar to the french é, like in café or Pokémon.",
+                "It's an interesting vowel, because it comes before the consonant:",
+                "For example, to write 'nay', you write เน!",
+                "เ can also be combined with า and sandwich a consonant to form the ao sound!",
+                "For example, เนา is read nao!",
+            ],
+            defeat_dialog=[
+                "Nim: The vowel เ has a very similar friend, the vowel แ!",
+                "You'll learn it later, but แ is pronounced ae, pronounced like in ham.",
+            ]
+        ),
+        Npc(
+            al=al,
+            letter=Letter.get_by_thai("ล"),
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=49,
+            y=42,
+            standard_dialog=[
+                "Nim: That's the consonnant l!",
+                "Don't get ล confused with the s: ส!",
+            ],
+            defeat_dialog=[
+                "Nim: At the end of a word, l in pronounced \"n\".",
+                "For example, มล is pronounced \"mon\", not \"mol\"!",
+                "You can't end a word in l in Thai."
+            ]
+        ),
         # Npc(
         #     al=al,
         #     name="Nim",
@@ -5341,83 +5519,83 @@ def ko_kut(al):
         #         "า looks like the letter A but without the left part and the bar.",
         #     ]
         # ),
-        Npc(
-            al=al,
-            name="Third letter",
-            taught=Letter.get_by_thai("ร"),
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=50,
-            y=49,
-            sprite="old_man",
-            direction=Direction.RIGHT,
-            wanna_meet=True,
-            eyesight=5,
-            standard_dialog=[
-                "I will teach you the consonant r: ร",
-                "You have to roll it, like in Spanish or Russian,",
-                "but actually in informal speach we Thai people just say 'l', not 'r'.",
-                "Oh! Also, if it's at the end of a word, it turns into a 'n' sound.",
-                "ราร would be pronounced 'ra:n' (or 'la:n'), not 'ra:r'.",
-            ],
-            defeat_dialog=[
-                "ร is easy to remember: it looks like the letter r, but reversed!",
-            ]
-        ),
-        Npc(
-            al=al,
-            name="Fourth letter",
-            taught=Letter.get_by_thai("◌ั"),
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=55,
-            y=48,
-            sprite="old_woman",
-            direction=Direction.LEFT,
-            wanna_meet=True,
-            eyesight=1,
-            standard_dialog=[
-                "I will teach you the vowel a:  ั ",
-                "It's an accent floating like a cloud over another letter.",
-                "If you put it over a consonant like so: นั ,",
-                "Then you get the sound na.",
-            ]
-        ),
-        Npc(
-            al=al,
-            name="Fifth letter",
-            taught=Letter.get_by_thai("ก"),
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=49,
-            y=49,
-            sprite="lass",
-            direction=Direction.LEFT,
-            wanna_meet=True,
-            eyesight=1,
-            standard_dialog=[
-                "I will teach you the consonant g: ก",
-                "It's the first letter of the Thai alphabet, and it's a very common letter.",
-            ]
-        ),
-        Npc(
-            al=al,
-            name="6th letter",
-            taught=Letter.get_by_thai("ม"),
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=45,
-            y=47,
-            sprite="kid",
-            direction=Direction.LEFT,
-            wanna_meet=True,
-            eyesight=1,
-            standard_dialog=[
-                "I will teach you the consonant m: ม",
-                "It looks a lot like the n: น - but in the m, the loops are on the sa>M<e side.",
-                "And for the น (n) the loops are >N<ot on the same side.",
-            ]
-        ),
+        # Npc(
+        #     al=al,
+        #     name="Third letter",
+        #     taught=Letter.get_by_thai("ร"),
+        #     ma=al.mas.get_map_from_name("ko_kut"),
+        #     x=50,
+        #     y=49,
+        #     sprite="old_man",
+        #     direction=Direction.RIGHT,
+        #     wanna_meet=True,
+        #     eyesight=5,
+        #     standard_dialog=[
+        #         "I will teach you the consonant r: ร",
+        #         "You have to roll it, like in Spanish or Russian,",
+        #         "but actually in informal speach we Thai people just say 'l', not 'r'.",
+        #         "Oh! Also, if it's at the end of a word, it turns into a 'n' sound.",
+        #         "ราร would be pronounced 'ra:n' (or 'la:n'), not 'ra:r'.",
+        #     ],
+        #     defeat_dialog=[
+        #         "ร is easy to remember: it looks like the letter r, but reversed!",
+        #     ]
+        # ),
+        # Npc(
+        #     al=al,
+        #     name="Fourth letter",
+        #     taught=Letter.get_by_thai("-ั"),
+        #     ma=al.mas.get_map_from_name("ko_kut"),
+        #     x=55,
+        #     y=48,
+        #     sprite="old_woman",
+        #     direction=Direction.LEFT,
+        #     wanna_meet=True,
+        #     eyesight=1,
+        #     standard_dialog=[
+        #         "I will teach you the vowel a:  ั ",
+        #         "It's an accent floating like a cloud over another letter.",
+        #         "If you put it over a consonant like so: นั ,",
+        #         "Then you get the sound na.",
+        #     ]
+        # ),
+        # Npc(
+        #     al=al,
+        #     name="Fifth letter",
+        #     taught=Letter.get_by_thai("ก"),
+        #     ma=al.mas.get_map_from_name("ko_kut"),
+        #     x=49,
+        #     y=49,
+        #     sprite="lass",
+        #     direction=Direction.LEFT,
+        #     wanna_meet=True,
+        #     eyesight=1,
+        #     standard_dialog=[
+        #         "I will teach you the consonant g: ก",
+        #         "It's the first letter of the Thai alphabet, and it's a very common letter.",
+        #     ]
+        # ),
+        # Npc(
+        #     al=al,
+        #     name="6th letter",
+        #     taught=Letter.get_by_thai("ม"),
+        #     ma=al.mas.get_map_from_name("ko_kut"),
+        #     x=45,
+        #     y=47,
+        #     sprite="kid",
+        #     direction=Direction.LEFT,
+        #     wanna_meet=True,
+        #     eyesight=1,
+        #     standard_dialog=[
+        #         "I will teach you the consonant m: ม",
+        #         "It looks a lot like the n: น - but in the m, the loops are on the sa>M<e side.",
+        #         "And for the น (n) the loops are >N<ot on the same side.",
+        #     ]
+        # ),
         Npc(
             al=al,
             name="7th letter",
-            taught=Letter.get_by_thai("เ◌"),
+            taught=Letter.get_by_thai("เ-"),
             ma=al.mas.get_map_from_name("ko_kut"),
             x=57,
             y=42,
@@ -5486,27 +5664,6 @@ def ko_kut(al):
                 'Even though there\'s no vowel written, we still pronounce it with a short "o" sound.',
                 "For example, รก is pronounced \"rok\", and not \"rk!\"",
             ],
-        ),
-        Npc(
-            al=al,
-            name="9th letter ล",
-            taught=Letter.get_by_thai("ล"),
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=54,
-            y=36,
-            sprite="rich_woman",
-            direction=Direction.UP,
-            wanna_meet=True,
-            eyesight=1,
-            standard_dialog=[
-                "I will teach you the consonant l: ล.",
-                "Don't get ล confused with the s: ส!",
-            ],
-            defeat_dialog=[
-                "At the end of a word, l in pronounced \"n\".",
-                "For example, มล is pronounced \"mon\", not \"mol\"!",
-                "You can't end a word in l in Thai."
-            ]
         ),
         Npc(
             al=al,
@@ -5588,11 +5745,44 @@ def ko_kut(al):
             al=al,
             name="",
             ma=al.mas.get_map_from_name("ko_kut"),
-            x=46,
-            y=54,
-            sprite="boat",
-            standard_dialog=["Enter the boat?"]
+            x=52,
+            y=37,
+            sprite="spirit_bird",
+            standard_dialog=["Kyaaaaa!"]
         ),
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=52,
+            y=38,
+            sprite="",
+            standard_dialog=["Kyaaaaa!"],
+        ),
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=53,
+            y=38,
+            sprite="",
+            standard_dialog=["Kyaaaaa!"],
+        ),
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=53,
+            y=37,
+            sprite="",
+            standard_dialog=["Kyaaaaa!"],
+        ),
+        # Npc(
+        #     al=al,
+        #     name="",
+        #     ma=al.mas.get_map_from_name("ko_kut"),
+        #     x=46,
+        #     y=54,
+        #     sprite="boat",
+        #     standard_dialog=["Enter the boat?"]
+        # ),
         Npc(
             al=al,
             name="",

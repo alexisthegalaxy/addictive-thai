@@ -8,6 +8,7 @@ from models import set_event, get_event_status, get_xp_for_word
 # The event is increased to n+1 just before calling the function _function_n
 from npc.npc import Position, _process_dialog, Npc
 from sounds.play_sound import play_thai_word
+from weather.weather import Weather, Shaking
 
 
 def _talk_to_lover_0(al: "All"):
@@ -190,13 +191,13 @@ def _talked_to_nim_in_plane_0(al: "All"):
     new_nim_teaching_second_letter = Npc(
         al=al,
         name="Nim",
-        taught=Letter.get_by_thai("า"),
+        # taught=Letter.get_by_thai("า"),
         ma=al.mas.get_map_from_name("plane"),
         x=8,
         y=7,
         sprite="nim",
         direction=Direction.RIGHT,
-        wanna_meet=True,
+        # wanna_meet=True,
         eyesight=1,
         standard_dialog=[
             "Nim: Good, that was your first letter.",
@@ -216,7 +217,41 @@ def _talked_to_nim_in_plane_0(al: "All"):
 
 def _talked_to_nim_in_plane_1(al: "All"):
     al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
-    # TODO: set weather to shaking and red
+    new_nim_teaching_second_letter = Npc(
+        al=al,
+        name="Nim",
+        # taught=Letter.get_by_thai("ร"),
+        ma=al.mas.get_map_from_name("plane"),
+        x=8,
+        y=7,
+        sprite="nim",
+        direction=Direction.RIGHT,
+        eyesight=1,
+        standard_dialog=[
+            "Nim: Good!",
+            "I think we have time for a last third letter before the landing.",
+            "ร is the consonnant r.",
+            "You have to roll it, like in Spanish or Russian,",
+            "but actually in informal speach we Thai people just say 'l', not 'r'.",
+            "Oh! Also, if it's at the end of a word, it turns into a 'n' sound.",
+            "ราร would be pronounced 'rān' (or 'lān'), not 'rār'.",
+        ],
+        defeat_dialog=[
+            "ร is easy to remember: it looks like the letter r, but reversed!",
+        ],
+        end_dialog_trigger_event=["talked_to_nim_in_plane"],
+    )
+    al.mas.current_map.add_npc(new_nim_teaching_second_letter)
+
+
+def _talked_to_nim_in_plane_2(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
+    al.weather = Weather(
+        al=al,
+        h_shaking=Shaking(period=100000, intensity=5),  # (period, intensity)
+        v_shaking=Shaking(period=5700, intensity=2),  # (period, intensity)
+        cos_light_flashing=(2.7, 0.5, (255, 0, 0)),  # (period, transparency, color)
+    )
     new_nim_teaching_second_letter = Npc(
         al=al,
         name="Nim",
@@ -228,16 +263,40 @@ def _talked_to_nim_in_plane_1(al: "All"):
         wanna_meet=True,
         eyesight=1,
         standard_dialog=[
-            "Nim: What was that?",
+            "Nim: Wow!",
+            "What is going on?",
             "PA: The plane is experiencing technical difficulties.",
             "We will attempt a landing.",
             "Brace for impact!",
+            "...",
         ],
         end_dialog_trigger_event=["talked_to_nim_in_plane"],
     )
     al.mas.current_map.add_npc(new_nim_teaching_second_letter)
 
 
+def _talked_to_nim_in_plane_3(al: "All"):
+    al.mas.current_map.map_change(
+        learner=al.learner,
+        ma=al.mas.get_map_from_name("ko_kut"),
+        x=57,
+        y=55,
+    )
+    al.weather = Weather(
+        al=al,
+        rain=True,
+        wind=50,
+    )
+    al.learner.followers.append(
+        Follower(
+            al,
+            direction=Direction.UP,
+            sprite='nim',
+            name='Nim',
+            x=57,
+            y=54,
+        )
+    )
 
 
 

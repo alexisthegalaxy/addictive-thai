@@ -129,7 +129,7 @@ class CellTypes:
     )
 
     fruit_tree = CellType("果", "fruit_tree", (192, 255, 81), False, 0, TREE_COLOR)
-    waterfall = CellType("滝", "_waterfall", (57, 150, 255), True, 0.1, WATER_COLOR)
+    waterfall = CellType("滝", "_waterfall", (57, 150, 255), False, 0.1, WATER_COLOR)
     bridge_hor = CellType("橋", "bridge_hor", (163, 165, 255), True, 0, WATER_COLOR)
     bridge_ver = CellType("圯", "bridge_ver", (163, 164, 255), True, 0, WATER_COLOR)
     plane_seat = CellType("機", "plane_seat", (181, 188, 185), False, 0, WALL_COLOR)
@@ -339,20 +339,23 @@ class Ma(object):
     def add_npc(self, npc):
         self.npcs.append(npc)
 
+    def map_change(self, learner, ma, x, y, direction=None):
+        self.mas.current_map = ma
+        learner.ma = ma
+        learner.x = x
+        learner.y = y
+        if direction:
+            learner.direction = direction
+
     def response_to_movement(self, learner, x, y):
         cell = self.get_cell_at(x, y)
 
         # 1 - Test for map change
         if cell.goes_to is not None:
-            self.mas.current_map = cell.goes_to[0]
-            learner.ma = cell.goes_to[0]
-            learner.x = cell.goes_to[1]
-            learner.y = cell.goes_to[2]
             try:
-                learner.direction = cell.goes_to[3]
+                self.map_change(learner=learner, ma=cell.goes_to[0], x=cell.goes_to[1], y=cell.goes_to[2], direction=cell.goes_to[3])
             except IndexError:
-                pass
-            return
+                self.map_change(learner=learner, ma=cell.goes_to[0], x=cell.goes_to[1], y=cell.goes_to[2])
 
         # 2 - Test for Word or Letter encounter
         if learner.free_steps <= 0:

@@ -7,7 +7,8 @@ from typing import List, Tuple, Optional, Union
 from direction import string_from_direction, opposite_direction, Direction, dir_equal
 from lexicon.items import Word, Letter
 from lexicon.learning import LetterLearning, WordLearning
-from models import xp_from_word, should_we_show_thai
+from models import xp_from_word
+from npc.letter import get_sprite_name_from_letter_class
 from sounds.play_sound import play_thai_word
 
 
@@ -42,6 +43,9 @@ def _can_turn(sprite_type):
             "chest_open",
             "chest_closed",
             "television_on",
+            "crashed_plane",
+            "spirit_bird",
+            "spirit_gecko",
             "television_off",
             "boat",
         ]
@@ -87,6 +91,7 @@ class Npc(object):
         end_dialog_trigger_event: List[str] = None,
         beginning_dialog_trigger_event: List[str] = None,
         wobble=False,
+        letter=None,
         hp=2,
     ):
         standard_dialog = standard_dialog or ["Hello"]
@@ -140,6 +145,11 @@ class Npc(object):
         self.process_dialog(al)
         self.wobble = wobble
         self.hp = hp
+        self.letter = letter
+        if self.letter:
+            self.sprite = get_sprite_name_from_letter_class(letter._class, al)
+            self.wobble = True
+            self.taught = self.letter
 
     def process_dialog(self, al):
         for dialog in self.dialogs:
@@ -297,6 +307,8 @@ class Npc(object):
             if self.taught:
                 if self.active_dialog == self.defeat_dialog:
                     trigger_event = True
+                    if self.letter:
+                        self.disappears(al)
             else:
                 trigger_event = True
             if trigger_event:
@@ -329,7 +341,14 @@ class Npc(object):
             return a0 <= now < a1
         return True
 
-    def draw_ow(self, al, x, y):
+    def _maybe_draw_letter(self, ui, x, y):
+        if self.letter:
+            rendered_letter = ui.fonts.garuda32.render(self.letter.thai, True, (0, 0, 0))
+            x += int(ui.cell_size / 2 - rendered_letter.get_width() / 2)
+            y += int(ui.cell_size / 2 - rendered_letter.get_height() / 2)
+            ui.screen.blit(rendered_letter, (x, y))
+
+    def _draw_ow(self, al, x, y):
         if not self.should_appear():
             return
 
@@ -358,6 +377,7 @@ class Npc(object):
 
         if sprite:
             al.ui.screen.blit(sprite, [x, y])
+            self._maybe_draw_letter(al.ui, x, y)
         else:
             pygame.draw.rect(
                 al.ui.screen,
@@ -377,17 +397,18 @@ class Npc(object):
             al.ui.screen.blit(al.ui.images["learning_mark"], [x, y - al.ui.cell_size])
 
     def draw(self, al):
-        offset_x = -al.ui.cell_size * (al.learner.x - 7)
-        offset_y = -al.ui.cell_size * (al.learner.y - 4)
+        if not self.sprite == "":
+            offset_x = -al.ui.cell_size * (al.learner.x - 7)
+            offset_y = -al.ui.cell_size * (al.learner.y - 4)
 
-        if (not al.learner.can_move()) and al.learner.movement:
-            movement_offset_x, movement_offset_y = al.learner.movement.get_offset()
-            offset_x += movement_offset_x * al.ui.cell_size
-            offset_y += movement_offset_y * al.ui.cell_size
+            if (not al.learner.can_move()) and al.learner.movement:
+                movement_offset_x, movement_offset_y = al.learner.movement.get_offset()
+                offset_x += movement_offset_x * al.ui.cell_size
+                offset_y += movement_offset_y * al.ui.cell_size
 
-        x = self.x * al.ui.cell_size + offset_x
-        y = self.y * al.ui.cell_size + offset_y
-        self.draw_ow(al, x, y)
+            x = self.x * al.ui.cell_size + offset_x
+            y = self.y * al.ui.cell_size + offset_y
+            self._draw_ow(al, x, y)
 
     def gets_exclamation_mark(self):
         now = time.time()

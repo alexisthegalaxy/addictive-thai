@@ -5,7 +5,7 @@ import pygame
 
 
 class Raindrop(object):
-    def __init__(self, al, wind=10):
+    def __init__(self, al, wind):
         self.image = al.ui.images[f"rain_drop_{random.randint(0, 3)}"]
         self.x = random.randint(0, al.ui.width)
         self.y = random.randint(0, al.ui.height)
@@ -17,19 +17,19 @@ class Raindrop(object):
         if self.x < 0:
             self.x = al.ui.width
         if self.x > al.ui.width:
-            self.x = 0
+            self.x = 0 + random.randint(0, 30)
 
         self.y = self.y + self.velocity_y
         if self.y > al.ui.height:
-            self.y = 0
+            self.y = 0 + random.randint(0, 30)
 
     def draw(self, al):
         al.ui.screen.blit(self.image, [self.x, self.y])
 
 
 class Rain(object):
-    def __init__(self, al):
-        self.drops = [Raindrop(al) for _ in range(300)]
+    def __init__(self, al, wind):
+        self.drops = [Raindrop(al, wind=wind) for _ in range(300)]
 
     def falls(self, al):
         for drop in self.drops:
@@ -47,6 +47,12 @@ class Shaking(object):
         self.intensity = intensity
 
 
+class Overlay(object):
+    def __init__(self, color, transparency):
+        self.color = color
+        self.transparency = transparency
+
+
 class Weather(object):
     def __init__(
         self,
@@ -54,19 +60,21 @@ class Weather(object):
         h_shaking=None,
         v_shaking=None,
         cos_light_flashing=None,
+        overlay=None,
         rain=None,
         lightning=False,
-        wind=False,
+        wind=4,
     ):
         self.h_shaking = h_shaking
         self.v_shaking = v_shaking
         self.cos_light_flashing = cos_light_flashing
         if rain:
-            self.rain = Rain(al)
+            self.rain = Rain(al, wind)
         else:
             self.rain = None
         self.lightning = lightning
         self.wind = wind
+        self.overlay = overlay
 
     def get_offset_x(self):
         if self.h_shaking:
@@ -91,8 +99,8 @@ class Weather(object):
         s = pygame.Surface((ui.width, ui.height))
         t = datetime.now().second + datetime.now().microsecond / 1_000_000
         transparency = 64 + 92 * math.cos(t * 3)
-        s.set_alpha(transparency)  # alpha level
-        s.fill(color)  # this fills the entire surface
+        s.set_alpha(transparency)
+        s.fill(color)
         screen.blit(s, (0, 0))
 
     def tick(self, al):
@@ -104,6 +112,13 @@ class Weather(object):
             self.draw_cos_light_flashing(al)
         if self.rain:
             self.rain.draw(al)
+        if self.overlay:
+            ui = al.ui
+            screen = ui.screen
+            s = pygame.Surface((ui.width, ui.height))
+            s.set_alpha(self.overlay.transparency)
+            s.fill(self.overlay.color)
+            screen.blit(s, (0, 0))
 
 # no_weather = Weather()
 #
