@@ -194,7 +194,7 @@ class Occurrence(object):
             else:
                 elements = line.split(" ")
             weight = int(elements[0])
-            # TODO Alexis do it so that it fetches word by id rather than by thai to avoid confusions
+            # TODO do it so that it fetches word by id rather than by thai to avoid confusions
             if letter:
                 letter = Letter.get_by_thai(elements[1])
                 self.candidates.append(letter)
@@ -240,12 +240,13 @@ def _get_time_type():
 
 class Ma(object):
     def __init__(
-        self, filename, mas, x_shift=-1, y_shift=-1, parent=None, trigger_tiles=None
+        self, filename, mas, x_shift=-1, y_shift=-1, parent=None, trigger_tiles=None, inside=False,
     ):
         self.filename = filename
         self.mas: Mas = mas
         self.parent = parent
         self.ma = []
+        self.inside = inside
         x, y = (0, 0)
         file = open(
             f"{os.path.dirname(os.path.realpath(__file__))}/map_text_files/{filename}",
@@ -490,7 +491,7 @@ class Mas(object):
             filename="chaiyaphum_house_1", mas=self, parent=self.chaiyaphum
         )
         self.plane = Ma(
-            filename="plane", mas=self, parent=self.ko_kut
+            filename="plane", mas=self, parent=self.ko_kut, inside=True,
         )
         self.chaiyaphum_house_2 = Ma(
             filename="chaiyaphum_house_2", mas=self, parent=self.chaiyaphum
@@ -662,6 +663,13 @@ class Mas(object):
             filename="phitsanulok_maths_school_1011", mas=self, parent=self.phitsanulok
         )
         self.ko_kut_cave_1 = Ma(filename="ko_kut_cave_1", mas=self, parent=self.ko_kut)
+
+        self.ko_kut_house_1 = Ma(
+            filename="ko_kut_house_1", mas=self, parent=self.ko_kut, inside=True,
+        )
+        self.ko_kut_house_2 = Ma(
+            filename="ko_kut_house_2", mas=self, parent=self.ko_kut, inside=True,
+        )
         self.current_map: Ma = self.chaiyaphum
         self.add_trigger_tiles()
 

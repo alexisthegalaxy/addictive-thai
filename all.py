@@ -30,7 +30,7 @@ class All:
         self.active_learning = None
         self.active_spell_identification = None
         self.active_presentation = None
-        self.active_battle = None
+        self.active_naming = None
         self.active_fight = None
         self.active_sale = None
         self.dex: Dex = None
@@ -49,9 +49,6 @@ class All:
     def tick_activity(self):
         # Called at every tick
         self.weather.tick(self)
-        if self.active_battle:
-            self.active_battle.tick()
-            self.active_battle.opponent_play()
         if self.active_test and self.active_test.allowed_time:
             if self.active_test.is_timer_over():
                 self.active_test.fails()

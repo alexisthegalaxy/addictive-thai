@@ -383,7 +383,6 @@ def insert_word(split_form, english, tones):
 # # # insert_word('วัน-อา-ทิตย์', 'Sunday', 'MMH')
 # # # insert_word('ภาพ-ยน-ตร์', 'movie (formal)', 'FHM')
 # # # insert_word('มาก-เกิน-ไป', 'excessively', 'FMM')
-# # # insert_word('อ-เล็ก-ซี่', 'Alexis', 'MRF')
 # # # insert_word('วิศวกร', 'engineer', 'HLHM')
 # # # insert_word('ส-นาม-เด็ก-เล่น', 'playground', 'LRLF')
 # # # insert_word('รถ-ไฟ-ใต้-ดิน', 'subway, underground train', 'HMFM')

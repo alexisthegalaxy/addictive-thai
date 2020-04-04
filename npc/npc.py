@@ -57,6 +57,13 @@ def _is_gif(sprite):
     return sprite and sprite[0] == "_"
 
 
+def make_letter_beaten(wild_letter):
+    wild_letter.is_walkable = True
+    wild_letter.wobble = False
+    wild_letter.shows_sprite = False
+    wild_letter.letter_color = (255, 255, 255)
+
+
 @dataclass
 class Position:
     x: int
@@ -82,7 +89,7 @@ class Npc(object):
         direction=Direction.UP,
         sprite="kid",
         taught: Union[Word, Letter] = None,
-        battle_words: List[Word] = None,
+        fight_words: List[Word] = None,
         money: int = 5,  # amount given when lost the fight
         eyesight: int = 5,  # how far the trainer can see
         wanna_meet: bool = False,  # if true, non trainers will also walk to the learner and start talking
@@ -92,6 +99,10 @@ class Npc(object):
         beginning_dialog_trigger_event: List[str] = None,
         wobble=False,
         letter=None,
+        is_walkable=False,
+        shows_sprite=True,
+        naming=None,
+        letter_color=(0, 0, 0),
         hp=2,
     ):
         standard_dialog = standard_dialog or ["Hello"]
@@ -130,7 +141,7 @@ class Npc(object):
         self.active_line_index = -1
         self.color = (0, 222, 222)
         self.taught = taught
-        self.battle_words = battle_words
+        self.fight_words = fight_words
         self.has_learning_mark = self.taught and xp_from_word(self.taught.id) <= 0
         self.wants_battle = True
         self.wanna_meet = wanna_meet
@@ -145,6 +156,14 @@ class Npc(object):
         self.process_dialog(al)
         self.wobble = wobble
         self.hp = hp
+        self.letter_color = letter_color
+        self.shows_sprite = shows_sprite
+        self.is_walkable = is_walkable
+
+        self.naming = naming
+        if self.naming:
+            self.naming.npc = self
+
         self.letter = letter
         if self.letter:
             self.sprite = get_sprite_name_from_letter_class(letter._class, al)
@@ -158,7 +177,7 @@ class Npc(object):
             self.review_dialog[0] = self.review_dialog[0] + f" {self.taught.thai} ?"
 
     def is_trainer(self):
-        return bool(self.battle_words)
+        return bool(self.fight_words)
 
     def sees_learner(self, al) -> Optional[List[Position]]:
         """
@@ -228,6 +247,48 @@ class Npc(object):
     def is_saying_last_sentence(self) -> bool:
         return self.active_line_index == len(self.active_dialog) - 1
 
+    def last_sentence_special_interaction(self, al):
+        if self.taught:
+            if (
+                self.active_dialog == self.standard_dialog
+                or self.active_dialog == self.review_dialog
+            ):
+                al.active_learning = (
+                    WordLearning(al=al, word=self.taught, npc=self)
+                    if isinstance(self.taught, Word)
+                    else LetterLearning(al=al, letter=self.taught, npc=self)
+                )
+                al.active_learning.goes_to_first_step()
+        if self.naming:
+            if (
+                self.active_dialog == self.standard_dialog
+                or self.active_dialog == self.review_dialog
+            ):
+                al.active_naming = self.naming
+                # al.active_learning.goes_to_first_step()
+        if self == "is a spell":  # TODO
+            if (
+                self.active_dialog == self.standard_dialog
+                or self.active_dialog == self.review_dialog
+            ):
+                al.active_learning = (
+                    WordLearning(al=al, word=self.taught, npc=self)
+                    if isinstance(self.taught, Word)
+                    else LetterLearning(al=al, letter=self.taught, npc=self)
+                )
+                al.active_learning.goes_to_first_step()
+        if self.fight_words:
+            if self.active_dialog == self.standard_dialog:
+                from mechanics.fight.fight import Fight
+
+                al.active_fight = Fight(
+                    al=al, words=self.fight_words, npc=self, starting="npc"
+                )
+            if self.active_dialog == self.victory_dialog:
+                al.learner.faints()
+                self.active_dialog = self.standard_dialog
+                self.active_line_index = 0
+
     def special_interaction(self, al):
         from event import execute_event
 
@@ -244,44 +305,8 @@ class Npc(object):
                 al.learner.bed_heal()
         if self.active_line_index == -1:
             play_thai_word(self.name)
-        if self.taught:
-            if self.is_saying_last_sentence() and (
-                self.active_dialog == self.standard_dialog
-                or self.active_dialog == self.review_dialog
-            ):
-                al.active_learning = (
-                    WordLearning(al=al, word=self.taught, npc=self)
-                    if isinstance(self.taught, Word)
-                    else LetterLearning(al=al, letter=self.taught, npc=self)
-                )
-                al.active_learning.goes_to_first_step()
-        if self == "is a spell": # TODO
-            if self.is_saying_last_sentence() and (
-                self.active_dialog == self.standard_dialog
-                or self.active_dialog == self.review_dialog
-            ):
-                al.active_learning = (
-                    WordLearning(al=al, word=self.taught, npc=self)
-                    if isinstance(self.taught, Word)
-                    else LetterLearning(al=al, letter=self.taught, npc=self)
-                )
-                al.active_learning.goes_to_first_step()
-        if self.battle_words:
-            if self.is_saying_last_sentence():
-                if self.active_dialog == self.standard_dialog:
-                    # from mechanics.battle import Battle
-                    from mechanics.fight.fight import Fight
-
-                    # al.active_battle = Battle(
-                    #     al=al, words=self.battle_words, trainer=self
-                    # )
-                    al.active_fight = Fight(
-                        al=al, words=self.battle_words, npc=self, starting="npc"
-                    )
-                if self.active_dialog == self.victory_dialog:
-                    al.learner.faints()
-                    self.active_dialog = self.standard_dialog
-                    self.active_line_index = 0
+        if self.is_saying_last_sentence():
+            self.last_sentence_special_interaction(al)
 
     def interact(self, al):
         from event import execute_event
@@ -308,7 +333,7 @@ class Npc(object):
                 if self.active_dialog == self.defeat_dialog:
                     trigger_event = True
                     if self.letter:
-                        self.disappears(al)
+                        make_letter_beaten(self)
             else:
                 trigger_event = True
             if trigger_event:
@@ -343,7 +368,7 @@ class Npc(object):
 
     def _maybe_draw_letter(self, ui, x, y):
         if self.letter:
-            rendered_letter = ui.fonts.garuda32.render(f" {self.letter.thai} ", True, (0, 0, 0))
+            rendered_letter = ui.fonts.garuda32.render(f" {self.letter.thai} ", True, self.letter_color)
             x += int(ui.cell_size / 2 - rendered_letter.get_width() / 2)
             y += int(ui.cell_size / 2 - rendered_letter.get_height() / 2)
             ui.screen.blit(rendered_letter, (x, y))
@@ -376,7 +401,8 @@ class Npc(object):
         y += al.weather.get_offset_y()
 
         if sprite:
-            al.ui.screen.blit(sprite, [x, y])
+            if self.shows_sprite:
+                al.ui.screen.blit(sprite, [x, y])
             self._maybe_draw_letter(al.ui, x, y)
         else:
             pygame.draw.rect(

@@ -85,7 +85,7 @@ def draw_box(
                 screen.blit(rendered_text, (x + 10, y))
                 y += font_size
         elif string:
-            rendered_text = font.render(string, True, default_color)
+            rendered_text = font.render(f" {string} ", True, default_color)
             screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
 
 
@@ -1936,7 +1936,7 @@ class EnglishLetterFromThai(Test):
         In this test, the tested letter is actually random.
         It's used only in the learning phases.
         """
-        super().__init__(al, learning, test_success_callback, test_failure_callback)
+        super().__init__(al, learning=learning, test_success_callback=test_success_callback, test_failure_callback=test_failure_callback)
         random_letter = Letter.get_weighted_random_known_letter()
         self.correct = random_letter if random_letter else letter
         self.number_of_distr: int = -1
@@ -1997,9 +1997,14 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
     def __init__(
         self, al: "All", learning=None, test_success_callback=None, letter=None
     ):
-        super().__init__(al, learning, test_success_callback, letter)
+        super().__init__(al, learning=learning, test_success_callback=test_success_callback, letter=letter)
         self.number_of_distr: int = 3
-        print("learning the letter", self.correct.thai)
+        try:
+            print("learning the letter", self.correct.thai)
+        except:
+            print(f"{self.correct} has no attribute: thai")
+            if self.correct is not None:
+                print(f"ID: {self.correct.id}")
         self.distractors: List[Letter] = self.select_distractors()
         self.choices: List[Letter] = [self.correct] + self.distractors
         random.shuffle(self.choices)
@@ -2048,7 +2053,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
         self.draw_background()
 
         # Draw "What's the Thai letter for"
-        explanatory_string = "What's the Thai letter for:"
+        explanatory_string = "What's the English letter for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
         screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
@@ -2056,7 +2061,7 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.garuda32.render(f" {self.correct.thai} ", True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -2085,7 +2090,7 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
     def __init__(
         self, al: "All", learning=None, test_success_callback=None, letter=None
     ):
-        super().__init__(al, learning, test_success_callback, letter)
+        super().__init__(al, learning=learning, test_success_callback=test_success_callback, letter=letter)
         self.number_of_distr: int = 15
 
         self.distractors: List[Letter] = self.select_distractors()
@@ -2150,8 +2155,8 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
         # Draw the background
         self.draw_background()
 
-        # Draw "What's the Thai letter for"
-        explanatory_string = "What's the Thai letter for:"
+        # Draw "What's the English letter for"
+        explanatory_string = "What's the English letter for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
         screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
@@ -2159,7 +2164,7 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.garuda32.render(f" {self.correct.thai} ", True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):

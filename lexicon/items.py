@@ -108,7 +108,7 @@ class Word(Growable):
         CONN.commit()
 
     def get_total_xp(self) -> int:
-        # TODO Alexis: add a check in the case that there is no column at all
+        # TODO: add a check in the case that there is no column at all
         total_xp = list(CURSOR.execute(
             f"SELECT uw.total_xp FROM user_word uw "
             f"JOIN words w on w.id = uw.word_id "
@@ -131,7 +131,7 @@ class Word(Growable):
         return self.split_form.split("-")
 
     def get_sentences(self) -> List['Sentence']:
-        # TODO Alexis
+        # TODO
         sentences = []
         for sentence_db in list(get_db_cursor().execute(
             f"SELECT * FROM sentences s JOIN word_sentence ws on s.id = ws.sentence_id WHERE ws.word_id = '{self.id}'"
@@ -384,34 +384,6 @@ class Sentences(object):
         print(self)
 
 
-#
-# class UserWord(object):
-#     """
-#     The word in relation to the user
-#     """
-#     def __init__(self, word):
-#         self.word = word
-#         self.xp = 0
-#         self.lvl = 1
-#
-#
-# class UserWords(object):
-#     def __init__(self):
-#         self.user_words = []
-#
-#     def add_word(self, user_word: UserWord):
-#         self.user_words.append(user_word)
-#
-#     # def get_word(self, split_form: str):
-#     #     for user_word in self.user_words:
-#     #         if word.split_form == split_form:
-#     #             return word
-#
-#     # def print(self):
-#     #     for word in self.words:
-#     #         word.print()
-
-
 class NoLetterHasXp(Exception):
     pass
 
@@ -453,25 +425,25 @@ class Letter(Growable):
     #     )
     #     CONN.commit()
 
-    # def get_total_xp(self) -> int:
-    #     # TODO Alexis: add a check in the case that there is no column at all
-    #     total_xp = list(CURSOR.execute(
-    #         f"SELECT uw.total_xp FROM user_word uw "
-    #         f"JOIN words w on w.id = uw.word_id "
-    #         f"JOIN users u on u.id = uw.user_id "
-    #         f"WHERE w.id = '{self.id}'"
-    #         f"AND u.is_playing"
-    #     ))
-    #     if not total_xp:
-    #         user_id = get_active_learner_id()
-    #         CURSOR.execute(
-    #             f"INSERT INTO user_word (word_id, user_id, total_xp, level, next_threshold, previous_threshold) "
-    #             f"VALUES ('{self.id}', '{user_id}', 0, 1, 1, 0)"
-    #         )
-    #         CONN.commit()
-    #         return 0
-    #
-    #     return total_xp[0][0]
+    def get_total_xp(self) -> int:
+        # TODO: add a check in the case that there is no column at all
+        total_xp = list(CURSOR.execute(
+            f"SELECT ul.total_xp FROM user_letter ul "
+            f"JOIN letters l on l.id = ul.letter_id "
+            f"JOIN users u on u.id = ul.user_id "
+            f"WHERE l.id = '{self.id}'"
+            f"AND u.is_playing"
+        ))
+        if not total_xp:
+            user_id = get_active_learner_id()
+            CURSOR.execute(
+                f"INSERT INTO user_letter (letter_id, user_id, total_xp, level, next_threshold, previous_threshold) "
+                f"VALUES ('{self.id}', '{user_id}', 0, 1, 1, 0)"
+            )
+            CONN.commit()
+            return 0
+
+        return total_xp[0][0]
 
     @classmethod
     def get_known_letters(cls) -> List[Letter]:

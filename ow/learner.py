@@ -2,7 +2,7 @@ import pygame
 import time
 
 from all import All
-from models import set_active_player
+from models import set_as_active_player
 from movement import Movement
 from ow.direction import Direction, dir_equal, string_from_direction, opposite_direction
 from ow.overworld import CellTypes
@@ -12,11 +12,12 @@ from sounds.play_sound import play_thai_word
 class Learner(object):
     def __init__(self, al, name, x=8, y=12, color=(150, 0, 150), learns_letters=True, gender=1):
         self.name = name
-        set_active_player(name, learns_letters)
+        self.gender = gender
+        set_as_active_player(name, gender, learns_letters)
         self.sprite = self.name.lower()
         self.money = 5
         self.learns_letters = learns_letters
-        self.max_hp = 5
+        self.max_hp = 1
         self.must_wait = 0.1
         self.hp = self.max_hp
         self.x = x
@@ -30,7 +31,6 @@ class Learner(object):
         self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
         self.movement: Movement = None
         self.followers = []
-        self.gender = gender
 
     def draw(self, al):
         cell_size = al.ui.cell_size
@@ -120,7 +120,7 @@ class Learner(object):
         # Check for npcs:
         if next_position_walkable:
             for npc in al.mas.current_map.npcs:
-                if npc.x == next_x and npc.y == next_y and npc.should_appear():
+                if npc.x == next_x and npc.y == next_y and npc.should_appear() and not npc.is_walkable:
                     next_position_walkable = False
                     break
 
@@ -227,7 +227,6 @@ class Learner(object):
         x, y, ma = self.last_healing_place
         self.teleport(x, y, ma)
         self.al.active_test = None
-        self.al.active_battle = None
         self.al.active_fight = None
         self.al.active_npc = None
         self.al.active_learning = None

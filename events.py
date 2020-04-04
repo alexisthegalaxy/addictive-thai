@@ -202,7 +202,7 @@ def _talked_to_nim_in_plane_0(al: "All"):
         standard_dialog=[
             "Nim: Good, that was your first letter.",
             "After the most common consonnant, here's the most common vowel:",
-            "า is the vowel 'ā' (ā), and note the accent on top, meaning it's a long vowel.",
+            "า is the vowel 'ā', and note the accent on top, meaning it's a long vowel.",
             "Thai has a short 'a' (-ั) and a long 'ā' (า)",
             "It's easy to use it: นา = 'nā'.",
         ],
@@ -252,7 +252,7 @@ def _talked_to_nim_in_plane_2(al: "All"):
         v_shaking=Shaking(period=5700, intensity=2),  # (period, intensity)
         cos_light_flashing=(2.7, 0.5, (255, 0, 0)),  # (period, transparency, color)
     )
-    new_nim_teaching_second_letter = Npc(
+    new_nim_teaching_third_letter = Npc(
         al=al,
         name="Nim",
         ma=al.mas.get_map_from_name("plane"),
@@ -272,7 +272,7 @@ def _talked_to_nim_in_plane_2(al: "All"):
         ],
         end_dialog_trigger_event=["talked_to_nim_in_plane"],
     )
-    al.mas.current_map.add_npc(new_nim_teaching_second_letter)
+    al.mas.current_map.add_npc(new_nim_teaching_third_letter)
 
 
 def _talked_to_nim_in_plane_3(al: "All"):
@@ -287,10 +287,32 @@ def _talked_to_nim_in_plane_3(al: "All"):
         rain=True,
         wind=50,
     )
+    new_nim = Npc(
+        al=al,
+        name="Nim",
+        ma=al.mas.get_map_from_name("plane"),
+        x=57,
+        y=54,
+        sprite="nim",
+        direction=Direction.DOWN,
+        wanna_meet=True,
+        eyesight=1,
+        standard_dialog=[
+            "Nim: Did we really...",
+            "crash?",
+            "...",
+        ],
+        end_dialog_trigger_event=["talked_to_nim_in_plane"],
+    )
+    al.mas.current_map.add_npc(new_nim)
+
+
+def _talked_to_nim_in_plane_4(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
     al.learner.followers.append(
         Follower(
             al,
-            direction=Direction.UP,
+            direction=Direction.DOWN,
             sprite='nim',
             name='Nim',
             x=57,

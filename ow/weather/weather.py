@@ -168,7 +168,7 @@ class Weather(object):
     def draw(self, al):
         if self.cos_light_flashing:
             self.draw_cos_light_flashing(al)
-        if self.rain:
+        if self.rain and not al.mas.current_map.inside:
             self.rain.draw(al)
         if self.overlay:
             ui = al.ui
@@ -177,5 +177,5 @@ class Weather(object):
             s.set_alpha(self.overlay.transparency)
             s.fill(self.overlay.color)
             screen.blit(s, (0, 0))
-        if self.lightning:
+        if self.lightning and not al.mas.current_map.inside:
             self.lightning.draw(al)

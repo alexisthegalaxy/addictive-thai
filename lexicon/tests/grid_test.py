@@ -179,8 +179,8 @@ class Grid(object):
         for i, position in enumerate(positions):
             x, y = position
             thai = words[i].thai
-            word_id = -1  # TODO Alexis
-            pos = 'VERB'  # TODO Alexis
+            word_id = -1  # TODO
+            pos = 'VERB'  # TODO
             self.set_cell(x, y, thai=thai, word_id=word_id, pos=pos)
         return True
 
@@ -336,7 +336,7 @@ class GrammarGridTest(Test):
     def validate_answer(self, built_sentence):
         print(built_sentence)
         print(built_sentence)
-        # TODO Alexis: have
+        # TODO: have
         # success = built_sentence == self.sentence.thai
         # if success:
         #     self.succeeds([])

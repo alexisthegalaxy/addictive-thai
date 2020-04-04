@@ -56,7 +56,6 @@ def create_many_to_many_relationships():
 # ผม_ไม่_ชอบ_อยู่_บ้าน | I (male) dont like to be at home.
 # ผม_ชอบ_อยู่_เมือง-ไทย | I (male) like to be in Thailand.
 # ฉัน_ไม่_ชอบ_อยู่_เมือง-ไทย | I (female) dont like to be in Thailand.
-# ผม_ชื่อ_อ-เล็ก-ซี่ | My name is Alexis (male)
 # ผม_อา-ยุ_สิบ_ปี | I (male) am ten years old.
 # ผม_วิ่ง_เร็ว | I (male) run fast.
 # ส-วัส-ดี_ค่ะ | Hello (said by female)!

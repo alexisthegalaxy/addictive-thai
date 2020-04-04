@@ -119,6 +119,8 @@ to_convert = [
     "phitsanulok_maths_school_456",
     "phitsanulok_maths_school_789",
     "phitsanulok_maths_school_1011",
+    "ko_kut_house_1",
+    "ko_kut_house_2",
 ]
 
 for item in to_convert:

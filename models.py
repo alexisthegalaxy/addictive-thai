@@ -144,28 +144,30 @@ def increase_xp_letter_by_id(letter_id, xp_amount):
     CONN.commit()
 
 
-def create_new_user(name: str, learns_letters: bool):
+def create_new_user(name: str, gender: int, learns_letters: bool):
     if learns_letters:
-        starting_map = "ko_kut"
-        starting_x = 47
-        starting_y = 54
+        starting_map = "plane"
+        starting_x = 9
+        starting_y = 7
+        direction = Direction.UP.value
     else:
         starting_map = "house_learner_f2"
         starting_x = 8
         starting_y = 12
+        direction = Direction.DOWN.value
     starting_money = 0
     starting_hp = 1
 
     learner_id = CURSOR.execute(
-        f"INSERT INTO users (name, is_playing, current_map, x, y, money, hp)"
-        f"VALUES ('{name}', '1', '{starting_map}', '{starting_x}', '{starting_y}', '{starting_money}', '{starting_hp}')"
+        f"INSERT INTO users (name, is_playing, current_map, x, y, money, hp, gender)"
+        f"VALUES ('{name}', '1', '{starting_map}', '{starting_x}', '{starting_y}', '{starting_money}', '{starting_hp}', '{gender}')"
     ).lastrowid
     CONN.commit()
 
     last_healing_map = "house_learner_f2"
     last_healing_x = 5
     last_healing_y = 10
-    direction = Direction.DOWN.value
+
     max_hp = 1
     last_saved_timestamp = datetime.now().isoformat()
     CURSOR.execute(
@@ -175,7 +177,7 @@ def create_new_user(name: str, learns_letters: bool):
     CONN.commit()
 
 
-def set_active_player(name, learns_letters):
+def set_as_active_player(name, gender, learns_letters):
     # 1 - Set all users to non-playing
     CURSOR.execute(f"UPDATE users " f"SET is_playing = 0 ")
     CONN.commit()
@@ -187,7 +189,7 @@ def set_active_player(name, learns_letters):
     )
 
     if no_user_found:
-        create_new_user(name, learns_letters)
+        create_new_user(name, gender, learns_letters)
     else:
         CURSOR.execute(f"UPDATE users " f"SET is_playing = 1 " f"WHERE name = '{name}'")
         CONN.commit()

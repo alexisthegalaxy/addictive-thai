@@ -149,8 +149,8 @@ class Ui(object):
                     elif al.active_npc:
                         al.active_npc = None
                         al.ui.escape = False
-                    elif al.active_battle:
-                        al.active_battle.end_battle()
+                    elif al.active_naming:
+                        al.active_naming.end_naming()
                         al.ui.escape = False
                     elif al.active_fight:
                         al.active_fight.end_fight()

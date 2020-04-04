@@ -7,7 +7,7 @@ from lexicon.dex import Dex
 import pygame
 
 from models import get_words_with_a_teaching_order
-from npc.import_npcs import import_npcs
+from npc.import_npcs.import_npcs import import_npcs
 from npc.npc_default_text import draw_npc_text
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
@@ -21,9 +21,9 @@ def main_interact(al: All):
     if al.active_test:
         ow_frozen = True
         al.active_test.interact(al)
-    elif al.active_battle:
+    elif al.active_naming:
         ow_frozen = True
-        al.active_battle.interact(al)
+        al.active_naming.interact(al)
     elif al.active_fight:
         ow_frozen = True
         al.active_fight.interact()
@@ -69,16 +69,14 @@ def main_draw(al: All):
     if al.active_test:
         al.active_test.draw()
         # the following is used to draw fighter's sprites even during other elements are active - for example, tests
-        if al.active_battle:
-            al.active_battle.draw_secondary()
         if al.active_fight:
             al.active_fight.draw_secondary()
     elif al.active_sale:
         al.active_sale.draw()
-    elif al.active_battle:
-        al.active_battle.draw()
     elif al.active_fight:
         al.active_fight.draw()
+    elif al.active_naming:
+        al.active_naming.draw()
     if al.active_learning:
         al.active_learning.draw()
     if al.dex.active:
@@ -98,7 +96,7 @@ def main():
         ui=Ui(),
         cell_types=CellTypes(),
     )
-    al.learner = Learner(al, "Alexis")
+    al.learner = Learner(al, "mom", gender=0)
     load(al)
     import_npcs(al)
     al.dex = Dex(al)
