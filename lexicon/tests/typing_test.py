@@ -132,6 +132,7 @@ class TypingTestFromEnglish(ThaiFromEnglish):
         if al.ui.click:
             for box in self.boxes:
                 if box.contains(al.ui.click):
-                    al.ui.click = None
                     self.learner_select_option()
                     break
+            al.ui.click = None
+

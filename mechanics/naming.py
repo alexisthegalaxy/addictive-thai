@@ -1,9 +1,12 @@
-import random
 import pygame
 from typing import List
 from all import All
-from lexicon.tests.tests import draw_box
+from lexicon.tests.tests import draw_box, TestAnswerBox
 from npc.npc import Npc
+import random
+
+
+VALIDATE_STRING = "Validate"
 
 
 class Naming(object):
@@ -11,7 +14,9 @@ class Naming(object):
         self.al: All = al
         self.npc: Npc = npc
         self.name = name
-        self.distractors = distractors if distractors else []
+        letters_in_name = [letter for letter in name]
+        self.distractors = letters_in_name + distractors if distractors else letters_in_name
+        random.shuffle(self.distractors)
         self.image = al.ui.npc_sprites[image] if image else None
         self.image_size = self.image.get_size() if self.image else None
         self.prompt = prompt
@@ -27,8 +32,58 @@ class Naming(object):
         self.rendered_prompt = self.al.ui.fonts.garuda32.render(self.prompt, True, (0, 0, 0))
         self.answer_y = self.prompt_y + self.rendered_prompt.get_height() + al.ui.percent_height(0.02)
 
+        self.boxes = self.make_boxes()
+
+    def make_boxes(self):
+        initial_x = self.al.ui.percent_width(0.1)
+        x = initial_x
+        y = self.answer_y + self.al.ui.percent_height(0.15)
+        width = self.al.ui.percent_width(0.1)
+        height = self.al.ui.percent_height(0.08)
+
+        boxes = []
+        for i, distractor in enumerate(self.distractors):
+            boxes.append(
+                TestAnswerBox(
+                    x=x,
+                    y=y,
+                    width=width,
+                    height=height,
+                    string=f" {distractor} ",
+                    index=i,
+                )
+            )
+            x += width + 20
+            if x > self.al.ui.percent_width(0.8):
+                x = initial_x
+                y += height + self.al.ui.percent_height(0.04)
+        boxes.append(
+            TestAnswerBox(
+                x=x,
+                y=y,
+                width=self.al.ui.percent_width(0.2) + 20,
+                height=height,
+                string=VALIDATE_STRING,
+                index=len(self.distractors),
+            )
+        )
+        return boxes
+
     def interact(self, al):
+        if al.ui.hover:
+            for box in self.boxes:
+                if box.contains(al.ui.hover):
+                    al.ui.hover = None
+                    for other_box in self.boxes:
+                        other_box.selected = False
+                    box.selected = True
+                    self.selected_option_index = box.index
+                    break
         if al.ui.click:
+            for box in self.boxes:
+                if box.contains(al.ui.click):
+                    self.learner_select_option(box.string)
+                    break
             al.ui.click = None
 
     def draw_background(self):
@@ -47,7 +102,7 @@ class Naming(object):
 
     def draw_answer(self):
         answer_width = self.al.ui.percent_width(0.8)
-        answer_height = self.al.ui.percent_height(0.07)
+        answer_height = self.al.ui.percent_height(0.1)
         draw_box(
             screen=self.al.ui.screen,
             fonts=self.al.ui.fonts,
@@ -55,37 +110,17 @@ class Naming(object):
             y=self.answer_y,
             width=answer_width,
             height=answer_height,
-            string=f" {self.answer} ",
-            # bg=self.bg_color,
-            # default_color=self.color,
-            font_size=32,
-            # thickness=1,
+            font_size=48,
+            string=f" {self.answer}",
+            centered=True,
         )
 
     def draw_distractors(self):
-        initial_x = self.al.ui.percent_width(0.1)
-        x = initial_x
-        y = self.answer_y + self.al.ui.percent_height(0.25)
-        width = 100
-        height = self.al.ui.percent_height(0.1)
-        for distractor in self.distractors:
-            draw_box(
+        for distractor_box in self.boxes:
+            distractor_box.draw(
                 screen=self.al.ui.screen,
                 fonts=self.al.ui.fonts,
-                x=x,
-                y=y,
-                width=width,
-                height=height,
-                string=f" {distractor} ",
-                # bg=self.bg_color,
-                # default_color=self.color,
-                font_size=32,
-                # thickness=1,
             )
-            x += width + 20
-            if x > 1000:
-                x = initial_x
-                y += height + self.al.ui.percent_height(0.04)
 
     def draw_prompt(self):
         text_length = self.rendered_prompt.get_width()
@@ -99,17 +134,19 @@ class Naming(object):
         self.draw_answer()
         self.draw_distractors()
 
-    def end_naming(self):
+    def learner_select_option(self, string):
+        if string == VALIDATE_STRING:
+            self.end_naming(success=self.answer == self.name)
+        cleaned_string = string.replace(' ', '').replace('-', '')
+        self.answer += cleaned_string
+
+    def end_naming(self, success=False):
+        # Called by the escape key, and also when clicking on Validate
         self.al.active_naming = None
         self.al.active_npc = self.npc
-        success = True
         if success:
             self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog
             self.al.active_npc.active_line_index = 0
-            self.al.active_npc.wants_battle = False
-            battle_money = self.al.active_npc.money
-            self.al.learner.money += battle_money
         else:
             self.al.active_npc.active_dialog = self.al.active_npc.victory_dialog
             self.al.active_npc.active_line_index = 0
-            print('DEFEAT!!!')

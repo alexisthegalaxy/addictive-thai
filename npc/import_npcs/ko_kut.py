@@ -418,6 +418,8 @@ def ko_kut(al):
             y=36,
             sprite="spirit_bird",
             standard_dialog=["Kyaaaaa!"],
+            defeat_dialog=["Well done! You got my name."],
+            victory_dialog=["No, this is not my real name."],
             wobble=True,
             end_dialog_trigger_event=["talk_to_spirit_bird"],
             naming=Naming(al, name="ลมสวย", image="spirit_bird", distractors=["น", "า", "ร", "-ั", "ก", "เ", "อ", "-ี", "ง", "ท", "-ิ", "ต"], prompt="Spell the spirit's True Name!"),

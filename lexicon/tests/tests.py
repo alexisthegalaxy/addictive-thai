@@ -52,6 +52,7 @@ def draw_box(
     sound_box: bool = False,
     images=None,
     thickness=5,
+    centered=False,
 ):
     # 1 - Draw background
     if sound_box:
@@ -76,6 +77,8 @@ def draw_box(
             font = fonts.garuda28
         elif font_size == 16:
             font = fonts.garuda16
+        elif font_size == 48:
+            font = fonts.garuda48
         else:
             font = fonts.garuda32
         if strings:
@@ -86,7 +89,11 @@ def draw_box(
                 y += font_size
         elif string:
             rendered_text = font.render(f" {string} ", True, default_color)
-            screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
+            if centered:
+                x = x + width / 2 - rendered_text.get_width() / 2
+            else:
+                x += 10
+            screen.blit(rendered_text, (x, y + int(height / 2) - rendered_text.get_height() / 2))
 
 
 class TestAnswerBox(object):
@@ -100,7 +107,7 @@ class TestAnswerBox(object):
         self.index = index
         self.sound_box = sound_box
 
-    def draw(self, screen, fonts, selected, hovered=False, images=None):
+    def draw(self, screen, fonts, selected=False, hovered=False, images=None):
         draw_box(
             screen,
             fonts,
