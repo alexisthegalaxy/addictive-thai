@@ -18,7 +18,7 @@ class Follower(object):
 
     def draw(self, al):
         progressive_offset = 1.05 * (time.time() - self.last_movement) / al.learner.must_wait
-        learner_movement_offset_x, learner_movement_offset_y = al.learner.movement.get_offset()
+        learner_movement_offset_x, learner_movement_offset_y = al.learner.movement.get_offset() if al.learner.movement else (0, 0)
         center_x = 7
         center_y = 4
 

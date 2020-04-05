@@ -21,8 +21,6 @@ def load(al: "All"):
     load_current_x_y_money_hp_ma(al)
     load_user_details(al)
     load_bag(al)
-
-    load_events(al)
     # TODO XP
     # # proceed to remove 1 xp for each word if necessary
     # seconds_since_last_time = (
@@ -35,17 +33,3 @@ def load(al: "All"):
     #     print("it has been more than 20 hours!")
     # else:
     #     print("it has NOT been 20 hours!")
-
-
-def load_events(al: "All"):
-    if get_event_status("sushi_is_following") == 1:
-        al.learner.followers.append(
-            Follower(
-                al,
-                direction=Direction.DOWN,
-                sprite='dog',
-                name='ซูชิ',
-                x=-1,
-                y=-1,
-            )
-        )

@@ -45,7 +45,13 @@ def _can_turn(sprite_type):
             "television_on",
             "crashed_plane",
             "spirit_bird",
+            "spirit_bird_invisible",
             "spirit_gecko",
+            "spirit_gecko_invisible",
+            "garbage_0",
+            "garbage_1",
+            "garbage_2",
+            "garbage_3",
             "television_off",
             "boat",
         ]
@@ -79,6 +85,7 @@ class Npc(object):
         y,
         name="...",
         standard_dialog=None,  # pre-fight, normal talk, pre-learn
+        standard_dialog_2=None,  # npc says that instead of standard_dialog after having talked once already
         defeat_dialog=None,  # post-fight
         victory_dialog=None,  # post-fight
         extra_dialog_1=None,  # use in triggers
@@ -102,6 +109,7 @@ class Npc(object):
         is_walkable=False,
         shows_sprite=True,
         naming=None,
+        is_silent=False,
         letter_color=(0, 0, 0),
         hp=2,
     ):
@@ -115,6 +123,8 @@ class Npc(object):
         self.extra_dialog_3 = extra_dialog_3 or []
         self.extra_dialog_4 = extra_dialog_4 or []
         self.extra_dialog_5 = extra_dialog_5 or []
+        # if standard_dialog_2 exists, the npc will say that instead of standard_dialog, but only after the first time
+        self.standard_dialog_2 = standard_dialog_2 or []
 
         self.name = name
         self.ma = ma
@@ -128,6 +138,7 @@ class Npc(object):
         self.review_dialog: List[str] = ["Do you want to review the word"]
         self.dialogs = [
             self.standard_dialog,
+            self.standard_dialog_2,
             self.defeat_dialog,
             self.victory_dialog,
             self.extra_dialog_1,
@@ -159,6 +170,7 @@ class Npc(object):
         self.letter_color = letter_color
         self.shows_sprite = shows_sprite
         self.is_walkable = is_walkable
+        self.is_silent = is_silent
 
         self.naming = naming
         if self.naming:
@@ -248,6 +260,8 @@ class Npc(object):
         return self.active_line_index == len(self.active_dialog) - 1
 
     def last_sentence_special_interaction(self, al):
+        if self.active_dialog == self.standard_dialog and self.standard_dialog_2:
+            self.active_dialog = self.standard_dialog_2
         if self.taught:
             if (
                 self.active_dialog == self.standard_dialog
@@ -265,7 +279,9 @@ class Npc(object):
                 or self.active_dialog == self.review_dialog
             ):
                 al.active_naming = self.naming
-                # al.active_learning.goes_to_first_step()
+                al.active_naming.actualize()
+            if self.active_dialog == self.victory_dialog:
+                self.active_dialog = self.standard_dialog
         if self == "is a spell":  # TODO
             if (
                 self.active_dialog == self.standard_dialog

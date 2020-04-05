@@ -1,6 +1,7 @@
 import pygame
 from typing import List
 from all import All
+from lexicon.items import Letter
 from lexicon.tests.tests import draw_box, TestAnswerBox
 from npc.npc import Npc
 import random
@@ -10,7 +11,7 @@ VALIDATE_STRING = "Validate"
 
 
 class Naming(object):
-    def __init__(self, al: All, name: str, npc: Npc = None, distractors: List[str] = None, image=None, prompt="Spell its True Name!") -> None:
+    def __init__(self, al: All, name: str, npc: Npc = None, distractors: List[str] = None, image=None, prompt="Spell its True Name!", victory_callback=None) -> None:
         self.al: All = al
         self.npc: Npc = npc
         self.name = name
@@ -20,8 +21,11 @@ class Naming(object):
         self.image = al.ui.npc_sprites[image] if image else None
         self.image_size = self.image.get_size() if self.image else None
         self.prompt = prompt
+        self.victory_callback = victory_callback
 
         self.answer = ""
+        self.selected_option_index = None
+        self.hover = None
 
         # UI
         self.x = al.ui.percent_width(0.07)
@@ -34,6 +38,9 @@ class Naming(object):
 
         self.boxes = self.make_boxes()
 
+    def actualize(self):
+        self.boxes = self.make_boxes()
+
     def make_boxes(self):
         initial_x = self.al.ui.percent_width(0.1)
         x = initial_x
@@ -43,6 +50,8 @@ class Naming(object):
 
         boxes = []
         for i, distractor in enumerate(self.distractors):
+            letter = Letter.get_by_thai(distractor)
+            letter_is_greyed_out = not letter.get_total_xp() > 1
             boxes.append(
                 TestAnswerBox(
                     x=x,
@@ -51,6 +60,7 @@ class Naming(object):
                     height=height,
                     string=f" {distractor} ",
                     index=i,
+                    greyed=letter_is_greyed_out,
                 )
             )
             x += width + 20
@@ -71,8 +81,10 @@ class Naming(object):
 
     def interact(self, al):
         if al.ui.hover:
+            self.hover = None
             for box in self.boxes:
                 if box.contains(al.ui.hover):
+                    self.hover = al.ui.hover
                     al.ui.hover = None
                     for other_box in self.boxes:
                         other_box.selected = False
@@ -81,7 +93,7 @@ class Naming(object):
                     break
         if al.ui.click:
             for box in self.boxes:
-                if box.contains(al.ui.click):
+                if not box.greyed and box.contains(al.ui.click):
                     self.learner_select_option(box.string)
                     break
             al.ui.click = None
@@ -116,11 +128,27 @@ class Naming(object):
         )
 
     def draw_distractors(self):
-        for distractor_box in self.boxes:
-            distractor_box.draw(
+        draw_tooltip = False
+        for box in self.boxes:
+            box.draw(
                 screen=self.al.ui.screen,
                 fonts=self.al.ui.fonts,
             )
+            if self.selected_option_index == box.index and box.greyed and self.hover:
+                draw_tooltip = True
+        if draw_tooltip:
+            draw_box(
+                self.al.ui.screen,
+                self.al.ui.fonts,
+                x=self.hover[0],
+                y=self.hover[1],
+                font_size=24,
+                width=self.al.ui.percent_width(0.3),
+                height=self.al.ui.percent_height(0.07),
+                string="You must first learn this letter!",
+                thickness=3,
+            )
+
 
     def draw_prompt(self):
         text_length = self.rendered_prompt.get_width()
@@ -137,16 +165,21 @@ class Naming(object):
     def learner_select_option(self, string):
         if string == VALIDATE_STRING:
             self.end_naming(success=self.answer == self.name)
-        cleaned_string = string.replace(' ', '').replace('-', '')
-        self.answer += cleaned_string
+        else:
+            cleaned_string = string.replace(' ', '').replace('-', '')
+            self.answer += cleaned_string
 
     def end_naming(self, success=False):
         # Called by the escape key, and also when clicking on Validate
         self.al.active_naming = None
         self.al.active_npc = self.npc
+        self.answer = ""
         if success:
+            if self.victory_callback:
+                self.victory_callback(self.al)
             self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog
             self.al.active_npc.active_line_index = 0
         else:
             self.al.active_npc.active_dialog = self.al.active_npc.victory_dialog
             self.al.active_npc.active_line_index = 0
+            self.al.learner.hurt(0.25)

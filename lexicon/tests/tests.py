@@ -53,7 +53,11 @@ def draw_box(
     images=None,
     thickness=5,
     centered=False,
+    greyed=False,
 ):
+    if greyed:
+        default_color = (128, 128, 128)
+        selected_color = (128, 128, 128)
     # 1 - Draw background
     if sound_box:
         border_color = selected_color if hovered else default_color
@@ -97,7 +101,7 @@ def draw_box(
 
 
 class TestAnswerBox(object):
-    def __init__(self, x, y, width, height, string, index, sound_box: bool = False):
+    def __init__(self, x, y, width, height, string, index, sound_box: bool = False, greyed=False):
         self.x = x
         self.y = y
         self.selected = False
@@ -106,6 +110,7 @@ class TestAnswerBox(object):
         self.string = string
         self.index = index
         self.sound_box = sound_box
+        self.greyed = greyed
 
     def draw(self, screen, fonts, selected=False, hovered=False, images=None):
         draw_box(
@@ -120,6 +125,7 @@ class TestAnswerBox(object):
             hovered=hovered,
             sound_box=self.sound_box,
             images=images,
+            greyed=self.greyed,
         )
 
     def contains(self, point):

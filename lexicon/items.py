@@ -609,15 +609,18 @@ class Letter(Growable):
     #
     @classmethod
     def get_by_thai(cls, thai) -> Letter:
-        letter_db = list(
-            CURSOR.execute(
-                f"""
-                SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index, audio
-                FROM letters
-                WHERE thai == '{thai}'
-                """
-            )
-        )[0]
+        try:
+            letter_db = list(
+                CURSOR.execute(
+                    f"""
+                    SELECT id, thai, pron, english, alphabet_index, final, class, frequency_index, audio
+                    FROM letters
+                    WHERE thai == '{thai}'
+                    """
+                )
+            )[0]
+        except IndexError:
+            print(f"Couldn't find letter for thai = {thai}")
         return Letter(
             id=letter_db[0],
             thai=letter_db[1],

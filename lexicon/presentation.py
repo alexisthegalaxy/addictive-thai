@@ -223,10 +223,10 @@ class LetterPresentation(Presentation):
         sound = "sound_icon_green" if self.selector_on_sound else "sound_icon"
         ui.screen.blit(ui.images[sound], [sound_x, sound_y])
 
-        # Draw Thai word
+        # Draw Thai letter
         x = ui.percent_width(0.26)
         y = ui.percent_height(0.15)
-        screen.blit(ui.fonts.garuda64.render(self.presented.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(ui.fonts.garuda64.render(f" {self.presented.thai} ", True, (0, 0, 0)), (x, y))
 
         # Draw English
         x = ui.percent_width(0.26)

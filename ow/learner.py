@@ -28,11 +28,19 @@ class Learner(object):
         self.al: "All" = al
         self.max_free_steps = 3
         self.free_steps = self.max_free_steps
-        self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
+        if learns_letters:
+            self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
+        else:
+            self.last_healing_place = (56, 55, self.al.mas.ko_kut)
         self.movement: Movement = None
         self.followers = []
 
+    def draw_followers(self, al):
+        for follower in self.followers:
+            follower.draw(al)
+
     def draw(self, al):
+        self.draw_followers(al)
         cell_size = al.ui.cell_size
         if cell_size == 30:
             x = 19 * al.ui.cell_size
@@ -57,9 +65,6 @@ class Learner(object):
                 self.color,
                 pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
             )
-
-        for follower in self.followers:
-            follower.draw(al)
 
     def draw_money(self, al, x=None, y=None):
         color = (0, 0, 0)
@@ -198,12 +203,12 @@ class Learner(object):
             return
         next_x, next_y = self.next_position()
         for npc in al.mas.current_map.npcs:
-            if npc.x == next_x and npc.y == next_y:
+            if npc.x == next_x and npc.y == next_y and not npc.is_silent:
                 npc.interact(al)
                 return
         next_next_x, next_next_y = self.next_next_position()
         for npc in al.mas.current_map.npcs:
-            if npc.x == next_next_x and npc.y == next_next_y:
+            if npc.x == next_next_x and npc.y == next_next_y and not npc.is_silent:
                 npc.interact(al)
                 return
 

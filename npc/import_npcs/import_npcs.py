@@ -5211,6 +5211,7 @@ def sukhothai(al):
     for npc in npcs:
         npc.ma.add_npc(npc)
 
+
 def import_npcs(al):
     plane(al)
     ko_kut(al)

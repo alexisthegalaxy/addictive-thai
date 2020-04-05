@@ -109,6 +109,10 @@ def npc_sprites():
         "monk_up": pygame.image.load(f"{dir_path}/../npc/sprites/monk_up.png"),
         "monk_right": pygame.image.load(f"{dir_path}/../npc/sprites/monk_right.png"),
         "monk_left": pygame.image.load(f"{dir_path}/../npc/sprites/monk_left.png"),
+        "fisherman_down": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_up.png"),
+        "fisherman_up": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_up.png"),
+        "fisherman_right": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_right.png"),
+        "fisherman_left": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_left.png"),
         "monk_levitating_up": pygame.image.load(
             f"{dir_path}/../npc/sprites/monk_levitating_up.png"
         ),
@@ -200,7 +204,13 @@ def npc_sprites():
         "teal_spell": pygame.image.load(f"{dir_path}/../npc/sprites/teal_spell.png"),
         "blue_spell": pygame.image.load(f"{dir_path}/../npc/sprites/blue_spell.png"),
         "spirit_bird": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_bird.png"),
+        "spirit_bird_invisible": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_bird_invisible.png"),
         "spirit_gecko": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_gecko.png"),
+        "spirit_gecko_invisible": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_gecko_invisible.png"),
+        "garbage_0": pygame.image.load(f"{dir_path}/../npc/sprites/garbage_0.png"),
+        "garbage_1": pygame.image.load(f"{dir_path}/../npc/sprites/garbage_1.png"),
+        "garbage_2": pygame.image.load(f"{dir_path}/../npc/sprites/garbage_2.png"),
+        "garbage_3": pygame.image.load(f"{dir_path}/../npc/sprites/garbage_3.png"),
         "television_off": pygame.image.load(
             f"{dir_path}/../npc/sprites/television_off.png"
         ),

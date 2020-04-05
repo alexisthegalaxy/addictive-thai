@@ -11,20 +11,18 @@ from sounds.play_sound import play_thai_word
 from weather.weather import Weather, Shaking
 
 
+def _get_npc_by_name(al, name: str):
+    for npc in al.mas.current_map.npcs:
+        if npc.name == name:
+            return npc
+
+
 def _talk_to_lover_0(al: "All"):
     """
     After talking to player, Lover leaves the garden by the door.
     """
-    lover = None
-    for npc in al.mas.current_map.npcs:
-        if npc.name == "Lover":
-            lover = npc
-            break
-    father_of_lover = None
-    for npc in al.mas.lover_house.npcs:
-        if npc.name == "father_of_lover":
-            father_of_lover = npc
-            break
+    lover = _get_npc_by_name(al, "Lover")
+    father_of_lover = _get_npc_by_name(al, "father_of_lover")
     lover.direction = Direction.DOWN
     father_of_lover.standard_dialog = [
         "You're looking for มะลิ? She went north, to Chumphae."
@@ -319,7 +317,47 @@ def _talked_to_nim_in_plane_4(al: "All"):
             y=54,
         )
     )
+    set_event('nim_is_following', 1)
 
+#
+# def _talk_to_spirit_bird_0(al: "All"):
+#     spirit_bird = _get_npc_by_name("spirit_bird")
+#     if "spirit bird is beaten":
+#         al.weather = Weather(al)
+#
+#     else:
+#         set_event('talk_to_spirit_bird', 0)
+#     al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
+#
+#     new_nim_teaching_second_letter = Npc(
+#         al=al,
+#         name="Nim",
+#         # taught=Letter.get_by_thai("า"),
+#         ma=al.mas.get_map_from_name("plane"),
+#         x=8,
+#         y=7,
+#         sprite="nim",
+#         direction=Direction.RIGHT,
+#         # wanna_meet=True,
+#         eyesight=1,
+#         standard_dialog=[
+#             "Nim: Good, that was your first letter.",
+#             "After the most common consonnant, here's the most common vowel:",
+#             "า is the vowel 'ā', and note the accent on top, meaning it's a long vowel.",
+#             "Thai has a short 'a' (-ั) and a long 'ā' (า)",
+#             "It's easy to use it: นา = 'nā'.",
+#         ],
+#         defeat_dialog=[
+#             "It's easy to remember:",
+#             "า looks like the letter A but without the left part and the bar.",
+#         ],
+#         end_dialog_trigger_event=["talked_to_nim_in_plane"],
+#     )
+#     al.mas.current_map.add_npc(new_nim_teaching_second_letter)
+#
+#
+#
+#
 
 
 # for npc in al.mas.current_map.npcs:

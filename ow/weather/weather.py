@@ -122,9 +122,12 @@ class Weather(object):
         else:
             self.rain = None
 
-        self.lightning = LightningStrike(al)
-        self.lightning_started_at = None
-        self.lightning_shape = None
+        if lightning:
+            self.lightning = LightningStrike(al)
+            self.lightning_started_at = None
+            self.lightning_shape = None
+        else:
+            self.lightning = None
 
         self.wind = wind
         self.overlay = overlay

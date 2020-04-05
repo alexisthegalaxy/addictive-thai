@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import time
 
-from all import All
+from all import All, special_loading
 from lexicon.dex import Dex
 import pygame
 
@@ -100,6 +100,7 @@ def main():
     load(al)
     import_npcs(al)
     al.dex = Dex(al)
+    special_loading(al)  # event-depending change to the data
     # get_links_from_city_word("ดี", al)
     while al.ui.running:
         al.ui.listen_event(al)
