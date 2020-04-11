@@ -2,6 +2,7 @@ from direction import Direction
 from lexicon.items import Word
 from models import get_event_status
 from npc.import_npcs.ko_kut import ko_kut
+from npc.import_npcs.ko_mak import ko_mak
 from npc.import_npcs.plane import plane
 from npc.npc import Npc
 from npc.spell import Spell
@@ -5215,6 +5216,7 @@ def sukhothai(al):
 def import_npcs(al):
     plane(al)
     ko_kut(al)
+    ko_mak(al)
     chumphae_lomsak(al)
     chumphae_school(al)
     chumphae(al)

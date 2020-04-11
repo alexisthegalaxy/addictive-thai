@@ -182,7 +182,7 @@ def wild_letters(al):
             y=49,
             standard_dialog=[
                 "Nim: Another one?",
-                "This one is ก, the consonnant g - and it's the first letter of the Thai alphabet.",
+                "This one is ก, the consonant g - and it's the first letter of the Thai alphabet.",
             ],
             defeat_dialog=["Nim: Well done [Name]!"],
         )
@@ -228,7 +228,7 @@ def wild_letters(al):
             ],
             defeat_dialog=[
                 "Nim: อ is quite easy to remember, because it looks like an o.",
-                'Given that it\'s both a consonnant and a vowel, "ออ" is a syllable!',
+                'Given that it\'s both a consonant and a vowel, "ออ" is a syllable!',
                 '"ออ" is read "o:", and means "to congregate"!',
                 'There\'s also this crazy word "เออออ", read "er o", meaning "to agree"!',
             ],
@@ -275,7 +275,7 @@ def wild_letters(al):
             x=49,
             y=42,
             standard_dialog=[
-                "Nim: That's the consonnant l!",
+                "Nim: That's the consonant l!",
                 "Don't get ล confused with the s: ส!",
             ],
             defeat_dialog=[
@@ -293,7 +293,7 @@ def wild_letters(al):
             x=49,
             y=35,
             standard_dialog=[
-                "Nim: That's ง, the ng consonnant!",
+                "Nim: That's ง, the ng consonant!",
                 "Don't you think ง looks like a muscle flexing?",
                 "I like to imagine somebody flexing and making the sound ng.",
                 "Nim: 'ng' can come at the end of a syllable like in English,",
@@ -388,7 +388,7 @@ def wild_letters(al):
             ma=al.mas.get_map_from_name("ko_kut"),
             x=47,
             y=32,
-            standard_dialog=["Nim: Here's the consonnant ด!", "This is the d."],
+            standard_dialog=["Nim: Here's the consonant ด!", "This is the d."],
             defeat_dialog=[
                 'Nim: At the end of a syllable, it\'s pronounced "t", not d.'
             ],
@@ -415,8 +415,7 @@ def wild_letters(al):
 def spirit_bird(al):
     naming = Naming(
         al,
-        # name="ลมสวย",
-        name="ล",
+        name="ลมสวย",
         image="spirit_bird",
         distractors=["น", "า", "ร", "-ั", "ก", "เ-", "อ", "-ี", "ง", "ท", "-ิ", "ต"],
         prompt="Spell the spirit's True Name!",
@@ -553,16 +552,32 @@ def old_people_and_fisherman(al):
         Npc(
             al=al,
             ma=al.mas.get_map_from_name("ko_kut"),
-            x=50,
-            y=27,
+            x=51,
+            y=28,
             name="fisherman",
             sprite="fisherman",
+            direction=Direction.RIGHT,
             standard_dialog=[
                 "Hello there.",
                 "Oh you want to go to Ko Chang?",
                 "Well, I can certainly help you.",
                 "I was just about to go back home, you can hop in if you want!",
             ],
+        )
+    )
+    add_npc(
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("ko_kut"),
+            x=48,
+            y=26,
+            name="small_fishing_boat",
+            sprite="small_fishing_boat",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "[Name] and Nim enter the boat.",
+            ],
+            end_dialog_trigger_event=["enter_boat_in_ko_kut"],
         )
     )
 

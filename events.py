@@ -199,7 +199,7 @@ def _talked_to_nim_in_plane_0(al: "All"):
         eyesight=1,
         standard_dialog=[
             "Nim: Good, that was your first letter.",
-            "After the most common consonnant, here's the most common vowel:",
+            "After the most common consonant, here's the most common vowel:",
             "า is the vowel 'ā', and note the accent on top, meaning it's a long vowel.",
             "Thai has a short 'a' (-ั) and a long 'ā' (า)",
             "It's easy to use it: นา = 'nā'.",
@@ -228,7 +228,7 @@ def _talked_to_nim_in_plane_1(al: "All"):
         standard_dialog=[
             "Nim: Good!",
             "I think we have time for a last third letter before the landing.",
-            "ร is the consonnant r.",
+            "ร is the consonant r.",
             "You have to roll it, like in Spanish or Russian,",
             "but actually in informal speach we Thai people just say 'l', not 'r'.",
             "Oh! Also, if it's at the end of a word, it turns into a 'n' sound.",
@@ -319,6 +319,17 @@ def _talked_to_nim_in_plane_4(al: "All"):
     )
     set_event('nim_is_following', 1)
 
+
+def _enter_boat_in_ko_kut_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
+    al.mas.current_map.map_change(
+        learner=al.learner,
+        ma=al.mas.get_map_from_name("ko_mak"),
+        x=35,
+        y=9,
+    )
+    set_event('enter_boat_in_ko_kut', 0)
+
 #
 # def _talk_to_spirit_bird_0(al: "All"):
 #     spirit_bird = _get_npc_by_name("spirit_bird")
@@ -342,7 +353,7 @@ def _talked_to_nim_in_plane_4(al: "All"):
 #         eyesight=1,
 #         standard_dialog=[
 #             "Nim: Good, that was your first letter.",
-#             "After the most common consonnant, here's the most common vowel:",
+#             "After the most common consonant, here's the most common vowel:",
 #             "า is the vowel 'ā', and note the accent on top, meaning it's a long vowel.",
 #             "Thai has a short 'a' (-ั) and a long 'ā' (า)",
 #             "It's easy to use it: นา = 'nā'.",

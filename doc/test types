@@ -44,7 +44,7 @@ R: the length (short/long)
 
 Test on letters:
 - Get the correct transliteration
-For consonnants:
+For consonants:
     - Get the group it belongs in
 For vowels:
     - Get the length?

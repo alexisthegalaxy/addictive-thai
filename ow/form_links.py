@@ -20,6 +20,9 @@ def form_links(mas):
     mas.ko_mak.get_cell_at(8, 14).goes_to = (mas.ko_klum, 8, 8)
     mas.ko_klum.get_cell_at(7, 8).goes_to = (mas.ko_mak, 8, 15)
 
+    mas.ko_mak.get_cell_at(25, 14).goes_to = (mas.ko_mak_cave, 10, 16)
+    mas.ko_mak_cave.get_cell_at(10, 17).goes_to = (mas.ko_mak, 25, 15)
+
     mas.ko_klum.get_cell_at(24, 12).goes_to = (mas.ko_chang, 44, 37)
     mas.ko_chang.get_cell_at(45, 37).goes_to = (mas.ko_klum, 23, 12)
 

@@ -109,10 +109,18 @@ def npc_sprites():
         "monk_up": pygame.image.load(f"{dir_path}/../npc/sprites/monk_up.png"),
         "monk_right": pygame.image.load(f"{dir_path}/../npc/sprites/monk_right.png"),
         "monk_left": pygame.image.load(f"{dir_path}/../npc/sprites/monk_left.png"),
-        "fisherman_down": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_up.png"),
+        "fisherman_down": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_down.png"),
         "fisherman_up": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_up.png"),
         "fisherman_right": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_right.png"),
         "fisherman_left": pygame.image.load(f"{dir_path}/../npc/sprites/fisherman_left.png"),
+        "fishing_boat_down": pygame.image.load(f"{dir_path}/../npc/sprites/fishing_boat_down.png"),
+        "fishing_boat_up": pygame.image.load(f"{dir_path}/../npc/sprites/fishing_boat_up.png"),
+        "fishing_boat_right": pygame.image.load(f"{dir_path}/../npc/sprites/fishing_boat_right.png"),
+        "fishing_boat_left": pygame.image.load(f"{dir_path}/../npc/sprites/fishing_boat_left.png"),
+        "small_fishing_boat_down": pygame.image.load(f"{dir_path}/../npc/sprites/small_fishing_boat_down.png"),
+        "small_fishing_boat_up": pygame.image.load(f"{dir_path}/../npc/sprites/small_fishing_boat_up.png"),
+        "small_fishing_boat_right": pygame.image.load(f"{dir_path}/../npc/sprites/small_fishing_boat_right.png"),
+        "small_fishing_boat_left": pygame.image.load(f"{dir_path}/../npc/sprites/small_fishing_boat_left.png"),
         "monk_levitating_up": pygame.image.load(
             f"{dir_path}/../npc/sprites/monk_levitating_up.png"
         ),
@@ -365,6 +373,7 @@ def get_sprites():
         "inn_map": pygame.image.load(f"{dir_path}/../ow/sprites/inn_map.bmp"),
         "fruit_tree": pygame.image.load(f"{dir_path}/../ow/sprites/fruit_tree.bmp"),
         "water": pygame.image.load(f"{dir_path}/../ow/sprites/water.bmp"),
+        "sea": pygame.image.load(f"{dir_path}/../ow/sprites/sea.bmp"),
         "cave_water": pygame.image.load(f"{dir_path}/../ow/sprites/cave_water.bmp"),
         "ground": pygame.image.load(f"{dir_path}/../ow/sprites/ground.bmp"),
         "_tall_grass_1": pygame.image.load(

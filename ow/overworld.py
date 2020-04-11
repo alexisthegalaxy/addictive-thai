@@ -49,6 +49,7 @@ class CellTypes:
     wall = CellType("壁", "wall", (22, 22, 22), False, 0, WALL_COLOR)
     sign = CellType("標", "sign", (71, 71, 71), False, 0, WALL_COLOR)
     water = CellType("水", "water", (57, 62, 255), False, 0.05, WATER_COLOR)
+    sea = CellType("海", "sea", (25, 201, 215), False, 0.05, WATER_COLOR)
     cave_water = CellType("湿", "cave_water", (24, 24, 58), False, 0.05, WATER_COLOR)
     decoration = CellType("飾", "decoration", (123, 9, 9), False, 0, ROOF_COLOR)
     flower_4 = CellType("萓", "flower_4", (231, 148, 191), True, 0, PATH_COLOR)
@@ -669,6 +670,9 @@ class Mas(object):
         )
         self.ko_kut_house_2 = Ma(
             filename="ko_kut_house_2", mas=self, parent=self.ko_kut, inside=True,
+        )
+        self.ko_mak_cave = Ma(
+            filename="ko_mak_cave", mas=self, parent=self.ko_mak, inside=True,
         )
         self.current_map: Ma = self.chaiyaphum
         self.add_trigger_tiles()
