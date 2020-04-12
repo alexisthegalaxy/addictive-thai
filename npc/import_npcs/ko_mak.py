@@ -103,7 +103,51 @@ def garbage(al):
             name="garbage_8",
             ma=al.mas.get_map_from_name("ko_mak"),
             x=26,
+            y=21,
+            sprite="garbage_0",
+            standard_dialog=["[Name] picks up the garbage."],
+        )
+    )
+    add_npc(
+        Npc(
+            al=al,
+            name="garbage_9",
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=12,
+            y=14,
+            sprite="garbage_1",
+            standard_dialog=["[Name] picks up the garbage."],
+        )
+    )
+    add_npc(
+        Npc(
+            al=al,
+            name="garbage_10",
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=10,
             y=22,
+            sprite="garbage_2",
+            standard_dialog=["[Name] picks up the garbage."],
+        )
+    )
+    add_npc(
+        Npc(
+            al=al,
+            name="garbage_11",
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=11,
+            y=21,
+            sprite="garbage_3",
+            standard_dialog=["[Name] picks up the garbage."],
+        )
+    )
+    add_npc(
+        Npc(
+            al=al,
+            name="garbage_12",
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=8,
+            y=14,
             sprite="garbage_0",
             standard_dialog=["[Name] picks up the garbage."],
         )
@@ -155,7 +199,8 @@ def wild_letters(al):
                 "You get it?",
             ],
             defeat_dialog=[
-                "Nim: Great, let's carry on!",
+                "Nim: This symbol is also used to shorten a vowel.",
+                "For example, โ− is long on it's own, while โ−ะ is short!",
             ],
         )
     )
@@ -167,11 +212,11 @@ def wild_letters(al):
             x=28,
             y=17,
             standard_dialog=[
-                "Nim: This one will be easy to learn, you know it already!",
-                "This is the same as -ั (the short a),",
-                "but this is the shape it takes when it's at the end of a syllable.",
-                "So, dtap is ตับ, but dta is ตะ.",
-                "You get it?",
+                "Nim: That's ค, and it's pronounced k'h - just like a k, but aspirated.",
+                "At the end of a syllable, it's more like a k.",
+                "Careful not to get ค and ด (d) confused!",
+                "ค looks like a cow (kow) looking at you,",
+                "while ด spirals in like a digital finger print.",
             ],
             defeat_dialog=[
                 "Nim: Great, let's carry on!",
@@ -186,14 +231,14 @@ def wild_letters(al):
             x=19,
             y=20,
             standard_dialog=[
-                "Nim: This one will be easy to learn, you know it already!",
-                "This is the same as -ั (the short a),",
-                "but this is the shape it takes when it's at the end of a syllable.",
-                "So, dtap is ตับ, but dta is ตะ.",
-                "You get it?",
+                "Nim: Now this is จ, the j sound.",
+                "Guess how it's pronounced at the end of a syllable.",
+                "It would be pronounced t.",
             ],
             defeat_dialog=[
-                "Nim: Great, let's carry on!",
+                "Nim: Here's my mnemonic for it:",
+                "จ looks like the trajectory of a >j<umping circle.",
+                "Although I must say I've heard other mnemonics concerning >g<enitals.",
             ],
         )
     )
@@ -203,16 +248,22 @@ def wild_letters(al):
             letter=Letter.get_by_thai("-ื"),
             ma=al.mas.get_map_from_name("ko_mak"),
             x=24,
-            y=22,
+            y=21,
             standard_dialog=[
-                "Nim: This one will be easy to learn, you know it already!",
-                "This is the same as -ั (the short a),",
-                "but this is the shape it takes when it's at the end of a syllable.",
-                "So, dtap is ตับ, but dta is ตะ.",
-                "You get it?",
+                "Nim: This vowel is the long \"eu\" sound.",
+                "It's in the same family as -ิ and -ี, but it has two streaks on top: -ื.",
+                "(And we also have -ึ in that family).",
+                "This sound is a bit hard to make:",
+                "You have to make the sound \"oo\" with your teeth and tongue,",
+                "But you smile with your lips as if you say the sound \"ee\".",
+                "I call this the smiling letter because it forces people to smile.",
+                "Sometimes, it's on its own, like in มืด (dark),",
+                "but sometimes it comes with อ: for example, \"hand\" is มือ.",
+                "It's pronounced the same way with or without the extra placeholder.",
             ],
             defeat_dialog=[
-                "Nim: Great, let's carry on!",
+                "Nim: Well done!",
+                "To remember it, imagine it's a smile with two teeth out.",
             ],
         )
     )
@@ -224,14 +275,32 @@ def wild_letters(al):
             x=20,
             y=14,
             standard_dialog=[
-                "Nim: This one will be easy to learn, you know it already!",
-                "This is the same as -ั (the short a),",
-                "but this is the shape it takes when it's at the end of a syllable.",
-                "So, dtap is ตับ, but dta is ตะ.",
-                "You get it?",
+                "Nim: This letter is the p'h: the aspirated p sound.",
+                "พ is low class, and it has a high-class brother ผ also pronounced p'h.",
+                "The low-class one looks outside, while the high-class looks inside.",
+                "To remember it, imagine that people in the upper class are full of themselves.",
+                "While people in the lower class look outside.",
             ],
             defeat_dialog=[
-                "Nim: Great, let's carry on!",
+                "Nim: To remember it, I imagine that พ is a wiggly >p<asta.",
+            ],
+        )
+    )
+    add_wild_letter(
+        wild_letter=Npc(
+            al=al,
+            letter=Letter.get_by_thai("ฟ"),
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=20,
+            y=13,
+            standard_dialog=[
+                "Nim: And this is p'h brother: the f.",
+                "Just like พ, ฟ has a high-class brother ฝ also pronounced f.",
+                "Here too, the low-class one looks outside, while the high-class looks inside.",
+            ],
+            defeat_dialog=[
+                "Nim: To remember it,",
+                "I imagine that ฟ is a พ that is >f<ull-grown and >f<lamboyant.",
             ],
         )
     )
@@ -243,14 +312,13 @@ def wild_letters(al):
             x=25,
             y=15,
             standard_dialog=[
-                "Nim: This one will be easy to learn, you know it already!",
-                "This is the same as -ั (the short a),",
-                "but this is the shape it takes when it's at the end of a syllable.",
-                "So, dtap is ตับ, but dta is ตะ.",
-                "You get it?",
+                "Nim: This is แ-, it looks like twice the เ-, that you learnt already!",
+                "It's pronounced ae, like the sound in cat.",
+                "Just like the เ-, it is before the consonant.",
             ],
             defeat_dialog=[
-                "Nim: Great, let's carry on!",
+                "Nim: Don't forget that แ- and เ- are long vowels!",
+                "Their shorter counterparts are แ−ะ and เ−ะ.",
             ],
         )
     )
@@ -262,11 +330,12 @@ def wild_letters(al):
             x=26,
             y=19,
             standard_dialog=[
-                "Nim: This one will be easy to learn, you know it already!",
-                "This is the same as -ั (the short a),",
-                "but this is the shape it takes when it's at the end of a syllable.",
-                "So, dtap is ตับ, but dta is ตะ.",
-                "You get it?",
+                "Nim: This is ห, the h.",
+                "For example, หก is pronounced hok - and that's how you write six!",
+                "Notice how it looks like a h: it's quite easy to remember.",
+                "The ห is also sometimes silent, and it's used to turn another consonant into a high-class.",
+                "High-class tells you with which tone you have to read a syllable.",
+                "For example in the word หลัง, you can just ignore the ห: it's simply read \"lang\".",
             ],
             defeat_dialog=[
                 "Nim: Great, let's carry on!",
@@ -332,15 +401,92 @@ def wild_letters(al):
             ],
         )
     )
+    add_wild_letter(
+        wild_letter=Npc(
+            al=al,
+            letter=Letter.get_by_thai("ข"),
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=10,
+            y=21,
+            standard_dialog=[
+                "Nim: Here's the k'h: the aspirated k sound.",
+                "We've learnt another letter that is pronounced k'h: ค.",
+                "It happens that Thai language has several letters for the same sound.",
+                "But most languages do, right?",
+                "However, ค and ข are different:",
+                "ค is low class, and ข is high class.",
+                "Each consonant in Thai is either high-, middle-, or low-class.",
+                "This helps us determine the tone of a syllable.",
+                "You'll have to learn for each eventually,",
+                "It will be necessary to unlock their magical potential and use spells.",
+            ],
+            defeat_dialog=[
+                "Nim: Did you see how ข looks like a บ (b), but flattened?",
+                "Don't get them confused!",
+            ],
+        )
+    )
+    add_wild_letter(
+        wild_letter=Npc(
+            al=al,
+            letter=Letter.get_by_thai("ช"),
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=12,
+            y=18,
+            standard_dialog=[
+                "Nim: This is 's brother, ช!",
+                "It looks the same, but has an extra dent.",
+                "It's pronounced \"ch\", and \"t\" at the end of a word.",
+            ],
+            defeat_dialog=[
+                "Nim: Did you see how ข looks like a บ (b), but flattened?",
+                "Don't get them confused!",
+            ],
+        )
+    )
+    add_wild_letter(
+        wild_letter=Npc(
+            al=al,
+            letter=Letter.get_by_thai("-ู"),
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=10,
+            y=14,
+            standard_dialog=[
+                "Nim: That's the vowel û, the long \"oo\" sound like in \"noon\".",
+                "It goes under the consonant:",
+                "หู is pronounced hoo (it means ear).",
+            ],
+            defeat_dialog=[
+                "Nim: It's the only letter that goes under, so it's easy to remember:",
+                "ū goes ūnder!",
+            ],
+        )
+    )
+    add_wild_letter(
+        wild_letter=Npc(
+            al=al,
+            letter=Letter.get_by_thai("-ุ"),
+            ma=al.mas.get_map_from_name("ko_mak"),
+            x=11,
+            y=14,
+            standard_dialog=[
+                "Nim: And here's -ุ, -ู short sister: the sane sound, but shorter.",
+                "It's quite similar, but -ุ lack the little bit on the side of -ู.",
+            ],
+            defeat_dialog=[
+                "Nim: These are the only letters that goes under, so it's easy to remember:",
+                "ū goes ūnder!",
+            ],
+        )
+    )
 
 
 def spirit_gecko(al):
     naming = Naming(
         al,
-        # name="ลมสวย",
-        name="ล",
+        name="ใจแขวนเกาะ",
         image="spirit_gecko",
-        distractors=["น", "า", "ร", "-ั", "ก", "เ-", "อ", "-ี", "ง", "ท", "-ิ", "ต"],
+        distractors=["น", "า", "ร", "-ั", "ก", "อ", "-ี", "ง"],
         prompt="Spell the spirit's True Name!",
         # victory_callback=spirit_bird_victory_callback,
     )
@@ -414,98 +560,7 @@ def spirit_gecko(al):
     )
 
 
-def old_people_and_fisherman(al):
-    add_npc(
-        Npc(
-            al=al,
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=52,
-            y=34,
-            sprite="old_man",
-            direction=Direction.DOWN,
-            standard_dialog=[
-                "Old man: Hello there. What are you doing outside in such a wicked storm?",
-                "Nim: Our plane crashed south of the island. People need some help over there.",
-                "Old man: What? This must be the island spirit again..."
-                "Come inside the house, while I'll be calling in for rescue!",
-                "My wife will tell you what to do.",
-                "Also, if you want to take a rest and restore your health, talk to her!"
-            ],
-            standard_dialog_2=[
-                "Alright, a rescue team should be coming soon!",
-                "Now, we should ease the spirit to make it easier for them.",
-                "Also, if you want to take a rest and restore your health, talk to my wife!"
-            ],
-        )
-    )
-    add_npc(
-        Npc(
-            al=al,
-            ma=al.mas.get_map_from_name("ko_kut_house_1"),
-            x=3,
-            y=8,
-            name="nurse",
-            sprite="old_woman",
-            standard_dialog=[
-                "Old woman: Hello?",
-                "[Nim explains]",
-                "Old woman: What? Then we can help!",
-                "It's all the doing of the spirit of the island -",
-                "a big bird made of light, you might have seen it already.",
-                "It's been furious lately, and this storm is also his doing.",
-                "We can make it stop, though.",
-                "You'd need to do a Naming ceremony - that is, bind it using it's true name.",
-                "It's called ลมสวย.",
-                'ลมสวย is pronounced "lom suay".',
-                "ลม is pronounced lom because if there is no vowel in between consonants,",
-                'we use an inherent short "o" sound.',
-                "Alright, good luck now! That mountain is too high for me to accompany you.",
-            ],
-            standard_dialog_2=[
-                "The spirit is called ลมสวย.",
-                'ลมสวย is pronounced "lom suay".',
-                "ลม is pronounced lom because if there is no vowel in between consonants,",
-                'we use an inherent short "o" sound.',
-                "Alright, good luck now! That mountain is too high for me to accompany you.",
-            ],
-        )
-    )
-    add_npc(
-        Npc(
-            al=al,
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=51,
-            y=28,
-            name="fisherman",
-            sprite="fisherman",
-            direction=Direction.RIGHT,
-            standard_dialog=[
-                "Hello there.",
-                "Oh you want to go to Ko Chang?",
-                "Well, I can certainly help you.",
-                "I was just about to go back home, you can hop in if you want!",
-            ],
-        )
-    )
-    add_npc(
-        Npc(
-            al=al,
-            ma=al.mas.get_map_from_name("ko_kut"),
-            x=48,
-            y=26,
-            name="small_fishing_boat",
-            sprite="small_fishing_boat",
-            direction=Direction.DOWN,
-            standard_dialog=[
-                "[Name] and Nim enter the boat.",
-            ],
-            end_dialog_trigger_event=["enter_boat_in_ko_kut"],
-        )
-    )
-
-
 def ko_mak(al):
     garbage(al)
     wild_letters(al)
     spirit_gecko(al)
-    # old_people_and_fisherman(al)

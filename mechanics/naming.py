@@ -50,7 +50,13 @@ class Naming(object):
 
         boxes = []
         for i, distractor in enumerate(self.distractors):
-            letter = Letter.get_by_thai(distractor)
+            try:
+                letter = Letter.get_by_thai(distractor)
+            except UnboundLocalError:
+                try:
+                    letter = Letter.get_by_thai(f"-{distractor}")
+                except UnboundLocalError:
+                    letter = Letter.get_by_thai(f"{distractor}-")
             letter_is_greyed_out = not letter.get_total_xp() > 1
             boxes.append(
                 TestAnswerBox(
