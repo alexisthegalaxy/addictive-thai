@@ -7,6 +7,7 @@ def add_wild_letter(wild_letter: Npc):
     wild_letter.ma.add_npc(wild_letter)
 
 
-def add_npc(npc: Npc):
-    npc.ma.add_npc(npc)
+def add_npc(npc: Npc, condition=True):
+    if condition:
+        npc.ma.add_npc(npc)
 

@@ -61,7 +61,7 @@ class TappingTestSentence(Test):
         y = ui.percent_height(0.30)
         height = ui.percent_height(0.1)
         for i, syllable in enumerate(self.choices):
-            rendered_text = fonts.garuda32.render(syllable, True, (0, 0, 0))
+            rendered_text = fonts.sarabun32.render(syllable, True, (0, 0, 0))
             text_length = rendered_text.get_width()
             width = text_length + 20
             self.option_boxes.append(
@@ -79,7 +79,7 @@ class TappingTestSentence(Test):
         y = ui.percent_height(0.60)
         validated_box_index = 0
         for i, syllable in enumerate(self.constructed_sentence):
-            rendered_text = fonts.garuda32.render(syllable, True, (0, 0, 0))
+            rendered_text = fonts.sarabun32.render(syllable, True, (0, 0, 0))
             text_length = rendered_text.get_width()
             width = text_length + 20
             self.sentence_boxes.append(
@@ -93,7 +93,7 @@ class TappingTestSentence(Test):
                 y += ui.percent_height(0.15)
             validated_box_index += 1
 
-        rendered_text = fonts.garuda32.render("Validate", True, (0, 0, 0))
+        rendered_text = fonts.sarabun32.render("Validate", True, (0, 0, 0))
         text_length = rendered_text.get_width()
         width = text_length + 20
 
@@ -146,13 +146,13 @@ class TappingTestSentence(Test):
         explanatory_string = "Write the following sentence in Thai:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.sentence.english, True, (0, 0, 0)), (x, y)
+            fonts.sarabun32.render(self.sentence.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -185,7 +185,7 @@ class TappingTestSentence(Test):
             x = ui.percent_width(0.15)
             y = ui.percent_height(0.78)
             screen.blit(
-                fonts.garuda32.render("Correct answer: " + self.sentence.thai, True, (0, 0, 0)), (x, y)
+                fonts.sarabun32.render("Correct answer: " + self.sentence.thai, True, (0, 0, 0)), (x, y)
             )
 
     def interact(self, al):

@@ -68,7 +68,7 @@ class Learner(object):
 
     def draw_money(self, al, x=None, y=None):
         color = (0, 0, 0)
-        rendered = al.ui.fonts.garuda32.render(str(self.money) + "฿", True, color)
+        rendered = al.ui.fonts.sarabun32.render(str(self.money) + "฿", True, color)
         if not x:
             x = al.ui.width - rendered.get_width() - 5
         if not y:

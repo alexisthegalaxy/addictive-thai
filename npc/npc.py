@@ -5,6 +5,7 @@ import pygame
 from typing import List, Tuple, Optional, Union
 
 from direction import string_from_direction, opposite_direction, Direction, dir_equal
+from languages import render_multilingual_text
 from lexicon.items import Word, Letter
 from lexicon.learning import LetterLearning, WordLearning
 from models import xp_from_word
@@ -383,8 +384,9 @@ class Npc(object):
         return True
 
     def _maybe_draw_letter(self, ui, x, y):
+        """Used to draw Thai Letters on the overworld"""
         if self.letter:
-            rendered_letter = ui.fonts.garuda32.render(f" {self.letter.thai} ", True, self.letter_color)
+            rendered_letter = ui.fonts.sarabun32.render(f" {self.letter.thai} ", True, self.letter_color)
             x += int(ui.cell_size / 2 - rendered_letter.get_width() / 2)
             y += int(ui.cell_size / 2 - rendered_letter.get_height() / 2)
             ui.screen.blit(rendered_letter, (x, y))
@@ -498,10 +500,3 @@ class Npc(object):
 
     def reset_cursor(self):
         self.draw_text_since = time.time()
-
-    def _progressively_draw_line(
-        self, line: str, number_of_characters_to_show, ui, screen, height, x, y
-    ):
-        line = line[:number_of_characters_to_show]
-        rendered_text = ui.fonts.garuda32.render(line, True, (0, 0, 0))
-        screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))

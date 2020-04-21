@@ -61,9 +61,9 @@ class WordBox(object):
         y = self.y
         if self.word.total_xp and self.word.total_xp > 0:
             screen.blit(ui.images["check_mark"], [x + 80, y - 10])
-            screen.blit(ui.fonts.garuda24.render(self.word.thai, True, (0, 0, 0)), (x + 10, y + 20))
+            screen.blit(ui.fonts.sarabun24.render(self.word.thai, True, (0, 0, 0)), (x + 10, y + 20))
         else:
-            screen.blit(ui.fonts.garuda24.render(self.word.thai, True, (100, 100, 100)), (x + 10, y + 20))
+            screen.blit(ui.fonts.sarabun24.render(self.word.thai, True, (100, 100, 100)), (x + 10, y + 20))
 
     def draw_tooltip(self, ui):
         if not self.word or not self.blinking or not self.hovered:
@@ -72,7 +72,7 @@ class WordBox(object):
         screen = ui.screen
         s = " The word is taught in the vicinity! "
         draw_square(screen, (210, 210, 210), x, y, 368, 50)
-        screen.blit(ui.fonts.garuda24.render(s, True, (0, 0, 0)), (x, y))
+        screen.blit(ui.fonts.sarabun24.render(s, True, (0, 0, 0)), (x, y))
 
 
 class Dex(object):

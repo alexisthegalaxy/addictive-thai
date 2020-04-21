@@ -33,7 +33,7 @@ class Naming(object):
         self.height = al.ui.percent_height(0.86)
         self.width = al.ui.percent_width(0.86)
         self.prompt_y = self.al.ui.percent_height(0.09) + (self.image_size[1] if self.image_size else 0)
-        self.rendered_prompt = self.al.ui.fonts.garuda32.render(self.prompt, True, (0, 0, 0))
+        self.rendered_prompt = self.al.ui.fonts.sarabun32.render(self.prompt, True, (0, 0, 0))
         self.answer_y = self.prompt_y + self.rendered_prompt.get_height() + al.ui.percent_height(0.02)
 
         self.boxes = self.make_boxes()

@@ -1,7 +1,7 @@
 from direction import Direction
 from lexicon.items import Letter
 from mechanics.naming import Naming
-from models import set_event
+from models import set_event, get_event_status
 from npc.import_npcs.service import add_wild_letter, add_npc
 from npc.npc import Npc
 from weather.weather import Weather
@@ -17,7 +17,9 @@ def garbage(al):
             y=16,
             sprite="garbage_0",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_0'],
+        ),
+        condition=get_event_status("picks_up_garbage_0") == 0,
     )
     add_npc(
         Npc(
@@ -28,7 +30,9 @@ def garbage(al):
             y=10,
             sprite="garbage_1",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_1'],
+        ),
+        condition=get_event_status("picks_up_garbage_0") == 0,
     )
     add_npc(
         Npc(
@@ -39,7 +43,9 @@ def garbage(al):
             y=12,
             sprite="garbage_2",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_2'],
+        ),
+        condition=get_event_status("picks_up_garbage_0") == 0,
     )
 
     add_npc(
@@ -51,7 +57,9 @@ def garbage(al):
             y=12,
             sprite="garbage_3",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_3'],
+        ),
+        condition=get_event_status("picks_up_garbage_3") == 0,
     )
     add_npc(
         Npc(
@@ -62,7 +70,9 @@ def garbage(al):
             y=12,
             sprite="garbage_0",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_4'],
+        ),
+        condition=get_event_status("picks_up_garbage_4") == 0,
     )
     add_npc(
         Npc(
@@ -73,7 +83,9 @@ def garbage(al):
             y=12,
             sprite="garbage_1",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_5'],
+        ),
+        condition=get_event_status("picks_up_garbage_5") == 0,
     )
     add_npc(
         Npc(
@@ -84,7 +96,9 @@ def garbage(al):
             y=15,
             sprite="garbage_2",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_6'],
+        ),
+        condition=get_event_status("picks_up_garbage_6") == 0,
     )
     add_npc(
         Npc(
@@ -95,7 +109,9 @@ def garbage(al):
             y=21,
             sprite="garbage_3",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_7'],
+        ),
+        condition=get_event_status("picks_up_garbage_7") == 0,
     )
     add_npc(
         Npc(
@@ -106,7 +122,9 @@ def garbage(al):
             y=21,
             sprite="garbage_0",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_8'],
+        ),
+        condition=get_event_status("picks_up_garbage_8") == 0,
     )
     add_npc(
         Npc(
@@ -117,7 +135,9 @@ def garbage(al):
             y=14,
             sprite="garbage_1",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_9'],
+        ),
+        condition=get_event_status("picks_up_garbage_9") == 0,
     )
     add_npc(
         Npc(
@@ -128,7 +148,9 @@ def garbage(al):
             y=22,
             sprite="garbage_2",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_10'],
+        ),
+        condition=get_event_status("picks_up_garbage_10") == 0,
     )
     add_npc(
         Npc(
@@ -139,7 +161,9 @@ def garbage(al):
             y=21,
             sprite="garbage_3",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_11'],
+        ),
+        condition=get_event_status("picks_up_garbage_11") == 0,
     )
     add_npc(
         Npc(
@@ -150,7 +174,9 @@ def garbage(al):
             y=14,
             sprite="garbage_0",
             standard_dialog=["[Name] picks up the garbage."],
-        )
+            beginning_dialog_trigger_event=['picks_up_garbage_12'],
+        ),
+        condition=get_event_status("picks_up_garbage_12") == 0,
     )
 
 
@@ -166,6 +192,7 @@ def wild_letters(al):
                              "It's บ the b, and it's big brother ป the bp!", "Let's get them!"],
             defeat_dialog=[
                 "Nim: Nice!",
+                "To remember บ, think of it as a bowl containing some beverage!",
             ],
         )
     )
@@ -180,7 +207,8 @@ def wild_letters(al):
                 "Nim: Let's get this one too!",
             ],
             defeat_dialog=[
-                "Nim: What is that garbage doing here? How dirty!",
+                "Nim: Wow, what is that garbage doing here? How dirty!",
+                "Let's pick it up!",
             ],
         )
     )
@@ -257,7 +285,7 @@ def wild_letters(al):
                 "You have to make the sound \"oo\" with your teeth and tongue,",
                 "But you smile with your lips as if you say the sound \"ee\".",
                 "I call this the smiling letter because it forces people to smile.",
-                "Sometimes, it's on its own, like in มืด (dark),",
+                "Sometimes, it's on its own, like in มืด (that means \"dark\" by the way),",
                 "but sometimes it comes with อ: for example, \"hand\" is มือ.",
                 "It's pronounced the same way with or without the extra placeholder.",
             ],
@@ -333,8 +361,9 @@ def wild_letters(al):
                 "Nim: This is ห, the h.",
                 "For example, หก is pronounced hok - and that's how you write six!",
                 "Notice how it looks like a h: it's quite easy to remember.",
-                "The ห is also sometimes silent, and it's used to turn another consonant into a high-class.",
-                "High-class tells you with which tone you have to read a syllable.",
+                "The ห is also sometimes silent,",
+                "and it's used to turn another consonant into a high-class.",
+                "High-class helps with telling which is the tone of a syllable.",
                 "For example in the word หลัง, you can just ignore the ห: it's simply read \"lang\".",
             ],
             defeat_dialog=[
@@ -406,8 +435,8 @@ def wild_letters(al):
             al=al,
             letter=Letter.get_by_thai("ข"),
             ma=al.mas.get_map_from_name("ko_mak"),
-            x=10,
-            y=21,
+            x=12,
+            y=18,
             standard_dialog=[
                 "Nim: Here's the k'h: the aspirated k sound.",
                 "We've learnt another letter that is pronounced k'h: ค.",
@@ -431,10 +460,10 @@ def wild_letters(al):
             al=al,
             letter=Letter.get_by_thai("ช"),
             ma=al.mas.get_map_from_name("ko_mak"),
-            x=12,
-            y=18,
+            x=10,
+            y=21,
             standard_dialog=[
-                "Nim: This is 's brother, ช!",
+                "Nim: This is ข's brother, ช!",
                 "It looks the same, but has an extra dent.",
                 "It's pronounced \"ch\", and \"t\" at the end of a word.",
             ],
@@ -452,7 +481,7 @@ def wild_letters(al):
             x=10,
             y=14,
             standard_dialog=[
-                "Nim: That's the vowel û, the long \"oo\" sound like in \"noon\".",
+                "Nim: That's the vowel ū, the long \"oo\" sound like in \"noon\".",
                 "It goes under the consonant:",
                 "หู is pronounced hoo (it means ear).",
             ],
@@ -470,7 +499,7 @@ def wild_letters(al):
             x=11,
             y=14,
             standard_dialog=[
-                "Nim: And here's -ุ, -ู short sister: the sane sound, but shorter.",
+                "Nim: And here's -ุ, -ู short sister: the same sound, but shorter.",
                 "It's quite similar, but -ุ lack the little bit on the side of -ู.",
             ],
             defeat_dialog=[

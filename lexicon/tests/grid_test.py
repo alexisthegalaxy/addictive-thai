@@ -75,7 +75,7 @@ class Cell(object):
         if not self.index == -1:
             index_render_x = self.x + self.width - 30
             index_render_y = self.y
-            rendered_text = ui.fonts.garuda28.render(str(self.index + 1), True, (0, 0, 0))
+            rendered_text = ui.fonts.sarabun28.render(str(self.index + 1), True, (0, 0, 0))
             ui.screen.blit(rendered_text, (index_render_x, index_render_y))
 
     def becomes_unselected(self):
@@ -316,7 +316,7 @@ class GrammarGridTest(Test):
         explanatory_string = "Find as many sentences as you can! The longer, the better!"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         self.grid.draw()
         self.timer.draw()
@@ -389,13 +389,13 @@ class SentenceGridTest(Test):
         explanatory_string = "Find the following sentence in Thai:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.10)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.15)
         screen.blit(
-            fonts.garuda32.render(self.sentence.english, True, (0, 0, 0)), (x, y)
+            fonts.sarabun32.render(self.sentence.english, True, (0, 0, 0)), (x, y)
         )
 
         self.grid.draw()

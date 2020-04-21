@@ -105,13 +105,13 @@ class TypingTestFromEnglish(ThaiFromEnglish):
         explanatory_string = "What's the Thai word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
+            fonts.sarabun32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options

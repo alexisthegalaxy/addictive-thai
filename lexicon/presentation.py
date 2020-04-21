@@ -102,7 +102,7 @@ class Presentation(object):
         pygame.draw.rect(screen, (200, 200, 200), (x1, y1, width, height))
         pygame.draw.rect(screen, color, [x1, y1, width, height], thickness)
         screen.blit(
-            ui.fonts.garuda24.render(" See on map", True, color), (x1, y1)
+            ui.fonts.sarabun24.render(" See on map", True, color), (x1, y1)
         )
 
     def draw(self):
@@ -148,13 +148,13 @@ class WordPresentation(Presentation):
         # Draw Thai word
         x = ui.percent_width(0.26)
         y = ui.percent_height(0.15)
-        screen.blit(ui.fonts.garuda64.render(self.presented.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(ui.fonts.sarabun64.render(self.presented.thai, True, (0, 0, 0)), (x, y))
 
         # Draw English
         x = ui.percent_width(0.26)
         y = ui.percent_height(0.27)
         screen.blit(
-            ui.fonts.garuda48.render(self.presented.english, True, (0, 0, 0)), (x, y)
+            ui.fonts.sarabun48.render(self.presented.english, True, (0, 0, 0)), (x, y)
         )
 
         if self.from_dex:
@@ -164,24 +164,24 @@ class WordPresentation(Presentation):
             x = ui.percent_width(0.26)
             y += ui.percent_height(0.10)
             s = f"Level: {self.presented.level}  XP: {self.presented.total_xp}"
-            screen.blit(ui.fonts.garuda16.render(s, True, (0, 0, 0)), (x, y))
+            screen.blit(ui.fonts.sarabun16.render(s, True, (0, 0, 0)), (x, y))
 
         try:
             sentence = self.sentences[self.selected_sentence_index]
             x = ui.percent_width(0.15)
             y += ui.percent_height(0.06)
             s = f"Sentences ({self.selected_sentence_index + 1}/{len(self.sentences)})"
-            screen.blit(ui.fonts.garuda48.render(s, True, (0, 0, 0)), (x, y))
+            screen.blit(ui.fonts.sarabun48.render(s, True, (0, 0, 0)), (x, y))
 
             x = ui.percent_width(0.23)
             y += ui.percent_height(0.11)
             s = f"{sentence.thai}"
-            screen.blit(ui.fonts.garuda32.render(s, True, (0, 0, 0)), (x, y))
+            screen.blit(ui.fonts.sarabun32.render(s, True, (0, 0, 0)), (x, y))
 
             x = ui.percent_width(0.23)
             y += ui.percent_height(0.08)
             s = f"{sentence.english}"
-            screen.blit(ui.fonts.garuda28.render(s, True, (0, 0, 0)), (x, y))
+            screen.blit(ui.fonts.sarabun28.render(s, True, (0, 0, 0)), (x, y))
 
         except IndexError:
             pass
@@ -226,20 +226,20 @@ class LetterPresentation(Presentation):
         # Draw Thai letter
         x = ui.percent_width(0.26)
         y = ui.percent_height(0.15)
-        screen.blit(ui.fonts.garuda64.render(f" {self.presented.thai} ", True, (0, 0, 0)), (x, y))
+        screen.blit(ui.fonts.sarabun64.render(f" {self.presented.thai} ", True, (0, 0, 0)), (x, y))
 
         # Draw English
         x = ui.percent_width(0.26)
         y = ui.percent_height(0.27)
         screen.blit(
-            ui.fonts.garuda48.render(self.presented.english, True, (0, 0, 0)), (x, y)
+            ui.fonts.sarabun48.render(self.presented.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw Space bar instruction
         x = ui.percent_width(0.38)
         y = ui.percent_height(0.80)  # >78
         screen.blit(
-            ui.fonts.garuda24.render("Press Space bar to continue", True, (100, 100, 100)), (x, y)
+            ui.fonts.sarabun24.render("Press Space bar to continue", True, (100, 100, 100)), (x, y)
         )
 
         if self.from_dex:
@@ -249,4 +249,4 @@ class LetterPresentation(Presentation):
             x = ui.percent_width(0.26)
             y += ui.percent_height(0.10)
             s = f"Level: {self.presented.level}  XP: {self.presented.total_xp}"
-            screen.blit(ui.fonts.garuda16.render(s, True, (0, 0, 0)), (x, y))
+            screen.blit(ui.fonts.sarabun16.render(s, True, (0, 0, 0)), (x, y))

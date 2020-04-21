@@ -32,7 +32,7 @@ class Sale(object):
 
     def draw(self):
         ui = self.al.ui
-        g16 = ui.fonts.garuda24
+        g16 = ui.fonts.sarabun24
         screen = ui.screen
         pygame.draw.rect(
             screen, (200, 200, 200), (self.x, self.y, self.width, self.height)

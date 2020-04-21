@@ -76,15 +76,15 @@ def draw_box(
         screen.blit(images[image_name], [x + 130, y + 10])
     else:
         if font_size == 24:
-            font = fonts.garuda24
+            font = fonts.sarabun24
         elif font_size == 28:
-            font = fonts.garuda28
+            font = fonts.sarabun28
         elif font_size == 16:
-            font = fonts.garuda16
+            font = fonts.sarabun16
         elif font_size == 48:
-            font = fonts.garuda48
+            font = fonts.sarabun48
         else:
-            font = fonts.garuda32
+            font = fonts.sarabun32
         if strings:
             y = y + int(height / 2.2) - 20
             for string in strings:
@@ -244,7 +244,7 @@ class ToneBox(object):
         self.x = x
         self.y = y
         self.s = s
-        self.rendered = fonts.garuda24.render(self.s, True, (0, 0, 0))
+        self.rendered = fonts.sarabun24.render(self.s, True, (0, 0, 0))
         self.selected = False
         self.width = 160
         self.height = 100
@@ -336,12 +336,12 @@ class ToneFromThaiAndSound(Test):
         explanatory_string = "What's the tone of:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.60)
@@ -506,13 +506,13 @@ class ThaiFromEnglish4(ThaiFromEnglish):
         explanatory_string = "What's the Thai word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
+            fonts.sarabun32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -636,13 +636,13 @@ class ThaiFromEnglish6(ThaiFromEnglish):
         explanatory_string = "What's the Thai word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
+            fonts.sarabun32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -732,12 +732,12 @@ class EnglishFromThai4(ThaiFromEnglish):
         explanatory_string = "What's the English word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -850,12 +850,12 @@ class EnglishFromThai6(ThaiFromEnglish):
         explanatory_string = "What's the English word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -1057,7 +1057,7 @@ class EnglishFromSound4(EnglishFromSound):
         explanatory_string = "What's the English word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.60)
@@ -1178,7 +1178,7 @@ class EnglishFromSound6(EnglishFromSound):
         explanatory_string = "What's the English word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.60)
@@ -1273,7 +1273,7 @@ class ThaiFromSound4(EnglishFromSound):
         explanatory_string = "What's the Thai word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.60)
@@ -1468,12 +1468,12 @@ class SoundFromThai4(SoundFromThai):
         explanatory_string = "How would you read the word:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(self.correct.thai, True, (0, 0, 0)), (x, y))
 
         # Draw continue button
         x = ui.percent_width(0.35)
@@ -1606,7 +1606,7 @@ class ThaiFromSound6(EnglishFromSound):
         explanatory_string = "What's the Thai word for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.60)
@@ -1768,13 +1768,13 @@ class ThaiLetterFromEnglish4(ThaiLetterFromEnglish):
         explanatory_string = "What's the Thai letter for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
+            fonts.sarabun32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -1881,13 +1881,13 @@ class ThaiLetterFromEnglish16(ThaiLetterFromEnglish):
         explanatory_string = "What's the Thai letter for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
         screen.blit(
-            fonts.garuda32.render(self.correct.english, True, (0, 0, 0)), (x, y)
+            fonts.sarabun32.render(self.correct.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw all the options
@@ -2069,12 +2069,12 @@ class EnglishLetterFromThai4(EnglishLetterFromThai):
         explanatory_string = "What's the English letter for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(f" {self.correct.thai} ", True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(f" {self.correct.thai} ", True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -2110,7 +2110,7 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
         self.choices: List[Letter] = [self.correct] + self.distractors
         random.shuffle(self.choices)
 
-        w = al.ui.percent_width(0.11)
+        w = al.ui.percent_width(0.15)
         h = al.ui.percent_height(0.1)
         r = 1.3
         self.boxes = (
@@ -2172,12 +2172,12 @@ class EnglishLetterFromThai16(EnglishLetterFromThai):
         explanatory_string = "What's the English letter for:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.15)
         y = ui.percent_height(0.18)
-        screen.blit(fonts.garuda32.render(f" {self.correct.thai} ", True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(f" {self.correct.thai} ", True, (0, 0, 0)), (x, y))
 
         # Draw all the options
         for i, box in enumerate(self.boxes):
@@ -2378,7 +2378,7 @@ class ThaiLettersFromSound4(ThaiLettersFromSound):
         explanatory_string = "How do you write that sound:"
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        screen.blit(fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        screen.blit(fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         # Draw prompt
         x = ui.percent_width(0.60)

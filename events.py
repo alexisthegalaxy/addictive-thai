@@ -484,3 +484,55 @@ print("yay!!!!")
 #         )
 #     al.mas.current_map.add_npc(lover)
 #
+
+
+def _picks_up_garbage_0_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_0"]
+
+
+def _picks_up_garbage_1_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_1"]
+
+
+def _picks_up_garbage_2_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_2"]
+
+
+def _picks_up_garbage_3_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_3"]
+
+
+def _picks_up_garbage_4_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_4"]
+
+
+def _picks_up_garbage_5_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_5"]
+
+
+def _picks_up_garbage_6_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_6"]
+
+
+def _picks_up_garbage_7_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_7"]
+
+
+def _picks_up_garbage_8_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_8"]
+
+
+def _picks_up_garbage_9_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_9"]
+
+
+def _picks_up_garbage_10_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_10"]
+
+
+def _picks_up_garbage_11_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_11"]
+
+
+def _picks_up_garbage_12_0(al: "All"):
+    al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "garbage_12"]

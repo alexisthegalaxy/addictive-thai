@@ -1,5 +1,7 @@
 import time
 import pygame
+
+from languages import render_multilingual_text
 from models import should_we_show_thai
 from npc.npc import Npc
 
@@ -7,9 +9,10 @@ from npc.npc import Npc
 def _progressively_draw_line(
     line: str, number_of_characters_to_show, ui, screen, height, x, y
 ):
+    x = x + 10
+    y = y + int(height / 2.2) - 20
     line = line[:number_of_characters_to_show]
-    rendered_text = ui.fonts.garuda32.render(line, True, (0, 0, 0))
-    screen.blit(rendered_text, (x + 10, y + int(height / 2.2) - 20))
+    render_multilingual_text(ui, text=line, x=x, y=y, size=32, color=(0, 0, 0))
 
 
 def draw_text(al, draw_text_since: float = 0, text: str = ""):

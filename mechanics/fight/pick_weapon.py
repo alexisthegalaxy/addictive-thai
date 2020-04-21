@@ -139,7 +139,7 @@ class PickWeapon(object):
         explanatory_string = "Select which word to create a test about."
         x = ui.percent_width(0.12)
         y = ui.percent_height(0.12)
-        ui.screen.blit(ui.fonts.garuda32.render(explanatory_string, True, (0, 0, 0)), (x, y))
+        ui.screen.blit(ui.fonts.sarabun32.render(explanatory_string, True, (0, 0, 0)), (x, y))
 
         for i, box in enumerate(self.boxes):
             box.draw(

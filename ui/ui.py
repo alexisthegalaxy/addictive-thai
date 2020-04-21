@@ -14,21 +14,18 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class Fonts(object):
     def __init__(self):
-        # garuda_path = f"{dir_path}/../fonts/Garuda.ttf"
-        # setha_path = f"{dir_path}/../fonts/JS-Setha-Normal.ttf"
-        garuda_path = f"{dir_path}/../fonts/Sarabun-Medium.ttf"
-        # garuda_path = f"{dir_path}/../fonts/NotoSans-Medium.ttf"
-        # garuda_path = f"{dir_path}/../fonts/Calibri Regular.ttf"
-        setha_path = f"{dir_path}/../fonts/Garuda.ttf"
-        self.garuda64 = pygame.font.Font(garuda_path, 64)
-        self.garuda48 = pygame.font.Font(garuda_path, 48)
-        self.garuda32 = pygame.font.Font(garuda_path, 32)
-        self.garuda16 = pygame.font.Font(garuda_path, 16)
-        self.garuda24 = pygame.font.Font(garuda_path, 24)
-        self.garuda28 = pygame.font.Font(garuda_path, 28)
-        self.setha64 = pygame.font.Font(setha_path, 64)
-        self.setha32 = pygame.font.Font(setha_path, 32)
-        self.setha16 = pygame.font.Font(setha_path, 16)
+        sarabun_path = f"{dir_path}/../fonts/Sarabun.ttf"
+        self.khmer32 = pygame.font.Font(f"{dir_path}/../fonts/Khmer.ttf", 32)
+        self.lao32 = pygame.font.Font(f"{dir_path}/../fonts/Lao.ttf", 32)
+        self.burmese32 = pygame.font.Font(f"{dir_path}/../fonts/ZawgyiOne.ttf", 32)
+        self.sanskrit32 = pygame.font.Font(f"{dir_path}/../fonts/Jaldi.ttf", 32)
+
+        self.sarabun64 = pygame.font.Font(sarabun_path, 64)
+        self.sarabun48 = pygame.font.Font(sarabun_path, 48)
+        self.sarabun32 = pygame.font.Font(sarabun_path, 32)
+        self.sarabun16 = pygame.font.Font(sarabun_path, 16)
+        self.sarabun24 = pygame.font.Font(sarabun_path, 24)
+        self.sarabun28 = pygame.font.Font(sarabun_path, 28)
 
 
 class Ui(object):
