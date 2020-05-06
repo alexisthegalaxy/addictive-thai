@@ -142,7 +142,7 @@ class Weather(object):
         return 0
 
     def get_offset_y(self):
-        if self.h_shaking:
+        if self.v_shaking:
             t = datetime.now().microsecond
             p = self.v_shaking.period
             i = self.v_shaking.intensity
@@ -167,6 +167,14 @@ class Weather(object):
             self.rain.falls(al, wind_amplifier=wind_amplifier)
         if self.lightning:
             self.lightning.maybe_restart(al)
+        if self.quake:
+            t = (datetime.now().second + datetime.now().microsecond / 1_000_000) / 2
+            c = math.cos(t)
+            if c > 0.8:
+                self.h_shaking = Shaking(period=10000, intensity=10)
+            else:
+                self.h_shaking = None
+
 
     def draw(self, al):
         if self.cos_light_flashing:

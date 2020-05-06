@@ -1,5 +1,5 @@
 from direction import Direction
-from lexicon.items import Word
+from lexicon.items import Word, Letter
 from models import get_event_status
 from npc.import_npcs.ko_kut import ko_kut
 from npc.import_npcs.ko_mak import ko_mak
@@ -1619,6 +1619,35 @@ def chaiyaphum(al):
             y=8,
             sprite="cat",
             direction=Direction.DOWN,
+        ),
+        Npc(
+            al=al,
+            ma=al.mas.get_map_from_name("chaiyaphum_hidden_cave"),
+            x=8,
+            y=6,
+            sprite="old_man",
+            standard_dialog=[
+                "I challenge you to a consonant game.",
+                "I'll give you consonant, and you have to tell me their class.",
+                "You'll have only twenty seconds.",
+                "If you win, I'll give you 3 Bahts.",
+                "If you lose, you give me 1 Baht.",
+                "Ready?",
+            ],
+            defeat_dialog=[
+                "Well played!",
+                "I gave you 3 Bahts, as promised",
+            ],
+            victory_dialog=[
+                "Haha, I got you, youngster!",
+                "Come on, show me a shiny Baht!",
+                "You should check your letters with L more often.",
+            ],
+            consonants=[Letter.get_by_thai(l) for l in ["น", "ร", "ก", "ม", "อ", "ล", "ง", "ท", "ว", "ย", "ส", "ต", "ด", "บ", "ป", "ค", "จ", "พ", "ห", "ช", "ข", "ฟ"]],
+            direction=Direction.DOWN,
+            hp=40,
+            money=3,
+            lost_money_on_defeat=1,
         ),
     ]
     if get_event_status("talk_to_sushi") == 0:

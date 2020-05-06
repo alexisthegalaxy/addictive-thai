@@ -1,10 +1,20 @@
-from direction import Direction
 from lexicon.items import Letter
 from mechanics.naming import Naming
-from models import set_event, get_event_status
+from models import get_event_status, set_event
 from npc.import_npcs.service import add_wild_letter, add_npc
 from npc.npc import Npc
 from weather.weather import Weather
+
+
+def spirit_gecko_victory_callback(al):
+    for npc in al.mas.current_map.npcs:
+        if npc.name == "spirit_gecko":
+            npc.is_walkable = True
+            npc.is_silent = True
+            if npc.sprite == "spirit_gecko":
+                npc.sprite = "spirit_gecko_invisible"
+    al.weather = Weather(al)
+    set_event('spirit_gecko_is_beaten', 1)
 
 
 def garbage(al):
@@ -517,7 +527,7 @@ def spirit_gecko(al):
         image="spirit_gecko",
         distractors=["น", "า", "ร", "-ั", "ก", "อ", "-ี", "ง"],
         prompt="Spell the spirit's True Name!",
-        # victory_callback=spirit_bird_victory_callback,
+        victory_callback=spirit_gecko_victory_callback,
     )
     add_npc(
         Npc(

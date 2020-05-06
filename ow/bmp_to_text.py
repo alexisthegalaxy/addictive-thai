@@ -58,6 +58,7 @@ to_convert = [
     "chumphae_khonkaen_house_2",
     "chumphae_khonkaen_house_3",
     "chumphae_khonkaen_house_4",
+    "chaiyaphum_hidden_cave",
     "chumphae_school",
     "chumphae_house1",
     "chumphae_house2",

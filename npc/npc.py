@@ -99,12 +99,14 @@ class Npc(object):
         taught: Union[Word, Letter] = None,
         fight_words: List[Word] = None,
         money: int = 5,  # amount given when lost the fight
+        lost_money_on_defeat: int = 0,  # amount lost when Learner loses
         eyesight: int = 5,  # how far the trainer can see
         wanna_meet: bool = False,  # if true, non trainers will also walk to the learner and start talking
         bubbles_max_hp: int = 1000,
         appears_between: Tuple[int, int] = (0, 24),
         end_dialog_trigger_event: List[str] = None,
         beginning_dialog_trigger_event: List[str] = None,
+        consonants: List[Letter] = None,
         wobble=False,
         letter=None,
         is_walkable=False,
@@ -133,6 +135,7 @@ class Npc(object):
         self.x = x
         self.y = y
         self.money = money
+        self.lost_money_on_defeat = lost_money_on_defeat
         self.standard_dialog: List[str] = standard_dialog
         self.defeat_dialog: List[str] = defeat_dialog
         self.victory_dialog: List[str] = victory_dialog
@@ -172,14 +175,14 @@ class Npc(object):
         self.shows_sprite = shows_sprite
         self.is_walkable = is_walkable
         self.is_silent = is_silent
-
+        self.consonants = consonants
         self.naming = naming
         if self.naming:
             self.naming.npc = self
 
         self.letter = letter
         if self.letter:
-            self.sprite = get_sprite_name_from_letter_class(letter._class, al)
+            self.sprite = get_sprite_name_from_letter_class(letter.class_, al)
             self.wobble = True
             self.taught = self.letter
 
@@ -303,6 +306,18 @@ class Npc(object):
                 )
             if self.active_dialog == self.victory_dialog:
                 al.learner.faints()
+                self.active_dialog = self.standard_dialog
+                self.active_line_index = 0
+        if self.consonants:
+            if self.active_dialog == self.standard_dialog:
+                from mechanics.consonant_race.consonant_race import ConsonantRace
+
+                al.active_consonant_race = ConsonantRace(
+                    al=al, consonants=self.consonants, npc=self
+                )
+            if self.active_dialog == self.victory_dialog:
+                if not self.consonants:
+                    al.learner.faints()
                 self.active_dialog = self.standard_dialog
                 self.active_line_index = 0
 

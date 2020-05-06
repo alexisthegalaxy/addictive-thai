@@ -3,7 +3,7 @@ from __future__ import annotations
 import time
 
 from all import All, special_loading
-from lexicon.dex import Dex
+from lexicon.dex import Dex, Lex
 import pygame
 
 from models import get_words_with_a_teaching_order
@@ -27,6 +27,9 @@ def main_interact(al: All):
     elif al.active_fight:
         ow_frozen = True
         al.active_fight.interact()
+    elif al.active_consonant_race:
+        ow_frozen = True
+        al.active_consonant_race.interact()
     if al.active_minimap:  # must happen before active_presentation
         ow_frozen = True
         al.active_minimap.interact()
@@ -39,6 +42,9 @@ def main_interact(al: All):
     if al.dex.active:
         ow_frozen = True
         al.dex.interact()
+    if al.lex.active:
+        ow_frozen = True
+        al.lex.interact()
     if al.active_npc:
         ow_frozen = True
         if al.ui.space:
@@ -75,17 +81,21 @@ def main_draw(al: All):
         al.active_sale.draw()
     elif al.active_fight:
         al.active_fight.draw()
+    elif al.active_consonant_race:
+        al.active_consonant_race.draw()
     elif al.active_naming:
         al.active_naming.draw()
     if al.active_learning:
         al.active_learning.draw()
     if al.dex.active:
         al.dex.draw()
+    if al.lex.active:
+        al.lex.draw()
     if al.active_minimap:
         al.active_minimap.draw()
     if al.active_spell_identification:
         al.active_spell_identification.draw()
-    if not al.active_fight:
+    if not al.active_fight and not al.active_consonant_race:
         al.learner.draw_money_and_hp(al)
     pygame.display.flip()
 
@@ -100,6 +110,7 @@ def main():
     load(al)
     import_npcs(al)
     al.dex = Dex(al)
+    al.lex = Lex(al)
     special_loading(al)  # event-depending change to the data
     # get_links_from_city_word("ดี", al)
     while al.ui.running:

@@ -397,9 +397,10 @@ class Letter(Growable):
         english="no_english",
         alphabet_index=-1,
         final=None,
-        _class="LOW/MID/HIGH/VOWEL",
+        class_="LOW/MID/HIGH/VOWEL",
         frequency_index=-1,
         audio='',
+        total_xp=None,
     ):
         # A letter is very similar to a word,
         # but the subset of tests is different, the presentation screen is different
@@ -410,9 +411,10 @@ class Letter(Growable):
         self.english = english
         self.alphabet_index = alphabet_index
         self.final = final
-        self._class = _class
+        self.class_ = class_
         self.frequency_index = frequency_index
         self.audio = audio
+        self.total_xp = total_xp or self.get_total_xp()
 
     # def increase_xp(self, al, value):
     #     super().increase_xp(al, value)
@@ -462,7 +464,7 @@ class Letter(Growable):
                 english=letter_db[3],
                 alphabet_index=letter_db[4],
                 final=letter_db[5],
-                _class=letter_db[6],
+                class_=letter_db[6],
                 frequency_index=letter_db[7],
                 audio=letter_db[8],
             )
@@ -488,7 +490,7 @@ class Letter(Growable):
             english=random_letter_db[3],
             alphabet_index=random_letter_db[4],
             final=random_letter_db[5],
-            _class=random_letter_db[6],
+            class_=random_letter_db[6],
             frequency_index=random_letter_db[7],
             audio=random_letter_db[8],
         )
@@ -581,7 +583,7 @@ class Letter(Growable):
             english=letter_db[3],
             alphabet_index=letter_db[4],
             final=letter_db[5],
-            _class=letter_db[6],
+            class_=letter_db[6],
             frequency_index=letter_db[7],
             audio=letter_db[8],
         )
@@ -628,7 +630,7 @@ class Letter(Growable):
             english=letter_db[3],
             alphabet_index=letter_db[4],
             final=letter_db[5],
-            _class=letter_db[6],
+            class_=letter_db[6],
             frequency_index=letter_db[7],
             audio=letter_db[8],
         )

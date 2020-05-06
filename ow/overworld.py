@@ -146,6 +146,7 @@ class CellTypes:
     buddha_statue = CellType("仏", "buddha_statue", (255, 215, 54), False, 0, WALL_COLOR)
 
     house_4x4 = CellType("泰", "house_4x4", (100, 100, 100), False, 0, WALL_COLOR, special_shape="0000_0000_0000_0100", special_offset=(1, 2))
+    low_house_4x3 = CellType("低", "low_house_4x3", (100, 100, 101), False, 0, WALL_COLOR, special_shape="0000_0000_0100", special_offset=(1, 1))
     big_tree = CellType("杉", "big_tree", (58, 78, 22), False, 0, TREE_COLOR, special_shape="00_00", special_offset=(0, 0))
 
     none = CellType("無", "none", (0, 0, 0), False, 0, (0, 0, 0))
@@ -520,6 +521,11 @@ class Mas(object):
             filename="chumphae_khonkaen_house_4",
             mas=self,
             parent=self.chumphae_khonkaen,
+        )
+        self.chaiyaphum_hidden_cave = Ma(
+            filename="chaiyaphum_hidden_cave",
+            mas=self,
+            parent=self.chaiyaphum,
         )
 
         self.chumphae_school = Ma(

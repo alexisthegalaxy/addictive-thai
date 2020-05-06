@@ -189,13 +189,13 @@ def _talked_to_nim_in_plane_0(al: "All"):
     new_nim_teaching_second_letter = Npc(
         al=al,
         name="Nim",
-        # taught=Letter.get_by_thai("า"),
+        taught=Letter.get_by_thai("า"),
         ma=al.mas.get_map_from_name("plane"),
         x=8,
         y=7,
         sprite="nim",
         direction=Direction.RIGHT,
-        # wanna_meet=True,
+        wanna_meet=True,
         eyesight=1,
         standard_dialog=[
             "Nim: Good, that was your first letter.",
@@ -218,7 +218,7 @@ def _talked_to_nim_in_plane_1(al: "All"):
     new_nim_teaching_second_letter = Npc(
         al=al,
         name="Nim",
-        # taught=Letter.get_by_thai("ร"),
+        taught=Letter.get_by_thai("ร"),
         ma=al.mas.get_map_from_name("plane"),
         x=8,
         y=7,
@@ -246,7 +246,7 @@ def _talked_to_nim_in_plane_2(al: "All"):
     al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc.name != "Nim"]
     al.weather = Weather(
         al=al,
-        h_shaking=Shaking(period=100000, intensity=5),  # (period, intensity)
+        h_shaking=Shaking(period=4700, intensity=5),  # (period, intensity)
         v_shaking=Shaking(period=5700, intensity=2),  # (period, intensity)
         cos_light_flashing=(2.7, 0.5, (255, 0, 0)),  # (period, transparency, color)
     )

@@ -157,6 +157,14 @@ class WordPresentation(Presentation):
             ui.fonts.sarabun48.render(self.presented.english, True, (0, 0, 0)), (x, y)
         )
 
+        # Draw Space bar instruction
+        if not self.from_dex:
+            x = ui.percent_width(0.38)
+            y = ui.percent_height(0.80)  # >78
+            screen.blit(
+                ui.fonts.sarabun24.render("Press Space bar to continue", True, (100, 100, 100)), (x, y)
+            )
+
         if self.from_dex:
             self.draw_map_button()
 
@@ -228,22 +236,26 @@ class LetterPresentation(Presentation):
         y = ui.percent_height(0.15)
         screen.blit(ui.fonts.sarabun64.render(f" {self.presented.thai} ", True, (0, 0, 0)), (x, y))
 
+        # Draw Thai final
+        if self.presented.final:
+            x = ui.percent_width(0.26)
+            y = ui.percent_height(0.27)
+            screen.blit(ui.fonts.sarabun18.render(f"(Pronounced \"{self.presented.final}\" in the final position)", True, (0, 0, 0)), (x, y))
+
         # Draw English
         x = ui.percent_width(0.26)
-        y = ui.percent_height(0.27)
+        y = ui.percent_height(0.32)
         screen.blit(
             ui.fonts.sarabun48.render(self.presented.english, True, (0, 0, 0)), (x, y)
         )
 
         # Draw Space bar instruction
-        x = ui.percent_width(0.38)
-        y = ui.percent_height(0.80)  # >78
-        screen.blit(
-            ui.fonts.sarabun24.render("Press Space bar to continue", True, (100, 100, 100)), (x, y)
-        )
-
-        if self.from_dex:
-            self.draw_map_button()
+        if not self.from_dex:
+            x = ui.percent_width(0.38)
+            y = ui.percent_height(0.80)  # >78
+            screen.blit(
+                ui.fonts.sarabun24.render("Press Space bar to continue", True, (100, 100, 100)), (x, y)
+            )
 
         if self.from_dex:
             x = ui.percent_width(0.26)

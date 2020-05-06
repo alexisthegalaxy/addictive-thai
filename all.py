@@ -35,8 +35,10 @@ class All:
         self.active_presentation = None
         self.active_naming = None
         self.active_fight = None
+        self.active_consonant_race = None
         self.active_sale = None
         self.dex: Dex = None
+        self.lex: Lex = None
         self.active_minimap: Minimap = None
         self.bag: Bag = Bag()
         self.weather = Weather(al=self)
@@ -44,6 +46,8 @@ class All:
     def tick_activity(self):
         # Called at every tick
         self.weather.tick(self)
+        if self.active_consonant_race:
+            self.active_consonant_race.tick()
         if self.active_test and self.active_test.allowed_time:
             if self.active_test.is_timer_over():
                 self.active_test.fails()
@@ -83,6 +87,19 @@ def letter_islands(al):
                 wind=30,
                 overlay=Overlay(color=(30, 30, 30), transparency=92),
                 lightning=True,
+            )
+    if al.mas.current_map.filename == "ko_mak":
+        if get_event_status("spirit_gecko_is_beaten") == 1:
+            from npc.import_npcs.ko_kut import spirit_bird_victory_callback
+            spirit_bird_victory_callback(al)
+        else:
+            al.weather = Weather(
+                al=al,
+                # rain=True,
+                # wind=30,
+                # overlay=Overlay(color=(30, 30, 30), transparency=92),
+                # lightning=True,
+                quake=True,
             )
 
 

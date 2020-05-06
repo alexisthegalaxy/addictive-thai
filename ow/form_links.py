@@ -33,6 +33,8 @@ def form_links(mas):
     mas.chumphae.get_cell_at(124, 81).goes_to = (mas.chaiyaphum, 43, 15)
     # chaiyaphum
     mas.chaiyaphum.get_cell_at(28, 101).goes_to = (mas.house_learner_f1, 5, 12)
+    mas.chaiyaphum.get_cell_at(24, 30).goes_to = (mas.chaiyaphum_hidden_cave, 8, 12)
+    mas.chaiyaphum_hidden_cave.get_cell_at(8, 13).goes_to = (mas.chaiyaphum, 24, 31)
     mas.house_learner_f1.get_cell_at(5, 13).goes_to = (mas.chaiyaphum, 28, 102)
     mas.house_learner_f1.get_cell_at(2, 9).goes_to = (
         mas.house_learner_f2,

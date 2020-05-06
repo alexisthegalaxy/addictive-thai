@@ -406,4 +406,5 @@ def get_sprites():
         "plane_floor": pygame.image.load(f"{dir_path}/../ow/sprites/plane_floor.bmp"),
         "big_tree": pygame.image.load(f"{dir_path}/../ow/sprites/big_tree.bmp"),
         "house_4x4": pygame.image.load(f"{dir_path}/../ow/sprites/house_4x4.png"),
+        "low_house_4x3": pygame.image.load(f"{dir_path}/../ow/sprites/low_house_4x3.png"),
     }

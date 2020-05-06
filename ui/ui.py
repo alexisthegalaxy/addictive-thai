@@ -20,10 +20,12 @@ class Fonts(object):
         self.burmese32 = pygame.font.Font(f"{dir_path}/../fonts/ZawgyiOne.ttf", 32)
         self.sanskrit32 = pygame.font.Font(f"{dir_path}/../fonts/Jaldi.ttf", 32)
 
+        self.sarabun128 = pygame.font.Font(sarabun_path, 128)
         self.sarabun64 = pygame.font.Font(sarabun_path, 64)
         self.sarabun48 = pygame.font.Font(sarabun_path, 48)
         self.sarabun32 = pygame.font.Font(sarabun_path, 32)
         self.sarabun16 = pygame.font.Font(sarabun_path, 16)
+        self.sarabun18 = pygame.font.Font(sarabun_path, 18)
         self.sarabun24 = pygame.font.Font(sarabun_path, 24)
         self.sarabun28 = pygame.font.Font(sarabun_path, 28)
 
@@ -120,6 +122,8 @@ class Ui(object):
                     al.ui.space = True
                 if event.key == pygame.K_w:
                     al.dex.w()
+                if event.key == pygame.K_l:
+                    al.lex.l()
                 if event.key == pygame.K_m:
                     if not al.active_presentation:
                         if al.active_minimap:
@@ -151,6 +155,9 @@ class Ui(object):
                         al.ui.escape = False
                     elif al.active_fight:
                         al.active_fight.end_fight()
+                        al.ui.escape = False
+                    elif al.active_consonant_race:
+                        al.active_consonant_race.end()
                         al.ui.escape = False
                     elif al.active_sale:
                         al.active_sale = None

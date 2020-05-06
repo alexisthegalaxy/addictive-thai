@@ -40,15 +40,21 @@ class Follower(object):
             x += progressive_offset_x + learner_movement_offset_x
             y += progressive_offset_y + learner_movement_offset_y
 
+        final_x = x * al.ui.cell_size
+        final_y = y * al.ui.cell_size
+
+        final_x += al.weather.get_offset_x()
+        final_y += al.weather.get_offset_y()
+
         sprite_name = f"{self.sprite}_{string_from_direction(self.direction)}"
         if sprite_name in al.ui.npc_sprites:
             sprite = al.ui.npc_sprites[sprite_name]
-            al.ui.screen.blit(sprite, [x * al.ui.cell_size, y * al.ui.cell_size])
+            al.ui.screen.blit(sprite, [final_x, final_y])
         else:
             pygame.draw.rect(
                 al.ui.screen,
                 self.color,
-                pygame.Rect(x * al.ui.cell_size, y * al.ui.cell_size, al.ui.cell_size, al.ui.cell_size),
+                pygame.Rect(final_x, final_y, al.ui.cell_size, al.ui.cell_size),
             )
 
     def move(self, al: "All", next_x, next_y):
