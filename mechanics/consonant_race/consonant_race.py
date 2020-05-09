@@ -143,7 +143,7 @@ class ConsonantRace(object):
 
     def victory(self):
         self.end()
-        self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog
+        self.al.active_npc.active_dialog = self.al.active_npc.defeat_dialog  # the player's victory is the npc's defeat
         self.al.active_npc.wants_battle = False
         self.al.learner.money += self.al.active_npc.money
 

@@ -16,7 +16,10 @@ def get_font_from_locale(fonts, locale="en", size=32):
     return fonts.sarabun32
 
 
-def render_multilingual_text(ui, text, x, y, size=32, color=(0, 0, 0)):
+def render_multilingual_text(ui, text, x, y, size=32, color=(0, 0, 0), blit=True):
+    """
+    Return the width of the rendered text
+    """
     beginning_of_segment_x = x
     first_iteration = True
     if "{" in text:

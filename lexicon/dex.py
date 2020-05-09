@@ -278,6 +278,10 @@ class Dex(object):
 class Lex(object):
     """
     Shows all the known letters - activated by typing L
+    TODO: would be cool to add three orders:
+    Frequency order
+    Alphabetical order
+    Class order: HIGH, MID, LOW, VOWELS
     """
     def __init__(self, al):
         self.actualized = False

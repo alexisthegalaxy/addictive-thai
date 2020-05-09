@@ -157,8 +157,7 @@ class Learner(object):
                     if npc.must_walk_to[0].x == npc.x and npc.must_walk_to[0].y == npc.y:
                         npc.must_walk_to.pop(0)
                         al.learner.direction = opposite_direction(npc.direction)
-                        npc.interact(al)
-
+                        npc.space_interact(al)
 
     def open(self):
         x, y = self.next_position()
@@ -199,17 +198,18 @@ class Learner(object):
 
     def start_interacting_with_npcs(self, al: All):
         if self.al.active_npc:
-            self.al.active_npc.interact(al)
+            self.al.active_npc.space_interact(al)
             return
+
         next_x, next_y = self.next_position()
         for npc in al.mas.current_map.npcs:
             if npc.x == next_x and npc.y == next_y and not npc.is_silent:
-                npc.interact(al)
+                npc.space_interact(al)
                 return
         next_next_x, next_next_y = self.next_next_position()
         for npc in al.mas.current_map.npcs:
             if npc.x == next_next_x and npc.y == next_next_y and not npc.is_silent:
-                npc.interact(al)
+                npc.space_interact(al)
                 return
 
     def start_interacting(self, al: All):

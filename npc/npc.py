@@ -1,3 +1,4 @@
+import copy
 from dataclasses import dataclass
 from datetime import datetime
 import time
@@ -10,6 +11,7 @@ from lexicon.items import Word, Letter
 from lexicon.learning import LetterLearning, WordLearning
 from models import xp_from_word
 from npc.letter import get_sprite_name_from_letter_class
+from npc.question import Question
 from sounds.play_sound import play_thai_word
 
 
@@ -26,13 +28,14 @@ def _get_time_type():
 
 def _process_dialog(dialog: List[str], al: "All"):
     for i, line in enumerate(dialog):
-        dialog[i] = line.replace("[Name]", al.learner.name)
-        if "[sibling_gender_of_player]" in dialog[i]:
-            if al.learner.gender == 0:
-                sibling = "sister"
-            else:
-                sibling = "brother"
-            dialog[i] = line.replace("[sibling_gender_of_player]", sibling)
+        if type(line) == str:
+            dialog[i] = line.replace("[Name]", al.learner.name)
+            if "[sibling_gender_of_player]" in dialog[i]:
+                if al.learner.gender == 0:
+                    sibling = "sister"
+                else:
+                    sibling = "brother"
+                dialog[i] = line.replace("[sibling_gender_of_player]", sibling)
 
 
 def _can_turn(sprite_type):
@@ -75,6 +78,9 @@ def make_letter_beaten(wild_letter):
 class Position:
     x: int
     y: int
+
+
+Dialog = List[Union[str, Question]]
 
 
 class Npc(object):
@@ -136,10 +142,10 @@ class Npc(object):
         self.y = y
         self.money = money
         self.lost_money_on_defeat = lost_money_on_defeat
-        self.standard_dialog: List[str] = standard_dialog
-        self.defeat_dialog: List[str] = defeat_dialog
-        self.victory_dialog: List[str] = victory_dialog
-        self.review_dialog: List[str] = ["Do you want to review the word"]
+        self.standard_dialog: Dialog = standard_dialog
+        self.defeat_dialog: Dialog = defeat_dialog
+        self.victory_dialog: Dialog = victory_dialog
+        self.review_dialog: Dialog = ["Do you want to review the word"]
         self.dialogs = [
             self.standard_dialog,
             self.standard_dialog_2,
@@ -151,7 +157,7 @@ class Npc(object):
             self.extra_dialog_4,
             self.extra_dialog_5,
         ]
-        self.active_dialog: List[str] = self.standard_dialog
+        self.active_dialog: Dialog = self.standard_dialog[:]
         self.direction = direction
         self.active_line_index = -1
         self.color = (0, 222, 222)
@@ -285,7 +291,7 @@ class Npc(object):
                 al.active_naming = self.naming
                 al.active_naming.actualize()
             if self.active_dialog == self.victory_dialog:
-                self.active_dialog = self.standard_dialog
+                self.active_dialog = self.standard_dialog[:]
         if self == "is a spell":  # TODO
             if (
                 self.active_dialog == self.standard_dialog
@@ -306,20 +312,23 @@ class Npc(object):
                 )
             if self.active_dialog == self.victory_dialog:
                 al.learner.faints()
-                self.active_dialog = self.standard_dialog
-                self.active_line_index = 0
+                self.active_dialog = self.standard_dialog[:]
+                self.active_line_index = 0  # this should be -2 maybe because just after we will increase by one
         if self.consonants:
-            if self.active_dialog == self.standard_dialog:
+            if self.active_dialog == self.victory_dialog:
+                self.active_dialog = self.standard_dialog[:]
+                self.active_line_index = -2
+                al.active_npc = None
+            elif self.active_dialog == self.defeat_dialog:
+                self.active_dialog = self.standard_dialog[:]
+                self.active_line_index = -2
+                al.active_npc = None
+            else:
                 from mechanics.consonant_race.consonant_race import ConsonantRace
-
+                # TODO weirdly this seems to be triggered but then the race doesnt start
                 al.active_consonant_race = ConsonantRace(
                     al=al, consonants=self.consonants, npc=self
                 )
-            if self.active_dialog == self.victory_dialog:
-                if not self.consonants:
-                    al.learner.faints()
-                self.active_dialog = self.standard_dialog
-                self.active_line_index = 0
 
     def special_interaction(self, al):
         from event import execute_event
@@ -340,22 +349,35 @@ class Npc(object):
         if self.is_saying_last_sentence():
             self.last_sentence_special_interaction(al)
 
-    def interact(self, al):
-        from event import execute_event
+    def go_to_next_line(self):
+        self.active_line_index += 1
 
+    def interact(self, al):
+        if type(self.active_dialog[self.active_line_index]) == Question:
+            self.active_dialog[self.active_line_index].interact(al)
+
+    def reset_dialogs(self, al):
+        self.active_dialog = self.standard_dialog[:]
+
+    def first_interaction(self, al):
         self.direction = opposite_direction(al.learner.direction)
-        self.wanna_meet = False
         self.has_learning_mark = False
-        self.reset_cursor()
+        self.wanna_meet = False
         if not al.active_npc:
+            self.reset_dialogs(al)
             if self.taught:  # If this NPC teaches
                 if self.taught.total_xp >= 5:  # If the word is known
                     self.active_dialog = self.review_dialog
         al.active_npc = self
 
-        self.special_interaction(al)
-        self.active_line_index += 1
+    def handle_question(self, al):
+        try:
+            if self.active_line_index > -1 and type(self.active_dialog[self.active_line_index]) == Question:
+                self.active_dialog[self.active_line_index].execute_callback(al, self)
+        except IndexError:
+            print('ERROR WHEN HANDLING QUESTION!')
 
+    def handle_dialog_triggered_events(self, al):
         if self.active_line_index >= len(
             self.active_dialog
         ):  # if this is the end of the current dialog
@@ -369,9 +391,18 @@ class Npc(object):
             else:
                 trigger_event = True
             if trigger_event:
+                from event import execute_event
                 for event in self.end_dialog_trigger_event:
                     execute_event(event, al)
             al.active_npc = None
+
+    def space_interact(self, al):
+        self.reset_cursor()
+        self.first_interaction(al)
+        self.handle_question(al)
+        self.special_interaction(al)
+        self.go_to_next_line()
+        self.handle_dialog_triggered_events(al)
 
     def get_precise_position(self, x, y):
         if dir_equal(self.direction, Direction.UP):
@@ -501,7 +532,7 @@ class Npc(object):
                         self.direction = Direction.UP
             elif al.learner.next_position() == (self.x, self.y):
                 al.learner.direction = opposite_direction(self.direction)
-                self.interact(al)
+                self.space_interact(al)
 
     def disappears(self, al):
         al.mas.current_map.npcs = [

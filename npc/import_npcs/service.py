@@ -11,3 +11,7 @@ def add_npc(npc: Npc, condition=True):
     if condition:
         npc.ma.add_npc(npc)
 
+
+def no_callback(al, npc):
+    print('no_callback')
+    pass

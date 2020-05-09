@@ -4,6 +4,7 @@ import pygame
 from languages import render_multilingual_text
 from models import should_we_show_thai
 from npc.npc import Npc
+from npc.question import Question
 
 
 def _progressively_draw_line(
@@ -15,7 +16,10 @@ def _progressively_draw_line(
     render_multilingual_text(ui, text=line, x=x, y=y, size=32, color=(0, 0, 0))
 
 
-def draw_text(al, draw_text_since: float = 0, text: str = ""):
+def draw_text(al, draw_text_since: float = 0, text: str = "") -> bool:
+    """
+    Return whether the text is fully written or not (used for displaying Questions)
+    """
     # 1 - Background:
     ui = al.ui
     x = 0
@@ -38,15 +42,24 @@ def draw_text(al, draw_text_since: float = 0, text: str = ""):
             _progressively_draw_line(
                 thai, number_of_characters_to_show, ui, screen, height, x, y
             )
+            return number_of_characters_to_show >= len(thai)
         else:
             _progressively_draw_line(
                 english, number_of_characters_to_show, ui, screen, height, x, y
             )
+            return number_of_characters_to_show >= len(english)
     else:
         _progressively_draw_line(
             text, number_of_characters_to_show, ui, screen, height, x, y
         )
+        return number_of_characters_to_show >= len(text)
 
 
 def draw_npc_text(al, npc: Npc):
-    draw_text(al, npc.draw_text_since, npc.active_dialog[npc.active_line_index])
+    if npc.active_line_index > -1 and type(npc.active_dialog[npc.active_line_index]) == Question:
+        question = npc.active_dialog[npc.active_line_index]
+        has_drawn_text = draw_text(al, npc.draw_text_since, question.precursor_text)
+        if has_drawn_text:
+            question.draw(al)
+    else:
+        draw_text(al, npc.draw_text_since, npc.active_dialog[npc.active_line_index])

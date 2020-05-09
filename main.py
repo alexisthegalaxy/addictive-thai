@@ -49,6 +49,8 @@ def main_interact(al: All):
         ow_frozen = True
         if al.ui.space:
             al.learner.start_interacting(al)
+        if al.active_npc:
+            al.active_npc.interact(al)
     if al.active_sale:
         ow_frozen = True
         al.active_sale.interact(al)
