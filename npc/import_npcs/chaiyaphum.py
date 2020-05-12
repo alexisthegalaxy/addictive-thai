@@ -213,13 +213,12 @@ def chaiyaphum_chumphae_mo_hin_khao(al):
     )
 
 
-
 def chaiyaphum_rest_of_the_city(al):
     add_npc(
         Npc(
             al=al,
             name="Lover",
-            # taught=Word.get_by_split_form("ชอบ"),
+            taught=Word.get_by_split_form("ชอบ"),
             ma=al.mas.get_map_from_name("chaiyaphum"),
             x=18,
             y=82,
@@ -238,6 +237,23 @@ def chaiyaphum_rest_of_the_city(al):
             end_dialog_trigger_event=["talk_to_lover"],
         ),
         get_event_status("talk_to_lover") == 0
+    )
+    add_npc(
+        Npc(
+            al=al,
+            name="Policeman guarding road to Bua Yai",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=34,
+            y=98,
+            sprite="policeman",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "Sorry, the road to Bua Yai is closed at the moment.",
+                "We've had many reports of people who've been under attack",
+                "from Thai words gone wild.",
+                "Only those knowing more than 50 Thai words are allowed to pass through.",
+            ],
+        ),
     )
     add_npc(
         Npc(
@@ -292,12 +308,12 @@ def chaiyaphum_rest_of_the_city(al):
             al=al,
             name="Nobody",
             ma=al.mas.get_map_from_name("chaiyaphum"),
-            x=20,
-            y=93,
+            x=18,
+            y=92,
             sprite="lass",
             direction=Direction.LEFT,
             standard_dialog=[
-                "That road east is quite dangerous if you don't know Thai.",
+                "The road east is quite dangerous if you don't know Thai.",
                 "I wouldn't go there myself,",
                 "although I have been learning thai for three months already!",
             ],
@@ -306,8 +322,6 @@ def chaiyaphum_rest_of_the_city(al):
 
 
 def set_consonant_challenge_old_dude(al, npc):
-    # assert False
-    print('woooot')
     if al.learner.money >= 1:
         npc.active_dialog = npc.active_dialog[:] + ["Alright, let's do it!"]
         npc.consonants = [Letter.get_by_thai(l) for l in
@@ -319,7 +333,6 @@ def set_consonant_challenge_old_dude(al, npc):
 
 
 def set_no_consonant_challenge_old_dude(al, npc):
-    print('waaaaaaaaaat')
     npc.consonants = None
     npc.active_dialog = npc.active_dialog[:] + ["Alright, but you should try eventually!", "Check your letters with L."]
 

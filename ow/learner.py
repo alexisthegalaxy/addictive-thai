@@ -1,11 +1,11 @@
 import pygame
 import time
 
-from all import All
+
 from models import set_as_active_player
 from movement import Movement
 from ow.direction import Direction, dir_equal, string_from_direction, opposite_direction
-from ow.overworld import CellTypes
+
 from sounds.play_sound import play_thai_word
 
 
@@ -27,6 +27,7 @@ class Learner(object):
         self.direction = Direction.DOWN
         self.al: "All" = al
         self.max_free_steps = 3
+        self.in_portal_world = False
         self.free_steps = self.max_free_steps
         if learns_letters:
             self.last_healing_place = (8, 12, self.al.mas.house_learner_f2)
@@ -136,7 +137,7 @@ class Learner(object):
             self.movement = Movement(self.direction, self)
 
         if has_moved:
-            self.al.mas.current_map.response_to_movement(self, self.x, self.y)
+            self.al.mas.current_map.response_to_movement(self, al, self.x, self.y)
             self.free_steps -= 1
             self.last_movement = time.time()
 
@@ -160,6 +161,7 @@ class Learner(object):
                         npc.space_interact(al)
 
     def open(self):
+        from ow.overworld import CellTypes
         x, y = self.next_position()
         cell_in_front = self.al.mas.current_map.get_cell_at(x, y)
         if cell_in_front.walkable():
@@ -196,7 +198,7 @@ class Learner(object):
 
         return next_next_x, next_next_y
 
-    def start_interacting_with_npcs(self, al: All):
+    def start_interacting_with_npcs(self, al):
         if self.al.active_npc:
             self.al.active_npc.space_interact(al)
             return
@@ -212,7 +214,7 @@ class Learner(object):
                 npc.space_interact(al)
                 return
 
-    def start_interacting(self, al: All):
+    def start_interacting(self, al):
         al.ui.space = False
         self.start_interacting_with_npcs(al)
 
@@ -255,6 +257,10 @@ class Learner(object):
     def heal(self, amount):
         self.hp = min(self.hp + amount, self.max_hp)
         play_thai_word("heal")
+
+    def enter_portal_world(self, al, entering_unit):
+        self.in_portal_world = True
+        al.mesh.current_unit = entering_unit
 
 
 def draw_hp(al, hp, max_hp, x=None, y=0):

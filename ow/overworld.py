@@ -9,6 +9,8 @@ import pygame
 from derive_from_mothermap import mothermap
 from direction import Direction
 # from event import execute_event
+from form_links import PORTAL_WORLD
+from learner import Learner
 from lexicon.items import Word, Letter
 from lexicon.test_services import pick_a_test_for_word, pick_a_test_for_letter
 from npc.npc import Npc
@@ -146,6 +148,7 @@ class CellTypes:
     buddha_statue = CellType("仏", "buddha_statue", (255, 215, 54), False, 0, WALL_COLOR)
 
     house_4x4 = CellType("泰", "house_4x4", (100, 100, 100), False, 0, WALL_COLOR, special_shape="0000_0000_0000_0100", special_offset=(1, 2))
+    portal_3x4 = CellType("門", "portal_3x4", (255, 100, 100), True, 0, WALL_COLOR, special_shape="101_000_010_010", special_offset=(1, 2))
     low_house_4x3 = CellType("低", "low_house_4x3", (100, 100, 101), False, 0, WALL_COLOR, special_shape="0000_0000_0100", special_offset=(1, 1))
     big_tree = CellType("杉", "big_tree", (58, 78, 22), False, 0, TREE_COLOR, special_shape="00_00", special_offset=(0, 0))
 
@@ -352,15 +355,19 @@ class Ma(object):
         if direction:
             learner.direction = direction
 
-    def response_to_movement(self, learner, x, y):
+    def response_to_movement(self, learner, al, x, y):
         cell = self.get_cell_at(x, y)
 
         # 1 - Test for map change
         if cell.goes_to is not None:
-            try:
-                self.map_change(learner=learner, ma=cell.goes_to[0], x=cell.goes_to[1], y=cell.goes_to[2], direction=cell.goes_to[3])
-            except IndexError:
-                self.map_change(learner=learner, ma=cell.goes_to[0], x=cell.goes_to[1], y=cell.goes_to[2])
+            if cell.goes_to[0] == PORTAL_WORLD:
+                learner.enter_portal_world(al, cell.goes_to[1])
+                return
+            else:
+                try:
+                    self.map_change(learner=learner, ma=cell.goes_to[0], x=cell.goes_to[1], y=cell.goes_to[2], direction=cell.goes_to[3])
+                except IndexError:
+                    self.map_change(learner=learner, ma=cell.goes_to[0], x=cell.goes_to[1], y=cell.goes_to[2])
 
         # 2 - Test for Word or Letter encounter
         if learner.free_steps <= 0:

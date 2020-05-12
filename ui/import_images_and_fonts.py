@@ -30,6 +30,10 @@ def npc_sprites():
         "mali_up": pygame.image.load(f"{dir_path}/../npc/sprites/mali_up.png"),
         "mali_right": pygame.image.load(f"{dir_path}/../npc/sprites/mali_right.png"),
         "mali_left": pygame.image.load(f"{dir_path}/../npc/sprites/mali_left.png"),
+        "policeman_down": pygame.image.load(f"{dir_path}/../npc/sprites/policeman_down.png"),
+        # "policeman_up": pygame.image.load(f"{dir_path}/../npc/sprites/policeman_up.png"),
+        "policeman_right": pygame.image.load(f"{dir_path}/../npc/sprites/policeman_right.png"),
+        "policeman_left": pygame.image.load(f"{dir_path}/../npc/sprites/policeman_left.png"),
         "old_man_left": pygame.image.load(
             f"{dir_path}/../npc/sprites/old_man_left.png"
         ),
@@ -406,5 +410,6 @@ def get_sprites():
         "plane_floor": pygame.image.load(f"{dir_path}/../ow/sprites/plane_floor.bmp"),
         "big_tree": pygame.image.load(f"{dir_path}/../ow/sprites/big_tree.bmp"),
         "house_4x4": pygame.image.load(f"{dir_path}/../ow/sprites/house_4x4.png"),
+        "portal_3x4": pygame.image.load(f"{dir_path}/../ow/sprites/portal_3x4.png"),
         "low_house_4x3": pygame.image.load(f"{dir_path}/../ow/sprites/low_house_4x3.png"),
     }

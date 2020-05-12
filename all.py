@@ -4,9 +4,10 @@ from direction import Direction
 from event import execute_event
 from follower import Follower
 from form_links import form_links
-from lexicon.dex import Dex
+from lexicon.dex import Dex, Lex
 from mechanics.minimap import Minimap
 from models import get_event_status
+from portals.mesh import Mesh
 from ui.ui import Ui
 from weather.weather import Weather, Overlay
 
@@ -39,6 +40,7 @@ class All:
         self.active_sale = None
         self.dex: Dex = None
         self.lex: Lex = None
+        self.mesh: Mesh = None
         self.active_minimap: Minimap = None
         self.bag: Bag = Bag()
         self.weather = Weather(al=self)

@@ -11,6 +11,7 @@ from npc.import_npcs.import_npcs import import_npcs
 from npc.npc_default_text import draw_npc_text
 from ow.learner import Learner
 from ow.overworld import Mas, CellTypes
+from portals.mesh import Mesh
 from profile.profile import load
 from sounds.thai.sound_processing import get_all_mp3_files
 from ui.ui import Ui
@@ -18,6 +19,9 @@ from ui.ui import Ui
 
 def main_interact(al: All):
     ow_frozen = False
+    if al.learner.in_portal_world:
+        ow_frozen = True
+        al.mesh.interact(al)
     if al.active_test:
         ow_frozen = True
         al.active_test.interact(al)
@@ -67,38 +71,41 @@ def main_interact(al: All):
 
 def main_draw(al: All):
     al.ui.screen.fill((0, 0, 0))
-    al.mas.current_map.draw(al)
-    for npc in al.mas.current_map.npcs:
-        npc.draw(al)
-    al.learner.draw(al)
-    al.weather.draw(al)
-    if al.active_npc and not al.active_npc.active_line_index == -1:
-        draw_npc_text(al, al.active_npc)
-    if al.active_test:
-        al.active_test.draw()
-        # the following is used to draw fighter's sprites even during other elements are active - for example, tests
-        if al.active_fight:
-            al.active_fight.draw_secondary()
-    elif al.active_sale:
-        al.active_sale.draw()
-    elif al.active_fight:
-        al.active_fight.draw()
-    elif al.active_consonant_race:
-        al.active_consonant_race.draw()
-    elif al.active_naming:
-        al.active_naming.draw()
-    if al.active_learning:
-        al.active_learning.draw()
-    if al.dex.active:
-        al.dex.draw()
-    if al.lex.active:
-        al.lex.draw()
-    if al.active_minimap:
-        al.active_minimap.draw()
-    if al.active_spell_identification:
-        al.active_spell_identification.draw()
-    if not al.active_fight and not al.active_consonant_race:
-        al.learner.draw_money_and_hp(al)
+    if al.learner.in_portal_world:
+        al.mesh.draw(al)
+    else:
+        al.mas.current_map.draw(al)
+        for npc in al.mas.current_map.npcs:
+            npc.draw(al)
+        al.learner.draw(al)
+        al.weather.draw(al)
+        if al.active_npc and not al.active_npc.active_line_index == -1:
+            draw_npc_text(al, al.active_npc)
+        if al.active_test:
+            al.active_test.draw()
+            # the following is used to draw fighter's sprites even during other elements are active - for example, tests
+            if al.active_fight:
+                al.active_fight.draw_secondary()
+        elif al.active_sale:
+            al.active_sale.draw()
+        elif al.active_fight:
+            al.active_fight.draw()
+        elif al.active_consonant_race:
+            al.active_consonant_race.draw()
+        elif al.active_naming:
+            al.active_naming.draw()
+        if al.active_learning:
+            al.active_learning.draw()
+        if al.dex.active:
+            al.dex.draw()
+        if al.lex.active:
+            al.lex.draw()
+        if al.active_minimap:
+            al.active_minimap.draw()
+        if al.active_spell_identification:
+            al.active_spell_identification.draw()
+        if not al.active_fight and not al.active_consonant_race:
+            al.learner.draw_money_and_hp(al)
     pygame.display.flip()
 
 
@@ -111,6 +118,7 @@ def main():
     al.learner = Learner(al, "Alexis", gender=1)
     load(al)
     import_npcs(al)
+    al.mesh = Mesh(al)
     al.dex = Dex(al)
     al.lex = Lex(al)
     special_loading(al)  # event-depending change to the data
