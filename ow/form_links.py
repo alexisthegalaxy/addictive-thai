@@ -36,6 +36,7 @@ def form_links(mas):
     mas.chumphae.get_cell_at(124, 81).goes_to = (mas.chaiyaphum, 43, 15)
     # chumphae portal
     mas.chumphae.get_cell_at(118, 54).goes_to = (PORTAL_WORLD, "ดี")
+    mas.kasetsombum.get_cell_at(35, 20).goes_to = (PORTAL_WORLD, "ยิน")
     # chaiyaphum
     mas.chaiyaphum.get_cell_at(28, 101).goes_to = (mas.house_learner_f1, 5, 12)
     mas.chaiyaphum.get_cell_at(24, 30).goes_to = (mas.chaiyaphum_hidden_cave, 8, 12)

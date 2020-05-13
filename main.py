@@ -72,7 +72,7 @@ def main_interact(al: All):
 def main_draw(al: All):
     al.ui.screen.fill((0, 0, 0))
     if al.learner.in_portal_world:
-        al.mesh.draw(al)
+        al.mesh.draw()
     else:
         al.mas.current_map.draw(al)
         for npc in al.mas.current_map.npcs:

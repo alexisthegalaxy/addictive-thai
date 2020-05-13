@@ -260,7 +260,7 @@ class Learner(object):
 
     def enter_portal_world(self, al, entering_unit):
         self.in_portal_world = True
-        al.mesh.current_unit = entering_unit
+        al.mesh.learner_enters(entering_unit)
 
 
 def draw_hp(al, hp, max_hp, x=None, y=0):

@@ -21,6 +21,7 @@ class Fonts(object):
         self.sanskrit32 = pygame.font.Font(f"{dir_path}/../fonts/Jaldi.ttf", 32)
 
         self.sarabun128 = pygame.font.Font(sarabun_path, 128)
+        self.sarabun96 = pygame.font.Font(sarabun_path, 96)
         self.sarabun64 = pygame.font.Font(sarabun_path, 64)
         self.sarabun48 = pygame.font.Font(sarabun_path, 48)
         self.sarabun32 = pygame.font.Font(sarabun_path, 32)

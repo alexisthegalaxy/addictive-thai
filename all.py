@@ -50,6 +50,8 @@ class All:
         self.weather.tick(self)
         if self.active_consonant_race:
             self.active_consonant_race.tick()
+        if self.learner.in_portal_world:
+            self.mesh.tick()
         if self.active_test and self.active_test.allowed_time:
             if self.active_test.is_timer_over():
                 self.active_test.fails()
