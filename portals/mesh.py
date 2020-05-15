@@ -196,16 +196,16 @@ class Mesh(object):
     def interact(self, al):
         ui = al.ui
         if ui.down:
-            self.offset.y -= OFFSET_MOVEMENT
+            self.goal_offset.y -= OFFSET_MOVEMENT
             ui.down = False
         if ui.up:
-            self.offset.y += OFFSET_MOVEMENT
+            self.goal_offset.y += OFFSET_MOVEMENT
             ui.up = False
         if ui.right:
-            self.offset.x -= OFFSET_MOVEMENT
+            self.goal_offset.x -= OFFSET_MOVEMENT
             ui.right = False
         if ui.left:
-            self.offset.x += OFFSET_MOVEMENT
+            self.goal_offset.x += OFFSET_MOVEMENT
             ui.left = False
         if ui.space:
             self.go_to_random_direction()
