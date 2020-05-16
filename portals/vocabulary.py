@@ -406,6 +406,11 @@ def get_naive_units(al):
 def get_naive_compounds():
     return [
         NaiveCompound(
+            english="cameraman, photographer",
+            word_1="ตา",
+            word_2="กล้อง",
+        ),
+        NaiveCompound(
             english="microscope",
             word_1="กล้อง",
             word_2="ขยาย",

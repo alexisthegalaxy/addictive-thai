@@ -14,17 +14,31 @@ class Compound(object):
         self.screen_x_2 = nexus_2.screen_x
         self.screen_y_2 = nexus_2.screen_y
 
-    def is_selected(self):
+    def is_linked_to_current_nexus(self):
         return self.al.mesh.selected_nexus in [self.nexus_1, self.nexus_2]
+
+    def is_hovered(self):
+        a = {self.al.mesh.selected_nexus, self.al.mesh.selected_nexus.best_link}
+        b = {self.nexus_1, self.nexus_2}
+        return a == b
+        return {self.al.mesh.selected_nexus, self.al.mesh.selected_nexus.best_link} == {self.nexus_1, self.nexus_2}
 
     def draw(self):
         # https://stackoverflow.com/questions/30578068/pygame-draw-anti-aliased-thick-line
-        if self.is_selected():
-            color = (255, 0, 0)
+        is_linked_to_current_nexus = self.is_linked_to_current_nexus()
+        is_hovered = is_linked_to_current_nexus and self.is_hovered()
+        if is_linked_to_current_nexus:
+            if is_hovered:
+                color = (60, 255, 255)
+            else:
+                color = (60, 120, 120)
         else:
             color = (60, 60, 60)
-        if self.is_selected():
-            thickness = 50
+        if is_linked_to_current_nexus:
+            if is_hovered:
+                thickness = 50
+            else:
+                thickness = 30
         else:
             thickness = 10
 

@@ -76,7 +76,7 @@ class Mesh(object):
         self.compounds = self.make_compounds()
         self.offset = Point(0, 0)
         self.goal_offset = Point(0, 0)
-        self.selected_nexus = None
+        self.selected_nexus: Optional[Nexus] = None
 
     def make_compounds(self):
         compounds = []
@@ -152,7 +152,6 @@ class Mesh(object):
         nexuses[new_nexus.thai] = new_nexus
         add_to_grid(temp_grid, new_nexus)
 
-
     def make_nexuses(self):
         nexuses = {}
         already_added_units_thai: List[str] = []
@@ -181,8 +180,6 @@ class Mesh(object):
                 grid_x, grid_y = get_grid_x_and_grid_y_for_new_unit(
                     temp_grid, unit_with_links_we_try_to_add, relevant_link
                 )
-
-                # we make the proper unit
                 new_nexus = Nexus(
                     al=self.al,
                     thai=unit_with_links_we_try_to_add.thai,
@@ -230,16 +227,14 @@ class Mesh(object):
         if ui.space:
             self.go_to_random_direction()
             ui.space = False
-        # if ui.hover:
-        #     self.hovered_box = None
-        #     for box in self.letter_boxes:
-        #         if ui.hover in box:
-        #             for other_box in self.letter_boxes:
-        #                 other_box.hovered = False
-        #             self.hovered_box = box
-        #             box.hovered = ui.hover
-        #             ui.hover = None
-        #             break
+        if ui.hover:
+            if self.selected_nexus:
+                self.selected_nexus.on_hover(ui.hover)
+                ui.hover = None
+        if ui.click:
+            if self.selected_nexus:
+                self.selected_nexus.on_click(ui.click)
+                ui.click = None
         # if ui.click:
         #     for box in self.letter_boxes:
         #         if ui.click in box:
