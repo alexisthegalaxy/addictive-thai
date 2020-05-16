@@ -1,7 +1,7 @@
 import random
 from collections import Counter
 from dataclasses import dataclass
-from typing import List, Dict
+from typing import List, Dict, Tuple, Optional
 
 import pygame
 
@@ -32,6 +32,31 @@ def grid_is_free(grid, x, y):
     return not (x in grid and y in grid[x])
 
 
+def maybe_get_grid_x_and_grid_y_for_new_unit(
+    temp_grid, unit_with_links_we_try_to_add, central_x, central_y
+) -> Tuple[int, int, Optional[int], Optional[int]]:
+    for adjacent_grid_x, adjacent_grid_y in get_coronas(
+        central_x, central_y, unit_with_links_we_try_to_add.thai
+    ):
+        if grid_is_free(temp_grid, adjacent_grid_x, adjacent_grid_y):
+            return central_x, central_y, adjacent_grid_x, adjacent_grid_y
+
+    return central_x + 1, central_y + 1, None, None
+
+
+def get_grid_x_and_grid_y_for_new_unit(
+    temp_grid, unit_with_links_we_try_to_add, relevant_link
+) -> Tuple[int, int]:
+    grid_x = None
+    grid_y = None
+    central_x, central_y = relevant_link.grid_x, relevant_link.grid_y
+    while grid_x is None:
+        central_x, central_y, grid_x, grid_y = maybe_get_grid_x_and_grid_y_for_new_unit(
+            temp_grid, unit_with_links_we_try_to_add, central_x, central_y
+        )
+    return grid_x, grid_y
+
+
 def add_to_grid(grid, unit):
     x = unit.grid_x
     y = unit.grid_y
@@ -47,7 +72,7 @@ class Mesh(object):
         self.naive_units = get_naive_units(al)
         self.units_with_links: Dict[str, UnitWithLinks] = self.get_units_with_links()
         self.grid = {}
-        self.nexuses = self.make_nexuses()  # contain their links as well as their position in space
+        self.nexuses = self.make_nexuses()
         self.compounds = self.make_compounds()
         self.offset = Point(0, 0)
         self.goal_offset = Point(0, 0)
@@ -69,8 +94,14 @@ class Mesh(object):
     def tick(self):
         goal_weight = 1
         current_position_weight = 15
-        self.offset.x = int((self.offset.x * current_position_weight + self.goal_offset.x * goal_weight) / (current_position_weight + goal_weight))
-        self.offset.y = int((self.offset.y * current_position_weight + self.goal_offset.y * goal_weight) / (current_position_weight + goal_weight))
+        self.offset.x = int(
+            (self.offset.x * current_position_weight + self.goal_offset.x * goal_weight)
+            / (current_position_weight + goal_weight)
+        )
+        self.offset.y = int(
+            (self.offset.y * current_position_weight + self.goal_offset.y * goal_weight)
+            / (current_position_weight + goal_weight)
+        )
 
     def get_units_with_links(self):
         units_with_links = {}
@@ -104,13 +135,7 @@ class Mesh(object):
                 raise KeyError
         return units_with_links
 
-    def make_nexuses(self):
-        nexuses = {}
-        already_added_units_thai: List[str] = []
-        nexuses_to_add = [value for key, value in self.units_with_links.items()]
-        i = 0
-        relevant_link = None
-
+    def add_first_nexus(self, nexuses_to_add, already_added_units_thai, nexuses, temp_grid):
         # We add the first element:
         first_unit = nexuses_to_add[0]
         nexuses_to_add.remove(first_unit)
@@ -121,17 +146,22 @@ class Mesh(object):
             map=first_unit.map,
             map_x=first_unit.map_x,
             map_y=first_unit.map_y,
-            # linked=first_unit.linked,
             grid_x=0,
             grid_y=0,
         )
         nexuses[new_nexus.thai] = new_nexus
-        temp_grid = (
-            {}
-        )  # a dictionary of dictionary that we can use with temp_grid[x][y]
         add_to_grid(temp_grid, new_nexus)
 
-        # We add the rest
+
+    def make_nexuses(self):
+        nexuses = {}
+        already_added_units_thai: List[str] = []
+        nexuses_to_add = [value for key, value in self.units_with_links.items()]
+        relevant_link = None
+        temp_grid = {}
+        self.add_first_nexus(nexuses_to_add, already_added_units_thai, nexuses, temp_grid)
+
+        i = 0
         while len(nexuses_to_add):
             has_already_added_link = False
             try:
@@ -148,17 +178,9 @@ class Mesh(object):
                     )  # TODO make this better and put it where it can have more neighbors
             if has_already_added_link:
                 nexuses_to_add.remove(unit_with_links_we_try_to_add)
-                grid_x = None
-                grid_y = None
-                central_x, central_y = relevant_link.grid_x, relevant_link.grid_y
-                while not grid_x:
-                    for adjacent_grid_x, adjacent_grid_y in get_coronas(
-                        central_x, central_y, unit_with_links_we_try_to_add.thai
-                    ):
-                        if grid_is_free(temp_grid, adjacent_grid_x, adjacent_grid_y):
-                            grid_x, grid_y = adjacent_grid_x, adjacent_grid_y
-                            break
-                    central_x, central_y = central_x + 1, central_y + 1
+                grid_x, grid_y = get_grid_x_and_grid_y_for_new_unit(
+                    temp_grid, unit_with_links_we_try_to_add, relevant_link
+                )
 
                 # we make the proper unit
                 new_nexus = Nexus(
@@ -167,7 +189,6 @@ class Mesh(object):
                     map=unit_with_links_we_try_to_add.map,
                     map_x=unit_with_links_we_try_to_add.map_x,
                     map_y=unit_with_links_we_try_to_add.map_y,
-                    # linked=unit_with_links_we_try_to_add.linked,
                     grid_x=grid_x,
                     grid_y=grid_y,
                 )
@@ -179,7 +200,6 @@ class Mesh(object):
                 if i >= len(nexuses_to_add):
                     i = 0
         self.grid = temp_grid
-        # before returning we need to do a pass where we convert the linked in units from UnitswithLinks to proper Units
         for naive_compound in self.naive_compounds:
             nexuses[naive_compound.word_1].linked.append(nexuses[naive_compound.word_2])
             nexuses[naive_compound.word_2].linked.append(nexuses[naive_compound.word_1])
