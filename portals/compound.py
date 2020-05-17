@@ -18,9 +18,6 @@ class Compound(object):
         return self.al.mesh.selected_nexus in [self.nexus_1, self.nexus_2]
 
     def is_hovered(self):
-        a = {self.al.mesh.selected_nexus, self.al.mesh.selected_nexus.best_link}
-        b = {self.nexus_1, self.nexus_2}
-        return a == b
         return {self.al.mesh.selected_nexus, self.al.mesh.selected_nexus.best_link} == {self.nexus_1, self.nexus_2}
 
     def draw(self):

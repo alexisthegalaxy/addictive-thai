@@ -225,7 +225,9 @@ class Mesh(object):
             self.goal_offset.x += OFFSET_MOVEMENT
             ui.left = False
         if ui.space:
-            self.go_to_random_direction()
+            self.goal_offset.x = -self.selected_nexus.screen_x + self.al.ui.width / 2
+            self.goal_offset.y = -self.selected_nexus.screen_y + self.al.ui.height / 2
+            # self.go_to_random_direction()
             ui.space = False
         if ui.hover:
             if self.selected_nexus:
@@ -233,14 +235,8 @@ class Mesh(object):
                 ui.hover = None
         if ui.click:
             if self.selected_nexus:
-                self.selected_nexus.on_click(ui.click)
+                self.selected_nexus.on_click()
                 ui.click = None
-        # if ui.click:
-        #     for box in self.letter_boxes:
-        #         if ui.click in box:
-        #             ui.click = None
-        #             self.launch_presentation(box.letter)
-        #             break
         if ui.escape:
             al.learner.in_portal_world = False
             al.ui.escape = False

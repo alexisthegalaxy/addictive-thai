@@ -2,7 +2,7 @@ from derive_from_mothermap import mothermap
 from direction import Direction
 
 
-PORTAL_WORLD = -1
+SPIRIT_WORLD = -1
 
 
 def form_links(mas):
@@ -34,9 +34,19 @@ def form_links(mas):
     mas.chaiyaphum.get_cell_at(43, 14).goes_to = (mas.chumphae, 124, 80)
     mas.chumphae.get_cell_at(123, 81).goes_to = (mas.chaiyaphum, 42, 15)
     mas.chumphae.get_cell_at(124, 81).goes_to = (mas.chaiyaphum, 43, 15)
-    # chumphae portal
-    mas.chumphae.get_cell_at(118, 54).goes_to = (PORTAL_WORLD, "ดี")
-    mas.kasetsombum.get_cell_at(35, 20).goes_to = (PORTAL_WORLD, "ยิน")
+    # gateways
+    mas.chumphae.get_cell_at(118, 54).goes_to = (SPIRIT_WORLD, "ดี")
+    mas.kasetsombum.get_cell_at(35, 20).goes_to = (SPIRIT_WORLD, "ยิน")
+    mas.chaiyaphum.get_cell_at(20, 81).goes_to = (SPIRIT_WORLD, "คน")
+    mas.lomsak.get_cell_at(20, 13).goes_to = (SPIRIT_WORLD, "ดู")
+    mas.phetchabun.get_cell_at(33, 32).goes_to = (SPIRIT_WORLD, "ใจ")
+    mas.bat_cave.get_cell_at(2, 8).goes_to = (SPIRIT_WORLD, "ที่")
+    mas.phitsanulok_sukhothai.get_cell_at(39, 12).goes_to = (SPIRIT_WORLD, "ได้")
+    mas.bua_yai.get_cell_at(64, 40).goes_to = (SPIRIT_WORLD, "โชค")
+    mas.chumphae_khonkaen.get_cell_at(72, 74).goes_to = (SPIRIT_WORLD, "คิด")
+    mas.phon.get_cell_at(16, 79).goes_to = (SPIRIT_WORLD, "ปลา")
+    mas.buengsamphan.get_cell_at(29, 11).goes_to = (SPIRIT_WORLD, "ตก")
+
     # chaiyaphum
     mas.chaiyaphum.get_cell_at(28, 101).goes_to = (mas.house_learner_f1, 5, 12)
     mas.chaiyaphum.get_cell_at(24, 30).goes_to = (mas.chaiyaphum_hidden_cave, 8, 12)

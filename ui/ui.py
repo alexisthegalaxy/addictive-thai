@@ -25,10 +25,13 @@ class Fonts(object):
         self.sarabun64 = pygame.font.Font(sarabun_path, 64)
         self.sarabun48 = pygame.font.Font(sarabun_path, 48)
         self.sarabun32 = pygame.font.Font(sarabun_path, 32)
-        self.sarabun16 = pygame.font.Font(sarabun_path, 16)
-        self.sarabun18 = pygame.font.Font(sarabun_path, 18)
-        self.sarabun24 = pygame.font.Font(sarabun_path, 24)
         self.sarabun28 = pygame.font.Font(sarabun_path, 28)
+        self.sarabun26 = pygame.font.Font(sarabun_path, 26)
+        self.sarabun24 = pygame.font.Font(sarabun_path, 24)
+        self.sarabun22 = pygame.font.Font(sarabun_path, 22)
+        self.sarabun20 = pygame.font.Font(sarabun_path, 20)
+        self.sarabun18 = pygame.font.Font(sarabun_path, 18)
+        self.sarabun16 = pygame.font.Font(sarabun_path, 16)
 
 
 class Ui(object):

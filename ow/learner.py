@@ -113,6 +113,7 @@ class Learner(object):
 
         # Check for walls:
         next_cell = al.mas.current_map.get_cell_at(next_x, next_y)
+        assert next_cell is not None
         if not next_cell.walkable():
             next_position_walkable = False
         if next_position_walkable and next_cell.typ.name == "cave_0011" and self.direction == Direction.DOWN:
@@ -258,9 +259,17 @@ class Learner(object):
         self.hp = min(self.hp + amount, self.max_hp)
         play_thai_word("heal")
 
-    def enter_portal_world(self, al, entering_unit):
+    def enter_spirit_world(self, al, entering_unit):
+        al.ui.up = False
+        al.ui.down = False
+        al.ui.right = False
+        al.ui.left = False
         self.in_portal_world = True
         al.mesh.learner_enters(entering_unit)
+
+    def exit_spirit_world(self, ma, x, y):
+        self.in_portal_world = False
+        ma.map_change(learner=self, ma=ma, x=x, y=y + 1, direction=Direction.DOWN)
 
 
 def draw_hp(al, hp, max_hp, x=None, y=0):

@@ -39,8 +39,8 @@ def draw_box(
     fonts,
     x,
     y,
-    width,
-    height,
+    width=0,
+    height=0,
     string=None,
     strings=None,
     selected=False,
@@ -58,6 +58,31 @@ def draw_box(
     if greyed:
         default_color = (128, 128, 128)
         selected_color = (128, 128, 128)
+
+    if string is not None or strings is not None:
+        if font_size == 24:
+            font = fonts.sarabun24
+        elif font_size == 28:
+            font = fonts.sarabun28
+        elif font_size == 16:
+            font = fonts.sarabun16
+        elif font_size == 48:
+            font = fonts.sarabun48
+        else:
+            font = fonts.sarabun32
+    if string is not None:
+        rendered_text = font.render(f" {string} ", True, default_color)
+        if width == 0:
+            width = rendered_text.get_width() + 20
+        if height == 0:
+            height = rendered_text.get_height() + 20
+    if strings is not None:
+        # TODO set width and height automatically for rendering multiple strings if width == 0 or height == 0
+        if width == 0:
+            width = 300
+        if height == 0:
+            height = 100 * len(strings)
+
     # 1 - Draw background
     if sound_box:
         border_color = selected_color if hovered else default_color
@@ -75,16 +100,6 @@ def draw_box(
         image_name = "sound_icon_green" if selected else "sound_icon"
         screen.blit(images[image_name], [x + 130, y + 10])
     else:
-        if font_size == 24:
-            font = fonts.sarabun24
-        elif font_size == 28:
-            font = fonts.sarabun28
-        elif font_size == 16:
-            font = fonts.sarabun16
-        elif font_size == 48:
-            font = fonts.sarabun48
-        else:
-            font = fonts.sarabun32
         if strings:
             y = y + int(height / 2.2) - 20
             for string in strings:
@@ -92,7 +107,6 @@ def draw_box(
                 screen.blit(rendered_text, (x + 10, y))
                 y += font_size
         elif string:
-            rendered_text = font.render(f" {string} ", True, default_color)
             if centered:
                 x = x + width / 2 - rendered_text.get_width() / 2
             else:

@@ -73,7 +73,7 @@ class Mothermap(object):
             'kasetsombum_temple': Daughtermap('kasetsombum_temple', x=748, y=624, x2=790, y2=650),
             'phitsanulok_sukhothai': Daughtermap('phitsanulok_sukhothai', x=493, y=540, x2=546, y2=584),
             'sukhothai': Daughtermap('sukhothai', x=468, y=513, x2=513, y2=549),
-            'old_sukhothai': Daughtermap('old_sukhothai', x=429, y=514, x2=482, y2=549),
+            'old_sukhothai': Daughtermap('old_sukhothai', x=429, y=514, x2=483, y2=549),
             'bua_yai': Daughtermap('bua_yai', x=795, y=699, x2=880, y2=769),
             'phon': Daughtermap('phon', x=865, y=644, x2=931, y2=760),
             'chaiyaphum_chatturat': Daughtermap('chaiyaphum_chatturat', x=750, y=715, x2=809, y2=774),

@@ -19,22 +19,23 @@ class NaiveCompound:
 
 def get_naive_units(al):
     return {
-        "คน": NaiveUnit(map=al.mas.chaiyaphum, x=800, y=711),
-        "ดี": NaiveUnit(map=al.mas.chumphae, x=818, y=622),
-        "ดู": NaiveUnit(map=al.mas.lomsak, x=818, y=622),
-        "ใจ": NaiveUnit(map=al.mas.lomsak, x=669, y=618),
-        "ยิน": NaiveUnit(map=al.mas.kasetsombum, x=790, y=655),
-        "โชค": NaiveUnit(),
+        "คน": NaiveUnit(map=al.mas.chaiyaphum, x=20, y=81),
+        "ดี": NaiveUnit(map=al.mas.chumphae, x=118, y=54),
+        "ดู": NaiveUnit(map=al.mas.lomsak, x=20, y=13),
+        "ใจ": NaiveUnit(map=al.mas.phetchabun, x=33, y=32),
+        "ยิน": NaiveUnit(map=al.mas.kasetsombum, x=35, y=20),
+        "ที่": NaiveUnit(map=al.mas.bat_cave, x=2, y=8),
+        "ได้": NaiveUnit(map=al.mas.phitsanulok_sukhothai, x=39, y=12),
+        "เห็น": NaiveUnit(),
+        "โชค": NaiveUnit(map=al.mas.bua_yai, x=64, y=40),
         "มาก": NaiveUnit(),
-        "ได้": NaiveUnit(),
         "ก็": NaiveUnit(),
         "ตาม": NaiveUnit(),
         "เข้า": NaiveUnit(),
         "จำ": NaiveUnit(),
         "ความ": NaiveUnit(),
         "เป็น": NaiveUnit(),
-        "คิด": NaiveUnit(),
-        "เห็น": NaiveUnit(),
+        "คิด": NaiveUnit(map=al.mas.chumphae_khonkaen, x=72, y=74),
         "ว่า": NaiveUnit(),
         "การ": NaiveUnit(),
         "ต้อง": NaiveUnit(),
@@ -43,10 +44,10 @@ def get_naive_units(al):
         "กลุ่ม": NaiveUnit(),
         "ดาว": NaiveUnit(),
         "เทียม": NaiveUnit(),
-        "ตก": NaiveUnit(),
+        "ตก": NaiveUnit(map=al.mas.buengsamphan, x=29, y=11),
         "น้ำ": NaiveUnit(),
         "ฝน": NaiveUnit(),
-        "ปลา": NaiveUnit(),
+        "ปลา": NaiveUnit(map=al.mas.phon, x=16, y=79),
         "ไป": NaiveUnit(),
         "เสาร์": NaiveUnit(),
         "ถึง": NaiveUnit(),
@@ -58,7 +59,6 @@ def get_naive_units(al):
         "อยู่": NaiveUnit(),
         "เดียว": NaiveUnit(),
         "เหมือน": NaiveUnit(),
-        "ที่": NaiveUnit(),
         "อาศัย": NaiveUnit(),
         "ขึ้น": NaiveUnit(),
         "รอด": NaiveUnit(),
@@ -400,11 +400,162 @@ def get_naive_units(al):
         "ข่าว": NaiveUnit(),
         "ฝัน": NaiveUnit(),
         "เที่ยว": NaiveUnit(),
+        "หยุด": NaiveUnit(),
+        "เขต": NaiveUnit(),
+        "มืด": NaiveUnit(),
+        "เช้า": NaiveUnit(),
+        "รอ": NaiveUnit(),
+        "ค่ำ": NaiveUnit(),
+        "แล้ว": NaiveUnit(),
+        "มา": NaiveUnit(),
+        "นี่": NaiveUnit(),
+        "กลาย": NaiveUnit(),
+        "พันธุ์": NaiveUnit(),
     }
 
 
 def get_naive_compounds():
     return [
+        NaiveCompound(
+            english="to mutate",
+            word_1="กลาย",
+            word_2="พันธุ์",
+        ),
+        NaiveCompound(
+            english="to become, change to, turn to",
+            word_1="กลับ",
+            word_2="กลาย",
+        ),
+        NaiveCompound(
+            english="mutation, change",
+            word_1="การ",
+            word_2="กลาย",
+        ),
+        NaiveCompound(
+            english="to change color",
+            word_1="กลาย",
+            word_2="สี",
+        ),
+        NaiveCompound(
+            english="to become, turn into",
+            word_1="กลาย",
+            word_2="เป็น",
+        ),
+        NaiveCompound(
+            english="second",
+            word_1="ที่",
+            word_2="สอง",
+        ),
+        NaiveCompound(
+            english="last, previous",
+            word_1="ที่",
+            word_2="แล้ว",
+        ),
+        NaiveCompound(
+            english="when, while, as",
+            word_1="ขณะ",
+            word_2="ที่",
+        ),
+        NaiveCompound(
+            english="to go to",
+            word_1="ไป",
+            word_2="ที่",
+        ),
+        NaiveCompound(
+            english="that",
+            word_1="ที่",
+            word_2="ว่า",
+        ),
+        NaiveCompound(
+            english="source",
+            word_1="ที่",
+            word_2="มา",
+        ),
+        NaiveCompound(
+            english="here",
+            word_1="ที่",
+            word_2="นี่",
+        ),
+        NaiveCompound(
+            english="good, best",
+            word_1="ที่",
+            word_2="ดี",
+        ),
+        NaiveCompound(
+            english="to be at, stay at, live at",
+            word_1="อยู่",
+            word_2="ที่",
+        ),
+        NaiveCompound(
+            english="that will",
+            word_1="ที่",
+            word_2="จะ",
+        ),
+        NaiveCompound(
+            english="most, maximum, great",
+            word_1="ที่",
+            word_2="สุด",
+        ),
+        NaiveCompound(
+            english="to be something that",
+            word_1="เป็น",
+            word_2="ที่",
+        ),
+        NaiveCompound(
+            english="date (calendar...)",
+            word_1="วัน",
+            word_2="ที่",
+        ),
+        NaiveCompound(
+            english="morning",
+            word_1="เวลา",
+            word_2="เช้า",
+        ),
+        NaiveCompound(
+            english="nighttime",
+            word_1="เวลา",
+            word_2="มืด",
+        ),
+        NaiveCompound(
+            english="timezone",
+            word_1="เขต",
+            word_2="เวลา",
+        ),
+        NaiveCompound(
+            english="stop time",
+            word_1="เวลา",
+            word_2="หยุด",
+        ),
+        NaiveCompound(
+            english="wait time",
+            word_1="เวลา",
+            word_2="รอ",
+        ),
+        NaiveCompound(
+            english="nightfall, dusk",
+            word_1="เวลา",
+            word_2="ค่ำ",
+        ),
+        NaiveCompound(
+            english="birth time",
+            word_1="เวลา",
+            word_2="เกิด",
+        ),
+        NaiveCompound(
+            english="when, whenever",
+            word_1="เวลา",
+            word_2="ใด",
+        ),
+        NaiveCompound(
+            english="at the moment, now",
+            word_1="เวลา",
+            word_2="นี้",
+        ),
+        NaiveCompound(
+            english="at the moment, now",
+            word_1="เวลา",
+            word_2="นี้",
+        ),
         NaiveCompound(
             english="cameraman, photographer",
             word_1="ตา",
@@ -2769,7 +2920,7 @@ def get_naive_compounds():
             english="homeland, hometown, native village", word_1="บ้าน", word_2="เกิด"
         ),
         NaiveCompound(
-            english="to be at home, stay at home", word_1="อยู่", word_2="อยู่"
+            english="to be at home, stay at home", word_1="อยู่", word_2="บ้าน"
         ),
         NaiveCompound(english="country, state, nation", word_1="บ้าน", word_2="เมือง"),
         NaiveCompound(

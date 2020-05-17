@@ -9,7 +9,7 @@ import pygame
 from derive_from_mothermap import mothermap
 from direction import Direction
 # from event import execute_event
-from form_links import PORTAL_WORLD
+from form_links import SPIRIT_WORLD
 from learner import Learner
 from lexicon.items import Word, Letter
 from lexicon.test_services import pick_a_test_for_word, pick_a_test_for_letter
@@ -339,10 +339,10 @@ class Ma(object):
         try:
             return self.ma[y][x]
         except:
-            return None
             # print("The map", self.filename)
             # print(f" only has dimensions ({len(self.ma)}, {len(self.ma[0])})")
             # print(f" and the cell requested is ({x}, {y})")
+            return None
 
     def add_npc(self, npc):
         self.npcs.append(npc)
@@ -360,8 +360,8 @@ class Ma(object):
 
         # 1 - Test for map change
         if cell.goes_to is not None:
-            if cell.goes_to[0] == PORTAL_WORLD:
-                learner.enter_portal_world(al, cell.goes_to[1])
+            if cell.goes_to[0] == SPIRIT_WORLD:
+                learner.enter_spirit_world(al, cell.goes_to[1])
                 return
             else:
                 try:
