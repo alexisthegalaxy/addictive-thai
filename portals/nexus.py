@@ -8,9 +8,17 @@ from math_service.rect import rect_contains_point
 from overworld import Ma
 from portals.definitions import DISTANCE, RANDOM_RANGE
 
-SELECTED_COLOR = (255, 255, 255)
-UNSELECTED_COLOR = (100, 100, 100)
+# SELECTED_COLOR = (255, 255, 255)
+# UNSELECTED_COLOR = (100, 100, 100)
 
+SELECTED_COLOR_CLEANSED = (252, 232, 3)
+UNSELECTED_COLOR_CLEANSED = (115, 111, 69)
+SELECTED_COLOR_CORRUPTED = (155, 0, 179)
+UNSELECTED_COLOR_CORRUPTED = (77, 51, 82)
+
+
+CLEANSED = 0
+CORRUPTED = 1
 
 class Nexus(object):
     def __init__(
@@ -42,7 +50,8 @@ class Nexus(object):
             + random.randint(-RANDOM_RANGE, RANDOM_RANGE)
         )
         self.font = al.ui.fonts.sarabun96
-        self.rendered_letter = self.font.render(thai, True, UNSELECTED_COLOR)
+        self.state = CLEANSED if self.can_exit() else CORRUPTED
+        self.rendered_letter = self.font.render(thai, True, UNSELECTED_COLOR_CLEANSED if self.state == CLEANSED else UNSELECTED_COLOR_CORRUPTED)
         self.width = self.rendered_letter.get_width()
         self.height = self.rendered_letter.get_height()
         self.best_link = None
@@ -55,9 +64,14 @@ class Nexus(object):
         self.al.ui.screen.blit(self.rendered_letter, (x, y))
         if self.show_exit:
             self.draw_exit()
-        if self.best_link and self.al.mesh.selected_nexus == self:
-            best_link_x = self.best_link.screen_x - self.best_link.width / 2 + self.al.mesh.offset.x
-            best_link_y = self.best_link.screen_y - self.best_link.height / 2 + self.al.mesh.offset.y
+        if self.al.mesh.selected_nexus == self:
+            self.draw_best_link_destination(x, y)
+
+    def draw_best_link_destination(self, x, y):
+        link = self.best_link
+        if link:
+            best_link_x = link.screen_x - link.width / 2 + self.al.mesh.offset.x
+            best_link_y = link.screen_y - link.height / 2 + self.al.mesh.offset.y
             intersection_with_screen = get_intersection_with_screen_border(self.al, (x, y), (best_link_x, best_link_y))
             if intersection_with_screen:
                 int_x, int_y = intersection_with_screen
@@ -65,13 +79,16 @@ class Nexus(object):
                     int_x -= 100
                 if int_y == self.al.ui.height:
                     int_y -= 60
+                color = SELECTED_COLOR_CLEANSED if link.state == CLEANSED else SELECTED_COLOR_CORRUPTED
                 draw_box(
                     screen=self.al.ui.screen,
                     fonts=self.al.ui.fonts,
                     font_size=12,
                     x=int_x,
                     y=int_y,
-                    string=self.best_link.thai,
+                    string=link.thai,
+                    default_color=color,
+                    bg=(128, 128, 128),
                 )
 
     def draw_exit(self):
@@ -94,11 +111,11 @@ class Nexus(object):
             if self.al.mesh.selected_nexus:
                 self.al.mesh.selected_nexus.set_selected(False)
             self.al.mesh.selected_nexus = self
-            color = (255, 255, 255)
+            color = SELECTED_COLOR_CLEANSED if self.state == CLEANSED else SELECTED_COLOR_CORRUPTED
             self.al.mesh.goal_offset.x = -self.screen_x + self.al.ui.width / 2
             self.al.mesh.goal_offset.y = -self.screen_y + self.al.ui.height / 2
         else:
-            color = (100, 100, 100)
+            color = UNSELECTED_COLOR_CLEANSED if self.state == CLEANSED else UNSELECTED_COLOR_CORRUPTED
         # self.selected = selected
         self.rendered_letter = self.font.render(self.thai, True, color)
 

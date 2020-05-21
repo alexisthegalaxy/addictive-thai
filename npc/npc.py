@@ -58,6 +58,7 @@ def _can_turn(sprite_type):
             "garbage_3",
             "television_off",
             "boat",
+            "seed",
         ]
         or "spell" in sprite_type
     )

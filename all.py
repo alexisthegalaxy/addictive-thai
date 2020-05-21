@@ -36,6 +36,7 @@ class All:
         self.active_presentation = None
         self.active_naming = None
         self.active_fight = None
+        self.gardening = None
         self.active_consonant_race = None
         self.active_sale = None
         self.dex: Dex = None

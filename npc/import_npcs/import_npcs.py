@@ -1,12 +1,11 @@
 from direction import Direction
-from lexicon.items import Word, Letter
+from lexicon.items import Word
 from models import get_event_status
 from npc.import_npcs.chaiyaphum import chaiyaphum
 from npc.import_npcs.ko_kut import ko_kut
 from npc.import_npcs.ko_mak import ko_mak
 from npc.import_npcs.plane import plane
 from npc.npc import Npc
-from npc.question import Question
 from npc.spell import Spell
 from npc.vendor import Vendor
 

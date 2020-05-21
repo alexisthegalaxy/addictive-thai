@@ -9,9 +9,12 @@ from overworld import Ma
 from portals.compound import Compound
 from portals.coronas import get_coronas
 from portals.definitions import OFFSET_MOVEMENT, DISTANCE
+from portals.fish import Fish
 from portals.nexus import Nexus
 from portals.vocabulary import get_naive_compounds, get_naive_units
 
+
+NUMBER_OF_FISH_SPIRITS = 500
 
 @dataclass
 class UnitWithLinks:
@@ -77,6 +80,7 @@ class Mesh(object):
         self.offset = Point(0, 0)
         self.goal_offset = Point(0, 0)
         self.selected_nexus: Optional[Nexus] = None
+        self.fish_spirits = [Fish(al) for _ in range(NUMBER_OF_FISH_SPIRITS)]
 
     def make_compounds(self):
         compounds = []
@@ -92,6 +96,8 @@ class Mesh(object):
         return compounds
 
     def tick(self):
+        for fish_spirit in self.fish_spirits:
+            fish_spirit.moves(self.al)
         goal_weight = 1
         current_position_weight = 15
         self.offset.x = int(
@@ -259,4 +265,6 @@ class Mesh(object):
 
     def draw(self):
         self.draw_background()
+        for fish_spirit in self.fish_spirits:
+            fish_spirit.draw(self.al)
         self.draw_mesh()

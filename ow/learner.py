@@ -1,7 +1,7 @@
 import pygame
 import time
 
-
+from mechanics.consonant_race.gardening import Gardening
 from models import set_as_active_player
 from movement import Movement
 from ow.direction import Direction, dir_equal, string_from_direction, opposite_direction
@@ -199,25 +199,36 @@ class Learner(object):
 
         return next_next_x, next_next_y
 
-    def start_interacting_with_npcs(self, al):
+    def start_interacting_with_garden(self, al) -> bool:
+        from overworld import CellTypes
+        if al.mas.current_map.get_cell_at(self.x, self.y).typ.name == CellTypes.soil.name:
+            print('is on garden')
+            al.active_gardening = Gardening(al, al.mas.current_map, self.x, self.y)
+            return True
+        return False
+
+    def start_interacting_with_npcs(self, al) -> bool:
         if self.al.active_npc:
             self.al.active_npc.space_interact(al)
-            return
+            return True
 
         next_x, next_y = self.next_position()
         for npc in al.mas.current_map.npcs:
             if npc.x == next_x and npc.y == next_y and not npc.is_silent:
                 npc.space_interact(al)
-                return
+                return True
         next_next_x, next_next_y = self.next_next_position()
         for npc in al.mas.current_map.npcs:
             if npc.x == next_next_x and npc.y == next_next_y and not npc.is_silent:
                 npc.space_interact(al)
-                return
+                return True
+        return False
 
     def start_interacting(self, al):
         al.ui.space = False
-        self.start_interacting_with_npcs(al)
+        has_interacted = self.start_interacting_with_npcs(al)
+        if not has_interacted:
+            self.start_interacting_with_garden(al)
 
     def can_move(self):
         return time.time() - self.last_movement > self.must_wait

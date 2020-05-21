@@ -1,4 +1,8 @@
+import sqlite3
+
+from bag.item import Item
 from direction import Direction
+from models import get_active_learner_id
 from npc.npc import Npc, _process_dialog
 
 
@@ -13,7 +17,8 @@ class Spell(Npc):
             direction=direction,
             sprite=color + '_spell',
             wobble=True,
-            standard_dialog=["The Spell comes closer...", "...and attacks!"],
+            standard_dialog=["The Spell comes closer... and attacks!"],
+            defeat_dialog=["You caught the spell!"],
         )
         self.word = word
 
@@ -27,8 +32,32 @@ class Spell(Npc):
                 self.review_dialog[0] + f" {self.taught.thai} ?"
             )
 
+    def gets_caught(self):
+        self.switch_to_dialog(self.defeat_dialog)
+
     def special_interaction(self, al):
         super().special_interaction(al)
         from lexicon.spell_identification import SpellIdentification
         if self.is_saying_last_sentence():
-            al.active_spell_identification = SpellIdentification(al=al, spell=self)
+            if self.active_dialog == self.defeat_dialog:
+                al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc != self]
+                # TODO USER ITEM
+                al.bag.add_item(Item('ลม', durability=100))
+            else:
+                al.active_spell_identification = SpellIdentification(al=al, spell=self)
+
+
+def get_spells_of_player():
+    """returns all the spells that a player has right now"""
+    CONN = sqlite3.connect("thai.db")
+    CURSOR = CONN.cursor()
+    learner_id = get_active_learner_id()
+    results = list(
+        CURSOR.execute(
+            f"SELECT item_id "
+            f"FROM user_items "
+            f"WHERE user_id = '{learner_id}' AND is_spell and durability > 0"
+        )
+    )
+    return results and results[0]
+

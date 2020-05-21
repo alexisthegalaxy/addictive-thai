@@ -1495,14 +1495,14 @@ class SoundFromThai4(SoundFromThai):
         width = ui.percent_width(0.3)
         height = ui.percent_height(0.1)
         draw_box(
-            screen,
-            fonts,
-            x,
-            y,
-            width,
-            height,
-            "continue",
-            self.selector_on_continue_button,
+            screen=screen,
+            fonts=fonts,
+            x=x,
+            y=y,
+            width=width,
+            height=height,
+            string="continue",
+            selected=self.selector_on_continue_button,
         )
 
         # Draw all the options

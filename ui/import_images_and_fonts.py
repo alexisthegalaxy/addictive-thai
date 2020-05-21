@@ -17,6 +17,7 @@ def npc_sprites():
     # This should be done automatically
     return {
         "sign": pygame.image.load(f"{dir_path}/../npc/sprites/sign.png"),
+        "seed": pygame.image.load(f"{dir_path}/../npc/sprites/seed.png"),
         "bed": pygame.image.load(f"{dir_path}/../npc/sprites/bed.png"),
         "mom_up": pygame.image.load(f"{dir_path}/../npc/sprites/mom_up.png"),
         "mom_down": pygame.image.load(f"{dir_path}/../npc/sprites/mom_down.png"),
@@ -299,6 +300,8 @@ def random_images():
         "lightning_strike_0": pygame.image.load(f"{dir_path}/../images/lightning_strike_0.png"),
         "lightning_strike_1": pygame.image.load(f"{dir_path}/../images/lightning_strike_1.png"),
         "lightning_strike_2": pygame.image.load(f"{dir_path}/../images/lightning_strike_2.png"),
+        "shift_keyboard": pygame.image.load(f"{dir_path}/../images/shift_keyboard.png"),
+        "default_keyboard": pygame.image.load(f"{dir_path}/../images/default_keyboard.png"),
     }
 
 
@@ -379,6 +382,7 @@ def get_sprites():
         "water": pygame.image.load(f"{dir_path}/../ow/sprites/water.bmp"),
         "sea": pygame.image.load(f"{dir_path}/../ow/sprites/sea.bmp"),
         "cave_water": pygame.image.load(f"{dir_path}/../ow/sprites/cave_water.bmp"),
+        "soil": pygame.image.load(f"{dir_path}/../ow/sprites/soil.bmp"),
         "ground": pygame.image.load(f"{dir_path}/../ow/sprites/ground.bmp"),
         "_tall_grass_1": pygame.image.load(
             f"{dir_path}/../ow/sprites/tall_grass_1.bmp"

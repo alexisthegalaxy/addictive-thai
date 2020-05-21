@@ -60,7 +60,7 @@ class SpellIdentification(object):
 
     def draw(self):
         """
-        The showing is taken care of by the tests during the test phases.
+        The drawing of the tests is taken care of by the tests during the test phases.
         """
         self.draw_brain()
 
@@ -77,7 +77,6 @@ class SpellIdentification(object):
             self.al.ui.screen.blit(self.al.ui.images["brain_6"], [x, y])
 
     def interact(self, al):
-        print('yo 123434')
         # if self.step == IdentificationStep.NONE:
         #     if al.ui.space:
         #         al.ui.space = False
@@ -106,77 +105,3 @@ class SpellIdentification(object):
         b = int(self.step.value) + 1
         c = IdentificationStep(int(self.step.value) + 1)
         self.step = IdentificationStep(int(self.step.value) + 1)
-
-    # def goes_to_first_step(self):
-    #     self.step = IdentificationStep.NONE
-#
-#
-# class WordLearning(Learning):
-#     def __init__(self, word: Union[Word, Letter], al, npc):
-#         self.al = al
-#         self.word = word
-#         self.npc = npc
-#         self.step = LearningStep.NONE
-#
-#         self.al.active_presentation = WordPresentation(al, word, from_learning=True)
-#         self.test_1 = ThaiFromEnglish4(al, correct=word, learning=self)
-#         self.test_2 = ThaiFromEnglish4(al, correct=word, learning=self)  # TODO
-#         self.test_3 = ThaiFromEnglish6(al, correct=word, learning=self)
-#         self.test_4 = ThaiFromEnglish4(al, correct=word, learning=self)  # TODO
-#         # self.test_5 = TappingTestSentence(al, correct_word=word, learning=self)
-#         # test_5 is a sentence if possible, a Thai from English 6 otherwise
-#         self.test_5 = pick_sentence_test(al, word, learning=self)
-#         if not self.test_5:
-#             self.test_5 = ThaiFromEnglish6(al, correct=word, learning=self)
-#
-#         play_transformed_thai_word(self.word.thai)
-#
-#
-# class LetterLearning(Learning):
-#     def __init__(self, letter: Letter, al, npc):
-#         self.al = al
-#         self.letter = letter
-#         self.npc = npc
-#         self.step = LearningStep.NONE
-#
-#         self.al.active_presentation = LetterPresentation(al, letter, from_learning=True)
-#         self.test_1 = EnglishLetterFromThai4(self.al, learning=self, letter=self.letter)
-#         play_transformed_thai_word(self.letter.audio)
-#
-#         # remove following
-#         word_containing_letter = Letter.get_readable_word_containing_letter(
-#             self.letter
-#         )
-#
-#     def test_finished(self, failed=False):
-#         """this is triggered by the test when it ends"""
-#         if failed:
-#             self.step = LearningStep.PRESENTATION
-#             self.al.active_test = None
-#         else:
-#             self.goes_to_next_step()
-#             if self.step == LearningStep.TEST2:
-#                 self.al.active_test = ThaiLetterFromEnglish4(
-#                     self.al, correct=self.letter, learning=self
-#                 )
-#             if self.step == LearningStep.TEST3:
-#                 self.al.active_test = EnglishLetterFromThai16(self.al, learning=self, letter=self.letter)
-#             if self.step == LearningStep.TEST4:
-#                 self.al.active_test = ThaiLetterFromEnglish16(
-#                     self.al, correct=self.letter, learning=self
-#                 )
-#             if self.step == LearningStep.TEST5:
-#                 word_containing_letter = Letter.get_readable_word_containing_letter(
-#                     self.letter
-#                 )
-#                 if word_containing_letter:
-#                     self.al.active_test = ThaiLettersFromSound4(
-#                         self.al,
-#                         correct=self.letter,
-#                         word=word_containing_letter,
-#                         learning=self,
-#                     )
-#                 else:
-#                     self.al.active_test = ThaiLetterFromEnglish16(
-#                         self.al, correct=self.letter, learning=self
-#                     )

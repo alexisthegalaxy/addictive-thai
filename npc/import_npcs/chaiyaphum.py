@@ -77,6 +77,20 @@ def chaiyaphum_learner_house(al):
     add_npc(
         Npc(
             al=al,
+            name="seed",
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            x=32,
+            y=101,
+            sprite="seed",
+            direction=Direction.LEFT,
+            standard_dialog=[
+                "Seed: I'm growing!",
+            ],
+        )
+    )
+    add_npc(
+        Npc(
+            al=al,
             name="Granny",
             taught=Word.get_by_split_form("คน"),
             ma=al.mas.get_map_from_name("chaiyaphum_house_1"),
@@ -504,8 +518,29 @@ def chaiyaphum_chumphae_path(al):
         Spell(
             al=al,
             ma=al.mas.get_map_from_name("chaiyaphum"),
+            word=Word.get_by_split_form("ลม"),
             x=56,
             y=39,
+            color="white",
+        )
+    )
+    add_npc(
+        Spell(
+            al=al,
+            ma=al.mas.get_map_from_name("chumphae"),
+            word=Word.get_by_split_form("อา-ทิตย์"),
+            x=114,
+            y=82,
+            color="white",
+        )
+    )
+    add_npc(
+        Spell(
+            al=al,
+            ma=al.mas.get_map_from_name("chaiyaphum"),
+            word=Word.get_by_split_form("อา-ทิตย์"),
+            x=33,
+            y=16,
             color="white",
         )
     )

@@ -47,6 +47,7 @@ class CellTypes:
     ground = CellType("土", "ground", (176, 246, 176), True, 0, PATH_COLOR)
     tall_grass = CellType("稂", "_tall_grass", (0, 128, 0), True, 0.1, GRASS_COLOR)
     path = CellType("道", "path", (200, 200, 200), True, 0, PATH_COLOR)
+    soil = CellType("壌", "soil", (114, 99, 76), True, 0, GRASS_COLOR)
     road = CellType("路", "road", (154, 154, 154), True, 0, PATH_COLOR)
     wall = CellType("壁", "wall", (22, 22, 22), False, 0, WALL_COLOR)
     sign = CellType("標", "sign", (71, 71, 71), False, 0, WALL_COLOR)
