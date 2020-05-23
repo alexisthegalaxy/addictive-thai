@@ -1,37 +1,15 @@
 import time
 import pygame
 
-from lexicon.items import Words
 from mechanics.minimap import want_to_launch_map
 
 import os
 
 from profile.profile import save
+from ui.fonts import Fonts
 from ui.import_images_and_fonts import get_sprites, random_images, npc_sprites
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
-
-
-class Fonts(object):
-    def __init__(self):
-        sarabun_path = f"{dir_path}/../fonts/Sarabun.ttf"
-        self.khmer32 = pygame.font.Font(f"{dir_path}/../fonts/Khmer.ttf", 32)
-        self.lao32 = pygame.font.Font(f"{dir_path}/../fonts/Lao.ttf", 32)
-        self.burmese32 = pygame.font.Font(f"{dir_path}/../fonts/ZawgyiOne.ttf", 32)
-        self.sanskrit32 = pygame.font.Font(f"{dir_path}/../fonts/Jaldi.ttf", 32)
-
-        self.sarabun128 = pygame.font.Font(sarabun_path, 128)
-        self.sarabun96 = pygame.font.Font(sarabun_path, 96)
-        self.sarabun64 = pygame.font.Font(sarabun_path, 64)
-        self.sarabun48 = pygame.font.Font(sarabun_path, 48)
-        self.sarabun32 = pygame.font.Font(sarabun_path, 32)
-        self.sarabun28 = pygame.font.Font(sarabun_path, 28)
-        self.sarabun26 = pygame.font.Font(sarabun_path, 26)
-        self.sarabun24 = pygame.font.Font(sarabun_path, 24)
-        self.sarabun22 = pygame.font.Font(sarabun_path, 22)
-        self.sarabun20 = pygame.font.Font(sarabun_path, 20)
-        self.sarabun18 = pygame.font.Font(sarabun_path, 18)
-        self.sarabun16 = pygame.font.Font(sarabun_path, 16)
 
 
 class Ui(object):
@@ -136,6 +114,26 @@ class Ui(object):
     def is_shift(self):
         return self.right_shift or self.left_shift
 
+    def nothing_is_active(self, al):
+        return (
+            al.active_test is None
+            and al.active_sale is None
+            and al.active_npc is None
+            and al.active_learning is None
+            and al.active_spell_identification is None
+            and al.active_presentation is None
+            and al.active_naming is None
+            and al.active_fight is None
+            and al.active_tablet is None
+            and al.active_minimap is None
+            and al.active_consonant_race is None
+            and al.active_sale is None
+            and al.active_gardening is None
+            and not al.learner.in_portal_world
+            and not al.dex.active
+            and not al.lex.active
+        )
+
     def percent_height(self, ratio):
         return int(ratio * self.height)
 
@@ -194,21 +192,26 @@ class Ui(object):
                 if event.key == pygame.K_q:
                     al.ui.q = True
                 if event.key == pygame.K_w:
-                    if al.active_test:
-                        al.ui.w = True
-                    else:
+                    if self.nothing_is_active(al):
                         al.dex.w()
+                    else:
+                        al.ui.w = True
                 if event.key == pygame.K_e:
                     al.ui.e = True
                 if event.key == pygame.K_r:
-                    if al.active_learning or al.active_test:
+                    if self.nothing_is_active(al):
+                        al.learner.hp = 5
+                        al.learner.max_hp = 5
+                        # Words.reset_words(xp=0)
+                        # al.learner.money = 3
+                    else:
                         al.ui.r = True
-                    # Words.reset_words(xp=0)
-                    # al.learner.money = 3
-                    al.learner.hp = 5
-                    al.learner.max_hp = 5
                 if event.key == pygame.K_t:
-                    al.ui.t = True
+                    if self.nothing_is_active(al):
+                        from mechanics.consonant_race.tablet.tablet import Tablet
+                        al.active_tablet = Tablet(al)
+                    else:
+                        al.ui.t = True
                 if event.key == pygame.K_y:
                     al.ui.y = True
                 if event.key == pygame.K_u:
@@ -216,15 +219,15 @@ class Ui(object):
                 if event.key == pygame.K_i:
                     al.ui.i = True
                 if event.key == pygame.K_o:
-                    if al.active_test:
-                        al.ui.o = True
-                    else:
+                    if self.nothing_is_active(al):
                         al.learner.open()
-                if event.key == pygame.K_p:
-                    if al.active_test:
-                        al.ui.p = True
                     else:
+                        al.ui.o = True
+                if event.key == pygame.K_p:
+                    if self.nothing_is_active(al):
                         al.learner.print_location()
+                    else:
+                        al.ui.p = True
                 if event.key == pygame.K_LEFTBRACKET:
                     al.ui.left_bracket = True
                 if event.key == pygame.K_RIGHTBRACKET:
@@ -235,7 +238,7 @@ class Ui(object):
                 if event.key == pygame.K_s:
                     if al.active_test:
                         al.ui.s = True
-                    else:
+                    if self.nothing_is_active(al):
                         save(al)
                 if event.key == pygame.K_d:
                     al.ui.d = True
@@ -252,7 +255,7 @@ class Ui(object):
                 if event.key == pygame.K_l:
                     if al.active_test:
                         al.ui.l = True
-                    else:
+                    if self.nothing_is_active(al):
                         al.lex.l()
                 if event.key == pygame.K_SEMICOLON:
                     al.ui.semicolon = True
@@ -280,11 +283,10 @@ class Ui(object):
                 if event.key == pygame.K_m:
                     if al.active_presentation or al.active_test:
                         al.ui.m = True
-                    else:
-                        if al.active_minimap:
-                            al.active_minimap = None
-                        else:
-                            want_to_launch_map(al, show_learner=True)
+                    if al.active_minimap:
+                        al.active_minimap = None
+                    elif self.nothing_is_active(al):
+                        want_to_launch_map(al, show_learner=True)
                 if event.key == pygame.K_COMMA:
                     al.ui.comma = True
                 if event.key == pygame.K_PERIOD:
@@ -294,8 +296,9 @@ class Ui(object):
                 if event.key == pygame.K_RSHIFT:
                     al.ui.right_shift = True
                 if event.key == pygame.K_u:
-                    al.learner.hp = max(al.learner.hp - 1/8, 0)
-                #     Words.reset_words(xp=100)
+                    if self.nothing_is_active(al):
+                        al.learner.hp = max(al.learner.hp - 1 / 8, 0)
+                        # Words.reset_words(xp=100)
                 if event.key == pygame.K_SPACE:
                     al.ui.space = True
                 if event.key == pygame.K_RETURN:
@@ -313,6 +316,9 @@ class Ui(object):
                         al.ui.escape = False
                     elif al.active_minimap:
                         al.active_minimap = None
+                        al.ui.escape = False
+                    elif al.active_tablet:
+                        al.active_tablet = None
                         al.ui.escape = False
                     elif al.active_npc:
                         al.active_npc = None
@@ -353,4 +359,3 @@ class Ui(object):
                 al.ui.click_up = pygame.mouse.get_pos()
             elif event.type == pygame.MOUSEMOTION:
                 al.ui.hover = pygame.mouse.get_pos()
-

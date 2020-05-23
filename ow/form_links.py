@@ -814,6 +814,13 @@ def form_links(mas):
     mas.banyaeng_cave.get_cell_at(6, 7).goes_to = (mas.banyaeng, 27, 52)
     mas.banyaeng_cave.get_cell_at(16, 11).goes_to = (mas.banyaeng, 37, 56)
 
+    mas.banyaeng.get_cell_at(20, 43).goes_to = (mas.banyaeng_underground_forest, 12, 5)
+    mas.banyaeng_underground_forest.get_cell_at(12, 6).goes_to = (mas.banyaeng, 20, 44)
+    mas.banyaeng.get_cell_at(22, 48).goes_to = (mas.banyaeng_underground_forest, 14, 10)
+    mas.banyaeng_underground_forest.get_cell_at(14, 11).goes_to = (mas.banyaeng, 22, 49)
+    mas.banyaeng.get_cell_at(17, 42).goes_to = (mas.banyaeng_underground_forest, 9, 4)
+    mas.banyaeng_underground_forest.get_cell_at(9, 5).goes_to = (mas.banyaeng, 17, 43)
+
     # Lomsak Labyrinth
     mas.lomsak_labyrinth.get_cell_at(48, 12).goes_to = (
         mas.lomsak_labyrinth_house_1,

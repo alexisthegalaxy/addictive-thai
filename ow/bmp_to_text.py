@@ -51,6 +51,7 @@ to_convert = [
     "inn_ko_kut",
     "ko_kut_cave_1",
     "banyaeng_cave",
+    "banyaeng_underground_forest",
     "phetchabun_school",
     "buengsamphan_cave",
     "buengsamphan_chaiyaphum_cave",

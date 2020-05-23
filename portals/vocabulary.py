@@ -411,11 +411,29 @@ def get_naive_units(al):
         "นี่": NaiveUnit(),
         "กลาย": NaiveUnit(),
         "พันธุ์": NaiveUnit(),
+        "ประกอบ": NaiveUnit(),
+        "องค์": NaiveUnit(),
+        "ด้วย": NaiveUnit(),
     }
 
 
 def get_naive_compounds():
     return [
+        NaiveCompound(
+            english="without trouble",
+            word_1="ด้วย",
+            word_2="ดี",
+        ),
+        NaiveCompound(
+            english="component, constituent, ingredient",
+            word_1="องค์",
+            word_2="ประกอบ",
+        ),
+        NaiveCompound(
+            english="to consist of, be composed of",
+            word_1="ประกอบ",
+            word_2="ด้วย",
+        ),
         NaiveCompound(
             english="to mutate",
             word_1="กลาย",
@@ -2948,6 +2966,7 @@ def get_naive_compounds():
         NaiveCompound(english="widow", word_1="แม่", word_2="หม้าย"),
         NaiveCompound(english="hen", word_1="แม่", word_2="ไก่"),
         NaiveCompound(english="ant nest", word_1="รัง", word_2="มด"),
+        NaiveCompound(english="uterus, womb", word_1="มด", word_2="ลูก"),
         NaiveCompound(english="red ant", word_1="มด", word_2="แดง"),
         NaiveCompound(english="witch", word_1="แม่", word_2="มด"),
         NaiveCompound(english="nun", word_1="แม่", word_2="ชี"),

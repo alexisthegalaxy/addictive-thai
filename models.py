@@ -314,25 +314,23 @@ def load_bag(al: "All"):
     learner_id = get_active_learner_id()
     results = list(
         CURSOR.execute(
-            f"SELECT item.id, item.name, item.description, item.price, user_item.quantity "
+            f"SELECT item.id, item.name, item.description, item.price, user_item.quantity, item.is_spell "
             f"FROM items item "
             f"JOIN user_items user_item "
             f"ON item.id = user_item.item_id "
             f"WHERE user_item.user_id = {learner_id}"
         )
     )
-    items = [
-        Item(
+    for item in results:
+        item_to_add = Item(
             name_id=item[0],
             name=item[1],
             description=item[2],
             price=item[3],
             amount=item[4],
+            is_spell=item[5],
         )
-        for item in results
-    ]
-    for item in items:
-        al.bag.items.append(item)
+        al.bag.add_item(item_to_add)
 
 
 def get_item_from_name(item_name: str) -> Optional[Item]:

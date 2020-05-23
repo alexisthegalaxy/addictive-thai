@@ -216,6 +216,7 @@ def npc_sprites():
         "purple_spell": pygame.image.load(f"{dir_path}/../npc/sprites/purple_spell.png"),
         "teal_spell": pygame.image.load(f"{dir_path}/../npc/sprites/teal_spell.png"),
         "blue_spell": pygame.image.load(f"{dir_path}/../npc/sprites/blue_spell.png"),
+        "spell_blue_half": pygame.image.load(f"{dir_path}/../npc/sprites/spell_blue_half.png"),
         "spirit_bird": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_bird.png"),
         "spirit_bird_invisible": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_bird_invisible.png"),
         "spirit_gecko": pygame.image.load(f"{dir_path}/../npc/sprites/spirit_gecko.png"),
@@ -412,8 +413,8 @@ def get_sprites():
         "field": pygame.image.load(f"{dir_path}/../ow/sprites/field.bmp"),
         "plane_seat": pygame.image.load(f"{dir_path}/../ow/sprites/plane_seat.bmp"),
         "plane_floor": pygame.image.load(f"{dir_path}/../ow/sprites/plane_floor.bmp"),
-        "big_tree": pygame.image.load(f"{dir_path}/../ow/sprites/big_tree.bmp"),
         "house_4x4": pygame.image.load(f"{dir_path}/../ow/sprites/house_4x4.png"),
         "portal_3x4": pygame.image.load(f"{dir_path}/../ow/sprites/portal_3x4.png"),
         "low_house_4x3": pygame.image.load(f"{dir_path}/../ow/sprites/low_house_4x3.png"),
+        "tree_gate_3x3": pygame.image.load(f"{dir_path}/../ow/sprites/tree_gate_3x3.png"),
     }

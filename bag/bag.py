@@ -14,6 +14,10 @@ class Compartment(Enum):
 class Bag(object):
     def __init__(self):
         self.items = []
+        self.spells = []
+
+    def reset_spells(self):
+        self.spells = [item for item in self.items if item.is_spell and item.amount > 0]
 
     def add_item(self, item_to_add: Item, quantity=0):
         item_added = False
@@ -25,11 +29,14 @@ class Bag(object):
             self.items.append(item_to_add)
             if quantity:
                 self.items[-1].amount = quantity
+        if item_to_add.is_spell:
+            self.reset_spells()
 
     def reduce_item_quantity(self, item_name_id: str, quantity=1):
         for item in self.items:
             if item.name_id == item_name_id:
                 item.amount -= quantity
+        self.reset_spells()
 
     def get_quantities(self, item_list: List[Item]) -> List[int]:
         list_to_return = []
@@ -48,6 +55,3 @@ class Bag(object):
             if item_in_bag.name_id == item_name:
                 return item_in_bag.amount
         return 0
-
-
-

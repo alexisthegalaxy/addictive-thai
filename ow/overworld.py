@@ -151,6 +151,7 @@ class CellTypes:
     house_4x4 = CellType("泰", "house_4x4", (100, 100, 100), False, 0, WALL_COLOR, special_shape="0000_0000_0000_0100", special_offset=(1, 2))
     portal_3x4 = CellType("門", "portal_3x4", (255, 100, 100), True, 0, WALL_COLOR, special_shape="101_000_010_010", special_offset=(1, 2))
     low_house_4x3 = CellType("低", "low_house_4x3", (100, 100, 101), False, 0, WALL_COLOR, special_shape="0000_0000_0100", special_offset=(1, 1))
+    tree_gate_3x3 = CellType("柏", "tree_gate_3x3", (64, 130, 64), True, 0, TREE_COLOR, special_shape="000_010_010", special_offset=(1, 1))
     big_tree = CellType("杉", "big_tree", (58, 78, 22), False, 0, TREE_COLOR, special_shape="00_00", special_offset=(0, 0))
 
     none = CellType("無", "none", (0, 0, 0), False, 0, (0, 0, 0))
@@ -424,7 +425,7 @@ class Mas(object):
         self.buengsamphan_mountain = Ma(
             filename="buengsamphan_mountain", mas=self, x_shift=719, y_shift=689
         )
-        self.lomsak = Ma(filename="lomsak", mas=self, x_shift=676, y_shift=543)
+        self.lomsak = Ma(filename="lomsak", mas=self, x_shift=676 - 6, y_shift=543)
         self.cat_cove = Ma(filename="cat_cove", mas=self, x_shift=710, y_shift=616)
         self.cat_cove_hidden_house = Ma(
             filename="cat_cove_hidden_house", mas=self, x_shift=720, y_shift=611
@@ -598,6 +599,7 @@ class Mas(object):
         self.buengsamphan_chaiyaphum_cave = Ma(filename="buengsamphan_chaiyaphum_cave", mas=self)
         self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", mas=self)
         self.banyaeng_cave = Ma(filename="banyaeng_cave", mas=self)
+        self.banyaeng_underground_forest = Ma(filename="banyaeng_underground_forest", mas=self)
         self.phetchabun_school = Ma(filename="phetchabun_school", mas=self)
         self.phetchabun_cave = Ma(filename="phetchabun_cave", mas=self)
         self.phetchabun_house_1 = Ma(filename="phetchabun_house_1", mas=self)

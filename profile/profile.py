@@ -1,10 +1,8 @@
 from datetime import datetime
 from time import mktime
 
-from direction import Direction
-from follower import Follower
 from models import save_user_to_db, load_current_x_y_money_hp_ma, save_user_details_to_db, \
-    load_user_details, save_bag, load_bag, get_event_status
+    load_user_details, save_bag, load_bag
 from sounds.play_sound import play_thai_word
 
 

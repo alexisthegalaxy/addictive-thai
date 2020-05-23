@@ -1,3 +1,4 @@
+from bag.item import Item
 from direction import Direction
 from lexicon.items import Word
 from models import get_event_status
@@ -1728,27 +1729,33 @@ def lomsak_labyrinth(al):
                 "Everybody likes them around here.",
             ],
         ),
-        # Vendor(
-        #     al=al,
-        #     name="TODOAlexis",
-        #     ma=al.mas.get_map_from_name("lomsak_labyrinth_shop"),
-        #     x=8,
-        #     y=12,
-        #     sprite="old_woman",
-        #     direction=Direction.LEFT,
-        #     vendor_dialog_beginning=[
-        #         "There are no inns around here young one.",
-        #         "If you don't wanna travel back all the way to Lomsak",
-        #         "you can buy some apples and get your health back here.",
-        #     ],
-        #     sold_items=[
-        #         Item(
-        #             name="apple",
-        #             description="looks like a normal apple.",
-        #             price=8,
-        #         ),
-        #     ],
-        # ),
+        Vendor(
+            al=al,
+            name="vendor",
+            ma=al.mas.get_map_from_name("labyrinth_shop"),
+            x=8,
+            y=11,
+            sprite="old_woman",
+            direction=Direction.LEFT,
+            vendor_dialog_beginning=[
+                "There are no inns around here young one.",
+                "If you don't wanna travel back all the way to Lomsak",
+                "you can buy some apples and get your health back here.",
+            ],
+            sold_items=["lomsak_apple"],
+        ),
+        Npc(
+            al=al,
+            name="first treasure chest",
+            ma=al.mas.get_map_from_name("labyrinth_shop"),
+            x=11,
+            y=10,
+            sprite="chest_closed",
+            direction=Direction.DOWN,
+            standard_dialog=[
+                "You can't open the chest.",
+            ],
+        ),
         Npc(
             al=al,
             name="the labyrinth boy",
@@ -2815,7 +2822,7 @@ def banyaeng(al):
             standard_dialog=[
                 "The goal of meditation is not to stop thinking,",
                 "it's to be able to control your thoughts.",
-                "Rather than being the puppet of your thoughts, you used thoughts like a tool.",
+                "Rather than being the puppet of your thoughts, you use thoughts like a tool.",
                 "Wanna learn to think?",
             ],
             defeat_dialog=[
@@ -2823,6 +2830,17 @@ def banyaeng(al):
                 "Thinking should be a tool for you - you should not be slave of your thinking.",
                 "It's just one tool in your toolkit.",
             ],
+        ),
+        Npc(
+            al=al,
+            name="banyaeng levitating monk",
+            ma=al.mas.get_map_from_name("banyaeng"),
+            x=50,
+            y=12,
+            sprite="monk_levitating",
+            direction=Direction.DOWN,
+            standard_dialog=["..."],
+            wobble=True,
         ),
         Npc(
             al=al,

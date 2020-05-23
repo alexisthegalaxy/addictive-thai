@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import time
-
 from all import All, special_loading
 from lexicon.dex import Dex, Lex
 import pygame
@@ -49,6 +47,9 @@ def main_interact(al: All):
     if al.lex.active:
         ow_frozen = True
         al.lex.interact()
+    if al.active_tablet:
+        ow_frozen = True
+        al.active_tablet.interact(al)
     if al.active_npc:
         ow_frozen = True
         if al.ui.space:
@@ -102,6 +103,8 @@ def main_draw(al: All):
             al.lex.draw()
         if al.active_minimap:
             al.active_minimap.draw()
+        if al.active_tablet:
+            al.active_tablet.draw()
         if al.active_spell_identification:
             al.active_spell_identification.draw()
         if not al.active_fight and not al.active_consonant_race:

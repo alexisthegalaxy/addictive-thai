@@ -1,5 +1,4 @@
 import sqlite3
-from bag.bag import Bag
 from direction import Direction
 from event import execute_event
 from follower import Follower
@@ -20,6 +19,8 @@ class All:
         cell_types: "CellType",
     ):
         from lexicon.tests.tests import Test
+        from mechanics.consonant_race.tablet.tablet import Tablet
+        from bag.bag import Bag
 
         self.mas = mas
         form_links(self.mas)
@@ -36,13 +37,14 @@ class All:
         self.active_presentation = None
         self.active_naming = None
         self.active_fight = None
-        self.gardening = None
+        self.active_tablet: Tablet = None
+        self.active_minimap: Minimap = None
         self.active_consonant_race = None
         self.active_sale = None
+        self.active_gardening = None
         self.dex: Dex = None
         self.lex: Lex = None
         self.mesh: Mesh = None
-        self.active_minimap: Minimap = None
         self.bag: Bag = Bag()
         self.weather = Weather(al=self)
 

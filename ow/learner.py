@@ -1,3 +1,4 @@
+import math
 import pygame
 import time
 
@@ -40,6 +41,33 @@ class Learner(object):
         for follower in self.followers:
             follower.draw(al)
 
+    def draw_spell_under_player(self, al, player_x, player_y):
+        PLAYER_WIDTH = 80
+        SPELL_WIDTH = 40
+        if al.bag.spells:
+            angle = math.pi * 2 / len(al.bag.spells)
+            time_offset = time.time()
+            for i, spell in enumerate(al.bag.spells):
+                spell_angle = angle * i
+                x = PLAYER_WIDTH / 2 - SPELL_WIDTH / 2 + player_x + math.cos(spell_angle + time_offset) * 70
+                y = 15 + player_y + math.sin(spell_angle + time_offset) * 30 + math.cos(i + time_offset * 3.5) * 5
+                if y < player_y:
+                    self.al.ui.screen.blit(self.al.ui.npc_sprites["spell_blue_half"], [x, y])
+
+    def draw_spell_over_player(self, al, player_x, player_y):
+        PLAYER_WIDTH = 80
+        SPELL_WIDTH = 40
+        if al.bag.spells:
+            angle = math.pi * 2 / len(al.bag.spells)
+            time_offset = time.time()
+            for i, spell in enumerate(al.bag.spells):
+                spell_angle = angle * i
+                x = PLAYER_WIDTH / 2 - SPELL_WIDTH / 2 + player_x + math.cos(spell_angle + time_offset) * 70
+                y = 15 + player_y + math.sin(spell_angle + time_offset) * 30 + math.cos(i + time_offset * 3.5) * 5
+                if y > player_y:
+                    self.al.ui.screen.blit(self.al.ui.npc_sprites["spell_blue_half"], [x, y])
+
+
     def draw(self, al):
         self.draw_followers(al)
         cell_size = al.ui.cell_size
@@ -55,6 +83,7 @@ class Learner(object):
 
         x += al.weather.get_offset_x()
         y += al.weather.get_offset_y()
+        self.draw_spell_under_player(al, player_x=x, player_y=y)
 
         sprite_name = f"{self.sprite}_{string_from_direction(self.direction)}"
         if sprite_name in al.ui.npc_sprites:
@@ -66,6 +95,7 @@ class Learner(object):
                 self.color,
                 pygame.Rect(x, y, al.ui.cell_size, al.ui.cell_size),
             )
+        self.draw_spell_over_player(al, x, y)
 
     def draw_money(self, al, x=None, y=None):
         color = (0, 0, 0)
