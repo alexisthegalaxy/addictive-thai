@@ -7,7 +7,7 @@ from ui.keyboard import Keyboard
 class Tablet(object):
     def __init__(self, al):
         self.al = al
-        self.keyboard = Keyboard(ui=al.ui, y=al.ui.percent_height(0.62))
+        self.keyboard = Keyboard(ui=al.ui, y=al.ui.percent_height(0.64))
         self.answer = ""  # the string being typed
         self.rendered_answer = None
 
@@ -26,12 +26,12 @@ class Tablet(object):
         screen = ui.screen
 
         # Draw the background
-        self.draw_background()
+        # self.draw_background()
 
         # Draw answer
         if self.rendered_answer:
             x = ui.percent_width(0.5) - self.rendered_answer.get_width() / 2
-            y = ui.percent_height(0.5)
+            y = ui.percent_height(0.55)
             screen.blit(
                 self.rendered_answer, (x, y)
             )
@@ -48,17 +48,24 @@ class Tablet(object):
             self.rendered_answer = None
 
     def validate_spell(self):
-        for spell in self.al.bag.spells:
-            if spell.name == self.answer:
-                spell_action(self.al, spell.name)
-                self.al.bag.reduce_item_quantity(spell.name)
-                self.close()
-                return
+        spell_testing = True
+        if spell_testing:
+            spell_action(self.al, self.answer)
+            self.close()
+        else:
+            for spell in self.al.bag.spells:
+                if spell.name == self.answer:
+                    spell_action(self.al, spell.name)
+                    self.al.bag.reduce_item_quantity(spell.name)
+                    self.close()
+                    return
         # if no spell was found:
         print('self.answer', self.answer)
+        if self.answer == "":
+            self.close()
 
     def close(self):
-        self.al.close = None
+        self.al.active_tablet = None
 
     def interact(self, al):
         if al.ui.enter:

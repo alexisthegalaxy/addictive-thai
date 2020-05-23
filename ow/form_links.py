@@ -36,7 +36,8 @@ def form_links(mas):
     mas.chumphae.get_cell_at(124, 81).goes_to = (mas.chaiyaphum, 43, 15)
     # gateways
     mas.chumphae.get_cell_at(118, 54).goes_to = (SPIRIT_WORLD, "ดี")
-    mas.kasetsombum.get_cell_at(35, 20).goes_to = (SPIRIT_WORLD, "ยิน")
+    mas.kasetsombun.get_cell_at(35, 20).goes_to = (SPIRIT_WORLD, "ยิน")
+    mas.cat_cove_hidden_house.get_cell_at(31, 6).goes_to = (SPIRIT_WORLD, "ก็")
     mas.chaiyaphum.get_cell_at(20, 81).goes_to = (SPIRIT_WORLD, "คน")
     mas.lomsak.get_cell_at(20, 13).goes_to = (SPIRIT_WORLD, "ดู")
     mas.phetchabun.get_cell_at(33, 32).goes_to = (SPIRIT_WORLD, "ใจ")
@@ -124,11 +125,11 @@ def form_links(mas):
     mas.chumphae.get_cell_at(118, 73).goes_to = (mas.chumphae_house3, 7, 12)
 
     mas.chumphae.get_cell_at(97, 77).goes_to = (
-        mas.chumphae_kasetsombum_cave,
+        mas.chumphae_kasetsombun_cave,
         19,
         4,
     )
-    mas.chumphae_kasetsombum_cave.get_cell_at(19, 5).goes_to = (
+    mas.chumphae_kasetsombun_cave.get_cell_at(19, 5).goes_to = (
         mas.chumphae,
         97,
         78,
@@ -229,10 +230,10 @@ def form_links(mas):
     mas.cat_cove_hidden_shop.get_cell_at(13, 25).goes_to = (mas.cat_cove_hidden_house, 40, 11)
 
     mas.cat_cove.get_cell_at(25, 10).goes_to = (mas.cat_cave_2, 8, 17)
-    mas.cat_cave_2.get_cell_at(54, 13).goes_to = (mas.kasetsombum_temple, 33, 5)
-    mas.kasetsombum_temple.get_cell_at(33, 4).goes_to = (mas.cat_cave_2, 54, 12)
+    mas.cat_cave_2.get_cell_at(54, 13).goes_to = (mas.kasetsombun_temple, 33, 5)
+    mas.kasetsombun_temple.get_cell_at(33, 4).goes_to = (mas.cat_cave_2, 54, 12)
     mas.cat_cave_2.get_cell_at(43, 8).goes_to = (mas.cat_cave_2, 54, 8)
-    mas.kasetsombum_temple.get_cell_at(18, 4).goes_to = (mas.cat_cave_2, 39, 19)
+    mas.kasetsombun_temple.get_cell_at(18, 4).goes_to = (mas.cat_cave_2, 39, 19)
     mas.cat_cave_2.get_cell_at(27, 11).goes_to = (
         mas.cat_cove_hidden_house,
         34,
@@ -881,51 +882,51 @@ def form_links(mas):
     mas.banyaeng.get_cell_at(31, 9).goes_to = (mas.banyaeng_house_3, 5, 12)
     mas.banyaeng_house_3.get_cell_at(5, 13).goes_to = (mas.banyaeng, 31, 10)
 
-    mas.chumphae_kasetsombum_cave.get_cell_at(18, 14).goes_to = (
-        mas.kasetsombum,
+    mas.chumphae_kasetsombun_cave.get_cell_at(18, 14).goes_to = (
+        mas.kasetsombun,
         34,
         15,
     )
-    mas.kasetsombum.get_cell_at(34, 14).goes_to = (
-        mas.chumphae_kasetsombum_cave,
+    mas.kasetsombun.get_cell_at(34, 14).goes_to = (
+        mas.chumphae_kasetsombun_cave,
         18,
         13,
     )
-    mas.kasetsombum.get_cell_at(8, 8).goes_to = (mas.kasetsombum_cave, 15, 9)
-    mas.kasetsombum_cave.get_cell_at(15, 10).goes_to = (mas.kasetsombum, 8, 9)
-    mas.kasetsombum_cave.get_cell_at(5, 4).goes_to = (
-        mas.kasetsombum_temple,
+    mas.kasetsombun.get_cell_at(8, 8).goes_to = (mas.kasetsombun_cave, 15, 9)
+    mas.kasetsombun_cave.get_cell_at(15, 10).goes_to = (mas.kasetsombun, 8, 9)
+    mas.kasetsombun_cave.get_cell_at(5, 4).goes_to = (
+        mas.kasetsombun_temple,
         11,
         14,
     )
-    mas.kasetsombum_temple.get_cell_at(11, 13).goes_to = (
-        mas.kasetsombum_cave,
+    mas.kasetsombun_temple.get_cell_at(11, 13).goes_to = (
+        mas.kasetsombun_cave,
         5,
         3,
     )
-    mas.kasetsombum.get_cell_at(17, 19).goes_to = (mas.inn_kasetsombum, 4, 7)
-    mas.inn_kasetsombum.get_cell_at(4, 8).goes_to = (mas.kasetsombum, 17, 20)
-    mas.kasetsombum_temple.get_cell_at(30, 8).goes_to = (
-        mas.kasetsombum_temple_temple,
+    mas.kasetsombun.get_cell_at(17, 19).goes_to = (mas.inn_kasetsombun, 4, 7)
+    mas.inn_kasetsombun.get_cell_at(4, 8).goes_to = (mas.kasetsombun, 17, 20)
+    mas.kasetsombun_temple.get_cell_at(30, 8).goes_to = (
+        mas.kasetsombun_temple_temple,
         13,
         24,
     )
-    mas.kasetsombum_temple_temple.get_cell_at(13, 25).goes_to = (
-        mas.kasetsombum_temple,
+    mas.kasetsombun_temple_temple.get_cell_at(13, 25).goes_to = (
+        mas.kasetsombun_temple,
         30,
         9,
     )
 
-    mas.kasetsombum.get_cell_at(15, 10).goes_to = (mas.kasetsombum_house1, 7, 12)
-    mas.kasetsombum_house1.get_cell_at(7, 13).goes_to = (mas.kasetsombum, 15, 11)
-    mas.kasetsombum.get_cell_at(22, 20).goes_to = (mas.kasetsombum_house2, 7, 12)
-    mas.kasetsombum_house2.get_cell_at(7, 13).goes_to = (mas.kasetsombum, 22, 21)
-    mas.kasetsombum.get_cell_at(25, 15).goes_to = (mas.kasetsombum_house3, 5, 12)
-    mas.kasetsombum_house3.get_cell_at(5, 13).goes_to = (mas.kasetsombum, 25, 16)
-    mas.kasetsombum.get_cell_at(12, 18).goes_to = (mas.kasetsombum_school, 13, 24)
-    mas.kasetsombum_school.get_cell_at(13, 25).goes_to = (mas.kasetsombum, 12, 19)
-    mas.kasetsombum.get_cell_at(20, 14).goes_to = (mas.kasetsombum_shop, 5, 12)
-    mas.kasetsombum_shop.get_cell_at(5, 13).goes_to = (mas.kasetsombum, 20, 15)
+    mas.kasetsombun.get_cell_at(15, 10).goes_to = (mas.kasetsombun_house1, 7, 12)
+    mas.kasetsombun_house1.get_cell_at(7, 13).goes_to = (mas.kasetsombun, 15, 11)
+    mas.kasetsombun.get_cell_at(22, 20).goes_to = (mas.kasetsombun_house2, 7, 12)
+    mas.kasetsombun_house2.get_cell_at(7, 13).goes_to = (mas.kasetsombun, 22, 21)
+    mas.kasetsombun.get_cell_at(25, 15).goes_to = (mas.kasetsombun_house3, 5, 12)
+    mas.kasetsombun_house3.get_cell_at(5, 13).goes_to = (mas.kasetsombun, 25, 16)
+    mas.kasetsombun.get_cell_at(12, 18).goes_to = (mas.kasetsombun_school, 13, 24)
+    mas.kasetsombun_school.get_cell_at(13, 25).goes_to = (mas.kasetsombun, 12, 19)
+    mas.kasetsombun.get_cell_at(20, 14).goes_to = (mas.kasetsombun_shop, 5, 12)
+    mas.kasetsombun_shop.get_cell_at(5, 13).goes_to = (mas.kasetsombun, 20, 15)
 
     mas.buengsamphan.get_cell_at(78, 19).goes_to = (
         mas.buengsamphan_chaiyaphum,

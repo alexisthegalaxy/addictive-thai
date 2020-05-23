@@ -521,7 +521,6 @@ def chaiyaphum_chumphae_path(al):
             word=Word.get_by_split_form("ลม"),
             x=56,
             y=39,
-            color="white",
         )
     )
     add_npc(
@@ -531,7 +530,6 @@ def chaiyaphum_chumphae_path(al):
             word=Word.get_by_split_form("อา-ทิตย์"),
             x=114,
             y=82,
-            color="white",
         )
     )
     add_npc(
@@ -541,7 +539,6 @@ def chaiyaphum_chumphae_path(al):
             word=Word.get_by_split_form("อา-ทิตย์"),
             x=33,
             y=16,
-            color="white",
         )
     )
     add_npc(

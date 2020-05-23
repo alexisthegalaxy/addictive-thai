@@ -207,12 +207,10 @@ class Ui(object):
                     else:
                         al.ui.r = True
                 if event.key == pygame.K_t:
-                    if self.nothing_is_active(al):
-                        from mechanics.consonant_race.tablet.tablet import Tablet
-                        al.active_tablet = Tablet(al)
-                    else:
-                        al.ui.t = True
+                    al.ui.t = True
                 if event.key == pygame.K_y:
+                    from bag.item import Item
+                    al.bag.add_item(Item('ลม', durability=100), quantity=1)
                     al.ui.y = True
                 if event.key == pygame.K_u:
                     al.ui.u = True
@@ -236,10 +234,10 @@ class Ui(object):
                 if event.key == pygame.K_a:
                     al.ui.a = True
                 if event.key == pygame.K_s:
-                    if al.active_test:
-                        al.ui.s = True
                     if self.nothing_is_active(al):
                         save(al)
+                    else:
+                        al.ui.s = True
                 if event.key == pygame.K_d:
                     al.ui.d = True
                 if event.key == pygame.K_f:
@@ -281,12 +279,14 @@ class Ui(object):
                 if event.key == pygame.K_n:
                     al.ui.n = True
                 if event.key == pygame.K_m:
-                    if al.active_presentation or al.active_test:
-                        al.ui.m = True
                     if al.active_minimap:
                         al.active_minimap = None
                     elif self.nothing_is_active(al):
                         want_to_launch_map(al, show_learner=True)
+                    elif al.active_minimap:
+                        al.active_minimap = None
+                    else:
+                        al.ui.m = True
                 if event.key == pygame.K_COMMA:
                     al.ui.comma = True
                 if event.key == pygame.K_PERIOD:
@@ -302,7 +302,11 @@ class Ui(object):
                 if event.key == pygame.K_SPACE:
                     al.ui.space = True
                 if event.key == pygame.K_RETURN:
-                    al.ui.enter = True
+                    if self.nothing_is_active(al):
+                        from mechanics.consonant_race.tablet.tablet import Tablet
+                        al.active_tablet = Tablet(al)
+                    else:
+                        al.ui.enter = True
                 if event.key == pygame.K_ESCAPE:
                     # TODO All of this should be processed after all the al.interact
                     #  so that each component can have its own way of dealing with the escape key
@@ -310,9 +314,13 @@ class Ui(object):
                     al.ui.escape = True
                     if al.active_test:
                         al.active_test = None
+                        al.active_learning = None
+                        al.active_npc = None
                         al.ui.escape = False
                     if al.active_learning:
                         al.active_learning = None
+                        al.active_test = None
+                        al.active_npc = None
                         al.ui.escape = False
                     elif al.active_minimap:
                         al.active_minimap = None

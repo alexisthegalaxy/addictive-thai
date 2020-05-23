@@ -83,6 +83,7 @@ class Learning(object):
                 al.active_presentation.interact()
         if self.al.ui.escape:
             al.active_learning = None
+            al.active_npc = None
             self.al.ui.escape = False
 
     def goes_to_next_step(self):

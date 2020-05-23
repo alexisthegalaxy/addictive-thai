@@ -170,14 +170,14 @@ class WordPresentation(Presentation):
 
         if self.from_dex:
             x = ui.percent_width(0.26)
-            y += ui.percent_height(0.10)
+            y += ui.percent_height(0.37)
             s = f"Level: {self.presented.level}  XP: {self.presented.total_xp}"
             screen.blit(ui.fonts.sarabun16.render(s, True, (0, 0, 0)), (x, y))
 
         try:
             sentence = self.sentences[self.selected_sentence_index]
             x = ui.percent_width(0.15)
-            y += ui.percent_height(0.06)
+            y = ui.percent_height(0.37)
             s = f"Sentences ({self.selected_sentence_index + 1}/{len(self.sentences)})"
             screen.blit(ui.fonts.sarabun48.render(s, True, (0, 0, 0)), (x, y))
 

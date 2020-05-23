@@ -433,8 +433,8 @@ class Mas(object):
         self.cat_cove_hidden_shop = Ma(
             filename="cat_cove_hidden_shop", mas=self,
         )
-        self.kasetsombum = Ma(
-            filename="kasetsombum", mas=self, x_shift=761, y_shift=635
+        self.kasetsombun = Ma(
+            filename="kasetsombun", mas=self, x_shift=761, y_shift=635
         )
         self.phetchabun = Ma(filename="phetchabun", mas=self, x_shift=639, y_shift=572)
         self.banyaeng = Ma(filename="banyaeng", mas=self, x_shift=599, y_shift=578)
@@ -470,216 +470,216 @@ class Mas(object):
         self.ko_chang = Ma(filename="ko_chang", mas=self, x_shift=802, y_shift=1263)
 
         # inns
-        self.inn1 = Ma(filename="inn1", mas=self, parent=self.chumphae)
-        self.inn2 = Ma(filename="inn2", mas=self, parent=self.lomsak)
-        self.inn_khonkaen = Ma(filename="inn_khonkaen", mas=self, parent=self.khonkaen)
+        self.inn1 = Ma(filename="inn1", mas=self, parent=self.chumphae, inside=True)
+        self.inn2 = Ma(filename="inn2", mas=self, parent=self.lomsak, inside=True)
+        self.inn_khonkaen = Ma(filename="inn_khonkaen", mas=self, parent=self.khonkaen, inside=True)
         self.inn_buengsamphan = Ma(
-            filename="inn_buengsamphan", mas=self, parent=self.buengsamphan
+            filename="inn_buengsamphan", mas=self, parent=self.buengsamphan, inside=True
         )
-        self.inn_banyaeng = Ma(filename="inn_banyaeng", mas=self)
-        self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", mas=self)
-        self.inn_chumsaeng = Ma(filename="inn_chumsaeng", mas=self)
-        self.inn_phetchabun = Ma(filename="inn_phetchabun", mas=self)
-        self.inn_phitsanulok = Ma(filename="inn_phitsanulok", mas=self)
-        self.inn_phitsanulok_2 = Ma(filename="inn_phitsanulok_2", mas=self)
-        self.inn_bua_yai = Ma(filename="inn_bua_yai", mas=self)
-        self.inn_chatturat = Ma(filename="inn_chatturat", mas=self)
-        self.inn_ko_kut = Ma(filename="inn_ko_kut", mas=self)
+        self.inn_banyaeng = Ma(filename="inn_banyaeng", mas=self, inside=True)
+        self.inn_nakhon_sawan = Ma(filename="inn_nakhon_sawan", mas=self, inside=True)
+        self.inn_chumsaeng = Ma(filename="inn_chumsaeng", mas=self, inside=True)
+        self.inn_phetchabun = Ma(filename="inn_phetchabun", mas=self, inside=True)
+        self.inn_phitsanulok = Ma(filename="inn_phitsanulok", mas=self, inside=True)
+        self.inn_phitsanulok_2 = Ma(filename="inn_phitsanulok_2", mas=self, inside=True)
+        self.inn_bua_yai = Ma(filename="inn_bua_yai", mas=self, inside=True)
+        self.inn_chatturat = Ma(filename="inn_chatturat", mas=self, inside=True)
+        self.inn_ko_kut = Ma(filename="inn_ko_kut", mas=self, inside=True)
 
         self.house_learner_f2 = Ma(
-            filename="house_learner_f2", mas=self, parent=self.chaiyaphum
+            filename="house_learner_f2", mas=self, parent=self.chaiyaphum, inside=True
         )
         self.house_learner_f1 = Ma(
-            filename="house_learner_f1", mas=self, parent=self.chaiyaphum
+            filename="house_learner_f1", mas=self, parent=self.chaiyaphum, inside=True
         )
         self.house_rival_f1 = Ma(
-            filename="house_rival_f1", mas=self, parent=self.chaiyaphum
+            filename="house_rival_f1", mas=self, parent=self.chaiyaphum, inside=True
         )
         self.house_rival_f2 = Ma(
-            filename="house_rival_f2", mas=self, parent=self.chaiyaphum
+            filename="house_rival_f2", mas=self, parent=self.chaiyaphum, inside=True
         )
         self.chaiyaphum_house_1 = Ma(
-            filename="chaiyaphum_house_1", mas=self, parent=self.chaiyaphum
+            filename="chaiyaphum_house_1", mas=self, parent=self.chaiyaphum, inside=True
         )
         self.plane = Ma(
             filename="plane", mas=self, parent=self.ko_kut, inside=True,
         )
         self.chaiyaphum_house_2 = Ma(
-            filename="chaiyaphum_house_2", mas=self, parent=self.chaiyaphum
+            filename="chaiyaphum_house_2", mas=self, parent=self.chaiyaphum, inside=True
         )
-        self.lover_house = Ma(filename="lover_house", mas=self, parent=self.chaiyaphum)
-        self.house4 = Ma(filename="house4", mas=self, parent=self.chaiyaphum)
-        self.house5 = Ma(filename="house5", mas=self, parent=self.chaiyaphum)
+        self.lover_house = Ma(filename="lover_house", mas=self, parent=self.chaiyaphum, inside=True)
+        self.house4 = Ma(filename="house4", mas=self, parent=self.chaiyaphum, inside=True)
+        self.house5 = Ma(filename="house5", mas=self, parent=self.chaiyaphum, inside=True)
 
         self.chumphae_khonkaen_house_1 = Ma(
             filename="chumphae_khonkaen_house_1",
             mas=self,
-            parent=self.chumphae_khonkaen,
+            parent=self.chumphae_khonkaen, inside=True
         )
         self.chumphae_khonkaen_house_2 = Ma(
             filename="chumphae_khonkaen_house_2",
             mas=self,
-            parent=self.chumphae_khonkaen,
+            parent=self.chumphae_khonkaen, inside=True
         )
         self.chumphae_khonkaen_house_3 = Ma(
             filename="chumphae_khonkaen_house_3",
             mas=self,
-            parent=self.chumphae_khonkaen,
+            parent=self.chumphae_khonkaen, inside=True
         )
         self.chumphae_khonkaen_house_4 = Ma(
             filename="chumphae_khonkaen_house_4",
             mas=self,
-            parent=self.chumphae_khonkaen,
+            parent=self.chumphae_khonkaen, inside=True
         )
         self.chaiyaphum_hidden_cave = Ma(
             filename="chaiyaphum_hidden_cave",
             mas=self,
-            parent=self.chaiyaphum,
+            parent=self.chaiyaphum, inside=True
         )
 
         self.chumphae_school = Ma(
-            filename="chumphae_school", mas=self, parent=self.chumphae
+            filename="chumphae_school", mas=self, parent=self.chumphae, inside=True
         )
         self.chumphae_house1 = Ma(
-            filename="chumphae_house1", mas=self, parent=self.chumphae
+            filename="chumphae_house1", mas=self, parent=self.chumphae, inside=True
         )
         self.chumphae_house2 = Ma(
-            filename="chumphae_house2", mas=self, parent=self.chumphae
+            filename="chumphae_house2", mas=self, parent=self.chumphae, inside=True
         )
         self.chumphae_house3 = Ma(
-            filename="chumphae_house3", mas=self, parent=self.chumphae
+            filename="chumphae_house3", mas=self, parent=self.chumphae, inside=True
         )
-        self.non_muang_house_1 = Ma(filename="non_muang_house_1", mas=self)
+        self.non_muang_house_1 = Ma(filename="non_muang_house_1", mas=self, inside=True)
         self.chumphae_lomsak_house1 = Ma(
-            filename="chumphae_lomsak_house1", mas=self, parent=self.chumphae
+            filename="chumphae_lomsak_house1", mas=self, parent=self.chumphae, inside=True
         )
         self.chumphae_lomsak_house2 = Ma(
-            filename="chumphae_lomsak_house2", mas=self, parent=self.chumphae
+            filename="chumphae_lomsak_house2", mas=self, parent=self.chumphae, inside=True
         )
         self.chumphae_lomsak_house3 = Ma(
-            filename="chumphae_lomsak_house3", mas=self, parent=self.chumphae
+            filename="chumphae_lomsak_house3", mas=self, parent=self.chumphae, inside=True
         )
 
         self.lomsak_house_1 = Ma(
-            filename="lomsak_house_1", mas=self, parent=self.lomsak
+            filename="lomsak_house_1", mas=self, parent=self.lomsak, inside=True
         )
         self.lomsak_house_2 = Ma(
-            filename="lomsak_house_2", mas=self, parent=self.lomsak
+            filename="lomsak_house_2", mas=self, parent=self.lomsak, inside=True
         )
         self.lomsak_house_3 = Ma(
-            filename="lomsak_house_3", mas=self, parent=self.lomsak
+            filename="lomsak_house_3", mas=self, parent=self.lomsak, inside=True
         )
         self.lomsak_house_4 = Ma(
-            filename="lomsak_house_4", mas=self, parent=self.lomsak
+            filename="lomsak_house_4", mas=self, parent=self.lomsak, inside=True
         )
-        self.lomsak_school = Ma(filename="lomsak_school", mas=self, parent=self.lomsak)
-        self.lomsak_gym = Ma(filename="lomsak_gym", mas=self, parent=self.lomsak)
-        self.lomsak_temple = Ma(filename="lomsak_temple", mas=self, parent=self.lomsak)
+        self.lomsak_school = Ma(filename="lomsak_school", mas=self, parent=self.lomsak, inside=True)
+        self.lomsak_gym = Ma(filename="lomsak_gym", mas=self, parent=self.lomsak, inside=True)
+        self.lomsak_temple = Ma(filename="lomsak_temple", mas=self, parent=self.lomsak, inside=True)
 
-        self.question_cave = Ma(filename="question_cave", mas=self)
-        self.cat_cave = Ma(filename="cat_cave", mas=self, parent=self.phetchabun)
+        self.question_cave = Ma(filename="question_cave", mas=self, inside=True)
+        self.cat_cave = Ma(filename="cat_cave", mas=self, parent=self.phetchabun, inside=True)
         self.cat_cave_2 = Ma(
-            filename="cat_cave_2", mas=self, parent=self.cat_cove_hidden_house
+            filename="cat_cave_2", mas=self, parent=self.cat_cove_hidden_house, inside=True
         )
-        self.bat_cave = Ma(filename="bat_cave", mas=self, parent=self.banyaeng)
+        self.bat_cave = Ma(filename="bat_cave", mas=self, parent=self.banyaeng, inside=True)
         self.mystery_cave = Ma(
-            filename="mystery_cave", mas=self, parent=self.chaiyaphum
+            filename="mystery_cave", mas=self, parent=self.chaiyaphum, inside=True
         )
-        self.cat_cove_house = Ma(filename="cat_cove_house", mas=self)
-        self.cat_cove_house_2 = Ma(filename="cat_cove_house_2", mas=self)
+        self.cat_cove_house = Ma(filename="cat_cove_house", mas=self, inside=True)
+        self.cat_cove_house_2 = Ma(filename="cat_cove_house_2", mas=self, inside=True)
         self.phetchabun_mountain_house_1 = Ma(
-            filename="phetchabun_mountain_house_1", mas=self
+            filename="phetchabun_mountain_house_1", mas=self, inside=True
         )
         self.phetchabun_mountain_house_2 = Ma(
-            filename="phetchabun_mountain_house_2", mas=self
+            filename="phetchabun_mountain_house_2", mas=self, inside=True
         )
-        self.phetchabun_farm = Ma(filename="phetchabun_farm", mas=self)
+        self.phetchabun_farm = Ma(filename="phetchabun_farm", mas=self, inside=True)
 
-        self.buengsamphan_cave = Ma(filename="buengsamphan_cave", mas=self)
-        self.buengsamphan_chaiyaphum_cave = Ma(filename="buengsamphan_chaiyaphum_cave", mas=self)
-        self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", mas=self)
-        self.banyaeng_cave = Ma(filename="banyaeng_cave", mas=self)
-        self.banyaeng_underground_forest = Ma(filename="banyaeng_underground_forest", mas=self)
-        self.phetchabun_school = Ma(filename="phetchabun_school", mas=self)
-        self.phetchabun_cave = Ma(filename="phetchabun_cave", mas=self)
-        self.phetchabun_house_1 = Ma(filename="phetchabun_house_1", mas=self)
-        self.phetchabun_house_2 = Ma(filename="phetchabun_house_2", mas=self)
-        self.phitsanulok_underground = Ma(filename="phitsanulok_underground", mas=self)
+        self.buengsamphan_cave = Ma(filename="buengsamphan_cave", mas=self, inside=True)
+        self.buengsamphan_chaiyaphum_cave = Ma(filename="buengsamphan_chaiyaphum_cave", mas=self, inside=True)
+        self.nakhon_sawan_aquarium = Ma(filename="nakhon_sawan_aquarium", mas=self, inside=True)
+        self.banyaeng_cave = Ma(filename="banyaeng_cave", mas=self, inside=True)
+        self.banyaeng_underground_forest = Ma(filename="banyaeng_underground_forest", mas=self, inside=True)
+        self.phetchabun_school = Ma(filename="phetchabun_school", mas=self, inside=True)
+        self.phetchabun_cave = Ma(filename="phetchabun_cave", mas=self, inside=True)
+        self.phetchabun_house_1 = Ma(filename="phetchabun_house_1", mas=self, inside=True)
+        self.phetchabun_house_2 = Ma(filename="phetchabun_house_2", mas=self, inside=True)
+        self.phitsanulok_underground = Ma(filename="phitsanulok_underground", mas=self, inside=True)
         self.lomsak_labyrinth_house_1 = Ma(
-            filename="lomsak_labyrinth_house_1", mas=self
+            filename="lomsak_labyrinth_house_1", mas=self, inside=True
         )
         self.lomsak_labyrinth_house_2 = Ma(
-            filename="lomsak_labyrinth_house_2", mas=self
+            filename="lomsak_labyrinth_house_2", mas=self, inside=True
         )
-        self.phetchabun_temple = Ma(filename="phetchabun_temple", mas=self)
-        self.phetchabun_gym = Ma(filename="phetchabun_gym", mas=self)
+        self.phetchabun_temple = Ma(filename="phetchabun_temple", mas=self, inside=True)
+        self.phetchabun_gym = Ma(filename="phetchabun_gym", mas=self, inside=True)
         self.banyaeng_house_1 = Ma(
-            filename="banyaeng_house_1", mas=self, parent=self.banyaeng
+            filename="banyaeng_house_1", mas=self, parent=self.banyaeng, inside=True
         )
         self.banyaeng_house_2 = Ma(
-            filename="banyaeng_house_2", mas=self, parent=self.banyaeng
+            filename="banyaeng_house_2", mas=self, parent=self.banyaeng, inside=True
         )
         self.banyaeng_school = Ma(
-            filename="banyaeng_school", mas=self, parent=self.banyaeng
+            filename="banyaeng_school", mas=self, parent=self.banyaeng, inside=True
         )
         self.banyaeng_temple = Ma(
-            filename="banyaeng_temple", mas=self, parent=self.banyaeng
+            filename="banyaeng_temple", mas=self, parent=self.banyaeng, inside=True
         )
         self.banyaeng_house_3 = Ma(
-            filename="banyaeng_house_3", mas=self, parent=self.banyaeng
+            filename="banyaeng_house_3", mas=self, parent=self.banyaeng, inside=True
         )
         self.phetchabun_shop = Ma(
-            filename="phetchabun_shop", mas=self, parent=self.phetchabun
+            filename="phetchabun_shop", mas=self, parent=self.phetchabun, inside=True
         )
         self.lomsak_labyrinth_shop = Ma(
-            filename="lomsak_labyrinth_shop", mas=self, parent=self.lomsak_labyrinth
+            filename="lomsak_labyrinth_shop", mas=self, parent=self.lomsak_labyrinth, inside=True
         )
-        self.chumphae_kasetsombum_cave = Ma(
-            filename="chumphae_kasetsombum_cave", mas=self
+        self.chumphae_kasetsombun_cave = Ma(
+            filename="chumphae_kasetsombun_cave", mas=self, inside=True
         )
-        self.kasetsombum_cave = Ma(filename="kasetsombum_cave", mas=self)
-        self.labyrinth_shop = Ma(filename="labyrinth_shop", mas=self)
-        self.kasetsombum_temple = Ma(
-            filename="kasetsombum_temple",
+        self.kasetsombun_cave = Ma(filename="kasetsombun_cave", mas=self, inside=True)
+        self.labyrinth_shop = Ma(filename="labyrinth_shop", mas=self, inside=True)
+        self.kasetsombun_temple = Ma(
+            filename="kasetsombun_temple",
             mas=self,
-            parent=self.kasetsombum,
+            parent=self.kasetsombun,
             x_shift=748,
             y_shift=624,
         )
-        self.inn_kasetsombum = Ma(
-            filename="inn_kasetsombum", mas=self, parent=self.kasetsombum
+        self.inn_kasetsombun = Ma(
+            filename="inn_kasetsombun", mas=self, parent=self.kasetsombun, inside=True
         )
-        self.kasetsombum_temple_temple = Ma(
-            filename="kasetsombum_temple_temple", mas=self, parent=self.kasetsombum
+        self.kasetsombun_temple_temple = Ma(
+            filename="kasetsombun_temple_temple", mas=self, parent=self.kasetsombun, inside=True
         )
-        self.kasetsombum_house1 = Ma(
-            filename="kasetsombum_house1", mas=self, parent=self.kasetsombum
+        self.kasetsombun_house1 = Ma(
+            filename="kasetsombun_house1", mas=self, parent=self.kasetsombun, inside=True
         )
-        self.kasetsombum_house2 = Ma(
-            filename="kasetsombum_house2", mas=self, parent=self.kasetsombum
+        self.kasetsombun_house2 = Ma(
+            filename="kasetsombun_house2", mas=self, parent=self.kasetsombun, inside=True
         )
-        self.kasetsombum_house3 = Ma(
-            filename="kasetsombum_house3", mas=self, parent=self.kasetsombum
+        self.kasetsombun_house3 = Ma(
+            filename="kasetsombun_house3", mas=self, parent=self.kasetsombun, inside=True
         )
-        self.kasetsombum_shop = Ma(
-            filename="kasetsombum_shop", mas=self, parent=self.kasetsombum
+        self.kasetsombun_shop = Ma(
+            filename="kasetsombun_shop", mas=self, parent=self.kasetsombun, inside=True
         )
-        self.kasetsombum_school = Ma(
-            filename="kasetsombum_school", mas=self, parent=self.kasetsombum
+        self.kasetsombun_school = Ma(
+            filename="kasetsombun_school", mas=self, parent=self.kasetsombun, inside=True
         )
         self.phitsanulok_maths_school_123 = Ma(
-            filename="phitsanulok_maths_school_123", mas=self, parent=self.phitsanulok
+            filename="phitsanulok_maths_school_123", mas=self, parent=self.phitsanulok, inside=True
         )
         self.phitsanulok_maths_school_456 = Ma(
-            filename="phitsanulok_maths_school_456", mas=self, parent=self.phitsanulok
+            filename="phitsanulok_maths_school_456", mas=self, parent=self.phitsanulok, inside=True
         )
         self.phitsanulok_maths_school_789 = Ma(
-            filename="phitsanulok_maths_school_789", mas=self, parent=self.phitsanulok
+            filename="phitsanulok_maths_school_789", mas=self, parent=self.phitsanulok, inside=True
         )
         self.phitsanulok_maths_school_1011 = Ma(
-            filename="phitsanulok_maths_school_1011", mas=self, parent=self.phitsanulok
+            filename="phitsanulok_maths_school_1011", mas=self, parent=self.phitsanulok, inside=True
         )
-        self.ko_kut_cave_1 = Ma(filename="ko_kut_cave_1", mas=self, parent=self.ko_kut)
+        self.ko_kut_cave_1 = Ma(filename="ko_kut_cave_1", mas=self, parent=self.ko_kut, inside=True)
 
         self.ko_kut_house_1 = Ma(
             filename="ko_kut_house_1", mas=self, parent=self.ko_kut, inside=True,

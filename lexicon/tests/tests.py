@@ -271,7 +271,7 @@ class ToneBox(object):
         )
         pygame.draw.rect(screen, color, [self.x, self.y, self.width, self.height], 1)
         screen.blit(self.rendered, (self.x + 10, self.y + 30))
-        screen.blit(ui.images[self.s.lower()], [self.x - 50, self.y])
+        screen.blit(ui.images["tone_" + self.s.lower()], [self.x - 50, self.y])
 
     def interact(self, al, test):
         if al.ui.hover:

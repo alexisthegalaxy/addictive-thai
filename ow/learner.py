@@ -67,7 +67,6 @@ class Learner(object):
                 if y > player_y:
                     self.al.ui.screen.blit(self.al.ui.npc_sprites["spell_blue_half"], [x, y])
 
-
     def draw(self, al):
         self.draw_followers(al)
         cell_size = al.ui.cell_size

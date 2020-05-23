@@ -6,8 +6,24 @@ from models import get_active_learner_id
 from npc.npc import Npc, _process_dialog
 
 
+def color_from_tones(tones):
+    if tones[0] == "M":
+        return "grey"
+    if tones[0] == "L":
+        return "black"
+    if tones[0] == "F":
+        return "red"
+    if tones[0] == "H":
+        return "white"
+    if tones[0] == "R":
+        return "rising"
+
 class Spell(Npc):
-    def __init__(self, al, ma, x, y, direction=Direction.UP, color="white", name="spell", word=None):
+    def __init__(self, al, ma, x, y, direction=Direction.UP, name="spell", word=None):
+        from lexicon.items import Word
+
+        if not word:
+            assert False
         super().__init__(
             al=al,
             name=name,
@@ -15,12 +31,12 @@ class Spell(Npc):
             x=x,
             y=y,
             direction=direction,
-            sprite=color + '_spell',
+            sprite='spell_' + color_from_tones(word.tones),
             wobble=True,
             standard_dialog=["The Spell comes closer... and attacks!"],
             defeat_dialog=["You caught the spell!"],
         )
-        self.word = word
+        self.word: Word = word
 
     def process_dialog(self, al):
         for dialog in self.dialogs:
@@ -42,7 +58,7 @@ class Spell(Npc):
             if self.active_dialog == self.defeat_dialog:
                 al.mas.current_map.npcs = [npc for npc in al.mas.current_map.npcs if npc != self]
                 # TODO USER ITEM
-                al.bag.add_item(Item('ลม', durability=100))
+                al.bag.add_item(Item('ลม', durability=100), quantity=1)
             else:
                 al.active_spell_identification = SpellIdentification(al=al, spell=self)
 

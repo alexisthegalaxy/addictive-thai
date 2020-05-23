@@ -17,7 +17,11 @@ class Bag(object):
         self.spells = []
 
     def reset_spells(self):
-        self.spells = [item for item in self.items if item.is_spell and item.amount > 0]
+        self.spells = []
+        for item in self.items:
+            if item.is_spell:
+                for i in range(item.amount):
+                    self.spells.append(item)
 
     def add_item(self, item_to_add: Item, quantity=0):
         item_added = False

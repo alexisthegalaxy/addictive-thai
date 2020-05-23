@@ -20,4 +20,4 @@ def _get_color_from_class(letter_class: str) -> str:
 
 def get_sprite_name_from_letter_class(letter_class: str, al):
     color = _get_color_from_class(letter_class)
-    return f"{color}_spell"
+    return f"spell_{color}"

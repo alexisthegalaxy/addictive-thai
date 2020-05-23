@@ -12,6 +12,9 @@ class TypingTestFromEnglish(ThaiFromEnglish):
         self.keyboard = Keyboard(ui=al.ui)
         self.answer = ""
 
+    def answer_got_modified(self):
+        pass
+
     def draw(self):
         ui = self.al.ui
         screen = ui.screen
@@ -52,6 +55,7 @@ class TypingTestFromEnglish(ThaiFromEnglish):
         if self.answer == self.correct.thai:
             print('success')
             self.al.active_test = None
+            self.al.active_npc = self.al.active_spell_identification.spell
             self.al.active_spell_identification = None
             self.al.active_npc.gets_caught()
         else:
